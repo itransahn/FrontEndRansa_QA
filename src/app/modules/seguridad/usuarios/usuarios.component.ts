@@ -98,10 +98,10 @@ EnvioCorreoContra( IdUsuario ?: number, nombreUsuario ?: string){
   this.sweel.mensajeConConfirmacion("Reenvío de contraseña", `¿Seguro de envíar contraseña generica a ${nombreUsuario}?`, "question").then(
     res=>{
       if( res ){
-        let url = 'seguridad/contraUsuarioAdmin';
+        let url = 'seguridad/updateContraAdmin';
         let params = {
           idUsuario:     IdUsuario,
-          contraNueva : GeneraRandomPassword
+          contra : GeneraRandomPassword
         };
         this.usuarioS.put(url, params).subscribe( data =>{
           if( !data.hasError ){

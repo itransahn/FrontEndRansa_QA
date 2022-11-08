@@ -53,7 +53,7 @@
                         <mat-icon class="success">check_box</mat-icon>
                     </span>
                     <span *ngIf="usuario?.estado != 1">
-                        <mat-icon class="error">indeterminate_check_box</mat-icon>
+                        <mat-icon style="color: red !important;" class="error">indeterminate_check_box</mat-icon>
                     </span>    
                 </td>
                 <td data-label="Acciones">
@@ -71,10 +71,10 @@
                    <mat-icon>create</mat-icon>
                </button>
                <!-- Cambiar estado -->
-               <button mat-mini-fab class="search" [disabled]="!auth.Actualizacion()" class="buttonSecundary" *ngIf="usuario?.estado == 1" (click)="CambiarEstado(usuario?.id_usuario, 2)" title="Inhabilitar">
+               <button mat-mini-fab class="search" [disabled]="!auth.Actualizacion() || usuario?.estado == 3" class="buttonSecundary" *ngIf="usuario?.estado == 1" (click)="CambiarEstado(usuario?.id_usuario, 2)" title="Inhabilitar">
                 <mat-icon>toggle_on</mat-icon>
             </button>
-        <button mat-mini-fab class="search" [disabled]="!auth.Actualizacion()" class="btnDelete" *ngIf="usuario?.estado != 1" (click)="CambiarEstado(usuario?.id_usuario, 1)" title="Habilitar">
+        <button mat-mini-fab class="search" [disabled]="!auth.Actualizacion() || usuario?.estado == 3" class="btnDelete" *ngIf="usuario?.estado != 1" (click)="CambiarEstado(usuario?.id_usuario, 1)" title="Habilitar">
             <mat-icon>toggle_off</mat-icon>
             </button>
 

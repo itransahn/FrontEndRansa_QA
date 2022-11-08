@@ -125,7 +125,7 @@ cargarCreditos(){
 
 
 ingresarCredito( ){
-  this.sweel.mensajeConConfirmacion(`¿Seguro del crédido del empleado ${ this.creditoForm.value.nombreEmpleado } ?`, `Crédito Cafetería`,"warning").then(
+  this.sweel.mensajeConConfirmacion(`¿Seguro del crédito al empleado ${ this.creditoForm.value.nombreEmpleado } ?`, `Crédito Cafetería`,"warning").then(
     res=>{
         if ( res ){
           let url = 'rrhh/insertarCredito';

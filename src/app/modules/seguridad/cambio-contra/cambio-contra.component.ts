@@ -56,13 +56,14 @@ export class CambioContraComponent implements OnInit {
             }
             this.auth.cambioContraUsuario( url, params ).subscribe(
               res=>{
+                console.log(res)
                 if(!res.hasError){
 
                   if ( res?.data.Table0[0]['codigo'] == -1 ){
                       this.toast.mensajeWarning(String(res?.data.Table0[0]['Mensaje']), mensajes.error)
                   }else{
                     this.toast.mensajeSuccess(String(res?.data.Table0[0]['Mensaje']),   mensajes.success)
-                    this.auth.redirecTo(`http://${environment.env}:4200/#/`)
+                    this.auth.redirecToLogin()
                   }
               }else{
                 this.toast.mensajeError(String(res?.errors),"Error")
