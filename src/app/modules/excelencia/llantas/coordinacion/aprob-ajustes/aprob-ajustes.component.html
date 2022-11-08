@@ -1,0 +1,76 @@
+
+<mat-card class="mat-cardContainerCuerpo mt-4">
+    <div class="row">
+        <div class="col-md-6 container">
+            <img src="../../../../../assets/images/logoRansa.ico" alt="">
+        </div>
+        <div class="col-md-6 container">
+            <h3 class="h4"> Ajustes solicitados </h3>
+        </div>
+    </div>
+</mat-card>
+<mat-card class="mat-cardContainerCuerpo mt-4">
+    <div class="table-responsive !important" *ngIf="ajustes?.length >= 1">
+        <table  >
+            <!-- <caption>Statement Summary</caption> -->
+            <thead>
+              <tr>
+                <th scope="col">Fecha          </th>
+                <th scope="col">Tipo de ajuste </th>
+                <th scope="col">Tipo de llanta </th>
+                <th scope="col">Lote           </th>
+                <th scope="col">Cantidad       </th>
+                <th scope="col">Comentario     </th>
+                <th scope="col">Usuario        </th>
+                <th scope="col">Estado         </th>
+                <th scope="col">Acciones       </th>     
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let aj of ajustes | slice: desde: hasta " class="trHover">
+                <td data-label="Fecha">           {{ aj?.fecha  | date : 'shortDate' }}</td>
+                <td data-label="Tipo de ajuste">  {{ aj?.Ajuste }}</td>
+                <td data-label="Tipo de llanta">  {{ aj?.DetalleAjuste }}</td>
+                <td data-label="Lote">       {{ aj?.lote }}</td>
+                <td data-label="Cantidad">   {{ aj?.cantidad }}</td>
+                <td data-label="Comentario"> {{ aj?.comentario }}</td>
+                <td data-label="Usuario"> {{ aj?.Usuario }}</td>
+                <td role="cell" data-label="Estado" class="text-center">
+                  <span *ngIf="aj.estado === 0" class="badge badge-pill badge-warning">  Pendiente    </span>
+                  <span *ngIf="aj.estado === 1" class="badge badge-pill badge-success">  Confirmado </span>
+                  <span *ngIf="aj.estado === 2" class="badge badge-pill badge-danger">   Denegado   </span>
+              </td>
+              <td data-label="Acciones">
+                <div class="text-center">
+                    <!-- Editar -->
+               <button mat-mini-fab class="buttonSecundary" [disabled]="aj.estado != 0 || (!auth.Actualizacion())" (click)="AprobarAjuste( aj )" #tooltip="matTooltip" matTooltip="Aprobar" matTooltipPosition="above" >
+                <mat-icon>check_circle</mat-icon>
+             </button>
+               <!-- Denegar -->
+               <button mat-mini-fab class="btnDelete"       [disabled]="aj.estado != 0 || (!auth.Eliminacion())" (click)="declinarAjuste( aj )" #tooltip="matTooltip" matTooltip="Denegar" matTooltipPosition="above">
+                  <mat-icon>close</mat-icon>
+               </button>
+        
+                </div>
+
+                </td>
+              </tr>
+            </tbody>
+  
+          </table>
+          
+       </div>
+          <mat-paginator  *ngIf="ajustes?.length >= 1" [length]="ajustes.length" [pageSize]="pageSize " (page)="next($event)">
+        </mat-paginator>
+
+
+
+        <nav *ngIf="ajustes?.length < 1" aria-label="breadcrumb">
+          <ol class="breadcrumb container">
+           <h4> No tiene ajustes pendientes </h4>
+          </ol>
+      </nav>
+</mat-card>
+
+
+<app-stock></app-stock>

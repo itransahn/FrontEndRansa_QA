@@ -1,0 +1,41 @@
+<mat-card class="mat-cardContainerCuerpo">
+    <div class="row">
+      <div class="col-md-6 container">
+          <img src="../../../../../assets/images/logoRansa.ico" alt="">
+      </div>
+      <div class="col-md-6 container">
+          <h3 class="h4"> Stock general de Fleje </h3>
+      </div>
+  </div>
+  </mat-card>
+  
+  <mat-card class="mat-cardContainerCuerpo mt-4">
+      <div class="table-responsive !important">
+          <table  >
+              <!-- <caption>Statement Summary</caption> -->
+              <thead>
+                <tr>
+                  <th scope="col">Columna </th>
+                  <th scope="col">Unidades  </th>
+                  <th scope="col">Cajas </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let sto of stock  | slice: desde: hasta " class="trHover">
+                  <td data-label="Columna"> {{ sto?.columna }}</td>
+                  <td data-label="Unidades">  {{ sto?.Unidades }}</td>
+                  <td data-label="Cajas"> {{ sto?.Cajas }}</td>
+   </tr>
+   </tbody>
+   <!-- <tfoot>
+    <tr>
+    <th class="footer"></th>
+    <th class="footerDetalle"> {{ Unidades | number}} </th>
+    <th class="footerDetalle"> {{ Cajas    | number}} </th>
+    </tr>
+</tfoot>  -->
+   </table>
+   </div>
+   <mat-paginator [length]="stock.length" [pageSize]="pageSize " (page)="next($event)">
+   </mat-paginator>
+  </mat-card>

@@ -1,0 +1,108 @@
+
+
+<mat-card class="mat-cardContainerCuerpo mt-4">
+
+    <div class="row">
+        <div class="col-md-6">
+            <form [formGroup]="filtro" #f="ngForm">
+                <mat-form-field appearance="fill">
+                    <mat-label>Dia de Crédito</mat-label>
+                    <input name="date" formControlName = "filtrar" matInput [matDatepicker]="pickerN">
+                    <mat-datepicker-toggle matSuffix [for]="pickerN"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerN></mat-datepicker>
+                  </mat-form-field>
+             </form>
+         </div>
+        
+         <div class="col-md-6">
+            <div class="text-right">
+                <button mat-raised-button class="buttonPrincipal"  [disabled]="!filtro.value.filtrar" (click)="CargarCanjeos(2)">
+                    <mat-icon>
+                        search
+                    </mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+
+</mat-card>
+
+
+<nav *ngIf="canjeos?.length < 1" aria-label="breadcrumb" class="mt-4">
+    <ol class="breadcrumb container">
+     <h4> No existen Canjeos del {{ fecha | date : 'shortDate'}}  </h4>
+    </ol>
+</nav>
+
+
+<div *ngIf="!loading">
+    <app-loading></app-loading>
+</div>
+
+<mat-card class="mat-cardContainerCuerpo mt-4" *ngIf="canjeos?.length >= 1">
+
+    <div class="row">
+        <div class="col-md-6">
+            <form [formGroup]="filtro">
+                <mat-form-field appearance="legacy">
+                    <mat-label>
+                        <mat-icon> search </mat-icon>
+                        Buscar
+                    </mat-label>
+                    <input matInput placeholder="Usuario, Nombre, Departamento....." formControlName="buscar">
+                </mat-form-field> 
+             </form>
+         </div>
+         <div class="col-md-6">
+            <div class="text-right">
+                <button mat-raised-button class="buttonPrincipal" #tooltip="matTooltip" matTooltip="dia actual" matTooltipPosition="above"  (click)="CargarCanjeos(1)">
+                    <mat-icon>
+                        calendar_today
+                    </mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="table-responsive !important">
+        <table  >
+            <!-- <caption>Statement Summary</caption> -->
+            <thead>
+              <tr> 
+                <th scope="col">Usuario Ransa  </th>
+                <th scope="col">Colaborador    </th>
+                <th scope="col">Monto          </th>
+                <th scope="col">Acciones       </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let canjeo of canjeos  | search: this.filtro.value.buscar:parametrosBusqueda | slice: desde: hasta " class="trHover">
+                <td data-label="Usuario Ransa"> {{  canjeo?.Usuario      }}</td>
+                <td data-label="Colaborador">   {{  canjeo?.Colaborador  }}</td>
+                <td data-label="CCO">           {{  canjeo?.monto  | currency : 'Lps '   }}</td>
+           
+                <td data-label="Acciones">
+                    <div class="text-center">
+    
+                          <!-- Editar -->
+                     <button mat-mini-fab class="buttonSecundary" (click)="Modal(canjeo)">
+                        <mat-icon>create</mat-icon>
+                    </button>
+
+                            <!-- Eliminar -->
+                <button mat-mini-fab class="btnDelete" (click)="eliminacion(canjeo?.id_credito, canjeo?.Colaborador ,canjeo?.Usuario)">
+                <mat-icon>delete_forever</mat-icon>
+                </button>
+                    </div>
+    
+                    </td>
+    
+              </tr>
+            </tbody>
+          </table>
+          
+       </div>
+          <mat-paginator [length]="canjeos.length" [pageSize]="pageSize " (page)="next($event)">
+        </mat-paginator>
+
+</mat-card>
+

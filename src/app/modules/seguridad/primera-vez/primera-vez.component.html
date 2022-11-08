@@ -1,0 +1,64 @@
+<body>
+    
+    <form ngNativeValidate [formGroup]="contraForm" #f="ngForm">
+        
+      <div class="container">
+        <img src="../../../../assets/images/logoRansa.ico" alt="">
+      </div>
+        <div class="row">
+            <div class="col-md-12">
+                <mat-form-field  appearance="fill">
+                    <mat-label>Código</mat-label>
+                    <input matInput placeholder="Código" class="Icontra" [type]="hide ? 'password' : 'text'" autocomplete="off" formControlName="codigo">
+                    <button class="Contra" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                  </mat-form-field>
+            </div>
+
+            <div class="col-md-12">
+                <mat-form-field  appearance="fill">
+                    <mat-label>Contraseña Nueva</mat-label>
+                    <input matInput placeholder="Contraseña" class="Icontra" [type]="hide2 ? 'password' : 'text'" autocomplete="off" formControlName="contraNueva" >
+                    <mat-error class="alert-danger mb-6" *ngIf="contraForm.get('contraNueva').hasError('pattern')" >
+                        Contraseña debe de contener mínimo: 8 caracteres ,1 letra Mayúscula, 1 Minúscula, 1 Número y 1 carácter no numérico </mat-error> 
+                    <!-- <mat-error class="error-message" *ngIf="this.contraForm.get('contraNueva').hasError('pattern')">
+                         </mat-error> -->
+                    <button class="Contra" mat-icon-button matSuffix (click)="hide2 = !hide2" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide2">
+                        <mat-icon>{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                  </mat-form-field>
+            </div>
+
+            <div class="col-md-12">
+                <mat-form-field  appearance="fill">
+                    <mat-label>Repetir Contraseña </mat-label>
+                    <input matInput placeholder="Contraseña" class="Icontra" [type]="hide3 ? 'password' : 'text'" autocomplete="off" formControlName="contraNuevaC">
+                    <mat-error class="alert-danger mb-6" *ngIf="contraForm.value.contraNueva != contraForm.value.contraNuevaC" >
+                       {{ contraForm.get('contraNuevaC').value }} </mat-error> 
+                    <button class="Contra" mat-icon-button matSuffix (click)="hide3 = !hide3" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide3">
+                        <mat-icon>{{hide3 ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                  </mat-form-field>
+            </div>
+
+        </div>
+
+   
+
+   
+    
+   
+    
+      <div class="container">
+      <button class="buttonC" [disabled]="f.invalid" (click)="CambioContra()"> Cambiar Contraseña </button>
+      </div>
+      
+    
+    </form>
+    </body>
+    
+
+         <!-- <app-spinner *ngIf="!flat"></app-spinner> -->
+     
+        

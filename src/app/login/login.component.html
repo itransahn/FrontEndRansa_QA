@@ -1,0 +1,39 @@
+<body>
+    
+    <form ngNativeValidate [formGroup]="loginForm" #f="ngForm">
+        
+      <div class="container">
+        <img src="../assets/images/logoRansa.ico" alt="">
+      </div>
+
+
+      <mat-form-field class="example-full-width" appearance="legacy">
+        <mat-label>Usuario</mat-label>
+        <input matInput placeholder="Usuario" autocomplete="off" formControlName="usuario" maxlength="38">
+      </mat-form-field>
+
+     
+     <mat-form-field class="example-full-width" appearance="legacy">
+        <mat-label>Contraseña</mat-label>
+        <input matInput placeholder="Contraseña" class="Icontra" [type]="hide ? 'password' : 'text'" autocomplete="off" formControlName="contrasena" 
+        (window:keypress) ="onKeypressEvent($event)"  maxlength="35">
+        <button class="Contra" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+    
+
+    
+      
+      <div class="container">
+      <button [disabled]="loginForm.invalid" (click)="Login()" class="buttonC"> Login </button>
+      </div>
+      
+    
+    </form>
+    </body>
+    
+
+         <!-- <app-spinner *ngIf="!flat"></app-spinner> -->
+     
+        

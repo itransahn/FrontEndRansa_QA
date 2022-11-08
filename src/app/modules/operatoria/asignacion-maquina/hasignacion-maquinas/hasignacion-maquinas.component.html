@@ -1,0 +1,110 @@
+<mat-card class="mat-cardContainerCuerpo">
+    <form [formGroup]="filtro" #f="ngForm">
+    <div class="row">
+        <div class="col-md-12 container">
+            <h4 class="h4"> Asignaciones de maquinas </h4>
+        </div>
+
+        <div class="col-md-4 container">
+                <mat-form-field appearance="fill">
+                    <mat-label>Desde</mat-label>
+                    <input name="date" formControlName = "desde" matInput [matDatepicker]="desde">
+                    <mat-datepicker-toggle matSuffix [for]="desde"></mat-datepicker-toggle>
+                    <mat-datepicker #desde></mat-datepicker>
+                  </mat-form-field>
+            
+         </div>
+    <div class="col-md-4 container">
+                <mat-form-field appearance="fill">
+                    <mat-label>Hasta</mat-label>
+                    <input name="date" formControlName = "hasta" matInput [matDatepicker]="hasta">
+                    <mat-datepicker-toggle matSuffix [for]="hasta"></mat-datepicker-toggle>
+                    <mat-datepicker #hasta></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="text-left">
+                        <button mat-raised-button class="buttonPrincipal"  [disabled]="f.invalid" (click)="CargarHasignacion()">
+                            <mat-icon>
+                                search
+                            </mat-icon>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+</mat-card>
+
+<div #factura id ="Factura">
+    <mat-card class="mat-cardContainerCuerpo mt-4" *ngIf="loading">
+        <div class="row">
+            <div class="col-md-12 ">
+                <img src="../../../../../assets/images/logoRansa.ico" alt="">
+            </div>
+        
+            <div class="col-md-12 container">
+                <h4 class="h4">
+              {{ filtro.value.desde | date :'shortDate' }} - {{ filtro.value.hasta | date :'shortDate' }}
+                </h4>
+            </div>
+            <div class="col-md-12 container">
+                <h4 class="h4"> RANSA CD SAUCE</h4>
+            </div>
+        </div>
+    
+    <!-- 
+        <div *ngIf="!loading">
+            <app-loading></app-loading>
+        </div> -->
+    
+        <div class="table-responsive !important" *ngIf="loading">
+            <table  >
+                <!-- <caption>Statement Summary</caption> -->
+                <thead>
+                  <tr> 
+                    <th scope="col">F. Asignación </th>
+                    <th scope="col">Hora Inicial </th>
+                    <th scope="col">Hora Final </th>
+                    <th scope="col">Uso/Minutos </th>
+                    <th scope="col">Tipo de Maquina</th>
+                    <th scope="col">Maquina </th>
+                    <th scope="col">Area </th>
+                    <th scope="col">Asignado por </th>
+                    <th scope="col">Asignado a </th>
+                    <th scope="col">Turno </th>
+                    <th scope="col">Observaciones </th>
+                </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let His of historial " class="trHover">
+                    <td data-label="Fecha Asignación"> {{ His['Fecha Asignación']                      }}</td>
+                    <td data-label="Hora Inicial"> {{ His['Hora Inicial'] }}</td>
+                    <td data-label="Hora Final"> {{ His['Hora Final'] }}</td>
+                    <td data-label="Uso/Minutos"> {{ His['Tiempo|Minutos'] }}</td>
+                    <td data-label="Tipo de Maquina"> {{ His?.tipo }}</td>
+                    <td data-label="Maquina"> {{ His?.Maquina }}</td>
+                    <td data-label="Area"> {{ His?.area }}</td>
+                    <td data-label="Asignado por"> {{ His['Asignado por'] }}</td>
+                    <td data-label="Asignado a"> {{ His['Asignado a'] }}</td>
+                    <td data-label="Turno"> {{ His?.turno }}</td>
+                    <td data-label="Observaciones"> {{ His?.OBS }}</td>
+                  </tr>
+                </tbody>
+                <!-- <tfoot *ngIf=" hastaF >= historial.length">
+                    <tr >
+                        <th ></th>
+                        <th > TOTAL</th>
+                        <th > {{ subTotal | currency : 'Lps '}} </th>
+                    </tr>
+                  </tfoot>   -->
+            </table>  
+           </div>
+    
+              <!-- <mat-paginator [length]="dolares.length" [pageSize]="pageSize " (page)="next($event)">
+            </mat-paginator> -->
+    </mat-card>
+
+</div>
+

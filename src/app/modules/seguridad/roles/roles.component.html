@@ -1,0 +1,78 @@
+<mat-card class="mat-cardContainerCuerpo mat-elevation-z0">
+    <form [formGroup]="filtro">
+        <div class="row">
+            <div class="col-md-6">
+    
+                <mat-form-field appearance="legacy">
+                    <mat-label>
+                        <mat-icon> search </mat-icon>
+                        Buscar
+                    </mat-label>
+                    <input matInput placeholder="Rol, Estado..." formControlName="filtrar">
+                </mat-form-field>
+    
+            </div>
+     
+            <div class="col-md-6">
+                <div class="text-right">
+                    <button mat-raised-button class="buttonPrincipal" [disabled]="!auth.Insercion()" (click)="ModalRol ( 2 )">
+                        <mat-icon>
+                            add
+                        </mat-icon>
+                        Agregar Rol
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+       <div class="table-responsive !important">
+        <table  >
+            <!-- <caption>Statement Summary</caption> -->
+            <thead>
+              <tr>
+                <th scope="col">Rol</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let rol of roles  | search: this.filtro.value.filtrar:parametrosBusqueda | slice: desde: hasta " class="trHover">
+                <td data-label="Rol">{{    rol?.rol             }}</td>
+                <td data-label="Estado">
+                    <span *ngIf="rol?.idEstado == 1">
+                        <mat-icon class="success">check_box</mat-icon>
+                    </span>
+                    <span *ngIf="rol?.idEstado != 1">
+                        <mat-icon class="error">indeterminate_check_box</mat-icon>
+                    </span>    
+                </td>
+                <td data-label="Acciones">
+                <div class="text-center">
+
+               <!-- Ver -->
+               <button mat-mini-fab class="buttonSecundary"   #tooltip="matTooltip" matTooltip="Ver Rol" (click)="ModalRol ( 1 , rol )"  matTooltipPosition="left">
+                   <mat-icon>visibility</mat-icon>
+               </button>
+                 <!-- Editar -->
+                 <button mat-mini-fab class="buttonSecundary" [disabled]="!auth.Actualizacion()" #tooltip="matTooltip" matTooltip="Editar Rol" matTooltipPosition="right" (click)="ModalRol ( 3 , rol )" >
+                   <mat-icon>create</mat-icon>
+               </button>
+               <!-- Eliminar -->
+               <button mat-mini-fab class="btnDelete"         [disabled]="!auth.Eliminacion()"      #tooltip="matTooltip" matTooltip="Eliminar Rol"  matTooltipPosition="right" (click)="eliminarRol(rol.rol, rol.ID)"  >
+                            <mat-icon>delete_forever</mat-icon>
+               </button>
+                      
+                </div>
+
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          
+       </div>
+          <mat-paginator [length]="roles.length" [pageSize]="pageSize " (page)="next($event)">
+        </mat-paginator>
+        
+
+ 
+</mat-card>

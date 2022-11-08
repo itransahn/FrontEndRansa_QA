@@ -1,0 +1,74 @@
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a [routerLink]="['/modulos']">Inicio</a></li>
+        <li class="breadcrumb-item"><a [routerLink]="['/ransa/administracion/modulos']">Módulos</a></li>
+    </ol>
+</nav>
+<form [formGroup]="filtro">
+    <div class="row">
+        <div class="col-md-6">
+  
+            <mat-form-field appearance="legacy">
+                <mat-label>
+                    <mat-icon> search </mat-icon>
+                    Buscar
+                </mat-label>
+                <input matInput placeholder="Rol" formControlName="filtrar">
+            </mat-form-field>
+  
+        </div>
+  
+        <div class="col-md-6">
+            <div class="text-right">
+                <button mat-raised-button class="buttonPrincipal" (click)="CrearPermiso()">
+                    <mat-icon>
+                      add
+                    </mat-icon>
+                    Agregar Permiso
+                </button>
+            </div>
+        </div>
+    </div>
+  </form>
+  
+  
+  <div class="table-responsive !important">
+    <table  >
+        <!-- <caption>Statement Summary</caption> -->
+        <thead>
+          <tr>
+            <th scope="col">Rol</th>
+            <th scope="col">Modulo</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let permiso of dataPermisos?.data?.Table0  | search: this.filtro.value.filtrar:parametrosBusqueda | slice: desde: hasta " class="trHover">
+            <td data-label="Usuario Ransa">{{   permiso?.rol     | uppercase  }}</td>
+            <td data-label="Usuario">      {{   permiso?.modulo  | uppercase  }}</td>
+            <td data-label="Acciones">
+            <div class="text-center">
+
+           <!-- Ver
+           <button mat-mini-fab class="buttonSecundary"   #tooltip="matTooltip" matTooltip="Ver perfil del usuario" matTooltipPosition="left">
+               <mat-icon>visibility</mat-icon>
+           </button> -->
+             <!-- Editar -->
+             <!-- <button mat-mini-fab class="buttonSecundary" #tooltip="matTooltip" matTooltip="Editar Usuario" matTooltipPosition="right" >
+               <mat-icon>create</mat-icon>
+           </button> -->
+           <!-- Eliminar -->
+           <button mat-mini-fab class="btnDelete" (click)="eliminarPermiso( permiso?.idRol, permiso?.idModulo , permiso?.rol, permiso?.modulo)" >
+                        <mat-icon>delete_forever</mat-icon>
+           </button>
+            </div>
+
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      
+   </div>
+      <mat-paginator [length]="dataPermisos?.data?.Table0.length" [pageSize]="pageSize " (page)="next($event)">
+    </mat-paginator>

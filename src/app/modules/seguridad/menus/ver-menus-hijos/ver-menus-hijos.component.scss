@@ -1,0 +1,25 @@
+// mat-list-item :hover{
+//     background-color: #006F1D !important;
+//     color: #FE9600 !important;
+//     cursor: pointer;
+// }
+
+
+/*Estilo Listas*/
+mat-list-item{
+    background-color: #F4F4F4 ;
+    div, i{
+      color:  #FE9600 !important;
+    }
+  }
+  
+  
+  mat-list-item:hover{
+    background-color: #ffffff ;
+    cursor: pointer;
+    div, i{
+      color:  #00A72C !important;
+    }
+  }
+  /*Estilo Listas*/
+

@@ -1,0 +1,91 @@
+<mat-card class="mat-cardContainerCuerpo">
+  <div class="row">
+    <div class="col-md-6 container">
+        <img src="../../../../../assets/images/logoRansa.ico" alt="">
+    </div>
+    <div class="col-md-6 container">
+        <h3 class="h4"> Movimiento de llantas </h3>
+    </div>
+</div>
+    <form [formGroup]="filtro" #f="ngForm">
+        <div class="row">
+            <div class="col-md-12">
+                <mat-form-field appearance="legacy">
+                    <mat-label> Movimiento </mat-label>
+                    <mat-select  formControlName="filtrar" (selectionChange)="cargarMovimientos()"> 
+                        <mat-option> - </mat-option> 
+                        <mat-option  *ngFor="let mov of movimientos" [value]="mov?.idMovimiento">
+                            {{  mov?.Movimiento | uppercase }}
+                        </mat-option> 
+                      </mat-select> 
+                  </mat-form-field>
+            </div>
+
+            <!-- <div class="col-md-4">
+              <div class="text-right">
+                  <button mat-raised-button class="buttonPrincipal"  [disabled]="f.invalid" (click)="cargarMovimientos()">
+                      <mat-icon>
+                          search
+                      </mat-icon>
+                  </button>
+              </div>
+            </div> -->
+        </div>
+    </form>
+
+</mat-card>
+
+
+<mat-card class="mat-cardContainerCuerpo mt-4">
+  <nav *ngIf="cambios?.length < 1 && this.filtro.value.filtrar && bandera" aria-label="breadcrumb" class="mt-4">
+    <ol class="breadcrumb container">
+     <h4> Actualmente no hay movimientos registrados </h4>
+    </ol>
+</nav>
+
+     <div class="table-responsive !important" *ngIf="cambios?.length >= 1 && this.filtro.value.filtrar">
+      <table  >
+          <!-- <caption>Statement Summary</caption> -->
+          <thead>
+            <tr>
+              <th scope="col">Fecha     </th>
+              <th scope="col">Llanta    </th>
+              <th scope="col">Proveedor </th>
+              <th scope="col">Usuario   </th>
+              <th scope="col">Cantidad  </th>
+              <th scope="col">C/U       </th>
+              <th scope="col">Costo     </th>
+              
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let cambio of cambios  | slice: desde: hasta " class="trHover">
+              <td data-label="Fecha">   {{ cambio?.Fecha | date : 'shortDate'}}</td>
+              <td data-label="Llanta">  {{ cambio?.Llanta }}</td>
+              <td data-label="Proveedor"> {{ cambio?.Proveedor }}</td>
+              <td data-label="Usuario">   {{ cambio?.Usuario }}</td>
+              <td data-label="Cantidad">  {{ cambio?.Cantidad  }}</td>
+              <td data-label="C/U">       {{ cambio['C/U']   | currency : 'Lps '   }}</td>
+              <td data-label="Costo"> {{ cambio?.Costo  | currency : 'Lps ' }}</td>
+            </tr>
+          </tbody>
+          <tfoot *ngIf=" hasta >= cambios.length && cambios.length >= 1">
+              <tr >
+                  <!-- style="background-color: #ffffff !important;" -->
+                  <th ></th>
+                  <th ></th>
+                  <th ></th>
+                  <th ></th>
+                  <th ></th>
+                  <th > Costo </th>
+                  <th > {{ subTotal | currency : 'Lps '}} </th>
+              </tr>
+            </tfoot>  
+        </table>
+        
+     </div>
+
+        <mat-paginator *ngIf="cambios?.length >= 1 && this.filtro.value.filtrar" [length]="cambios.length" [pageSize]="pageSize " (page)="next($event)">
+      </mat-paginator>
+      
+</mat-card>

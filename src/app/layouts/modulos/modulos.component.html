@@ -1,0 +1,27 @@
+<div class="navbarE">
+    <app-navbar1> </app-navbar1>
+</div>
+
+
+<div class="containerMen">
+    
+    <mat-card class="mat-cardContainer mat-elevation-z0">
+        <div class="row mb-4">
+            <div class="col-md-12 container">
+                <img src="../../../../../assets/images/logoRansa.ico" alt="">
+            </div>
+        </div>
+        <mat-card class="card mat-elevation-z1" *ngFor="let mod of modulos" >
+                <div class="containerH4">
+                        <h4> {{ mod?.modulo }} </h4>
+                </div>
+                <div class="containerImg" (click)="redireccionar(mod.id_modulo)">
+                    <img  *ngIf="mod.imagen" class="imageCard" [src] ="mod.imagen"/>
+                    <img  *ngIf="!mod.imagen" class="imageCard" src   = "../../../assets/images/DefaultModule.png"/>
+                    <!-- <mat-icon class="imageCard"> person </mat-icon> -->
+                </div>
+
+            </mat-card>
+
+    </mat-card>
+</div>

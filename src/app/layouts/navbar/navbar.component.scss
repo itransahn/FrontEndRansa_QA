@@ -1,0 +1,57 @@
+b{
+  color: #006F1D;
+  font: bold;
+}
+.exit {
+    border-radius: 5px;
+  }
+
+  button.mat-menu-mat-icon{
+    color: #006F1D;
+  }
+
+  button.mat-menu-item{
+      background-color: #ffffff ;
+      color: #006F1D !important;
+      mat-icon{
+        color: #006F1D !important;
+    }
+  }
+  
+  button.mat-menu-item:hover {
+    background-color: #006F1D;
+    color:  #FE9600 !important;
+    mat-icon{
+        color: #FE9600 !important;
+    }
+  }
+
+::ng-deep .custom-class {
+    margin-top: 5%;
+    background-color: #ffffff !important;
+    float: right !important;
+}
+
+.profile-pic {
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+}
+
+.positionNadbar{
+  float: right !important;
+}
+
+@media only screen and (max-width: 600px) {
+      b{
+        display: none !important;
+      }
+  
+}
+
+
+
+
+
+
+

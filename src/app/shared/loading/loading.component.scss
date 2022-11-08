@@ -1,0 +1,32 @@
+body{
+    background-color: #fff;
+}
+div{
+    height: 25px;
+}
+
+.container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40%;
+    margin: auto;
+    border: 3px solid #3ed669;
+    background-color: #fff;
+    box-shadow: 0px 0px 15px #3ed669;
+}
+.progress {
+    width: 0%;
+    background-color: green;
+    opacity: 0.8;
+    animation: progress 15s infinite alternate;
+}
+@keyframes progress {
+    0%{
+        width: 0%;
+    }
+    100%{
+        width: 100%;
+    }
+}

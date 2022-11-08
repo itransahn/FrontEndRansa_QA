@@ -1,0 +1,93 @@
+<mat-card class="mat-cardContainerCuerpo">
+    <div class="row">
+        <div class="col-md-6 container">
+            <img src="../../../../../assets/images/logoRansa.ico" alt="">
+        </div>
+        <div class="col-md-6 container">
+            <h3 class="h4"> Asignación de Maquina </h3>
+        </div>
+    </div>
+</mat-card>
+
+<mat-card  class="mat-cardContainerCuerpo mt-4">
+   
+    <form [formGroup]="asignacionForm" #f="ngForm">
+        <div class="row">
+           
+                <div class="col-md-6 container">
+                    <mat-form-field appearance="legacy">
+                        <mat-label>Tipo de Maquina</mat-label>
+                        <mat-select formControlName="tipoMaquina" > 
+                            <mat-option> - </mat-option> 
+                            <mat-option *ngFor="let Aj of catalogo['tipoMaquinas']" [value]="Aj.id_tipo">
+                                {{  Aj.tipo | uppercase }}
+                            </mat-option> 
+                          </mat-select> 
+                      </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field appearance="legacy">
+                        <mat-label> Maquina </mat-label>
+                        <mat-select  formControlName="maquina" id="maquina"> 
+                            <!-- <mat-option> - </mat-option> 
+                            <mat-option  *ngFor="let city of catalogo['ciudades']" [value]="city?.id_ciudad">
+                                {{  city?.ciudad | uppercase }}
+                            </mat-option>  -->
+                            <ng-container *ngFor="let item of catalogo['Maquinas']">
+                                <div *ngIf="item?.id_tipoMaquina == asignacionForm.value.tipoMaquina">
+                                    <mat-option [value]="item?.id_maquina" >
+                                        {{  item?.maquina | uppercase }}
+                                    </mat-option>
+                                </div>
+                            </ng-container>
+    
+                          </mat-select> 
+                      </mat-form-field>
+                </div>
+
+                <div class="col-md-6 container">
+                    <mat-form-field appearance="legacy">
+                        <mat-label> Areas Ransa </mat-label>
+                        <mat-select formControlName="areas" > 
+                            <mat-option> - </mat-option> 
+                            <mat-option *ngFor="let Aj of catalogo['areasRansa']" [value]="Aj.id_areaDeOperacion">
+                                {{  Aj.area | uppercase }}
+                            </mat-option> 
+                          </mat-select> 
+                      </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                    <mat-form-field appearance="legacy">
+                        <mat-label> Empleado </mat-label>
+                        <mat-select  formControlName="empleado" id="empleado"> 
+                            <ng-container *ngFor="let item of catalogo['usuarios']">
+                                <div *ngIf="item?.area == asignacionForm.value.areas">
+                                    <mat-option [value]="item?.ID" >
+                                        {{  item?.usuario | uppercase }}
+                                    </mat-option>
+                                </div>
+                            </ng-container>
+    
+                          </mat-select> 
+                      </mat-form-field>
+                </div>
+
+                <div class="col-md-12">
+                    <mat-form-field appearance="legacy" hintLabel="Max 500 Caracteres">
+                        <mat-label> Observaciones </mat-label>
+                        <textarea matInput maxlength="500" #direccion formControlName="Observaciones"></textarea>
+                        <mat-hint align="end">{{direccion.value?.length || 0}}/500</mat-hint>
+                    </mat-form-field>
+                </div>
+                <div class="container">
+                    <button class="buttonPrincipal" mat-raised-button type="submit" [disabled]="f.invalid || (!auth.Insercion())" (click)="post()" >Guardar</button>
+                </div>
+
+        </div>
+    </form>
+        
+</mat-card>
+
+
+<app-maquinas-en-uso></app-maquinas-en-uso>

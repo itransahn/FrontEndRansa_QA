@@ -1,0 +1,238 @@
+<mat-card class="cardPersonalizada" >
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a [routerLink]="['/modulos']">Inicio</a></li>
+            <li class="breadcrumb-item"><a [routerLink]="['/ransa/administracion/usuarios']">Usuarios</a></li>
+        </ol>
+    </nav>
+</mat-card>
+
+<mat-card class="cardPersonalizada" >
+ 
+    <div *ngIf="!bandera">
+        <!-- <app-spinner></app-spinner> -->
+    </div>
+    
+    <mat-card-content>
+        <form [formGroup]="usuarioForm" #f="ngForm" style="margin-top: 2%;">
+            <div class="row">
+
+<!-- <div class="col-md-12 imageProfile"> 
+    <label class="custom-file-upload" *ngIf="banderaRuta">
+        <input type="file"/>
+        Subir archivo
+      </label>
+      <img style="margin-left: 1%;"  [src]= "photoSelected || UrlImagenDefault" class=" img-fluid imagen" alt="No image"
+      title="Imagen de Perfil">
+</div> -->
+
+    <div class="col-md-4">
+                    <mat-form-field  appearance="legacy">
+                        <mat-label>Nombre Completo </mat-label>
+                        <input matInput  maxlength="100" placeholder="Nombre Completo" formControlName ="nombre">  
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                    <mat-form-field  appearance="legacy">
+                        <mat-label> Teléfono </mat-label>
+                        <input [mask]="mask.numberPhone" matInput #telefono maxlength="100" placeholder="(+504) 9999-9999" formControlName ="telefono">  
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Fecha de Nacimiento</mat-label>
+                            <input name="date" formControlName = "nacimiento" matInput [matDatepicker]="pickerN">
+                            <mat-datepicker-toggle matSuffix [for]="pickerN"></mat-datepicker-toggle>
+                            <mat-datepicker #pickerN></mat-datepicker>
+                          </mat-form-field>
+
+                </div>
+                <div class="col-md-8">
+                    <mat-form-field class="example-full-width" hintLabel="Max 250 Caracteres" appearance="legacy">
+                        <mat-label>Dirección </mat-label>
+                        <textarea matInput #direccion formControlName ="direccion" placeholder="Dirección " ></textarea>
+                        <mat-hint align="end">{{direccion.value?.length || 0}}/250</mat-hint>
+                      </mat-form-field>
+                </div>
+
+                <div class="col-md-4">
+                    <mat-form-field appearance="legacy">
+                        <mat-label>Tipo identificación</mat-label>
+                        <mat-select  formControlName="tipoId" > 
+                            <mat-option> - </mat-option> 
+                            <mat-option #tipoId *ngFor="let tipo of catalogo['tipoIdentificacion']" [value]="tipo?.id_tipoIdentificacion">
+                                {{  tipo?.tipoIdentificacion | uppercase }}
+                            </mat-option> 
+                          </mat-select> 
+                      </mat-form-field>
+                </div>
+
+                <div *ngIf="usuarioForm.value.tipoId == 1" class="col-md-4">
+                    <mat-form-field  appearance="legacy">
+                        <mat-label> Identidad </mat-label>
+                        <input *ngIf="usuarioForm.value.tipoId == 1" [mask]="mask.identidad" matInput #telefono maxlength="18" placeholder="Identidad" formControlName ="identidad">  
+                   </mat-form-field>
+                </div>
+                <div class="col-md-4" *ngIf="usuarioForm.value.tipoId == 2">
+                    <mat-form-field  appearance="legacy">
+                        <mat-label> Pasaporte </mat-label>
+                        <input matInput #telefono maxlength="20" placeholder="Pasaporte" formControlName ="identidad">  
+                        
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                    <mat-form-field  appearance="legacy">
+                        <mat-label> Correo </mat-label>
+                        <input type="email" matInput #telefono maxlength="100" placeholder="Correo"   formControlName ="correo">  
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-4">
+                    <mat-form-field appearance="legacy">
+                        <mat-label> Sexo </mat-label>
+                        <mat-select  formControlName="id_sexo" > 
+                            <mat-option> - </mat-option> 
+                            <mat-option  *ngFor="let sexo of catalogo['sexos']" [value]="sexo?.id_sexo">
+                                {{  sexo?.sexo | uppercase }}
+                            </mat-option> 
+                          </mat-select> 
+                      </mat-form-field>
+                </div>
+
+                <div class="col-md-4">
+                    <mat-form-field appearance="legacy">
+                        <mat-label> Departamento </mat-label>
+                        <mat-select  formControlName="departamento"> 
+                            <mat-option> - </mat-option> 
+                            <mat-option  *ngFor="let dpto of catalogo['departamentos']" [value]="dpto?.id_departamento">
+                                {{  dpto?.departamento | uppercase }}
+                            </mat-option> 
+                          </mat-select> 
+                      </mat-form-field>
+                </div>
+
+                <div class="col-md-4">
+                    <mat-form-field appearance="legacy">
+                        <mat-label> Ciudad </mat-label>
+                        <mat-select  formControlName="idCiudad" > 
+                            <ng-container *ngFor="let item of catalogo['ciudades']">
+                                <div *ngIf="item.id_departamento === usuarioForm.value.departamento">
+                                    <mat-option [value]="item?.id_ciudad">
+                                        {{  item?.ciudad | uppercase }}
+                                    </mat-option>
+                                </div>
+                            </ng-container>
+
+                          </mat-select> 
+                      </mat-form-field>
+                </div>
+
+                <div class="col-md-4">
+                    <mat-form-field appearance="legacy">
+                        <mat-label> Tipo de Sangre </mat-label>
+                        <mat-select  formControlName="tipoSangre" > 
+                            <mat-option> - </mat-option> 
+                            <mat-option  *ngFor="let tipoS of catalogo['tipoSangres']" [value]="tipoS?.id_tipoSangre">
+                                {{  tipoS?.tipoSangre | uppercase }}
+                            </mat-option> 
+                          </mat-select> 
+                      </mat-form-field>
+                </div>
+
+<mat-divider class="mt-2 mb-2"></mat-divider>
+
+<div class="col-md-4">
+    <mat-form-field  appearance="legacy">
+        <mat-label>Usuario Ransa </mat-label>
+        <input matInput  maxlength="100" placeholder="Usuario Ransa" formControlName ="usuarioRansa">  
+    </mat-form-field>
+</div>
+
+<div class="col-md-4">
+         <mat-form-field appearance="fill">
+           <mat-label>Fecha de Ingreso</mat-label>
+           <input name="date" formControlName = "fechaIngreso" matInput [matDatepicker]="pickerF">
+           <mat-datepicker-toggle matSuffix [for]="pickerF"></mat-datepicker-toggle>
+           <mat-datepicker #pickerF></mat-datepicker>
+         </mat-form-field>
+</div>
+
+
+<div class="col-md-4">
+    <mat-form-field appearance="legacy">
+        <mat-label> Departamento fisico asignado </mat-label>
+        <mat-select  formControlName="deptoFisico" > 
+            <mat-option> - </mat-option> 
+            <mat-option  *ngFor="let sexo of catalogo['depFisicos']" [value]="sexo?.id_departamentoFisico">
+                {{  sexo?.departamentoFisico | uppercase }}
+            </mat-option> 
+          </mat-select> 
+      </mat-form-field>
+</div>
+
+<div class="col-md-4">
+    <mat-form-field appearance="legacy">
+        <mat-label> Puesto </mat-label>
+        <mat-select  formControlName="idPuesto" > 
+            <mat-option> - </mat-option> 
+            <mat-option  *ngFor="let puesto of catalogo['puesto']" [value]="puesto?.id_puesto">
+                {{  puesto?.puestoRansa | uppercase }}
+            </mat-option> 
+          </mat-select> 
+      </mat-form-field>
+</div>
+
+<div class="col-md-4">
+    <mat-form-field  appearance="legacy">
+        <mat-label>Usuario </mat-label>
+        <input matInput  maxlength="100" placeholder="Usuario" formControlName ="usuario">  
+    </mat-form-field>
+</div>
+
+
+<div class="col-md-4">
+    <mat-form-field appearance="legacy">
+        <mat-label> Rol </mat-label>
+        <mat-select  formControlName="rol" > 
+            <mat-option> - </mat-option> 
+            <mat-option  *ngFor="let rol of catalogo['roles']" [value]="rol?.id_rol">
+                {{  rol?.rol | uppercase }}
+            </mat-option> 
+          </mat-select> 
+      </mat-form-field>
+</div>
+
+<div class="col-md-4">
+    <mat-form-field appearance="legacy">
+        <mat-label> CCO </mat-label>
+        <mat-select  formControlName="cco" > 
+            <mat-option> - </mat-option> 
+            <mat-option  *ngFor="let cco of catalogo['ccos']" [value]="cco?.id_cco">
+                {{  cco?.cco | uppercase }}
+            </mat-option> 
+          </mat-select> 
+      </mat-form-field>
+</div>
+
+
+<div class="col-md-4">
+    <mat-form-field appearance="legacy">
+        <mat-label> Sede </mat-label>
+        <mat-select  formControlName="idSede" > 
+            <mat-option> - </mat-option> 
+            <mat-option  *ngFor="let sede of catalogo['sedes']" [value]="sede?.id_sedeRansa">
+                {{  sede?.sedeRansa | uppercase }}
+            </mat-option> 
+          </mat-select> 
+      </mat-form-field>
+</div>
+
+              
+            </div>
+
+            <div class="container">
+                <button class="buttonPrincipal" mat-raised-button type="submit" [disabled]="f.invalid">Guardar</button>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>

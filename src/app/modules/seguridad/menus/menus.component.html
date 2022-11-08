@@ -1,0 +1,90 @@
+<form [formGroup]="filtro">
+    <div class="row">
+        <div class="col-md-6">
+  
+            <mat-form-field appearance="legacy">
+                <mat-label>
+                    <mat-icon> search </mat-icon>
+                    Buscar
+                </mat-label>
+                <input matInput placeholder="Menú Padre" formControlName="filtrar">
+            </mat-form-field>
+  
+        </div>
+  
+        <div class="col-md-6">
+            <div class="text-right">
+                <button (click)="CrearMenu()" [disabled]="!auth.Insercion()" mat-raised-button class="buttonPrincipal">
+                    <mat-icon>
+                      add
+                    </mat-icon>
+                    Agregar Menú
+                </button>
+            </div>
+        </div>
+    </div>
+  </form>
+  
+  
+  <div class="ContenedorModulos">
+    
+  <div class="example-action-buttons container">
+    <button mat-button (click)="accordion.openAll()"> Expandir </button>
+    <button mat-button (click)="accordion.closeAll()">Cerrar   </button>
+  </div>
+  
+  <mat-accordion  class="example-headers-align custom" multi>
+    <mat-expansion-panel  *ngFor="let padre of menusPadre | search: this.filtro.value.filtrar:parametrosBusqueda | slice: desde: hasta; let i = index">
+  
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{padre?.menuPadre}}
+        </mat-panel-title>
+          <mat-icon *ngIf="auth.Insercion()" #tooltip="matTooltip" matTooltip="Opciones menú padre" style="float: right ;" (click)="menuPadre(padres, padre?.menuPadre, padre?.id_menuPadre, padre, padre?.hijo)">settings</mat-icon>
+      </mat-expansion-panel-header>
+  
+      <mat-list>
+        <div mat-subheader *ngIf="padre?.hijos.length > 0"> Menus Hijos </div>
+        <mat-list-item *ngFor="let hijo of padre?.hijos" (click)="menuHijo(hijos, hijo?.menuHijo, hijo , padre)" >
+          <!-- <mat-icon mat-list-icon > {{ hijo?.icon}}</mat-icon> -->
+          <i class="{{ hijo?.icon }}" ></i>
+          <div mat-line>{{hijo?.menuHijo}}</div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+      </mat-list>
+  
+  
+    </mat-expansion-panel>
+  
+  
+  </mat-accordion>
+  <mat-paginator [length]="menusPadre.length" [pageSize]="pageSize " (page)="next($event)">
+  </mat-paginator>
+  
+  </div>
+  
+  
+  <ng-template  #padres>
+    <h4 class="container"> {{ padre }} </h4>
+  <mat-nav-list >
+    <a  mat-list-item *ngFor="let bottom of opcionesPadres" (click)="Padre(bottom.accion)">
+        <mat-icon>{{bottom.icono}}</mat-icon>
+        <span mat-line><b>{{bottom.titulo}}</b></span>
+        <span mat-line>{{bottom.subtitulo}}</span>
+        <mat-divider></mat-divider>
+    </a>
+  
+  </mat-nav-list>
+  </ng-template>
+  
+  <ng-template  #hijos>
+    <h4 class="container"> {{ hijo }} </h4>
+  <mat-nav-list >
+    <a  mat-list-item *ngFor="let bottomP of opcionesHijos" (click)="Hijo(bottomP?.accion)" >
+        <mat-icon>{{bottomP.icono}}</mat-icon>
+        <span mat-line><b>{{bottomP.titulo}}</b></span>
+        <span mat-line>{{bottomP.subtitulo}}</span>
+        <mat-divider></mat-divider>
+    </a>
+  </mat-nav-list>
+  </ng-template>

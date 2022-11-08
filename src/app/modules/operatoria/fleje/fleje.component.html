@@ -1,0 +1,59 @@
+<mat-card class="mat-cardContainerCuerpo">
+    <form [formGroup]="flejeForm" #f="ngForm">
+        <div class="row">
+            <div class="col-md-6 container">
+                <img src="../../../../../assets/images/logoRansa.ico" alt="">
+            </div>
+            <div class="col-md-6 container">
+                <h3 class="h4"> Entrada de Fleje </h3>
+            </div>
+
+            <div class="col-md-6">
+                <mat-form-field appearance="legacy">
+                    <mat-label>Columna</mat-label>
+                    <mat-select  formControlName="columna" > 
+                        <mat-option> - </mat-option> 
+                        <mat-option #tipoLla *ngFor="let tipo of catalogoData['ColumFleje']" [value]="tipo?.columna">
+                            {{  tipo?.columna | uppercase }}
+                        </mat-option> 
+                      </mat-select> 
+                  </mat-form-field>
+            </div>
+    
+            <div class="col-md-6">
+                <mat-form-field  appearance="legacy">
+                    <mat-label> Cajas </mat-label>
+                    <input matInput #cajas [maxlength]="maxLength" placeholder="Cajas" (keypress)="validateFormat($event)" formControlName ="cajas">
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field appearance="legacy">
+                    <mat-label>Proveedor</mat-label>
+                    <mat-select  formControlName="proveedor" > 
+                        <mat-option> - </mat-option> 
+                        <mat-option #tipoLla *ngFor="let tipo of catalogoData['proveFleje']" [value]="tipo?.idProvFle">
+                            {{  tipo?.proveedor | uppercase }}
+                        </mat-option> 
+                      </mat-select> 
+                  </mat-form-field>
+            </div>
+
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="legacy" hintLabel="Max 250 Caracteres">
+                    <mat-label>Observaciones </mat-label>
+                    <textarea matInput #comentario formControlName ="Observaciones" placeholder="Observaciones" ></textarea>
+                    <mat-hint align="end">{{comentario.value?.length || 0}}/250</mat-hint>
+                  </mat-form-field>
+            </div>
+    
+            <div class=" col-md-12 container mt-4">
+                <button class="buttonPrincipal" mat-raised-button type="submit" [disabled]="f.invalid || (!auth.Insercion())" (click)="ingresarFlete()"  >Guardar</button>
+            </div>
+        </div>
+    </form>
+</mat-card>
+
+
+<mat-card class="mt-4">
+    <app-stock-fleje></app-stock-fleje>
+</mat-card>

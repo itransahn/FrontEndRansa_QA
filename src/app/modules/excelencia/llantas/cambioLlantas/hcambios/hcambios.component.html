@@ -1,0 +1,62 @@
+<mat-card class="mat-cardContainerCuerpo">
+    <div class="row">
+      <div class="col-md-6 container">
+          <img src="../../../../../assets/images/logoRansa.ico" alt="">
+      </div>
+      <div class="col-md-6 container">
+          <h3 class="h4"> Bitacora de modificaciones y/o eliminaciones </h3>
+      </div>
+  </div>
+  
+      <form [formGroup]="filtro">
+          <div class="row">
+              <div class="col-md-6">
+      
+                  <mat-form-field appearance="legacy">
+                      <mat-label>
+                          <mat-icon> search </mat-icon>
+                          Buscar
+                      </mat-label>
+                      <input matInput placeholder="..." formControlName="filtrar">
+                  </mat-form-field>
+              </div>
+          </div>
+      </form>
+  </mat-card>
+  
+  <mat-card class="mat-cardContainerCuerpo mt-4">
+      <div class="table-responsive !important">
+          <table  >
+              <!-- <caption>Statement Summary</caption> -->
+              <thead>
+                <tr>
+                  <th scope="col">Fecha registro </th>
+                  <th scope="col">Acción  </th>
+                  <th scope="col">Usuario </th>
+                  <th scope="col">Tipo de maquina </th>
+                  <th scope="col">Maquina anterior </th>
+                  <th scope="col">Maquina nueva     </th>
+                  <th scope="col">Lado Anterior </th>
+                  <th scope="col">Lado Nuevo </th>
+                  <th scope="col">Comentario actualización </th>
+
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let cambio of cambios  | search: this.filtro.value.filtrar:parametrosBusqueda | slice: desde: hasta " class="trHover">
+                  <td data-label="Fecha registro"> {{ cambio?.FechaCambio }}</td>
+                  <td data-label="Acción">  {{ cambio?.Accion }}</td>
+                  <td data-label="Usuario"> {{ cambio?.Usuario }}</td>
+                  <td data-label="Tipo de maquina">  {{ cambio?.TipoMaquina }}</td>
+                  <td data-label="Maquina anterior"> {{ cambio?.MaquinaAnterior }}</td>
+                  <td data-label="Maquina nueva"> {{ cambio?.MaquinaNueva     }}</td>
+                  <td data-label="Lado anterior"> {{ cambio?.LadoAnterior }}</td>
+                  <td data-label="Lado nuevo">    {{ cambio?.LadoNuevo }}</td>
+                  <td data-label="Comentario actualización"> {{ cambio?.ComentarioActualizacion }}</td>
+   </tr>
+   </tbody>
+   </table>
+   </div>
+   <mat-paginator [length]="cambios.length" [pageSize]="pageSize " (page)="next($event)">
+   </mat-paginator>
+  </mat-card>

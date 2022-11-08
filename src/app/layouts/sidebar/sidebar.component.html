@@ -1,0 +1,48 @@
+<div class="scrollbar" >
+    <div class="profile-img text-center"> <img src="../../../assets/images/Ransa.ico" class="logoSideBar">
+    </div>
+    
+    <div class="text-center" style="margin-top: 10%;">
+        <button id="snavButton" mat-mini-fab class="snav"(click)="redireccionar()" >
+      <mat-icon>  home </mat-icon>
+    </button>
+    </div>
+
+    <div class="mt-4 prueba " style="padding: 2%;">
+
+        <mat-accordion class="accordion" *ngFor="let menu of menu">
+
+            <mat-expansion-panel [expanded]="true" style="background-color: #006F1D !important;" class="mat-expansion-panelP">
+                <mat-expansion-panel-header *ngIf="menu.hijos.length > 0">
+
+                    <mat-panel-title style=" color:#FE9600 !important">
+                        <span class="textSideHeader">{{menu.menuPadre}}</span>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <ng-template matExpansionPanelContent style="padding: 0%;" class="contentAccordion">
+                    <mat-nav-list appAccordion class="fs">
+                             <ng-container *ngFor="let menuitem of menu.hijos">
+                                     
+                                <mat-divider></mat-divider>
+                                <!-- [routerLinkActive]="['is-active']" [routerLink]="menuitem.url"  -->
+                                <mat-list-item (click)="redireccionarHijos(menuitem?.url, menuitem)" style="width: 100% !important; ">
+                             
+                                <div mat-line class="textSide " >
+                                    <i class="{{menuitem.icon}} icon text-center" ></i>
+                                    {{menuitem.menuHijo }} </div>
+                                </mat-list-item>
+
+                             </ng-container>
+                    </mat-nav-list>
+                </ng-template>
+
+            </mat-expansion-panel>
+
+        </mat-accordion>
+    </div>
+
+
+
+</div>
+

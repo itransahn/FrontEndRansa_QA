@@ -1,0 +1,168 @@
+
+
+<mat-card class="cardPersonalizada scroll">
+ 
+    <mat-card-header class="header">   {{ dataUsuario['Nombre'] || 'MARIO' }}
+    <mat-icon style="float: right !important;" (click)="close()" > close </mat-icon>
+
+    </mat-card-header>
+
+
+    <mat-card-content >
+        <form [formGroup]="usuarioForm" #f="ngForm" style="margin-top: 2%;">
+            <div class="row">
+
+                <div class="col-md-12 imageProfile container"> 
+                    
+                      <img style="margin-left: 1%;"  [src]= "UrlImagenDefault" class=" img-fluid imagen" alt="No image"
+                      title="Imagen de Perfil">
+                      <!-- <img style="margin-left: 1%;"  [src]= "photoSelected || UrlImagenDefault " class=" img-fluid imagen" alt="No image"
+                      title="Imagen de Perfil"> -->
+                </div>
+
+                <div class="col-md-6">
+                    <mat-form-field  appearance="legacy">
+                        <mat-label>Nombre </mat-label>
+                        <input matInput [readonly]="true"  maxlength="100" placeholder="Nombre Completo" formControlName ="nombre">  
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                    <mat-form-field  appearance="legacy">
+                        <mat-label> Telefono </mat-label>
+                        <input matInput [readonly]="true" maxlength="100" placeholder="Telefono" formControlName ="telefono">  
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-12">
+                    <mat-form-field class="example-full-width" appearance="legacy">
+                        <mat-label>Dirección </mat-label>
+                        <textarea matInput [readonly]="true"  formControlName ="direccion" placeholder="Dirección " ></textarea>
+                      </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                    <mat-form-field  appearance="legacy">
+                        <mat-label> Nacimiento</mat-label>
+                        <input matInput [readonly]="true"  maxlength="100" placeholder="Nacimiento" formControlName ="nacimiento">  
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                    <mat-form-field  appearance="legacy">
+                        <mat-label> Edad </mat-label>
+                        <input matInput  [readonly]="true" maxlength="100" placeholder="edad" formControlName ="edad">  
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                    <mat-form-field  appearance="legacy">
+                        <mat-label> Identidad </mat-label>
+                        <input matInput [readonly]="true"  maxlength="100" placeholder="identidad" formControlName ="identidad">  
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                    <mat-form-field  appearance="legacy">
+                        <mat-label> Correo </mat-label>
+                        <input matInput [readonly]="true"  maxlength="100" placeholder="correo" formControlName ="correo">  
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                    <mat-form-field  appearance="legacy">
+                        <mat-label> Sexo </mat-label>
+                        <input matInput [readonly]="true"  maxlength="100" placeholder="sexo" formControlName ="sexo">  
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                    <mat-form-field  appearance="legacy">
+                        <mat-label> Departamento</mat-label>
+                        <input matInput [readonly]="true"  maxlength="100" placeholder="departamento" formControlName ="departamento">  
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                    <mat-form-field  appearance="legacy">
+                        <mat-label> Ciudad </mat-label>
+                        <input matInput [readonly]="true"  maxlength="100" placeholder="ciudad" formControlName ="ciudad">  
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                    <mat-form-field  appearance="legacy">
+                        <mat-label> Tipo de Sangre </mat-label>
+                        <input matInput [readonly]="true"  maxlength="100" placeholder="tipoSangre" formControlName ="tipoSangre">  
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                    <mat-form-field  appearance="legacy">
+                        <mat-label> usuarioRansa </mat-label>
+                        <input matInput [readonly]="true"  maxlength="100" placeholder="usuarioRansa" formControlName ="usuarioRansa">  
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                    <mat-form-field  appearance="legacy">
+                        <mat-label> Fecha de Ingreso </mat-label>
+                        <input matInput [readonly]="true"  maxlength="100" placeholder="fechaIngreso" formControlName ="fechaIngreso">  
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                    <mat-form-field  appearance="legacy">
+                        <mat-label> Departamento Físico </mat-label>
+                        <input matInput  [readonly]="true" maxlength="100" placeholder="deptoFisico" formControlName ="deptoFisico">  
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                    <mat-form-field  appearance="legacy">
+                        <mat-label> Puesto </mat-label>
+                        <input matInput [readonly]="true"  maxlength="100" placeholder="puesto" formControlName ="puesto">  
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                    <mat-form-field  appearance="legacy">
+                        <mat-label> Usuario Sistema </mat-label>
+                        <input matInput [readonly]="true"  maxlength="100" placeholder="usuario" formControlName ="usuario">  
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                    <mat-form-field  appearance="legacy">
+                        <mat-label> Rol </mat-label>
+                        <input matInput  [readonly]="true"  maxlength="100" placeholder="rol" formControlName ="rol">  
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                    <mat-form-field  appearance="legacy">
+                        <mat-label> CCO </mat-label>
+                        <input matInput  [readonly]="true"  maxlength="100" placeholder="CCO" formControlName ="CCO">  
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                    <mat-form-field  appearance="legacy">
+                        <mat-label> SEDE </mat-label>
+                        <input matInput  [readonly]="true"  maxlength="100" placeholder="sede" formControlName ="sede">  
+                    </mat-form-field>
+                </div>
+
+                </div>
+
+
+
+
+            <!-- <div class="container">
+                <button class="buttonPrincipal" mat-raised-button type="submit" [disabled]="f.invalid" [hidden]="!botton" (click)="submit()"  >Guardar</button>
+            </div> -->
+        </form>
+    </mat-card-content>
+
+</mat-card>  
+

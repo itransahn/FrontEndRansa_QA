@@ -1,0 +1,116 @@
+.NavbarPrincipal{
+    width: 100%;
+    height: auto;
+    background-color: #ffffff;
+    box-shadow: -2px 2px 13px 3px rgba(40,38,41,0.38);
+    -webkit-box-shadow: -2px 2px 13px 3px rgba(40,38,41,0.38);
+    -moz-box-shadow: -2px 2px 13px 3px rgba(40,38,41,0.38);
+}
+
+.fila{
+    width: 101%;
+}
+
+
+.avatar {
+    width : 30px; 
+    height: 30px;
+    border-radius: 100px;    
+    padding: 0;
+    margin-right: 0;
+}
+
+
+.imagen{   
+    padding-left: 40%;
+    font: bold;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
+button.mat-menu-mat-icon{
+    color: #006F1D;
+  }
+
+  button.mat-menu-item{
+      background-color: #ffffff ;
+      color: #006F1D !important;
+      mat-icon{
+        color: #006F1D !important;
+    }
+  }
+  
+  button.mat-menu-item:hover {
+    background-color: #006F1D;
+    color:  #FE9600 !important;
+    mat-icon{
+        color: #FE9600 !important;
+    }
+  }
+
+::ng-deep .custom-class {
+    margin-top: 5%;
+    background-color: #ffffff !important;
+}
+
+.texto{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+        .bienvenido{
+            color: #006F1D  !important;
+            font-family: "Poppins", sans-serif;
+            font-size: medium;
+            margin: 0; 
+            margin-left: 4%;
+        }
+}   
+
+/* pantallas de 450px*/
+@media only screen and (max-width: 500px) {
+    .avatar{
+        width :30px;
+        height:30px;
+        border-radius: 100px;    
+        padding: 0;
+    }
+
+    .bienvenido{
+        color: #006F1D  !important;
+        font-family: "Poppins", sans-serif;
+        font-size: xx-small !important;
+        display: none !important;
+    }
+
+     .imagen{
+        display: flex;
+        justify-content: right;
+        align-items: center;
+        }
+
+  .fila{
+    width: 103%;
+  }
+}
+/* pantallas de 380px*/
+@media only screen and (max-width: 380px) {
+    .avatar{
+        width :30px;
+        height:30px;
+        border-radius: 100px;    
+        padding: 0;
+    }
+
+    .bienvenido{
+        color: #006F1D  !important;
+        font-family: "Poppins", sans-serif;
+        font-size: xx-small !important;
+        display: none !important;
+    }
+    .avatar{
+        display:  none ;
+            }
+}
+
+

@@ -1,0 +1,27 @@
+.example-form {
+    min-width: 150px;
+    max-width: 100%;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+
+  
+  .imageProfile{
+    margin-top: 1%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .imagen{ 
+         width : 100px;
+         height:   100px;
+         display: inline;
+     }  
+  }
+
+
+  .scroll{
+   overflow-y: auto;
+  }

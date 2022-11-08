@@ -1,0 +1,77 @@
+
+<mat-card class="mat-cardContainerCuerpo mt-4">
+    <div class="row">
+        <div class="col-md-6 container">
+            <img src="../../../../../assets/images/logoRansa.ico" alt="">
+        </div>
+        <div class="col-md-6 container">
+            <h3 class="h4"> Historial de Ajustes </h3>
+        </div>
+    </div>
+</mat-card>
+<mat-card class="mat-cardContainerCuerpo mt-4">
+    <form [formGroup]="filtro">
+        <div class="row">
+            <div class="col-md-12">
+    
+                <mat-form-field appearance="legacy">
+                    <mat-label>
+                        <mat-icon> search </mat-icon>
+                        Buscar
+                    </mat-label>
+                    <input matInput placeholder="Ajustes,Llanta,Lote,Cantidad,Comentario,Solicitante,Aprobador" formControlName="filtrar">
+                </mat-form-field>
+    
+            </div>
+
+        </div>
+    </form>
+    <div class="table-responsive !important" *ngIf="ajustes?.length >= 1">
+        <table  >
+            <!-- <caption>Statement Summary</caption> -->
+            <thead>
+              <tr>
+                <th scope="col">Fecha          </th>
+                <th scope="col">Tipo de ajuste </th>
+                <th scope="col">Tipo de llanta </th>
+                <th scope="col">Lote        </th>
+                <th scope="col">Cantidad    </th>
+                <th scope="col">Comentario  </th>
+                <th scope="col">Solicitante </th>
+                <th scope="col">Aprobador </th>
+                <th scope="col">Estado    </th> 
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let aj of ajustes | search: this.filtro.value.filtrar:parametrosBusqueda | slice: desde: hasta " class="trHover">
+                <td data-label="Fecha">           {{ aj?.Fecha  }}</td>
+                <td data-label="Tipo de ajuste">  {{ aj?.Ajuste }}</td>
+                <td data-label="Tipo de llanta">  {{ aj?.Llanta }}</td>
+                <td data-label="Lote">       {{ aj?.Lote }}</td>
+                <td data-label="Cantidad">   {{ aj?.Cantidad }}</td>
+                <td data-label="Comentario"> {{ aj?.Comentario }}</td>
+                <td data-label="Solicitante"> {{ aj?.Solicitante }}</td>
+                <td data-label="Aprobador">   {{ aj?.Aprobador }}</td>
+                <td role="cell" data-label="Estado" class="text-center">
+                  <span *ngIf="aj.estado === 0" class="badge badge-pill badge-warning">  Pendiente    </span>
+                  <span *ngIf="aj.estado === 1" class="badge badge-pill badge-success">  Confirmado </span>
+                  <span *ngIf="aj.estado === 2" class="badge badge-pill badge-danger">   Denegado   </span>
+              </td>
+       
+              </tr>
+            </tbody>
+  
+          </table>
+          
+       </div>
+          <mat-paginator  *ngIf="ajustes?.length >= 1" [length]="ajustes.length" [pageSize]="pageSize " (page)="next($event)">
+        </mat-paginator>
+
+
+
+        <nav *ngIf="ajustes?.length < 1" aria-label="breadcrumb">
+          <ol class="breadcrumb container">
+           <h4> No tiene ajustes pendientes </h4>
+          </ol>
+      </nav>
+</mat-card>

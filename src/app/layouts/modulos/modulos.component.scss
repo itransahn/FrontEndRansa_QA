@@ -1,0 +1,173 @@
+@import "../../shared/variables.scss";
+
+.navbarE{
+    width: 100% !important;
+    height: 5% !important;
+}
+
+.contenedor{
+    width: 100% !important;
+    height: 95% !important;
+
+    border-style: solid !important;
+    color: red !important;
+}
+
+.containerH4{
+    width: 100% !important;
+    height: 30% !important;
+    display: grid !important;
+    justify-content: center !important;
+    align-items: center !important;
+
+}
+.containerImg{
+    width: 100% !important;
+    height: 70% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+h4{
+    font-size: $tamaño-FuenteGrande;
+    padding: 0;
+    margin-bottom: 2px;
+}
+
+.card{
+    max-width:  150px !important;
+    max-height: 150px !important;
+    width:  150px !important;
+    height: 150px !important;
+    background-color: $blanco-primario !important;
+    color: $verde-primario;
+    float: left !important;
+    margin-left:   3%   !important;
+    margin-bottom: 2%   !important;
+    border-radius: 50px !important;
+}
+
+.card:hover{
+    cursor: pointer;
+    color: $anaranjado-primario !important;
+    transform: scale(0.9);
+}
+
+
+.imageCard{
+    width :100% !important;
+    height:100% !important;
+    padding: 0 !important;
+}
+
+/*PANTALLA MENOR DE 768*/
+@media only screen and (max-width: 768px) {
+    .navbarE{
+        width: 100%;
+        height: 5%;
+    }
+
+    .contenedor{
+        width: 100%;
+        height: 95%;
+    }
+
+    h4{
+        font-size :  $tamaño-FuentePequeña;
+        margin-bottom: 75%;
+    }
+}
+
+/*PANTALLA MENOR DE 500*/
+@media only screen and (max-width: 500px) {
+    .navbarE{
+        width: 100%;
+        height: 5%;
+    }
+
+    .contenedor{
+        width: 100%;
+        height: 95%;
+    }
+
+
+    /* Modificacion a tarjeta interna */
+    .containerImg{
+        width: 100%;
+        height: 70%;
+        display: grid;
+        justify-content: center;
+        align-items: center;
+    }
+
+    h4{
+        font-size:  $tamaño-FuentePequeña;
+        margin-bottom: 75%;
+    }
+
+    .card{
+        width:  110px !important;
+        height: 110px !important;
+        background-color: #ffffff !important;
+        color: $verde-primario;
+
+        float: left;
+        margin-left: 10%;
+        margin-bottom: 5%;
+        border-radius: 20px !important;
+    }
+
+    .imageCard{
+        width : 50px;
+        height: 50px;
+    }
+}
+
+/*PANTALLA MENOR DE 360px*/
+@media only screen and (max-width: 360px) {
+    .navbarE{
+        width: 100%;
+        height: 3%;
+    }
+
+    .contenedor{
+        width: 100%;
+        height: 97%;
+    }
+
+
+    /* Modificacion a tarjeta interna */
+    .containerImg{
+        width: 100%;
+        height: 70%;
+        display: grid;
+        justify-content: center;
+        align-items: center;
+    }
+
+    h4{
+        font-size: $tamaño-FuentePequeña;
+        margin-bottom: 75%;
+    }
+
+    .card{
+        width:  100px;
+        height: 100px;
+        background-color: #ffffff !important;
+        color: $verde-primario;
+
+        float: left;
+        margin-left: 11%;
+        margin-bottom: 5%;
+
+    }
+
+    .imageCard{
+        width : 50px;
+        height: 50px;
+    }
+}
+
+
+

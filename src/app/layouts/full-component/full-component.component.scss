@@ -1,0 +1,200 @@
+.imgLogoPrincipal {
+    max-width: 120px;
+  }
+  
+  .imgLogoSecundary {
+    max-width: 170px;
+    max-height: 60px;
+  }
+  
+
+  .position{
+    align-items: flex-end;
+    justify-content: right;
+  }
+  .colorBack {
+    background-color: #ffffff;
+    height: 55px !important;
+  }
+  
+  .snav {
+    background-color: #006F1D;
+    color: white;
+  }
+  .letterNavBarPrimary{
+    font-weight: bold;
+    color: #006F1D;
+  }
+  .letterNavBarSecundary {
+    font-weight: bold;
+    color: #006F1D;
+  }
+  
+  .page-content {
+    padding: 15px;
+    color: #006F1D !important;
+  }
+
+  .letterNavBarSecundary {
+    font-weight: bold;
+    color: #006F1D;
+  }
+
+  .example-sidenav-container {
+    /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
+       causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
+    flex: 1;
+  }
+  .example-sidenav-container {
+    /* When the sidenav is fixed, don't constrain the height of the sidenav container. This allows the
+       `<body>` to be our scrolling element for mobile layouts. */
+    flex: 1 0 auto;
+  }
+
+  .colorBack {
+    background-color: white;
+    height: 55px !important;
+  }
+  
+  .navbar-header {
+    text-align: center;
+    .navbar-brand {
+      display: flex;
+      line-height: 18px;
+      align-items: center;
+      .dark-logo {
+        display: none;
+      }
+      b {
+        margin-right: 5px;
+      }
+    }
+  }
+
+  html .page-wrapper {
+    height: calc(100vh - 1px);
+  }
+  html .page-wrapper .page-content {
+    padding: 15px;
+  }
+  
+
+  html .page-wrapper {
+
+    height: calc(100vh - 1px);
+    .page-content {
+      padding: 5px;
+    }
+  }
+
+  @media all and (max-width: 600px) {
+    .letterUnah {
+      display: none !important;
+    }
+  }
+  
+  .main-container {
+    padding: 5px;
+    flex-grow: 1;
+    overflow: auto;
+   }
+   
+   .example-sidenav-container {
+    /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
+       causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
+    flex: 1;
+  }
+  .example-sidenav-container {
+    /* When the sidenav is fixed, don't constrain the height of the sidenav container. This allows the
+       `<body>` to be our scrolling element for mobile layouts. */
+    flex: 1 0 auto;
+  }
+
+  /* PAGE css */
+  .main-container {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  
+  .mat-drawer-container {
+    background: #ffffff;
+  }
+  
+  html .page-wrapper {
+  
+    height: calc(100vh - 1px);
+    .page-content {
+      padding: 15px;
+    }
+  }
+  
+  .align-items-center {
+    align-items: center;
+  }
+  
+  /*******************
+  Chartistt chart css
+  ******************/
+  
+  .barchrt {
+    .ct-series-a .ct-bar {
+      stroke: #ffffff;
+    }
+    .ct-series-b .ct-bar {
+      stroke: #ffffff;
+    }
+  }
+  
+
+  
+  /*******************/
+  
+  /*social-profile-first*/
+  
+  /*******************/
+  
+  .little-profile {
+    .pro-img,
+    .pro-img:first-child {
+      margin-top: -110px;
+      margin-bottom: 20px;
+      img {
+        width: 128px;
+        height: 128px;
+        -webkit-box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        border-radius: 100%;
+      }
+    }
+  }
+  
+  .button-row button {
+    margin-bottom: 5px;
+    margin-right: 5px;
+  }
+  
+  .pl-5 {
+    padding-left: 5px;
+  }
+  
+  .pr-5 {
+    padding-right: 5px;
+  }
+  
+  /* Page css */
+
+
+
+
+  /* FOOTER */
+  .footer{
+    background-color: transparent !important;
+    color:  #006F1D !important;
+    width:  100% !important;
+  }

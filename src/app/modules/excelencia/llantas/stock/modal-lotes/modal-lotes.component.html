@@ -1,0 +1,44 @@
+<mat-card class="cardPersonalizada" >
+    <mat-card-header class="header  mb-4">   Modificación a Lote {{ data['Lote']}}
+        <mat-icon style="float: right !important;" (click)="close()" > close </mat-icon>
+        </mat-card-header>
+
+<mat-card-content>
+    <form [formGroup]="lotesForm" #f = "ngForm">
+        <div class="row">        
+            <div class="col-md-12">
+                <mat-form-field  appearance="legacy">
+                    <mat-label> LOTE </mat-label>
+                    <input matInput placeholder="Lote" formControlName ="lote">
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-12">
+                <mat-form-field  appearance="legacy">
+                    <mat-label> Precio </mat-label>
+                    <input matInput  maxlength="100" placeholder="Precio" formControlName ="precio">
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-12">
+                <mat-form-field appearance="legacy">
+                    <mat-label>Tipo de llanta </mat-label>
+                    <mat-select  formControlName="proveedor" > 
+                        <mat-option> - </mat-option> 
+                        <mat-option #tipoLla *ngFor="let tipo of catalogo['proveedorLlanta']" [value]="tipo?.idProveedor">
+                            {{  tipo?.proveedor | uppercase }}
+                        </mat-option> 
+                      </mat-select> 
+                  </mat-form-field>
+            </div>
+   
+            <div class="col-md-12 container">
+                <button class="buttonPrincipal" mat-raised-button type="submit" (click)="submit()" 
+                [disabled]="f.invalid">Guardar</button>
+            </div>
+
+        </div>
+    </form>
+</mat-card-content>
+
+  </mat-card>

@@ -1,0 +1,62 @@
+<mat-card></mat-card>
+<mat-card class="mat-cardContainerCuerpo mt-4">
+    <div class="table-responsive !important" *ngIf="ajustes?.length >= 1">
+        <table  >
+            <!-- <caption>Statement Summary</caption> -->
+            <thead>
+              <tr>
+                <th scope="col">Fecha              </th>
+                <th scope="col">Tipo de ajuste     </th>
+                <th scope="col">Tipo de llanta     </th>
+                <th scope="col">Lote               </th>
+                <th scope="col">Cantidad           </th>
+                <th scope="col">Comentario         </th>
+                <th scope="col">Estado             </th>
+                <th scope="col">Acciones           </th>
+                
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let aj of ajustes | slice: desde: hasta " class="trHover">
+                <td data-label="Fecha">           {{ aj?.Fecha  }}</td>
+                <td data-label="Tipo de ajuste">  {{ aj?.Ajuste }}</td>
+                <td data-label="Tipo de llanta">  {{ aj?.DetalleAjuste }}</td>
+                <td data-label="Lote">       {{ aj?.lote }}</td>
+                <td data-label="Cantidad">   {{ aj?.Cantidad }}</td>
+                <td data-label="Comentario"> {{ aj?.comentario }}</td>
+                <td role="cell" data-label="Estado" class="text-center">
+                  <span *ngIf="aj.estado === 0" class="badge badge-pill badge-warning"> Pendiente    </span>
+                  <span *ngIf="aj.estado === 1" class="badge badge-pill badge-success">  Confirmado </span>
+                  <span *ngIf="aj.estado === 2" class="badge badge-pill badge-danger">  Denegado   </span>
+              </td>
+              <td data-label="Acciones">
+                <div class="text-center">
+                    <!-- Editar -->
+               <button mat-mini-fab class="buttonSecundary" [disabled]="aj.estado != 0" (click)="ModalAjustes( aj )" >
+                <mat-icon>create</mat-icon>
+             </button>
+               <!-- Eliminar -->
+               <button mat-mini-fab class="btnDelete" (click)="eliminarAjuste( aj)">
+                  <mat-icon>delete_forever</mat-icon>
+               </button>
+        
+                </div>
+
+                </td>
+              </tr>
+            </tbody>
+  
+          </table>
+          
+       </div>
+          <mat-paginator  *ngIf="ajustes?.length >= 1" [length]="ajustes.length" [pageSize]="pageSize " (page)="next($event)">
+        </mat-paginator>
+
+
+
+        <nav *ngIf="ajustes?.length < 1" aria-label="breadcrumb">
+          <ol class="breadcrumb container">
+           <h4> No tiene ajustes pendientes </h4>
+          </ol>
+      </nav>
+</mat-card>

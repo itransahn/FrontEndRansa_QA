@@ -1,0 +1,65 @@
+<mat-card class="mat-cardContainerCuerpo mat-elevation-z0">
+    <form [formGroup]="filtro">
+        <div class="row">
+            <div class="col-md-6">
+    
+                <mat-form-field appearance="legacy">
+                    <mat-label>
+                        <mat-icon> search </mat-icon>
+                        Buscar
+                    </mat-label>
+                    <input matInput placeholder="puesto..." formControlName="filtrar">
+                </mat-form-field>
+    
+            </div>
+     
+            <div class="col-md-6">
+                <div class="text-right">
+                    <button mat-raised-button class="buttonPrincipal" [disabled]="!auth.Insercion()" (click)="ModalPuesto(2)">
+                        <mat-icon>
+                            add
+                        </mat-icon>
+                        Agregar Puesto
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+       <div class="table-responsive !important">
+        <table  >
+            <!-- <caption>Statement Summary</caption> -->
+            <thead>
+              <tr>
+                <th scope="col">Puesto Ransa</th>
+                <th scope="col">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let puesto of dataPuestos  | search: this.filtro.value.filtrar:parametrosBusqueda | slice: desde: hasta " class="trHover">
+                <td data-label="Puesto Ransa">                {{    puesto?.puestoRansa     }}</td>
+                <td data-label="Acciones">
+                <div class="text-center">
+
+                 <!-- Ver -->
+               <button mat-mini-fab class="buttonSecundary"    (click)="ModalPuesto(1 ,puesto)"  >
+                   <mat-icon>visibility</mat-icon>
+               </button>
+                 <!-- Editar -->
+                 <button mat-mini-fab class="buttonSecundary" [disabled]="!auth.Actualizacion()" (click)="ModalPuesto(3, puesto)" >
+                   <mat-icon>create</mat-icon>
+               </button>
+                 <!-- Eliminar -->
+               <button mat-mini-fab class="btnDelete" [disabled]="!auth.Eliminacion()" (click)="eliminarpuesto( puesto?.id_puesto, puesto?.puesto )" >
+                            <mat-icon>delete_forever</mat-icon>
+               </button>                 
+                </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          
+       </div>
+          <mat-paginator [length]="dataPuestos.length" [pageSize]="pageSize " (page)="next($event)">
+        </mat-paginator>
+        
+</mat-card>

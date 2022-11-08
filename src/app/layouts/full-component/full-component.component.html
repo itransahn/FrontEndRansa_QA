@@ -1,0 +1,60 @@
+<div class="main-container" style="height: 100%;">
+
+    <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 0 : 0">
+
+  
+        <mat-sidenav #snav id="snav" class="dark-sidebar pl-xs" [mode]="mobileQuery.matches ? 'side' : 'over'"
+            fixedTopGap="0" [opened]="mobileQuery.matches" [disableClose]="mobileQuery.matches" [(opened)]="opened">
+            <!-- <app-side-menu></app-side-menu> -->
+            <app-sidebar></app-sidebar>
+        </mat-sidenav>
+
+        <mat-sidenav-content class="page-wrapper">
+            <mat-toolbar class="topbar telative colorBack">
+                <div class="navbar-header" *ngIf="mobileQuery.matches && !opened" style="float: left !important;">
+                    <a class="navbar-brand">
+                        <b>
+                            <img src="../../../assets/images/logoRansa.ico" alt="homepage" class="imgLogoPrincipal">
+                        </b>
+                    </a>
+                </div>
+
+                <div style="float: left !important;">
+                    <button id="snavButton" mat-mini-fab (click)="snav.toggle()" value="sidebarclosed" class="snav">
+                        <mat-icon *ngIf="!opened">menu</mat-icon>
+                        <mat-icon *ngIf="opened">close</mat-icon>
+                    </button>
+                </div>
+
+
+                <span fxFlex>
+                    <div class="text-center"  style=" margin-left: 5%;">
+                        <b class="letterNavBarSecundary"> HONDURAS </b>
+                    </div>
+                </span>
+                <!-- <app-navbar1 ></app-navbar1> -->
+              
+                <app-navbar style=" position: relative; float: right !important; margin-left: auto;"></app-navbar>
+           
+            </mat-toolbar>
+            <!-- ============================================================== -->
+            <!-- Page container - style you can find in pages.scss -->
+            <!-- ============================================================== -->
+            <div class="page-content">
+
+                
+                <router-outlet> </router-outlet>
+                <!-- <app-usuarios></app-usuarios> -->
+
+            </div>
+            
+            <div class=" footer container">
+                <h4> Ransa © 2022 Todos los derechos reservados. Términos de Uso and Política de Privacidad</h4>
+        </div>
+        </mat-sidenav-content>
+  
+ 
+    </mat-sidenav-container>
+
+</div>
+

@@ -1,0 +1,145 @@
+<mat-card class="mat-cardContainerCuerpo">
+    <form [formGroup]="filtro" #f="ngForm">
+    <div class="row">
+        <div class="col-md-12 container">
+            <h4 class="h4"> Control del dolar detallado </h4>
+        </div>
+        <div class="col-md-4 container">
+                <mat-form-field appearance="fill">
+                    <mat-label>Desde</mat-label>
+                    <input name="date" formControlName = "desde" matInput [matDatepicker]="desde">
+                    <mat-datepicker-toggle matSuffix [for]="desde"></mat-datepicker-toggle>
+                    <mat-datepicker #desde></mat-datepicker>
+                  </mat-form-field>
+            
+         </div>
+    <div class="col-md-4 container">
+                <mat-form-field appearance="fill">
+                    <mat-label>Hasta</mat-label>
+                    <input name="date" formControlName = "hasta" matInput [matDatepicker]="hasta">
+                    <mat-datepicker-toggle matSuffix [for]="hasta"></mat-datepicker-toggle>
+                    <mat-datepicker #hasta></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="text-left">
+                        <button mat-raised-button class="buttonPrincipal"  [disabled]="f.invalid" (click)="CargarCanjeos()">
+                            <mat-icon>
+                                search
+                            </mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+</mat-card>
+
+<div #factura id ="Factura">
+    <mat-card class="mat-cardContainerCuerpo mt-4" *ngIf="loading">
+        <div class="row">
+            <div class="col-md-12 ">
+                <img src="../../../../../assets/images/logoRansa.ico" alt="">
+            </div>
+        
+            <div class="col-md-12 container">
+                <h4 class="h4">
+                 {{ filtro.value.desde | date :'shortDate' }} - {{ filtro.value.hasta | date :'shortDate' }}
+                </h4>
+            </div>
+            <div class="col-md-12 container">
+                <h4 class="h4"> RANSA CD SAUCE</h4>
+            </div>
+        </div>
+    
+        <div class="table-responsive !important" *ngIf="loading">
+            <table  >
+                <!-- <caption>Statement Summary</caption> -->
+                <thead>
+                  <tr> 
+                    <th scope="col">Fecha        </th>
+                    <th scope="col">Hora </th>
+                    <th scope="col">Usuario        </th>
+                    <th scope="col">Colaborador        </th>
+                    <th scope="col">CCO        </th>
+                    <th scope="col">Dolar        </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let dolar of dolares | slice: desdeF:hastaF " class="trHover">
+                    <td data-label="Fecha">           {{  dolar?.Fecha  | date : 'shortDate'  }}</td>
+                    <td data-label="Hora">            {{  dolar['Hora Canjeo']     }}</td>
+                    <td data-label="Usuario">         {{  dolar['Usuario Ransa']   }}</td>
+                    <td data-label="Colaborador">     {{  dolar?.NOMBRE            }}</td>
+                    <td data-label="CCO">             {{  dolar?.CCO               }}</td>
+                    <td data-label="Dolar">           {{  dolar?.Dolar  | currency: 'Lps '  }}</td>
+
+                  </tr>
+                </tbody>
+                <tfoot *ngIf=" hastaF >= dolares.length">
+                    <tr >
+                        <th ></th>
+                        <th ></th>
+                        <th ></th>
+                        <th ></th>
+                        <th > TOTAL</th>
+                        <th > {{ subTotal | currency : 'Lps '}} </th>
+                        </tr>
+                    <!-- ISV -->
+                        <!-- <tr class="footer">
+                        <th class="footer"></th>
+                        <th class="footer"></th>
+                        <th class="footer"></th>
+                        <th class="footer"></th>
+                        <th class="footerDetalle titulo"> ISV </th>
+                        <th class="footerDetalle"> {{ ( subTotal * 0.15 ) | currency : 'Lps '}} </th>
+                        </tr>
+                    <tr class="footer">
+                    <th class="footer"></th>
+                    <th class="footer"></th>
+                    <th class="footer"></th>
+                    <th class="footer"></th>
+                    <th class="footerDetalle titulo"> Total Factura </th>
+                    <th class="footerDetalle"> {{ ( subTotal * 0.15 ) + subTotal | currency : 'Lps '}} </th> -->
+                    <!-- </tr> -->
+                  
+                  </tfoot>  
+            </table>  
+           </div>
+    
+              <mat-paginator #paginator [length]="dolares.length" [pageSize]="pageSize " (page)="next($event)">
+            </mat-paginator>
+    </mat-card>
+
+</div>
+
+<!-- <mat-card class="mat-cardContainerCuerpo mt-4" *ngIf="loading">
+        <div class="row mb-4">
+            <div class="col-md-12 container">
+                <h4 class="h4"> Opciones </h4>
+            </div>
+            <div class="col-md-6 container">
+                <div class="text-rigth">
+                    <button mat-raised-button class="buttonPrincipal" 
+                    #tooltip="matTooltip" matTooltip="Imprimir" matTooltipPosition="above" 
+                    [disabled]="f.invalid" (click)="sharedS.printComponent('Factura')">
+                        <mat-icon>
+                            print
+                        </mat-icon>
+                    </button>
+                </div>
+            </div>
+
+            <div class="col-md-6 container">
+                <div class="text-left">
+                    <button mat-raised-button class="buttonPrincipal"  
+                    #tooltip="matTooltip" matTooltip="Documento PDF" matTooltipPosition="above" 
+                    [disabled]="f.invalid" (click)="sharedS.downloadPDF('Factura', 'Factura_cco','Factura por centro de costo', 'Seguro de imprimir factura')">
+                        <mat-icon>
+                            picture_as_pdf
+                        </mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+</mat-card> -->

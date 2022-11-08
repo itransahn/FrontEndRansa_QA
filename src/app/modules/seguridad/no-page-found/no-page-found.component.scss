@@ -1,0 +1,69 @@
+.RANSA{
+    width: 100%;
+    height: 300px;
+}
+.error-page{
+    width: 98%;
+    height: 100%;
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
+}
+
+.error-box {
+    height: 90%;
+    position: fixed;
+    background-color: #ffffff;
+    width: 100%;
+ }
+    .error-box .footer {
+      width: 100%;
+      left: 0px;
+      right: 0px; 
+    }
+  
+  .error-body {
+    padding-top: 1%;
+ }
+ h1{
+    color: #006F1D;
+ }
+ p{
+    color: #006F1D;
+ }
+ h3{
+    color: #006F1D;
+}
+ .error-body h1 {
+      font-size: 150px;
+      font-weight: 900;
+      text-shadow: 4px 4px 0 #ffffff, 6px 6px 0 #006F1D;
+      line-height: 210px; 
+    }
+  
+// a{
+//     color: #ffffff;
+//     background-color: #006F1D;
+//     :hover{
+
+//     }
+// }
+
+.buttonC {
+    margin-top: 3%;
+    width: 20%;
+    background-color: #006F1D;
+    color:  #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 5px rgba(8, 7, 16, 0.6);
+    padding: 15px 0;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+  
+  }
+
+footer{ 
+    color: #006F1D;
+}

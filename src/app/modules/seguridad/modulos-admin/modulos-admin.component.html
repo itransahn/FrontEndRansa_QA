@@ -1,0 +1,91 @@
+<form [formGroup]="filtro">
+  <div class="row">
+      <div class="col-md-6">
+
+          <mat-form-field appearance="legacy">
+              <mat-label>
+                  <mat-icon> search </mat-icon>
+                  Buscar
+              </mat-label>
+              <input matInput placeholder="Modulo......" formControlName="filtrar">
+          </mat-form-field>
+
+      </div>
+
+      <div class="col-md-6">
+          <div class="text-right">
+              <button mat-raised-button class="buttonPrincipal" [disabled]="!auth.Insercion()" (click)="CrearModulo()">
+                  <mat-icon>
+                    add
+                  </mat-icon>
+                  Agregar Módulo
+              </button>
+          </div>
+      </div>
+  </div>
+</form>
+
+
+<div class="ContenedorModulos">
+  
+<div class="example-action-buttons container">
+  <button mat-button (click)="accordion.openAll()"> Expandir </button>
+  <button mat-button (click)="accordion.closeAll()">Cerrar   </button>
+</div>
+
+<mat-accordion  class="example-headers-align custom" multi>
+  <mat-expansion-panel  *ngFor="let modulo of modulosPadre | search: this.filtro.value.filtrar:parametrosBusqueda | slice: desde: hasta; let i = index">
+
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{modulo?.modulo}}
+      </mat-panel-title>
+      <mat-icon #tooltip="matTooltip"  matTooltip="Opciones Módulo" *ngIf="auth.Actualizacion()" style="float: right;" (click)="menuModulos(modulos, modulo?.modulo, modulo?.id_modulo, modulo)" >settings</mat-icon>
+        <!-- <button class="container" mat-icon-button [disabled]="!auth.Actualizacion()" >
+       </button> -->
+      </mat-expansion-panel-header>
+
+    <mat-list>
+      <div mat-subheader *ngIf="modulo?.padres.length > 0"> Menus Padres </div>
+      <mat-list-item *ngFor="let padre of modulo?.padres"  (click)="menuPadres(padres, padre?.menuPadre, padre?.id_menuPadre, padre, modulo)" >
+        <mat-icon mat-list-icon > {{ padre?.icon}}</mat-icon>
+        <div mat-line>{{padre?.menuPadre}}</div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+    </mat-list>
+
+
+  </mat-expansion-panel>
+
+
+</mat-accordion>
+<mat-paginator [length]="modulosPadre.length" [pageSize]="pageSize " (page)="next($event)">
+</mat-paginator>
+
+</div>
+
+
+<ng-template  #modulos>
+  <h4 class="container"> {{ modulo }} </h4>
+<mat-nav-list >
+  <a  mat-list-item *ngFor="let bottom of opcionesModules" (click)="Module(bottom?.accion)">
+      <mat-icon>{{bottom.icono}}</mat-icon>
+      <span mat-line><b>{{bottom.titulo}}</b></span>
+      <span mat-line>{{bottom.subtitulo}}</span>
+      <mat-divider></mat-divider>
+  </a>
+
+</mat-nav-list>
+</ng-template>
+
+<ng-template  #padres>
+  <h4 class="container"> {{ padre }} </h4>
+<mat-nav-list >
+  <a  mat-list-item *ngFor="let bottomP of opcionesPadres" (click)="MenuPadre(bottomP?.accion)" >
+      <mat-icon>{{bottomP.icono}}</mat-icon>
+      <span mat-line><b>{{bottomP.titulo}}</b></span>
+      <span mat-line>{{bottomP.subtitulo}}</span>
+      <mat-divider></mat-divider>
+  </a>
+</mat-nav-list>
+</ng-template>

@@ -1,0 +1,54 @@
+<!-- <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a [routerLink]="['/dashboard']">Inicio</a></li>
+        <li class="breadcrumb-item"><a [routerLink]="['/seguridad/menus']">Menus</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Nuevo Menu</li>
+    </ol>
+</nav> -->
+
+
+<mat-card class="cardPersonalizada">
+
+    <mat-card-header class="header">    Nuevo Menú 
+    <mat-icon style="float: right !important;" (click)="close()" > close </mat-icon>
+
+    </mat-card-header>
+
+
+    <mat-card-content>
+        <form [formGroup]="menuForm" #f="ngForm" style="margin-top: 2%;">
+            <div class="row">
+                <div class="col-md-12">
+                    <mat-form-field hintLabel="Max 50 Caracteres" appearance="legacy">
+                        <mat-label>Nombre Menú</mat-label>
+                        <input matInput #texto maxlength="50" placeholder="Nombre Menú" formControlName ="menuPadre">
+                        <mat-hint align="end">{{texto.value?.length || 0}}/50</mat-hint>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-12">
+                    <mat-form-field appearance="legacy">
+                        <mat-label>Icono</mat-label>
+                        <input #icono matInput placeholder="Icono de Angular Material" formControlName ="icono">
+                        <span matSuffix> <mat-icon #icon>{{icono?.value}}</mat-icon></span>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-12 container">
+                    <mat-form-field appearance="legacy">
+                        <mat-label>Módulos</mat-label>
+                        <mat-select style="color: #006F1D !important;" formControlName="modulo" > 
+                            <mat-option> - </mat-option> 
+                            <mat-option *ngFor="let modulo of catalogo['modulos']" [value]="modulo?.id_modulo" >
+                                {{  modulo?.modulo }}
+                            </mat-option> 
+                          </mat-select> 
+                      </mat-form-field>
+                </div>
+            </div>
+
+
+            <div class="container mt-4">
+                <button class="buttonPrincipal" mat-raised-button type="submit" [disabled]="f.invalid" (click)="insertarMenu()" >Guardar</button>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>

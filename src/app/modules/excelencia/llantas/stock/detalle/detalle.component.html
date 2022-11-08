@@ -1,0 +1,82 @@
+<mat-card class="mat-cardContainerCuerpo mt-4" >
+    <form [formGroup]="filtro" #f ="ngForm">
+       <div class="row">
+        <div class="col-md-8">
+            <mat-form-field appearance="legacy">
+                <mat-label>Tipo de llanta </mat-label>
+                <mat-select  formControlName="tipoLlanta" (selectionChange)="cargarStock()" > 
+                    <mat-option> - </mat-option> 
+                    <mat-option #tipoLla *ngFor="let tipo of catalogoData['tipoLlanta']" [value]="tipo?.id_tipoLlanta">
+                        {{  tipo?.tipoLlanta | uppercase }}
+                    </mat-option> 
+                  </mat-select> 
+              </mat-form-field>
+        </div>
+
+        <!-- <div class="col-md-4">
+          <div class="text-right">
+              <button mat-raised-button class="buttonPrincipal"  [disabled]="f.invalid" (click)="cargarStock()">
+                  <mat-icon>
+                      search
+                  </mat-icon>
+              </button>
+          </div>
+        </div> -->
+
+       </div>
+    </form>
+
+    <nav *ngIf="stock?.length < 1 && bandera" aria-label="breadcrumb" class="mt-4">
+        <ol class="breadcrumb container">
+         <h4> Actualmente no hay stock disponible </h4>
+        </ol>
+    </nav>
+
+    <div class="table-responsive !important mt-4" *ngIf="stock?.length >= 1">
+       <table  >
+           <!-- <caption>Statement Summary</caption> -->
+          <thead>
+             <tr> 
+               <th scope="col"> Lote      </th>
+               <th scope="col"> Stock     </th>
+               <th scope="col"> Proveedor </th>
+               <th scope="col"> Valor     </th>
+               <th scope="col"> Costo     </th>
+               <th scope="col" *ngIf="banderaRol"> Acciones  </th>
+             </tr>
+          </thead>
+
+           <tbody>
+             <tr *ngFor="let stoc of stock  | search: this.filtro.value.filtrar:parametrosBusqueda | slice: desde: hasta " class="trHover">
+               <td data-label="Lote">      {{  stoc?.Lote        }}</td>
+               <td data-label="Stock">     {{  stoc?.StockActual }}</td>
+               <td data-label="Proveedor"> {{  stoc?.Proveedor   }}</td>
+               <td data-label="Valor">     {{  stoc?.Valor  | currency : 'Lps ' }}</td>
+               <td data-label="Costo">     {{  stoc?.Costo  | currency : 'Lps ' }}</td>
+               <td data-label="Acciones"  *ngIf="banderaRol">
+                <div class="text-center">
+                 <!-- Editar -->
+                 <button mat-mini-fab class="buttonSecundary" (click)="Modal( stoc )">
+                   <mat-icon>create</mat-icon>
+               </button>  
+                </div>
+                </td>
+             </tr>
+           </tbody>
+           <tfoot *ngIf=" hasta >= stock.length && stock.length >= 1">
+            <tr >
+                <!-- style="background-color: #ffffff !important;" -->
+                <th ></th>
+                <th ></th>
+                <th ></th> 
+                <th > TOTAL </th>
+                <th > {{ subTotal | currency : 'Lps '}} </th>
+                <th *ngIf="banderaRol"></th >
+            </tr>
+          </tfoot>  
+         </table>
+         
+      </div>
+         <mat-paginator *ngIf="stock.length >= 1" [length] ="stock.length" [pageSize]="pageSize " (page)="next($event)">
+       </mat-paginator>
+   </mat-card>

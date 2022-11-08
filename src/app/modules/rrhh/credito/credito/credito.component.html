@@ -1,0 +1,88 @@
+<mat-card class="mat-cardContainerCuerpo">
+    <div class="row container">
+      
+         <form [formGroup]="creditoForm" #f="ngForm" style="margin-top: 2%;">
+          
+          <div class="row">
+            <div class="container">
+                <h3> Crédito Cafetería </h3>
+            </div>
+       
+            <div class="col-md-4">
+                <mat-form-field  appearance="legacy">
+                    <mat-label>Número de Empleado</mat-label>
+                    <input matInput #texto maxlength="100" placeholder="Número de Empleado" (window:keypress) ="onKeypressEvent($event)" mask="999999999"  formControlName ="codigoEmpleado">
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-4" *ngIf="creditoForm.value.codigoEmpleado.length > 0">
+                <mat-form-field appearance="legacy">
+                    <mat-label>Nombre Empleado</mat-label>
+                    <input readonly="true" matInput maxlength="100" placeholder="Nombre Empleado" formControlName ="nombreEmpleado">
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-4" *ngIf="creditoForm.value.codigoEmpleado.length > 0">
+                <mat-form-field appearance="legacy">
+                    <mat-label> Monto Crédito </mat-label>
+                    <input  matInput mask="separator.2" thousandSeparator="," maxlength="100" placeholder="Monto"  formControlName ="monto">
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-12 container" *ngIf="creditoForm.valid">
+                <button mat-raised-button class="fs" type="submit"  [disabled]="!auth.Insercion()" (click)="ingresarCredito()">
+                    <i class="fas fa-comment-dollar icon"></i>
+                    <!-- <span style="margin-left: 10px;">Insertar Nivel</span> -->
+                </button>
+            </div>
+          </div>
+  
+     </form>
+ 
+    </div>
+</mat-card>
+
+
+<nav *ngIf="canjeos?.length < 1" aria-label="breadcrumb" class="mt-4">
+    <ol class="breadcrumb container">
+     <h4> Actualmente no hay créditos  </h4>
+    </ol>
+</nav>
+
+
+<mat-card class="mat-cardContainerCuerpo mt-4" *ngIf="canjeos?.length >= 1">
+    <div class="container">
+        <h3> Dolares Canjeados {{ fecha | date:'shortDate' }} </h3>
+    </div>
+ <form [formGroup]="filtro">
+    <mat-form-field appearance="legacy">
+        <mat-label>
+            <mat-icon> search </mat-icon>
+            Buscar
+        </mat-label>
+        <input matInput placeholder="Usuario, Nombre......" formControlName="filtrar">
+    </mat-form-field> 
+ </form>
+ <div class="table-responsive !important">
+    <table  >
+        <!-- <caption>Statement Summary</caption> -->
+        <thead>
+          <tr> 
+            <th scope="col">Usuario      </th>
+            <th scope="col">Colaborador  </th>
+            <th scope="col">Monto         </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let credito of canjeos  | search: this.filtro.value.filtrar:parametrosBusqueda | slice: desde: hasta " class="trHover">
+            <td data-label="Usuario">    {{  credito?.Usuario      }}</td>
+            <td data-label="Colaborador">{{  credito?.Colaborador  }}</td>
+            <td data-label="Monto">      {{  credito?.monto     | currency : 'Lps '   }}</td>
+          </tr>
+        </tbody>
+      </table>
+      
+   </div>
+      <mat-paginator [length]="canjeos.length" [pageSize]="pageSize " (page)="next($event)">
+    </mat-paginator>
+</mat-card>

@@ -1,0 +1,19 @@
+
+<div class="positionNadbar">
+  <button mat-raised-button [matMenuTriggerFor]="menu" class="m-r-5" style="background-color: white;">
+    <b>{{ auth.dataUsuario.nombreCompleto}} </b>
+    <img *ngIf="flatImagen" [src]="auth.dataUsuario.imgPerfil" alt="user" width="20%"
+      class="profile-pic" style="margin-left: 10px;">
+
+      <img *ngIf="!flatImagen" src="../../../assets/images/user.png" alt="user" width="20%"
+      class="profile-pic" style="margin-left: 10px;">
+
+  </button>
+</div>
+  
+    <mat-menu #menu="matMenu" class="custom-class" color="primary">
+        <button mat-menu-item *ngFor="let item of dataMenu" (click)=" accion(item.accion)">
+          <mat-icon> {{ item.icon   }} </mat-icon>
+          <span>     {{ item.titulo }} </span>
+        </button>
+      </mat-menu>

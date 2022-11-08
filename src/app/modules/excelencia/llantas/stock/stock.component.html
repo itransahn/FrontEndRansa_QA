@@ -1,0 +1,14 @@
+<mat-card class="mat-cardContainerCuerpo mt-4" >
+  <div class="row" *ngIf="detonador != 1">
+    <div class="col-md-6 container">
+      <img src="../../../../../assets/images/logoRansa.ico" alt="">
+  </div>
+  <div class="col-md-6 container">
+      <h3 class="h4"> Stock de llantas </h3>
+  </div>
+  </div>
+  <mat-tab-group class="tab">
+    <mat-tab class="tab" label="General"  > <app-general></app-general> </mat-tab>
+    <mat-tab class="tab" label="Detallado"> <app-detalle></app-detalle> </mat-tab>
+  </mat-tab-group>
+</mat-card>

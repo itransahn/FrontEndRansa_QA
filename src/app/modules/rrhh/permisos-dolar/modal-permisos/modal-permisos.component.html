@@ -1,0 +1,55 @@
+
+
+<mat-card class="cardPersonalizada">
+ 
+    <mat-card-header class="header">    {{ titulo }} {{ subtitulo }}
+    <mat-icon style="float: right !important;" (click)="close()" > close </mat-icon>
+
+    </mat-card-header>
+
+
+    <mat-card-content>
+        <form [formGroup]="permisosForm" #f="ngForm" style="margin-top: 2%;">
+            <div class="row">
+                <div class="col-md-12">
+                    <mat-form-field  appearance="legacy">
+                        <mat-label> Usuario Ransa </mat-label>
+                        <input matInput #texto [readonly]="enable" maxlength="50" placeholder="Usuario Ransa" formControlName ="usuarioRansa">
+                        <!-- <mat-hint align="end">{{texto.value?.length || 0}}/50</mat-hint> -->
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-12">
+                    <mat-form-field appearance="legacy">
+                        <mat-label> Nombre colaborador </mat-label>
+                        <input matInput #texto [readonly]="enable" maxlength="50" placeholder="Nombre Colaborador" formControlName ="Colaborador">
+                        <!-- <mat-hint align="end">{{texto.value?.length || 0}}/50</mat-hint> -->
+                    </mat-form-field>
+                </div>
+
+                <div  class="col-md-12 container" >
+                    <mat-form-field *ngIf="visible" appearance="legacy">
+                        <mat-label>CCO</mat-label>
+                        <mat-select  formControlName="Cco" > 
+                            <mat-option> - </mat-option> 
+                            <mat-option  *ngFor="let cat of catalogo['ccos']" [value]="cat?.id_cco">
+                                {{  cat?.cco | uppercase }}
+                            </mat-option> 
+                          </mat-select> 
+                      </mat-form-field>
+                </div>
+                <!-- <div  class="col-md-12">
+                    <mat-form-field *ngIf="enable" hintLabel="Max 50 Caracteres" appearance="legacy">
+                        <mat-label>Estado</mat-label>
+                        <input matInput #texto [readonly]="enable" maxlength="50" placeholder="Estado" formControlName ="estado">
+                        <mat-hint align="end">{{texto.value?.length || 0}}/50</mat-hint>
+                    </mat-form-field>
+                </div> -->
+                </div>
+            <div class="container">
+                <button class="buttonPrincipal" mat-raised-button type="submit" [disabled]="f.invalid" [hidden]="!botton" (click)="submit()"  >Guardar</button>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>  
+

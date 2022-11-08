@@ -1,0 +1,40 @@
+<mat-card class="mat-cardContainerCuerpo mt-4" *ngIf="modificaciones?.length >= 1">
+ 
+    <form [formGroup]="filtro">
+       <mat-form-field appearance="legacy">
+           <mat-label>
+               <mat-icon> search </mat-icon>
+               Buscar
+           </mat-label>
+           <input matInput placeholder="Llanta" formControlName="filtrar">
+       </mat-form-field> 
+    </form>
+    <div class="table-responsive !important">
+       <table  >
+           <!-- <caption>Statement Summary</caption> -->
+           <thead>
+             <tr> 
+               <th scope="col">Fecha </th>
+               <th scope="col">Usuario </th>
+               <th scope="col">Lote </th>
+               <th scope="col">Tipo de llanta </th>
+               <th scope="col">Precio Anterior</th>
+               <th scope="col">Precio Actual </th>
+             </tr>
+           </thead>
+           <tbody>
+             <tr *ngFor="let mod of modificaciones  | search: this.filtro.value.filtrar:parametrosBusqueda | slice: desde: hasta " class="trHover">
+               <td data-label="Fecha"> {{ mod?.Fecha  }}</td>
+               <td data-label="Usuario"> {{ mod?.Usuario   }}</td>
+               <td data-label="Lote"> {{ mod?.Lote  }}</td>
+               <td data-label="Tipo de llanta"> {{ mod?.TipoLlanta }}</td>
+               <td data-label="Precio Anterior"> {{ mod?.PrecioAnterior | currency :'Lps ' }}</td>
+               <td data-label="Precio Actual"> {{ mod?.PrecioActual  | currency :'Lps '}}</td>
+             </tr>
+           </tbody>
+         </table>
+         
+      </div>
+         <mat-paginator [length]="modificaciones.length" [pageSize]="pageSize " (page)="next($event)">
+       </mat-paginator>
+   </mat-card>
