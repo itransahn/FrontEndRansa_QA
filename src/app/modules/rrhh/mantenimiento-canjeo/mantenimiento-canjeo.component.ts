@@ -13,6 +13,7 @@ import * as _rollupMoment from 'moment';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { FormMantenimientoDolarComponent } from './form-mantenimiento-dolar/form-mantenimiento-dolar.component';
 import { mensajes } from 'src/app/interfaces/generales';
+import { AuthService } from 'src/app/services/auth.service';
 const moment = _rollupMoment || _moment;
 
 
@@ -63,7 +64,8 @@ export class MantenimientoCanjeoComponent implements OnInit {
     public rrhhS : RrhhService,
     public dialog : MatDialog, 
     private sweel : SweetAlertService,
-    private toast : ToastServiceLocal 
+    private toast : ToastServiceLocal,
+    private auth  : AuthService 
   ) { }
 
   ngOnInit() {

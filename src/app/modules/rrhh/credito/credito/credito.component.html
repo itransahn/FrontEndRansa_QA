@@ -10,8 +10,8 @@
        
             <div class="col-md-4">
                 <mat-form-field  appearance="legacy">
-                    <mat-label>Número de Empleado</mat-label>
-                    <input matInput #texto maxlength="100" placeholder="Número de Empleado" (window:keypress) ="onKeypressEvent($event)" mask="999999999"  formControlName ="codigoEmpleado">
+                    <mat-label>Cod. Empleado</mat-label>
+                    <input matInput #texto maxlength="100" placeholder="Cod. Empleado" (window:keypress) ="onKeypressEvent($event)" mask="999999999"  formControlName ="codigoEmpleado">
                 </mat-form-field>
             </div>
 
@@ -69,14 +69,14 @@
         <!-- <caption>Statement Summary</caption> -->
         <thead>
           <tr> 
-            <th scope="col">Usuario      </th>
+            <th scope="col">Cod. Empleado      </th>
             <th scope="col">Colaborador  </th>
             <th scope="col">Monto         </th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let credito of canjeos  | search: this.filtro.value.filtrar:parametrosBusqueda | slice: desde: hasta " class="trHover">
-            <td data-label="Usuario">    {{  credito?.Usuario      }}</td>
+            <td data-label="Cod. Empleado">    {{  credito?.Usuario      }}</td>
             <td data-label="Colaborador">{{  credito?.Colaborador  }}</td>
             <td data-label="Monto">      {{  credito?.monto     | currency : 'Lps '   }}</td>
           </tr>

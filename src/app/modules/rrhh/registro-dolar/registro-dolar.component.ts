@@ -49,7 +49,7 @@ export class RegistroDolarComponent implements OnInit {
 
   incializarForm(){
       this.dolarForm   = new FormGroup({
-        codigoEmpleado : new FormControl( '', [ Validators.required] ),
+        codigoEmpleado : new FormControl( '', [ Validators.required, Validators.minLength(9)] ),
         nombreEmpleado : new FormControl( '', [ Validators.required] ),
       })
 
@@ -84,6 +84,9 @@ export class RegistroDolarComponent implements OnInit {
     }
     
   CargarUsuario( codigo?:any ){
+    this.dolarForm.patchValue({
+      nombreEmpleado: ''
+    })
     let url = 'rrhh/validarUsuario';
     let params = {
       usuario : codigo
@@ -117,7 +120,7 @@ export class RegistroDolarComponent implements OnInit {
 
 
   ingresarDolar(){
-    this.sweel.mensajeConConfirmacion(`¿Seguro de enviar canjeo de dolar al empleado ${ this.dolarForm.value.nombreEmpleado} ?`, `Dolar Cafetería`,"warning").then(
+    this.sweel.mensajeConConfirmacion(`¿Seguro de canjear dolar del empleado ${ this.dolarForm.value.nombreEmpleado} ?`, `Dolar Cafetería`,"warning").then(
       res=>{
         if ( res ) {
           let url = 'rrhh/insertarDolar';

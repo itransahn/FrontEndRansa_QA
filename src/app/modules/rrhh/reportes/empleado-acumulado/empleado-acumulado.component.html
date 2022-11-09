@@ -57,7 +57,7 @@
                 <!-- <caption>Statement Summary</caption> -->
                 <thead>
                   <tr> 
-                    <th scope="col">Usuario     </th>
+                    <th scope="col">Cod. Empleado     </th>
                     <th scope="col">Colaborador </th>
                     <th scope="col">CCO         </th>
                     <th scope="col">Cantidad    </th>
@@ -66,7 +66,7 @@
                 </thead>
                 <tbody>
                   <tr *ngFor="let dolar of dolares | slice: desdeF:hastaF " class="trHover">
-                    <td data-label="Usuario">     {{  dolar['Usuario Ransa']  }}</td>
+                    <td data-label="Cod. Empleado">     {{  dolar['Usuario Ransa']  }}</td>
                     <td data-label="Colaborador"> {{  dolar?.NOMBRE           }}</td>
                     <td data-label="CCO">         {{  dolar?.CCO              }}</td>
                     <td data-label="Cantidad">    {{  dolar?.Cantidad         }}</td>

@@ -7,7 +7,7 @@
                     <mat-icon> search </mat-icon>
                     Buscar
                 </mat-label>
-                <input matInput placeholder="Usuario, Nombre, Departamento....." formControlName="filtrar">
+                <input matInput placeholder="Cod. Empleado, Nombre, Cco....." formControlName="filtrar">
             </mat-form-field> 
          </form>
      </div>
@@ -30,7 +30,7 @@
         <!-- <caption>Statement Summary</caption> -->
         <thead>
           <tr> 
-            <th scope="col">Usuario Ransa  </th>
+            <th scope="col">Cod. Empleado  </th>
             <th scope="col">Colaborador    </th>
             <th scope="col">CCO            </th>
             <th scope="col">Estado         </th>
@@ -39,7 +39,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let permiso of permisos  | search: this.filtro.value.filtrar:parametrosBusqueda | slice: desde: hasta " class="trHover">
-            <td data-label="Usuario Ransa"> {{  permiso?.USUARIO      }}</td>
+            <td data-label="Cod. Empleado"> {{  permiso?.USUARIO      }}</td>
             <td data-label="Colaborador">   {{  permiso?.NOMBRE       }}</td>
             <td data-label="CCO">           {{  permiso?.Departamento }}</td>
             <td data-label="Estado">
@@ -47,7 +47,7 @@
                     <mat-icon class="success">check_box</mat-icon>
                 </span>
                 <span *ngIf="permiso?.idEstado != 1">
-                    <mat-icon class="error">indeterminate_check_box</mat-icon>
+                    <mat-icon style="color: red !important;" class="error">indeterminate_check_box</mat-icon>
                 </span>    
             </td>
             <td data-label="Acciones">

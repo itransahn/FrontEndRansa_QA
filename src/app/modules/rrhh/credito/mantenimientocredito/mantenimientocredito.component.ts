@@ -13,6 +13,7 @@ import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import { ToastServiceLocal } from 'src/app/services/toast.service';
 import { DataApi } from 'src/app/interfaces/dataApi';
 import { FormMantenimientoCreComponent } from './form-mantenimiento-cre/form-mantenimiento-cre.component';
+import { AuthService } from 'src/app/services/auth.service';
 const moment = _rollupMoment || _moment;
 
 
@@ -61,7 +62,8 @@ export class MantenimientocreditoComponent implements OnInit {
     public rrhhS      : RrhhService,
     public dialog     : MatDialog, 
     private sweel     : SweetAlertService,
-    private toast     : ToastServiceLocal 
+    private toast     : ToastServiceLocal,
+    public  auth      : AuthService
   ) { }
 
   ngOnInit() {

@@ -48,7 +48,7 @@
                         <mat-icon> search </mat-icon>
                         Buscar
                     </mat-label>
-                    <input matInput placeholder="Usuario, Nombre, Departamento....." formControlName="buscar">
+                    <input matInput placeholder="Usuario, Colaborador Cco..." formControlName="buscar">
                 </mat-form-field> 
              </form>
          </div>
@@ -68,7 +68,7 @@
             <thead>
               <tr> 
                 <th scope="col">HORA </th>
-                <th scope="col">Usuario Ransa  </th>
+                <th scope="col">Cod. Empleado  </th>
                 <th scope="col">Colaborador    </th>
                 <th scope="col">CCO            </th>
                 <th scope="col">Acciones       </th>
@@ -78,7 +78,7 @@
               <tr *ngFor="let canjeo of canjeos  | search: this.filtro.value.buscar:parametrosBusqueda | slice: desde: hasta " class="trHover">
 
                 <td data-label="Hora">          {{  canjeo?.HORA      }}</td>
-                <td data-label="Usuario Ransa"> {{  canjeo?.USUARIO      }}</td>
+                <td data-label="Cod. Empleado"> {{  canjeo?.USUARIO      }}</td>
                 <td data-label="Colaborador">   {{  canjeo?.Nombre       }}</td>
                 <td data-label="CCO">           {{  canjeo?.Departamento }}</td>
            
@@ -86,12 +86,12 @@
                     <div class="text-center">
     
                           <!-- Editar -->
-                     <button mat-mini-fab class="buttonSecundary" (click)="Modal(canjeo)">
+                     <button mat-mini-fab class="buttonSecundary"  [disabled]="!auth.Actualizacion()" (click)="Modal(canjeo)">
                         <mat-icon>create</mat-icon>
                     </button>
 
                             <!-- Eliminar -->
-                <button mat-mini-fab class="btnDelete" (click)="eliminacion(canjeo?.CONTROL, canjeo?.Nombre ,canjeo?.USUARIO)">
+                <button mat-mini-fab class="btnDelete" [disabled]="!auth.Eliminacion()" (click)="eliminacion(canjeo?.CONTROL, canjeo?.Nombre ,canjeo?.USUARIO)">
                 <mat-icon>delete_forever</mat-icon>
                 </button>
                     </div>

@@ -49,6 +49,7 @@ export class ModalPermisosComponent implements OnInit {
     if ( this.data['bandera'] == 2 ){
       this.enable     = false;
       this.botton     = true
+      this.visible    = true;
       this.titulo     = `Nuevo Permiso`;
       this.subtitulo  = ''; 
       this.cargarFormPost()
@@ -107,7 +108,7 @@ SetForm(){
     let params = {
       usuario  : this.permisosForm.value.usuarioRansa,
       nombre   : this.permisosForm.value.Colaborador,
-      cco      : this.permisosForm.value.cco,
+      cco      : this.permisosForm.value.Cco,
     } 
     this.rrhhS.post(url,params).subscribe(
       res=>{
@@ -133,7 +134,7 @@ actualizarPermiso(){
     nombre    : this.permisosForm.value.Colaborador,
     cco       : this.permisosForm.value.Cco,
   } 
-  this.rrhhS.put( url,params ).subscribe(
+  this.rrhhS.post( url,params ).subscribe(
     res=>{
       if(!res.hasError){
           if ( res?.data.Table0[0]['codigo'] == -1 ){
