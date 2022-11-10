@@ -2,7 +2,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a [routerLink]="['/modulos']">Inicio</a></li>
-            <li class="breadcrumb-item"><a [routerLink]="['/ransa/administracion/usuarios']">Usuarios</a></li>
+            <!-- <li class="breadcrumb-item"><a [routerLink]="['/ransa/administracion/usuarios']">Modulos</a></li> -->
         </ol>
     </nav>
 </mat-card>
@@ -24,7 +24,7 @@
       </label>
       <img style="margin-left: 1%;"  [src]= "photoSelected || UrlImagenDefault" class=" img-fluid imagen" alt="No image"
       title="Imagen de Perfil">
-</div> -->
+</div>-->
 
     <div class="col-md-4">
                     <mat-form-field  appearance="legacy">
@@ -50,7 +50,7 @@
                 <div class="col-md-8">
                     <mat-form-field class="example-full-width" hintLabel="Max 250 Caracteres" appearance="legacy">
                         <mat-label>Dirección </mat-label>
-                        <textarea matInput #direccion formControlName ="direccion" placeholder="Dirección " ></textarea>
+                        <textarea matInput #direccion formControlName ="direccion" placeholder="Dirección" ></textarea>
                         <mat-hint align="end">{{direccion.value?.length || 0}}/250</mat-hint>
                       </mat-form-field>
                 </div>
@@ -77,7 +77,6 @@
                     <mat-form-field  appearance="legacy">
                         <mat-label> Pasaporte </mat-label>
                         <input matInput #telefono maxlength="20" placeholder="Pasaporte" formControlName ="identidad">  
-                        
                     </mat-form-field>
                 </div>
                 <div class="col-md-4">
@@ -148,14 +147,14 @@
     </mat-form-field>
 </div>
 
-<div class="col-md-4">
+<!-- <div class="col-md-4">
          <mat-form-field appearance="fill">
            <mat-label>Fecha de Ingreso</mat-label>
            <input name="date" formControlName = "fechaIngreso" matInput [matDatepicker]="pickerF">
            <mat-datepicker-toggle matSuffix [for]="pickerF"></mat-datepicker-toggle>
            <mat-datepicker #pickerF></mat-datepicker>
          </mat-form-field>
-</div>
+</div> -->
 
 
 <div class="col-md-4">

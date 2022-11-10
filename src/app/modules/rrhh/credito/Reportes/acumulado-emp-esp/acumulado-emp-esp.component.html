@@ -83,10 +83,10 @@
                     <td data-label="Colaborador">  {{  credito?.Nombre  }} </td>
                     <td data-label="CCO">          {{  credito?.CCO        }} </td>
                     <td data-label="Canjeo Dolar"> 
-                        <span *ngIf="credito?.CanjeoDolar == 'SI'">
-                            <mat-icon class="success">check_box</mat-icon>
+                        <span *ngIf="credito?.CanjeoDolar === 'SI'">
+                            <mat-icon class="success">check_circle</mat-icon>
                         </span>
-                        <span *ngIf="credito?.CanjeoDolar == 'NO'">
+                        <span *ngIf="credito?.CanjeoDolar === 'NO'">
                             <mat-icon class="error">indeterminate_check_box</mat-icon>
                         </span>   
                     </td>

@@ -98,11 +98,11 @@ export class PuestosComponent implements OnInit {
       })
     }
 
-eliminarPuesto(  idPuesto : number, puesto ?: string ){
+eliminarpuesto(  idPuesto : number, puesto ?: string ){
       this.sweel.mensajeConConfirmacion(`¿Seguro de Eliminar el puesto ${ puesto }?`, `Eliminación de puesto`,"question").then(
         res=>{
             if ( res ){
-                  let url    = 'administracion/cco';
+                  let url    = 'administracion/puesto';
                   let params = {
                     idPuesto : idPuesto
                   } 

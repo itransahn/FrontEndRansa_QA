@@ -20,7 +20,7 @@ export class ModalPermisosComponent implements OnInit {
   public  titulo        : string;
   public  subtitulo     : string;
   public  catalogo      : any;
-
+  public pattern        = "[0-9]{1,5}";
 
   constructor( 
   private dialogRef:MatDialogRef<ModalPermisosComponent>,
@@ -71,9 +71,9 @@ export class ModalPermisosComponent implements OnInit {
 
   cargarFormGet(){
       this.permisosForm = new FormGroup({
-        usuarioRansa    : new FormControl({ value: '', disabled : this.enable }, [] ),
-        Colaborador     : new FormControl({ value: '', disabled : this.enable }, [] ),
-        Cco             : new FormControl({ value: '', disabled : this.enable }, [] )
+        usuarioRansa    : new FormControl({ value: '', disabled : this.enable }, [Validators.required, Validators.pattern( this.pattern )] ),
+        Colaborador     : new FormControl({ value: '', disabled : this.enable }, [Validators.required] ),
+        Cco             : new FormControl({ value: '', disabled : this.enable }, [Validators.required] )
       })
 
   }

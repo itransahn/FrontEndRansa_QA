@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { GeneraRandomPassword, mask, mensajes } from 'src/app/interfaces/generales';
+import { catalogo, GeneraRandomPassword, mask, mensajes } from 'src/app/interfaces/generales';
 import {MomentDateAdapter} from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import * as _moment       from 'moment';
@@ -42,7 +42,7 @@ export class MiPerfilComponent implements OnInit {
   photoSelected: any;
   prueba : any;
   UrlImagenDefault = "../../../../../assets/images/user.png";
-  catalogo : any[];
+  catalogo : any;
   public bandera     : boolean = false;
   public banderaRuta : boolean = false;
   public dataUsuario : any;
@@ -57,9 +57,18 @@ export class MiPerfilComponent implements OnInit {
 
   ngOnInit(){
     this.cargarForm();
-    // this.cargarUsuario( this.ruta.snapshot.params['idUsuario'] )
-    // this.cargarFormulario();
+    this.cargarCatalogo();
+    this.validarRuta()
   }
+
+  validarRuta(){
+    if ( this.ruta.snapshot.params['idUsuario'] == '0' ){
+        this.banderaRuta = true;
+    }else{
+      this.banderaRuta   = false;
+      this.cargarUsuario( this.ruta.snapshot.params['idUsuario']);
+    }
+}
 
   cargarForm(){
     this.usuarioForm = new FormGroup({
@@ -87,15 +96,12 @@ export class MiPerfilComponent implements OnInit {
   }
   
   cargarCatalogo(){
-    let url = 'seguridad/catalogo';
-    this.seguridadS.get(url).subscribe(
-      res =>{
-         if ( !res.hasError){
-            this.catalogo = res
-           this.bandera = true;
-         }
-      }
-    );
+    this.auth.returnCatalogoData().subscribe(
+      (res : catalogo | any) =>{ 
+       if ( res['areasRansa'] ){
+         this.catalogo = res;
+       }  }
+     ) 
   }
 
   cargarUsuario( idUsuario ){
@@ -136,4 +142,42 @@ export class MiPerfilComponent implements OnInit {
       idSede        : this.dataUsuario?.id_sede
     })
   }
+
+  put(){
+    let url = 'seguridad/actualizarUsuario';
+    let params = {
+      nombreCompleto     : this.usuarioForm.value?.nombre,
+      telefono           : this.usuarioForm.value?.telefono,
+      direccion          : this.usuarioForm.value?.direccion,
+      nacimiento         : this.usuarioForm.value?.nacimiento,
+      identidad          : this.usuarioForm.value?.identidad,
+      correo             : this.usuarioForm.value?.correo,
+      tipoIdentificacion : this.usuarioForm.value?.tipoId,
+      id_sexo            : this.usuarioForm.value?.id_sexo,
+      idCiudad           : this.usuarioForm.value?.idCiudad,
+      tipoSangre         : this.usuarioForm.value?.tipoSangre,
+      fechaIngreso       : this.usuarioForm.value?.fechaIngreso,
+      DepartamentoFisico : this.usuarioForm.value?.deptoFisico,
+      idPuesto           : this.usuarioForm.value?.idPuesto,
+      cco                : this.usuarioForm.value?.cco,
+      id_rol             : this.usuarioForm.value?.rol,
+      id_sede            : this.usuarioForm.value?.idSede,
+      idPersona         :  this.dataUsuario['id_persona'],
+      idUsuario          : this.dataUsuario['ID'],
+    }
+
+  this.usuarioS.put(url,params).subscribe( res=>{
+    if ( !res.hasError){
+      if ( res?.data.Table0[0]['codigo'] == -1 ){
+        this.toast.mensajeWarning(String(res?.data.Table0[0]['Mensaje']), mensajes.warning)
+    }else{
+      this.toast.mensajeSuccess(String(res?.data.Table0[0]['Mensaje']),   mensajes.success)
+      this.auth.redirecTo('/ransa/administracion/usuarios')
+    }
+}else{
+  this.toast.mensajeError(String(res?.errors),"Error")
+}
+  })
+  }
+
 }
