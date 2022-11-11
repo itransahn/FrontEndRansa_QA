@@ -43,6 +43,11 @@ const routes: Routes = [
         path : 'operatoria',
         canActivate : [AccessGuard],
         loadChildren : () => import('./modules/operatoria/operatoria-routing.module').then( m=> m.operatoriaRoutingModule)
+      },
+      {
+        path : 'finanzas',
+        canActivate : [AccessGuard],
+        loadChildren : () => import('./modules/finanzas/finanzas-routing.module').then( m=> m.finanzasRoutingModule)
       }
     ]
 

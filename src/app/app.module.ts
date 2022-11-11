@@ -23,6 +23,7 @@ import { FullComponentComponent } from './layouts/full-component/full-component.
 import { rrhhModule } from './modules/rrhh/rrhh.module';
 import { ExcelenciaModule } from './modules/excelencia/excelencia.module';
 import { OperatoriaModule } from './modules/operatoria/operatoria.module';
+import { FinanzasModule } from './modules/finanzas/finanzas.module';
 import { SharedModule } from './modules/shared/shared.module';
 
 @NgModule({

@@ -1,0 +1,56 @@
+<div class="container" id="Factura">
+    <mat-card class="cardPersonalizada">
+        <div class="row">
+        <div class="col-md-6">
+            <img src="../../../../assets/images/logoRansa.ico" alt="">
+            <p>
+             OPERADORES LOGISTICOS RANSA, S.A. DE C.V.
+             Residencial El Sauce, Calle: Anillo Periférico Sur, Km 12
+             Municipio: Distrito Centra, Departamento: Francisco Morazan
+             Tel: (504)2291-5434, 3290-9348  
+            </p>
+        </div>
+
+        <div class="col-md-6 mt-4">
+            <p>
+                <span style="text-align: left !important;">FACTURA</span> <br>
+                <span style="text-align:left  !important; color:#FE9600 !important;">
+                    000-001-01-00031018
+                </span>
+            </p>
+            <h4> FECHA: </h4>
+        <mat-divider class="material-dividier"></mat-divider>
+            <p> 
+            CAI:1DB9E1-AA9139-424F93-F014DE-876326-F3 <br>
+            <span> RANGO AUTORIZADO </span> <br>
+            000-001-01-00031001 AL 000-001-01-00034000 <br>
+            FECHA LIMITE DE EMISION: 05/09/2023 
+            </p>
+        </div>
+
+        <div class="contain1 mt-2 container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>
+                    <span style="font-weight: bold;"> CLIENTE: UNILEVER DE CENTRO AMERICA</span>
+                    <span> DIRECCION: Anillo Periférico contiguo al acceso de Residencial Roble Oeste</span>
+                    <span> TELEFONO : 2290-0200</span>
+                    </p>
+                    </div>
+                    <div class="col-md-6 center">
+                        <p>
+                     RTN: 08019002263012
+                        </p>
+                    </div>
+            </div>
+        </div>
+            
+        </div>
+    </mat-card>
+</div>
+
+<!-- id?:string, NombreFinal ?: string, detalle?: string, titulo ?: string -->
+<button mat-raised-button class="buttonPrincipal btn-flotante" #tooltip="matTooltip" matTooltip="Imprimir"  matTooltipPosition="left" 
+(click)="sharedS.downloadPDF('Factura', 'FacturaRansa','Factura Ransa', 'Seguro de generar PDF de Factura')">
+    <mat-icon> print </mat-icon>
+</button>
