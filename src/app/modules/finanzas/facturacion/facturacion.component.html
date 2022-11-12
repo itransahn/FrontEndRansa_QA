@@ -6,7 +6,7 @@
             <p>
              OPERADORES LOGISTICOS RANSA, S.A. DE C.V.
              Residencial El Sauce, Calle: Anillo Periférico Sur, Km 12
-             Municipio: Distrito Centra, Departamento: Francisco Morazan
+             Municipio: Distrito Centra, Departamento: Francisco Morazan <br> 
              Tel: (504)2291-5434, 3290-9348  
             </p>
         </div>
@@ -32,8 +32,8 @@
             <div class="row">
                 <div class="col-md-6">
                     <p>
-                    <span style="font-weight: bold;"> CLIENTE: UNILEVER DE CENTRO AMERICA</span>
-                    <span> DIRECCION: Anillo Periférico contiguo al acceso de Residencial Roble Oeste</span>
+                    <span style="font-weight: bold;"> CLIENTE: UNILEVER DE CENTRO AMERICA</span> <br>
+                    <span> DIRECCION: Anillo Periférico contiguo al acceso de Residencial Roble Oeste</span> <br>
                     <span> TELEFONO : 2290-0200</span>
                     </p>
                     </div>
@@ -43,6 +43,109 @@
                         </p>
                     </div>
             </div>
+        </div>
+
+        <div class="tabla mt-4">
+            <div class="table-responsive !important" >
+                <table>
+                    <thead>
+                      <tr>
+                        <th scope="col">CANTIDAD</th>
+                        <th scope="col">DESCRIPCION</th>
+                        <th scope="col">PRECIO UNITARIO</th>
+                        <th scope="col">DESC. Y REB OTORGADA</th>
+                        <th scope="col">IMPUESTO</th>
+                        <th scope="col">TOTAL</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td data-label="CANTIDAD"> 01</td>
+                        <td data-label="DESCRIPCION">FLETE</td>
+                        <td data-label="PRECIO UNITARIO">{{ 4047 | currency : 'Lps' }}</td>
+                        <td data-label="DESC. Y REB OTORGADA">{{ 0    | currency : 'Lps' }}</td>
+                        <td data-label="IMPUESTO"> G </td>
+                        <td data-label="TOTAL">{{ 4047    | currency : 'Lps' }}</td>
+                      </tr>
+
+                      <tr>
+                        <td data-label="CANTIDAD"> 01</td>
+                        <td data-label="DESCRIPCION">FLETE</td>
+                        <td data-label="PRECIO UNITARIO">{{ 4047 | currency : 'Lps' }}</td>
+                        <td data-label="DESC. Y REB OTORGADA">{{ 0    | currency : 'Lps' }}</td>
+                        <td data-label="IMPUESTO"> G </td>
+                        <td data-label="TOTAL">{{ 4047    | currency  : 'Lps'}}</td>
+                      </tr>
+                     
+                    </tbody>
+                    <tfoot>
+                        <tr >
+                            <th class="legend" colspan="4" >VALOR EN LETRAS: <span>
+                                CUATRO MIL SEICIENTOS CINCUENTA Y CUATRO LEMPIRAS 05/100 M.N
+                            </span>:</th>
+
+                        <th > SUBTOTAL</th>
+                        <th > {{ 8094 | currency : 'Lps '}} </th>
+                        </tr>
+                        <!-- Importe Exento -->
+                             <tr >
+                            <th  clas="legend"colspan="4" >NO. CORRELATIVO DE ORDEN DE COMPRA EXENTA:</th>
+                            <th > Importe Exento</th>
+                            <th > {{ 0 | currency : 'Lps '}} </th>
+                            </tr>
+                        <!-- Importe Exonerado -->
+                        <tr >
+                            <th class="legend" colspan="4" >NO. CORRELATIVO DE CONSTANCIA DE REGISTRO EXONERADO:</th>
+                            <th > Importe Exonerado </th>
+                            <th > {{ 0 | currency : 'Lps '}} </th>
+                        </tr>
+                           <!-- Importe Gravado al 15% -->
+                           <tr >
+                            <th class="legend" colspan="4" >NO. IDENTIFICATIVO DEL REGISTRO DE LA SAG:</th>
+                            <th > Importe Gravado al 15% </th>
+                            <th > {{ 4047 | currency : 'Lps '}} </th>
+                        </tr>
+
+                          <!-- Importe Gravado al 18% -->
+                          <tr >
+                            <th ></th>
+                            <th ></th>
+                            <th ></th>
+                            <th ></th>
+                            <th > Importe Gravado al 18% </th>
+                            <th > {{ 4047 | currency : 'Lps '}} </th>
+                        </tr>
+
+                        <!-- ISV 15% -->
+                        <tr >
+                            <th class="legend" colspan="4" >**Vencido el plazo de pago de este documento genera 3% ede interés***:</th>
+                            <th > ISV 15% </th>
+                            <th > {{ 607.05 | currency : 'Lps '}} </th>
+                        </tr>
+
+                           <!-- ISV 18% -->
+                           <tr >
+                            <th class="legend" colspan="4" >**Si su pago con cheque resulta rechazado tendrá un recargo de L400.00***:</th>
+                            <th > ISV 18% </th>
+                            <th > {{ 607.05 | currency : 'Lps '}} </th>
+                        </tr>
+                          <!-- Total a pagar -->
+                          <tr >
+                            <!-- <th ></th> -->
+                            <th></th>
+                            <th></th>
+                            <th></th> 
+                            <th></th>
+                            <!-- <div >
+                            <label > INGRESADO POR MARIO VELASQUEZ</label>
+                            </div> -->
+                            <th > Total a pagar </th>
+                            <th > {{ 4654.05 | currency : 'Lps '}} </th>
+                        </tr>
+
+                    </tfoot>  
+                  </table>
+               </div>
         </div>
             
         </div>

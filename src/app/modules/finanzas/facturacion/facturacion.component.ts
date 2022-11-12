@@ -7,10 +7,11 @@ import { SharedService } from '../../shared/shared.service';
   styleUrls: ['./facturacion.component.scss']
 })
 export class FacturacionComponent implements OnInit {
-
+  public dolares = [];
   constructor( public sharedS : SharedService) { }
 
   ngOnInit(): void {
   }
+
 
 }
