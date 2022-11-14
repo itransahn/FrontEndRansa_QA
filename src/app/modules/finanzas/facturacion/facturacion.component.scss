@@ -1,6 +1,6 @@
 .cardPersonalizada{
-    width:  21.59cm;
-    height: 27.94cm;
+    width:  22cm;
+    height: 28cm;
 
     box-shadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2), 0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12);
 
@@ -42,11 +42,11 @@
 
 
 div, p, span{
-        color : #050404;
-        font-size: small;
-        font-family: 'Courier New', Courier, monospace !important;
+    color : #050404;
+    font-size: small;
+ 	font-family: 'Courier New', Courier, monospace !important;
 }
-
+// monospace
 
 .contain1{
     border : 1px groove #006F1D;
@@ -54,18 +54,24 @@ div, p, span{
     width: 100%;
     height: auto;
     border-radius: 10px;
+	width: 97%;
 }
 
 
 .mat-divider {  border-top-color: #006F1D !important; }
 
+/* Alineacion */
 .left{  text-align: left !important; }
 
 .right{ text-align: right !important; }
 
 .center{    text-align: center !important; }
+/* Alineacion */
 
-
+.tituloT{
+	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif !important;
+	font-size: smaller !important;
+}
 thead{
 	border: none;
 	font-weight: bold;
@@ -93,12 +99,25 @@ th{
 }
 }
 
+/* FUENTES */
 .legend{
-	text-align: left !important;
+	// text-align: left !important;
+	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif !important;
+	font-size: 1vh !important;
+}
+.footL{
+		font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif !important;
+		font-size: xx-small; 
+}
+/* FUENTES */
+
+.footE{
+	width: 100%;
+	height: 100px !important;
 }
 
 tbody{
-	font-weight: bold;
+	// font-weight: bold;
 	font-size:   x-small;
 	tr{
 	font-size:   xx-small;
@@ -192,6 +211,18 @@ table {
   
   /* general styling */
   body {
-	font-family: "Open Sans", sans-serif;
+	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif !important;
 	line-height: 1.25;
   }
+
+  .espacioB{
+	width: 100% !important;
+	height:  auto !important;
+	border-collapse: inherit;
+	// border-color: #050404 !important;
+  }
+
+
+.padre{
+	min-height: 28cm;
+}
