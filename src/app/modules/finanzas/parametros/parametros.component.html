@@ -1,0 +1,106 @@
+<mat-card class="cardPersonalizada">
+<form [formGroup]="menuForm" #f="ngForm" >
+    <div class="row">
+        <div class="col-md-6 ">
+            <img src="../../../../../assets/images/logoRansa.ico" alt="">
+        </div>
+        <div class="col-md-6 ">
+            <h3 class="h4"> Parámetros Factura </h3>
+        </div>
+        <div class="col-md-12 container" >
+            <mat-form-field appearance="legacy">
+                <mat-label> Sede </mat-label>
+                <mat-select style="color: #006F1D !important;" formControlName="sede" (selectionChange)="cargarParametros()" > 
+                    <mat-option> - </mat-option> 
+                    <mat-option *ngFor="let sed of sedes" [value]="sed?.idSede" >
+                        {{  sed?.Sede }}
+                    </mat-option> 
+                  </mat-select> 
+              </mat-form-field>
+        </div>
+    </div>
+</form>
+
+</mat-card>
+
+
+<mat-card class="cardPersonalizada mt-4">
+<form [formGroup]="menuFormP" #f="ngForm">
+<div class="row">
+
+    <div class="col-md-12">
+        <mat-form-field  appearance="legacy">
+            <mat-label> Nombre Empresa </mat-label>
+            <input matInput placeholder="Nombre de la empresa"  formControlName ="nombreEmpresa">
+        </mat-form-field>
+    </div>
+
+    <div class="col-md-12">
+        <mat-form-field  appearance="legacy">
+            <mat-label> Dirección 1 </mat-label>
+            <input matInput placeholder="Dirección 1"  formControlName ="direccion1">
+        </mat-form-field>
+    </div>
+
+    <div class="col-md-12">
+        <mat-form-field  appearance="legacy">
+            <mat-label> Dirección 2 </mat-label>
+            <input matInput placeholder="Dirección 2"  formControlName ="direccion2">
+        </mat-form-field>
+    </div>
+
+    <div class="col-md-12">
+        <mat-form-field  appearance="legacy">
+            <mat-label> Municipio </mat-label>
+            <input matInput placeholder="Municipio"  formControlName ="municipio">
+        </mat-form-field>
+    </div>
+
+    <div class="col-md-12">
+        <mat-form-field  appearance="legacy">
+            <mat-label> Departamento </mat-label>
+            <input matInput placeholder="Municipio"  formControlName ="Departamento">
+        </mat-form-field>
+    </div>
+
+    <div class="col-md-12">
+        <mat-form-field  appearance="legacy">
+            <mat-label> Tel. Fijos </mat-label>
+            <input matInput placeholder="Teléfono Fijos"  formControlName ="telFijo">
+        </mat-form-field>
+    </div>
+
+    <div class="col-md-12">
+        <mat-form-field  appearance="legacy">
+            <mat-label> Tel. Celulares </mat-label>
+            <input matInput placeholder="Teléfono Celulares"  formControlName ="telCel">
+        </mat-form-field>
+    </div>
+
+    <div class="col-md-12">
+        <mat-form-field  appearance="legacy">
+            <mat-label> RTN Empresa </mat-label>
+            <input matInput placeholder="Rtn Empresa"  formControlName ="rtnEmpresa">
+        </mat-form-field>
+    </div>
+
+    <div class="col-md-12">
+        <mat-form-field  appearance="legacy">
+            <mat-label> Correo </mat-label>
+            <input matInput placeholder="Correo"  formControlName ="correo">
+        </mat-form-field>
+    </div>
+
+    <div class="col-md-12">
+        <mat-form-field  appearance="legacy">
+            <mat-label> Lema de factura </mat-label>
+            <input matInput placeholder="lema de factura"  formControlName ="lemaFactura">
+        </mat-form-field>
+    </div>
+
+    <div class=" col-md-12 container">
+        <button class="buttonPrincipal" mat-raised-button type="submit" [disabled]="f.invalid || (!auth.Insercion())" (click)="UpdatePermisos()" >Guardar</button>
+    </div>
+</div>
+</form>
+</mat-card>

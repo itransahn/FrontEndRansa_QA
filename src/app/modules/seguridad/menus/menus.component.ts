@@ -85,12 +85,13 @@ export class MenusComponent implements OnInit, OnDestroy {
       this.sweel.mensajeConConfirmacion(`¿Seguro de Eliminar el menú ${this.dataPadre?.menuPadre}?`, `Eliminación de Menú`,"question").then(
         res=>{
             if ( res ){
-                  let url    = '/seguridad/eliminarMenu';
+                  let url    = 'seguridad/eliminarMenu';
                   let params = {
                     idMenuPadre : this.dataPadre?.id_menuPadre
                   } 
                   this.seguridad.eliminarMenu(url, params).subscribe(
                     res=>{
+                      console.log(res)
                       if ( res?.data.Table0[0]['codigo'] == -1 ){
                         this.toast.mensajeWarning(String(res?.data.Table0[0]['Mensaje']), mensajes.warning)
                     }else{

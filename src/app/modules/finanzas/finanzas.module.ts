@@ -4,12 +4,14 @@ import { finanzasRoutingModule } from './finanzas-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { FacturacionComponent } from './facturacion/facturacion.component';
+import { ParametrosComponent } from './parametros/parametros.component';
 
 
 
 @NgModule({
   declarations: [
-    FacturacionComponent
+    FacturacionComponent,
+    ParametrosComponent
   ],
   imports: [
     CommonModule,

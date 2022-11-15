@@ -65,7 +65,7 @@ export class CambioComponent implements OnInit {
     ) 
   }
 
-  cargarTipoLlanta(  ){
+  cargarTipoLlanta( ){
       let url = "excelencia/tipoLlantas";
       let params = {
         tipoMaquina : this.cambioForm.value?.tipoMaquina
