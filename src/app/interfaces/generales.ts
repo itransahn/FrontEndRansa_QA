@@ -342,7 +342,7 @@ interface usuarioEspecifico  {
 const Acumulador = ( arreglo ?: any[], ValorBuscar ?:string )=>{
     let subtotal = 0;
 for ( let i=0; i< arreglo.length; i++){
-    subtotal += arreglo[i][ValorBuscar]
+    subtotal += Number(arreglo[i][ValorBuscar])
 }
 return subtotal;
 }

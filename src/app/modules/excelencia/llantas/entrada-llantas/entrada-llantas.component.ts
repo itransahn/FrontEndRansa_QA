@@ -107,12 +107,16 @@ pruebaAs400(){
   let params = {
     // query : "CALL DC@RNSLIB.SP_AWS_LISTA_FACTURA ('EZ', 51, 16168, 1390054395, 20220413, 20220413)",
     // env   : "PRD"
-    "query": "CALL DC@RNSLIB.SP_AWS_LISTA_FACTURA_DETALLE ('EZ', 51, 1390054395)",
-    "env": "PRD"
+    
+      "query": "CALL DC@HONLIB.SP_AWS_LISTA_FACTURA ('RH', 1, 1965, 100031795, 20210101, 20221231)",
+      "env": "PRD"
+  
   }
 this.excelenciaS.pruebahttp( params ).subscribe(
   (res:any)=>{
-    console.log( res )
+if (res){
+  console.log(res)
+}
   }
 )
 }

@@ -49,7 +49,6 @@ export class FacturacionService {
 
   // Servicio de Inserción 
   post( url?:string, params?:any){
-  
     let request$ = this.http.post<DataApi>(environment.UrlApi + url,params).pipe(
       tap( ( result:DataApi | any )=>{
         // this.refresh$.next();
@@ -108,6 +107,12 @@ export class FacturacionService {
       })
     );
     return request$
+  }
+
+  As400( params ){
+    // let headers = new Headers();
+    // headers.append('Content-Type', 'application/json');
+    return this.http.post( environment.UrlAs400, params )
   }
 
 }

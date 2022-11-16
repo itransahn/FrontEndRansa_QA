@@ -159,7 +159,6 @@
 
 export let numeroALetras = (function() {
         function Unidades(num){
-    
             switch(num)
             {
                 case 1: return 'UN';
@@ -321,8 +320,8 @@ export let numeroALetras = (function() {
     
     // Modo de uso: 500,34 USD
     numeroALetras(500.34, {
-      plural: 'Lempiras',
-      singular: 'Lempira',
-      centPlural: 'centavos',
-      centSingular: 'centavo'
+      plural: 'LEMPIRAS',
+      singular: 'LEMPIRA',
+      centPlural: 'CENTAVOS',
+      centSingular: 'CENTAVO'
     });

@@ -44,17 +44,15 @@
 div, p, span{
     color : #050404;
     font-size: small;
- 	font-family: 'Courier New', Courier, monospace !important;
+ 	font-family: Arial, Helvetica, sans-serif
 }
 // monospace
 
 .contain1{
     border : 1px groove #006F1D;
     color: #006F1D !important;
-    width: 100%;
     height: auto;
     border-radius: 10px;
-	width: 97%;
 }
 
 
@@ -68,8 +66,12 @@ div, p, span{
 .center{    text-align: center !important; }
 /* Alineacion */
 
+.leftC{
+    justify-content: left;
+}
+
 .tituloT{
-	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif !important;
+	font-family: Arial, Helvetica, sans-serif;
 	font-size: smaller !important;
 }
 thead{
@@ -102,12 +104,12 @@ th{
 /* FUENTES */
 .legend{
 	// text-align: left !important;
-	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif !important;
-	font-size: 1vh !important;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 0.9em !important;
 }
 .footL{
-		font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif !important;
-		font-size: xx-small; 
+		font-family: Arial, Helvetica, sans-serif;
+		font-size: 1em !important; 
 }
 /* FUENTES */
 
@@ -211,8 +213,8 @@ table {
   
   /* general styling */
   body {
-	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif !important;
-	line-height: 1.25;
+	font-family: Arial, Helvetica, sans-serif;
+	// line-height: 1.25;
   }
 
   .espacioB{

@@ -5,6 +5,7 @@ import { catalogo, mensajes } from 'src/app/interfaces/generales';
 import { AuthService } from 'src/app/services/auth.service';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import { ToastServiceLocal } from 'src/app/services/toast.service';
+import { numeroALetras } from 'src/app/shared/functions/conversorNumLetras';
 import { FacturacionService } from '../facturacion.service';
 
 @Component({
@@ -36,6 +37,7 @@ export class ParametrosComponent implements OnInit {
   ngOnInit(){
     this.formMenu()
     this.formMenuP()
+    console.log(numeroALetras(120385.67,{}))
   }
 
   public formMenu(){
@@ -131,7 +133,8 @@ lema   :  this.menuFormP.value?.lemaFactura,
                     this.toast.mensajeWarning(String(res?.data.Table0[0]['Mensaje']), mensajes.warning)
                 }else{
                   this.toast.mensajeSuccess(String(res?.data.Table0[0]['Mensaje']), mensajes.success)
-                  this.menuFormP.reset();
+                  // this.menuFormP.reset();
+                  this.cargarParametros()
                 }
             }else{
               this.toast.mensajeError(String(res?.errors),"Error")
