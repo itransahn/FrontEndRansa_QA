@@ -13,7 +13,8 @@ import { ToastServiceLocal } from 'src/app/services/toast.service';
 })
 export class CreaMenuHijoComponent implements OnInit {
   public menuForm : FormGroup;
-  constructor(  private dialogRef:MatDialogRef<CreaMenuHijoComponent>, @Inject(MAT_DIALOG_DATA) public data: any, public auth:AuthService,
+  constructor(  
+  private dialogRef:MatDialogRef<CreaMenuHijoComponent>, @Inject(MAT_DIALOG_DATA) public data: any, public auth:AuthService,
   public seguridad : SeguridadService, public toast:ToastServiceLocal ) { }
 
   ngOnInit() {

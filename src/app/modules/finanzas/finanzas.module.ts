@@ -5,13 +5,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { FacturacionComponent } from './facturacion/facturacion.component';
 import { ParametrosComponent } from './parametros/parametros.component';
+import { ModalComponent } from './facturacion/modal/modal.component';
+import { IntemedioComponent } from './facturacion/intemedio/intemedio.component';
 
 
 
 @NgModule({
   declarations: [
     FacturacionComponent,
-    ParametrosComponent
+    ParametrosComponent,
+    ModalComponent,
+    IntemedioComponent
   ],
   imports: [
     CommonModule,

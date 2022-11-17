@@ -12,7 +12,12 @@ $anaranjado-primario:   #FE9600;
 $anaranjado-secundario: #F5973D;
 $anaranjado-tercero   : #F3A505;
 $negro-texto   :        #1E1E1E;
-
+  /* FOOTER PAGINA COMPLETA*/
+  .footerPC{
+    background-color: transparent !important;
+    color:  #006F1D !important;
+    width:  100% !important;
+  }
 
 .buttonView {
   background-color: #006F1D !important;

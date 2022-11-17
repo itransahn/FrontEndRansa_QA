@@ -46,6 +46,67 @@ export class SharedService {
       )
   }
 
+  //PDF
+  pdfFactura( id?:string, NombreFinal ?: string, detalle?: string, titulo ?: string) {
+    this.sweel.mensajeConConfirmacion(`¿${titulo}?`, `${detalle}`,"warning").then(
+      res=>{
+          if ( res ){
+             // Extraemos el
+  const DATA = document.getElementById(id);
+  const doc = new jsPDF('p', 'pt', 'Letter');
+  const options = {
+               background: 'white',
+               scale: 3,
+               format: [4, 2]
+                  };
+html2canvas(DATA, options).then((canvas) => {
+  const img = canvas.toDataURL('image/PNG');
+  // Add image Canvas to PDF
+  const bufferX = 15;
+  const bufferY = 15;
+  const imgProps = (doc as any).getImageProperties(img);
+  const pdfWidth = doc.internal.pageSize.getWidth() - 2 * bufferX;
+  const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+  doc.addImage(img, 'PNG', bufferX, bufferY, pdfWidth, pdfHeight, undefined, 'FAST');
+  return doc;
+  }).then((docResult) => {
+    docResult.save(`${NombreFinal}.pdf`);
+  });
+          }else{
+            
+           }
+      }
+    )
+}
+
+  //PDF
+  pdfFacturaD( id?:string, NombreFinal ?: string, detalle?: string, titulo ?: string) {
+             // Extraemos el
+  const DATA = document.getElementById(id);
+  const doc = new jsPDF('p', 'pt', 'Letter');
+  const options = {
+               background: 'white',
+               scale: 3,
+               format: [4, 2]
+                  };
+html2canvas(DATA, options).then((canvas) => {
+  const img = canvas.toDataURL('image/PNG');
+  // Add image Canvas to PDF
+  const bufferX = 15;
+  const bufferY = 15;
+  const imgProps = (doc as any).getImageProperties(img);
+  const pdfWidth = doc.internal.pageSize.getWidth() - 2 * bufferX;
+  const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+  doc.addImage(img, 'PNG', bufferX, bufferY, pdfWidth, pdfHeight, undefined, 'FAST');
+  return doc;
+  }).then((docResult) => {
+    docResult.save(`${NombreFinal}.pdf`);
+  });
+      
+      }
+   
+
+
   //IMPRIMIR
   printComponent(idName) { 
     let printContents = document.getElementById(idName).innerHTML;

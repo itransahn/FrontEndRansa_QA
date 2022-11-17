@@ -277,7 +277,7 @@ export let numeroALetras = (function() {
             let cientos = Math.floor(num / divisor)
             let resto = num - (cientos * divisor)
     
-            let strMillones = Seccion(num, divisor, 'UN MILLON DE', 'MILLONES DE');
+            let strMillones = Seccion(num, divisor, 'UN MILLON', 'MILLONES');
             let strMiles = Miles(resto);
     
             if(strMillones == '')
@@ -293,8 +293,8 @@ export let numeroALetras = (function() {
                 enteros: Math.floor(num),
                 centavos: (((Math.round(num * 100)) - (Math.floor(num) * 100))),
                 letrasCentavos: '',
-                letrasMonedaPlural: currency.plural || 'Lempiras',//'PESOS', 'Dólares', 'Bolívares', 'etcs'
-                letrasMonedaSingular: currency.singular || 'Lempira', //'PESO', 'Dólar', 'Bolivar', 'etc'
+                letrasMonedaPlural: currency.plural || 'Lempiras',
+                letrasMonedaSingular: currency.singular || 'Lempira', 
                 letrasMonedaCentavoPlural: currency.centPlural || 'Centavos',
                 letrasMonedaCentavoSingular: currency.centSingular || 'Centavo'
             };
@@ -318,7 +318,7 @@ export let numeroALetras = (function() {
     
     })();
     
-    // Modo de uso: 500,34 USD
+    // Modo de uso: 500,34 
     numeroALetras(500.34, {
       plural: 'LEMPIRAS',
       singular: 'LEMPIRA',
