@@ -4,6 +4,7 @@ import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 // Importaciones para PDF 
 import html2canvas from 'html2canvas';
 import { jsPDF } from "jspdf";
+import { ToastServiceLocal } from 'src/app/services/toast.service';
 
 
 @Injectable({
@@ -11,7 +12,8 @@ import { jsPDF } from "jspdf";
 })
 export class SharedService {
   public fecha = new Date().toLocaleDateString()
-  constructor( private sweel:SweetAlertService) { }
+  constructor( private sweel:SweetAlertService,
+    private toast: ToastServiceLocal) { }
 
     //PDF
     downloadPDF( id?:string, NombreFinal ?: string, detalle?: string, titulo ?: string) {
@@ -47,7 +49,7 @@ export class SharedService {
   }
 
   //PDF
-  pdfFactura( id?:string, NombreFinal ?: string, detalle?: string, titulo ?: string) {
+  pdfFactura( id?:string, NombreFinal ?: string, detalle?: string, titulo ?: string, data?:any){
     this.sweel.mensajeConConfirmacion(`¿${titulo}?`, `${detalle}`,"warning").then(
       res=>{
           if ( res ){
@@ -71,6 +73,11 @@ html2canvas(DATA, options).then((canvas) => {
   return doc;
   }).then((docResult) => {
     docResult.save(`${NombreFinal}.pdf`);
+    this.pdfFacturaD('cliente',data['numeroFactura']+'Cliente', 'Seguro','PDF' )
+    this.pdfFacturaD('archivo',data['numeroFactura']+'Archivo', 'Seguro','PDF' )
+
+    this.toast.mensajeSuccess("Documento generado correctamente","Generación de PDF")
+    return true;
   });
           }else{
             
@@ -86,6 +93,7 @@ html2canvas(DATA, options).then((canvas) => {
   const doc = new jsPDF('p', 'pt', 'Letter');
   const options = {
                background: 'white',
+               color     : 'black',
                scale: 3,
                format: [4, 2]
                   };

@@ -1,6 +1,6 @@
 <div class="container padre" id="Factura" *ngIf="DcabeceraF.length >= 1 && loading1 && loading2 && cabeceraF.length >= 1">
-    <mat-card class="cardPersonalizada">
-        <div class="row">
+    <mat-card class="cardPersonalizada mt-8">
+        <div class="row ">
         <div class="col-md-6">
             <img src="../../../../assets/images/logoRansa.ico" alt="">
             <p>
@@ -167,7 +167,7 @@
                </div>
         </div>
             <div class="row">
-                <div class="col-md-4 container footL">
+                <div class="col-md-12 container footL">
                     <label class="center"> ORIGINAL: CLIENTE</label>
                 </div>
                 <!-- <div class="col-md-4 container footL">
@@ -189,11 +189,11 @@
 
 
 
-<div class="container padre mt-4" id="cliente" *ngIf="DcabeceraF.length >= 1 && loading1 && loading2 && cabeceraF.length >= 1">
+<div class="container padre herencia mt-4" id="cliente" *ngIf="DcabeceraF.length >= 1 && loading1 && loading2 && cabeceraF.length >= 1">
     <mat-card class="cardPersonalizada">
         <div class="row">
         <div class="col-md-6">
-            <img src="../../../../assets/images/logoRansa.ico" alt="">
+            <img src="../../../../assets/images/LOGO_RANSA_BN.png" alt="">
             <p>
              {{parametros[0]['nombreCompleto']}}
              {{parametros[0]['direccion1']}}: {{ parametros[0]['direccion2']}}
@@ -205,7 +205,7 @@
         <div class="col-md-6 mt-4">
             <p>
                 <span style="text-align: left !important;">FACTURA</span> <br>
-            <span style="text-align:left  !important; color:#FE9600 !important; font-size: 1.2em !important;">
+            <span style="text-align:left  !important; color:#050404 !important; font-size: 1.2em !important;">
                     000-001-01-{{retornarCorrelativo()}}
                 </span>
             </p>
@@ -358,8 +358,8 @@
                </div>
         </div>
             <div class="row">
-                <div class="col-md-4 container footL">
-                    <label class="center"> ORIGINAL: CLIENTE</label>
+                <div class="col-md-12 container footL">
+                    <label class="center"> DUPLICADO: OBLIGADO TRIBUTARIO EMISOR </label>
                 </div>
                 <!-- <div class="col-md-4 container footL">
                     <label class="center"> DUPLICADO: TRIBUTARIO EMISOR</label>
@@ -370,18 +370,18 @@
             </div>
             <div class="row container">
                 <div class="col-md-12 container">
-                    <label class="center" style="color:#FE9600 !important; padding-top: 3%;"> {{ parametros[0]['lemaFactura']}} </label>
+                    <label class="center" style="color:#050404 !important; padding-top: 3%;"> {{ parametros[0]['lemaFactura']}} </label>
 
                 </div>
             </div>
         </div>
     </mat-card>
 </div>
-<div class="container padre mt-4" id="archivo" *ngIf="DcabeceraF.length >= 1 && loading1 && loading2 && cabeceraF.length >= 1">
+<div class="container padre herencia mt-4" id="archivo" *ngIf="DcabeceraF.length >= 1 && loading1 && loading2 && cabeceraF.length >= 1">
     <mat-card class="cardPersonalizada">
         <div class="row">
         <div class="col-md-6">
-            <img src="../../../../assets/images/logoRansa.ico" alt="">
+            <img src="../../../../assets/images/LOGO_RANSA_BN.png" alt="">
             <p>
              {{parametros[0]['nombreCompleto']}}
              {{parametros[0]['direccion1']}}: {{ parametros[0]['direccion2']}}
@@ -393,13 +393,13 @@
         <div class="col-md-6 mt-4">
             <p>
                 <span style="text-align: left !important;">FACTURA</span> <br>
-            <span style="text-align:left  !important; color:#FE9600 !important; font-size: 1.2em !important;">
+            <span style="text-align:left  !important; color:#050404 !important; font-size: 1.2em !important;">
                     000-001-01-{{retornarCorrelativo()}}
                 </span>
             </p>
             <h4 > FECHA: {{ fecha | date:'mediumDate' | uppercase }} </h4>
 
-        <mat-divider class="material-dividier"></mat-divider>
+        <mat-divider class="material-dividier" style="color: #050404 !important;"></mat-divider>
 
             <p> 
             CAI:1DB9E1-AA9139-624F93-FO14DE-876326-F3 <br>
@@ -427,7 +427,7 @@
         </div>
 
         <div class="tabla mt-4">
-            <div class="table-responsive !important" >
+            <div >
                 <table>
                     <thead>
                       <tr>
@@ -546,8 +546,8 @@
                </div>
         </div>
             <div class="row">
-                <div class="col-md-4 container footL">
-                    <label class="center"> ORIGINAL: CLIENTE</label>
+                <div class="col-md-12 container footL">
+                    <label class="center"> TRIPLICADO: ARCHIVO </label>
                 </div>
                 <!-- <div class="col-md-4 container footL">
                     <label class="center"> DUPLICADO: TRIBUTARIO EMISOR</label>
@@ -558,7 +558,7 @@
             </div>
             <div class="row container">
                 <div class="col-md-12 container">
-                    <label class="center" style="color:#FE9600 !important; padding-top: 3%;"> {{ parametros[0]['lemaFactura']}} </label>
+                    <label class="center" style="color:#050404 !important; padding-top: 3%;"> {{ parametros[0]['lemaFactura']}} </label>
 
                 </div>
             </div>
@@ -566,7 +566,7 @@
     </mat-card>
 </div>
 <!-- id?:string, NombreFinal ?: string, detalle?: string, titulo ?: string -->
-<button mat-raised-button class="buttonPrincipal btn-flotante" #tooltip="matTooltip" matTooltip="Imprimir"  matTooltipPosition="left" 
+<button mat-raised-button class="buttonPrincipal btn-flotante" #tooltip="matTooltip" matTooltip="Generar PDF"  matTooltipPosition="left" 
 (click)="GenerarPdf()">
     <mat-icon> picture_as_pdf </mat-icon>
 </button>

@@ -21,10 +21,11 @@ export class FacturacionComponent implements OnInit {
   public espaciosBlancos = [];
   public cabeceraF  : cabeceraFactura[] = [];
   public DcabeceraF : detalleCabecera[] = [];
-  public cliente : number = 0;
-  public documento : number = 0;
+  public cliente : string = '0';
+  public documento : string = '0';
   public loading1 = false;
   public loading2 = false;
+  public Env      = 'RH'
 
   public obs : string = "SERVICIO TRAMITE ADUANAL, BL NO MEDUX5035795, FACTURA NO:MINB4944 CONTENEDORES: MEDU9423500, FFAU3016235, MSMU4209438, MSMU4722250 MSMU8235780, CAIU4870715,CAIU75744086, MSMU4715760"
 
@@ -36,18 +37,18 @@ export class FacturacionComponent implements OnInit {
     ) { }
 
   ngOnInit(){
-    this.cliente   = Number(this.ruta.snapshot.params['cliente'])
-    this.documento = Number(this.ruta.snapshot.params['documento'])
+    this.cliente   = (this.ruta.snapshot.params['cliente']);
+    this.documento = '1000'+ (this.ruta.snapshot.params['documento'])
     this.cargarParametrosF()
     this.cabeceraFac()
     this.DetallecabeceraFac();
   }
 
   validacion(){
-    this.cliente   = Number(this.ruta.snapshot.params['cliente'])
-    this.documento = Number(this.ruta.snapshot.params['documento'])
+    this.cliente   = (this.ruta.snapshot.params['cliente']);
+    this.documento = '1000'+ (this.ruta.snapshot.params['documento'])
 
-    if ( this.cliente == 0 && this.documento == 0 ){
+    if ( this.cliente == '0' && this.documento == '0' ){
       this.modal()
     }else{
     this.cargarParametrosF()
@@ -87,9 +88,9 @@ export class FacturacionComponent implements OnInit {
 
   cabeceraFac(){
     let paramsE = {
-      Empresa   : 'AH',
+      Empresa   : this.Env,
       Cliente   : this.cliente,
-      Documento : this.documento
+      Documento : Number(this.documento)
     }
     let params = {
      "query": `CALL DC@HONLIB.SP_AWS_LISTA_FACTURA('${paramsE['Empresa']}', 1,  ${paramsE['Cliente']},${paramsE['Documento']},20210101, 20221231)`,
@@ -111,9 +112,9 @@ export class FacturacionComponent implements OnInit {
 
   DetallecabeceraFac(){
     let paramsE = {
-      Empresa   : 'AH',
+      Empresa   : this.Env,
       Cliente   : this.cliente,
-      Documento : this.documento
+      Documento : Number(this.documento)
     }
     let params = {
       "query": `CALL DC@HONLIB.SP_AWS_LISTA_FACTURA_DETALLE('${paramsE['Empresa']}',1,${paramsE['Documento']})`,
@@ -151,7 +152,6 @@ export class FacturacionComponent implements OnInit {
     }
   )
   }
-
   
   // if ( this.DcabeceraF.length != 0){
   //   for(let k = 0; k < this.DcabeceraF.length ; k++){
@@ -164,8 +164,6 @@ export class FacturacionComponent implements OnInit {
   //  }else{
   // this.DcabeceraF.push(res[i])
   //  }
-
-
 
   retornarArraryAcum( objeto : any[]){
     let guardado : any[] = [];
@@ -184,7 +182,7 @@ export class FacturacionComponent implements OnInit {
   }
 
   retornarLetra( campo : string){
-    if( campo.includes(" - EXP") || campo.includes(" EXP")){
+    if( campo.includes(" - EXP") || campo.includes(" EXP") || campo.includes(" EXONERADO")) {
         return 'E'
     }else{
       return 'G'
@@ -201,13 +199,17 @@ export class FacturacionComponent implements OnInit {
   }
 
     GenerarPdf(){
-      this.sharedS.pdfFactura('Factura',  `${this.retornarCorrelativoPDF()}_${this.cabeceraF[0]['TCMPCL']}Original`,'Factura Ransa', `Seguro de generar PDF de FACTURA ${this.cabeceraF[0]['NDCCTC']} del CLIENTE
-       ${this.cabeceraF[0]['TCMPCL']}`)
+    this.sharedS.pdfFactura('Factura',  `${this.retornarCorrelativoPDF()}_${this.cabeceraF[0]['TCMPCL']}Original`,'Factura Ransa', `Seguro de generar PDF de FACTURA ${this.cabeceraF[0]['NDCCTC']} del CLIENTE
+    ${this.cabeceraF[0]['TCMPCL']}`,{
+      numeroFactura: `${this.retornarCorrelativoPDF()}_${this.cabeceraF[0]['TCMPCL']}`,
+      factura : 'Factura Ransa',
+      titulo : ''
+    })
 
-       this.sharedS.pdfFacturaD('cliente', `${this.retornarCorrelativoPDF()}_${this.cabeceraF[0]['TCMPCL']}Cliente`,'Factura Ransa', `Seguro de generar PDF de FACTURA ${this.cabeceraF[0]['NDCCTC']} del CLIENTE
-       ${this.cabeceraF[0]['TCMPCL']}`)
+    // this.sharedS.pdfFacturaD('cliente', `${this.retornarCorrelativoPDF()}_${this.cabeceraF[0]['TCMPCL']}Cliente`,'Factura Ransa', `Seguro de generar PDF de FACTURA ${this.cabeceraF[0]['NDCCTC']} del CLIENTE
+    // ${this.cabeceraF[0]['TCMPCL']}`)
 
-       this.sharedS.pdfFacturaD('archivo', `${this.retornarCorrelativoPDF()}_${this.cabeceraF[0]['TCMPCL']}Archivo`,'Factura Ransa', `Seguro de generar PDF de FACTURA ${this.cabeceraF[0]['NDCCTC']} del CLIENTE
-       ${this.cabeceraF[0]['TCMPCL']}`)
+    // this.sharedS.pdfFacturaD('archivo', `${this.retornarCorrelativoPDF()}_${this.cabeceraF[0]['TCMPCL']}Archivo`,'Factura Ransa', `Seguro de generar PDF de FACTURA ${this.cabeceraF[0]['NDCCTC']} del CLIENTE
+    // ${this.cabeceraF[0]['TCMPCL']}`)
     }
 }
