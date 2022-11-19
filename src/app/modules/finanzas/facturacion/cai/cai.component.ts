@@ -5,15 +5,38 @@ import { catalogo, mensajes } from 'src/app/interfaces/generales';
 import { AuthService } from 'src/app/services/auth.service';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import { ToastServiceLocal } from 'src/app/services/toast.service';
-import { numeroALetras } from 'src/app/shared/functions/conversorNumLetras';
-import { FacturacionService } from '../facturacion.service';
+import { FacturacionService } from '../../facturacion.service';
+
+
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import * as _moment       from 'moment';
+import * as _rollupMoment from 'moment';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import { ModalCaiComponent } from './modal-cai/modal-cai.component';
+import { MatDialog } from '@angular/material/dialog';
+
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'LL',
+  },
+  display: {
+    dateInput: 'YYYY-MM-DD',
+    monthYearLabel: 'YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'YYYY',
+  },
+};
 
 @Component({
-  selector: 'app-parametros',
-  templateUrl: './parametros.component.html',
-  styleUrls: ['./parametros.component.scss']
+  selector: 'app-cai',
+  templateUrl: './cai.component.html',
+  styleUrls: ['./cai.component.scss'],
+  providers : [
+    {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+    {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
+   ]
 })
-export class ParametrosComponent implements OnInit {
+export class CaiComponent implements OnInit {
   public menuForm  : FormGroup;
   public menuFormP : FormGroup;
   public catalogoData : any[];
@@ -27,11 +50,14 @@ export class ParametrosComponent implements OnInit {
     idSede : 2,
     Sede   : 'Almahsa'
   }]
-  constructor( 
-  public auth:AuthService,
-  public finanzasS : FacturacionService, 
-  public toast:ToastServiceLocal,
-  public sweel:SweetAlertService
+
+  public maskCai = '9AAA-A999'
+  constructor(
+    public auth      : AuthService,
+    public finanzasS : FacturacionService, 
+    public toast     : ToastServiceLocal,
+    public sweel     : SweetAlertService,
+    public dialog    : MatDialog
   ) { }
 
   ngOnInit(){
@@ -41,22 +67,16 @@ export class ParametrosComponent implements OnInit {
 
   public formMenu(){
     this.menuForm = new FormGroup({
-      sede    : new FormControl ('' , [ Validators.required,]),
+      sede : new FormControl ('' , [ Validators.required,]),
     })
 }
 
 private formMenuP(){
   this.menuFormP = new FormGroup({
-    nombreEmpresa : new FormControl ('' , [Validators.required]),
-    direccion1 : new FormControl ('' , [Validators.required]),
-    direccion2 : new FormControl ('' , [Validators.required]),
-    municipio  : new FormControl ('' , []),
-    Departamento : new FormControl ('' , []),
-    telFijo : new FormControl ('' , [Validators.required]),
-    telCel  : new FormControl ('' , [Validators.required]),
-    rtnEmpresa : new FormControl ('' , [Validators.required]),
-    correo : new FormControl ('' , []),
-    lemaFactura : new FormControl ('' , []),
+    cai : new FormControl ('', [Validators.required]),
+    desde : new FormControl ('', [Validators.required]),
+    hasta : new FormControl ('', [Validators.required]),
+    fechaLimite  : new FormControl ('', [Validators.required]),
   })
 }
 
@@ -84,17 +104,18 @@ catalogo(){
   ) 
 }
 
-cargarParametros(){
-  let url = 'seguridad/parametrosF';
+cargarCai(){
+  let url = 'finanzas/caiActual';
   let params = {
     sede : this.menuForm.value?.sede
   }
   this.finanzasS.post( url, params ).subscribe(
     res=>{
+      console.log(res)
       if( !res.hasError ){
         this.parametros = res.data.Table0[0]
         console.log(this.parametros)
-        this.cargarForm()
+        // this.cargarForm()
       }
     }
   )
@@ -131,9 +152,9 @@ lema   :  this.menuFormP.value?.lemaFactura,
                 if ( res?.data.Table0[0]['codigo'] == -1 ){
                     this.toast.mensajeWarning(String(res?.data.Table0[0]['Mensaje']), mensajes.warning)
                 }else{
-                  this.toast.mensajeSuccess(String(res?.data.Table0[0]['Mensaje']), mensajes.success)
+                  this.toast.mensajeSuccess(String(res?.data.Table0[0]['Mensaje']),   mensajes.success)
                   // this.menuFormP.reset();
-                  this.cargarParametros()
+                  this.cargarCai()
                 }
             }else{
               this.toast.mensajeError(String(res?.errors),"Error")
@@ -144,5 +165,17 @@ lema   :  this.menuFormP.value?.lemaFactura,
     }
   )
 }
+
+
+modal( ){
+  const dialogReg = this.dialog.open( ModalCaiComponent,{
+    width  :   '500px',
+    height :   'auto',
+    maxWidth:  'auto',
+    data    :  { },
+    disableClose : true
+  })
+}
+
 
 }

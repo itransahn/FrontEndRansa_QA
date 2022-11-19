@@ -1,0 +1,46 @@
+<mat-card class="cardPersonalizada">
+    <mat-card-header class="header">  Generación de Factura
+    <mat-icon style="float: right !important;" (click)="close()" > close </mat-icon>
+    </mat-card-header>
+    <mat-card-content>
+        <form [formGroup]="menuForm" #f="ngForm">
+            <div class="row">
+            
+                <div class="col-md-12">
+                    <mat-form-field  appearance="legacy">
+                        <mat-label> CAI </mat-label>
+                        <input matInput placeholder="CAI" mask="999999-999999-999999-999999-999999-99" formControlName ="cai">
+                        
+                    </mat-form-field>
+                </div>
+            
+                <div class="col-md-12">
+                    <mat-form-field  appearance="legacy">
+                        <mat-label> Rango Desde </mat-label>
+                        <input matInput placeholder="Rango Desde"  formControlName ="desde">
+                    </mat-form-field>
+                </div>
+            
+                <div class="col-md-12">
+                    <mat-form-field appearance="legacy">
+                    <mat-label> Rango Hasta </mat-label>
+                    <input matInput placeholder="Rango Hasta" formControlName = "hasta">    
+                    </mat-form-field>
+                </div>
+               
+                <div class="col-md-12">
+                        <mat-form-field appearance="fill">
+                            <mat-label> Fecha Limite </mat-label>
+                            <input name="date" formControlName = "fecha" matInput [matDatepicker]="pickerN">
+                            <mat-datepicker-toggle matSuffix [for]="pickerN"></mat-datepicker-toggle>
+                            <mat-datepicker #pickerN></mat-datepicker>
+                          </mat-form-field>
+                 </div>
+            
+                <div class=" col-md-12 container">
+                    <button class="buttonPrincipal" mat-raised-button type="submit" [disabled]="f.invalid || (!auth.Insercion())" (click)="insertCai()" >Guardar</button>
+                </div>
+            </div>
+            </form>
+    </mat-card-content>
+</mat-card>

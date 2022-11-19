@@ -1,0 +1,77 @@
+<mat-card class="cardPersonalizada">
+    <form [formGroup]="menuForm" #f="ngForm" >
+        <div class="row">
+            <div class="col-md-6 ">
+                <img src="../../../../../assets/images/logoRansa.ico" alt="">
+            </div>
+            <div class="col-md-6 ">
+                <h3 class="h4"> CAI </h3>
+            </div>
+            <div class="col-md-8 container" >
+                <mat-form-field appearance="legacy">
+                    <mat-label> Sede </mat-label>
+                    <mat-select style="color: #006F1D !important;" formControlName="sede" (selectionChange)="cargarCai()" > 
+                        <mat-option> - </mat-option> 
+                        <mat-option *ngFor="let sed of sedes" [value]="sed?.idSede" >
+                            {{  sed?.Sede }}
+                        </mat-option> 
+                      </mat-select> 
+                  </mat-form-field>
+            </div>
+            <div class="col-md-4">
+                <div class="text-right">
+                    <button mat-raised-button class="buttonPrincipal" (click)="modal()" [disabled]="!auth.Insercion()">
+                        <mat-icon>
+                            add
+                        </mat-icon>
+                        Nuevo CAI
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+    
+    </mat-card>
+    
+    
+    <mat-card class="cardPersonalizada mt-4">
+    <form [formGroup]="menuFormP" #f="ngForm">
+    <div class="row">
+    
+        <div class="col-md-6">
+            <mat-form-field  appearance="legacy">
+                <mat-label> CAI </mat-label>
+                <input matInput placeholder="CAI" [mask]="maskCai" formControlName ="cai">
+            </mat-form-field>
+        </div>
+    
+        <div class="col-md-6">
+            <mat-form-field  appearance="legacy">
+                <mat-label> Rango Desde </mat-label>
+                <input matInput placeholder="Rango Desde"  formControlName ="desde">
+            </mat-form-field>
+        </div>
+    
+        <div class="col-md-6">
+            <mat-form-field appearance="legacy">
+            <mat-label> Rango Hasta </mat-label>
+            <input matInput placeholder="Rango Hasta" formControlName = "hasta">    
+            </mat-form-field>
+        </div>
+       
+        <div class="col-md-6">
+                <mat-form-field appearance="fill">
+                    <mat-label> Fecha Limite </mat-label>
+                    <input name="date" formControlName = "fechaLimite" matInput [matDatepicker]="pickerN">
+                    <mat-datepicker-toggle matSuffix [for]="pickerN"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerN></mat-datepicker>
+                  </mat-form-field>
+         </div>
+    
+        <div class=" col-md-12 container">
+            <button class="buttonPrincipal" mat-raised-button type="submit" [disabled]="f.invalid || (!auth.Insercion())" (click)="UpdatePermisos()" >Guardar</button>
+        </div>
+    </div>
+    </form>
+    </mat-card>
+    

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { CaiComponent } from './facturacion/cai/cai.component';
 import { FacturacionComponent } from './facturacion/facturacion.component';
 import { IntemedioComponent } from './facturacion/intemedio/intemedio.component';
 import { ParametrosComponent } from './parametros/parametros.component';
@@ -17,6 +18,10 @@ const routes: Routes = [
  {
   path      : 'parametros',
   component : ParametrosComponent
+ },
+ {
+  path      : 'cai',
+  component : CaiComponent
  }
 //  /finanzas/facturacion/0/0
 

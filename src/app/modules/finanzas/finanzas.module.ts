@@ -7,6 +7,8 @@ import { FacturacionComponent } from './facturacion/facturacion.component';
 import { ParametrosComponent } from './parametros/parametros.component';
 import { ModalComponent } from './facturacion/modal/modal.component';
 import { IntemedioComponent } from './facturacion/intemedio/intemedio.component';
+import { CaiComponent } from './facturacion/cai/cai.component';
+import { ModalCaiComponent } from './facturacion/cai/modal-cai/modal-cai.component';
 
 
 
@@ -15,7 +17,9 @@ import { IntemedioComponent } from './facturacion/intemedio/intemedio.component'
     FacturacionComponent,
     ParametrosComponent,
     ModalComponent,
-    IntemedioComponent
+    IntemedioComponent,
+    CaiComponent,
+    ModalCaiComponent
   ],
   imports: [
     CommonModule,
