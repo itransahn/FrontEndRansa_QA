@@ -1,4 +1,4 @@
-<div class="container padre" id="Factura" *ngIf="DcabeceraF.length >= 1 && loading1 && loading2 && cabeceraF.length >= 1">
+<div class="container padre" id="Factura" *ngIf="DcabeceraF.length >= 1 && loading1 && loading2 && cabeceraF.length >= 1 && permitido">
     <mat-card class="cardPersonalizada mt-8">
         <div class="row ">
         <div class="col-md-6">
@@ -189,7 +189,7 @@
 
 
 
-<div class="container padre herencia mt-4" id="cliente" *ngIf="DcabeceraF.length >= 1 && loading1 && loading2 && cabeceraF.length >= 1">
+<div class="container padre herencia mt-4" id="cliente" *ngIf="DcabeceraF.length >= 1 && loading1 && loading2 && cabeceraF.length >= 1 && permitido">
     <mat-card class="cardPersonalizada">
         <div class="row">
         <div class="col-md-6">
@@ -377,7 +377,7 @@
         </div>
     </mat-card>
 </div>
-<div class="container padre herencia mt-4" id="archivo" *ngIf="DcabeceraF.length >= 1 && loading1 && loading2 && cabeceraF.length >= 1">
+<div class="container padre herencia mt-4" id="archivo" *ngIf="DcabeceraF.length >= 1 && loading1 && loading2 && cabeceraF.length >= 1 && permitido">
     <mat-card class="cardPersonalizada">
         <div class="row">
         <div class="col-md-6">
@@ -575,8 +575,14 @@
 
 
 
-<nav *ngIf="DcabeceraF.length < 1 || cabeceraF.length < 1 && loading1 && loading2" aria-label="breadcrumb">
+<nav *ngIf="DcabeceraF.length < 1 && cabeceraF.length < 1 && loading1 && loading2" aria-label="breadcrumb">
     <ol class="breadcrumb container">
      <h4> No se encuentra información de la factura {{ documento }} del cliente {{cliente}} </h4>
+    </ol>
+</nav>
+
+<nav *ngIf="!permitido" aria-label="breadcrumb" class="container">
+    <ol class="breadcrumb container">
+     <h4> Rango de Facturas vencido </h4>
     </ol>
 </nav>

@@ -22,7 +22,7 @@ interface detalleCabecera{
     TCMTRF ?: string,
     NDCCTC ?: string,
     QAPCTC ?: string,
-    IVLDCS ?: string,
+    IVLDCS ?: number,
     NCRDCC ?: string,
     IVLDCD ?: string,
     CRBCTC ?: string,

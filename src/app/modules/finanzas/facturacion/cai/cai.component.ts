@@ -73,7 +73,7 @@ export class CaiComponent implements OnInit {
 
 private formMenuP(){
   this.menuFormP = new FormGroup({
-    cai : new FormControl ('', [Validators.required]),
+    cai : new FormControl ({disabled:true, value : ''}, [Validators.required]),
     desde : new FormControl ('', [Validators.required]),
     hasta : new FormControl ('', [Validators.required]),
     fechaLimite  : new FormControl ('', [Validators.required]),
@@ -82,16 +82,10 @@ private formMenuP(){
 
 public cargarForm(){
   this.menuFormP.patchValue({
-nombreEmpresa : this.parametros['nombreCompleto'],
-direccion1 : this.parametros['direccion1'],
-direccion2 : this.parametros['direccion2'],
-municipio : this.parametros['municipio'],
-Departamento : this.parametros['Departamento'],
-telFijo : this.parametros['Telfijo'],
-telCel : this.parametros['TelCel'],
-rtnEmpresa : this.parametros['rtnEmpresa'],
-correo : this.parametros['correo'],
-lemaFactura : this.parametros['lemaFactura'],
+cai : this.parametros['CAI'],
+desde : this.parametros['desde'],
+hasta : this.parametros['hasta'],
+fechaLimite : this.parametros['fechaLimite'],
   })
 }
 
@@ -107,43 +101,32 @@ catalogo(){
 cargarCai(){
   let url = 'finanzas/caiActual';
   let params = {
-    sede : this.menuForm.value?.sede
+    idSede : this.menuForm.value?.sede
   }
   this.finanzasS.post( url, params ).subscribe(
     res=>{
-      console.log(res)
+      // console.log(res)
       if( !res.hasError ){
         this.parametros = res.data.Table0[0]
-        console.log(this.parametros)
-        // this.cargarForm()
+        // console.log(this.parametros)
+        this.cargarForm()
       }
     }
   )
 }
 
-UpdatePermisos(){
-  let sede : string;
-  if( this.menuForm?.value.sede == 1){
-    sede = 'Sauce'
-  }else{
-    sede = 'Almahsa'
-  }
-
-  let url = 'seguridad/UpdparametrosF';
+actualizarCai(){
+  let url = 'finanzas/updateCai';
   let params = {
-sede   :  this.menuForm.value?.sede,
-nombre   :  this.menuFormP.value?.nombreEmpresa,
-direccion1   :  this.menuFormP.value?.direccion1,
-direccion2   :  this.menuFormP.value?.direccion2,
-municipio   :  this.menuFormP.value?.municipio,
-departamento   :  this.menuFormP.value?.Departamento,
-telFijos   :  this.menuFormP.value?.telFijo,
-telCelulares   :  this.menuFormP.value?.telCel,
-rtnE   :  this.menuFormP.value?.rtnEmpresa,
-correo   :  this.menuFormP.value?.correo,
-lema   :  this.menuFormP.value?.lemaFactura,
-  }
-  this.sweel.mensajeConConfirmacion(`¿Seguro de cambiar parametros de facturación de ${ sede }?`, `Cambios de parámetros`,"warning").then(
+id      :  this.parametros['id'],
+cai     :  this.parametros['CAI'],
+desde   :  this.menuFormP.value.desde,
+hasta   :  this.menuFormP.value.hasta,
+fechalimite   :  this.menuFormP.value.fechaLimite,
+sede    :  this.menuForm.value.sede,
+usuario : this.auth.dataUsuario['id_usuario']
+}
+  this.sweel.mensajeConConfirmacion(`¿Seguro de Actualizar CAI ${ this.parametros['CAI'] }?`, `Actualización CAI`,"warning").then(
     res=>{
       if( res ){
           this.finanzasS.post( url, params ).subscribe (
@@ -153,8 +136,6 @@ lema   :  this.menuFormP.value?.lemaFactura,
                     this.toast.mensajeWarning(String(res?.data.Table0[0]['Mensaje']), mensajes.warning)
                 }else{
                   this.toast.mensajeSuccess(String(res?.data.Table0[0]['Mensaje']),   mensajes.success)
-                  // this.menuFormP.reset();
-                  this.cargarCai()
                 }
             }else{
               this.toast.mensajeError(String(res?.errors),"Error")

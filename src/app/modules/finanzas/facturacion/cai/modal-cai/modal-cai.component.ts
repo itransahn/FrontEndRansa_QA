@@ -38,7 +38,18 @@ export const MY_FORMATS = {
 })
 export class ModalCaiComponent implements OnInit {
   public menuForm : FormGroup;
-  public maskCai = '999999-999999-999999-A0999A-999999-99'
+  public maskCai = '999999-999999-999999-A0999A-999999-99';
+  datemask = [/\d/, /\d/, /\d/,/\d/,/\d/,/\d/, '-', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/];
+  public sedes  = [
+    {
+      idSede : 1,
+      Sede   : 'Sauce'
+    },
+    {
+      idSede : 2,
+      Sede   : 'Almahsa'
+    }]
+  // 1AA9A9 - AA9999 - 999F93 - F999AA - 999999 - A9
   constructor(
     private dialogRef:MatDialogRef<ModalCaiComponent>, 
     public auth:AuthService, 
@@ -71,10 +82,10 @@ insertCai(){
 cai     :  this.menuForm.value?.cai,
 desde   :  this.menuForm.value?.desde,
 hasta   :  this.menuForm.value?.hasta,
-fecha   :  this.menuForm.value?.fecha,
+fechalimite   :  this.menuForm.value?.fecha,
 sede    :  this.menuForm.value?.sede,
 usuario : this.auth.dataUsuario['id_usuario']
-  }
+}
   this.sweel.mensajeConConfirmacion(`¿Seguro de ingresar CAI ${ params['cai'] }?`, `Nuevo CAI`,"warning").then(
     res=>{
       if( res ){

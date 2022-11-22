@@ -20,7 +20,7 @@
             </div>
             <div class="col-md-4">
                 <div class="text-right">
-                    <button mat-raised-button class="buttonPrincipal" (click)="modal()" [disabled]="!auth.Insercion()">
+                    <button mat-raised-button class="buttonPrincipal" (click)="modal()" [disabled]="!auth.Actualizacion()">
                         <mat-icon>
                             add
                         </mat-icon>
@@ -41,7 +41,7 @@
         <div class="col-md-6">
             <mat-form-field  appearance="legacy">
                 <mat-label> CAI </mat-label>
-                <input matInput placeholder="CAI" [mask]="maskCai" formControlName ="cai">
+                <input matInput placeholder="CAI"  formControlName ="cai">
             </mat-form-field>
         </div>
     
@@ -69,7 +69,7 @@
          </div>
     
         <div class=" col-md-12 container">
-            <button class="buttonPrincipal" mat-raised-button type="submit" [disabled]="f.invalid || (!auth.Insercion())" (click)="UpdatePermisos()" >Guardar</button>
+            <button class="buttonPrincipal" mat-raised-button type="submit" [disabled]="f.invalid || (!auth.Insercion())" (click)="actualizarCai()" >Guardar</button>
         </div>
     </div>
     </form>

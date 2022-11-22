@@ -3,7 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { DataApi } from 'src/app/interfaces/dataApi';
 import { cabeceraFactura, detalleCabecera } from 'src/app/interfaces/Factura';
-import { Acumulador } from 'src/app/interfaces/generales';
+import { Acumulador, mensajes } from 'src/app/interfaces/generales';
+import { ToastServiceLocal } from 'src/app/services/toast.service';
 import { numeroALetras } from 'src/app/shared/functions/conversorNumLetras';
 import { SharedService } from '../../shared/shared.service';
 import { FacturacionService } from '../facturacion.service';
@@ -25,7 +26,8 @@ export class FacturacionComponent implements OnInit {
   public documento : string = '0';
   public loading1 = false;
   public loading2 = false;
-  public Env      = 'RH'
+  public Env      = 'AH';
+  public permitido : boolean = false;
 
   public obs : string = "SERVICIO TRAMITE ADUANAL, BL NO MEDUX5035795, FACTURA NO:MINB4944 CONTENEDORES: MEDU9423500, FFAU3016235, MSMU4209438, MSMU4722250 MSMU8235780, CAIU4870715,CAIU75744086, MSMU4715760"
 
@@ -33,12 +35,14 @@ export class FacturacionComponent implements OnInit {
     public sharedS      : SharedService,
     public facturacionS : FacturacionService,
     public ruta : ActivatedRoute,
-    public dialog : MatDialog
+    public dialog : MatDialog,
+    public toast : ToastServiceLocal
     ) { }
 
   ngOnInit(){
     this.cliente   = (this.ruta.snapshot.params['cliente']);
-    this.documento = '1000'+ (this.ruta.snapshot.params['documento'])
+    this.documento = '10000'+ (this.ruta.snapshot.params['documento'])
+    this.validarCorrelativo()
     this.cargarParametrosF()
     this.cabeceraFac()
     this.DetallecabeceraFac();
@@ -55,6 +59,34 @@ export class FacturacionComponent implements OnInit {
     this.cabeceraFac()
     this.DetallecabeceraFac();
     }
+  }
+
+  validarCorrelativo(){
+    let url = 'finanzas/validarNum'
+    let params = {
+      correlativo : this.ruta.snapshot.params['documento'],
+      sede        : 2
+    }
+    this.facturacionS.post( url, params ).subscribe(
+      (res:DataApi)=>{
+        if(!res.hasError){
+          if ( res?.data.Table0[0]['codigo'] != -1 && res?.data.Table0[0]['codigo'] != 1 ){
+              this.toast.mensajeWarning(String(res?.data.Table0[0]['Mensaje']), mensajes.warning);
+              this.permitido = true;
+          }else{
+            // this.toast.mensajeSuccess(String(res?.data.Table0[0]['Mensaje']),   mensajes.success)
+            if ( res?.data.Table0[0]['codigo'] == 1){
+                this.permitido = true;
+            }else{
+              this.toast.mensajeError(String(res?.data.Table0[0]['Mensaje']), mensajes.error);
+                this.permitido =  false;
+            }
+          }
+      }else{
+        this.toast.mensajeError(String(res?.errors),"Error")
+    }
+      }
+    )
   }
 
   modal( ){
@@ -128,7 +160,7 @@ export class FacturacionComponent implements OnInit {
      
     if( res[i]['TCMTRF'] == 'IVA' || res[i]['TCMTRF'] == 'IMPUESTO AL VALOR AGREGADO'){
           }else{
-        this.DcabeceraF.push(res[i])
+        this.DcabeceraF.push(res[i]);
 
   //         if ( this.DcabeceraF[0]){
   //   for(let k = 0; k < this.DcabeceraF.length ; k++){
@@ -149,6 +181,7 @@ export class FacturacionComponent implements OnInit {
       }
       // console.log(this.DcabeceraF)
       this.loading2 = true;
+      this.descomponerArray(this.DcabeceraF)
     }
   )
   }
@@ -211,5 +244,58 @@ export class FacturacionComponent implements OnInit {
 
     // this.sharedS.pdfFacturaD('archivo', `${this.retornarCorrelativoPDF()}_${this.cabeceraF[0]['TCMPCL']}Archivo`,'Factura Ransa', `Seguro de generar PDF de FACTURA ${this.cabeceraF[0]['NDCCTC']} del CLIENTE
     // ${this.cabeceraF[0]['TCMPCL']}`)
+    }
+
+    descomponerArray( array : detalleCabecera[] ){
+      let arrayC : detalleCabecera[];
+      console.log(array[0])
+      // arrayC.push(array[0]);
+      arrayC = [{
+CCNCSD:array[0]['CCNCSD'],
+CRBCTC:array[0]['CRBCTC'],
+CUNCNA:array[0]['CUNCNA'],
+CUTCTC:array[0]['CUTCTC'],
+ITRCTC:array[0]['ITRCTC'],
+IVLDCD:array[0]['IVLDCD'],
+IVLDCS:0,
+NCRDCC:array[0]['NCRDCC'],
+NDCCTC:array[0]['NDCCTC'],
+QAPCTC:array[0]['QAPCTC'],
+TCMTRF:array[0]['TCMTRF']
+      }]
+      
+      for( let i = 0; i < array.length; i++ ){
+      // console.log(array[i]['TCMTRF'],array[i]['IVLDCS'])
+      // console.log(array[i])
+      // console.log(arrayC.length)
+
+      /* FALLA PORQUE NO CONTROLA LA IGUALACION DENTRO DEL CICLO  
+      ¿Variable temporal?
+      */
+               for(let j = 0; j < arrayC.length; j++){
+      console.log( arrayC[j]['TCMTRF'] , array[i]['TCMTRF'] )
+              if(arrayC[j]['TCMTRF'] == array[i]['TCMTRF'] ){
+                arrayC[j]['IVLDCS']  +=  Number(array[i]['IVLDCS'])     
+                break
+               }else{
+                 arrayC.push(array[i]);
+                 break
+               }
+            }
+          // console.log('1')
+    }
+      console.log(arrayC)
+
+      var nuevoArray    = []
+      var arrayTemporal = []
+      
+  //     for(var i=0; i<array.length; i++){
+	//     arrayTemporal = nuevoArray.filter(resp => resp["TCMTRF"] == array[i]["TCMTRF"])
+	//     if(arrayTemporal.length>0){
+	//         nuevoArray[nuevoArray.indexOf(arrayTemporal[0])]["Profesionales"].push(array[i]["Nombre"])
+	//     }else{
+	//         nuevoArray.push({"Nombre" : array[i]["Ciudad"] , "Profesionales" : [array[i]["Nombre"]]})
+	//     }
+	// }
     }
 }
