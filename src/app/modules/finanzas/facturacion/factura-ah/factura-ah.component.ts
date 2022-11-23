@@ -6,29 +6,29 @@ import { cabeceraFactura, detalleCabecera } from 'src/app/interfaces/Factura';
 import { Acumulador, mensajes } from 'src/app/interfaces/generales';
 import { ToastServiceLocal } from 'src/app/services/toast.service';
 import { numeroALetras } from 'src/app/shared/functions/conversorNumLetras';
-import { SharedService } from '../../shared/shared.service';
-import { FacturacionService } from '../facturacion.service';
-import { ModalComponent } from './modal/modal.component';
+import { SharedService } from 'src/app/modules/shared/shared.service';
+import { FacturacionService } from '../../facturacion.service';
+import { ModalComponent } from '../modal/modal.component';
 
 @Component({
-  selector: 'app-facturacion',
-  templateUrl: './facturacion.component.html',
-  styleUrls: ['./facturacion.component.scss']
+  selector: 'app-factura-ah',
+  templateUrl: './factura-ah.component.html',
+  styleUrls: ['./factura-ah.component.scss']
 })
-export class FacturacionComponent implements OnInit {
+export class FacturaAHComponent implements OnInit {
   public dolares = [];
   public parametros = [];
   public fecha = new Date()
   public espaciosBlancos = [];
   public cabeceraF  : cabeceraFactura[] = [];
   public DcabeceraF : detalleCabecera[] = [];
-  public cliente : string = '0';
+  public cliente   : string = '0';
   public documento : string = '0';
   public loading1 = false;
   public loading2 = false;
-  public Env      = 'RH';
+  public Env      = 'AH';
   public permitido : boolean = false;
-  public sede : number = 1;
+  public sede : number  = 2;
 
   public obs : string = "SERVICIO TRAMITE ADUANAL, BL NO MEDUX5035795, FACTURA NO:MINB4944 CONTENEDORES: MEDU9423500, FFAU3016235, MSMU4209438, MSMU4722250 MSMU8235780, CAIU4870715,CAIU75744086, MSMU4715760"
 
@@ -42,7 +42,7 @@ export class FacturacionComponent implements OnInit {
 
   ngOnInit(){
     this.cliente   = (this.ruta.snapshot.params['cliente']);
-    this.documento = '1000'+ (this.ruta.snapshot.params['documento'])
+    this.documento = '10000'+ (this.ruta.snapshot.params['documento'])
     this.validarCorrelativo()
     this.cargarParametrosF()
     this.cabeceraFac()
@@ -51,8 +51,7 @@ export class FacturacionComponent implements OnInit {
 
   validacion(){
     this.cliente   = (this.ruta.snapshot.params['cliente']);
-    this.documento = '1000'+ (this.ruta.snapshot.params['documento'])
-
+    this.documento = '10000'+ (this.ruta.snapshot.params['documento'])
     if ( this.cliente == '0' && this.documento == '0' ){
       this.modal()
     }else{
@@ -116,6 +115,7 @@ export class FacturacionComponent implements OnInit {
     }
   )
   }
+
   convertirNumLetra( numero : any){
       return numeroALetras(numero,{})
   }
@@ -308,4 +308,5 @@ TCMTRF:array[0]['TCMTRF']
             return arrayC;
 
     }
+
 }

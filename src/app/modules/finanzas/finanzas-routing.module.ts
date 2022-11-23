@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CaiComponent } from './facturacion/cai/cai.component';
+import { FacturaAHComponent } from './facturacion/factura-ah/factura-ah.component';
 import { FacturacionComponent } from './facturacion/facturacion.component';
 import { IntemedioComponent } from './facturacion/intemedio/intemedio.component';
 import { ParametrosComponent } from './parametros/parametros.component';
@@ -12,7 +13,11 @@ const routes: Routes = [
   component : FacturacionComponent
  },
  {
-  path      : 'facturacion',
+  path      : 'facturacionAh/:cliente/:documento',
+  component : FacturaAHComponent
+ },
+ {
+  path      : 'facturacion/:sede',
   component : IntemedioComponent
  },
  {

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AuthService } from 'src/app/services/auth.service';
 import { SeguridadService } from 'src/app/services/seguridad.service';
 import { ToastServiceLocal } from 'src/app/services/toast.service';
@@ -17,7 +17,8 @@ export class ModalComponent implements OnInit {
   private dialogRef:MatDialogRef<ModalComponent>, 
   public auth:AuthService,
   public seguridad : SeguridadService, 
-  public toast:ToastServiceLocal
+  public toast:ToastServiceLocal,
+  @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
   ngOnInit() {
@@ -36,8 +37,17 @@ close(){
 }
 
 redireccionar(){
-  this.auth.redirecTo(`/ransa/finanzas/facturacion/${this.menuForm.value.cliente}/${this.menuForm.value.documento}`)
-  this.dialogRef.close()
+
+  if ( this.data['sede'] == 1){
+    this.auth.redirecTo(`/ransa/finanzas/facturacion/${this.menuForm.value.cliente}/${this.menuForm.value.documento}`)
+    this.dialogRef.close()
+  }
+
+  if ( this.data['sede'] == 2) {
+    this.auth.redirecTo(`/ransa/finanzas/facturacionAh/${this.menuForm.value.cliente}/${this.menuForm.value.documento}`)
+    this.dialogRef.close()
+  }
+
 }
 
 }

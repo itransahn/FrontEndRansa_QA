@@ -9,6 +9,7 @@ import { ModalComponent } from './facturacion/modal/modal.component';
 import { IntemedioComponent } from './facturacion/intemedio/intemedio.component';
 import { CaiComponent } from './facturacion/cai/cai.component';
 import { ModalCaiComponent } from './facturacion/cai/modal-cai/modal-cai.component';
+import { FacturaAHComponent } from './facturacion/factura-ah/factura-ah.component';
 
 
 
@@ -19,7 +20,8 @@ import { ModalCaiComponent } from './facturacion/cai/modal-cai/modal-cai.compone
     ModalComponent,
     IntemedioComponent,
     CaiComponent,
-    ModalCaiComponent
+    ModalCaiComponent,
+    FacturaAHComponent
   ],
   imports: [
     CommonModule,

@@ -28,7 +28,7 @@ interface detalleCabecera{
     CRBCTC ?: string,
     CUTCTC ?: string,
     CUNCNA ?: string,
-    ITRCTC ?: string,
+    ITRCTC ?: number,
     CCNCSD ?: string,
 }
 

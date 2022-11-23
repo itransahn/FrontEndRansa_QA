@@ -10,17 +10,20 @@ import { ModalComponent } from '../modal/modal.component';
 })
 export class IntemedioComponent implements OnInit {
   constructor(
-  public dialog: MatDialog
+  public dialog: MatDialog,
+  public ruta : ActivatedRoute
   ) { }
 
-  ngOnInit(){ this.modal() }
+  ngOnInit(){  this.modal( ) }
 
-  modal( ){
+  modal(  ){
     const dialogReg = this.dialog.open( ModalComponent,{
       width  :   '500px',
       height :   'auto',
       maxWidth:  'auto',
-      data    :  { },
+      data    :  {
+        sede : this.ruta.snapshot.params['sede']
+      },
       disableClose : true
     })
   }
