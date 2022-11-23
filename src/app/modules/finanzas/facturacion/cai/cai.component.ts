@@ -126,6 +126,7 @@ fechalimite   :  this.menuFormP.value.fechaLimite,
 sede    :  this.menuForm.value.sede,
 usuario : this.auth.dataUsuario['id_usuario']
 }
+console.log( this.menuFormP.value.fechaLimite)
   this.sweel.mensajeConConfirmacion(`¿Seguro de Actualizar CAI ${ this.parametros['CAI'] }?`, `Actualización CAI`,"warning").then(
     res=>{
       if( res ){

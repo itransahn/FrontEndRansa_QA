@@ -7,7 +7,8 @@
              {{parametros[0]['nombreCompleto']}}
              {{parametros[0]['direccion1']}}: {{ parametros[0]['direccion2']}}
              Municipio:{{ parametros[0]['municipio']}}, Departamento: {{ parametros[0]['Departamento']}} <br> 
-             Tel: {{parametros[0]['Telfijo']}}, {{parametros[0]['TelCel']}}  
+             Tel: {{parametros[0]['Telfijo']}}, {{parametros[0]['TelCel']}}  <br>
+            <span *ngIf="parametros[0]['correo']"> Correo: {{parametros[0]['correo']}}, {{parametros[0]['TelCel']}}  </span>
             </p>
         </div>
 
@@ -18,15 +19,16 @@
                     000-001-01-{{retornarCorrelativo()}}
                 </span>
             </p>
-            <h4 > FECHA: {{ fecha | date:'mediumDate' | uppercase }} </h4>
+            <!-- <h4 > FECHA: {{ fecha | date:'mediumDate' | uppercase }} </h4> -->
+            <h4 > FECHA: {{ dia }}/{{mes}}/{{anio}} </h4>
 
         <mat-divider class="material-dividier"></mat-divider>
 
             <p> 
-            CAI:1DB9E1-AA9139-624F93-FO14DE-876326-F3 <br>
+            CAI: {{ parametrosCai[0]['CAI']}} <br>
             <span> RANGO AUTORIZADO </span> <br>
-            000-001-01-00031001 AL 000-001-01-00034000 <br>
-            FECHA LIMITE DE EMISION: 05/09/2023 
+            {{ parametrosCai[0]['desde'] }} AL {{ parametrosCai[0]['hasta'] }} <br>
+            FECHA LIMITE DE EMISION: {{ parametrosCai[0]['fechaLimite'] | date: 'dd/MM/yyyy'}} 
             </p>
         </div>
 
@@ -61,10 +63,10 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr *ngFor="let item of DcabeceraF">
+                      <tr *ngFor="let item of DcabeceraF; let i = index">
                         <td data-label="CANTIDAD" class="contenidoF"> {{ item?.QAPCTC  | number }} </td>
                         <td data-label="DESCRIPCION" class="contenidoF"> {{item?.TCMTRF }} </td>
-                        <td data-label="PRECIO UNITARIO" class="contenidoF">{{ item?.IVLDCS | number : '1.2-2' }}</td>
+                        <td data-label="PRECIO UNITARIO" class="contenidoF">{{ retornarPrecioUnitario(i, item?.QAPCTC) | number : '1.2-2' }}</td>
                         <td data-label="DESC. Y REB OTORGADA" class="contenidoF">{{ 0    | number : '1.2-2' }}</td>
                         <td data-label="IMPUESTO" class="contenidoF"> {{ retornarLetra( item?.TCMTRF )}} </td>
                         <td data-label="TOTAL" class="contenidoF">{{ item?.IVLDCS    | number : '1.2-2' }}</td>
@@ -187,8 +189,6 @@
     </mat-card>
 </div>
 
-
-
 <div class="container padre herencia mt-4" id="cliente" *ngIf="DcabeceraF.length >= 1 && loading1 && loading2 && cabeceraF.length >= 1 && permitido">
     <mat-card class="cardPersonalizada">
         <div class="row">
@@ -209,15 +209,15 @@
                     000-001-01-{{retornarCorrelativo()}}
                 </span>
             </p>
-            <h4 > FECHA: {{ fecha | date:'mediumDate' | uppercase }} </h4>
-
+            <!-- <h4 > FECHA: {{ fecha | date:'mediumDate' | uppercase }} </h4> -->
+            <h4 > FECHA: {{ dia }}/{{mes}}/{{anio}} </h4>
         <mat-divider class="material-dividier"></mat-divider>
 
-            <p> 
-            CAI:1DB9E1-AA9139-624F93-FO14DE-876326-F3 <br>
+        <p> 
+            CAI: {{ parametrosCai[0]['CAI']}} <br>
             <span> RANGO AUTORIZADO </span> <br>
-            000-001-01-00031001 AL 000-001-01-00034000 <br>
-            FECHA LIMITE DE EMISION: 05/09/2023 
+            {{ parametrosCai[0]['desde'] }} AL {{ parametrosCai[0]['hasta'] }} <br>
+            FECHA LIMITE DE EMISION: {{ parametrosCai[0]['fechaLimite'] | date: 'dd/MM/yyyy'}} 
             </p>
         </div>
 
@@ -255,7 +255,7 @@
                       <tr *ngFor="let item of DcabeceraF">
                         <td data-label="CANTIDAD" class="contenidoF"> {{ item?.QAPCTC  | number }} </td>
                         <td data-label="DESCRIPCION" class="contenidoF"> {{item?.TCMTRF }} </td>
-                        <td data-label="PRECIO UNITARIO" class="contenidoF">{{ item?.IVLDCS | number : '1.2-2' }}</td>
+                        <td data-label="PRECIO UNITARIO" class="contenidoF">{{ retornarPrecioUnitario(i, item?.QAPCTC) | number : '1.2-2' }}</td>
                         <td data-label="DESC. Y REB OTORGADA" class="contenidoF">{{ 0    | number : '1.2-2' }}</td>
                         <td data-label="IMPUESTO" class="contenidoF"> {{ retornarLetra( item?.TCMTRF )}} </td>
                         <td data-label="TOTAL" class="contenidoF">{{ item?.IVLDCS    | number : '1.2-2' }}</td>
@@ -377,6 +377,7 @@
         </div>
     </mat-card>
 </div>
+
 <div class="container padre herencia mt-4" id="archivo" *ngIf="DcabeceraF.length >= 1 && loading1 && loading2 && cabeceraF.length >= 1 && permitido">
     <mat-card class="cardPersonalizada">
         <div class="row">
@@ -397,15 +398,15 @@
                     000-001-01-{{retornarCorrelativo()}}
                 </span>
             </p>
-            <h4 > FECHA: {{ fecha | date:'mediumDate' | uppercase }} </h4>
-
+            <!-- <h4 > FECHA: {{ fecha | date:'mediumDate' | uppercase }} </h4> -->
+            <h4 > FECHA: {{ dia }}/{{mes}}/{{anio}} </h4>
         <mat-divider class="material-dividier" style="color: #050404 !important;"></mat-divider>
 
-            <p> 
-            CAI:1DB9E1-AA9139-624F93-FO14DE-876326-F3 <br>
+        <p> 
+            CAI: {{ parametrosCai[0]['CAI']}} <br>
             <span> RANGO AUTORIZADO </span> <br>
-            000-001-01-00031001 AL 000-001-01-00034000 <br>
-            FECHA LIMITE DE EMISION: 05/09/2023 
+            {{ parametrosCai[0]['desde'] }} AL {{ parametrosCai[0]['hasta'] }} <br>
+            FECHA LIMITE DE EMISION: {{ parametrosCai[0]['fechaLimite'] | date: 'dd/MM/yyyy'}} 
             </p>
         </div>
 
@@ -443,7 +444,7 @@
                       <tr *ngFor="let item of DcabeceraF">
                         <td data-label="CANTIDAD" class="contenidoF"> {{ item?.QAPCTC  | number }} </td>
                         <td data-label="DESCRIPCION" class="contenidoF"> {{item?.TCMTRF }} </td>
-                        <td data-label="PRECIO UNITARIO" class="contenidoF">{{ item?.IVLDCS | number : '1.2-2' }}</td>
+                        <td data-label="PRECIO UNITARIO" class="contenidoF">{{ retornarPrecioUnitario(i, item?.QAPCTC) | number : '1.2-2' }}</td>
                         <td data-label="DESC. Y REB OTORGADA" class="contenidoF">{{ 0    | number : '1.2-2' }}</td>
                         <td data-label="IMPUESTO" class="contenidoF"> {{ retornarLetra( item?.TCMTRF )}} </td>
                         <td data-label="TOTAL" class="contenidoF">{{ item?.IVLDCS    | number : '1.2-2' }}</td>
@@ -575,7 +576,7 @@
 
 
 
-<nav *ngIf="DcabeceraF.length < 1 && cabeceraF.length < 1 && loading1 && loading2" aria-label="breadcrumb">
+<nav *ngIf="DcabeceraF.length < 1 || cabeceraF.length < 1 || !loading1 || !loading2" aria-label="breadcrumb">
     <ol class="breadcrumb container">
      <h4> No se encuentra información de la factura {{ documento }} del cliente {{cliente}} </h4>
     </ol>

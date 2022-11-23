@@ -9,7 +9,6 @@ import { numeroALetras } from 'src/app/shared/functions/conversorNumLetras';
 import { SharedService } from 'src/app/modules/shared/shared.service';
 import { FacturacionService } from '../../facturacion.service';
 import { ModalComponent } from '../modal/modal.component';
-
 @Component({
   selector: 'app-factura-ah',
   templateUrl: './factura-ah.component.html',
@@ -18,6 +17,7 @@ import { ModalComponent } from '../modal/modal.component';
 export class FacturaAHComponent implements OnInit {
   public dolares = [];
   public parametros = [];
+  public parametrosCai = [];
   public fecha = new Date()
   public espaciosBlancos = [];
   public cabeceraF  : cabeceraFactura[] = [];
@@ -29,6 +29,9 @@ export class FacturaAHComponent implements OnInit {
   public Env      = 'AH';
   public permitido : boolean = false;
   public sede : number  = 2;
+  public dia : string;
+  public mes : string;
+  public anio : string;
 
   public obs : string = "SERVICIO TRAMITE ADUANAL, BL NO MEDUX5035795, FACTURA NO:MINB4944 CONTENEDORES: MEDU9423500, FFAU3016235, MSMU4209438, MSMU4722250 MSMU8235780, CAIU4870715,CAIU75744086, MSMU4715760"
 
@@ -110,7 +113,7 @@ export class FacturaAHComponent implements OnInit {
     (res:DataApi | any )=>{
         if( !res?.hasError ){
             this.parametros = res.data.Table0;
-            // console.log( this.parametros )
+            this.parametrosCai = res.data.Table1;
         }
     }
   )
@@ -137,9 +140,14 @@ export class FacturaAHComponent implements OnInit {
 
   this.facturacionS.As400( params ).subscribe(
     (res:any)=>{
-      // console.log( res )
-      this.cabeceraF = res
-      this.loading1 = true;
+      if( res ){
+this.cabeceraF = res
+let fecha : string = String(this.cabeceraF[0]?.FDCCTC);
+this.dia  =  fecha.substring(6,8);
+this.mes  =  fecha.substring(4,6);
+this.anio =  fecha.substring(0,4);
+this.loading1 = true;
+      }
     }
   )
   }
@@ -182,8 +190,11 @@ export class FacturaAHComponent implements OnInit {
     for(let j=0; j<(15-this.DcabeceraF.length); j++){
         this.espaciosBlancos.push(j)
     }
+    // console.log(this.DcabeceraF)
     this.DcabeceraF =  this.descomponerArray(this.DcabeceraF);
     this.loading2 = true;
+    // console.log(this.DcabeceraF)
+
       }
     }
   )
@@ -227,7 +238,7 @@ export class FacturaAHComponent implements OnInit {
 
   retornarCorrelativo(){
     let correlativo : string = this.cabeceraF[0]['NDCCTC'];
-    return correlativo.substring(1,correlativo.length)
+    return correlativo.substring(2,correlativo.length)
   }
   retornarCorrelativoPDF(){
     let correlativo : string = this.cabeceraF[0]['NDCCTC'];
@@ -309,4 +320,11 @@ TCMTRF:array[0]['TCMTRF']
 
     }
 
+    retornarPrecioUnitario( index : number, cantidad : number ){
+      if ( cantidad != 1 ){
+          return this.DcabeceraF[index]?.ITRCTC
+        }else{
+          return this.DcabeceraF[index]?.IVLDCS
+        }
+  }
 }

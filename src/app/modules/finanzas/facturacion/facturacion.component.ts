@@ -18,6 +18,7 @@ import { ModalComponent } from './modal/modal.component';
 export class FacturacionComponent implements OnInit {
   public dolares = [];
   public parametros = [];
+  public parametrosCai = [];
   public fecha = new Date()
   public espaciosBlancos = [];
   public cabeceraF  : cabeceraFactura[] = [];
@@ -29,6 +30,9 @@ export class FacturacionComponent implements OnInit {
   public Env      = 'RH';
   public permitido : boolean = false;
   public sede : number = 1;
+  public dia : string;
+  public mes : string;
+  public anio : string;
 
   public obs : string = "SERVICIO TRAMITE ADUANAL, BL NO MEDUX5035795, FACTURA NO:MINB4944 CONTENEDORES: MEDU9423500, FFAU3016235, MSMU4209438, MSMU4722250 MSMU8235780, CAIU4870715,CAIU75744086, MSMU4715760"
 
@@ -110,8 +114,8 @@ export class FacturacionComponent implements OnInit {
   this.facturacionS.post(url,params).subscribe(
     (res:DataApi | any )=>{
         if( !res?.hasError ){
-            this.parametros = res.data.Table0;
-            // console.log( this.parametros )
+            this.parametros    = res.data.Table0;
+            this.parametrosCai = res.data.Table1;
         }
     }
   )
@@ -138,7 +142,11 @@ export class FacturacionComponent implements OnInit {
   this.facturacionS.As400( params ).subscribe(
     (res:any)=>{
       // console.log( res )
-      this.cabeceraF = res
+      this.cabeceraF = res;
+      let fecha : string = String(this.cabeceraF[0]?.FDCCTC);
+      this.dia  =  fecha.substring(6,8);
+      this.mes  =  fecha.substring(4,6);
+      this.anio =  fecha.substring(0,4);
       this.loading1 = true;
     }
   )
@@ -183,6 +191,7 @@ export class FacturacionComponent implements OnInit {
         this.espaciosBlancos.push(j)
     }
     this.DcabeceraF =  this.descomponerArray(this.DcabeceraF);
+   
     this.loading2 = true;
       }
     }
@@ -308,4 +317,12 @@ TCMTRF:array[0]['TCMTRF']
             return arrayC;
 
     }
+
+  retornarPrecioUnitario( index : number, cantidad : number ){
+      if ( cantidad != 1 ){
+          return this.DcabeceraF[index]?.ITRCTC
+        }else{
+          return this.DcabeceraF[index]?.IVLDCS
+        }
+  }
 }
