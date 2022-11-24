@@ -11,9 +11,7 @@ import { ToastServiceLocal } from 'src/app/services/toast.service';
 })
 export class ModulosComponent implements OnInit {
   public modulos     : modulos[]  = [];
-
   public subs : Subscription;
-
 
   constructor( public auth : AuthService, public toas: ToastServiceLocal) {
    }

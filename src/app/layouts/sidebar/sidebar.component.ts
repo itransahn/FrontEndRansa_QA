@@ -22,18 +22,17 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   public menu : menushijos[] = [];
 
-  
   constructor( public auth_ : AuthService, private ruta: ActivatedRoute, public sidebarService : SidebarFacadeService,
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher, private seguridad : SeguridadService , private auth : AuthService) {
       this.mobileQuery = media.matchMedia('(min-width: 768px)');
-      this._mobileQueryListener = () => changeDetectorRef.detectChanges();
-      this.mobileQuery.addListener(this._mobileQueryListener);
+      // this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+      // this.mobileQuery.addListener(this._mobileQueryListener);
    }
 
-  ngOnInit(): void {
+  ngOnInit(){
     this.cargarMenus();
-    this.sidebarService.CargarMenus();  
+    // this.sidebarService.CargarMenus();  
     this.subscrption = this.seguridad.refresh$.subscribe(
       res=>{
         this.cargarMenus()
