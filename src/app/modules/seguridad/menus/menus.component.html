@@ -47,7 +47,10 @@
         <div mat-subheader *ngIf="padre?.hijos.length > 0"> Menus Hijos </div>
         <mat-list-item *ngFor="let hijo of padre?.hijos" (click)="menuHijo(hijos, hijo?.menuHijo, hijo , padre)" >
           <!-- <mat-icon mat-list-icon > {{ hijo?.icon}}</mat-icon> -->
-          <i class="{{ hijo?.icon }}" ></i>
+          <!-- <i class="{{ hijo?.icon }}" ></i> -->
+          <mat-icon class="icon text-center">
+            {{ hijo?.icon }}
+          </mat-icon>
           <div mat-line>{{hijo?.menuHijo}}</div>
         </mat-list-item>
         <mat-divider></mat-divider>
@@ -88,3 +91,5 @@
     </a>
   </mat-nav-list>
   </ng-template>
+
+

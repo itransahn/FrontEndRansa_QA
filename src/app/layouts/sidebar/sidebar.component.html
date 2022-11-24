@@ -29,8 +29,11 @@
                                 <mat-list-item (click)="redireccionarHijos(menuitem?.url, menuitem)" style="width: 100% !important; ">
                              
                                 <div mat-line class="textSide " >
-                                    <i class="{{menuitem.icon}} icon text-center" ></i>
-                                    {{menuitem.menuHijo }} </div>
+                                    <mat-icon class="icon text-center"> {{ menuitem?.icon }} </mat-icon>
+                                    <!-- <i class="{{menuitem.icon}} icon text-center" ></i>
+                                    {{menuitem.menuHijo }} -->
+                                    {{menuitem?.menuHijo }} 
+                                 </div>
                                 </mat-list-item>
 
                              </ng-container>
