@@ -9,7 +9,7 @@
         </div>
         <div class="col-md-12 container" >
             <mat-form-field appearance="legacy">
-                <mat-label> Sede </mat-label>
+                <mat-label> Empresa </mat-label>
                 <mat-select style="color: #006F1D !important;" formControlName="sede" (selectionChange)="cargarParametros()" > 
                     <mat-option> - </mat-option> 
                     <mat-option *ngFor="let sed of sedes" [value]="sed?.idSede" >

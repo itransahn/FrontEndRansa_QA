@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { CaiComponent } from './facturacion/cai/cai.component';
 import { FacturaAHComponent } from './facturacion/factura-ah/factura-ah.component';
 import { FacturacionComponent } from './facturacion/facturacion.component';
+import { FacturasClienteComponent } from './facturacion/facturas-cliente/facturas-cliente.component';
 import { IntemedioComponent } from './facturacion/intemedio/intemedio.component';
 import { ParametrosComponent } from './parametros/parametros.component';
 
@@ -27,6 +28,10 @@ const routes: Routes = [
  {
   path      : 'cai',
   component : CaiComponent
+ },
+ {
+  path      : 'facturas',
+  component : FacturasClienteComponent
  }
 //  /finanzas/facturacion/0/0
 

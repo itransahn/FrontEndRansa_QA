@@ -1,0 +1,99 @@
+<mat-card class="cardPersonalizada">
+    <form [formGroup]="menuForm" #f="ngForm" >
+        <div class="row">
+            <div class="col-md-6 ">
+                <img src="../../../../../assets/images/logoRansa.ico" alt="">
+            </div>
+            <div class="col-md-6 ">
+                <h3 class="h4"> Fácturas Cliente </h3>
+            </div>
+
+            <div class="col-md-6">
+                <mat-form-field  appearance="legacy">
+                    <mat-label> Código Cliente </mat-label>
+                    <input matInput placeholder="Código de Cliente" mask="999999" formControlName ="cliente">
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-6">
+                <mat-form-field  appearance="legacy">
+                    <mat-label> Desde </mat-label>
+                    <input matInput placeholder="YYYYMMDD" mask="99999999" formControlName ="desde">
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-6">
+                <mat-form-field  appearance="legacy">
+                    <mat-label> Hasta </mat-label>
+                    <input matInput placeholder="YYYYMMDD" mask="99999999" formControlName ="hasta">
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-6 container" >
+                <mat-form-field appearance="legacy">
+                    <mat-label> Empresa </mat-label>
+                    <mat-select style="color: #006F1D !important;" formControlName="sede" > 
+                        <mat-option> - </mat-option> 
+                        <mat-option *ngFor="let sed of sedes" [value]="sed?.idSede" >
+                            {{  sed?.Sede }}
+                        </mat-option> 
+                      </mat-select> 
+                  </mat-form-field>
+            </div>
+
+            <div class="container">
+                <button class="buttonPrincipal" mat-raised-button type="submit" [disabled]="f.invalid" (click)="cargarFacturas()"> Cargar </button>
+            </div>
+        </div>
+    </form>
+    
+    </mat-card>
+    
+    
+    <mat-card class="cardPersonalizada mt-4" *ngIf="loading && facturas.length > 0">
+        <div class="row ">
+            <div class="col-md-12 container">
+                <h4> {{ facturas[0]?.TCMPCL }} </h4>
+            </div>
+            <div class="col-md-12 container">
+                <h4> {{ facturas[0]?.TDRCOR }} </h4>
+            </div>
+        </div>
+        
+        <div class="table-responsive !important">
+            <table>
+                <!-- <caption>Statement Summary</caption> -->
+                <thead>
+                  <tr>
+                    <th scope="col">Fecha  de factura </th>
+                    <th scope="col">Número de factura </th>
+                    <th scope="col">Impuesto</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let fac of facturas  | slice: desde: hasta " class="trHover">
+                    <td data-label="Fecha  de factura"> {{ retornarFecha(fac?.FDCCTC) }}</td>
+                    <td data-label="Número de factura"> {{ retornarFactura(fac?.NDCCTC)     }}</td>
+                    <td data-label="Impuesto"> {{ fac?.IVLIGS | currency:'Lps' }}</td>
+                    <td data-label="Total">    {{ fac?.ITTFCS | currency:'Lps' }}</td>
+              
+                    <td data-label="Acciones">
+                    <div class="text-center">
+                   <button mat-mini-fab class="buttonSecundary" (click)="redireccionamiento(retornarFactura(fac?.NDCCTC), facturas[0]?.TCMPCL )">
+                       <mat-icon>visibility</mat-icon>
+                   </button>
+                 
+                    </div>
+    
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              
+           </div>
+           <mat-paginator [length]="facturas.length" [pageSize]="pageSize " (page)="next($event)">
+        </mat-paginator>
+    </mat-card>
+    

@@ -21,7 +21,7 @@ export class ParametrosComponent implements OnInit {
   public sedes  = [
   {
     idSede : 1,
-    Sede   : 'Sauce'
+    Sede   : 'Ransa'
   },
   {
     idSede : 2,
