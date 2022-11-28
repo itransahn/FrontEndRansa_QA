@@ -43,7 +43,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatExpansionModule} from '@angular/material/expansion';
 // Radio Button
 import {MatRadioModule} from '@angular/material/radio';
-
+//Check Box
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import {MatRadioModule} from '@angular/material/radio';
     MatTooltipModule,
     MatToolbarModule,
     MatExpansionModule,
-    MatRadioModule
+    MatRadioModule,
+    MatCheckboxModule
   ],
   exports : [
     MatButtonModule,
@@ -94,7 +96,8 @@ import {MatRadioModule} from '@angular/material/radio';
     MatTooltipModule,
     MatToolbarModule,
     MatExpansionModule,
-    MatRadioModule
+    MatRadioModule,
+    MatCheckboxModule
   ]
 })
 export class AngularMaterialModule { }

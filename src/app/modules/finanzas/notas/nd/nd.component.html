@@ -1,0 +1,183 @@
+<div class="container">
+    <mat-card class="cardPersonalizada">
+        <div class="row">
+            <div class="col-md-6">
+                <img src="../../../../assets/images/logoRansa.ico" alt="">
+                <p>
+                 <!-- {{parametros[0]['nombreCompleto']}}
+                 {{parametros[0]['direccion1']}}: {{ parametros[0]['direccion2']}}
+                 Municipio:{{ parametros[0]['municipio']}}, Departamento: {{ parametros[0]['Departamento']}} <br> 
+                 Tel: {{parametros[0]['Telfijo']}}, {{parametros[0]['TelCel']}}  <br>
+                <span *ngIf="parametros[0]['correo']"> Correo: {{parametros[0]['correo']}}  </span> -->
+                OPERADORES LOGISTICOS RANSA, S.A DE CV <br>
+                Residencial el Sauce, Calle: Anillo Periferico Sur, Km. 12 Casa N°: S/N <br>
+                Municipio: Distrito Central, Departamento: Francisco Morazan <br>
+                Tel: (504) 2291-5434, 3290-9348 <br>
+                R.T.N: 050119006507142 <br>
+                ransa@net.com
+                </p>
+            </div>
+    
+            <div class="col-md-6 mt-4 container">
+                <p>
+                <span class="container">NOTA DE DEBITO </span>
+                <span class="container" style="text-align:left  !important; color:#FE9600 !important; font-size: 1.2em !important;">
+                        <!-- 000-001-01-{{retornarCorrelativo()}} -->
+                        000-001-01-000151            
+                </span>
+                <!-- CAI: {{ parametrosCai[0]['CAI']}} <br>
+                <span> RANGO AUTORIZADO </span> <br>
+                {{ parametrosCai[0]['desde'] }} AL {{ parametrosCai[0]['hasta'] }} <br>
+                FECHA LIMITE DE EMISION: {{ parametrosCai[0]['fechaLimite'] | date: 'dd/MM/yyyy'}}  -->
+                <span class="container">   C.A.I: A5DA59-624F05-CC4A8F-E8257C-05FF15-14 </span>
+                <span class="container"> RANGO AUTORIZADO </span>
+                <!-- {{ parametrosCai[0]['desde'] }} AL {{ parametrosCai[0]['hasta'] }} <br> -->
+                <span  class="container"> 000-001-07-00000151 - 000-001-07-00000175 </span> 
+                 <span class="container">Fecha Limite de Emisión : 27/10/2023</span>
+                </p>
+            </div>
+
+            <!-- Detalle de la generación  -->
+            <div>
+                <div class="row">
+                    <div class="col-md-6 containB" style="width: 80% !important;">
+                    <p>
+                    <!-- <span style="text-align: left !important;" class="leftC"> CLIENTE: {{  cabeceraF[0]['TCMPCL'] }} </span> <br>
+                    <span style="text-align: left !important;"> DIRECCION: {{cabeceraF[0]['TDRCOR'] }} </span> <br> -->
+                    <!-- <span style="text-align: left !important;"> TELEFONO : 2290-0200</span> -->
+                    Sr.(a): VITAPRO HONDURAS, S.A. DE C.F <br>
+                    R.T.N : 08019016822881 <br>
+                    CAI del Comprobante:    <br>
+                    NO. Correlativo Comprobante: <br>
+                    Fecha de emisión comprobante:  <br>
+
+                    </p>
+                    </div>
+                <div class="col-md-6 center containB container">
+                <!-- <p> RTN: 0{{ cabeceraF[0]['NRUC'] }} </p> -->
+                <p > Nota de Debito por L. <span style="font-weight: bold !important;"> 189,496.98 </span> </p>
+                </div>
+                </div>
+            </div>
+            <!-- Detalle de la generación  -->
+
+            <!-- Comentario de la nota de débito -->
+            <div class="col-md-12">
+                <h4 class="container"> En esta fecha hemos registrado en su cuenta el valor que indica la presente NOTA DE DEBITO, por el siguiente motivo:  </h4>
+            </div>
+
+     <div class="tabla">
+                <div class="table-responsive !important" >
+                    <table>
+                        <thead>
+                          <tr>
+                            <th class="contenidoF" scope="col">No.</th>
+                            <th class="contenidoF" scope="col"colspan="2" >Descripcion</th>
+                            <th class="contenidoF" scope="col">Sub Total</th>
+                            <th class="contenidoF" scope="col">Impuesto</th>
+                            <th class="contenidoF" scope="col">Monto Total</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let item of DcabeceraF; let i = index">
+                            <td data-label="No." class="contenidoF"> {{ i + 1  }} </td>
+                            <td data-label="Descripcion" colspan="2" class="contenidoF"> {{ item?.descripcion }} </td>
+                            <td data-label="Sub Total" class="contenidoF center">{{ item?.Subtotal | number : '1.2-2' }}</td>
+                            <td data-label="Impuesto" class="contenidoF center">{{ 0    | number : '1.2-2' }}</td>
+                            <td data-label="Monto Total" class="contenidoF center"> {{ item?.Subtotal | number : '1.2-2' }} </td>
+                          </tr>
+    
+                          <!-- <tr>
+                            <td data-label="CANTIDAD"> 01</td>
+                            <td data-label="DESCRIPCION">FLETE</td>
+                            <td data-label="PRECIO UNITARIO">{{ 4047 | currency : 'Lps' }}</td>
+                            <td data-label="DESC. Y REB OTORGADA">{{ 0    | currency : 'Lps' }}</td>
+                            <td data-label="IMPUESTO"> G </td>
+                            <td data-label="TOTAL">{{ 4047    | currency  : 'Lps'}}</td>
+                          </tr> -->
+                          
+                            <!-- <tr style=" border-collapse: collapse;"  *ngFor="let item of espaciosBlancos "> 
+                                <td class="espacioB"  colspan="6"></td>
+                            </tr> -->
+                            <tr style=" border-collapse: collapse;" > 
+                                <td class="espacioB"  colspan="6"></td>
+                            </tr>
+                            <tr style=" border-collapse: collapse;"> 
+                                <td style="text-align:left !important; font-size: 0.9em !important; " class="espacioB" colspan="3" >
+                                {{ leyendaInterna }}
+                                </td>
+                            </tr>
+                            
+                            <tr style=" border-collapse: collapse;"> 
+                                <td style="text-align:left !important; font-size: 0.9em !important; " class="espacioB" colspan="6">
+                                    CIENTO OCHENTA Y NUEVE MIL CUATROCIENTOS NOVENTA Y SEIS CON NOVENTA Y OCHO CENTAVOS
+                                </td>
+                            </tr>
+                        
+                            <tr style=" border-collapse: collapse;"> 
+                                <td style="font-size: 0.9em !important; " class="espacioB rigth" colspan="3">
+                                    TOTALES
+                                </td>
+                                <td style="font-size: 0.9em !important; " class="espacioB center">
+                                        {{ DcabeceraF[0]['Subtotal'] | number :'1.2-2' }}
+                                </td>
+                                <td style="font-size: 0.9em !important; " class="espacioB center">
+                                        {{ 0 | number :'1.2-2' }}
+                                </td>
+                                <td style="font-size: 0.9em !important; " class="espacioB center">
+                                    {{ DcabeceraF[0]['MTotal'] | number :'1.2-2' }}
+                            </td>
+                            </tr>
+
+
+                        </tbody>
+                   
+                      </table>
+                   </div>
+            </div>
+     
+  <!-- Motivo de Nota de Débito -->
+<div class="col-md-12 container">
+    <p>
+        Motivo de Emisión de la Nota de Débito: 
+    </p>
+    <section class="example-section ml-4">
+        <mat-checkbox class="example-margin ml-2" [disabled]="disabled" [(ngModel)]="anulacion">Anulación  </mat-checkbox>
+        <mat-checkbox class="example-margin ml-2" [disabled]="disabled" [(ngModel)]="devolcion">Devolución </mat-checkbox>
+        <mat-checkbox class="example-margin ml-2" [disabled]="disabled" [(ngModel)]="descuento">Descuento  </mat-checkbox>
+      </section>
+</div>
+<div class="col-md-12">
+<h3 *ngIf="DcabeceraF[0]['descripcion']">
+    Otros especifique: <span style="text-decoration: underline; margin-left: 1px;"> {{  DcabeceraF[0]['descripcion'] }} </span>
+</h3>
+<h3 *ngIf="!DcabeceraF[0]['descripcion']">
+    Otros especifique:____________________________________________________________________________
+</h3>
+</div>
+
+<div class="col-md-6">
+ <p>
+    __________________________________________ <br>
+            <span style="margin-left: 20%;">    Elaborado por:  </span>
+ </p>
+</div>
+
+<div class="col-md-6">
+        Recibí Conforme: ______________________________________________ <br>
+        Identidad: ____________________________________________________ <br>
+        Firma: _______________________________________________________     
+</div>
+
+<div class="col-md-12 container mt-4">
+    <label class="center"> ORIGINAL : CLIENTE </label>
+</div>
+<!-- <div class="col-md-4 container footL">
+    <label class="center"> DUPLICADO: TRIBUTARIO EMISOR</label>
+</div> -->
+<!-- <div class="col-md-4 container footL">
+    <label class="center"> TRIPLICADO: ARCHIVO</label>
+</div> -->
+        </div>
+    </mat-card>
+</div>

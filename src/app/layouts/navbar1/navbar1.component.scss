@@ -67,8 +67,18 @@ button.mat-menu-mat-icon{
         }
 }   
 
+/* Pantallas de 888px*/
+@media only screen and ( max-width : 888px){
+    .imgR{
+        display: none !important;
+    }
+}
+
 /* pantallas de 450px*/
 @media only screen and (max-width: 500px) {
+    .imgR{
+        display: none !important;
+    }
     .avatar{
         width :30px;
         height:30px;
@@ -95,6 +105,9 @@ button.mat-menu-mat-icon{
 }
 /* pantallas de 380px*/
 @media only screen and (max-width: 380px) {
+    .imgR{
+        display: none !important;
+    }
     .avatar{
         width :30px;
         height:30px;
@@ -112,5 +125,4 @@ button.mat-menu-mat-icon{
         display:  none ;
             }
 }
-
 

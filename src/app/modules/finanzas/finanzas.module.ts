@@ -11,6 +11,8 @@ import { CaiComponent } from './facturacion/cai/cai.component';
 import { ModalCaiComponent } from './facturacion/cai/modal-cai/modal-cai.component';
 import { FacturaAHComponent } from './facturacion/factura-ah/factura-ah.component';
 import { FacturasClienteComponent } from './facturacion/facturas-cliente/facturas-cliente.component';
+import { NdComponent } from './notas/nd/nd.component';
+import { NcComponent } from './notas/nc/nc.component';
 
 
 
@@ -23,7 +25,9 @@ import { FacturasClienteComponent } from './facturacion/facturas-cliente/factura
     CaiComponent,
     ModalCaiComponent,
     FacturaAHComponent,
-    FacturasClienteComponent
+    FacturasClienteComponent,
+    NdComponent,
+    NcComponent
   ],
   imports: [
     CommonModule,

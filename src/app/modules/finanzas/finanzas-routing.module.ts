@@ -5,6 +5,8 @@ import { FacturaAHComponent } from './facturacion/factura-ah/factura-ah.componen
 import { FacturacionComponent } from './facturacion/facturacion.component';
 import { FacturasClienteComponent } from './facturacion/facturas-cliente/facturas-cliente.component';
 import { IntemedioComponent } from './facturacion/intemedio/intemedio.component';
+import { NcComponent } from './notas/nc/nc.component';
+import { NdComponent } from './notas/nd/nd.component';
 import { ParametrosComponent } from './parametros/parametros.component';
 
 
@@ -32,8 +34,16 @@ const routes: Routes = [
  {
   path      : 'facturas',
   component : FacturasClienteComponent
+ },
+ {
+  path      : 'notaDebito',
+  component : NdComponent
+ },
+ {
+  path      : 'notaCredito',
+  component : NcComponent
  }
-//  /finanzas/facturacion/0/0
+
 
 ];
 
