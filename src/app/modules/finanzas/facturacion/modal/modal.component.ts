@@ -47,7 +47,6 @@ redireccionar(){
     this.auth.redirecTo(`/ransa/finanzas/facturacionAh/${this.menuForm.value.cliente}/${this.menuForm.value.documento}`)
     this.dialogRef.close()
   }
-
 }
 
 }

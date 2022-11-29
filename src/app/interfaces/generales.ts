@@ -169,7 +169,6 @@ interface menus{
 
 
 interface catalogo{
-  
         modulos :  {
                id_modulo ?: number,
                modulo    ?: string,

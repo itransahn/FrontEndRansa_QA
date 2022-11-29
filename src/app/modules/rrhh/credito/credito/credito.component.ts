@@ -58,9 +58,9 @@ export class CreditoComponent implements OnInit {
 
   incializarForm(){
     this.creditoForm   = new FormGroup({
-      codigoEmpleado : new FormControl( '', [ Validators.required] ),
-      nombreEmpleado : new FormControl( '', [ Validators.required] ),
-      monto          : new FormControl( '', [ Validators.required] ),
+      codigoEmpleado : new FormControl( { value :'', disabled :false }, [ Validators.required] ),
+      nombreEmpleado : new FormControl( { value :'', disabled :false }, [ Validators.required] ),
+      monto          : new FormControl( { value :'', disabled :false }, [ Validators.required] ),
     })
 
     this.filtro = new FormGroup({
@@ -92,6 +92,7 @@ onKeypressEvent(event: any){
     this.pageIndex = event.pageIndex;
   }
   
+
 CargarUsuario( codigo?:any ){
   let url = 'rrhh/validarUsuario';
   let params = {
@@ -122,7 +123,6 @@ cargarCreditos(){
     }
   )
 }
-
 
 ingresarCredito( ){
   this.sweel.mensajeConConfirmacion(`¿Seguro del crédito al empleado ${ this.creditoForm.value.nombreEmpleado } ?`, `Crédito Cafetería`,"warning").then(

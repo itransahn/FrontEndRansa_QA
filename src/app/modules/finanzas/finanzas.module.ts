@@ -13,6 +13,8 @@ import { FacturaAHComponent } from './facturacion/factura-ah/factura-ah.componen
 import { FacturasClienteComponent } from './facturacion/facturas-cliente/facturas-cliente.component';
 import { NdComponent } from './notas/nd/nd.component';
 import { NcComponent } from './notas/nc/nc.component';
+import { IntermediarioNComponent } from './notas/intermediario-n/intermediario-n.component';
+import { ModalNComponent } from './notas/intermediarioN/modal-n/modal-n.component';
 
 
 
@@ -27,7 +29,9 @@ import { NcComponent } from './notas/nc/nc.component';
     FacturaAHComponent,
     FacturasClienteComponent,
     NdComponent,
-    NcComponent
+    NcComponent,
+    IntermediarioNComponent,
+    ModalNComponent
   ],
   imports: [
     CommonModule,

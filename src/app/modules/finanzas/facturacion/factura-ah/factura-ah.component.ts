@@ -15,6 +15,7 @@ import { ModalComponent } from '../modal/modal.component';
   styleUrls: ['./factura-ah.component.scss']
 })
 export class FacturaAHComponent implements OnInit {
+  public anioActual = new Date().getFullYear()
   public dolares = [];
   public parametros = [];
   public parametrosCai = [];
@@ -130,7 +131,7 @@ export class FacturaAHComponent implements OnInit {
       Documento : Number(this.documento)
     }
     let params = {
-     "query": `CALL DC@HONLIB.SP_AWS_LISTA_FACTURA('${paramsE['Empresa']}', 1,  ${paramsE['Cliente']},${paramsE['Documento']},20210101, 20221231)`,
+     "query": `CALL DC@HONLIB.SP_AWS_LISTA_FACTURA('${paramsE['Empresa']}', 1,  ${paramsE['Cliente']},${paramsE['Documento']},${this.anioActual}0101, ${this.anioActual}1231)`,
       "env": "PRD"
     }
     // let params = {
