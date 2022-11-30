@@ -7,10 +7,10 @@
             <div class="col-md-6 ">
                 <h3 class="h4"> CAI </h3>
             </div>
-            <div class="col-md-8 container" >
+            <div class="col-md-4" >
                 <mat-form-field appearance="legacy">
                     <mat-label> Empresa </mat-label>
-                    <mat-select style="color: #006F1D !important;" formControlName="sede" (selectionChange)="cargarCai()" > 
+                    <mat-select style="color: #006F1D !important;" formControlName="sede" > 
                         <mat-option> - </mat-option> 
                         <mat-option *ngFor="let sed of sedes" [value]="sed?.idSede" >
                             {{  sed?.Sede }}
@@ -18,8 +18,19 @@
                       </mat-select> 
                   </mat-form-field>
             </div>
+            <div class="col-md-4" >
+                <mat-form-field appearance="legacy">
+                    <mat-label> Tipo Documento </mat-label>
+                    <mat-select style="color: #006F1D !important;" formControlName="documento" (selectionChange)="cargarCai()" > 
+                        <mat-option> - </mat-option> 
+                        <mat-option *ngFor="let sed of tipoCai" [value]="sed?.id" >
+                            {{  sed?.tipo }}
+                        </mat-option> 
+                      </mat-select> 
+                  </mat-form-field>
+            </div>
             <div class="col-md-4">
-                <div class="text-right">
+                <div class="text-center">
                     <button mat-raised-button class="buttonPrincipal" (click)="modal()" [disabled]="!auth.Actualizacion()">
                         <mat-icon>
                             add

@@ -40,6 +40,20 @@ export class ModalCaiComponent implements OnInit {
   public menuForm : FormGroup;
   public maskCai = '999999-999999-999999-A0999A-999999-99';
   datemask = [/\d/, /\d/, /\d/,/\d/,/\d/,/\d/, '-', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/];
+  public tipoCai  = [
+    {
+      id : 1,
+      tipo   : 'Factura'
+    },
+    {
+      id : 2,
+      tipo   : 'ND'
+    },
+    {
+      id : 3,
+      tipo   : 'NC'
+    }]
+
   public sedes  = [
     {
       idSede : 1,
@@ -69,6 +83,7 @@ export class ModalCaiComponent implements OnInit {
       hasta : new FormControl ('' , [ Validators.required,]),
       fecha : new FormControl ('' , [ Validators.required,]),
       sede  : new FormControl ('' , [ Validators.required,]),
+      documento : new FormControl ('' , [ Validators.required,]),
     })
 }
 
@@ -84,7 +99,8 @@ desde   :  this.menuForm.value?.desde,
 hasta   :  this.menuForm.value?.hasta,
 fechalimite   :  this.menuForm.value?.fecha,
 sede    :  this.menuForm.value?.sede,
-usuario : this.auth.dataUsuario['id_usuario']
+usuario : this.auth.dataUsuario['id_usuario'],
+tipo    : this.menuForm.value?.documento
 }
   this.sweel.mensajeConConfirmacion(`¿Seguro de ingresar CAI ${ params['cai'] }?`, `Nuevo CAI`,"warning").then(
     res=>{

@@ -51,6 +51,20 @@ export class CaiComponent implements OnInit {
     Sede   : 'Almahsa'
   }]
 
+  public tipoCai  = [
+    {
+      id : 1,
+      tipo   : 'Factura'
+    },
+    {
+      id : 2,
+      tipo   : 'ND'
+    },
+    {
+      id : 3,
+      tipo   : 'NC'
+    }]
+
   public maskCai = '9AAA-A999'
   constructor(
     public auth      : AuthService,
@@ -68,6 +82,7 @@ export class CaiComponent implements OnInit {
   public formMenu(){
     this.menuForm = new FormGroup({
       sede : new FormControl ('' , [ Validators.required,]),
+      documento : new FormControl ('' , [ Validators.required,]),
     })
 }
 
@@ -101,7 +116,8 @@ catalogo(){
 cargarCai(){
   let url = 'finanzas/caiActual';
   let params = {
-    idSede : this.menuForm.value?.sede
+    idSede : this.menuForm.value?.sede,
+    tipo   : this.menuForm.value?.documento
   }
   this.finanzasS.post( url, params ).subscribe(
     res=>{
@@ -124,7 +140,8 @@ desde   :  this.menuFormP.value.desde,
 hasta   :  this.menuFormP.value.hasta,
 fechalimite   :  this.menuFormP.value.fechaLimite,
 sede    :  this.menuForm.value.sede,
-usuario : this.auth.dataUsuario['id_usuario']
+usuario : this.auth.dataUsuario['id_usuario'],
+tipo    : 3
 }
 console.log( this.menuFormP.value.fechaLimite)
   this.sweel.mensajeConConfirmacion(`¿Seguro de Actualizar CAI ${ this.parametros['CAI'] }?`, `Actualización CAI`,"warning").then(

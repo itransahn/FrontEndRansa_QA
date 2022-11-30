@@ -34,9 +34,50 @@ interface detalleCabecera{
     CCNCSD ?: string,
 }
 
+const retornarMes = ( mes : any ) =>{
+    if ( mes == '01' ) {
+        return 'DE ENERO DEL'
+    }
+    if ( mes == '02' ) {
+        return 'DE FEBRERO DEL'
+    }
+    if ( mes == '03' ) {
+        return 'DE MARZO DEL'
+    }
+    if ( mes == '04' ) {
+        return 'DE ABRIL DEL'
+    }
+    if ( mes == '05' ) {
+        return 'DE MAYO DEL'
+    }
+    if ( mes == '06' ) {
+        return 'DE JUNIO DEL'
+    }
+    if ( mes == '07' ) {
+        return 'DE JULIO DEL'
+    }
+    if ( mes == '08' ) {
+        return 'DE AGOSTO DEL'
+    }
+    if ( mes == '09' ) {
+        return 'DE SEPTIEMBRE DEL'
+    }
+    if ( mes == '10' ) {
+        return 'DE OCTUBRE DEL'
+    }
+    if ( mes == '11' ) {
+        return 'DE NOVIEMBRE DEL'
+    }
+    if ( mes == '12' ) {
+        return 'DE DICIEMBRE DEL'
+    }
+    return ''
+}
+
 
 
 export {
     cabeceraFactura,
-    detalleCabecera
+    detalleCabecera,
+    retornarMes
 }

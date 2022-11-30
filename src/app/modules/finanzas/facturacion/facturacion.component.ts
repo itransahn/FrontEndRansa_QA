@@ -71,7 +71,8 @@ export class FacturacionComponent implements OnInit {
     let url = 'finanzas/validarNum'
     let params = {
       correlativo : this.ruta.snapshot.params['documento'],
-      sede        : this.sede
+      sede        : this.sede,
+      tipo        : 1
     }
     this.facturacionS.post( url, params ).subscribe(
       (res:DataApi)=>{
@@ -110,7 +111,8 @@ export class FacturacionComponent implements OnInit {
   cargarParametrosF(){
     let url='seguridad/parametrosF';
     let params = {
-      sede : this.sede
+      sede : this.sede,
+      tipo : 1
     }
   this.facturacionS.post(url,params).subscribe(
     (res:DataApi | any )=>{
