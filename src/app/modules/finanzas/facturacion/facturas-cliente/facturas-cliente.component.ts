@@ -18,6 +18,7 @@ export class FacturasClienteComponent implements OnInit {
   public desde = 0;
   public hasta = 50;
   public loading = false;
+  public empresa : string;
   nextPageLabel     = 'Página Siguiente';
   previousPageLabel = 'Página Anterior';
   public pageSize = 50;
@@ -32,6 +33,20 @@ export class FacturasClienteComponent implements OnInit {
       Sede : 'Almahsa'
     }
   ]
+  public tipoCai  = [
+    {
+      id : 1,
+      tipo   : 'Factura'
+    },
+    {
+      id : 2,
+      tipo   : 'ND'
+    },
+    {
+      id : 3,
+      tipo   : 'NC'
+    }]
+
   constructor(
     private paginator : MatPaginatorIntl,
     public facturacionS : FacturacionService,
@@ -50,15 +65,14 @@ export class FacturasClienteComponent implements OnInit {
     this.menuForm = new FormGroup({
       sede    : new FormControl ('' , [ Validators.required,]),
       cliente : new FormControl ('' , [ Validators.required,]),
+      documento : new FormControl ('' , [ Validators.required,]),
       desde   : new FormControl ('' , [ Validators.required,]),
       hasta   : new FormControl ('' , [ Validators.required,]),
     })
 }
 
-
      //Paginación de la tabla
      next(event: PageEvent) {
-
       if (event.pageIndex === this.pageIndex + 1) {
         this.desde = this.desde + this.pageSize;
         this.hasta = this.hasta + this.pageSize;
@@ -71,22 +85,21 @@ export class FacturasClienteComponent implements OnInit {
     }
 
     cargarFacturas(){
-      let empresa : string;
       if ( this.menuForm.value.sede == 1 ){
-          empresa = 'RH'
+          this.empresa = 'RH'
       }else{
-        empresa = 'AH'
+        this.empresa = 'AH'
       }
 
       let paramsE = {
-        Empresa   : empresa,
+        Empresa   : this.empresa,
         Cliente   : this.menuForm.value.cliente,
         desde     : this.menuForm.value.desde,
         hasta     : this.menuForm.value.hasta,
 
       }
       let params = {
-       "query": `CALL DC@HONLIB.SP_AWS_LISTA_FACTURA('${paramsE['Empresa']}', 1,  ${paramsE['Cliente']},0,${paramsE['desde']}, ${paramsE['hasta']})`,
+       "query": `CALL DC@HONLIB.SP_AWS_LISTA_FACTURA('${paramsE['Empresa']}', ${this.menuForm.value.documento},  ${paramsE['Cliente']}, 0 , ${paramsE['desde']}, ${paramsE['hasta']})`,
         "env": "PRD"
       }
       // let params = {
@@ -120,19 +133,45 @@ export class FacturasClienteComponent implements OnInit {
     }
     }
 
-    redireccionamiento( factura, cliente ){
-this.sweet.mensajeConConfirmacion('Visualización de factura',`Seguro de visualizar la Factura ${factura} del cliente ${cliente}`,"question").then(
-  res=>{
-    if ( res ){
-      if ( this.menuForm.value.sede == 1){
-        this.auth.redirecTo(`ransa/finanzas/facturacion/${this.menuForm.value.cliente}/${factura}`)
-      }else{
-        this.auth.redirecTo(`ransa/finanzas/facturacionAh/${this.menuForm.value.cliente}/${factura}`)
-
+    redireccionamiento( documento, cliente ){
+/* FAC */
+if ( this.menuForm.value.documento == 1){
+  this.sweet.mensajeConConfirmacion('Visualización de factura',`Seguro de visualizar la Factura ${documento} del cliente ${cliente}`,"question").then(
+    res=>{
+      if ( res ){
+        if ( this.menuForm.value.sede == 1){
+          this.auth.redirecTo(`ransa/finanzas/facturacion/${this.menuForm.value.cliente}/${documento}`)
+        }else{
+          this.auth.redirecTo(`ransa/finanzas/facturacionAh/${this.menuForm.value.cliente}/${documento}`)
+  
+        }
       }
     }
-  }
-)  
+  ) 
+}
+/* ND */
+if ( this.menuForm.value.documento == 2) {
+  this.sweet.mensajeConConfirmacion('Visualización de Nota de Débito',`Seguro de visualizar la Nota ${documento} del cliente ${cliente}`,"question").then(
+    res=>{
+      if ( res ){
+        this.auth.redirecTo(`/ransa/finanzas/notaDebito/${this.empresa}/${this.menuForm.value.cliente}/${documento}`)
+      }
+    }
+  ) 
+}
+
+/* NC*/
+if( this.menuForm.value.documento == 3){
+  this.sweet.mensajeConConfirmacion('Visualización de Nota de Crédito',`Seguro de visualizar la Nota ${documento} del cliente ${cliente}`,"question").then(
+    res=>{
+      if ( res ){
+        this.auth.redirecTo(`/ransa/finanzas/notaCredito/${this.empresa}/${this.menuForm.value.cliente}/${documento}`)
+      }
+    }
+  ) 
+}
+
+ 
     }
 
 }

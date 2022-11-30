@@ -143,7 +143,6 @@ sede    :  this.menuForm.value.sede,
 usuario : this.auth.dataUsuario['id_usuario'],
 tipo    : 3
 }
-console.log( this.menuFormP.value.fechaLimite)
   this.sweel.mensajeConConfirmacion(`¿Seguro de Actualizar CAI ${ this.parametros['CAI'] }?`, `Actualización CAI`,"warning").then(
     res=>{
       if( res ){
@@ -175,6 +174,5 @@ modal( ){
     disableClose : true
   })
 }
-
 
 }

@@ -1,4 +1,4 @@
-<div class="container" *ngIf="loading && loading1">
+<div class="container" id="original" *ngIf="loading && loading1">
     <mat-card class="cardPersonalizada">
         <div class="row">
             <div class="col-md-6">
@@ -159,6 +159,338 @@
 <!-- <div class="col-md-4 container footL">
     <label class="center"> TRIPLICADO: ARCHIVO</label>
 </div> -->
+        </div>
+    </mat-card>
+</div>
+
+
+<div class="container mt-4" id="segunda" *ngIf="loading && loading1">
+    <mat-card class="cardPersonalizada">
+        <div class="row">
+            <div class="col-md-6">
+                <img src="../../../../assets/images/LOGO_RANSA_BN.png" alt="">
+                <p style="color: black !important;">
+                {{ parametros[0]['nombreCompleto']}} <br>
+                {{ parametros[0]['direccion1']}}, Calle: {{ parametros[0]['direccion2'] }} Casa N°: S/N <br>
+                Municipio: {{ parametros[0]['municipio']}}, Departamento: {{ parametros[0]['Departamento']}} <br>
+                Tel: {{ parametros[0]['Telfijo'] }} <br>
+                <span *ngIf="parametros[0]['TelCel']">     Cel   : {{ parametros[0]['TelCel'] }} <br> </span> 
+                <span *ngIf="parametros[0]['rtnEmpresa']"> R.T.N : {{ parametros[0]['rtnEmpresa'] }} </span> 
+                <span *ngIf="parametros[0]['correo']">     Correo: {{ parametros[0]['correo'] }} </span> <br>
+                </p>
+            </div>
+    
+            <div class="col-md-6 mt-4 container">
+                <p style="color: black !important;">
+                <span class="container">NOTA DE CREDITO </span>
+                <span *ngIf="ruta.snapshot.params['empresa'] == 'RH'" class="container" style="text-align:left  !important; font-size: 1.2em !important;">
+                        <!-- 000-001-01-{{retornarCorrelativo()}} -->
+                        000-001-06-{{retornarCorrelativo()}}            
+                </span>
+                <span *ngIf="ruta.snapshot.params['empresa'] == 'AH'" class="container" style="text-align:left  !important; font-size: 1.2em !important;">
+                    <!-- 000-001-01-{{retornarCorrelativo()}} -->
+                    000-002-06-{{retornarCorrelativo()}}            
+            </span>
+                <span class="container">   C.A.I: {{parametrosCai[0]['CAI']}} </span>
+                <span class="container"> RANGO AUTORIZADO </span>
+                <span  class="container"> {{parametrosCai[0]['desde']}} - {{parametrosCai[0]['hasta']}} </span> 
+                 <span class="container">Fecha Limite de Emisión : {{ parametrosCai[0]['fechaLimite'] | date : 'dd/MM/yyyy' }} </span>
+                </p>
+            </div>
+
+            <!-- Detalle de la generación  -->
+            <div>
+                <div class="row" >
+                    <div class="col-md-6 containB" style="width: 80% !important;" style="border-color: black !important;">
+                    <p>
+                    Sr.(a): {{ cabeceraN[0]['TCMPCL'] }} <br>
+                    R.T.N : {{ cabeceraN[0]['NRUC2']}} <br>
+                    CAI del Comprobante:    <br>
+                    NO. Correlativo Comprobante: <br>
+                    Fecha de emisión comprobante: {{ dia }}  {{ mes }} {{ anio }} <br>
+                    </p>
+                    </div>
+                <div class="col-md-6 center containB container" style="border-color: black !important;">
+                <p > Nota de Débito por L. <span style="font-weight: bold !important;"> {{ (cabeceraN[0]['ITTFCS'] ) | number :'1.2-2' }} </span> </p>
+                </div>
+                </div>
+            </div>
+            <!-- Detalle de la generación  -->
+
+            <!-- Comentario de la nota de débito -->
+            <div class="col-md-12">
+                <h4 class="container" style="color: black !important;"> En esta fecha hemos registrado en su cuenta el valor que indica la presente NOTA DE DEBITO, por el siguiente motivo:  </h4>
+            </div>
+     <div class="tabla" style="border-color: black !important;">
+                <div class="table-responsive !important"  style="color: black !important;">
+                    <table>
+                        <thead>
+                          <tr>
+                            <th class="contenidoF" scope="col">No.</th>
+                            <th class="contenidoF" scope="col"colspan="2" >Descripcion</th>
+                            <th class="contenidoF" scope="col">Sub Total</th>
+                            <th class="contenidoF" scope="col">Impuesto</th>
+                            <th class="contenidoF" scope="col">Monto Total</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let item of DcabeceraN; let i = index">
+                            <td data-label="No." class="contenidoF"> {{ i + 1  }} </td>
+                            <td data-label="Descripcion" colspan="2" class="contenidoF"> {{ item?.TCMTRF }} </td>
+                            <td data-label="Sub Total" class="contenidoF center"> {{ (item?.IVLDCS ) | number : '1.2-2' }}</td>
+                            <td data-label="Impuesto"  class="contenidoF center">  {{  ( cabeceraN[0]['IVLIGS'] )  | number : '1.2-2' }}</td>
+                            <td data-label="Monto Total" class="contenidoF center"> {{ (cabeceraN[0]['ITTFCS'] )  | number : '1.2-2' }} </td>
+                          </tr>
+                          
+                            <!-- <tr style=" border-collapse: collapse;"  *ngFor="let item of espaciosBlancos "> 
+                                <td class="espacioB"  colspan="6"></td>
+                            </tr> -->
+                            <tr style=" border-collapse: collapse;" > 
+                                <td class="espacioB"  colspan="6"></td>
+                            </tr>
+                            <tr style=" border-collapse: collapse;"> 
+                                <td style="text-align:left !important; font-size: 0.9em !important; " class="espacioB" colspan="3" >
+                                {{ leyendaInterna }}
+                                </td>
+                            </tr>
+                            
+                            <tr style=" border-collapse: collapse;"> 
+                                <td style="text-align:left !important; font-size: 0.9em !important; " class="espacioB" colspan="6">
+                                    <!-- CIENTO OCHENTA Y NUEVE MIL CUATROCIENTOS NOVENTA Y SEIS CON NOVENTA Y OCHO CENTAVOS -->
+                                    {{ letras }}
+                                </td>
+                            </tr>
+                        
+                            <tr style=" border-collapse: collapse;"> 
+                                <td style="font-size: 0.9em !important; " class="espacioB rigth" colspan="3">
+                                    TOTALES
+                                </td>
+                                <td style="font-size: 0.9em !important; " class="espacioB center">
+                                        {{ (DcabeceraN[0]['IVLDCS'] ) | number :'1.2-2' }}
+                                </td>
+                                <td style="font-size: 0.9em !important; " class="espacioB center">
+                                        {{ ( cabeceraN[0]['IVLIGS'] )  | number :'1.2-2' }}
+                                </td>
+                                <td style="font-size: 0.9em !important; " class="espacioB center">
+                                    {{ (cabeceraN[0]['ITTFCS'] ) | number :'1.2-2' }}
+                            </td>
+                            </tr>
+
+
+                        </tbody>
+                   
+                      </table>
+                   </div>
+            </div>
+     
+  <!-- Motivo de Nota de Débito -->
+<div class="col-md-12 container">
+    <p class="black">
+        Motivo de Emisión de la Nota de Débito: 
+    </p>
+    <section class="example-section ml-4">
+        <mat-checkbox class="example-margin ml-2" [disabled]="disabled" [(ngModel)]="anulacion">Anulación  </mat-checkbox>
+        <mat-checkbox class="example-margin ml-2" [disabled]="disabled" [(ngModel)]="devolcion">Devolución </mat-checkbox>
+        <mat-checkbox class="example-margin ml-2" [disabled]="disabled" [(ngModel)]="descuento">Descuento  </mat-checkbox>
+      </section>
+</div>
+<div class="col-md-12 black" >
+<h3 *ngIf="DcabeceraN[0]['descripcion']">
+    Otros especifique: <span style="text-decoration: underline; margin-left: 1px;"> {{  DcabeceraF[0]['descripcion'] }} </span>
+</h3>
+<h3 *ngIf="!DcabeceraN[0]['descripcion']">
+    Otros especifique:____________________________________________________________________________
+</h3>
+</div>
+
+<div class="col-md-6 black">
+ <p>
+    __________________________________________ <br>
+            <span style="margin-left: 20%;">    Elaborado por:  </span>
+ </p>
+</div>
+
+<div class="col-md-6 black">
+        Recibí Conforme: ______________________________________________ <br>
+        Identidad: ____________________________________________________ <br>
+        Firma: _______________________________________________________     
+</div>
+
+<!-- <div class="col-md-12 container mt-4">
+    <label class="center"> ORIGINAL : CLIENTE </label>
+</div> -->
+<div class="col-md-4 container black">
+    <label class="center"> DUPLICADO: TRIBUTARIO EMISOR</label>
+</div>
+<!-- <div class="col-md-4 container footL">
+    <label class="center"> TRIPLICADO: ARCHIVO</label>
+</div> -->
+        </div>
+    </mat-card>
+</div>
+
+
+<div class="container mt-4" id="tercera" *ngIf="loading && loading1">
+    <mat-card class="cardPersonalizada">
+        <div class="row">
+            <div class="col-md-6">
+                <img src="../../../../assets/images/LOGO_RANSA_BN.png" alt="">
+                <p style="color: black !important;">
+                {{ parametros[0]['nombreCompleto']}} <br>
+                {{ parametros[0]['direccion1']}}, Calle: {{ parametros[0]['direccion2'] }} Casa N°: S/N <br>
+                Municipio: {{ parametros[0]['municipio']}}, Departamento: {{ parametros[0]['Departamento']}} <br>
+                Tel: {{ parametros[0]['Telfijo'] }} <br>
+                <span *ngIf="parametros[0]['TelCel']">     Cel   : {{ parametros[0]['TelCel'] }} <br> </span> 
+                <span *ngIf="parametros[0]['rtnEmpresa']"> R.T.N : {{ parametros[0]['rtnEmpresa'] }} </span> 
+                <span *ngIf="parametros[0]['correo']">     Correo: {{ parametros[0]['correo'] }} </span> <br>
+                </p>
+            </div>
+    
+            <div class="col-md-6 mt-4 container">
+                <p style="color: black !important;">
+                <span class="container">NOTA DE CREDITO </span>
+                <span *ngIf="ruta.snapshot.params['empresa'] == 'RH'" class="container" style="text-align:left  !important; font-size: 1.2em !important;">
+                        <!-- 000-001-01-{{retornarCorrelativo()}} -->
+                        000-001-06-{{retornarCorrelativo()}}            
+                </span>
+                <span *ngIf="ruta.snapshot.params['empresa'] == 'AH'" class="container" style="text-align:left  !important; font-size: 1.2em !important;">
+                    <!-- 000-001-01-{{retornarCorrelativo()}} -->
+                    000-002-06-{{retornarCorrelativo()}}            
+            </span>
+                <span class="container">   C.A.I: {{parametrosCai[0]['CAI']}} </span>
+                <span class="container"> RANGO AUTORIZADO </span>
+                <span  class="container"> {{parametrosCai[0]['desde']}} - {{parametrosCai[0]['hasta']}} </span> 
+                 <span class="container">Fecha Limite de Emisión : {{ parametrosCai[0]['fechaLimite'] | date : 'dd/MM/yyyy' }} </span>
+                </p>
+            </div>
+
+            <!-- Detalle de la generación  -->
+            <div>
+                <div class="row" >
+                    <div class="col-md-6 containB" style="width: 80% !important;" style="border-color: black !important;">
+                    <p>
+                    Sr.(a): {{ cabeceraN[0]['TCMPCL'] }} <br>
+                    R.T.N : {{ cabeceraN[0]['NRUC2']}} <br>
+                    CAI del Comprobante:    <br>
+                    NO. Correlativo Comprobante: <br>
+                    Fecha de emisión comprobante: {{ dia }}  {{ mes }} {{ anio }} <br>
+                    </p>
+                    </div>
+                <div class="col-md-6 center containB container" style="border-color: black !important;">
+                <p > Nota de Débito por L. <span style="font-weight: bold !important;"> {{ (cabeceraN[0]['ITTFCS'] ) | number :'1.2-2' }} </span> </p>
+                </div>
+                </div>
+            </div>
+            <!-- Detalle de la generación  -->
+
+            <!-- Comentario de la nota de débito -->
+            <div class="col-md-12">
+                <h4 class="container" style="color: black !important;"> En esta fecha hemos registrado en su cuenta el valor que indica la presente NOTA DE DEBITO, por el siguiente motivo:  </h4>
+            </div>
+     <div class="tabla" style="border-color: black !important;">
+                <div class="table-responsive !important"  style="color: black !important;">
+                    <table>
+                        <thead>
+                          <tr>
+                            <th class="contenidoF" scope="col">No.</th>
+                            <th class="contenidoF" scope="col"colspan="2" >Descripcion</th>
+                            <th class="contenidoF" scope="col">Sub Total</th>
+                            <th class="contenidoF" scope="col">Impuesto</th>
+                            <th class="contenidoF" scope="col">Monto Total</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let item of DcabeceraN; let i = index">
+                            <td data-label="No." class="contenidoF"> {{ i + 1  }} </td>
+                            <td data-label="Descripcion" colspan="2" class="contenidoF"> {{ item?.TCMTRF }} </td>
+                            <td data-label="Sub Total" class="contenidoF center"> {{ (item?.IVLDCS ) | number : '1.2-2' }}</td>
+                            <td data-label="Impuesto"  class="contenidoF center">  {{  ( cabeceraN[0]['IVLIGS'] )  | number : '1.2-2' }}</td>
+                            <td data-label="Monto Total" class="contenidoF center"> {{ (cabeceraN[0]['ITTFCS'] )  | number : '1.2-2' }} </td>
+                          </tr>
+                          
+                            <!-- <tr style=" border-collapse: collapse;"  *ngFor="let item of espaciosBlancos "> 
+                                <td class="espacioB"  colspan="6"></td>
+                            </tr> -->
+                            <tr style=" border-collapse: collapse;" > 
+                                <td class="espacioB"  colspan="6"></td>
+                            </tr>
+                            <tr style=" border-collapse: collapse;"> 
+                                <td style="text-align:left !important; font-size: 0.9em !important; " class="espacioB" colspan="3" >
+                                {{ leyendaInterna }}
+                                </td>
+                            </tr>
+                            
+                            <tr style=" border-collapse: collapse;"> 
+                                <td style="text-align:left !important; font-size: 0.9em !important; " class="espacioB" colspan="6">
+                                    <!-- CIENTO OCHENTA Y NUEVE MIL CUATROCIENTOS NOVENTA Y SEIS CON NOVENTA Y OCHO CENTAVOS -->
+                                    {{ letras }}
+                                </td>
+                            </tr>
+                        
+                            <tr style=" border-collapse: collapse;"> 
+                                <td style="font-size: 0.9em !important; " class="espacioB rigth" colspan="3">
+                                    TOTALES
+                                </td>
+                                <td style="font-size: 0.9em !important; " class="espacioB center">
+                                        {{ (DcabeceraN[0]['IVLDCS'] ) | number :'1.2-2' }}
+                                </td>
+                                <td style="font-size: 0.9em !important; " class="espacioB center">
+                                        {{ ( cabeceraN[0]['IVLIGS'] )  | number :'1.2-2' }}
+                                </td>
+                                <td style="font-size: 0.9em !important; " class="espacioB center">
+                                    {{ (cabeceraN[0]['ITTFCS'] ) | number :'1.2-2' }}
+                            </td>
+                            </tr>
+
+
+                        </tbody>
+                   
+                      </table>
+                   </div>
+            </div>
+     
+  <!-- Motivo de Nota de Débito -->
+<div class="col-md-12 container">
+    <p class="black">
+        Motivo de Emisión de la Nota de Débito: 
+    </p>
+    <section class="example-section ml-4">
+        <mat-checkbox class="example-margin ml-2" [disabled]="disabled" [(ngModel)]="anulacion">Anulación  </mat-checkbox>
+        <mat-checkbox class="example-margin ml-2" [disabled]="disabled" [(ngModel)]="devolcion">Devolución </mat-checkbox>
+        <mat-checkbox class="example-margin ml-2" [disabled]="disabled" [(ngModel)]="descuento">Descuento  </mat-checkbox>
+      </section>
+</div>
+<div class="col-md-12 black" >
+<h3 *ngIf="DcabeceraN[0]['descripcion']">
+    Otros especifique: <span style="text-decoration: underline; margin-left: 1px;"> {{  DcabeceraF[0]['descripcion'] }} </span>
+</h3>
+<h3 *ngIf="!DcabeceraN[0]['descripcion']">
+    Otros especifique:____________________________________________________________________________
+</h3>
+</div>
+
+<div class="col-md-6 black">
+ <p>
+    __________________________________________ <br>
+            <span style="margin-left: 20%;">    Elaborado por:  </span>
+ </p>
+</div>
+
+<div class="col-md-6 black">
+        Recibí Conforme: ______________________________________________ <br>
+        Identidad: ____________________________________________________ <br>
+        Firma: _______________________________________________________     
+</div>
+
+<!-- <div class="col-md-12 container mt-4">
+    <label class="center"> ORIGINAL : CLIENTE </label>
+</div> -->
+<!-- <div class="col-md-4 container black">
+    <label class="center"> DUPLICADO: TRIBUTARIO EMISOR</label>
+</div> -->
+<div class="col-md-4 container black">
+    <label class="center"> TRIPLICADO: ARCHIVO</label>
+</div>
         </div>
     </mat-card>
 </div>

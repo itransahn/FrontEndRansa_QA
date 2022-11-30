@@ -93,7 +93,8 @@ export class NdComponent implements OnInit {
           this.dia  =  fecha.substring(6,8);
           this.mes  =  fecha.substring(4,6);
           this.mes  =  retornarMes(this.mes);
-          this.letras = numeroALetras((Number(this.cabeceraN[0]?.ITTFCS) * -1),{})
+          console.log('Cantidad', this.cabeceraN[0]['ITTFCS'])
+          this.letras = numeroALetras( Number(this.cabeceraN[0]['ITTFCS']),{})
           this.anio =  fecha.substring(0,4);
         }
       )

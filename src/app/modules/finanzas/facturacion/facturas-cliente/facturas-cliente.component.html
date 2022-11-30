@@ -8,25 +8,37 @@
                 <h3 class="h4"> Fácturas Cliente </h3>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <mat-form-field  appearance="legacy">
                     <mat-label> Código Cliente </mat-label>
                     <input matInput placeholder="Código de Cliente" mask="999999" formControlName ="cliente">
                 </mat-form-field>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <mat-form-field  appearance="legacy">
                     <mat-label> Desde </mat-label>
                     <input matInput placeholder="YYYYMMDD" mask="99999999" formControlName ="desde">
                 </mat-form-field>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <mat-form-field  appearance="legacy">
                     <mat-label> Hasta </mat-label>
                     <input matInput placeholder="YYYYMMDD" mask="99999999" formControlName ="hasta">
                 </mat-form-field>
+            </div>
+
+            <div class="col-md-6 container" >
+                <mat-form-field appearance="legacy">
+                    <mat-label> Tipo de documento </mat-label>
+                    <mat-select style="color: #006F1D !important;" formControlName="documento" > 
+                        <mat-option> - </mat-option> 
+                        <mat-option *ngFor="let sed of tipoCai" [value]="sed?.id" >
+                            {{  sed?.tipo }}
+                        </mat-option> 
+                      </mat-select> 
+                  </mat-form-field>
             </div>
 
             <div class="col-md-6 container" >
