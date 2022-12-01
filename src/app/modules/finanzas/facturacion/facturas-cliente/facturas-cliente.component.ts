@@ -18,6 +18,8 @@ export class FacturasClienteComponent implements OnInit {
   public desde = 0;
   public hasta = 50;
   public loading = false;
+  public active  = false;
+  public mensaje = false;
   public empresa : string;
   nextPageLabel     = 'Página Siguiente';
   previousPageLabel = 'Página Anterior';
@@ -85,6 +87,7 @@ export class FacturasClienteComponent implements OnInit {
     }
 
     cargarFacturas(){
+      this.active = true;
       if ( this.menuForm.value.sede == 1 ){
           this.empresa = 'RH'
       }else{
@@ -110,8 +113,12 @@ export class FacturasClienteComponent implements OnInit {
     this.facturacionS.As400( params ).subscribe(
       (res:any)=>{
         if( res ){
-  this.facturas = res
-  this.loading = true;
+      this.facturas = res
+          if ( this.facturas.length > 0) {
+            this.loading = true;
+          }else{
+            this.mensaje = true;
+          }
         }
       }
     )

@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { DataApi } from 'src/app/interfaces/dataApi';
 import { cabeceraFactura, detalleCabecera, retornarMes } from 'src/app/interfaces/Factura';
 import { mensajes } from 'src/app/interfaces/generales';
+import { SharedService } from 'src/app/modules/shared/shared.service';
 import { ToastServiceLocal } from 'src/app/services/toast.service';
 import { numeroALetras } from 'src/app/shared/functions/conversorNumLetras';
 import { FacturacionService } from '../../facturacion.service';
@@ -41,7 +42,8 @@ export class NdComponent implements OnInit {
  constructor( 
   public facturacionS : FacturacionService,
   public ruta         : ActivatedRoute,
-  public toast        : ToastServiceLocal
+  public toast        : ToastServiceLocal,
+  public sharedS      : SharedService
       ) { }
       ngOnInit() {
         this.PreCargaData();
@@ -145,12 +147,15 @@ export class NdComponent implements OnInit {
       )
       }
     
-      retornarCorrelativo( valor){
+      retornarCorrelativo( ){
         let correlativo : string = this.cabeceraN[0]['NDCCTC'];
         return correlativo.substring(1,correlativo.length)
-      }
-    
-    
+      } 
+      
+      retornarCorrelativoND( ){
+        let correlativo : string = this.cabeceraN[0]['NDCCTC'];
+        return correlativo.substring(4,correlativo.length)
+      } 
       validarCorrelativo(){
         let url = 'finanzas/validarNum'
         let params = {
@@ -181,4 +186,13 @@ export class NdComponent implements OnInit {
         )
       }
 
+      GenerarPdf(){
+        this.sharedS.pdfNotas('originalN',  `${this.retornarCorrelativoND()}_${this.cabeceraN[0]['TCMPCL']}NDOriginal`,'Nota de débito de Ransa', `Seguro de generar PDF de Nota ${this.cabeceraN[0]['NDCCTC']} del CLIENTE
+        ${this.cabeceraN[0]['TCMPCL']}`,{
+          numeroFactura: `${this.retornarCorrelativoND()}_${this.cabeceraN[0]['TCMPCL']}`,
+          factura : 'Nota de débito Ransa',
+          titulo : '',
+          tipo   : 'ND'
+        })
+      }
 }

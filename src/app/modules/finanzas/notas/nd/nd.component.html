@@ -1,9 +1,10 @@
-<div class="container" id="original" *ngIf="loading && loading1">
+<div class="container completo" id="originalN" *ngIf="loading && loading1">
     <mat-card class="cardPersonalizada">
         <div class="row">
             <div class="col-md-6">
-                <img src="../../../../assets/images/logoRansa.ico" alt="">
-                <p>
+                <img *ngIf="sede == 1" src="../../../../assets/images/logoRansa.ico" alt="">
+                <img *ngIf="sede == 2" src="../../../../assets/images/Almahsa.png"   alt="">
+                <p class="black">
                 {{ parametros[0]['nombreCompleto']}} <br>
                 {{ parametros[0]['direccion1']}}, Calle: {{ parametros[0]['direccion2'] }} Casa N°: S/N <br>
                 Municipio: {{ parametros[0]['municipio']}}, Departamento: {{ parametros[0]['Departamento']}} <br>
@@ -15,8 +16,8 @@
             </div>
     
             <div class="col-md-6 mt-4 container">
-                <p>
-                <span class="container">NOTA DE CREDITO </span>
+                <p class="black">
+                <span class="container">NOTA DE DEBITO </span>
                 <span *ngIf="ruta.snapshot.params['empresa'] == 'RH'" class="container" style="text-align:left  !important; color:#FE9600 !important; font-size: 1.2em !important;">
                         <!-- 000-001-01-{{retornarCorrelativo()}} -->
                         000-001-06-{{retornarCorrelativo()}}            
@@ -53,7 +54,7 @@
 
             <!-- Comentario de la nota de débito -->
             <div class="col-md-12">
-                <h4 class="container"> En esta fecha hemos registrado en su cuenta el valor que indica la presente NOTA DE DEBITO, por el siguiente motivo:  </h4>
+                <h4 class="container completo black"> En esta fecha hemos registrado en su cuenta el valor que indica la presente NOTA DE DEBITO, por el siguiente motivo:  </h4>
             </div>
      <div class="tabla">
                 <div class="table-responsive !important" >
@@ -86,13 +87,16 @@
                                 <td style="text-align:left !important; font-size: 0.9em !important; " class="espacioB" colspan="3" >
                                 {{ leyendaInterna }}
                                 </td>
+                                <td class="espacioB" colspan="3"> </td>
+
                             </tr>
                             
                             <tr style=" border-collapse: collapse;"> 
-                                <td style="text-align:left !important; font-size: 0.9em !important; " class="espacioB" colspan="6">
+                                <td style="text-align:left !important; font-size: 0.9em !important; " class="espacioB" colspan="3">
                                     <!-- CIENTO OCHENTA Y NUEVE MIL CUATROCIENTOS NOVENTA Y SEIS CON NOVENTA Y OCHO CENTAVOS -->
                                     {{ letras }}
                                 </td>
+                                <td class="espacioB" colspan="3"> </td>
                             </tr>
                         
                             <tr style=" border-collapse: collapse;"> 
@@ -119,7 +123,7 @@
      
   <!-- Motivo de Nota de Débito -->
 <div class="col-md-12 container">
-    <p>
+    <p class="black">
         Motivo de Emisión de la Nota de Débito: 
     </p>
     <section class="example-section ml-4">
@@ -128,23 +132,23 @@
         <mat-checkbox class="example-margin ml-2" [disabled]="disabled" [(ngModel)]="descuento">Descuento  </mat-checkbox>
       </section>
 </div>
-<div class="col-md-12">
-<h3 *ngIf="DcabeceraN[0]['descripcion']">
+<div class="col-md-12 completo black">
+<h3 *ngIf="DcabeceraN[0]['descripcion']" class="completo">
     Otros especifique: <span style="text-decoration: underline; margin-left: 1px;"> {{  DcabeceraF[0]['descripcion'] }} </span>
 </h3>
-<h3 *ngIf="!DcabeceraN[0]['descripcion']">
+<h3 *ngIf="!DcabeceraN[0]['descripcion']" class="completo">
     Otros especifique:____________________________________________________________________________
 </h3>
 </div>
 
-<div class="col-md-6">
- <p>
+<div class="col-md-6" style="font-size: x-small !important;">
+ <p class="black"> 
     __________________________________________ <br>
-            <span style="margin-left: 20%;">    Elaborado por:  </span>
+            <span style="margin-left: 20%;" class="black">    Elaborado por:  </span>
  </p>
 </div>
 
-<div class="col-md-6">
+<div class="col-md-6 black" style="font-size: x-small !important;">
         Recibí Conforme: ______________________________________________ <br>
         Identidad: ____________________________________________________ <br>
         Firma: _______________________________________________________     
@@ -163,12 +167,12 @@
     </mat-card>
 </div>
 
-
-<div class="container mt-4" id="segunda" *ngIf="loading && loading1">
+<div class="container completo mt-4" id="segunda" *ngIf="loading && loading1">
     <mat-card class="cardPersonalizada">
         <div class="row">
             <div class="col-md-6">
-                <img src="../../../../assets/images/LOGO_RANSA_BN.png" alt="">
+                <img *ngIf="sede == 1" src="../../../../assets/images/LOGO_RANSA_BN.png" alt="">
+                <img *ngIf="sede == 2" src="../../../../assets/images/Almahsa_BN.png" alt="">
                 <p style="color: black !important;">
                 {{ parametros[0]['nombreCompleto']}} <br>
                 {{ parametros[0]['direccion1']}}, Calle: {{ parametros[0]['direccion2'] }} Casa N°: S/N <br>
@@ -182,7 +186,7 @@
     
             <div class="col-md-6 mt-4 container">
                 <p style="color: black !important;">
-                <span class="container">NOTA DE CREDITO </span>
+                <span class="container">NOTA DE DEBITO </span>
                 <span *ngIf="ruta.snapshot.params['empresa'] == 'RH'" class="container" style="text-align:left  !important; font-size: 1.2em !important;">
                         <!-- 000-001-01-{{retornarCorrelativo()}} -->
                         000-001-06-{{retornarCorrelativo()}}            
@@ -219,7 +223,7 @@
 
             <!-- Comentario de la nota de débito -->
             <div class="col-md-12">
-                <h4 class="container" style="color: black !important;"> En esta fecha hemos registrado en su cuenta el valor que indica la presente NOTA DE DEBITO, por el siguiente motivo:  </h4>
+                <h4 class="container completo black"> En esta fecha hemos registrado en su cuenta el valor que indica la presente NOTA DE DEBITO, por el siguiente motivo:  </h4>
             </div>
      <div class="tabla" style="border-color: black !important;">
                 <div class="table-responsive !important"  style="color: black !important;">
@@ -252,13 +256,17 @@
                                 <td style="text-align:left !important; font-size: 0.9em !important; " class="espacioB" colspan="3" >
                                 {{ leyendaInterna }}
                                 </td>
+                                <td class="espacioB" colspan="3"> </td>
+
                             </tr>
                             
                             <tr style=" border-collapse: collapse;"> 
-                                <td style="text-align:left !important; font-size: 0.9em !important; " class="espacioB" colspan="6">
+                                <td style="text-align:left !important; font-size: 0.9em !important; " class="espacioB" colspan="3">
                                     <!-- CIENTO OCHENTA Y NUEVE MIL CUATROCIENTOS NOVENTA Y SEIS CON NOVENTA Y OCHO CENTAVOS -->
                                     {{ letras }}
                                 </td>
+
+                                <td class="espacioB" colspan="3"> </td>
                             </tr>
                         
                             <tr style=" border-collapse: collapse;"> 
@@ -294,23 +302,23 @@
         <mat-checkbox class="example-margin ml-2" [disabled]="disabled" [(ngModel)]="descuento">Descuento  </mat-checkbox>
       </section>
 </div>
-<div class="col-md-12 black" >
-<h3 *ngIf="DcabeceraN[0]['descripcion']">
+<div class="col-md-12 black completo" >
+<h3 *ngIf="DcabeceraN[0]['descripcion']" class="completo">
     Otros especifique: <span style="text-decoration: underline; margin-left: 1px;"> {{  DcabeceraF[0]['descripcion'] }} </span>
 </h3>
-<h3 *ngIf="!DcabeceraN[0]['descripcion']">
+<h3 *ngIf="!DcabeceraN[0]['descripcion']" class="completo">
     Otros especifique:____________________________________________________________________________
 </h3>
 </div>
 
-<div class="col-md-6 black">
+<div class="col-md-6 black" style="font-size: x-small !important;">
  <p>
     __________________________________________ <br>
             <span style="margin-left: 20%;">    Elaborado por:  </span>
  </p>
 </div>
 
-<div class="col-md-6 black">
+<div class="col-md-6 black" style="font-size: x-small !important;"> 
         Recibí Conforme: ______________________________________________ <br>
         Identidad: ____________________________________________________ <br>
         Firma: _______________________________________________________     
@@ -319,22 +327,22 @@
 <!-- <div class="col-md-12 container mt-4">
     <label class="center"> ORIGINAL : CLIENTE </label>
 </div> -->
-<div class="col-md-4 container black">
+<div class="col-md-4 mt-4 container black">
     <label class="center"> DUPLICADO: TRIBUTARIO EMISOR</label>
-</div>
-<!-- <div class="col-md-4 container footL">
+</div> 
+<!-- <div class="col-md-4  mt-4 container footL">
     <label class="center"> TRIPLICADO: ARCHIVO</label>
 </div> -->
         </div>
     </mat-card>
 </div>
 
-
-<div class="container mt-4" id="tercera" *ngIf="loading && loading1">
+<div class="container completo mt-4" id="tercera" *ngIf="loading && loading1">
     <mat-card class="cardPersonalizada">
         <div class="row">
             <div class="col-md-6">
-                <img src="../../../../assets/images/LOGO_RANSA_BN.png" alt="">
+                <img *ngIf="sede == 1" src="../../../../assets/images/LOGO_RANSA_BN.png" alt="">
+                <img *ngIf="sede == 2" src="../../../../assets/images/Almahsa_BN.png" alt="">
                 <p style="color: black !important;">
                 {{ parametros[0]['nombreCompleto']}} <br>
                 {{ parametros[0]['direccion1']}}, Calle: {{ parametros[0]['direccion2'] }} Casa N°: S/N <br>
@@ -348,7 +356,7 @@
     
             <div class="col-md-6 mt-4 container">
                 <p style="color: black !important;">
-                <span class="container">NOTA DE CREDITO </span>
+                <span class="container">NOTA DE DEBITO </span>
                 <span *ngIf="ruta.snapshot.params['empresa'] == 'RH'" class="container" style="text-align:left  !important; font-size: 1.2em !important;">
                         <!-- 000-001-01-{{retornarCorrelativo()}} -->
                         000-001-06-{{retornarCorrelativo()}}            
@@ -385,7 +393,7 @@
 
             <!-- Comentario de la nota de débito -->
             <div class="col-md-12">
-                <h4 class="container" style="color: black !important;"> En esta fecha hemos registrado en su cuenta el valor que indica la presente NOTA DE DEBITO, por el siguiente motivo:  </h4>
+                <h4 class="container completo" style="color: black !important;"> En esta fecha hemos registrado en su cuenta el valor que indica la presente NOTA DE DEBITO, por el siguiente motivo:  </h4>
             </div>
      <div class="tabla" style="border-color: black !important;">
                 <div class="table-responsive !important"  style="color: black !important;">
@@ -418,13 +426,17 @@
                                 <td style="text-align:left !important; font-size: 0.9em !important; " class="espacioB" colspan="3" >
                                 {{ leyendaInterna }}
                                 </td>
+                                <td class="espacioB" colspan="3"> </td>
+
                             </tr>
                             
                             <tr style=" border-collapse: collapse;"> 
-                                <td style="text-align:left !important; font-size: 0.9em !important; " class="espacioB" colspan="6">
+                                <td style="text-align:left !important; font-size: 0.9em !important; " class="espacioB" colspan="3">
                                     <!-- CIENTO OCHENTA Y NUEVE MIL CUATROCIENTOS NOVENTA Y SEIS CON NOVENTA Y OCHO CENTAVOS -->
                                     {{ letras }}
                                 </td>
+                                <td class="espacioB" colspan="3"> </td>
+
                             </tr>
                         
                             <tr style=" border-collapse: collapse;"> 
@@ -460,23 +472,23 @@
         <mat-checkbox class="example-margin ml-2" [disabled]="disabled" [(ngModel)]="descuento">Descuento  </mat-checkbox>
       </section>
 </div>
-<div class="col-md-12 black" >
-<h3 *ngIf="DcabeceraN[0]['descripcion']">
+<div class="col-md-12 black completo" >
+<h3 *ngIf="DcabeceraN[0]['descripcion']" class="completo">
     Otros especifique: <span style="text-decoration: underline; margin-left: 1px;"> {{  DcabeceraF[0]['descripcion'] }} </span>
 </h3>
-<h3 *ngIf="!DcabeceraN[0]['descripcion']">
+<h3 *ngIf="!DcabeceraN[0]['descripcion']" class="completo">
     Otros especifique:____________________________________________________________________________
 </h3>
 </div>
 
-<div class="col-md-6 black">
+<div class="col-md-6 black" style="font-size: x-small !important;">
  <p>
     __________________________________________ <br>
             <span style="margin-left: 20%;">    Elaborado por:  </span>
  </p>
 </div>
 
-<div class="col-md-6 black">
+<div class="col-md-6 black" style="font-size: x-small !important;">
         Recibí Conforme: ______________________________________________ <br>
         Identidad: ____________________________________________________ <br>
         Firma: _______________________________________________________     
@@ -485,19 +497,27 @@
 <!-- <div class="col-md-12 container mt-4">
     <label class="center"> ORIGINAL : CLIENTE </label>
 </div> -->
-<!-- <div class="col-md-4 container black">
+<!-- <div class="col-md-4 container  mt-4 black">
     <label class="center"> DUPLICADO: TRIBUTARIO EMISOR</label>
 </div> -->
-<div class="col-md-4 container black">
+<div class="col-md-4 container mt-4 black">
     <label class="center"> TRIPLICADO: ARCHIVO</label>
 </div>
         </div>
     </mat-card>
 </div>
 
+<button mat-raised-button class="buttonPrincipal btn-flotante" #tooltip="matTooltip" matTooltip="Generar PDF"  matTooltipPosition="left" 
+(click)="GenerarPdf()" >
+    <mat-icon> picture_as_pdf </mat-icon>
+</button>
+
+<app-loading2 *ngIf="!loading1 && !loading1"></app-loading2>
 
 <nav *ngIf="!permitido" aria-label="breadcrumb" class="container">
     <ol class="breadcrumb container">
-     <h4> Rango de Facturas vencido </h4>
+     <h4> Rango Permitido vencido </h4>
     </ol>
 </nav>
+
+

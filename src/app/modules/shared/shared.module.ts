@@ -5,6 +5,7 @@ import { AngularMaterialModule } from '../angular-material/angular-material.modu
 import { LoadingComponent } from 'src/app/shared/loading/loading.component';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { ScrollTopComponent } from 'src/app/shared/scroll-top/scroll-top.component';
+import { Loading2Component } from 'src/app/shared/loading2/loading2.component';
 
 
 const maskConfig: Partial<IConfig> = {
@@ -15,6 +16,7 @@ const maskConfig: Partial<IConfig> = {
   declarations: [
     SearchPipe,
     LoadingComponent,
+    Loading2Component,
     ScrollTopComponent
   ],
   imports: [
@@ -26,6 +28,7 @@ const maskConfig: Partial<IConfig> = {
     SearchPipe,
     AngularMaterialModule,
     LoadingComponent,
+    Loading2Component,
     NgxMaskModule,
     ScrollTopComponent
   ]

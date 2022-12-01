@@ -47,8 +47,7 @@ export class SharedService {
         }
       )
   }
-
-  //PDF
+  //PDF FACTURA
   pdfFactura( id?:string, NombreFinal ?: string, detalle?: string, titulo ?: string, data?:any){
     this.sweel.mensajeConConfirmacion(`¿${titulo}?`, `${detalle}`,"warning").then(
       res=>{
@@ -73,11 +72,56 @@ html2canvas(DATA, options).then((canvas) => {
   return doc;
   }).then((docResult) => {
     docResult.save(`${NombreFinal}.pdf`);
-    this.pdfFacturaD('cliente',data['numeroFactura']+'Cliente', 'Seguro','PDF' )
-    this.pdfFacturaD('archivo',data['numeroFactura']+'Archivo', 'Seguro','PDF' )
+    this.pdfFacturaD('cliente',data['numeroFactura']+'FACCliente', 'Seguro','PDF' )
+    this.pdfFacturaD('archivo',data['numeroFactura']+'FACArchivo', 'Seguro','PDF' )
 
     this.toast.mensajeSuccess("Documento generado correctamente","Generación de PDF")
     return true;
+  });
+          }else{
+            
+           }
+      }
+    )
+}
+
+  //PDF
+  pdfNotas( id?:string, NombreFinal ?: string, detalle?: string, titulo ?: string, data?:any){
+    this.sweel.mensajeConConfirmacion(`¿${titulo}?`, `${detalle}`,"warning").then(
+      res=>{
+          if ( res ){
+             // Extraemos el
+  const DATA = document.getElementById(id);
+  const doc = new jsPDF('p', 'pt', 'Letter');
+  const options = {
+               background: 'white',
+               scale: 3,
+               format: [4, 2]
+                  };
+html2canvas(DATA, options).then((canvas) => {
+  const img = canvas.toDataURL('image/PNG');
+  // Add image Canvas to PDF
+  const bufferX = 15;
+  const bufferY = 15;
+  const imgProps = (doc as any).getImageProperties(img);
+  const pdfWidth = doc.internal.pageSize.getWidth() - 2 * bufferX;
+  const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+  doc.addImage(img, 'PNG', bufferX, bufferY, pdfWidth, pdfHeight, undefined, 'FAST');
+  return doc;
+  }).then((docResult) => {
+    docResult.save(`${NombreFinal}.pdf`);
+
+    if(data['tipo'] == 'ND'){
+      this.pdfFacturaD('segunda',data['numeroFactura']+'NDCliente', 'Seguro','PDF' )
+      this.pdfFacturaD('tercera',data['numeroFactura']+'NDArchivo', 'Seguro','PDF' )
+      this.toast.mensajeSuccess("Documento generado correctamente","Generación de PDF")
+      return true;
+    }else{
+      this.pdfFacturaD('segundaNC',data['numeroFactura']+'NCCliente', 'Seguro','PDF' )
+      this.pdfFacturaD('terceraNC',data['numeroFactura']+'NCArchivo', 'Seguro','PDF' )
+      this.toast.mensajeSuccess("Documento generado correctamente","Generación de PDF")
+      return true;
+    }
   });
           }else{
             

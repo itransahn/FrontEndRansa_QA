@@ -57,7 +57,6 @@ export class FacturacionComponent implements OnInit {
   validacion(){
     this.cliente   = (this.ruta.snapshot.params['cliente']);
     this.documento = '1000'+ (this.ruta.snapshot.params['documento'])
-
     if ( this.cliente == '0' && this.documento == '0' ){
       this.modal()
     }else{
@@ -246,8 +245,8 @@ export class FacturacionComponent implements OnInit {
     return correlativo.substring(3,correlativo.length)
   }
 
-    GenerarPdf(){
-    this.sharedS.pdfFactura('Factura',  `${this.retornarCorrelativoPDF()}_${this.cabeceraF[0]['TCMPCL']}Original`,'Factura Ransa', `Seguro de generar PDF de FACTURA ${this.cabeceraF[0]['NDCCTC']} del CLIENTE
+  GenerarPdf(){
+    this.sharedS.pdfFactura('Factura',  `${this.retornarCorrelativoPDF()}_${this.cabeceraF[0]['TCMPCL']}FACOriginal`,'Factura Ransa', `Seguro de generar PDF de FACTURA ${this.cabeceraF[0]['NDCCTC']} del CLIENTE
     ${this.cabeceraF[0]['TCMPCL']}`,{
       numeroFactura: `${this.retornarCorrelativoPDF()}_${this.cabeceraF[0]['TCMPCL']}`,
       factura : 'Factura Ransa',
@@ -261,7 +260,7 @@ export class FacturacionComponent implements OnInit {
     // ${this.cabeceraF[0]['TCMPCL']}`)
     }
 
-    descomponerArray( array : detalleCabecera[] ){
+  descomponerArray( array : detalleCabecera[] ){
       let arrayC : detalleCabecera[];
       // console.log(array[0])
       // arrayC.push(array[0]);
