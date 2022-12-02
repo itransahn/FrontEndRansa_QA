@@ -20,11 +20,11 @@
                 <span class="container">NOTA DE DEBITO </span>
                 <span *ngIf="ruta.snapshot.params['empresa'] == 'RH'" class="container" style="text-align:left  !important; color:#FE9600 !important; font-size: 1.2em !important;">
                         <!-- 000-001-01-{{retornarCorrelativo()}} -->
-                        000-001-06-{{retornarCorrelativo()}}            
+                        000-001-07-{{retornarCorrelativo()}}            
                 </span>
                 <span *ngIf="ruta.snapshot.params['empresa'] == 'AH'" class="container" style="text-align:left  !important; color:#FE9600 !important; font-size: 1.2em !important;">
                     <!-- 000-001-01-{{retornarCorrelativo()}} -->
-                    000-002-06-{{retornarCorrelativo()}}            
+                    000-002-07-{{retornarCorrelativo()}}            
             </span>
                 <span class="container">   C.A.I: {{parametrosCai[0]['CAI']}} </span>
                 <span class="container"> RANGO AUTORIZADO </span>
@@ -40,8 +40,9 @@
                     <p>
                     Sr.(a): {{ cabeceraN[0]['TCMPCL'] }} <br>
                     R.T.N : {{ cabeceraN[0]['NRUC2']}} <br>
-                    CAI del Comprobante:    <br>
-                    NO. Correlativo Comprobante: <br>
+                    Dirección: {{ cabeceraN[0]['TDRCOR'] }} <br>
+                    <!-- CAI del Comprobante:    <br>
+                    NO. Correlativo Comprobante: <br> -->
                     Fecha de emisión comprobante: {{ dia }}  {{ mes }} {{ anio }} <br>
                     </p>
                     </div>
@@ -189,11 +190,11 @@
                 <span class="container">NOTA DE DEBITO </span>
                 <span *ngIf="ruta.snapshot.params['empresa'] == 'RH'" class="container" style="text-align:left  !important; font-size: 1.2em !important;">
                         <!-- 000-001-01-{{retornarCorrelativo()}} -->
-                        000-001-06-{{retornarCorrelativo()}}            
+                        000-001-07-{{retornarCorrelativo()}}            
                 </span>
                 <span *ngIf="ruta.snapshot.params['empresa'] == 'AH'" class="container" style="text-align:left  !important; font-size: 1.2em !important;">
                     <!-- 000-001-01-{{retornarCorrelativo()}} -->
-                    000-002-06-{{retornarCorrelativo()}}            
+                    000-002-07-{{retornarCorrelativo()}}            
             </span>
                 <span class="container">   C.A.I: {{parametrosCai[0]['CAI']}} </span>
                 <span class="container"> RANGO AUTORIZADO </span>
@@ -209,8 +210,9 @@
                     <p>
                     Sr.(a): {{ cabeceraN[0]['TCMPCL'] }} <br>
                     R.T.N : {{ cabeceraN[0]['NRUC2']}} <br>
-                    CAI del Comprobante:    <br>
-                    NO. Correlativo Comprobante: <br>
+                    Dirección: {{ cabeceraN[0]['TDRCOR'] }} <br>
+                    <!-- CAI del Comprobante:    <br>
+                    NO. Correlativo Comprobante: <br> -->
                     Fecha de emisión comprobante: {{ dia }}  {{ mes }} {{ anio }} <br>
                     </p>
                     </div>
@@ -359,11 +361,11 @@
                 <span class="container">NOTA DE DEBITO </span>
                 <span *ngIf="ruta.snapshot.params['empresa'] == 'RH'" class="container" style="text-align:left  !important; font-size: 1.2em !important;">
                         <!-- 000-001-01-{{retornarCorrelativo()}} -->
-                        000-001-06-{{retornarCorrelativo()}}            
+                        000-001-07-{{retornarCorrelativo()}}            
                 </span>
                 <span *ngIf="ruta.snapshot.params['empresa'] == 'AH'" class="container" style="text-align:left  !important; font-size: 1.2em !important;">
                     <!-- 000-001-01-{{retornarCorrelativo()}} -->
-                    000-002-06-{{retornarCorrelativo()}}            
+                    000-002-07-{{retornarCorrelativo()}}            
             </span>
                 <span class="container">   C.A.I: {{parametrosCai[0]['CAI']}} </span>
                 <span class="container"> RANGO AUTORIZADO </span>
@@ -379,8 +381,9 @@
                     <p>
                     Sr.(a): {{ cabeceraN[0]['TCMPCL'] }} <br>
                     R.T.N : {{ cabeceraN[0]['NRUC2']}} <br>
-                    CAI del Comprobante:    <br>
-                    NO. Correlativo Comprobante: <br>
+                    Dirección: {{ cabeceraN[0]['TDRCOR'] }} <br>
+                    <!-- CAI del Comprobante:    <br>
+                    NO. Correlativo Comprobante: <br> -->
                     Fecha de emisión comprobante: {{ dia }}  {{ mes }} {{ anio }} <br>
                     </p>
                     </div>
