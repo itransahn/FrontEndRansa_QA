@@ -111,6 +111,9 @@ export class MantenimientoCanjeoComponent implements OnInit {
             if( !res.hasError ){
               this.loading = true;
               this.canjeos = res?.data?.Table0;
+              this.filtro.patchValue({
+                filtrar : ''
+              })
                     }
           }
         )

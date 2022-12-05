@@ -1,4 +1,4 @@
-<mat-card class="mat-cardContainerCuerpo">
+<mat-card class="mat-cardContainerCuerpo ">
     <form [formGroup]="filtro" #f="ngForm">
     <div class="row">
         <div class="col-md-12 container">
@@ -36,7 +36,7 @@
 </mat-card>
 
 <div #factura id ="Factura">
-    <mat-card class="mat-cardContainerCuerpo mt-4" *ngIf="loading">
+    <mat-card class="mat-cardContainerCuerpo container cardPersonalizada mt-4" *ngIf="loading">
         <div class="row">
             <div class="col-md-12 ">
                 <img src="../../../../../assets/images/logoRansa.ico" alt="">
@@ -70,18 +70,18 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let dolar of dolares " class="trHover titulos22">
+                  <tr *ngFor="let dolar of dolares " >
                     <td data-label="Centro de Costo"> {{  dolar?.CC                  }}</td>
                     <td data-label="Porcentaje">      {{ (dolar?.CANTIDAD / dolar?.Total) | percent  }}</td>
                     <td data-label="Cantidad">        {{  dolar?.CANTIDAD                              }}</td>
-                    <td data-label="Costo">           {{  dolar?.COSTO  | currency: 'Lps '           }}</td>
+                    <td data-label="Costo">           {{  dolar?.COSTO  | number  : '1.2-2':'es'    }}</td>
                   </tr>
                 </tbody>
                 <tfoot>
                       <tr class="footer">
                       <th class="footer"></th>
                       <th class="footer"></th>
-                      <th class="footerDetalle titulo"> SUBTOTAL</th>
+                      <th class="footerDetalle "> SUBTOTAL</th>
                       <th class="footerDetalle"> {{ subTotal | currency : 'Lps '}} </th>
                       </tr>
     
@@ -89,14 +89,14 @@
                         <tr class="footer">
                         <th class="footer"></th>
                         <th class="footer"></th>
-                        <th class="footerDetalle titulo"> ISV </th>
+                        <th class="footerDetalle "> ISV </th>
                         <th class="footerDetalle"> {{ ( subTotal * 0.15 ) | currency : 'Lps '}} </th>
                         </tr>
                     <!-- TOTAL -->
                     <tr class="footer">
                     <th class="footer"></th>
                     <th class="footer"></th>
-                    <th class="footerDetalle titulo"> Total Factura </th>
+                    <th class="footerDetalle "> Total Factura </th>
                     <th class="footerDetalle"> {{ ( subTotal * 0.15 ) + subTotal | currency : 'Lps '}} </th>
                     </tr>
                   </tfoot>  
@@ -109,7 +109,7 @@
 
 </div>
 
-<mat-card class="mat-cardContainerCuerpo mt-4" *ngIf="loading">
+<!-- <mat-card class="mat-cardContainerCuerpo mt-4" *ngIf="loading">
         <div class="row mb-4">
             <div class="col-md-12 container">
                 <h4 class="h4"> Opciones </h4>
@@ -126,16 +126,22 @@
                 </div>
             </div>
 
-            <div class="col-md-6 container">
+            <div class="col-md-12 container">
                 <div class="text-left">
-                    <button mat-raised-button class="buttonPrincipal"  
-                    #tooltip="matTooltip" matTooltip="Documento PDF" matTooltipPosition="above" 
-                    [disabled]="f.invalid" (click)="sharedS.downloadPDF('Factura', 'Factura_cco','Factura por centro de costo', 'Seguro de imprimir factura')">
-                        <mat-icon>
-                            picture_as_pdf
-                        </mat-icon>
-                    </button>
+           
                 </div>
             </div>
         </div>
-</mat-card>
+        
+</mat-card> -->
+
+
+
+<button mat-raised-button class="buttonPrincipal"  
+#tooltip="matTooltip" matTooltip="Documento PDF" matTooltipPosition="above" 
+[disabled]="f.invalid" (click)="sharedS.downloadPDF('Factura', 'Factura_cco','Factura por centro de costo', 'Seguro de imprimir factura')"
+class="buttonPrincipal btn-flotante">
+    <mat-icon>
+        picture_as_pdf
+    </mat-icon  >
+</button>

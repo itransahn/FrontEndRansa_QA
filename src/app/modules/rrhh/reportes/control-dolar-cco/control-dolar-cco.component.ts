@@ -58,11 +58,11 @@ export class ControlDolarCCOComponent implements OnInit {
   public pageSize   = 50;
   constructor(
     private paginator : MatPaginatorIntl,
-    public rrhhS : RrhhService,
-    public dialog : MatDialog, 
+    public  rrhhS : RrhhService,
+    public  dialog : MatDialog, 
     private sweel : SweetAlertService,
     private toast : ToastServiceLocal,
-    private sharedS : SharedService
+    public  sharedS : SharedService
   ) { }
 
   ngOnInit() {

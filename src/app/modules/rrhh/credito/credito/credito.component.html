@@ -3,26 +3,26 @@
       
          <form [formGroup]="creditoForm" #f="ngForm" style="margin-top: 2%;">
           
-          <div class="row">
+          <div class="row container">
             <div class="container">
                 <h3> Crédito Cafetería </h3>
             </div>
        
-            <div class="col-md-4">
+            <div class="col-md-4 container">
                 <mat-form-field  appearance="legacy">
                     <mat-label>Cod. Empleado</mat-label>
                     <input matInput #texto maxlength="100" placeholder="Cod. Empleado" (window:keypress) ="onKeypressEvent($event)" mask="999999999"  formControlName ="codigoEmpleado">
                 </mat-form-field>
             </div>
 
-            <div class="col-md-4" *ngIf="creditoForm.value.codigoEmpleado.length > 0">
+            <div class="col-md-4  container" *ngIf="creditoForm.value.codigoEmpleado.length > 0" style="text-align:center !important">
                 <mat-form-field appearance="legacy">
                     <mat-label>Nombre Empleado</mat-label>
                     <input readonly="true" matInput maxlength="100" placeholder="Nombre Empleado" formControlName ="nombreEmpleado">
                 </mat-form-field>
             </div>
 
-            <div class="col-md-4" *ngIf="creditoForm.value.codigoEmpleado.length > 0">
+            <div class="col-md-4  container" *ngIf="creditoForm.value.codigoEmpleado.length > 0" style="text-align:right !important">
                 <mat-form-field appearance="legacy">
                     <mat-label> Monto Crédito </mat-label>
                     <input  matInput mask="separator.2" thousandSeparator="," maxlength="100" placeholder="Monto"  formControlName ="monto">

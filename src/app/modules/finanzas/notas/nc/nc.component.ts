@@ -188,7 +188,6 @@ cargarCabeceraN(){
     return correlativo.substring(4,correlativo.length)
   }
 
-
   GenerarPdf(){
     this.sharedS.pdfNotas('originalNC',  `${this.retornarCorrelativoNC()}_${this.cabeceraN[0]['TCMPCL']}NCOriginal`,'Nota de débito de Ransa', `Seguro de generar PDF de Nota ${this.cabeceraN[0]['NDCCTC']} del CLIENTE
     ${this.cabeceraN[0]['TCMPCL']}`,{
