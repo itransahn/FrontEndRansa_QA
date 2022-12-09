@@ -48,6 +48,11 @@ const routes: Routes = [
         path : 'finanzas',
         canActivate : [AccessGuard],
         loadChildren : () => import('./modules/finanzas/finanzas-routing.module').then( m=> m.finanzasRoutingModule)
+      },
+      {
+        path : 'transporte',
+        canActivate : [AccessGuard],
+        loadChildren : () => import('./modules/transporte/transporte-routing.module').then(m => m.transporteRoutingModule )
       }
     ]
 

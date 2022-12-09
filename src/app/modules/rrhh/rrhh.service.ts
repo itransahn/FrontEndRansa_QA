@@ -112,7 +112,6 @@ export class RrhhService {
     return request$
   }
 
-
   /* Búscarle funcionamiento OJO */
   cargarUsuario( codigo ?: number ){
     let url = 'rrhh/validarUsuario';
