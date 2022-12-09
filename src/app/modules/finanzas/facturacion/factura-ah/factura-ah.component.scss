@@ -6,7 +6,10 @@
 
 *{
 	border-color: #050404;
-	border: 0.5px !important;
+	border: 0.1px !important;
+		.bordes2{
+		border : 1.5px solid #050404 !important;
+	}
 }
 
 .bordes{
@@ -15,7 +18,7 @@
 	// border-style: outset !important;
 	// border-color: #050404 !important;
 	// border : 1px outset #050505 !important;
-	border : 0.5px solid #050404;
+	border : 0.1px solid #050404;
 	// border-style: outset !important;
 	// color: #006F1D !important;
 }
@@ -67,7 +70,7 @@ div, p, span{
 
 .contain1{
 	width: 100%;
-    border : 0.5px solid #006F1D;
+    border : 0.1px solid #006F1D;
     color: #006F1D !important;
     height: auto;
 	border-radius: 10px;
@@ -108,7 +111,7 @@ tfoot{
 	th{
 		border-style: outset !important;
 		border-color: #050404;
-		border: 0.5px;
+		border: 0.1px;
 		background-color: #ffffff !important;
 	color: #050404 !important;
 	font-size: x-small;
@@ -199,13 +202,13 @@ table {
 	}
 	
 	table tr {
-	  border-bottom: 1px solid #050505 !important;
+	  border-bottom: 0.1px solid #050505 !important;
 	  display: block;
 	  margin-bottom: .625em;
 	}
 	
 	table td {
-	  border-bottom: 1px solid #050505 !important;
+	  border-bottom: 0.1px solid #050505 !important;
 	  display: block;
 	  font-size: .8em;
 	  text-align: right;
@@ -258,13 +261,13 @@ table {
 		color: #050404 !important;
 	}
 	.contain1{
-		border : 0.5px groove #050404 !important;
+		border : 0.1px groove #050404 !important;
 	}
 
 .tabla{
 		background-color: #ffffff !important;
 		color: #050404 !important;
-		border: 1px #050404 !important;
+		border: 0.1px #050404 !important;
 }
 }
 
@@ -282,7 +285,7 @@ table{
 	margin: 0;
 	padding: 0;
 	width: 100% !important;
-	border :  0.5px solid #050404 !important;
+	border :  0.1px solid #050404 !important;
   }
   
   table caption {
@@ -300,7 +303,7 @@ table{
   table th{
 	background-color: #ffffff ;
 	color: #050404;
-	border : 0.5px solid #050404 !important;
+	border : 0.1px solid #bcb9b9 !important;
 	font-size: 0.75em !important;
 	font: bold;
 	padding: .625em;

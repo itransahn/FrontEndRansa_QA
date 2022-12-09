@@ -49,7 +49,7 @@
 
         <div class="tabla mt-4">
             <div class="table-responsive !important" >
-                <table>
+                <table class="mb-4">
                     <thead>
                       <tr>
                         <th class="contenidoF" scope="col">CANTIDAD</th>
@@ -60,7 +60,7 @@
                         <th class="contenidoF" scope="col">TOTAL</th>
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="bordes2">
                       <tr *ngFor="let item of DcabeceraF; let i = index">
                         <td data-label="CANTIDAD" class="contenidoF"> {{ item?.QAPCTC  | number }} </td>
                         <td data-label="DESCRIPCION" class="contenidoF"> {{item?.TCMTRF }} </td>
@@ -79,18 +79,18 @@
                         <td data-label="TOTAL">{{ 4047    | currency  : 'Lps'}}</td>
                       </tr> -->
 
-                        <tr style=" border-collapse: collapse;"  *ngFor="let item of espaciosBlancos "> 
+                        <tr  *ngFor="let item of espaciosBlancos "> 
                             <td class="espacioB"  colspan="6"></td>
                         </tr>
 
-                        <tr style=" border-collapse: collapse;"> 
+                        <tr > 
                             <td style="text-align:left !important; font-size: 0.9em !important; " class="espacioB" colspan="6">
                                 {{obs}}
                             </td>
                         </tr>
                     
                     </tbody>
-                    <tfoot>
+                    <tfoot class="mb-4">
                         <tr >
                                 <!-- Número a letras -->
                             <th class="legend left" colspan="4" >VALOR EN LETRAS: <span class="legend">
@@ -160,17 +160,18 @@
                   </table>
                </div>
         </div>
-            <div class="row mt-4">
-                <div class="col-md-12 container footL">
-                    <label class="center"> ORIGINAL: CLIENTE</label>
-                </div>
-                <!-- <div class="col-md-4 container footL">
-                    <label class="center"> DUPLICADO: TRIBUTARIO EMISOR</label>
-                </div> -->
-                <!-- <div class="col-md-4 container footL">
-                    <label class="center"> TRIPLICADO: ARCHIVO</label>
-                </div> -->
+
+        <div class="row mt-4">
+            <div class="col-md-12 container footL">
+                <label class="center"> ORIGINAL: CLIENTE </label>
             </div>
+            <!-- <div class="col-md-4 container footL">
+                <label class="center"> DUPLICADO: TRIBUTARIO EMISOR</label>
+            </div>
+            <div class="col-md-4 container footL">
+                <label class="center"> TRIPLICADO: ARCHIVO</label>
+            </div> -->
+        </div>
             <div class="row container">
                 <div class="col-md-12 container">
                     <label class="center" style="color:#FE9600 !important; padding-top: 3%;"> {{ parametros[0]['lemaFactura']}} </label>
