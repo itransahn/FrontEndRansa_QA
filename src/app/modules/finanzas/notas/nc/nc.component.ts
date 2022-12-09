@@ -159,7 +159,6 @@ cargarCabeceraN(){
       sede        : this.sede,
       tipo        : 3
     }
-    console.log( params )
     this.facturacionS.post( url, params ).subscribe(
       (res:DataApi)=>{
         console.log(res)
@@ -189,7 +188,7 @@ cargarCabeceraN(){
   }
 
   GenerarPdf(){
-    this.sharedS.pdfNotas('originalNC',  `${this.retornarCorrelativoNC()}_${this.cabeceraN[0]['TCMPCL']}NCOriginal`,'Nota de débito de Ransa', `Seguro de generar PDF de Nota ${this.cabeceraN[0]['NDCCTC']} del CLIENTE
+    this.sharedS.pdfNotas('originalNC',  `${this.retornarCorrelativoNC()}_${this.cabeceraN[0]['TCMPCL']}NCOriginal`,'Nota de crédito Ransa', `Seguro de generar PDF de Nota ${this.cabeceraN[0]['NDCCTC']} del CLIENTE
     ${this.cabeceraN[0]['TCMPCL']}`,{
       numeroFactura: `${this.retornarCorrelativoNC()}_${this.cabeceraN[0]['TCMPCL']}`,
       factura : 'Nota de crédito Ransa',

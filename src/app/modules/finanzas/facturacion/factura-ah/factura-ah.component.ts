@@ -249,7 +249,7 @@ this.loading1 = true;
   }
 
     GenerarPdf(){
-    this.sharedS.pdfFactura('Factura',  `${this.retornarCorrelativoPDF()}_${this.cabeceraF[0]['TCMPCL']}Original`,'Factura Ransa', `Seguro de generar PDF de FACTURA ${this.cabeceraF[0]['NDCCTC']} del CLIENTE
+    this.sharedS.pdfFactura('Factura',  `${this.retornarCorrelativoPDF()}_${this.cabeceraF[0]['TCMPCL']}FACOriginal`,'Factura Ransa', `Seguro de generar PDF de FACTURA ${this.cabeceraF[0]['NDCCTC']} del CLIENTE
     ${this.cabeceraF[0]['TCMPCL']}`,{
       numeroFactura: `${this.retornarCorrelativoPDF()}_${this.cabeceraF[0]['TCMPCL']}`,
       factura : 'Factura Ransa',
@@ -331,3 +331,6 @@ TCMTRF:array[0]['TCMTRF']
         }
   }
 }
+
+
+

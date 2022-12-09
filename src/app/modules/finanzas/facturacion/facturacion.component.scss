@@ -4,8 +4,25 @@
     box-shadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2), 0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12);
 }
 
+*{
+	border-color: #050404;
+	border: 0.3px !important;
+}
+
+.bordes{
+	// border-style: solid !important; 
+	// border-color: #050404 !important;
+	// border-style: outset !important;
+	// border-color: #050404 !important;
+	// border : 1px outset #050505 !important;
+	border : 0.3px solid #050404;
+	// border-style: outset !important;
+	// color: #006F1D !important;
+}
+
 .contenidoF{
 	font-size: 0.9em !important;
+	font-size: xx-small;
 }
 
 .btn-flotante {
@@ -50,10 +67,11 @@ div, p, span{
 // monospace
 
 .contain1{
-    border : 1px groove #006F1D;
+	width: 100%;
+    border : 0.5px solid #006F1D;
     color: #006F1D !important;
     height: auto;
-    border-radius: 10px;
+	border-radius: 10px;
 }
 
 .mat-divider {  border-top-color: #006F1D !important; }
@@ -61,7 +79,7 @@ div, p, span{
 /* Alineacion */
 .left{  text-align: left !important; }
 
-.right{ text-align: right !important; }
+.right{ text-align: right !important; } 
 
 .center{    text-align: center !important; }
 /* Alineacion */
@@ -75,7 +93,6 @@ div, p, span{
 	font-size: smaller !important;
 }
 thead{
-	border: none;
 	font-weight: bold;
 	font-size:   small;
 	th{
@@ -85,18 +102,14 @@ thead{
 }
 
 tfoot{
-	border: inset opt ;
-	border:none;
 	tr{
-		background-color: #ffffff !important;
-		border: inset opt ;
-		border:none;
+		background-color: #ffffff !important;	
 		font-size: x-small;
 	}
-th{
-	background-color: #ffffff !important;
+	th{
+		border: 0.5px;
+		background-color: #ffffff !important;
 	color: #050404 !important;
-	border:none;
 	font-size: x-small;
 }
 }
@@ -134,10 +147,12 @@ tbody{
 }
 
 table {
-	border-collapse: collapse;
 	margin: 0;
 	padding: 0;
 	width: 100%;
+	// .tbody{
+	// 	border-bottom: 1px solid #050505 !important;
+	// }
   }
   
   table caption {
@@ -146,8 +161,7 @@ table {
   }
   
   table tr {
-	background-color: #f8f8f8;
-	border: 1px solid #ddd;
+	background-color: #ffffff;
 	padding: .35em;
   }
   
@@ -184,14 +198,13 @@ table {
 	}
 	
 	table tr {
-	  border-bottom: 3px solid #ddd;
-	  display: block;
+	  border-bottom: 1px solid #050505 !important;
+
 	  margin-bottom: .625em;
 	}
 	
 	table td {
-	  border-bottom: 1px solid #ddd;
-	  display: block;
+	  border-bottom: 1px solid #050505 !important;
 	  font-size: .8em;
 	  text-align: right;
 	}
@@ -221,7 +234,6 @@ table {
   .espacioB{
 	width: 100% !important;
 	height:  auto !important;
-	border-collapse: inherit;
 	// border-color: #050404 !important;
   }
 
@@ -244,12 +256,13 @@ table {
 		color: #050404 !important;
 	}
 	.contain1{
-		border : 1px groove #050404 !important;
+		border : 0.5px groove #050404 !important;
 	}
 
 .tabla{
 		background-color: #ffffff !important;
 		color: #050404 !important;
+		border: 1px #050404 !important;
 }
 }
 
@@ -260,3 +273,53 @@ table {
 .footerPC{
 	display:  none !important;
 }
+
+
+/* Modificando clases padres*/
+table{
+	margin: 0;
+	padding: 0;
+	width: 100% !important;
+	border :  0.3px solid #050404 !important;
+  }
+  
+  table caption {
+	font-size: 1.5em;
+	margin: .5em 0 .75em;
+  }
+  
+  table tr {
+	background-color: #ffffff;
+	font-size: 0.75em !important;
+	padding: .35em;
+  }
+  
+  table th{
+	background-color: #ffffff ;
+	color: #050404;
+	border : 0.3px solid #050404 !important;
+	font-size: 0.75em !important;
+	font: bold;
+	padding: .625em;
+	text-align: center;
+  }
+  
+  table td {
+	padding: .625em;
+	text-align: center;
+	font-size: 1.1em !important;
+  }
+  
+  .trHover:hover {
+	background-color: #ffffff !important;
+	color: #050404 !important;
+	cursor: pointer;
+  }
+  
+  table th {
+	font-size: .85em;
+	letter-spacing: .1em;
+	text-transform: uppercase;
+  }
+
+/* Modificando clases padres*/

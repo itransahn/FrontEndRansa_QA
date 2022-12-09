@@ -120,7 +120,7 @@ export class RegistroDolarComponent implements OnInit {
 
 
   ingresarDolar(){
-    this.sweel.mensajeConConfirmacion(`¿Seguro de canjear dolar del empleado ${ this.dolarForm.value.nombreEmpleado} ?`, `Dolar Cafetería`,"warning").then(
+    this.sweel.mensajeConConfirmacion(`¿Desea canjear el dolar del empleado ${ this.dolarForm.value.nombreEmpleado} ?`, `Dolar Cafetería`,"warning").then(
       res=>{
         if ( res ) {
           let url = 'rrhh/insertarDolar';

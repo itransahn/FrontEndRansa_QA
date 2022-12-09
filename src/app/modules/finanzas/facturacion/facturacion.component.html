@@ -1,4 +1,4 @@
-<div class="container padre" id="Factura" *ngIf="DcabeceraF.length >= 1 && loading1 && loading2 && cabeceraF.length >= 1 && permitido">
+<div class="container padre herencia"   id="Factura" *ngIf="DcabeceraF.length >= 1 && loading1 && loading2 && cabeceraF.length >= 1 && permitido">
     <mat-card class="cardPersonalizada mt-8">
         <div class="row ">
         <div class="col-md-6">
@@ -32,8 +32,8 @@
             </p>
         </div>
 
-        <div class="mt-2">
-            <div class="row contain1">
+        <div class="mt-2 container">
+            <div class="row contain1 ">
                 <div class="col-md-6" >
                     <p>
                     <span style="text-align: left !important;" class="leftC"> CLIENTE: {{  cabeceraF[0]['TCMPCL'] }} </span> <br>
@@ -49,11 +49,12 @@
             </div>
         </div>
 
-        <div class="tabla mt-4">
+
+        <div class="tabla mt-4" >
             <div class="table-responsive !important" >
                 <table>
                     <thead>
-                      <tr>
+                      <tr >
                         <th class="contenidoF" scope="col">CANTIDAD</th>
                         <th class="contenidoF" scope="col">DESCRIPCION</th>
                         <th class="contenidoF" scope="col">PRECIO UNITARIO</th>
@@ -62,7 +63,7 @@
                         <th class="contenidoF" scope="col">TOTAL</th>
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="bordes">
                       <tr *ngFor="let item of DcabeceraF; let i = index">
                         <td data-label="CANTIDAD" class="contenidoF"> {{ item?.QAPCTC  | number }} </td>
                         <td data-label="DESCRIPCION" class="contenidoF"> {{item?.TCMTRF }} </td>
@@ -81,13 +82,15 @@
                         <td data-label="TOTAL">{{ 4047    | currency  : 'Lps'}}</td>
                       </tr> -->
 
-                        <tr style=" border-collapse: collapse;"  *ngFor="let item of espaciosBlancos "> 
+                        <tr  *ngFor="let item of espaciosBlancos "> 
                             <td class="espacioB"  colspan="6"></td>
                         </tr>
 
-                        <tr style=" border-collapse: collapse;"> 
-                            <td style="text-align:left !important; font-size: 0.9em !important; " class="espacioB" colspan="6">
+                        <tr> 
+                            <td style="text-align:left !important; font-size: 0.9em !important; " class="espacioB" colspan="5">
                                 {{obs}}
+                            </td>
+                            <td style="text-align:left !important; font-size: 0.9em !important; " class="espacioB" colspan="1">
                             </td>
                         </tr>
                     
@@ -98,7 +101,7 @@
                             <th class="legend left" colspan="4" >VALOR EN LETRAS: <span class="legend">
                                 <!-- CUATRO MIL SEICIENTOS CINCUENTA Y CUATRO LEMPIRAS 05/100 M.N -->
                                 {{ convertirNumLetra( retornarTotal(),[])}}
-                            </span>:</th>
+                            </span></th>
 
                         <th class="right"> SUBTOTAL L.</th>
                         <th class="right"> {{ retornarSubtotal() | number : '1.2-2':'es' }} </th>
@@ -117,17 +120,15 @@
                         </tr>
                            <!-- Importe Gravado al 15% -->
                            <tr >
-                            <th class="legend left" colspan="3" >NO. IDENTIFICATIVO DEL REGISTRO DE LA SAG:</th>
-                            <th class="right" colspan="2"> Importe Gravado al 15%L.</th>
+                            <th class="legend left" colspan="4" >NO. IDENTIFICATIVO DEL REGISTRO DE LA SAG:</th>
+                            <th class="right" colspan="1"> Importe Gravado al 15%L.</th>
                             <th class="right"> {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2':'es' }} </th>
                         </tr>
 
                           <!-- Importe Gravado al 18% -->
                           <tr >
-                            <th ></th>
-                            <th ></th>
-                            <th ></th>
-                            <th class="right" colspan="2"> Importe Gravado al 18%L.</th>
+                            <th colspan="4"></th>
+                            <th class="right" colspan="1"> Importe Gravado al 18%L.</th>
                             <th class="right"> {{ 0 | number : '1.2-2':'es' }} </th>
                         </tr>
 
@@ -147,14 +148,10 @@
                           <!-- Total a pagar -->
                           <tr >
                             <!-- <th ></th> -->
-                            <th></th>
-                            <th></th>
-                            <th></th> 
-                            <th></th>
+                            <!-- <th colspan="4"></th> -->
                             <!-- <div >
-                            <label > INGRESADO POR MARIO VELASQUEZ</label>
                             </div> -->
-                            <th class="right"> Total a pagarL.</th>
+                            <th class="right" colspan="5"> Total a pagarL.</th>
                             <th class="right"> {{ retornarTotal() | number : '1.2-2':'es'}} </th>
                         </tr>
 
@@ -168,7 +165,8 @@
                   </table>
                </div>
         </div>
-            <div class="row">
+
+            <div class="row mt-4">
                 <div class="col-md-12 container footL">
                     <label class="center"> ORIGINAL: CLIENTE</label>
                 </div>
@@ -221,7 +219,7 @@
             </p>
         </div>
 
-        <div class="mt-2">
+        <div class="mt-2 container">
             <div class="row contain1">
                 <div class="col-md-6" >
                     <p>
@@ -242,7 +240,7 @@
             <div class="table-responsive !important" >
                 <table>
                     <thead>
-                      <tr>
+                      <tr class="bordes">
                         <th class="contenidoF" scope="col">CANTIDAD</th>
                         <th class="contenidoF" scope="col">DESCRIPCION</th>
                         <th class="contenidoF" scope="col">PRECIO UNITARIO</th>
@@ -251,8 +249,8 @@
                         <th class="contenidoF" scope="col">TOTAL</th>
                       </tr>
                     </thead>
-                    <tbody>
-                      <tr *ngFor="let item of DcabeceraF">
+                    <tbody class="bordes">
+                      <tr *ngFor="let item of DcabeceraF; let i = index">
                         <td data-label="CANTIDAD" class="contenidoF"> {{ item?.QAPCTC  | number }} </td>
                         <td data-label="DESCRIPCION" class="contenidoF"> {{item?.TCMTRF }} </td>
                         <td data-label="PRECIO UNITARIO" class="contenidoF">{{ retornarPrecioUnitario(i, item?.QAPCTC) | number : '1.2-2' }}</td>
@@ -275,8 +273,10 @@
                         </tr>
 
                         <tr style=" border-collapse: collapse;"> 
-                            <td style="text-align:left !important; font-size: 0.9em !important; " class="espacioB" colspan="6">
+                            <td style="text-align:left !important; font-size: 0.9em !important; " class="espacioB" colspan="5">
                                 {{obs}}
+                            </td>
+                            <td style="text-align:left !important; font-size: 0.9em !important; " class="espacioB" colspan="1">
                             </td>
                         </tr>
                     
@@ -287,7 +287,7 @@
                             <th class="legend left" colspan="4" >VALOR EN LETRAS: <span class="legend">
                                 <!-- CUATRO MIL SEICIENTOS CINCUENTA Y CUATRO LEMPIRAS 05/100 M.N -->
                                 {{ convertirNumLetra( retornarTotal(),[])}}
-                            </span>:</th>
+                            </span></th>
 
                         <th class="right"> SUBTOTAL L.</th>
                         <th class="right"> {{ retornarSubtotal() | number : '1.2-2':'es' }} </th>
@@ -306,17 +306,15 @@
                         </tr>
                            <!-- Importe Gravado al 15% -->
                            <tr >
-                            <th class="legend left" colspan="3" >NO. IDENTIFICATIVO DEL REGISTRO DE LA SAG:</th>
-                            <th class="right" colspan="2"> Importe Gravado al 15%L.</th>
+                            <th class="legend left" colspan="4" >NO. IDENTIFICATIVO DEL REGISTRO DE LA SAG:</th>
+                            <th class="right" colspan="1"> Importe Gravado al 15%L.</th>
                             <th class="right"> {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2':'es' }} </th>
                         </tr>
 
                           <!-- Importe Gravado al 18% -->
                           <tr >
-                            <th ></th>
-                            <th ></th>
-                            <th ></th>
-                            <th class="right" colspan="2"> Importe Gravado al 18%L.</th>
+                            <th colspan="4"></th>
+                            <th class="right" colspan="1"> Importe Gravado al 18%L.</th>
                             <th class="right"> {{ 0 | number : '1.2-2':'es' }} </th>
                         </tr>
 
@@ -336,14 +334,10 @@
                           <!-- Total a pagar -->
                           <tr >
                             <!-- <th ></th> -->
-                            <th></th>
-                            <th></th>
-                            <th></th> 
-                            <th></th>
                             <!-- <div >
                             <label > INGRESADO POR MARIO VELASQUEZ</label>
                             </div> -->
-                            <th class="right"> Total a pagarL.</th>
+                            <th class="right" colspan="5"> Total a pagarL.</th>
                             <th class="right"> {{ retornarTotal() | number : '1.2-2':'es'}} </th>
                         </tr>
 
@@ -357,7 +351,7 @@
                   </table>
                </div>
         </div>
-            <div class="row">
+            <div class="row mt-4">
                 <div class="col-md-12 container footL">
                     <label class="center"> DUPLICADO: OBLIGADO TRIBUTARIO EMISOR </label>
                 </div>
@@ -410,7 +404,7 @@
             </p>
         </div>
 
-        <div class="mt-2">
+        <div class="mt-2 container">
             <div class="row contain1">
                 <div class="col-md-6" >
                     <p>
@@ -431,7 +425,7 @@
             <div class="table-responsive !important" >
                 <table>
                     <thead>
-                      <tr>
+                      <tr class="bordes">
                         <th class="contenidoF" scope="col">CANTIDAD</th>
                         <th class="contenidoF" scope="col">DESCRIPCION</th>
                         <th class="contenidoF" scope="col">PRECIO UNITARIO</th>
@@ -440,8 +434,8 @@
                         <th class="contenidoF" scope="col">TOTAL</th>
                       </tr>
                     </thead>
-                    <tbody>
-                      <tr *ngFor="let item of DcabeceraF">
+                    <tbody class="bordes">
+                      <tr *ngFor="let item of DcabeceraF ; let i = index">
                         <td data-label="CANTIDAD" class="contenidoF"> {{ item?.QAPCTC  | number }} </td>
                         <td data-label="DESCRIPCION" class="contenidoF"> {{item?.TCMTRF }} </td>
                         <td data-label="PRECIO UNITARIO" class="contenidoF">{{ retornarPrecioUnitario(i, item?.QAPCTC) | number : '1.2-2' }}</td>
@@ -464,8 +458,10 @@
                         </tr>
 
                         <tr style=" border-collapse: collapse;"> 
-                            <td style="text-align:left !important; font-size: 0.9em !important; " class="espacioB" colspan="6">
+                            <td style="text-align:left !important; font-size: 0.9em !important; " class="espacioB" colspan="5">
                                 {{obs}}
+                            </td>
+                            <td style="text-align:left !important; font-size: 0.9em !important; " class="espacioB" colspan="1">
                             </td>
                         </tr>
                     
@@ -476,7 +472,7 @@
                             <th class="legend left" colspan="4" >VALOR EN LETRAS: <span class="legend">
                                 <!-- CUATRO MIL SEICIENTOS CINCUENTA Y CUATRO LEMPIRAS 05/100 M.N -->
                                 {{ convertirNumLetra( retornarTotal(),[])}}
-                            </span>:</th>
+                            </span></th>
 
                         <th class="right"> SUBTOTAL L.</th>
                         <th class="right"> {{ retornarSubtotal() | number : '1.2-2':'es' }} </th>
@@ -495,17 +491,15 @@
                         </tr>
                            <!-- Importe Gravado al 15% -->
                            <tr >
-                            <th class="legend left" colspan="3" >NO. IDENTIFICATIVO DEL REGISTRO DE LA SAG:</th>
-                            <th class="right" colspan="2"> Importe Gravado al 15%L.</th>
+                            <th class="legend left" colspan="4" >NO. IDENTIFICATIVO DEL REGISTRO DE LA SAG:</th>
+                            <th class="right" colspan="1"> Importe Gravado al 15%L.</th>
                             <th class="right"> {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2':'es' }} </th>
                         </tr>
 
                           <!-- Importe Gravado al 18% -->
                           <tr >
-                            <th ></th>
-                            <th ></th>
-                            <th ></th>
-                            <th class="right" colspan="2"> Importe Gravado al 18%L.</th>
+                            <th colspan="4"></th>
+                            <th class="right" colspan="1"> Importe Gravado al 18%L.</th>
                             <th class="right"> {{ 0 | number : '1.2-2':'es' }} </th>
                         </tr>
 
@@ -524,15 +518,10 @@
                         </tr>
                           <!-- Total a pagar -->
                           <tr >
-                            <!-- <th ></th> -->
-                            <th></th>
-                            <th></th>
-                            <th></th> 
-                            <th></th>
                             <!-- <div >
                             <label > INGRESADO POR MARIO VELASQUEZ</label>
                             </div> -->
-                            <th class="right"> Total a pagarL.</th>
+                            <th class="right" colspan="5"> Total a pagarL.</th>
                             <th class="right"> {{ retornarTotal() | number : '1.2-2':'es'}} </th>
                         </tr>
 
@@ -546,7 +535,7 @@
                   </table>
                </div>
         </div>
-            <div class="row">
+            <div class="row mt-4">
                 <div class="col-md-12 container footL">
                     <label class="center"> TRIPLICADO: ARCHIVO </label>
                 </div>
@@ -574,8 +563,6 @@
 <!-- this.cabeceraF[0]['NDCCTC'] -->
 <app-loading2 *ngIf="!loading1 && !loading2"></app-loading2>
 
-
-
 <nav *ngIf="DcabeceraF.length < 1 || cabeceraF.length < 1 || !loading1 || !loading2" aria-label="breadcrumb">
     <ol class="breadcrumb container">
      <h4> No se encuentra información de la factura {{ documento }} del cliente {{cliente}} </h4>
@@ -587,3 +574,4 @@
      <h4> Rango de Facturas vencido </h4>
     </ol>
 </nav>
+

@@ -25,6 +25,11 @@ import { ExcelenciaModule } from './modules/excelencia/excelencia.module';
 import { OperatoriaModule } from './modules/operatoria/operatoria.module';
 import { FinanzasModule } from './modules/finanzas/finanzas.module';
 import { SharedModule } from './modules/shared/shared.module';
+import { TransportesComponent } from './modules/transporte/transportes/transportes.component';
+import { CamionesComponent } from './modules/transporte/camiones/camiones.component';
+import { MotoristasComponent } from './modules/transporte/motoristas/motoristas.component';
+import { ClientesTComponent } from './modules/transporte/clientes-t/clientes-t.component';
+import { ProveedoresTComponent } from './modules/transporte/proveedores-t/proveedores-t.component';
 // import { Loading2Component } from './shared/loading2/loading2.component';
 
 @NgModule({
@@ -35,6 +40,11 @@ import { SharedModule } from './modules/shared/shared.module';
     NoPageFoundComponent,
     FullComponentComponent,
     CambioContraComponent,
+    TransportesComponent,
+    CamionesComponent,
+    MotoristasComponent,
+    ClientesTComponent,
+    ProveedoresTComponent,
   ],
   imports: [
     BrowserModule,
