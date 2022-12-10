@@ -59,10 +59,10 @@ export class CamionesComponent implements OnInit {
 }
 
 cargarCamiones(){
-  let url = 'camion/camiones';
+  let url = 'transporte/camiones';
   let params = {};
   
-  this.administracion.usuarios(url,params).subscribe(
+  this.transporteService.get(url,params).subscribe(
     (data : DataApi | any) =>{
       if( !data.hasError ){
         this.camiones = data?.data?.Table0;
