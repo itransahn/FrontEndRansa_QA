@@ -8,6 +8,10 @@ import { ProveedoresTComponent } from './proveedores-t/proveedores-t.component';
 import { transporteRoutingModule } from './transporte-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { TransProveedorComponent } from './trans-proveedor/trans-proveedor.component';
+import { TransClienteComponent } from './trans-cliente/trans-cliente.component';
+import { RolClienteComponent } from './rol-cliente/rol-cliente.component';
+import { RolProveedorComponent } from './rol-proveedor/rol-proveedor.component';
 
 
 @NgModule({
@@ -17,6 +21,10 @@ CamionesComponent,
 MotoristasComponent,
 ClientesTComponent,
 ProveedoresTComponent,
+TransProveedorComponent,
+TransClienteComponent,
+RolClienteComponent,
+RolProveedorComponent,
   ],
   imports: [
     CommonModule,

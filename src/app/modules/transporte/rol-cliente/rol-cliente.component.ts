@@ -4,19 +4,15 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 import { Subscription } from 'rxjs';
 import { DataApi } from 'src/app/interfaces/dataApi';
-import { AdministracionService } from 'src/app/services/administracion.service';
 import { AuthService } from 'src/app/services/auth.service';
-import { SweetAlertService } from 'src/app/services/sweet-alert.service';
-import { ToastServiceLocal } from 'src/app/services/toast.service';
-import { RolesService } from '../../seguridad/roles/roles.service';
 import { TransporteService } from '../transporte.service';
 
 @Component({
-  selector: 'app-transportes',
-  templateUrl: './transportes.component.html',
-  styleUrls: ['./transportes.component.scss']
+  selector: 'app-rol-cliente',
+  templateUrl: './rol-cliente.component.html',
+  styleUrls: ['./rol-cliente.component.scss']
 })
-export class TransportesComponent implements OnInit {
+export class RolClienteComponent implements OnInit {
   //Paginacion
   public page = 0;
   public pageEvent : PageEvent;
@@ -28,22 +24,18 @@ export class TransportesComponent implements OnInit {
   public pageSize = 50;
   public filter :string  = '';
   public filtro: FormGroup;
-  public parametrosBusqueda = ['nombreEmpresa', 'RTNEmpresa','sedeRansa','Propietario'];
-  public transportes : any[] = [];
+  public parametrosBusqueda = ['rol', 'Nombre'];
+  public clientes : any[] = [];
   private sub : Subscription = new Subscription();
   constructor(
     public auth       : AuthService,
-    private paginator : MatPaginatorIntl, 
-    public administracion: AdministracionService, 
+    private paginator : MatPaginatorIntl,  
     public dialog : MatDialog, 
     private transporteService : TransporteService, 
-    private sweel : SweetAlertService,
-    private toast : ToastServiceLocal 
-    
   ) { }
 
-  ngOnInit() {
-    
+ 
+  ngOnInit() {  
     this.paginator.itemsPerPageLabel = 'Items por hoja.';
     this.paginator.nextPageLabel     = 'Página Siguiente';
     this.paginator.previousPageLabel = 'Página Anterior';
@@ -52,36 +44,31 @@ export class TransportesComponent implements OnInit {
       filtrar: new FormControl({ value:'',disabled: false})
     })
 
-    this.cargarTransportes();
+    this.cargarRelacion();
 
     this.sub = this.transporteService.refresh$.subscribe(
       res=>{
-         this.cargarTransportes()
+         this.cargarRelacion()
       }
     )
-  
   }
 
-  ngOnDestroy()  {
-    this.sub.unsubscribe()
-}
-cargarTransportes(){
-  let url = 'transporte/transportes';
-  let params = {};
-  
-  this.administracion.usuarios(url,params).subscribe(
-    (data : DataApi | any) =>{
-      if( !data.hasError ){
-        this.transportes = data?.data?.Table0;
-      }    
-    }
+  cargarRelacion(){
+    let url = 'transporte/relacionRoles';
+    let params = {
+      tipo : 1 
+    };
+    this.transporteService.post(url,params).subscribe(
+      (data : DataApi | any) =>{
+        if( !data.hasError ){
+          this.clientes = data?.data?.Table0;
+        }    
+      }
+    )
+  }
 
-  )
-}
-
-     //Paginación de la tabla
-     next(event: PageEvent) {
-
+    //Paginación de la tabla
+    next(event: PageEvent) {
       if (event.pageIndex === this.pageIndex + 1) {
         this.desde = this.desde + this.pageSize;
         this.hasta = this.hasta + this.pageSize;
@@ -92,20 +79,5 @@ cargarTransportes(){
       }
       this.pageIndex = event.pageIndex;
     }
-
-    CambiarEstado(id ?: number, estado?: number){
-      let url = 'transporte/cambiarEstado';
-      let params = {
-        id: id,
-        estado   : estado,
-        tabla : 1
-      };
-      this.transporteService.post(url, params).subscribe( data =>{
-        if( !data.hasError ){
-                this.cargarTransportes()
-        }
-      })
-    }
-
 
 }

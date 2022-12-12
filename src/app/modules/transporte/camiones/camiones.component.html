@@ -88,15 +88,23 @@
                 <div class="text-center">
 
                <!-- Ver -->
-               <button mat-mini-fab class="buttonSecundary"   #tooltip="matTooltip" matTooltip="Ver Transporte" (click)="ModalRol ( 1 , rol )"  matTooltipPosition="left">
+               <button mat-mini-fab class="buttonSecundary"   (click)="ModalRol ( 1 , rol )" >
                    <mat-icon>visibility</mat-icon>
                </button>
                  <!-- Editar -->
-                 <button mat-mini-fab class="buttonSecundary" [disabled]="!auth.Actualizacion()" #tooltip="matTooltip" matTooltip="Editar Rol" matTooltipPosition="right" (click)="ModalRol ( 3 , rol )" >
+                 <button mat-mini-fab class="buttonSecundary" [disabled]="!auth.Actualizacion()"(click)="ModalRol ( 3 , rol )" >
                    <mat-icon>create</mat-icon>
                </button>
+
+                   <!-- Cambiar estado -->
+                   <button mat-mini-fab class="search" [disabled]="!auth.Actualizacion()" class="buttonSecundary" *ngIf="tr?.estado == 1" (click)="CambiarEstado(tr?.idCamion, 0)" title="Inhabilitar">
+                    <mat-icon>toggle_on</mat-icon>
+                </button>
+            <button mat-mini-fab class="search" [disabled]="!auth.Actualizacion()" class="btnDelete" *ngIf="tr?.estado != 1" (click)="CambiarEstado(tr?.idCamion, 1)" title="Habilitar">
+                <mat-icon>toggle_off</mat-icon>
+                </button>
                <!-- Eliminar -->
-               <button mat-mini-fab class="btnDelete"         [disabled]="!auth.Eliminacion()"      #tooltip="matTooltip" matTooltip="Eliminar Rol"  matTooltipPosition="right" (click)="eliminarRol(rol.rol, rol.ID)"  >
+               <button mat-mini-fab class="btnDelete"         [disabled]="!auth.Eliminacion()"  (click)="eliminarRol(rol.rol, rol.ID)"  >
                             <mat-icon>delete_forever</mat-icon>
                </button>
                       

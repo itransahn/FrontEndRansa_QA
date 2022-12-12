@@ -7,7 +7,7 @@
                         <mat-icon> search </mat-icon>
                         Buscar
                     </mat-label>
-                    <input matInput placeholder="Proveedor,Rtn,Nombre Corto, Sede" formControlName="filtrar">
+                    <input matInput placeholder="Cliente, Rol" formControlName="filtrar">
                 </mat-form-field>
             </div>
      
@@ -17,7 +17,7 @@
                         <mat-icon>
                             add
                         </mat-icon>
-                        Agregar Proveedor
+                        Agregar Relación
                     </button>
                 </div>
             </div>
@@ -28,48 +28,23 @@
             <!-- <caption>Statement Summary</caption> -->
             <thead>
               <tr>
+                <th scope="col">Rol</th>
                 <th scope="col">Proveedor</th>
-                <th scope="col">RTN</th>
-                <th scope="col">Nombre Corto</th>
-                <th scope="col">SEDE</th>
-                <th scope="col">Estado</th>
                 <th scope="col">Acciones</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let tr of proveedores | search: this.filtro.value.filtrar:parametrosBusqueda | slice: desde: hasta " class="trHover">
-                <td data-label="Proveedor">{{ tr?.Proveedor }}</td>
-                <td data-label="RTN">  {{ tr?.rtnProveedor }}</td>
-                <td data-label="Nombre Corto"> {{ tr?.Corto }}</td>
-                <td data-label="Sede"> {{ tr?.Sede }}</td>
-                <td data-label="Estado">
-                    <span *ngIf="tr?.estado == 1">
-                        <mat-icon class="success">check_box</mat-icon>
-                    </span>
-                    <span *ngIf="tr?.estado != 1">
-                        <mat-icon class="error">indeterminate_check_box</mat-icon>
-                    </span>    
-                </td>
-
+                <td data-label="Rol">    {{ tr?.rol }}</td>
+                <td data-label="Proveedor"> {{ tr?.Nombre }}</td>
                 <td data-label="Acciones">
                 <div class="text-center">
 
                <!-- Ver -->
-               <button mat-mini-fab class="buttonSecundary"   (click)="ModalRol ( 1 , rol )" >
+               <button mat-mini-fab class="buttonSecundary" (click)="ModalRol ( 1 , rol )">
                    <mat-icon>visibility</mat-icon>
                </button>
-                 <!-- Editar -->
-                 <button mat-mini-fab class="buttonSecundary" [disabled]="!auth.Actualizacion()"(click)="ModalRol ( 3 , rol )" >
-                   <mat-icon>create</mat-icon>
-               </button>
-
-                   <!-- Cambiar estado -->
-                   <button mat-mini-fab class="search" [disabled]="!auth.Actualizacion()" class="buttonSecundary" *ngIf="tr?.estado == 1" (click)="CambiarEstado(tr?.ID, 0)" title="Inhabilitar">
-                    <mat-icon>toggle_on</mat-icon>
-                </button>
-            <button mat-mini-fab class="search" [disabled]="!auth.Actualizacion()" class="btnDelete" *ngIf="tr?.estado != 1" (click)="CambiarEstado(tr?.ID, 1)" title="Habilitar">
-                <mat-icon>toggle_off</mat-icon>
-                </button>
+    
                <!-- Eliminar -->
                <button mat-mini-fab class="btnDelete"         [disabled]="!auth.Eliminacion()"  (click)="eliminarRol(rol.rol, rol.ID)"  >
                             <mat-icon>delete_forever</mat-icon>

@@ -46,7 +46,7 @@ export class TransporteService {
     
       let request$ = this.http.post<DataApi>(environment.UrlApi + url,params).pipe(
         tap( ( result:DataApi | any )=>{
-          this.refresh$.next();
+          // this.refresh$.next();
             return result
         } ),
         catchError( ( error: HttpErrorResponse) =>{
@@ -66,7 +66,7 @@ export class TransporteService {
     put( url?:string, params?:any){
       let request$ = this.http.put<DataApi>(environment.UrlApi + url,params).pipe(
         tap( ( result:DataApi | any )=>{
-          // this.refresh$.next();
+          this.refresh$.next();
             return result
         } ),
         catchError( ( error: HttpErrorResponse) =>{

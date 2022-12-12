@@ -25,7 +25,7 @@ export class MotoristasComponent implements OnInit {
   public pageSize = 50;
   public filter :string  = '';
   public filtro: FormGroup;
-  public parametrosBusqueda = ['descripcionCamion', 'placa','nombreEmpresa','tipoUnidad','sedeRansa'];
+  public parametrosBusqueda = ['Nombre', 'Nlicencia','nombreEmpresa','SEDE'];
   public motoristas : any[] = [];
   private sub : Subscription = new Subscription();
   constructor(
@@ -79,5 +79,20 @@ export class MotoristasComponent implements OnInit {
       this.pageIndex = event.pageIndex;
     }
 
+
+    
+    CambiarEstado(id ?: number, estado?: number){
+      let url = 'transporte/cambiarEstado';
+      let params = {
+        id: id,
+        estado   : estado,
+        tabla : 3
+      };
+      this.transporteService.post(url, params).subscribe( data =>{
+        if( !data.hasError ){
+                this.cargarMotorista()
+        }
+      })
+    }
 
 }

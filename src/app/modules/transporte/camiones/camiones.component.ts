@@ -85,4 +85,18 @@ cargarCamiones(){
       this.pageIndex = event.pageIndex;
     }
 
+    CambiarEstado(id ?: number, estado?: number){
+      let url = 'transporte/cambiarEstado';
+      let params = {
+        id: id,
+        estado   : estado,
+        tabla : 2
+      };
+      this.transporteService.post(url, params).subscribe( data =>{
+        if( !data.hasError ){
+                this.cargarCamiones()
+        }
+      })
+    }
+
 }
