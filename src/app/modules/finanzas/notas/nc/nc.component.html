@@ -86,7 +86,9 @@
                             </tr>
                             <tr style=" border-collapse: collapse;"> 
                                 <td style="text-align:left !important; font-size: 0.9em !important; " class="espacioB" colspan="3" >
-                                {{ leyendaInterna }}
+                                    <span *ngFor="let item of EstrObs2" >
+                                        {{ item?.TOBCTC}}
+                                    </span>
                                 </td>
                                 <td class="espacioB" colspan="3"> </td>
                             </tr>
@@ -124,7 +126,7 @@
   <!-- Motivo de Nota de Débito -->
 <div class="col-md-12 container">
     <p>
-        Motivo de Emisión de la Nota de Débito: 
+        Motivo de Emisión de la Nota de Crédito: 
     </p>
     <section class="example-section ml-4">
         <mat-checkbox class="example-margin ml-2" [disabled]="disabled" [(ngModel)]="anulacion">Anulación  </mat-checkbox>
@@ -132,14 +134,14 @@
         <mat-checkbox class="example-margin ml-2" [disabled]="disabled" [(ngModel)]="descuento">Descuento  </mat-checkbox>
       </section>
 </div>
-<div class="col-md-12 ">
-<h3 *ngIf="DcabeceraN[0]['descripcion']" class="completo black">
-    Otros especifique: <span style="text-decoration: underline; margin-left: 1px;"> {{  DcabeceraF[0]['descripcion'] }} </span>
-</h3>
-<h3 *ngIf="!DcabeceraN[0]['descripcion']" class="completo black">
-    Otros especifique:____________________________________________________________________________
-</h3>
-</div>
+<div class="col-md-12 completo black">
+    <h3 *ngIf="Motivo" class="completo">
+        Otros especifique: <span style="text-decoration: underline; margin-left: 1px;"> {{  Motivo }} </span>
+    </h3>
+    <h3 *ngIf="!Motivo" class="completo">
+        Otros especifique:____________________________________________________________________________
+    </h3>
+    </div>
 
 <div class="col-md-6" style="font-size: x-small !important;">
     <p class="black"> 
@@ -255,7 +257,9 @@
                             </tr>
                             <tr style=" border-collapse: collapse;"> 
                                 <td style="text-align:left !important; font-size: 0.9em !important; " class="espacioB" colspan="3" >
-                                {{ leyendaInterna }}
+                                    <span *ngFor="let item of EstrObs2" >
+                                        {{ item?.TOBCTC}}
+                                    </span>
                                 </td>
                                 <td class="espacioB" colspan="3"> </td>
                             </tr>
@@ -293,7 +297,7 @@
   <!-- Motivo de Nota de Débito -->
 <div class="col-md-12 container">
     <p class="black">
-        Motivo de Emisión de la Nota de Débito: 
+        Motivo de Emisión de la Nota de Crédito: 
     </p>
     <section class="example-section ml-4">
         <mat-checkbox class="example-margin ml-2" [disabled]="disabled" [(ngModel)]="anulacion">Anulación  </mat-checkbox>
@@ -301,14 +305,14 @@
         <mat-checkbox class="example-margin ml-2" [disabled]="disabled" [(ngModel)]="descuento">Descuento  </mat-checkbox>
       </section>
 </div>
-<div class="col-md-12 ">
-    <h3 *ngIf="DcabeceraN[0]['descripcion']" class="completo black">
-        Otros especifique: <span style="text-decoration: underline; margin-left: 1px;"> {{  DcabeceraF[0]['descripcion'] }} </span>
+<div class="col-md-12 completo black">
+    <h3 *ngIf="Motivo" class="completo">
+        Otros especifique: <span style="text-decoration: underline; margin-left: 1px;"> {{  Motivo }} </span>
     </h3>
-    <h3 *ngIf="!DcabeceraN[0]['descripcion']" class="completo black">
+    <h3 *ngIf="!Motivo" class="completo">
         Otros especifique:____________________________________________________________________________
     </h3>
-    </div>
+</div>
     
     <div class="col-md-6" style="font-size: x-small !important;">
         <p class="black"> 
@@ -424,7 +428,9 @@
                             </tr>
                             <tr style=" border-collapse: collapse;"> 
                                 <td style="text-align:left !important; font-size: 0.9em !important; " class="espacioB" colspan="3" >
-                                {{ leyendaInterna }}
+                                    <span *ngFor="let item of EstrObs2" >
+                                        {{ item?.TOBCTC}}
+                                    </span>
                                 </td>
                                 <td class="espacioB" colspan="3"> </td>
                             </tr>
@@ -462,7 +468,7 @@
   <!-- Motivo de Nota de Débito -->
 <div class="col-md-12 container">
     <p class="black">
-        Motivo de Emisión de la Nota de Débito: 
+        Motivo de Emisión de la Nota de Crédito: 
     </p>
     <section class="example-section ml-4">
         <mat-checkbox class="example-margin ml-2" [disabled]="disabled" [(ngModel)]="anulacion">Anulación  </mat-checkbox>
@@ -471,11 +477,11 @@
       </section>
 </div>
 
-<div class="col-md-12 ">
-    <h3 *ngIf="DcabeceraN[0]['descripcion']" class="completo black">
-        Otros especifique: <span style="text-decoration: underline; margin-left: 1px;"> {{  DcabeceraF[0]['descripcion'] }} </span>
+<div class="col-md-12 completo black">
+    <h3 *ngIf="Motivo" class="completo">
+        Otros especifique: <span style="text-decoration: underline; margin-left: 1px;"> {{  Motivo }} </span>
     </h3>
-    <h3 *ngIf="!DcabeceraN[0]['descripcion']" class="completo black">
+    <h3 *ngIf="!Motivo" class="completo">
         Otros especifique:____________________________________________________________________________
     </h3>
     </div>

@@ -22,24 +22,25 @@ export class NdComponent implements OnInit {
   public documento  =  '';
   public cabeceraN   : cabeceraFactura[] = [];
   public DcabeceraN  : detalleCabecera[] = [];
-  public dia : string;
-  public mes : string;
-  public anio : string;
+  public Observaciones : string ='';
+  public Motivo   : string ='';
+  public EstrObs1 : any[] = [];
+  public EstrObs2 : any[] = [];
+  public dia    : string;
+  public mes    : string;
+  public anio   : string;
   public letras : string;
-  public loading = false;
-  public loading1 = false;
+  public loading   = false;
+  public loading1  = false;
   public permitido = false;
   public parametros    : any[]= [];
   public parametrosCai : any[]= [];
-
-  public espaciosBlancos = [1,2,3,4];
   public anulacion = false;
   public devolcion = false;
   public descuento = false;
   public disabled  = true;
 
-  public leyendaInterna = ' BL No.  CONTENEDORES MEDUX5035795  MEDU9423500,FFAU3016235, MSMU4209438, MSMU4722250, FACTURA No. MSMU4209438,MSMU4722250, MINB4944 MSMU8235780, CAIU4870715, CAIU7574086, MSMU4715780 '
- constructor( 
+  constructor( 
   public facturacionS : FacturacionService,
   public ruta         : ActivatedRoute,
   public toast        : ToastServiceLocal,
@@ -87,7 +88,7 @@ export class NdComponent implements OnInit {
       this.facturacionS.As400( params ).subscribe(
         (res:any)=>{
           this.cabeceraN = res;
-          console.log( this.cabeceraN )
+          // console.log( this.cabeceraN )
           if ( this.cabeceraN.length > 0) {
             this.loading = true;
           }
@@ -95,7 +96,7 @@ export class NdComponent implements OnInit {
           this.dia  =  fecha.substring(6,8);
           this.mes  =  fecha.substring(4,6);
           this.mes  =  retornarMes(this.mes);
-          console.log('Cantidad', this.cabeceraN[0]['ITTFCS'])
+          // console.log('Cantidad', this.cabeceraN[0]['ITTFCS'])
           this.letras = numeroALetras( Number(this.cabeceraN[0]['ITTFCS']),{})
           this.anio =  fecha.substring(0,4);
         }
@@ -116,7 +117,7 @@ export class NdComponent implements OnInit {
         (res:any[])=>{
           if( res.length > 0 ){
             // this.DcabeceraN = res 
-            console.log( this.DcabeceraN )
+            // console.log( this.DcabeceraN )
             for(let i=0; i< res.length; i++){
         if( res[i]['TCMTRF'] == 'IVA' || res[i]['TCMTRF'] == 'IMPUESTO AL VALOR AGREGADO'){
               }else{
@@ -124,12 +125,54 @@ export class NdComponent implements OnInit {
               }
           }
             if ( this.DcabeceraN.length > 0){
+              this.cargarObservacionesFac()
               this.loading1 = true;
             }
           }
         }
       )
       }
+
+      cargarObservacionesFac(){
+        // Observaciones
+        let paramsE = {
+          Empresa   : this.Env,
+          Cliente   : this.cliente,
+          Documento : Number(this.documento)
+        }
+        let params = {
+          "query": `CALL DC@HONLIB.SP_AWS_LISTA_FACTURA_OBCTC('${paramsE['Empresa']}',2,${paramsE['Documento']})`,
+           "env": "PRD"
+         }
+         this.facturacionS.As400( params ).subscribe(
+          (res:any[])=>{
+            if( res ){
+                this.EstrObs1 = res;
+                this.EstructurarObservaciones( this.EstrObs1)
+            }
+          }
+        )
+      }
+      
+      
+      EstructurarObservaciones( array : any[]){
+          for( let i = 0; i < array.length; i++ ){
+              if (    (array[i]['TOBCTC']).includes('ND') || (array[i]['TOBCTC']).includes('N/D')
+                   || (array[i]['TOBCTC']).includes('nd') || (array[i]['TOBCTC']).includes('n/d') ){
+                this.Motivo = array[i]['TOBCTC'];
+              }else{
+                this.EstrObs2.push(array[i])
+              }
+          }
+      
+          for( let i = 0; i < this.EstrObs2.length; i++ ){
+           this.Observaciones += this.EstrObs2[i]['TOBCTC']
+        }
+          // console.log( this.EstrObs2)
+      }
+           
+
+
     
       cargarParametrosF(){
         let url='seguridad/parametrosF';
@@ -163,7 +206,7 @@ export class NdComponent implements OnInit {
           sede        : this.sede,
           tipo        : 2
         }
-        console.log( params )
+        // console.log( params )
         this.facturacionS.post( url, params ).subscribe(
           (res:DataApi)=>{
             if(!res.hasError){

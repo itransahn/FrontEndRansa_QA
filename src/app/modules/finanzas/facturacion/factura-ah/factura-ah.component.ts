@@ -23,6 +23,9 @@ export class FacturaAHComponent implements OnInit {
   public espaciosBlancos = [];
   public cabeceraF  : cabeceraFactura[] = [];
   public DcabeceraF : detalleCabecera[] = [];
+  public Observaciones : string ='';
+  public EstrObs1 : any[] = [];
+  public EstrObs2 : any[] = [];
   public cliente   : string = '0';
   public documento : string = '0';
   public loading1 = false;
@@ -34,7 +37,6 @@ export class FacturaAHComponent implements OnInit {
   public mes : string;
   public anio : string;
 
-  public obs : string = "SERVICIO TRAMITE ADUANAL, BL NO MEDUX5035795, FACTURA NO:MINB4944 CONTENEDORES: MEDU9423500, FFAU3016235, MSMU4209438, MSMU4722250 MSMU8235780, CAIU4870715,CAIU75744086, MSMU4715760"
 
   constructor( 
     public sharedS      : SharedService,
@@ -136,10 +138,6 @@ export class FacturaAHComponent implements OnInit {
      "query": `CALL DC@HONLIB.SP_AWS_LISTA_FACTURA('${paramsE['Empresa']}', 1,  ${paramsE['Cliente']},${paramsE['Documento']},${this.anioActual}0101, ${this.anioActual}1231)`,
       "env": "PRD"
     }
-    // let params = {
-    //   "query": "CALL DC@HONLIB.SP_AWS_LISTA_FACTURA ('RH', 1, 1965, 100031795, 20210101, 20221231)",
-    //   "env": "PRD"
-    // }
 
   this.facturacionS.As400( params ).subscribe(
     (res:any)=>{
@@ -149,11 +147,50 @@ let fecha : string = String(this.cabeceraF[0]?.FDCCTC);
 this.dia  =  fecha.substring(6,8);
 this.mes  =  fecha.substring(4,6);
 this.anio =  fecha.substring(0,4);
+this.cargarObservacionesFac()
 this.loading1 = true;
       }
     }
   )
   }
+
+  cargarObservacionesFac(){
+    // Observaciones
+    let paramsE = {
+      Empresa   : this.Env,
+      Cliente   : this.cliente,
+      Documento : Number(this.documento)
+    }
+    let params = {
+      "query": `CALL DC@HONLIB.SP_AWS_LISTA_FACTURA_OBCTC('${paramsE['Empresa']}',1,${paramsE['Documento']})`,
+       "env": "PRD"
+     }
+     this.facturacionS.As400( params ).subscribe(
+      (res:any[])=>{
+        if( res ){
+            this.EstrObs1 = res;
+            this.EstructurarObservaciones( this.EstrObs1)
+        }
+      }
+    )
+  }
+  
+  
+  EstructurarObservaciones( array : any[]){
+      for( let i = 0; i < array.length; i++ ){
+          if ( array[i]['CTPDCC'] == 2 ){
+              this.EstrObs2.push(array[i])
+          }
+      }
+  
+      for( let i = 0; i < this.EstrObs2.length; i++ ){
+       this.Observaciones += this.EstrObs2[i]['TOBCTC']
+    }
+      console.log( this.EstrObs2)
+      console.log( this.Observaciones)
+  
+  }
+
 
   DetallecabeceraFac(){
     let paramsE = {

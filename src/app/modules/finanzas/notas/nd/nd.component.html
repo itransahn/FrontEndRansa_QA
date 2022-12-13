@@ -85,8 +85,10 @@
                                 <td class="espacioB"  colspan="6"></td>
                             </tr>
                             <tr style=" border-collapse: collapse;"> 
-                                <td style="text-align:left !important; font-size: 0.9em !important; " class="espacioB" colspan="3" >
-                                {{ leyendaInterna }}
+                                <td style="text-align:left !important; font-size: 0.9em !important; height: auto !important; " class="espacioB" colspan="3" >
+                                    <span *ngFor="let item of EstrObs2" >
+                                        {{ item?.TOBCTC}}
+                                    </span>
                                 </td>
                                 <td class="espacioB" colspan="3"> </td>
 
@@ -134,10 +136,10 @@
       </section>
 </div>
 <div class="col-md-12 completo black">
-<h3 *ngIf="DcabeceraN[0]['descripcion']" class="completo">
-    Otros especifique: <span style="text-decoration: underline; margin-left: 1px;"> {{  DcabeceraF[0]['descripcion'] }} </span>
+<h3 *ngIf="Motivo" class="completo">
+    Otros especifique: <span style="text-decoration: underline; margin-left: 1px;"> {{  Motivo }} </span>
 </h3>
-<h3 *ngIf="!DcabeceraN[0]['descripcion']" class="completo">
+<h3 *ngIf="!Motivo" class="completo">
     Otros especifique:____________________________________________________________________________
 </h3>
 </div>
@@ -304,14 +306,14 @@
         <mat-checkbox class="example-margin ml-2" [disabled]="disabled" [(ngModel)]="descuento">Descuento  </mat-checkbox>
       </section>
 </div>
-<div class="col-md-12 black completo" >
-<h3 *ngIf="DcabeceraN[0]['descripcion']" class="completo">
-    Otros especifique: <span style="text-decoration: underline; margin-left: 1px;"> {{  DcabeceraF[0]['descripcion'] }} </span>
-</h3>
-<h3 *ngIf="!DcabeceraN[0]['descripcion']" class="completo">
-    Otros especifique:____________________________________________________________________________
-</h3>
-</div>
+<div class="col-md-12 completo black">
+    <h3 *ngIf="Motivo" class="completo">
+        Otros especifique: <span style="text-decoration: underline; margin-left: 1px;"> {{  Motivo }} </span>
+    </h3>
+    <h3 *ngIf="!Motivo" class="completo">
+        Otros especifique:____________________________________________________________________________
+    </h3>
+    </div>
 
 <div class="col-md-6 black" style="font-size: x-small !important;">
  <p>
@@ -475,11 +477,11 @@
         <mat-checkbox class="example-margin ml-2" [disabled]="disabled" [(ngModel)]="descuento">Descuento  </mat-checkbox>
       </section>
 </div>
-<div class="col-md-12 black completo" >
-<h3 *ngIf="DcabeceraN[0]['descripcion']" class="completo">
-    Otros especifique: <span style="text-decoration: underline; margin-left: 1px;"> {{  DcabeceraF[0]['descripcion'] }} </span>
+<div class="col-md-12 completo black">
+<h3 *ngIf="Motivo" class="completo">
+    Otros especifique: <span style="text-decoration: underline; margin-left: 1px;"> {{  Motivo }} </span>
 </h3>
-<h3 *ngIf="!DcabeceraN[0]['descripcion']" class="completo">
+<h3 *ngIf="!Motivo" class="completo">
     Otros especifique:____________________________________________________________________________
 </h3>
 </div>

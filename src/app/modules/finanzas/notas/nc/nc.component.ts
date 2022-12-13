@@ -22,6 +22,10 @@ export class NcComponent implements OnInit {
   public documento  =  '';
   public cabeceraN   : cabeceraFactura[] = [];
   public DcabeceraN  : detalleCabecera[] = [];
+  public Observaciones : string ='';
+  public Motivo   : string ='';
+  public EstrObs1 : any[] = [];
+  public EstrObs2 : any[] = [];
   public dia : string;
   public mes : string;
   public anio : string;
@@ -38,8 +42,7 @@ export class NcComponent implements OnInit {
   public descuento = false;
   public disabled  = true;
 
-  public leyendaInterna = ' BL No.  CONTENEDORES MEDUX5035795  MEDU9423500,FFAU3016235, MSMU4209438, MSMU4722250, FACTURA No. MSMU4209438,MSMU4722250, MINB4944 MSMU8235780, CAIU4870715, CAIU7574086, MSMU4715780 '
-  constructor(
+ constructor(
     public facturacionS : FacturacionService,
     public ruta         : ActivatedRoute,
     public toast        : ToastServiceLocal,
@@ -123,12 +126,55 @@ cargarCabeceraN(){
           }
       }
         if ( this.DcabeceraN.length > 0){
+          this.cargarObservacionesFac()
           this.loading1 = true;
         }
       }
     }
   )
   }
+
+  cargarObservacionesFac(){
+    let paramsE = {
+      Empresa   : this.Env,
+      Cliente   : this.cliente,
+      Documento : Number(this.documento)
+    }
+    let params = {
+      "query": `CALL DC@HONLIB.SP_AWS_LISTA_FACTURA_OBCTC('${paramsE['Empresa']}',3,${paramsE['Documento']})`,
+       "env": "PRD"
+     }
+     this.facturacionS.As400( params ).subscribe(
+      (res:any[])=>{
+        if( res ){
+            this.EstrObs1 = res;
+            this.EstructurarObservaciones( this.EstrObs1)
+        }
+      }
+    )
+  }
+  
+  
+  EstructurarObservaciones( array : any[]){
+      for( let i = 0; i < array.length; i++ ){
+          if (    (array[i]['TOBCTC']).includes('NC') || (array[i]['TOBCTC']).includes('N/C')
+               || (array[i]['TOBCTC']).includes('nc') || (array[i]['TOBCTC']).includes('n/c') ){
+            this.Motivo = array[i]['TOBCTC'];
+          }else{
+            this.EstrObs2.push(array[i])
+          }
+      }
+  
+      for( let i = 0; i < this.EstrObs2.length; i++ ){
+       this.Observaciones += this.EstrObs2[i]['TOBCTC']
+    }
+      console.log( this.EstrObs2)
+      console.log( this.Observaciones)
+      console.log( this.Motivo)
+
+
+  }
+
 
   cargarParametrosF(){
     let url='seguridad/parametrosF';

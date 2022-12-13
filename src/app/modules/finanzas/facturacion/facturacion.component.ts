@@ -24,6 +24,9 @@ export class FacturacionComponent implements OnInit {
   public espaciosBlancos = [];
   public cabeceraF  : cabeceraFactura[] = [];
   public DcabeceraF : detalleCabecera[] = [];
+  public Observaciones : string ='';
+  public EstrObs1 : any[] = [];
+  public EstrObs2 : any[] = [];
   public cliente : string = '0';
   public documento : string = '0';
   public loading1 = false;
@@ -193,24 +196,48 @@ export class FacturacionComponent implements OnInit {
         this.espaciosBlancos.push(j)
     }
     this.DcabeceraF =  this.descomponerArray(this.DcabeceraF);
-   
+    this.cargarObservacionesFac()
     this.loading2 = true;
       }
     }
   )
   }
   
-  // if ( this.DcabeceraF.length != 0){
-  //   for(let k = 0; k < this.DcabeceraF.length ; k++){
-  //     if( this.DcabeceraF[k]['TCMTRF'] === res[i]['TCMTRF'] ) {
-  //       this.DcabeceraF[k]['IVLDCS']   += res[i]['IVLDCS']
-  //     }else{
-  //     this.DcabeceraF.push(res[i])
-  //     }
-  // }
-  //  }else{
-  // this.DcabeceraF.push(res[i])
-  //  }
+cargarObservacionesFac(){
+  // Observaciones
+  let paramsE = {
+    Empresa   : this.Env,
+    Cliente   : this.cliente,
+    Documento : Number(this.documento)
+  }
+  let params = {
+    "query": `CALL DC@HONLIB.SP_AWS_LISTA_FACTURA_OBCTC('${paramsE['Empresa']}',1,${paramsE['Documento']})`,
+     "env": "PRD"
+   }
+   this.facturacionS.As400( params ).subscribe(
+    (res:any[])=>{
+      if( res ){
+          this.EstrObs1 = res;
+          this.EstructurarObservaciones( this.EstrObs1)
+      }
+    }
+  )
+}
+
+
+EstructurarObservaciones( array : any[]){
+    for( let i = 0; i < array.length; i++ ){
+        if ( array[i]['CTPDCC'] == 2 ){
+            this.EstrObs2.push(array[i])
+        }
+    }
+
+    for( let i = 0; i < this.EstrObs2.length; i++ ){
+     this.Observaciones += this.EstrObs2[i]['TOBCTC']
+  }
+    console.log( this.EstrObs2)
+    console.log( this.Observaciones)
+}
 
   retornarArraryAcum( objeto : any[]){
     let guardado : any[] = [];
