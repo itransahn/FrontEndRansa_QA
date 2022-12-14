@@ -161,16 +161,50 @@ html2canvas(DATA, options).then((canvas) => {
 
   //IMPRIMIR
   printComponent(idName) { 
-    let printContents = document.getElementById(idName).innerHTML;
-    let originalContents = document.body.innerHTML;
+    this.sweel.mensajeConConfirmacion(`¿Seguro de imprimir documento?`, `Factura`,"warning").then(
+    res=>{
+        if( res  ){
+          // let printContents = document.getElementById(idName).innerHTML;
+          // let originalContents = document.body.innerHTML;
+          // document.body.innerHTML = printContents;
+          // document.write(originalContents.toString())
+          // window.print(); 
+          // document.body.innerHTML = originalContents;
+          // window.close();
 
-    document.body.innerHTML = printContents;
 
-    window.print();
+          // let printContents, popupWin;
+          // printContents = document.getElementById(idName).innerHTML;
+          // // printContents = (<string>printContents + "").replace("col-sm", "col-xs");
+          // // console.log(printContents);
+          // popupWin = window.open("", "", "top=0,left=0,height=100%,width=auto");
+          // popupWin.document.open();
+          // popupWin.document.write(document.body.innerHTML.toString())
+          // popupWin.document.close();
 
-    document.body.innerHTML = originalContents;
+
+          // const printContent = document.getElementById(idName);
+          // const WindowPrt = window.open('', '', 'left=0,top=0,width=auto,height=auto,toolbar=0,scrollbars=0,status=0');
+          // WindowPrt.document.write(printContent.innerHTML);
+          // WindowPrt.document.close();
+          // WindowPrt.focus();
+          // WindowPrt.print();
+          // WindowPrt.close();
+
+
+          let popupWin = window.open('', '_blank', 'width=1080,height=595');
+          let printContents = document.getElementById(idName).innerHTML;
+          let printHead = document.head.innerHTML;
+          popupWin.document
+              .write(`<html>
+               ${printHead}
+              <body onload="window.print();">${printContents}</body></html>`);
+          popupWin.document.close();
+
+
+        }
+    } ) 
  }
-
 
  CalcularTotal(arreglo ?: any[], valor ?:string){
   let subTotal

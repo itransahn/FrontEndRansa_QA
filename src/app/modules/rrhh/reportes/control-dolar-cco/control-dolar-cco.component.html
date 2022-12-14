@@ -35,7 +35,7 @@
         </form>
 </mat-card>
 
-<div #factura id ="Factura">
+<div #factura id ="FacturaRR">
     <mat-card class="mat-cardContainerCuerpo container cardPersonalizada mt-4" *ngIf="loading">
         <div class="row">
             <div class="col-md-12 ">
@@ -109,7 +109,7 @@
 
 </div>
 
-<!-- <mat-card class="mat-cardContainerCuerpo mt-4" *ngIf="loading">
+<mat-card class="mat-cardContainerCuerpo mt-4" *ngIf="loading">
         <div class="row mb-4">
             <div class="col-md-12 container">
                 <h4 class="h4"> Opciones </h4>
@@ -118,13 +118,25 @@
                 <div class="text-rigth">
                     <button mat-raised-button class="buttonPrincipal" 
                     #tooltip="matTooltip" matTooltip="Imprimir" matTooltipPosition="above" 
-                    [disabled]="f.invalid" (click)="sharedS.printComponent('Factura')">
+                    [disabled]="f.invalid" (click)="sharedS.printComponent('FacturaRR')">
                         <mat-icon>
                             print
                         </mat-icon>
                     </button>
                 </div>
             </div>
+            <div class="col-md-6 container">
+                <div class="text-rigth">
+                    <button mat-raised-button class="buttonPrincipal" 
+                    #tooltip="matTooltip" matTooltip="Generar Documento" matTooltipPosition="above" 
+                    [disabled]="f.invalid" (click)="sharedS.downloadPDF('Factura', 'Factura_cco','Factura por centro de costo', 'Seguro de imprimir factura')">
+                        <mat-icon>
+                            picture_as_pdf
+                        </mat-icon>
+                    </button>
+                </div>
+            </div>
+
 
             <div class="col-md-12 container">
                 <div class="text-left">
@@ -133,15 +145,15 @@
             </div>
         </div>
         
-</mat-card> -->
+</mat-card>
 
 
 
-<button mat-raised-button class="buttonPrincipal"  
+<!-- <button mat-raised-button class="buttonPrincipal"  
 #tooltip="matTooltip" matTooltip="Documento PDF" matTooltipPosition="above" 
 [disabled]="f.invalid" (click)="sharedS.downloadPDF('Factura', 'Factura_cco','Factura por centro de costo', 'Seguro de imprimir factura')"
 class="buttonPrincipal btn-flotante">
     <mat-icon>
         picture_as_pdf
     </mat-icon  >
-</button>
+</button> -->

@@ -12,6 +12,17 @@
 .col-md-6{
     width: 90%;
 }
+.obs{
+	font-size: 0.5em !important;
+}
+
+*{
+	border-color: #050404;
+	border: 0.1px !important;
+	.bordes2{
+		border : 1.5px solid #050404 !important;
+	}
+}
 
 .containB{
     // border : 1px groove #006F1D;
@@ -29,82 +40,9 @@
     text-align: center !important;
 }
 
-thead{
-	border: none;
-	font-weight: bold;
-	font-size:   small;
-	th{
-		background-color: #ffffff !important;
-		color:  #050404 !important;	
-	}
-}
-
-tfoot{
-	border: inset opt ;
-	border:none;
-	tr{
-		background-color: #ffffff !important;
-		border: inset opt ;
-		border:none;
-		font-size: x-small;
-	}
-th{
-	background-color: #ffffff !important;
-	color: #050404 !important;
-	border:none;
-	font-size: x-small;
-}
-}
-
-tbody{
-	// font-weight: bold;
-	font-size:   x-small;
-	tr{
-	font-size:   xx-small;
-
-	}
-	td{
-		background-color: #ffffff !important;
-		color: #050404 !important;
-		font-size: x-small;
-	}
-}
-
-table {
-	border-collapse: collapse;
-	margin: 0;
-	padding: 0;
-	width: 100%;
-  }
-  
-  table caption {
-	font-size: 1.5em;
-	margin: .5em 0 .75em;
-  }
-  
-  table tr {
-	background-color: #f8f8f8;
-	border: 1px solid #ddd;
-	padding: .35em;
-  }
-  
-  table th,
-  table td {
-	padding: .625em;
-	text-align: center;
-  }
-  
-  table th {
-	font-size: .85em;
-	letter-spacing: .1em;
-	text-transform: uppercase;
-  }
-
-  .black{
+.black{
 	color: black !important;
 }
-
-
 
 .btn-flotante {
 	font-size: 16px; /* Cambiar el tamaño de la tipografia */
@@ -139,3 +77,87 @@ table {
 		right:     20px;
 	}
 }
+
+
+.espacioB{
+	width: 100% !important;
+	// border-color: #050404 !important;
+  }
+
+.contain1{
+	width: 100%;
+    border : 0.1px solid #050404 !important;
+    color: #006F1D !important;
+    height: auto;
+	border-radius: 10px;
+}
+
+/* Modificando clases padres*/
+
+table{
+	// padding: 0;
+	width: 100% !important;
+	height: 100% !important;
+	border :  0.1px solid #050404 !important;
+	// margin-bottom: 5% !important;
+
+	tbody{
+		// font-weight: bold;
+		font-family: Arial, Helvetica, sans-serif;
+		font-size: 0.9em !important;
+		tr{
+			font-family: Arial, Helvetica, sans-serif;
+			font-size: 0.9em !important;
+		}
+		td{
+			background-color: #ffffff !important;
+			color: #050404 !important;
+			font-family: Arial, Helvetica, sans-serif;
+			font-size: 0.9em !important;
+		}
+	}
+	
+  }
+  
+  table caption {
+	font-size: 1.5em;
+	// margin: .5em 0 .75em;
+  }
+  
+  table tr {
+	background-color: #ffffff;
+	font-size: 0.9em !important;
+	// padding: .35em;
+  }
+  
+  table th{
+	background-color: #ffffff ;
+	color: #050404;
+	border : 0.01px solid #bcb9b9 !important;
+	font-size: 0.9em !important;
+	font: bold;
+	// padding: .625em;
+	text-align: center;
+  }
+  
+  table td {
+	// padding: .625em;
+	text-align: center;
+	font-size: 0.9em !important;
+  }
+  
+  .trHover:hover {
+	background-color: #ffffff !important;
+	color: #050404 !important;
+	cursor: pointer;
+  }
+  
+  table th {
+	font-size: .85em;
+	// letter-spacing: .1em;
+	text-transform: uppercase;
+  }
+
+
+/* Modificando clases padres*/
+
