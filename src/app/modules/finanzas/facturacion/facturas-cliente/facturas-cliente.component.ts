@@ -113,7 +113,7 @@ export class FacturasClienteComponent implements OnInit {
     this.facturacionS.As400( params ).subscribe(
       (res:any)=>{
         if( res ){
-      this.facturas = res
+      this.facturas = res;
           if ( this.facturas.length > 0) {
             this.loading = true;
           }else{

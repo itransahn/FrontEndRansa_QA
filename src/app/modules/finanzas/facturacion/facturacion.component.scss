@@ -1,5 +1,5 @@
 .cardPersonalizada{
-    width:  23cm;
+    width:  24cm;
     height: auto ;
     box-shadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2), 0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12);
 }
@@ -7,12 +7,10 @@
 *{
 	border-color: #050404;
 	border: 0.1px !important;
-	.bordes2{
+		.bordes2{
 		border : 1.5px solid #050404 !important;
 	}
 }
-
-
 
 .bordes{
 	// border-style: solid !important; 
@@ -20,14 +18,13 @@
 	// border-style: outset !important;
 	// border-color: #050404 !important;
 	// border : 1px outset #050505 !important;
-	border : 0.1px ridge #424242;
+	border : 0.1px solid #050404;
 	// border-style: outset !important;
 	// color: #006F1D !important;
 }
 
 .contenidoF{
 	font-size: 0.9em !important;
-	font-size: xx-small;
 }
 
 .btn-flotante {
@@ -112,7 +109,11 @@ tfoot{
 		font-size: x-small;
 	}
 	th{
+		border-style: outset !important;
+		border-color: #050404;
+		border: 0.1px;
 		background-color: #ffffff !important;
+	color: #050404 !important;
 	font-size: x-small;
 }
 }
@@ -180,53 +181,54 @@ table {
 	text-transform: uppercase;
   }
   
-//   @media screen and (max-width: 600px) {
-// 	table {
-// 	  border: 0;
-// 	}
+  @media screen and (max-width: 600px) {
+	table {
+	  border: 0;
+	}
   
-// 	table caption {
-// 	  font-size: 1.3em;
-// 	}
+	table caption {
+	  font-size: 1.3em;
+	}
 	
-// 	table thead {
-// 	  border: none;
-// 	  clip: rect(0 0 0 0);
-// 	  height: 1px;
-// 	  margin: -1px;
-// 	  overflow: hidden;
-// 	  padding: 0;
-// 	  position: absolute;
-// 	  width: 1px;
-// 	}
+	table thead {
+	  border: none;
+	  clip: rect(0 0 0 0);
+	  height: 1px;
+	  margin: -1px;
+	  overflow: hidden;
+	  padding: 0;
+	  position: absolute;
+	  width: 1px;
+	}
 	
-// 	table tr {
-// 	  border-bottom: 0.1px solid #050505 !important;
-
-// 	  margin-bottom: .625em;
-// 	}
+	table tr {
+	  border-bottom: 0.1px solid #050505 !important;
+	  display: block;
+	  margin-bottom: .625em;
+	}
 	
-// 	table td {
-// 	  border-bottom: 0.1px solid #050505 !important;
-// 	  font-size: .8em;
-// 	  text-align: right;
-// 	}
+	table td {
+	  border-bottom: 0.1px solid #050505 !important;
+	  display: block;
+	  font-size: .8em;
+	  text-align: right;
+	}
 	
-// 	table td::before {
-// 	  /*
-// 	  * aria-label has no advantage, it won't be read inside a table
-// 	  content: attr(aria-label);
-// 	  */
-// 	  content: attr(data-label);
-// 	  float: left;
-// 	  font-weight: bold;
-// 	  text-transform: uppercase;
-// 	}
+	table td::before {
+	  /*
+	  * aria-label has no advantage, it won't be read inside a table
+	  content: attr(aria-label);
+	  */
+	  content: attr(data-label);
+	  float: left;
+	  font-weight: bold;
+	  text-transform: uppercase;
+	}
 	
-// 	table td:last-child {
-// 	  border-bottom: 0;
-// 	}
-//   }
+	table td:last-child {
+	  border-bottom: 0;
+	}
+  }
   
   /* general styling */
   body {
@@ -259,7 +261,7 @@ table {
 		color: #050404 !important;
 	}
 	.contain1{
-		border : 0.1px solid #050404 !important;
+		border : 0.1px groove #050404 !important;
 	}
 
 .tabla{
@@ -277,12 +279,13 @@ table {
 	display:  none !important;
 }
 
+
 /* Modificando clases padres*/
 table{
+	margin: 0;
 	padding: 0;
 	width: 100% !important;
 	border :  0.1px solid #050404 !important;
-	margin-bottom: 5% !important;
   }
   
   table caption {
@@ -292,15 +295,16 @@ table{
   
   table tr {
 	background-color: #ffffff;
-	font-size: 0.9em !important;
+	font-size: 0.75em !important;
 	padding: .35em;
+
   }
   
   table th{
 	background-color: #ffffff ;
 	color: #050404;
-	border : 0.01px solid #bcb9b9 !important;
-	font-size: 0.9em !important;
+	border : 0.1px solid #bcb9b9 !important;
+	font-size: 0.75em !important;
 	font: bold;
 	padding: .625em;
 	text-align: center;
@@ -309,7 +313,7 @@ table{
   table td {
 	padding: .625em;
 	text-align: center;
-	font-size: 0.9em !important;
+	font-size: 1.1em !important;
   }
   
   .trHover:hover {
@@ -319,7 +323,7 @@ table{
   }
   
   table th {
-	font-size: 0.9em !important;
+	font-size: .85em;
 	letter-spacing: .1em;
 	text-transform: uppercase;
   }

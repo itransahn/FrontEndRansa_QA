@@ -4,17 +4,17 @@
         <div class="col-md-6">
             <img src="../../../../assets/images/Almahsa.png" alt="">
             <p>
-             {{parametros[0]['nombreCompleto']}}
-             {{parametros[0]['direccion1']}}: {{ parametros[0]['direccion2']}}
-             Municipio:{{ parametros[0]['municipio']}}, Departamento: {{ parametros[0]['Departamento']}} <br> 
-             Tel: {{parametros[0]['Telfijo']}}, {{parametros[0]['TelCel']}}  <br>
-            <span *ngIf="parametros[0]['correo']"> Correo: {{parametros[0]['correo']}}  </span>
-            </p>
+                {{parametros[0]['nombreCompleto']}} <br>
+                {{parametros[0]['direccion1']}}: {{ parametros[0]['direccion2']}} <br>
+                Municipio: {{ parametros[0]['municipio']}}, Departamento: {{ parametros[0]['Departamento']}} <br> 
+                Tel: {{parametros[0]['Telfijo']}}, {{parametros[0]['TelCel']}}  <br>
+               <span *ngIf="parametros[0]['correo']"> Correo: {{parametros[0]['correo']}}  </span>
+               </p>
         </div>
 
-        <div class="col-md-6 mt-4">
+        <div class="col-md-6 mt-4"  style="text-align: center !important;">
             <p>
-                <span style="text-align: left !important;">FACTURA</span> <br>
+                <span >FACTURA</span> <br>
             <span style="text-align:left  !important; color:#FE9600 !important; font-size: 1.2em !important;">
                     000-001-01-{{retornarCorrelativo()}}
                 </span>
@@ -30,6 +30,7 @@
             FECHA LIMITE DE EMISION: {{ parametrosCai[0]['fechaLimite'] | date: 'dd/MM/yyyy'}} 
             </p>
         </div>
+
         <div class="mt-2 container">
             <div class="row contain1 ">
                 <div class="col-md-6" >
@@ -195,10 +196,10 @@
             </p>
         </div>
 
-        <div class="col-md-6 mt-4">
+       <div class="col-md-6 mt-4"  style="text-align: center !important;">
             <p>
-                <span style="text-align: left !important;">FACTURA</span> <br>
-            <span style="text-align:left  !important; color:#050404 !important; font-size: 1.2em !important;">
+                <span >FACTURA</span> <br>
+            <span style="text-align:left  !important; font-size: 1.2em !important;">
                     000-001-01-{{retornarCorrelativo()}}
                 </span>
             </p>
@@ -377,16 +378,16 @@
             </p>
         </div>
 
-        <div class="col-md-6 mt-4">
+        <div class="col-md-6 mt-4"  style="text-align: center !important;">
             <p>
-                <span style="text-align: left !important;">FACTURA</span> <br>
-            <span style="text-align:left  !important; color:#050404 !important; font-size: 1.2em !important;">
+                <span >FACTURA</span> <br>
+            <span style="text-align:left  !important; font-size: 1.2em !important;">
                     000-001-01-{{retornarCorrelativo()}}
                 </span>
             </p>
             <!-- <h4 > FECHA: {{ fecha | date:'mediumDate' | uppercase }} </h4> -->
             <h4 > FECHA: {{ dia }}/{{mes}}/{{anio}} </h4>
-        <mat-divider class="material-dividier" style="color: #050404 !important;"></mat-divider>
+        <mat-divider class="material-dividier"></mat-divider>
 
         <p> 
             CAI: {{ parametrosCai[0]['CAI']}} <br>
