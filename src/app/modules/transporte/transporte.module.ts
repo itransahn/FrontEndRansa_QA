@@ -12,6 +12,11 @@ import { TransProveedorComponent } from './trans-proveedor/trans-proveedor.compo
 import { TransClienteComponent } from './trans-cliente/trans-cliente.component';
 import { RolClienteComponent } from './rol-cliente/rol-cliente.component';
 import { RolProveedorComponent } from './rol-proveedor/rol-proveedor.component';
+import { ModalComponent } from './trans-cliente/modal/modal.component';
+import { ModalProComponent } from './trans-proveedor/modal-pro/modal-pro.component';
+import { ModalRCComponent } from './rol-cliente/modal-rc/modal-rc.component';
+import { ModalRPComponent } from './rol-proveedor/modal-rp/modal-rp.component';
+import { ModalTransporteComponent } from './transportes/modal-transporte/modal-transporte.component';
 
 
 @NgModule({
@@ -25,6 +30,11 @@ TransProveedorComponent,
 TransClienteComponent,
 RolClienteComponent,
 RolProveedorComponent,
+ModalComponent,
+ModalProComponent,
+ModalRCComponent,
+ModalRPComponent,
+ModalTransporteComponent,
   ],
   imports: [
     CommonModule,

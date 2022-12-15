@@ -1,0 +1,99 @@
+
+
+<mat-card class="cardPersonalizada">
+ 
+    <mat-card-header class="header">    {{ titulo }} {{ subtitulo }}
+    <mat-icon style="float: right !important;" (click)="close()" > close </mat-icon>
+    </mat-card-header>
+
+
+    <mat-card-content>
+        <form [formGroup]="modalForm" #f="ngForm" style="margin-top: 2%;">
+            <div class="row">
+                <div class="col-md-12">
+                    <mat-form-field appearance="legacy">
+                        <mat-label>Nombre Empresa</mat-label>
+                        <input matInput [readonly]="enable" maxlength="50" placeholder="Nombre Empresa" formControlName ="empresa">
+                    </mat-form-field>
+                </div>
+
+             <div class="col-md-12">
+               <mat-form-field appearance="legacy" hintLabel="Max 50 Caracteres">
+                   <mat-label>Direción Empresa</mat-label>
+                   <textarea matInput #texto placeholder="Dirección" [readonly]="enable" maxlength="100"></textarea>
+                   <mat-hint align="end">{{texto.value?.length || 0}}/100</mat-hint>
+                 </mat-form-field>
+             </div>
+
+        
+
+            <div class="col-md-12">
+                <mat-form-field appearance="legacy">
+                    <mat-label>RTN empresa</mat-label>
+                    <input matInput [readonly]="enable" maxlength="50" placeholder="RTN" formControlName ="RTN">
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-12">
+                <mat-form-field appearance="legacy">
+                    <mat-label>Teléfono Empresa </mat-label>
+                    <input matInput [readonly]="enable" maxlength="50" placeholder="telefono Empresa" formControlName ="telefonoE">
+                </mat-form-field>
+            </div>
+            
+            <div class="col-md-12">
+                <mat-form-field appearance="legacy">
+                    <mat-label>Propietario</mat-label>
+                    <input matInput [readonly]="enable" maxlength="50" placeholder="Propietario" formControlName ="propietario">
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-12">
+                <mat-form-field appearance="legacy">
+                    <mat-label>Celular Propietario </mat-label>
+                    <input matInput [readonly]="enable" maxlength="50" placeholder="celular Propietario" formControlName ="celularP">
+                </mat-form-field>
+            </div>
+
+
+            <div class="col-md-12">
+                <mat-form-field appearance="legacy">
+                    <mat-label>Cantidad de Camiones </mat-label>
+                    <input matInput [readonly]="enable" maxlength="50" placeholder="Camiones" formControlName ="camiones">
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-12">
+                <mat-form-field appearance="legacy">
+                    <mat-label>Cantidad de Motoristas </mat-label>
+                    <input matInput [readonly]="enable" maxlength="50" placeholder="Motoristas" formControlName ="Motoristas">
+                </mat-form-field>
+            </div>
+
+                <div  class="col-md-12 container" >
+                    <mat-form-field *ngIf="visible" appearance="legacy">
+                        <mat-label>Sede</mat-label>
+                        <mat-select  formControlName="sede" > 
+                            <mat-option> - </mat-option> 
+                            <mat-option  *ngFor="let sede of catalogo['sedes']" [value]="sede?.id_sedeRansa">
+                                {{  sede?.sedeRansa | uppercase }}
+                            </mat-option> 
+                          </mat-select> 
+                      </mat-form-field>
+                </div>
+                <!-- <div  class="col-md-12">
+                    <mat-form-field *ngIf="enable" hintLabel="Max 50 Caracteres" appearance="legacy">
+                        <mat-label>Estado</mat-label>
+                        <input matInput #texto [readonly]="enable" maxlength="50" placeholder="Estado" formControlName ="estado">
+                        <mat-hint align="end">{{texto.value?.length || 0}}/50</mat-hint>
+                    </mat-form-field>
+                </div> -->
+                </div>
+            <div class="container">
+                <button class="buttonPrincipal" mat-raised-button type="submit" [disabled]="f.invalid" [hidden]="!botton" (click)="submit()"  >Guardar</button>
+            </div>
+        </form>
+    </mat-card-content>
+    
+</mat-card>  
+

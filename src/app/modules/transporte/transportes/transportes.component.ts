@@ -10,6 +10,7 @@ import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import { ToastServiceLocal } from 'src/app/services/toast.service';
 import { RolesService } from '../../seguridad/roles/roles.service';
 import { TransporteService } from '../transporte.service';
+import { ModalTransporteComponent } from './modal-transporte/modal-transporte.component';
 
 @Component({
   selector: 'app-transportes',
@@ -73,6 +74,7 @@ cargarTransportes(){
     (data : DataApi | any) =>{
       if( !data.hasError ){
         this.transportes = data?.data?.Table0;
+        console.log(this.transportes)
       }    
     }
 
@@ -104,6 +106,27 @@ cargarTransportes(){
         if( !data.hasError ){
                 this.cargarTransportes()
         }
+      })
+    }
+
+    Modal ( accion : number, data ?: any ){
+      const dialogReg = this.dialog.open( ModalTransporteComponent,{
+        width :   '500px',
+        height:   'auto',
+        maxWidth: 'auto',
+        data: { 
+          bandera : accion,
+          nombreEmpresa  : data?.nombreEmpresa,
+          direccionEmpresa  : data?.direccionEmpresa,
+          nombrePropietario  : data?.Propietario,
+          RTNEmpresa  : data?.RTNEmpresa,
+          telefonoEmpresa  : data?.telefonoEmpresa,
+          idSede  : data?.idSede,
+          celularPropietario  : data?.celularPropietario,
+          Camiones  : data?.Camiones,
+          Motoristas  : data?.Motoristas,
+        },
+        disableClose : true
       })
     }
 

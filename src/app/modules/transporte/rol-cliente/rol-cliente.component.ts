@@ -4,8 +4,12 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 import { Subscription } from 'rxjs';
 import { DataApi } from 'src/app/interfaces/dataApi';
+import { mensajes } from 'src/app/interfaces/generales';
 import { AuthService } from 'src/app/services/auth.service';
+import { SweetAlertService } from 'src/app/services/sweet-alert.service';
+import { ToastServiceLocal } from 'src/app/services/toast.service';
 import { TransporteService } from '../transporte.service';
+import { ModalRCComponent } from './modal-rc/modal-rc.component';
 
 @Component({
   selector: 'app-rol-cliente',
@@ -32,9 +36,11 @@ export class RolClienteComponent implements OnInit {
     private paginator : MatPaginatorIntl,  
     public dialog : MatDialog, 
     private transporteService : TransporteService, 
+    public toast  :ToastServiceLocal,
+    public sweel : SweetAlertService
   ) { }
 
- 
+
   ngOnInit() {  
     this.paginator.itemsPerPageLabel = 'Items por hoja.';
     this.paginator.nextPageLabel     = 'Página Siguiente';
@@ -62,6 +68,7 @@ export class RolClienteComponent implements OnInit {
       (data : DataApi | any) =>{
         if( !data.hasError ){
           this.clientes = data?.data?.Table0;
+          console.log(this.clientes)
         }    
       }
     )
@@ -79,5 +86,44 @@ export class RolClienteComponent implements OnInit {
       }
       this.pageIndex = event.pageIndex;
     }
+
+    
+  eliminarRelacion(  rol?:string ,cliente?:number){
+    this.sweel.mensajeConConfirmacion(`¿Seguro de Eliminar el permiso?`, `Eliminación de Permiso`,"question").then(
+      res=>{
+          if ( res ){
+                let url    = '/transporte/rolCliente';
+                let params = {
+                  rol     : rol,
+                  cliente : cliente,
+                } 
+                this.transporteService.delete(url, params).subscribe(
+                  res=>{
+                    if ( res?.data.Table0[0]['codigo'] == -1 ){
+                      this.toast.mensajeWarning(String(res?.data.Table0[0]['Mensaje']), mensajes.warning)
+                  }else{
+                    this.toast.mensajeSuccess(String(res?.data.Table0[0]['Mensaje']),   mensajes.success)
+                    this.cargarRelacion()
+                  }
+                  }
+                )
+          }else{ }
+      }
+    )
+  }
+
+
+  Modal ( accion : number, dataRol ?: any ){
+    const dialogReg = this.dialog.open( ModalRCComponent,{
+      width :   '1000px',
+      height:   'auto',
+      maxWidth: 'auto',
+      data: { 
+        bandera : accion
+      },
+      disableClose : true
+    })
+  }
+
 
 }

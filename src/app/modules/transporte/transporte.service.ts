@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Subject, tap } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, Subject, tap } from 'rxjs';
 import { DataApi } from 'src/app/interfaces/dataApi';
 import { MensajesHttpService } from 'src/app/services/mensajes-http.service';
 import { environment } from 'src/environments/environment';
@@ -11,13 +11,42 @@ import { environment } from 'src/environments/environment';
 export class TransporteService {
   private _refresh$ = new Subject<void>();
 
+public catalogo$ = new BehaviorSubject<any[]>([]) ;
+public catalogoData$ : Observable<any[]>= this.catalogo$.asObservable();
+public dataCatalogo : any;
+
   constructor(
    private http          :  HttpClient,
    private _mensajesHttp :  MensajesHttpService
-  ) { }
+  ) {
+    this.cargarCatalogo()
+   }
+
+  // ngOnInit(): void {
+  //   this.cargarCatalogo()
+  // }
 
   get refresh$(){
     return this._refresh$;
+  }
+
+  cargarCatalogo(){
+    let url = 'transporte/catalogoT';
+    this.http.get(environment.UrlApi + url , {}).subscribe(
+      (res : any)  =>{
+        this.dataCatalogo = res;
+        this.catalogo$.next(res);
+      }
+    );
+  }
+
+  returnCatalogo(){
+    this.cargarCatalogo();
+    return this.catalogo$.value
+  }
+  
+  returnCatalogoData(){
+    return this.catalogoData$
   }
 
     // Servicio de Visualización 
@@ -39,8 +68,6 @@ export class TransporteService {
       );
       return request$
     }
-  
-  
     // Servicio de Inserción 
     post( url?:string, params?:any){
     
@@ -103,6 +130,5 @@ export class TransporteService {
       );
       return request$
     }
-  
     
 }
