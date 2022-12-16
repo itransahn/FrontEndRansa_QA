@@ -7,6 +7,7 @@ import { DataApi } from 'src/app/interfaces/dataApi';
 import { AdministracionService } from 'src/app/services/administracion.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { TransporteService } from '../transporte.service';
+import { ModalCaComponent } from './modal-ca/modal-ca.component';
 
 @Component({
   selector: 'app-camiones',
@@ -98,5 +99,30 @@ cargarCamiones(){
         }
       })
     }
+
+
+    
+    Modal ( accion : number, data ?: any ){
+      const dialogReg = this.dialog.open( ModalCaComponent,{
+        width :   '500px',
+        height:   'auto',
+        maxWidth: 'auto',
+        data: { 
+          bandera : accion,
+          camion : data?.descripcionCamion  ,
+          idUnidad : data?.idUnidad,
+          placa : data?.placa,
+          idTransportista : data?.idTransportista,
+          dimensiones : data?.dimensiones,
+          GPS : data?.GPS,
+          Rampa : data?.Rampa,
+          Refrigerado : data?.Refrigerado,
+          idSede : data?.idSede,
+          idCamion : data?.idCamion
+        },
+        disableClose : true
+      })
+    }
+
 
 }

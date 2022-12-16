@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 import { Subscription } from 'rxjs';
 import { DataApi } from 'src/app/interfaces/dataApi';
+import { mensajes } from 'src/app/interfaces/generales';
 import { AdministracionService } from 'src/app/services/administracion.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
@@ -74,7 +75,6 @@ cargarTransportes(){
     (data : DataApi | any) =>{
       if( !data.hasError ){
         this.transportes = data?.data?.Table0;
-        console.log(this.transportes)
       }    
     }
 
@@ -115,6 +115,7 @@ cargarTransportes(){
         height:   'auto',
         maxWidth: 'auto',
         data: { 
+          idTransportista : data?.ID,
           bandera : accion,
           nombreEmpresa  : data?.nombreEmpresa,
           direccionEmpresa  : data?.direccionEmpresa,
@@ -130,5 +131,28 @@ cargarTransportes(){
       })
     }
 
+
+    eliminarTransporte(  transporte?:string ,idTr?:number){
+      this.sweel.mensajeConConfirmacion(`¿Seguro de Eliminar el Transporte ${ transporte }?`, `Eliminación de Transporte`,"question").then(
+        res=>{
+            if ( res ){
+                  let url    = '/transporte/transporte';
+                  let params = {
+                    idTransporte : idTr
+                  } 
+                  this.transporteService.delete(url, params).subscribe(
+                    res=>{
+                      if ( res?.data.Table0[0]['codigo'] == -1 ){
+                        this.toast.mensajeWarning(String(res?.data.Table0[0]['Mensaje']), mensajes.warning)
+                    }else{
+                      this.toast.mensajeSuccess(String(res?.data.Table0[0]['Mensaje']),   mensajes.success)
+                      this.cargarTransportes()
+                    }
+                    }
+                  )
+            }else{ }
+        }
+      )
+    }
 
 }

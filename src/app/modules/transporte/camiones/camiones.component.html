@@ -13,7 +13,7 @@
      
             <div class="col-md-6">
                 <div class="text-right">
-                    <button mat-raised-button class="buttonPrincipal" [disabled]="!auth.Insercion()">
+                    <button mat-raised-button class="buttonPrincipal" [disabled]="!auth.Insercion()" (click)="Modal ( 2 )">
                         <mat-icon>
                             add
                         </mat-icon>
@@ -88,11 +88,11 @@
                 <div class="text-center">
 
                <!-- Ver -->
-               <button mat-mini-fab class="buttonSecundary"   (click)="ModalRol ( 1 , rol )" >
+               <button mat-mini-fab class="buttonSecundary"   (click)="Modal ( 1 , tr )" >
                    <mat-icon>visibility</mat-icon>
                </button>
                  <!-- Editar -->
-                 <button mat-mini-fab class="buttonSecundary" [disabled]="!auth.Actualizacion()"(click)="ModalRol ( 3 , rol )" >
+                 <button mat-mini-fab class="buttonSecundary" [disabled]="!auth.Actualizacion()"(click)="Modal ( 3 , tr )" >
                    <mat-icon>create</mat-icon>
                </button>
 
@@ -104,9 +104,9 @@
                 <mat-icon>toggle_off</mat-icon>
                 </button>
                <!-- Eliminar -->
-               <button mat-mini-fab class="btnDelete"         [disabled]="!auth.Eliminacion()"  (click)="eliminarRol(rol.rol, rol.ID)"  >
+               <!-- <button mat-mini-fab class="btnDelete"         [disabled]="!auth.Eliminacion()"  (click)="eliminarRol(rol.rol, rol.ID)"  >
                             <mat-icon>delete_forever</mat-icon>
-               </button>
+               </button> -->
                       
                 </div>
 

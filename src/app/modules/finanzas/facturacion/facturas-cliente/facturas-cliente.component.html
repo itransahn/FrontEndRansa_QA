@@ -112,9 +112,7 @@
         </mat-paginator>
     </mat-card>
     
-
-
-    <nav *ngIf="!loading && mensaje" aria-label="breadcrumb" class="container mt-4">
+    <nav *ngIf="(!loading && mensaje)" aria-label="breadcrumb" class="container mt-4">
         <ol class="breadcrumb container">
          <h4> No se encuentran documentos del cliente ingresado </h4>
         </ol>

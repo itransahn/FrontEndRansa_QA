@@ -5,6 +5,7 @@ import { mensajes } from 'src/app/interfaces/generales';
 import { RolesService } from 'src/app/modules/seguridad/roles/roles.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ToastServiceLocal } from 'src/app/services/toast.service';
+import { TransporteService } from '../../transporte.service';
 
 @Component({
   selector: 'app-modal-transporte',
@@ -25,7 +26,7 @@ export class ModalTransporteComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any, 
     public auth : AuthService,
     public toast: ToastServiceLocal, 
-    public rolService : RolesService
+    public transporteService : TransporteService
   ) { 
 
   }
@@ -41,7 +42,7 @@ export class ModalTransporteComponent implements OnInit {
       this.enable     = true;
       this.visible    = true;
       this.botton     = false
-      this.titulo     = `Transporte` 
+      this.titulo     = `` 
       this.subtitulo  = String(this.data['nombreEmpresa']); 
       this.cargarFormGet(),
       this.SetForm()
@@ -59,7 +60,7 @@ export class ModalTransporteComponent implements OnInit {
       this.enable     = false;
       this.visible    = true;
       this.botton     = true
-      this.titulo     = `Actualizacion` 
+      this.titulo     = `` 
       this.subtitulo  = String(this.data['nombreEmpresa']); 
       this.cargarFormPut()
       this.SetForm()
@@ -136,7 +137,7 @@ Motoristas  : this.data['Motoristas']
       sede    :   this.modalForm.value.sede , 
       usuario :  this.auth.dataUsuario['id_usuario'], 
     } 
-    this.rolService.post(url,params).subscribe(
+    this.transporteService.post(url,params).subscribe(
       res=>{
         if(!res.hasError){
             if ( res?.data.Table0[0]['codigo'] == -1 ){
@@ -165,7 +166,7 @@ actualizarMenu(){
     sede    :   this.modalForm.value.sede , 
     usuario :  this.auth.dataUsuario['id_usuario'], 
   } 
-  this.rolService.put( url,params ).subscribe(
+  this.transporteService.put( url,params ).subscribe(
     res=>{
       if(!res.hasError){
           if ( res?.data.Table0[0]['codigo'] == -1 ){
