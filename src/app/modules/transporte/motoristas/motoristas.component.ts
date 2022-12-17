@@ -7,6 +7,7 @@ import { DataApi } from 'src/app/interfaces/dataApi';
 import { AdministracionService } from 'src/app/services/administracion.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { TransporteService } from '../transporte.service';
+import { ModalMotComponent } from './modal-mot/modal-mot.component';
 
 @Component({
   selector: 'app-motoristas',
@@ -94,5 +95,26 @@ export class MotoristasComponent implements OnInit {
         }
       })
     }
+
+
+        
+    Modal ( accion : number, data ?: any ){
+      const dialogReg = this.dialog.open( ModalMotComponent,{
+        width :   '500px',
+        height:   'auto',
+        maxWidth: 'auto',
+        data: { 
+          bandera : accion,
+          Nombre : data?.descripcionCamion,
+          celular : data?.idUnidad,
+          identidad : data?.placa,
+          FechaVencimientoLicencia : data?.idTransportista,
+          idTransportista : data?.dimensiones,
+          idMotorista : data?.idMotorista
+        },
+        disableClose : true
+      })
+    }
+
 
 }

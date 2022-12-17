@@ -18,6 +18,7 @@ import { ModalRCComponent } from './rol-cliente/modal-rc/modal-rc.component';
 import { ModalRPComponent } from './rol-proveedor/modal-rp/modal-rp.component';
 import { ModalTransporteComponent } from './transportes/modal-transporte/modal-transporte.component';
 import { ModalCaComponent } from './camiones/modal-ca/modal-ca.component';
+import { ModalMotComponent } from './motoristas/modal-mot/modal-mot.component';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ ModalRCComponent,
 ModalRPComponent,
 ModalTransporteComponent,
 ModalCaComponent,
+ModalMotComponent,
   ],
   imports: [
     CommonModule,
