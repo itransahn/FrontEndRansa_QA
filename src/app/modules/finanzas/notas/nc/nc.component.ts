@@ -168,9 +168,6 @@ cargarCabeceraN(){
       for( let i = 0; i < this.EstrObs2.length; i++ ){
        this.Observaciones += this.EstrObs2[i]['TOBCTC']
     }
-      console.log( this.EstrObs2)
-      console.log( this.Observaciones)
-      console.log( this.Motivo)
 
 
   }
@@ -207,7 +204,6 @@ cargarCabeceraN(){
     }
     this.facturacionS.post( url, params ).subscribe(
       (res:DataApi)=>{
-        console.log(res)
         if(!res.hasError){
           if ( res?.data.Table0[0]['codigo'] != -1 && res?.data.Table0[0]['codigo'] != 1 ){
               this.toast.mensajeWarning(String(res?.data.Table0[0]['Mensaje']), mensajes.warning);

@@ -56,7 +56,6 @@ export class CambioContraComponent implements OnInit {
             }
             this.auth.cambioContraUsuario( url, params ).subscribe(
               res=>{
-                console.log(res)
                 if(!res.hasError){
 
                   if ( res?.data.Table0[0]['codigo'] == -1 ){

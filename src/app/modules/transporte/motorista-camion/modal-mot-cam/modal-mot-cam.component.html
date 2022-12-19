@@ -1,0 +1,76 @@
+
+
+<mat-card class="cardPersonalizada">
+ 
+    <mat-card-header class="header">    Nuevo Permiso
+    <mat-icon style="float: right !important;" (click)="close()" > close </mat-icon>
+    </mat-card-header>
+
+
+    <mat-card-content>
+        <form [formGroup]="modalForm" #f="ngForm" style="margin-top: 2%;">
+            <div class="row">
+         
+                <div  class="col-md-12 container" >
+                    <mat-form-field  appearance="legacy">
+                        <mat-label>Transporte </mat-label>
+                        <mat-select  formControlName="transporte" > 
+                            <mat-option> - </mat-option> 
+                            <mat-option *ngFor="let tu of catalogo['transportes']" [value]="tu?.idTransportista">
+                                {{  tu?.nombreEmpresa | uppercase }}
+                            </mat-option> 
+                          </mat-select> 
+                      </mat-form-field>
+                </div>
+
+                <div  class="col-md-12 container" >
+                    <mat-form-field  appearance="legacy">
+                        <mat-label>Motorista</mat-label>
+                        <mat-select  formControlName="motorista" > 
+                            <!-- <mat-option> - </mat-option> 
+                            <mat-option *ngFor="let tu of catalogo['motoristas']" [value]="tu?.idMotorista">
+                                {{  tu?.Nombre | uppercase }}
+                            </mat-option>  -->
+
+                            <ng-container *ngFor="let item of catalogo['motoristas']">
+                                <div *ngIf="item.idTransportista === modalForm.value.transporte">
+                                    <mat-option [value]="item?.idMotorista">
+                                        {{  item?.Nombre | uppercase }}
+                                    </mat-option>
+                                </div>
+                            </ng-container>
+
+                          </mat-select> 
+                      </mat-form-field>
+                </div>
+
+                <div  class="col-md-12 container" >
+                    <mat-form-field  appearance="legacy">
+                        <mat-label>Camión</mat-label>
+                        <mat-select  formControlName="camion" > 
+                            <!-- <mat-option> - </mat-option> 
+                            <mat-option *ngFor="let tu of catalogo['camiones']" [value]="tu?.idCamion">
+                                {{  tu?.placa | uppercase }}
+                            </mat-option>  -->
+                            <ng-container *ngFor="let item of catalogo['camiones']">
+                                <div *ngIf="item.idTransportista === modalForm.value.transporte">
+                                    <mat-option [value]="item?.idCamion">
+                                        {{  item?.placa | uppercase }}
+                                    </mat-option>
+                                </div>
+                            </ng-container>
+
+                          </mat-select> 
+                      </mat-form-field>
+                </div>
+
+             
+                </div>
+            <div class="container">
+                <button class="buttonPrincipal" mat-raised-button type="submit" [disabled]="f.invalid"  (click)="submit()"  >Guardar</button>
+            </div>
+        </form>
+    </mat-card-content>
+    
+</mat-card>  
+

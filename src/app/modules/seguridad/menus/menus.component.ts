@@ -91,7 +91,6 @@ export class MenusComponent implements OnInit, OnDestroy {
                   } 
                   this.seguridad.eliminarMenu(url, params).subscribe(
                     res=>{
-                      console.log(res)
                       if ( res?.data.Table0[0]['codigo'] == -1 ){
                         this.toast.mensajeWarning(String(res?.data.Table0[0]['Mensaje']), mensajes.warning)
                     }else{

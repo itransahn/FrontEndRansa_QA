@@ -55,7 +55,6 @@ export class ModalMotComponent implements OnInit {
 
 
   ngOnInit() {
-    console.log(this.data)
     this.catalogo = this.auth.returnCatalogo();
     this.catalogoF = this.transporteService.returnCatalogo();
     this.validacion();

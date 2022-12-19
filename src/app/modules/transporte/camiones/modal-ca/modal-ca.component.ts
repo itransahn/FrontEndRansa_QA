@@ -42,7 +42,6 @@ export class ModalCaComponent implements OnInit {
 
   
   ngOnInit() {
-    console.log( this.data )
     this.catalogo  = this.auth.returnCatalogo();
     this.catalogoT = this.transporteService.returnCatalogo();
     this.validacion();

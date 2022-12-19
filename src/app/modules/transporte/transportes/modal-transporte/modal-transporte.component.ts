@@ -32,7 +32,6 @@ export class ModalTransporteComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.data)
     this.catalogo = this.auth.returnCatalogo()
     this.validacion();
   }

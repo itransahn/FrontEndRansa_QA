@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from "../seguridad/dashboard/dashboard.component";
 import { CamionesComponent } from './camiones/camiones.component';
 import { ClientesTComponent } from './clientes-t/clientes-t.component';
+import { MotoristaCamionComponent } from './motorista-camion/motorista-camion.component';
 import { MotoristasComponent } from './motoristas/motoristas.component';
 import { ProveedoresTComponent } from './proveedores-t/proveedores-t.component';
 import { RolClienteComponent } from './rol-cliente/rol-cliente.component';
@@ -54,6 +55,11 @@ const routes: Routes = [
         path : 'rolProveedor',
         component : RolProveedorComponent
     }, 
+    {
+        path : 'MotCamion',
+        component : MotoristaCamionComponent
+    }, 
+
   ];
   
   @NgModule({

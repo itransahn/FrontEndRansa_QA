@@ -68,7 +68,6 @@ export class RolClienteComponent implements OnInit {
       (data : DataApi | any) =>{
         if( !data.hasError ){
           this.clientes = data?.data?.Table0;
-          console.log(this.clientes)
         }    
       }
     )

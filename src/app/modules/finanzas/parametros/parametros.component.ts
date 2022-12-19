@@ -93,7 +93,6 @@ cargarParametros(){
     res=>{
       if( !res.hasError ){
         this.parametros = res.data.Table0[0]
-        console.log(this.parametros)
         this.cargarForm()
       }
     }

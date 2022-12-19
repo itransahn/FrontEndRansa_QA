@@ -8,15 +8,15 @@ import { mensajes } from 'src/app/interfaces/generales';
 import { AuthService } from 'src/app/services/auth.service';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import { ToastServiceLocal } from 'src/app/services/toast.service';
+import { ModalMotCamComponent } from './modal-mot-cam/modal-mot-cam.component';
 import { TransporteService } from '../transporte.service';
-import { ModalTransporteComponent } from './modal-transporte/modal-transporte.component';
 
 @Component({
-  selector: 'app-transportes',
-  templateUrl: './transportes.component.html',
-  styleUrls: ['./transportes.component.scss']
+  selector: 'app-motorista-camion',
+  templateUrl: './motorista-camion.component.html',
+  styleUrls: ['./motorista-camion.component.scss']
 })
-export class TransportesComponent implements OnInit {
+export class MotoristaCamionComponent implements OnInit {
   //Paginacion
   public page = 0;
   public pageEvent : PageEvent;
@@ -28,21 +28,20 @@ export class TransportesComponent implements OnInit {
   public pageSize = 50;
   public filter :string  = '';
   public filtro: FormGroup;
-  public parametrosBusqueda = ['nombreEmpresa', 'RTNEmpresa','sedeRansa','Propietario'];
-  public transportes : any[] = [];
+  public parametrosBusqueda = ['Motorista', 'Camion','placa','Propietario'];
+  public Uniones : any[] = [];
   private sub : Subscription = new Subscription();
   constructor(
     public auth       : AuthService,
-    private paginator : MatPaginatorIntl, 
+    private paginator : MatPaginatorIntl,  
     public dialog : MatDialog, 
     private transporteService : TransporteService, 
     private sweel : SweetAlertService,
     private toast : ToastServiceLocal 
-    
+
   ) { }
 
   ngOnInit() {
-    
     this.paginator.itemsPerPageLabel = 'Items por hoja.';
     this.paginator.nextPageLabel     = 'Página Siguiente';
     this.paginator.previousPageLabel = 'Página Anterior';
@@ -50,31 +49,30 @@ export class TransportesComponent implements OnInit {
     this.filtro = new FormGroup({
       filtrar: new FormControl({ value:'',disabled: false})
     })
-
-    this.cargarTransportes();
-
+    this.cargarUniones();
     this.sub = this.transporteService.refresh$.subscribe(
       res=>{
-         this.cargarTransportes()
+         this.cargarUniones()
       }
     )
-  
   }
 
+
+
+  
   ngOnDestroy()  {
     this.sub.unsubscribe()
 }
-cargarTransportes(){
-  let url = 'transporte/transportes';
+cargarUniones(){
+  let url = 'transporte/camionMotorista';
   let params = {};
   
   this.transporteService.get(url,params).subscribe(
     (data : DataApi | any) =>{
       if( !data.hasError ){
-        this.transportes = data?.data?.Table0;
+        this.Uniones = data?.data?.Table0;
       }    
     }
-
   )
 }
 
@@ -92,50 +90,16 @@ cargarTransportes(){
       this.pageIndex = event.pageIndex;
     }
 
-    CambiarEstado(id ?: number, estado?: number){
-      let url = 'transporte/cambiarEstado';
-      let params = {
-        id: id,
-        estado   : estado,
-        tabla : 1
-      };
-      this.transporteService.post(url, params).subscribe( data =>{
-        if( !data.hasError ){
-                this.cargarTransportes()
-        }
-      })
-    }
-
-    Modal ( accion : number, data ?: any ){
-      const dialogReg = this.dialog.open( ModalTransporteComponent,{
-        width :   '500px',
-        height:   'auto',
-        maxWidth: 'auto',
-        data: { 
-          idTransportista : data?.ID,
-          bandera : accion,
-          nombreEmpresa  : data?.nombreEmpresa,
-          direccionEmpresa  : data?.direccionEmpresa,
-          nombrePropietario  : data?.Propietario,
-          RTNEmpresa  : data?.RTNEmpresa,
-          telefonoEmpresa  : data?.telefonoEmpresa,
-          idSede  : data?.idSede,
-          celularPropietario  : data?.celularPropietario,
-          Camiones  : data?.Camiones,
-          Motoristas  : data?.Motoristas,
-        },
-        disableClose : true
-      })
-    }
 
 
-    eliminarTransporte(  transporte?:string ,idTr?:number){
-      this.sweel.mensajeConConfirmacion(`¿Seguro de Eliminar el Transporte ${ transporte }?`, `Eliminación de Transporte`,"question").then(
+    eliminarUnion(  motorista?:string ,camion?:number){
+      this.sweel.mensajeConConfirmacion(`¿Seguro de Eliminar el Permiso?`, `Eliminación de Permiso`,"question").then(
         res=>{
             if ( res ){
-                  let url    = '/transporte/transporte';
+                  let url    = '/transporte/camionMotorista';
                   let params = {
-                    idTransporte : idTr
+                 motorista : motorista,
+                 camion : camion
                   } 
                   this.transporteService.delete(url, params).subscribe(
                     res=>{
@@ -143,7 +107,7 @@ cargarTransportes(){
                         this.toast.mensajeWarning(String(res?.data.Table0[0]['Mensaje']), mensajes.warning)
                     }else{
                       this.toast.mensajeSuccess(String(res?.data.Table0[0]['Mensaje']),   mensajes.success)
-                      this.cargarTransportes()
+                      this.cargarUniones()
                     }
                     }
                   )
@@ -151,4 +115,18 @@ cargarTransportes(){
         }
       )
     }
+
+
+    Modal ( ){
+      const dialogReg = this.dialog.open( ModalMotCamComponent,{
+        width :   '500px',
+        height:   'auto',
+        maxWidth: 'auto',
+        data: {  },
+        disableClose : true
+      })
+    }
+
+
+
 }

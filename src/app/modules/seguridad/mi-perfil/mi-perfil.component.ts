@@ -112,7 +112,6 @@ export class MiPerfilComponent implements OnInit {
     this.usuarioS.post(url,params).subscribe(
       res=>{
           this.dataUsuario = res?.data.Table0[0];
-          console.log(this.dataUsuario)
           this.cargarFormulario()
       }
     )
