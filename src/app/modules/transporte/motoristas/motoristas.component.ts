@@ -105,11 +105,11 @@ export class MotoristasComponent implements OnInit {
         maxWidth: 'auto',
         data: { 
           bandera : accion,
-          Nombre : data?.descripcionCamion,
-          celular : data?.idUnidad,
-          identidad : data?.placa,
-          FechaVencimientoLicencia : data?.idTransportista,
-          idTransportista : data?.dimensiones,
+          Nombre  : data?.Nombre,
+          celular : data?.celular,
+          identidad : data?.identidad,
+          FechaVencimientoLicencia : data?.FechaVencimientoLicencia,
+          idTransportista : data?.idTransportista,
           idMotorista : data?.idMotorista
         },
         disableClose : true

@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { DataApi } from 'src/app/interfaces/dataApi';
 import { AuthService } from 'src/app/services/auth.service';
 import { TransporteService } from '../transporte.service';
+import { ModalProveedoresTComponent } from './modal-proveedores-t/modal-proveedores-t.component';
 
 @Component({
   selector: 'app-proveedores-t',
@@ -97,5 +98,27 @@ cargarCamiones(){
         }
       })
     }
+
+
+
+          
+    Modal ( accion : number, data ?: any ){
+      const dialogReg = this.dialog.open( ModalProveedoresTComponent,{
+        width :   '500px',
+        height:   'auto',
+        maxWidth: 'auto',
+        data: { 
+        bandera : accion,
+         ID         : data?.ID,
+         Proveedor    : data?.Proveedor,
+         direccion  : data?.direccion,
+         rtnProveedor : data?.rtnProveedor,
+         Corto      : data?.Corto,
+         idSede     : data?.idSede
+        },
+        disableClose : true
+      })
+    }
+
 
 }

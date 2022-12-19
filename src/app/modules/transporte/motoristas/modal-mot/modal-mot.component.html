@@ -27,25 +27,28 @@
                 <div class="col-md-12">
                     <mat-form-field appearance="legacy">
                         <mat-label>Identidad</mat-label>
-                        <input matInput [readonly]="enable" maxlength="50" placeholder="Identidad" formControlName ="identidad">
+                        <input matInput [readonly]="enable" id="identidad" #identidad maxlength="50" placeholder="Identidad" formControlName ="identidad">
                     </mat-form-field>
                 </div>
 
-                <div class="col-md-12">
+                <!-- <div class="col-md-12">
                     <mat-form-field appearance="legacy">
                         <mat-label>Licencia</mat-label>
-                        <input matInput readonly ="true" maxlength="50" placeholder="Identidad" formControlName ="identidad">
+                        <input matInput  value = "document.getElementById('identidad').value" maxlength="50" placeholder="Licencia" formControlName ="identidad">
                     </mat-form-field>
-                </div>
+                </div> -->
 
                 <div class="col-md-12">
                     <mat-form-field appearance="legacy">
-                        <mat-label>Vencimiento de Licencia</mat-label>
-                        <input matInput [readonly]="enable" maxlength="50" placeholder="vencimiento de Licencia" formControlName ="vencimientoLicencia">
-                    </mat-form-field>
+                        <mat-label>Vencimiento de Licencia </mat-label>
+                        <input name="date" formControlName = "vencimientoLicencia" matInput [matDatepicker]="pickerN">
+                        <mat-datepicker-toggle matSuffix [for]="pickerN"></mat-datepicker-toggle>
+                        <mat-datepicker #pickerN></mat-datepicker>
+                      </mat-form-field>
                 </div>
+
                 <div  class="col-md-12 container" >
-                    <mat-form-field *ngIf="visible" appearance="legacy">
+                    <mat-form-field  appearance="legacy">
                         <mat-label> Transporte </mat-label>
                         <mat-select  formControlName="transportista" > 
                             <mat-option> - </mat-option> 

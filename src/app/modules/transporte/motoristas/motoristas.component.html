@@ -40,11 +40,11 @@
             </thead>
             <tbody>
               <tr *ngFor="let tr of motoristas | search: this.filtro.value.filtrar:parametrosBusqueda | slice: desde: hasta " class="trHover">
-                <td data-label="Nombre">  {{ tr?.Nombre }}</td>
+                <td data-label="Nombre">  {{ tr?.Nombre  | uppercase}}</td>
                 <td data-label="Celular"> {{ tr?.celular }}</td>
                 <td data-label="Identidad"> {{ tr?.identidad }}</td>
                 <td data-label="Transporte"> {{ tr?.nombreEmpresa }}</td>
-                <td data-label="Vencimiento Licencia">{{ tr?.FechaVencimientoLicencia | date : 'shortDate' }}</td>
+                <td data-label="Vencimiento Licencia">{{ tr?.FechaVencimientoLicencia  | date  }}</td>
                 <td data-label="Sede">{{ tr?.SEDE }}</td>
                 <td data-label="Estado">
                     <span *ngIf="tr?.estado == 1">
@@ -74,9 +74,9 @@
                         <mat-icon>toggle_off</mat-icon>
                         </button>
                <!-- Eliminar -->
-               <button mat-mini-fab class="btnDelete"         [disabled]="!auth.Eliminacion()"  (click)="eliminarRol(rol.rol, rol.ID)"  >
+               <!-- <button mat-mini-fab class="btnDelete"         [disabled]="!auth.Eliminacion()"  (click)="eliminarRol(rol.rol, rol.ID)"  >
                             <mat-icon>delete_forever</mat-icon>
-               </button>
+               </button> -->
                       
                 </div>
 

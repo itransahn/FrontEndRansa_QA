@@ -6,10 +6,34 @@ import { AuthService } from 'src/app/services/auth.service';
 import { ToastServiceLocal } from 'src/app/services/toast.service';
 import { TransporteService } from '../../transporte.service';
 
+
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import * as _moment       from 'moment';
+import * as _rollupMoment from 'moment';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
+const moment = _rollupMoment || _moment;
+
+
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'LL',
+  },
+  display: {
+    dateInput: 'YYYY-MM-DD',
+    monthYearLabel: 'YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'YYYY',
+  },
+};
+
 @Component({
   selector: 'app-modal-mot',
   templateUrl: './modal-mot.component.html',
-  styleUrls: ['./modal-mot.component.scss']
+  styleUrls: ['./modal-mot.component.scss'],
+  providers : [
+    {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+    {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
+   ]
 })
 export class ModalMotComponent implements OnInit {
   public  modalForm  : FormGroup;
@@ -17,7 +41,7 @@ export class ModalMotComponent implements OnInit {
   public  enable     : boolean = false;
   public  botton     : boolean = false;
   public  catalogo   : any;
-  public  catalogoT  : any;
+  public  catalogoF  : any;
   public  titulo     : string;
   public  subtitulo  : string;
 
@@ -33,7 +57,7 @@ export class ModalMotComponent implements OnInit {
   ngOnInit() {
     console.log(this.data)
     this.catalogo = this.auth.returnCatalogo();
-    this.catalogoT = this.transporteService.returnCatalogo();
+    this.catalogoF = this.transporteService.returnCatalogo();
     this.validacion();
   }
 
@@ -109,7 +133,7 @@ transportista   : this.data['idTransportista']
 }
 
   insertar(){
-    let url    = 'transporte/InsCamiones';
+    let url    = 'transporte/InsMotoristas';
     let params = {
       nombre  :   this.modalForm.value.nombre , 
       celular :   this.modalForm.value.celular , 
@@ -119,7 +143,7 @@ transportista   : this.data['idTransportista']
       transportista  :   this.modalForm.value.transportista , 
       usuario :  this.auth.dataUsuario['id_usuario'], 
     } 
-    this.transporteService.post(url,params).subscribe(
+    this.transporteService.put(url,params).subscribe(
       res=>{
         if(!res.hasError){
             if ( res?.data.Table0[0]['codigo'] == -1 ){
@@ -136,7 +160,7 @@ transportista   : this.data['idTransportista']
 }
 
 actualizar(){
-  let url    = 'transporte/ActCamiones';
+  let url    = 'transporte/ActMotoristas';
   let params = {
     idMotorista : this.data['idMotorista'],
     nombre  :   this.modalForm.value.nombre , 

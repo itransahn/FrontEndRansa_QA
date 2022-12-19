@@ -7,13 +7,13 @@ import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import { ToastServiceLocal } from 'src/app/services/toast.service';
 import { RrhhService } from '../rrhh.service';
 
+import { FormMantenimientoDolarComponent } from './form-mantenimiento-dolar/form-mantenimiento-dolar.component';
+import { mensajes } from 'src/app/interfaces/generales';
+import { AuthService } from 'src/app/services/auth.service';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import * as _moment       from 'moment';
 import * as _rollupMoment from 'moment';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
-import { FormMantenimientoDolarComponent } from './form-mantenimiento-dolar/form-mantenimiento-dolar.component';
-import { mensajes } from 'src/app/interfaces/generales';
-import { AuthService } from 'src/app/services/auth.service';
 const moment = _rollupMoment || _moment;
 
 
