@@ -10,7 +10,8 @@ interface dataUsuario {
     puestoRansa : string,
     id_area : number,
     id_rol : number,
-    imgPerfil : string
+    imgPerfil : string,
+    sede      : number
 }
 
 

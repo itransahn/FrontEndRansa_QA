@@ -15,7 +15,7 @@
             <!-- <caption>Statement Summary</caption> -->
             <thead>
               <tr>
-                <th scope="col">Fecha          </th>
+                <th scope="col">Fecha    </th>
                 <th scope="col">Tipo de ajuste </th>
                 <th scope="col">Tipo de llanta </th>
                 <th scope="col">Lote           </th>
@@ -28,7 +28,7 @@
             </thead>
             <tbody>
               <tr *ngFor="let aj of ajustes | slice: desde: hasta " class="trHover">
-                <td data-label="Fecha">           {{ aj?.fecha  | date : 'shortDate' }}</td>
+                <td data-label="Fecha">           {{ aj?.fechaHoraSalida  | date : 'shortDate' }}</td>
                 <td data-label="Tipo de ajuste">  {{ aj?.Ajuste }}</td>
                 <td data-label="Tipo de llanta">  {{ aj?.DetalleAjuste }}</td>
                 <td data-label="Lote">       {{ aj?.lote }}</td>

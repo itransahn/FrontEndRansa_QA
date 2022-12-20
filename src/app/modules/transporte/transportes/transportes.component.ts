@@ -41,7 +41,7 @@ export class TransportesComponent implements OnInit {
     
   ) { }
 
-  ngOnInit() {
+ngOnInit() {
     
     this.paginator.itemsPerPageLabel = 'Items por hoja.';
     this.paginator.nextPageLabel     = 'Página Siguiente';
@@ -61,7 +61,7 @@ export class TransportesComponent implements OnInit {
   
   }
 
-  ngOnDestroy()  {
+ngOnDestroy()  {
     this.sub.unsubscribe()
 }
 cargarTransportes(){
@@ -77,9 +77,8 @@ cargarTransportes(){
 
   )
 }
-
      //Paginación de la tabla
-     next(event: PageEvent) {
+    next(event: PageEvent) {
 
       if (event.pageIndex === this.pageIndex + 1) {
         this.desde = this.desde + this.pageSize;
@@ -91,7 +90,6 @@ cargarTransportes(){
       }
       this.pageIndex = event.pageIndex;
     }
-
     CambiarEstado(id ?: number, estado?: number){
       let url = 'transporte/cambiarEstado';
       let params = {
@@ -105,7 +103,6 @@ cargarTransportes(){
         }
       })
     }
-
     Modal ( accion : number, data ?: any ){
       const dialogReg = this.dialog.open( ModalTransporteComponent,{
         width :   '500px',
@@ -127,8 +124,6 @@ cargarTransportes(){
         disableClose : true
       })
     }
-
-
     eliminarTransporte(  transporte?:string ,idTr?:number){
       this.sweel.mensajeConConfirmacion(`¿Seguro de Eliminar el Transporte ${ transporte }?`, `Eliminación de Transporte`,"question").then(
         res=>{

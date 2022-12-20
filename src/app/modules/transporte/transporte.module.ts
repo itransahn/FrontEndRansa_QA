@@ -23,6 +23,8 @@ import { ModalClientesTComponent } from './clientes-t/modal-clientes-t/modal-cli
 import { ModalProveedoresTComponent } from './proveedores-t/modal-proveedores-t/modal-proveedores-t.component';
 import { MotoristaCamionComponent } from './motorista-camion/motorista-camion.component';
 import { ModalMotCamComponent } from './motorista-camion/modal-mot-cam/modal-mot-cam.component';
+import { PasesSalidaComponent } from './pases-salida/pases-salida.component';
+import { CrearPaseSalidaComponent } from './pases-salida/crear-pase-salida/crear-pase-salida.component';
 
 
 @NgModule({
@@ -47,6 +49,8 @@ ModalClientesTComponent,
 ModalProveedoresTComponent,
 MotoristaCamionComponent,
 ModalMotCamComponent,
+PasesSalidaComponent,
+CrearPaseSalidaComponent,
   ],
   imports: [
     CommonModule,

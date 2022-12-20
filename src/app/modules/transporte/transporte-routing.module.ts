@@ -5,6 +5,8 @@ import { CamionesComponent } from './camiones/camiones.component';
 import { ClientesTComponent } from './clientes-t/clientes-t.component';
 import { MotoristaCamionComponent } from './motorista-camion/motorista-camion.component';
 import { MotoristasComponent } from './motoristas/motoristas.component';
+import { CrearPaseSalidaComponent } from './pases-salida/crear-pase-salida/crear-pase-salida.component';
+import { PasesSalidaComponent } from './pases-salida/pases-salida.component';
 import { ProveedoresTComponent } from './proveedores-t/proveedores-t.component';
 import { RolClienteComponent } from './rol-cliente/rol-cliente.component';
 import { RolProveedorComponent } from './rol-proveedor/rol-proveedor.component';
@@ -59,6 +61,10 @@ const routes: Routes = [
         path : 'MotCamion',
         component : MotoristaCamionComponent
     }, 
+    {
+        path : 'salidas',
+        component : PasesSalidaComponent
+    }
 
   ];
   
