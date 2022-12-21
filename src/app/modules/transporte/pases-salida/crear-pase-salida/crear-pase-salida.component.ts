@@ -9,6 +9,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import { ToastServiceLocal } from 'src/app/services/toast.service';
 import { TransporteService } from '../../transporte.service';
 import { DataApi } from 'src/app/interfaces/dataApi';
+import { mensajes } from 'src/app/interfaces/generales';
+import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 const moment = _rollupMoment || _moment;
 
 
@@ -23,8 +25,6 @@ export const MY_FORMATS = {
     monthYearA11yLabel: 'YYYY',
   },
 };
-
-
 
 @Component({
   selector: 'app-crear-pase-salida',
@@ -61,7 +61,8 @@ export class CrearPaseSalidaComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any, 
     public auth : AuthService,
     public toast: ToastServiceLocal, 
-    public transporteService : TransporteService
+    public transporteService : TransporteService,
+    public sweel : SweetAlertService
   ) { }
 
   ngOnInit() {
@@ -85,6 +86,7 @@ export class CrearPaseSalidaComponent implements OnInit {
       fechaSalida   : new FormControl({ value: '', disabled : this.enable }, [Validators.required] ),
       HoraSalida    : new FormControl({ value: '', disabled : this.enable }, [Validators.required] ),
       destino       : new FormControl({ value: '', disabled : this.enable }, [Validators.required] ),
+      contenido     : new FormControl({ value: '', disabled : this.enable }, [Validators.required] ),
     })
 }
 
@@ -108,5 +110,39 @@ close(){
 }
 
 
+submit(){
+  this.sweel.mensajeConConfirmacion('¿Seguro de crear pase de salida?','Pase de Salida Ransa','question').then(
+    res=>{
+      if ( res ){
+        let url    = 'transporte/paseSalida';
+        let params = {
+          idTransportista : this.modalForm2.value.transporte,
+          idCamion        : this.modalForm2.value.camion,
+          idMotorista     : this.modalForm2.value.motorista,
+          usuario         : this.auth.dataUsuario['id_usuario'],
+          fechaSalida     : this.modalForm2.value.fechaSalida,
+          horaSalida      : this.modalForm2.value.HoraSalida,
+          tipo            : this.modalForm.value.tipo,
+          idDestino       : this.modalForm2.value.destino,
+          contenido       : this.modalForm2.value.contenido,
+        } 
+        this.transporteService.put(url,params).subscribe(
+          res=>{
+            if(!res.hasError){
+                if ( res?.data.Table0[0]['codigo'] == -1 ){
+                    this.toast.mensajeWarning(String(res?.data.Table0[0]['Mensaje']), mensajes.warning)
+                }else{
+                  this.toast.mensajeSuccess(String(res?.data.Table0[0]['Mensaje']), mensajes.success)
+                  this.dialogRef.close()
+                }
+            }else{
+              this.toast.mensajeError(String(res?.errors),"Error")
+            }
+          }
+        )
+      }  
+    }
+  )
 
+}
 }

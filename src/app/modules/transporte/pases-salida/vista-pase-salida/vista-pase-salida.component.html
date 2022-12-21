@@ -1,0 +1,84 @@
+<div class="container" id="pase">
+    <mat-card class="cardPersonalizada">
+        <div class="row">
+            <div class="col-md-2">
+                <img style="width: 150px;" src="../../../../assets/images/logoRansa.ico" alt="">
+            </div>
+            <div class="col-md-10">
+                <div class="linea">  </div>
+                <div class="linea2">  </div>
+            </div>
+        </div>
+
+
+        <div class="row" style="margin-top: 50px;">
+            <h4 class="container"> PASE DE SALIDA </h4>
+        </div>
+  
+<div class="row texto1">
+    <h4>
+         Anillo periférico, El SAUCE Francisco Morazán XX de diciembre del 2022
+    </h4>
+</div>
+
+<div class="row texto2">
+    <h4>
+         Atención: Jefatura de entrada
+    </h4>
+</div>
+
+<div class="row texto2">
+    <h4>
+        Por medio de la presente se informa que se da permiso de salir al NOMBRE DE MOTORISTA <br>
+        con placa: XXX-1234
+    </h4>
+</div>
+
+<div class="row texto2">
+    <h4>
+        Tipo camión con mercadería de cliente: XXXXXXXX
+    </h4>
+</div>
+
+<div class="row texto2">
+    <h4>
+        Hora de salida: 04:00 AM
+    </h4>
+</div>
+
+
+
+<div class="row container" style="margin-top: 5%;">
+<div class="col-md-6 container">
+    <h4 style="background-color: yellow; font-weight: bold; font-size: medium ;">
+        FIRMA DEL QUE AUTORIZA
+    </h4>
+</div>
+</div>
+
+<div class="row container mt-4" >
+    <div class="col-md-6 container" >
+        <h4 style="color:red; font-weight: bold; font-size: medium ;">
+           NOMBRE DE LA PERSONA QUE AUTORIZA
+        </h4>
+    </div>
+    </div>
+
+
+<div>
+    <div class="marca-de-agua container">
+        <img alt="" src="../../../../assets/images/logoRansa.ico" />
+    </div>
+
+</div>
+       
+
+    </mat-card>
+</div>
+
+
+
+<button mat-raised-button class="buttonPrincipal btn-flotante" #tooltip="matTooltip" matTooltip="Generar PDF"  matTooltipPosition="left" 
+(click)="GenerarPdf()">
+    <mat-icon> picture_as_pdf </mat-icon>
+</button>

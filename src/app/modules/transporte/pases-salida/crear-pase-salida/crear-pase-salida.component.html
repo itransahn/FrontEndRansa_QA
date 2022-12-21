@@ -27,86 +27,96 @@
     
 
         <form [formGroup]="modalForm2"  #f2="ngForm" style="margin-top: 2%;" *ngIf="modalForm.value.tipo">
+<div class="row">
+    
+    <div  class="col-md-6 container" >
+        <mat-form-field  appearance="legacy">
+            <mat-label>Motivo</mat-label>
+            <mat-select  formControlName="destino" *ngIf="modalForm.value.tipo"> 
+                    <mat-option> - </mat-option> 
+                    <mat-option  *ngFor="let tu of catalogoF?.data" [value]="tu?.ID">
+                        {{  tu?.Destino | uppercase }}
+                    </mat-option> 
+              </mat-select> 
+          </mat-form-field>
+    </div>
 
-            <div  class="col-md-12 container" >
-                <mat-form-field  appearance="legacy">
-                    <mat-label>Motivo</mat-label>
-                    <mat-select  formControlName="destino" *ngIf="modalForm.value.tipo"> 
-                            <mat-option> - </mat-option> 
-                            <mat-option  *ngFor="let tu of catalogoF?.data" [value]="tu?.ID">
-                                {{  tu?.Destino | uppercase }}
-                            </mat-option> 
-                      </mat-select> 
-                  </mat-form-field>
-            </div>
+    <div  class="col-md-6 container" >
+        <mat-form-field  appearance="legacy">
+            <mat-label>Transporte </mat-label>
+            <mat-select  formControlName="transporte"> 
+                <mat-option> - </mat-option> 
+                <ng-container *ngFor="let item of catalogoF?.Transportes">
+                    <div *ngIf="item.IdDestino === modalForm2.value.destino">
+                        <mat-option [value]="item?.idTransportista">
+                            {{  item?.nombreEmpresa | uppercase }}
+                        </mat-option>
+                    </div>
+                </ng-container>
+                
+              </mat-select> 
+          </mat-form-field>
+    </div>
 
-            <div  class="col-md-12 container" >
-                <mat-form-field  appearance="legacy">
-                    <mat-label>Transporte </mat-label>
-                    <mat-select  formControlName="transporte"> 
-                        <mat-option> - </mat-option> 
-                        <ng-container *ngFor="let item of catalogoF?.Transportes">
-                            <div *ngIf="item.IdDestino === modalForm2.value.destino">
-                                <mat-option [value]="item?.idTransportista">
-                                    {{  item?.nombreEmpresa | uppercase }}
-                                </mat-option>
-                            </div>
-                        </ng-container>
-                        
-                      </mat-select> 
-                  </mat-form-field>
-            </div>
+    <div  class="col-md-6 container" >
+        <mat-form-field  appearance="legacy">
+            <mat-label>Camion</mat-label>
+            <mat-select  formControlName="camion"  > 
+                <mat-option> - </mat-option> 
+                <ng-container *ngFor="let item of catalogoF?.Camiones ">
+                    <div *ngIf="item.idTransportista === modalForm2.value.transporte">
+                        <mat-option [value]="item?.idCamion">
+                            {{  item?.placa | uppercase }}
+                        </mat-option>
+                    </div>
+                </ng-container>
 
-            <div  class="col-md-12 container" >
-                <mat-form-field  appearance="legacy">
-                    <mat-label>Camion</mat-label>
-                    <mat-select  formControlName="camion"  > 
-                        <mat-option> - </mat-option> 
-                        <ng-container *ngFor="let item of catalogoF?.Camiones ">
-                            <div *ngIf="item.idTransportista === modalForm2.value.transporte">
-                                <mat-option [value]="item?.idCamion">
-                                    {{  item?.placa | uppercase }}
-                                </mat-option>
-                            </div>
-                        </ng-container>
+              </mat-select> 
+          </mat-form-field>
+    </div>
 
-                      </mat-select> 
-                  </mat-form-field>
-            </div>
+    <div  class="col-md-6 container" >
+        <mat-form-field  appearance="legacy">
+            <mat-label>Motorista</mat-label>
+            <mat-select  formControlName="motorista" > 
+                <mat-option> - </mat-option> 
+                <ng-container *ngFor="let item of catalogoF?.Motorista">
+                    <div *ngIf="item.idTransportista === modalForm2.value.transporte && item.idCamion === modalForm2.value.camion ">
+                        <mat-option [value]="item?.idMotorista">
+                            {{  item?.Motorista | uppercase }}
+                        </mat-option>
+                    </div>
+                </ng-container>
+              </mat-select> 
+          </mat-form-field>
+    </div>
 
-            <div  class="col-md-12 container" >
-                <mat-form-field  appearance="legacy">
-                    <mat-label>Motorista</mat-label>
-                    <mat-select  formControlName="motorista" > 
-                        <mat-option> - </mat-option> 
-                        <ng-container *ngFor="let item of catalogoF?.Motorista">
-                            <div *ngIf="item.idTransportista === modalForm2.value.transporte && item.idCamion === modalForm2.value.camion ">
-                                <mat-option [value]="item?.idMotorista">
-                                    {{  item?.Motorista | uppercase }}
-                                </mat-option>
-                            </div>
-                        </ng-container>
-                      </mat-select> 
-                  </mat-form-field>
-            </div>
+    <div class="col-md-6 container">
+        <mat-form-field appearance="legacy" >
+            <mat-label>Fecha de Salida </mat-label>
+            <input name="date" formControlName = "fechaSalida" matInput [matDatepicker]="pickerN">
+            <mat-datepicker-toggle matSuffix [for]="pickerN"></mat-datepicker-toggle>
+            <mat-datepicker #pickerN></mat-datepicker>
+          </mat-form-field>
+    </div>
+   
+    <div class="col-md-6 container">
+        <mat-form-field appearance="legacy">
+            <mat-label> Hora Salida </mat-label>
+            <input matInput type="time" placeholder="Hora de Salida" formControlName ="HoraSalida">
+        </mat-form-field>
+    </div>
 
-            <div class="col-md-12 container">
-                <mat-form-field appearance="legacy" >
-                    <mat-label>Fecha de Salida </mat-label>
-                    <input name="date" formControlName = "fechaSalida" matInput [matDatepicker]="pickerN">
-                    <mat-datepicker-toggle matSuffix [for]="pickerN"></mat-datepicker-toggle>
-                    <mat-datepicker #pickerN></mat-datepicker>
-                  </mat-form-field>
-            </div>
-           
-            <div class="col-md-12 container">
-                <mat-form-field appearance="legacy">
-                    <mat-label> Hora Salida </mat-label>
-                    <input matInput type="time" placeholder="Hora de Salida" formControlName ="HoraSalida">
-                </mat-form-field>
-            </div>
+    <div class="col-md-12 container">
+        <mat-form-field class="example-full-width" hintLabel="Max 250 Caracteres" appearance="legacy">
+            <mat-label>Contenido de salida </mat-label>
+            <textarea matInput #contenido formControlName ="contenido" placeholder="Contenido " ></textarea>
+            <mat-hint align="end">{{contenido.value?.length || 0}}/250</mat-hint>
+          </mat-form-field>
+    </div>
+</div>
             <div class="container">
-                <button class="buttonPrincipal" mat-raised-button type="submit" [disabled]="f2.invalid"   >Guardar</button>
+                <button class="buttonPrincipal" mat-raised-button type="submit" [disabled]="f2.invalid" (click)="submit()"  >Guardar</button>
             </div>
         </form>
     </mat-card-content>

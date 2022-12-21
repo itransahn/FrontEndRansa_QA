@@ -25,6 +25,7 @@ import { MotoristaCamionComponent } from './motorista-camion/motorista-camion.co
 import { ModalMotCamComponent } from './motorista-camion/modal-mot-cam/modal-mot-cam.component';
 import { PasesSalidaComponent } from './pases-salida/pases-salida.component';
 import { CrearPaseSalidaComponent } from './pases-salida/crear-pase-salida/crear-pase-salida.component';
+import { VistaPaseSalidaComponent } from './pases-salida/vista-pase-salida/vista-pase-salida.component';
 
 
 @NgModule({
@@ -51,6 +52,7 @@ MotoristaCamionComponent,
 ModalMotCamComponent,
 PasesSalidaComponent,
 CrearPaseSalidaComponent,
+VistaPaseSalidaComponent,
   ],
   imports: [
     CommonModule,

@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 import { Subscription } from 'rxjs';
 import { DataApi } from 'src/app/interfaces/dataApi';
+import { mensajes } from 'src/app/interfaces/generales';
 import { AuthService } from 'src/app/services/auth.service';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import { ToastServiceLocal } from 'src/app/services/toast.service';
@@ -28,7 +29,7 @@ export class PasesSalidaComponent implements OnInit {
   public pageSize = 50;
   public filter :string  = '';
   public filtro: FormGroup;
-  public parametrosBusqueda = ['NombreUsuario', 'Transporte','Nombre','Hacia'];
+  public parametrosBusqueda = ['NombreUsuario', 'Transporte','Nombre','Hacia','camion'];
   public pases : any[] = [];
   private sub : Subscription = new Subscription();
 
@@ -95,7 +96,7 @@ next(event: PageEvent) {
   
   Modal ( ){
     const dialogReg = this.dialog.open( CrearPaseSalidaComponent,{
-      width :   '500px',
+      width :   '1000px',
       height:   'auto',
       maxWidth: 'auto',
       data: {  },
@@ -103,4 +104,58 @@ next(event: PageEvent) {
     })
   }
 
+
+  aprobarPase( idPase : number , camion : string){
+  this.sweel.mensajeConConfirmacion('¿Seguro de aprobar pase de salida?', `Placa de Camión ${camion}`,'warning' ).then(
+    res=>{
+      if( res ){
+        let url    = 'transporte/AprobarpaseSalida';
+        let params = {
+          usuario : this.auth.dataUsuario['id_usuario'],
+          idPase  : idPase,
+        } 
+        this.transporteService.put(url,params).subscribe(
+          (res)=> {
+            if(!res.hasError){
+                if ( res?.data.Table0[0]['codigo'] == -1 ){
+                    this.toast.mensajeWarning(String(res?.data.Table0[0]['Mensaje']), mensajes.warning)
+                }else{
+                    this.toast.mensajeSuccess(String(res?.data.Table0[0]['Mensaje']), mensajes.success)
+                }
+            }else{
+              this.toast.mensajeError(String(res?.errors),"Error")
+            }
+          }
+        )
+      }
+    }
+  )  
+  }
+
+
+ eliminarPase( idPase : number , camion : string){
+    this.sweel.mensajeConConfirmacion('¿Seguro de eliminar pase de salida?', `Placa de Camión ${camion}`,'warning' ).then(
+      res=>{
+        if( res ){
+          let url    = 'transporte/EliminarpaseSalida';
+          let params = {
+            idPase  : idPase,
+          } 
+          this.transporteService.delete(url,params).subscribe(
+            (res)=> {
+              if(!res.hasError){
+                  if ( res?.data.Table0[0]['codigo'] == -1 ){
+                      this.toast.mensajeWarning(String(res?.data.Table0[0]['Mensaje']), mensajes.warning)
+                  }else{
+                      this.toast.mensajeSuccess(String(res?.data.Table0[0]['Mensaje']), mensajes.success)
+                  }
+              }else{
+                this.toast.mensajeError(String(res?.errors),"Error")
+              }
+            }
+          )
+        }
+      }
+    )  
+    }
 }

@@ -7,7 +7,7 @@
                         <mat-icon> search </mat-icon>
                         Buscar
                     </mat-label>
-                    <input matInput placeholder="Transporte, Rtn, Propietario, Sede" formControlName="filtrar">
+                    <input matInput placeholder="Transporte, Placa , Motorista, Solicitador por" formControlName="filtrar">
                 </mat-form-field>
             </div>
      
@@ -33,8 +33,8 @@
                 <th scope="col">Transporte</th>
                 <th scope="col">Placa</th>
                 <th scope="col">Motorista</th>
-                <th scope="col">Motivo</th>
-                <th scope="col">Creado Por</th>
+                <!-- <th scope="col">Motivo</th> -->
+                <th scope="col">Contenido</th>
                 <th scope="col">Solicitado por</th>
                 <th scope="col">Acciones</th>
               </tr>
@@ -46,21 +46,28 @@
                 <td data-label="Transporte">{{    tr?.Transporte             }}</td>
                 <td data-label="Placa">{{     tr?.camion }}</td>
                 <td data-label="Motorista">{{ tr?.Nombre }}</td>
-                <td data-label="Motivo">{{    tr?.TIPOD  }}</td>
-                <td data-label="Creado Por">{{    tr?.Usuario  }}</td>
+                <!-- <td data-label="Motivo">{{    tr?.TIPOD  }}</td> -->
+                <td data-label="Contenido">{{    tr?.contenido  }}</td>
                 <td data-label="Solicitado por">{{    tr?.Hacia  }}</td>
                 <td data-label="Acciones">
                 <div class="text-center">
 
-               <!-- Aprobar -->
-               <button mat-mini-fab class="buttonSecundary" [disabled]="(!auth.Actualizacion())" (click)="AprobarSalida( tr )" #tooltip="matTooltip" matTooltip="Aprobar" matTooltipPosition="above" >
+                <!-- Aprobar -->
+               <button mat-mini-fab class="buttonSecundary" [disabled]="(!auth.Actualizacion() || !auth.Insercion())" (click)="aprobarPase( tr.idPase, tr.camion  )" #tooltip="matTooltip" matTooltip="Aprobar" matTooltipPosition="above" >
                 <mat-icon>check_circle</mat-icon>
                 </button>
 
+
+
+                <!-- Ver Pase -->
                 <button mat-mini-fab class="buttonSecundary" [hidden]="!auth.Insercion()" #tooltip="matTooltip" matTooltip="Ver Pase" matTooltipPosition="above" >
                     <mat-icon>visibility</mat-icon>
                     </button>
                 </div>
+                <!-- Eliminar -->
+                <button mat-mini-fab class="btnDelete" [hidden]="!auth.Eliminacion()" #tooltip="matTooltip" (click)="eliminarPase( tr.idPase, tr.camion  )" matTooltip="Ver Pase" matTooltipPosition="above" >
+                    <mat-icon>delete</mat-icon>
+                    </button>
 
                 </td>
               </tr>
