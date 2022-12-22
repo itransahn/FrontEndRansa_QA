@@ -43,6 +43,7 @@ export class PasesSalidaComponent implements OnInit {
   ) { }
 
   ngOnInit(){
+    this.LimpiarInformacionPase();
     this.paginator.itemsPerPageLabel = 'Items por hoja.';
     this.paginator.nextPageLabel     = 'Página Siguiente';
     this.paginator.previousPageLabel = 'Página Anterior';
@@ -89,10 +90,6 @@ next(event: PageEvent) {
     }
     this.pageIndex = event.pageIndex;
   }
-
-  AprobarSalida( data ){
-  }
-
   
   Modal ( ){
     const dialogReg = this.dialog.open( CrearPaseSalidaComponent,{
@@ -157,5 +154,13 @@ next(event: PageEvent) {
         }
       }
     )  
+    }
+
+    enviarLocalStorage( data){
+      localStorage.setItem('PaseSalida', JSON.stringify(data));
+      this.auth.redirecTo('ransa/transporte/Pasesalidas')
+    }
+    LimpiarInformacionPase(){
+      localStorage.removeItem('PaseSalida')
     }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SharedService } from 'src/app/modules/shared/shared.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-vista-pase-salida',
@@ -7,12 +8,22 @@ import { SharedService } from 'src/app/modules/shared/shared.service';
   styleUrls: ['./vista-pase-salida.component.scss']
 })
 export class VistaPaseSalidaComponent implements OnInit {
-
+    public data: any[]=[];
   constructor(
-    public sharedS:SharedService
+    public sharedS:SharedService,
+    public auth: AuthService
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit(){
+    this.validarData()
+  }
+  validarData(){
+   if ( localStorage.getItem('PaseSalida')){
+    this.data = JSON.parse(localStorage.getItem('PaseSalida') );
+    console.log(this.data)
+   } else{
+    this.auth.redirecTo('/ransa/transporte/salidas')
+   }
   }
 
   GenerarPdf(){
@@ -24,5 +35,17 @@ export class VistaPaseSalidaComponent implements OnInit {
     // this.sharedS.pdfFacturaD('archivo', `${this.retornarCorrelativoPDF()}_${this.cabeceraF[0]['TCMPCL']}Archivo`,'Factura Ransa', `Seguro de generar PDF de FACTURA ${this.cabeceraF[0]['NDCCTC']} del CLIENTE
     // ${this.cabeceraF[0]['TCMPCL']}`)
     }
+
+  ValidacionHora( hora:string ){
+    if ( Number(hora.substring(0,2)) >=0 && Number(hora.substring(0,2))<= 12 ){
+        return 'AM'
+    }else{
+      return 'PM'
+    }
+  }
+
+  retornarHora( hora:string ){
+    return hora.substring(0,5)
+  }
 
 }

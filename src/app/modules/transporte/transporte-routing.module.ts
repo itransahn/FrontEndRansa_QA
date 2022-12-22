@@ -6,6 +6,7 @@ import { ClientesTComponent } from './clientes-t/clientes-t.component';
 import { MotoristaCamionComponent } from './motorista-camion/motorista-camion.component';
 import { MotoristasComponent } from './motoristas/motoristas.component';
 import { CrearPaseSalidaComponent } from './pases-salida/crear-pase-salida/crear-pase-salida.component';
+import { PasesSalidaHComponent } from './pases-salida/pases-salida-h/pases-salida-h.component';
 import { PasesSalidaComponent } from './pases-salida/pases-salida.component';
 import { VistaPaseSalidaComponent } from './pases-salida/vista-pase-salida/vista-pase-salida.component';
 import { ProveedoresTComponent } from './proveedores-t/proveedores-t.component';
@@ -69,6 +70,10 @@ const routes: Routes = [
     {
         path : 'Pasesalidas',
         component : VistaPaseSalidaComponent
+    },
+    {
+        path : 'PasesalidasH',
+        component : PasesSalidaHComponent
     }
 
   ];

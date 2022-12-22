@@ -9,6 +9,7 @@
     height: 0.5cm;
     background-color:#00A72C;
     -webkit-transform: skew(20deg);
+    margin-left: 0.7%;
 }
 
 .linea2{
@@ -17,8 +18,14 @@
     height: 0.5cm;
     background-color:#F3A505;
     -webkit-transform: skew(-20deg);
+    margin-left: 0.7%;
+
 }
 
+.subrayado{
+    text-decoration: underline;
+    font-weight: bold !important;
+}
 
 .marca-de-agua {
     // background-image: url("../../../../../assets/images/logoRansa.ico");
@@ -47,18 +54,26 @@
 
 .texto1{
     margin-top:  15%;
-    margin-left:  9%;
+    margin-left:  3%;
     text-align: left;
-    color:    #555555;
+    color:    #000000;
+    font-weight: bold;
 }
 
 .texto2{
-    margin-top:  5%;
-    margin-left:  9%;
+    margin-top: 4%;
+    margin-left:  3%;
     text-align: left;
-    color:    #555555;
+    color:    #000000;
+    font-weight: bold;
 }
-
+.texto3{
+    margin-top:  6%;
+    margin-left:  3%;
+    text-align: left;
+    color:    #000000;
+    font-weight: bold;
+}
 
   
 
