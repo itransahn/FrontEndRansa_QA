@@ -28,7 +28,7 @@ export class RolClienteComponent implements OnInit {
   public pageSize = 50;
   public filter :string  = '';
   public filtro: FormGroup;
-  public parametrosBusqueda = ['rol', 'Nombre'];
+  public parametrosBusqueda = ['rol', 'Nombre','sedeRansa'];
   public clientes : any[] = [];
   private sub : Subscription = new Subscription();
   constructor(

@@ -41,10 +41,10 @@ export class MenusComponent implements OnInit, OnDestroy {
     public pageEvent : PageEvent;
     public pageIndex : number = 0;
     public desde = 0;
-    public hasta = 10;
+    public hasta = 50;
     nextPageLabel     = 'Página Siguiente';
     previousPageLabel = 'Página Anterior';
-    public pageSize = 10;
+    public pageSize = 50;
     public filter :string  = '';
     public filtro: FormGroup;
     public parametrosBusqueda = ['menuPadre'];

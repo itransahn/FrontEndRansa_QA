@@ -119,7 +119,7 @@ cargarUniones(){
 
     Modal ( ){
       const dialogReg = this.dialog.open( ModalMotCamComponent,{
-        width :   '500px',
+        width :   '1000px',
         height:   'auto',
         maxWidth: 'auto',
         data: {  },

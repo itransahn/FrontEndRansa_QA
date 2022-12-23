@@ -66,10 +66,10 @@ cargarPases(){
   let params = {};
   this.transporteService.get(url,params).subscribe(
     (data : DataApi | any) =>{
-      console.log(data)
+      // console.log(data)
       if( !data.hasError ){
         this.pases = data?.data?.Table0;
-        console.log(this.pases)
+        // console.log(this.pases)
       }    
     }
 
@@ -97,5 +97,14 @@ next(event: PageEvent) {
   LimpiarInformacionPase(){
     localStorage.removeItem('PaseSalida')
   }
+
+  ValidacionHora( hora:string ){
+    if ( Number(hora.substring(11,5)) >=0 && Number(hora.substring(11,5))<= 12 ){
+        return 'AM'
+    }else{
+      return 'PM'
+    }
+  }
+  
 
 }

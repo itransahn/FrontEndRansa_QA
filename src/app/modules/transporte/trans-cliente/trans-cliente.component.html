@@ -30,6 +30,7 @@
               <tr>
                 <th scope="col">Cliente</th>
                 <th scope="col">Transporte</th>
+                <th scope="col">Sede</th>
                 <th scope="col">Acciones</th>
               </tr>
             </thead>
@@ -37,6 +38,7 @@
               <tr *ngFor="let tr of clientes | search: this.filtro.value.filtrar:parametrosBusqueda | slice: desde: hasta " class="trHover">
                 <td data-label="Cliente">    {{ tr?.Cliente }}</td>
                 <td data-label="Transporte"> {{ tr?.Transporte }}</td>
+                <td data-label="Sede"> {{ tr?.Sede }}</td>
                 <td data-label="Acciones">
                 <div class="text-center">
 

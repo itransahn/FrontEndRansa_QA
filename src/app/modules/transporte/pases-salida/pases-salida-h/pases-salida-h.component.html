@@ -36,13 +36,13 @@
                 <!-- <th scope="col">Motivo</th> -->
                 <th scope="col">Solicitado por</th>
                 <th scope="col">Diferencia</th>
-                <th scope="col">Acciones</th>
+                <th scope="col" [hidden]="!auth.Insercion()">Acciones</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let tr of pases | search: this.filtro.value.filtrar:parametrosBusqueda | slice: desde: hasta " class="trHover">
-                <td data-label="Fecha/Hora de Salida">{{    tr?.Fecha   | date : 'short'  }}</td>
-                <td data-label="Fecha/Hora Portón">{{    tr?.fechaAprobacion  | date : 'short'  }}</td>
+                <td data-label="Fecha/Hora de Salida">{{    tr?.Fecha }} {{ ValidacionHora(tr?.Fecha)}}</td>
+                <td data-label="Fecha/Hora Portón">{{    tr?.fechaAprobacion     }}</td>
                 <td data-label="Transporte">{{    tr?.Transporte             }}</td>
                 <td data-label="Placa">{{     tr?.camion }}</td>
                 <td data-label="Motorista">{{ tr?.Nombre }}</td>
@@ -52,12 +52,12 @@
                     <span class="badge bg-danger"  *ngIf="tr?.Diferencia < 0"> {{ tr?.Diferencia }}</span>
                     <span class="badge bg-success" *ngIf="tr?.Diferencia >= 0">{{ tr?.Diferencia }}</span>
                 </td>
-                <td data-label="Acciones">
+                <td data-label="Acciones" [hidden]="!auth.Insercion()">
                 <div class="text-center">
                 <!-- Aprobar -->
-               <button mat-mini-fab class="buttonSecundary" [disabled]="(!auth.Actualizacion() || !auth.Insercion())" (click)="aprobarPase( tr.idPase, tr.camion  )" #tooltip="matTooltip" matTooltip="Aprobar" matTooltipPosition="above" >
+               <!-- <button mat-mini-fab class="buttonSecundary" [disabled]="(!auth.Actualizacion() || !auth.Insercion())" (click)="aprobarPase( tr.idPase, tr.camion  )" #tooltip="matTooltip" matTooltip="Aprobar" matTooltipPosition="above" >
                 <mat-icon>check_circle</mat-icon>
-                </button>
+                </button> -->
 
                 <!-- Ver Pase -->
                 <button mat-mini-fab class="buttonSecundary" [hidden]="!auth.Insercion()" #tooltip="matTooltip" (click)="enviarLocalStorage(tr)"  matTooltip="Ver Pase" matTooltipPosition="above" >
@@ -66,9 +66,9 @@
                 </div>
 
                 <!-- Eliminar -->
-                <button mat-mini-fab class="btnDelete" [hidden]="!auth.Eliminacion()" #tooltip="matTooltip" (click)="eliminarPase( tr.idPase, tr.camion  )" matTooltip="Ver Pase" matTooltipPosition="above" >
+                <!-- <button mat-mini-fab class="btnDelete" [hidden]="!auth.Eliminacion()" #tooltip="matTooltip" (click)="eliminarPase( tr.idPase, tr.camion  )" matTooltip="Ver Pase" matTooltipPosition="above" >
                     <mat-icon>delete</mat-icon>
-                </button>
+                </button> -->
 
                 </td>
               </tr>

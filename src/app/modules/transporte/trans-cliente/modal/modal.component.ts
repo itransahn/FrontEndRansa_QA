@@ -78,8 +78,7 @@ submit(){
     ) 
    }
     this.toast.mensajeSuccess(String('Permisos Agregados Correctamente'), mensajes.success);
-    this.dialogRef.close(); 
-  
+    this.dialogRef.close();
 }
 
   close(){

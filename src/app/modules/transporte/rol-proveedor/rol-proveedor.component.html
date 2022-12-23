@@ -7,7 +7,7 @@
                         <mat-icon> search </mat-icon>
                         Buscar
                     </mat-label>
-                    <input matInput placeholder="Cliente, Rol" formControlName="filtrar">
+                    <input matInput placeholder="Cliente, Rol, Sede" formControlName="filtrar">
                 </mat-form-field>
             </div>
      
@@ -30,6 +30,7 @@
               <tr>
                 <th scope="col">Rol</th>
                 <th scope="col">Proveedor</th>
+                <th scope="col">Sede</th>
                 <th scope="col">Acciones</th>
               </tr>
             </thead>
@@ -37,6 +38,7 @@
               <tr *ngFor="let tr of proveedores | search: this.filtro.value.filtrar:parametrosBusqueda | slice: desde: hasta " class="trHover">
                 <td data-label="Rol">    {{ tr?.rol }}</td>
                 <td data-label="Proveedor"> {{ tr?.Nombre }}</td>
+                <td data-label="Sede">      {{ tr?.sedeRansa }}</td>
                 <td data-label="Acciones">
                 <div class="text-center">
 
