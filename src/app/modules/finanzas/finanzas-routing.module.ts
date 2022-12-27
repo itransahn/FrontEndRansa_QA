@@ -13,7 +13,7 @@ import { ParametrosComponent } from './parametros/parametros.component';
 
 const routes: Routes = [
  {
-  path      : 'facturacion/:cliente/:documento',
+  path      : 'facturacion/:cliente/:documento/:tipo',
   component : FacturacionComponent
  },
  {

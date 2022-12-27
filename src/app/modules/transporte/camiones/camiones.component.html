@@ -31,7 +31,7 @@
                 <th scope="col">Camion</th>
                 <th scope="col">placa</th>
                 <th scope="col">Transporte</th>
-                <th scope="col">Dimensiones</th>
+                <!-- <th scope="col">Dimensiones</th> -->
                 <th scope="col">Tipo de unidad</th>
                 <th scope="col">Sede</th>
                 <th scope="col">Estado</th>
@@ -46,7 +46,7 @@
                 <td data-label="Camion">{{ tr?.descripcionCamion }}</td>
                 <td data-label="placa">       {{ tr?.placa }}</td>
                 <td data-label="Transporte">  {{ tr?.nombreEmpresa }}</td>
-                <td data-label="Dimensiones"> {{ tr?.AltoXAnchoXLargo }}</td>
+                <!-- <td data-label="Dimensiones"> {{ tr?.AltoXAnchoXLargo }}</td> -->
                 <td data-label="Tipo de unidad">{{ tr?.tipoUnidad }}</td>
                 <td data-label="Sede">{{ tr?.sedeRansa }}</td>
                 <td data-label="Estado">
@@ -54,7 +54,7 @@
                         <mat-icon class="success">check_box</mat-icon>
                     </span>
                     <span *ngIf="tr?.estado != 1">
-                        <mat-icon class="error">indeterminate_check_box</mat-icon>
+                        <mat-icon class="errorL">indeterminate_check_box</mat-icon>
                     </span>    
                 </td>
                 <td data-label="GPS">
@@ -62,7 +62,7 @@
                         <mat-icon class="success">check_box</mat-icon>
                     </span>
                     <span *ngIf="tr?.GPS != 1">
-                        <mat-icon class="error">indeterminate_check_box</mat-icon>
+                        <mat-icon class="errorL">indeterminate_check_box</mat-icon>
                     </span>    
                 </td>
 
@@ -71,7 +71,7 @@
                         <mat-icon class="success">check_box</mat-icon>
                     </span>
                     <span *ngIf="tr?.Refrigerado != 1">
-                        <mat-icon class="error">indeterminate_check_box</mat-icon>
+                        <mat-icon class="errorL">indeterminate_check_box</mat-icon>
                     </span>    
                 </td>
 
@@ -80,7 +80,7 @@
                         <mat-icon class="success">check_box</mat-icon>
                     </span>
                     <span *ngIf="tr?.Rampa != 1">
-                        <mat-icon class="error">indeterminate_check_box</mat-icon>
+                        <mat-icon class="errorL">indeterminate_check_box</mat-icon>
                     </span>    
                 </td>
 

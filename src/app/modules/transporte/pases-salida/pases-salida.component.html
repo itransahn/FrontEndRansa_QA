@@ -53,19 +53,19 @@
                 <div class="text-center">
 
                 <!-- Aprobar -->
-               <button mat-mini-fab class="buttonSecundary" [disabled]="(!auth.Actualizacion() || !auth.Insercion())" (click)="aprobarPase( tr.idPase, tr.camion  )" #tooltip="matTooltip" matTooltip="Aprobar" matTooltipPosition="above" >
+               <button mat-mini-fab class="buttonSecundary" [disabled]="(!auth.Actualizacion() || !auth.Insercion())" (click)="aprobarPase( tr.idPase, tr.camion  )" >
                 <mat-icon>check_circle</mat-icon>
                 </button>
 
 
 
                 <!-- Ver Pase -->
-                <button mat-mini-fab class="buttonSecundary" [hidden]="!auth.Insercion()" #tooltip="matTooltip" (click)="enviarLocalStorage(tr)"  matTooltip="Ver Pase" matTooltipPosition="above" >
+                <button mat-mini-fab class="buttonSecundary" [hidden]="!auth.Insercion()"  (click)="enviarLocalStorage(tr)"  >
                     <mat-icon>visibility</mat-icon>
                     </button>
                 </div>
                 <!-- Eliminar -->
-                <button mat-mini-fab class="btnDelete" [hidden]="!auth.Eliminacion()" #tooltip="matTooltip" (click)="eliminarPase( tr.idPase, tr.camion  )" matTooltip="Ver Pase" matTooltipPosition="above" >
+                <button mat-mini-fab class="btnDelete" [hidden]="!auth.Eliminacion()"  (click)="eliminarPase( tr.idPase, tr.camion  )"  >
                     <mat-icon>delete</mat-icon>
                     </button>
 

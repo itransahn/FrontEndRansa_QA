@@ -31,7 +31,8 @@
     
     <div  class="col-md-6 container" >
         <mat-form-field  appearance="legacy">
-            <mat-label>Motivo</mat-label>
+            <mat-label *ngIf="modalForm.value.tipo === 1" >Cliente</mat-label>
+            <mat-label *ngIf="modalForm.value.tipo === 2" >Proveedor</mat-label>
             <mat-select  formControlName="destino" *ngIf="modalForm.value.tipo"> 
                     <mat-option> - </mat-option> 
                     <mat-option  *ngFor="let tu of catalogoF?.data" [value]="tu?.ID">

@@ -42,6 +42,7 @@ export class ModalCaComponent implements OnInit {
 
   
   ngOnInit() {
+    console.log(this.data)
     this.catalogo  = this.auth.returnCatalogo();
     this.catalogoT = this.transporteService.returnCatalogo();
     this.validacion();
@@ -79,57 +80,78 @@ export class ModalCaComponent implements OnInit {
 
   cargarFormGet(){
       this.modalForm = new FormGroup({
-        camion      : new FormControl({ value: '', disabled : this.enable },  [] ),
-        tipoUnidad  : new FormControl({ value: '', disabled : this.enable },  [] ),
-        placa       : new FormControl({ value: '', disabled : this.enable },  [] ),
-        transporte  : new FormControl({ value: '', disabled : this.enable },  [] ),
-        dimenciones  : new FormControl({ value: '', disabled : this.enable }, [] ),
-        gps     : new FormControl({ value: '', disabled : this.enable }, [] ),
-        rampa   : new FormControl({ value: '', disabled : this.enable }, [] ),
-        refrigerado    : new FormControl({ value: '', disabled : true }, [] ),
-        sede  : new FormControl({ value: '', disabled : true }, [] ),
+        // camion      : new FormControl({ value: '', disabled : this.enable },  [] ),
+        tipoUnidad   : new FormControl({ value: '', disabled : this.enable },  [] ),
+        placa        : new FormControl({ value: '', disabled : this.enable },  [] ),
+        transporte   : new FormControl({ value: '', disabled : this.enable },  [] ),
+        gps          : new FormControl({ value: '', disabled : this.enable }, [] ),
+        rampa        : new FormControl({ value: '', disabled : this.enable }, [] ),
+        refrigerado  : new FormControl({ value: '', disabled : true }, [] ),
+        sede         : new FormControl({ value: '', disabled : true }, [] ),
+        marca        : new FormControl({ value: '', disabled : this.enable }, [Validators.required] ),
+        modelo       : new FormControl({ value: '', disabled : this.enable }, [Validators.required] ),
+        tonelada     : new FormControl({ value: '', disabled : this.enable }, [Validators.required] ),
+        metraje      : new FormControl({ value: '', disabled : this.enable }, [Validators.required] ),
+        anio         : new FormControl({ value: '', disabled : this.enable }, [Validators.required, Validators.maxLength(4)] ),
+        color        : new FormControl({ value: '', disabled : this.enable }, [Validators.required] ),
       })
   }
 
   cargarFormPost(){
     this.modalForm = new FormGroup({
-      camion       : new FormControl({ value: '', disabled : this.enable }, [Validators.required] ),
+      // camion       : new FormControl({ value: '', disabled : this.enable }, [Validators.required] ),
       tipoUnidad   : new FormControl({ value: '', disabled : this.enable }, [Validators.required] ),
       placa        : new FormControl({ value: '', disabled : this.enable }, [Validators.required] ),
       transporte   : new FormControl({ value: '', disabled : this.enable }, [Validators.required] ),
-      dimenciones  : new FormControl({ value: '', disabled : this.enable }, [] ),
       gps          : new FormControl({ value: '', disabled : this.enable }, [Validators.required] ),
       rampa        : new FormControl({ value: '', disabled : this.enable }, [Validators.required] ),
       refrigerado  : new FormControl({ value: '', disabled : this.enable }, [Validators.required] ),
       sede         : new FormControl({ value: '', disabled : this.enable }, [Validators.required] ),
+      marca        : new FormControl({ value: '', disabled : this.enable }, [Validators.required] ),
+      modelo       : new FormControl({ value: '', disabled : this.enable }, [Validators.required] ),
+      tonelada     : new FormControl({ value: '', disabled : this.enable }, [Validators.required] ),
+      metraje      : new FormControl({ value: '', disabled : this.enable }, [Validators.required] ),
+      anio         : new FormControl({ value: '', disabled : this.enable }, [Validators.required, Validators.maxLength(4)] ),
+      color        : new FormControl({ value: '', disabled : this.enable }, [Validators.required] ),
     })
 }
 
 cargarFormPut(){
   this.modalForm = new FormGroup({
-    camion       : new FormControl({ value: '', disabled : this.enable }, [Validators.required] ),
+    // camion       : new FormControl({ value: '', disabled : this.enable }, [Validators.required] ),
     tipoUnidad   : new FormControl ({ value: '', disabled : this.enable }, [Validators.required] ),
     placa        : new FormControl({ value: '', disabled : this.enable }, [Validators.required] ),
     transporte   : new FormControl({ value: '', disabled : this.enable }, [Validators.required] ),
-    dimenciones  : new FormControl({ value: '', disabled : this.enable }, [] ),
     gps          : new FormControl({ value: '', disabled : this.enable }, [Validators.required] ),
     rampa        : new FormControl({ value: '', disabled : this.enable }, [Validators.required] ),
     refrigerado  : new FormControl({ value: '', disabled : this.enable }, [Validators.required] ),
     sede         : new FormControl({ value: '', disabled : this.enable }, [Validators.required] ),
+    marca        : new FormControl({ value: '', disabled : this.enable }, [Validators.required] ),
+    modelo       : new FormControl({ value: '', disabled : this.enable }, [Validators.required] ),
+    tonelada     : new FormControl({ value: '', disabled : this.enable }, [Validators.required] ),
+    metraje      : new FormControl({ value: '', disabled : this.enable }, [Validators.required] ),
+    anio         : new FormControl({ value: '', disabled : this.enable }, [Validators.required, Validators.maxLength(4)] ),
+    color        : new FormControl({ value: '', disabled : this.enable }, [Validators.required] ),
+     
   })
 }
 
 SetForm(){
 this.modalForm.setValue({
-  camion       :  this.data['camion'], 
+  // camion       :  this.data['camion'], 
   tipoUnidad   :  this.data['idUnidad'], 
   placa        :  this.data['placa'], 
   transporte   :  this.data['idTransportista'], 
-  dimenciones  :  this.data['dimensiones'], 
   gps          :  this.data['GPS'], 
   rampa        :  this.data['Rampa'], 
   refrigerado  :  this.data['Refrigerado'], 
   sede         :  this.data['idSede'], 
+  marca        : this.data['idMarca'],
+  modelo       : this.data['idModelo'],
+  tonelada     : this.data['idtonelada'],
+  metraje      : this.data['idMetraje'],
+  anio         : this.data['anio'],
+  color        : this.data['idColor']
   })
 }
 
@@ -137,16 +159,21 @@ this.modalForm.setValue({
   insertar(){
     let url    = 'transporte/InsCamiones';
     let params = {
-      descripcionCamion  : this.modalForm.value.camion,
+      // descripcionCamion  : this.modalForm.value.camion,
       tipoUnidad         : this.modalForm.value.tipoUnidad,
       placa              : this.modalForm.value.placa,
       idTransportista    : this.modalForm.value.transporte,
-      dimenciones        : this.modalForm.value.dimenciones,
       gps                : this.modalForm.value.gps,
       rampa              : this.modalForm.value.rampa,
       refrigerado        : this.modalForm.value.refrigerado,
       sede               : this.modalForm.value.sede,
-      usuario            :  this.auth.dataUsuario['id_usuario'], 
+      usuario            : this.auth.dataUsuario['id_usuario'], 
+      marca             : this.modalForm.value.marca,
+      modelo             : this.modalForm.value.modelo,
+      tonelada           : this.modalForm.value.tonelada,
+      metraje            : this.modalForm.value.metraje,
+      anio               : this.modalForm.value.anio,
+      color               : this.modalForm.value.color,
     } 
     this.transporteService.put(url,params).subscribe(
       res=>{
@@ -168,17 +195,21 @@ actualizar(){
   let url    = 'transporte/ActCamiones';
   let params = {
     idCamion           : this.data['idCamion'],
-    descripcionCamion  : this.modalForm.value.camion,
     tipoUnidad         : this.modalForm.value.tipoUnidad,
     placa              : this.modalForm.value.placa,
-    idTransportista    : this.modalForm.value.idTransportista,
-    dimenciones        : this.modalForm.value.dimenciones,
+    idTransportista    : this.modalForm.value.transporte,
     gps                : this.modalForm.value.gps,
     rampa              : this.modalForm.value.rampa,
     refrigerado        : this.modalForm.value.refrigerado,
     sede               : this.modalForm.value.sede,
     usuario            : this.auth.dataUsuario['id_usuario'], 
+    modelo             : this.modalForm.value.modelo,
+    tonelada           : this.modalForm.value.tonelada,
+    metraje            : this.modalForm.value.metraje,
+    anio               : this.modalForm.value.anio,
+    color               : this.modalForm.value.color,
   } 
+  console.log( params )
   this.transporteService.put( url,params ).subscribe(
     res=>{
       if(!res.hasError){

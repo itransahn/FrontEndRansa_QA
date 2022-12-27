@@ -56,7 +56,7 @@ export class SharedService {
   const DATA = document.getElementById(id);
   const doc = new jsPDF('p', 'pt', 'Letter');
   const options = {
-               background: 'white',
+               background: 'transparent',
                scale: 3,
                format: [4, 2]
                   };

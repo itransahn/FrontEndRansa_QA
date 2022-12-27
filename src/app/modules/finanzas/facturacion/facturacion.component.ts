@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { DataApi } from 'src/app/interfaces/dataApi';
@@ -16,12 +17,18 @@ import { ModalComponent } from './modal/modal.component';
   styleUrls: ['./facturacion.component.scss']
 })
 export class FacturacionComponent implements OnInit {
+/* DATA PARA DETALLES MANUALES */
+  public detalleServicios : dataManual[] = [];
+  public form : FormGroup;
+  public tipo : number = 0;;
+/* DATA PARA DETALLES MANUALES */
   public anioActual = new Date().getFullYear()
   public dolares = [];
   public parametros = [];
   public parametrosCai = [];
   public fecha = new Date()
   public espaciosBlancos = [];
+  public espaciosBlancos2 = [];
   public cabeceraF  : cabeceraFactura[] = [];
   public DcabeceraF : detalleCabecera[] = [];
   public Observaciones : string ='';
@@ -49,12 +56,43 @@ export class FacturacionComponent implements OnInit {
     ) { }
 
   ngOnInit(){
+    this.cargarForm();
+    this.tipo = this.ruta.snapshot.params['tipo'];
     this.cliente   = (this.ruta.snapshot.params['cliente']);
-    this.documento = '1000'+ (this.ruta.snapshot.params['documento'])
-    this.validarCorrelativo()
-    this.cargarParametrosF()
-    this.cabeceraFac()
+    this.documento = '1000'+ (this.ruta.snapshot.params['documento']);
+    this.validarCorrelativo();
+    this.cargarParametrosF();
+    this.cabeceraFac();
     this.DetallecabeceraFac();
+  }
+  
+
+llenarDataManual(){
+  this.espaciosBlancos2 = []
+  this.detalleServicios.push({
+   cantidad    : this.form.value.cantidad,
+   descripcion : this.form.value.detalle,
+   Punitario   : this.form.value.punitario,
+   descuento   : 0,
+   impuesto    : this.form.value.impuesto,
+   total       : String(  this.form.value.cantidad  * this.form.value.punitario ),
+  })
+
+  for(let j=0; j<(15-this.detalleServicios.length); j++){
+    this.espaciosBlancos2.push(j)
+}
+  console.log( this.detalleServicios)
+  this.form.reset()
+}
+
+
+  cargarForm(){
+    this.form = new FormGroup({
+cantidad   : new FormControl('', [ Validators.required]),
+punitario  : new FormControl('', [ Validators.required]),
+detalle    : new FormControl('', [ Validators.required]),
+impuesto   : new FormControl('', [ Validators.required]),
+    })
   }
 
   validacion(){
@@ -235,8 +273,8 @@ EstructurarObservaciones( array : any[]){
     for( let i = 0; i < this.EstrObs2.length; i++ ){
      this.Observaciones += ' ' + this.EstrObs2[i]['TOBCTC']
   }
-    console.log( this.EstrObs2)
-    console.log( this.Observaciones)
+    // console.log( this.EstrObs2)
+    // console.log( this.Observaciones)
 }
 
   retornarArraryAcum( objeto : any[]){
@@ -354,4 +392,14 @@ TCMTRF:array[0]['TCMTRF']
           return this.DcabeceraF[index]?.IVLDCS
         }
   }
+}
+
+
+interface dataManual {
+  cantidad    : number,
+  descripcion : string,
+  Punitario   : string,
+  descuento   : number,
+  impuesto    : string,
+  total       : string
 }

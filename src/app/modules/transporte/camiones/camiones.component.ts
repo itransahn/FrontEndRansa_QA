@@ -67,6 +67,7 @@ cargarCamiones(){
     (data : DataApi | any) =>{
       if( !data.hasError ){
         this.camiones = data?.data?.Table0;
+        // console.log(this.camiones)
       }    
     }
   )
@@ -104,7 +105,7 @@ cargarCamiones(){
     
     Modal ( accion : number, data ?: any ){
       const dialogReg = this.dialog.open( ModalCaComponent,{
-        width :   '500px',
+        width :   '1000px',
         height:   'auto',
         maxWidth: 'auto',
         data: { 
@@ -113,12 +114,17 @@ cargarCamiones(){
           idUnidad : data?.idUnidad,
           placa : data?.placa,
           idTransportista : data?.idTransportista,
-          dimensiones : data?.dimensiones,
           GPS : data?.GPS,
           Rampa : data?.Rampa,
           Refrigerado : data?.Refrigerado,
           idSede : data?.idSede,
-          idCamion : data?.idCamion
+          idCamion : data?.idCamion,
+          idMarca  : data?.idMarca,
+          idModelo : data?.idModelo,
+          idtonelada : data?.idtonelada,
+          idColor    : data?.idColor,
+          idMetraje  : data?.idMetraje,
+          anio       : data?.anio
         },
         disableClose : true
       })
