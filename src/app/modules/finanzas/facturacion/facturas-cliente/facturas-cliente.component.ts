@@ -147,9 +147,9 @@ if ( this.menuForm.value.documento == 1){
     res=>{
       if ( res ){
         if ( this.menuForm.value.sede == 1){
-          this.auth.redirecTo(`ransa/finanzas/facturacion/${this.menuForm.value.cliente}/${documento}`)
+          this.auth.redirecTo(`ransa/finanzas/facturacion/${this.menuForm.value.cliente}/${documento}/0`)
         }else{
-          this.auth.redirecTo(`ransa/finanzas/facturacionAh/${this.menuForm.value.cliente}/${documento}`)
+          this.auth.redirecTo(`ransa/finanzas/facturacionAh/${this.menuForm.value.cliente}/${documento}/0`)
   
         }
       }

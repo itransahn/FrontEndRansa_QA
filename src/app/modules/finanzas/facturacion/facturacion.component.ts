@@ -20,7 +20,7 @@ export class FacturacionComponent implements OnInit {
 /* DATA PARA DETALLES MANUALES */
   public detalleServicios : dataManual[] = [];
   public form : FormGroup;
-  public tipo : number = 0;;
+  public tipo : number = 0;
 /* DATA PARA DETALLES MANUALES */
   public anioActual = new Date().getFullYear()
   public dolares = [];
@@ -395,7 +395,7 @@ TCMTRF:array[0]['TCMTRF']
 }
 
 
-interface dataManual {
+export interface dataManual {
   cantidad    : number,
   descripcion : string,
   Punitario   : string,

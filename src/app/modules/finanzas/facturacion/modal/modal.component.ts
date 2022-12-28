@@ -12,12 +12,22 @@ import { ToastServiceLocal } from 'src/app/services/toast.service';
 })
 export class ModalComponent implements OnInit {
   public menuForm : FormGroup;
-
+  public cambios = [
+    {
+      id : 0,
+      valor : 'No'
+    },
+    {
+      id : 1,
+      valor : 'Si'
+    }
+  ]
   constructor(
   private dialogRef:MatDialogRef<ModalComponent>, 
   public auth:AuthService,
   public seguridad : SeguridadService, 
   public toast:ToastServiceLocal,
+  
   @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
@@ -25,10 +35,13 @@ export class ModalComponent implements OnInit {
     this.formMenu()
     }
 
+  
+
   private formMenu(){
     this.menuForm = new FormGroup({
       cliente     : new FormControl ('' , [ Validators.required,]),
       documento   : new FormControl ('' , [ Validators.required,]),
+      cambios     : new FormControl ('' , [ Validators.required,])
     })
 }
 
@@ -39,13 +52,26 @@ close(){
 redireccionar(){
 
   if ( this.data['sede'] == 1){
-    this.auth.redirecTo(`/ransa/finanzas/facturacion/${this.menuForm.value.cliente}/${this.menuForm.value.documento}`)
-    this.dialogRef.close()
+
+      if ( this.menuForm.value.cambios === 0){
+        this.auth.redirecTo(`/ransa/finanzas/facturacion/${this.menuForm.value.cliente}/${this.menuForm.value.documento}/0`)
+        this.dialogRef.close()
+        }else{
+          this.auth.redirecTo(`/ransa/finanzas/facturacion/${this.menuForm.value.cliente}/${this.menuForm.value.documento}/1`)
+          this.dialogRef.close()
+      }
   }
 
   if ( this.data['sede'] == 2) {
-    this.auth.redirecTo(`/ransa/finanzas/facturacionAh/${this.menuForm.value.cliente}/${this.menuForm.value.documento}`)
+
+    
+    if ( this.menuForm.value.cambios === 0){
+      this.auth.redirecTo(`/ransa/finanzas/facturacionAh/${this.menuForm.value.cliente}/${this.menuForm.value.documento}/0`)
     this.dialogRef.close()
+      }else{
+        this.auth.redirecTo(`/ransa/finanzas/facturacionAh/${this.menuForm.value.cliente}/${this.menuForm.value.documento}/1`)
+        this.dialogRef.close()
+    }
   }
 }
 

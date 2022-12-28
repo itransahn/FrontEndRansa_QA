@@ -9,17 +9,25 @@ import { numeroALetras } from 'src/app/shared/functions/conversorNumLetras';
 import { SharedService } from 'src/app/modules/shared/shared.service';
 import { FacturacionService } from '../../facturacion.service';
 import { ModalComponent } from '../modal/modal.component';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { dataManual } from '../facturacion.component';
 @Component({
   selector: 'app-factura-ah',
   templateUrl: './factura-ah.component.html',
   styleUrls: ['./factura-ah.component.scss']
 })
 export class FacturaAHComponent implements OnInit {
-  public anioActual = new Date().getFullYear()
+  /* DATA PARA DETALLES MANUALES */
+  public detalleServicios : dataManual[] = [];
+  public form : FormGroup;
+  public tipo : number = 0;
+  public espaciosBlancos2 = [];
+/* DATA PARA DETALLES MANUALES */
+  public anioActual = new Date().getFullYear();
   public dolares = [];
   public parametros = [];
   public parametrosCai = [];
-  public fecha = new Date()
+  public fecha = new Date();
   public espaciosBlancos = [];
   public cabeceraF  : cabeceraFactura[] = [];
   public DcabeceraF : detalleCabecera[] = [];
@@ -47,6 +55,8 @@ export class FacturaAHComponent implements OnInit {
     ) { }
 
   ngOnInit(){
+    this.cargarForm();
+    this.tipo = this.ruta.snapshot.params['tipo'];
     this.cliente   = (this.ruta.snapshot.params['cliente']);
     this.documento = '10000'+ (this.ruta.snapshot.params['documento'])
     this.validarCorrelativo()
@@ -55,6 +65,33 @@ export class FacturaAHComponent implements OnInit {
     this.DetallecabeceraFac();
   }
 
+  cargarForm(){
+    this.form = new FormGroup({
+cantidad   : new FormControl('', [ Validators.required]),
+punitario  : new FormControl('', [ Validators.required]),
+detalle    : new FormControl('', [ Validators.required]),
+impuesto   : new FormControl('', [ Validators.required]),
+    })
+  }
+
+  llenarDataManual(){
+    this.espaciosBlancos2 = []
+    this.detalleServicios.push({
+     cantidad    : this.form.value.cantidad,
+     descripcion : this.form.value.detalle,
+     Punitario   : this.form.value.punitario,
+     descuento   : 0,
+     impuesto    : this.form.value.impuesto,
+     total       : String(  this.form.value.cantidad  * this.form.value.punitario ),
+    })
+  
+    for(let j=0; j<(15-this.detalleServicios.length); j++){
+      this.espaciosBlancos2.push(j)
+  }
+    console.log( this.detalleServicios)
+    this.form.reset()
+  }
+  
   validacion(){
     this.cliente   = (this.ruta.snapshot.params['cliente']);
     this.documento = '10000'+ (this.ruta.snapshot.params['documento'])

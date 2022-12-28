@@ -1,3 +1,52 @@
+<div style="position: relative; margin-bottom: 5px;" class="container" >
+    <mat-card class="cardPersonalizada" *ngIf="tipo == 1">
+        <form [formGroup]="form" #f="ngForm">
+            <div class="row">
+                <div class="col-md-4">
+                    <mat-form-field appearance="legacy">
+                        <mat-label> Cantidad </mat-label>
+                        <input matInput maxlength="2" placeholder=" Cantidad " formControlName ="cantidad">
+                    </mat-form-field>
+                </div>
+
+           
+                <div class="col-md-4">
+                    <mat-form-field appearance="legacy">
+                        <mat-label> Precio Unitario </mat-label>
+                        <input matInput mask="separator.2" thousandSeparator="," placeholder=" Precio Unitario " formControlName ="punitario">
+                    </mat-form-field>
+                </div>
+
+                <!-- <div class="col-md-4">
+                    <mat-form-field appearance="legacy">
+                        <mat-label> Descuento y Reb Otorgada </mat-label>
+                        <input matInput maxlength="50" placeholder=" Descuento y Reb Otorgada " formControlName ="anio">
+                    </mat-form-field>
+                </div> -->
+                
+                <div class="col-md-4">
+                    <mat-form-field appearance="legacy">
+                        <mat-label> Impuesto </mat-label>
+                        <input matInput maxlength="1"  style="text-transform:uppercase;" placeholder=" Impuesto " formControlName ="impuesto">
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-12">
+                    <mat-form-field appearance="legacy">
+                        <mat-label> Descripción </mat-label>
+                        <textarea matInput maxlength="250" placeholder=" Descripción " formControlName ="detalle"></textarea>
+                    </mat-form-field>
+                </div>
+
+                <div class="container">
+                    <button class="buttonPrincipal" mat-raised-button type="submit" [disabled]="f.invalid" (click)="llenarDataManual()" > Agregar </button>
+                </div>
+
+            </div>
+        </form>
+    </mat-card>
+</div>
+
 <div class="container herencia padre" id="Factura" *ngIf="DcabeceraF.length >= 1 && loading1 && loading2 && cabeceraF.length >= 1 && permitido">
     <mat-card class="cardPersonalizada mt-8">
         <div class="row ">
@@ -14,7 +63,7 @@
 
         <div class="col-md-6 mt-4"  style="text-align: center !important;">
             <p>
-                <span >FACTURA</span> <br>
+                <span style = "font-size: 1.3em !important;">FACTURA</span> <br>
             <span style="text-align:left  !important; color:#FE9600 !important; font-size: 1.2em !important;">
                     000-001-01-{{retornarCorrelativo()}}
                 </span>
@@ -61,110 +110,201 @@
                         <th class="contenidoF" scope="col">TOTAL</th>
                       </tr>
                     </thead>
-                    <tbody class="bordes2">
-                      <tr *ngFor="let item of DcabeceraF; let i = index">
-                        <td data-label="CANTIDAD" class="contenidoF"> {{ item?.QAPCTC  | number }} </td>
-                        <td data-label="DESCRIPCION" class="contenidoF"> {{item?.TCMTRF }} </td>
-                        <td data-label="PRECIO UNITARIO" class="contenidoF">{{ retornarPrecioUnitario(i, item?.QAPCTC) | number : '1.2-2' }}</td>
-                        <td data-label="DESC. Y REB OTORGADA" class="contenidoF">{{ 0    | number : '1.2-2' }}</td>
-                        <td data-label="IMPUESTO" class="contenidoF"> {{ retornarLetra( item?.TCMTRF )}} </td>
-                        <td data-label="TOTAL" class="contenidoF">{{ item?.IVLDCS    | number : '1.2-2' }}</td>
-                      </tr>
-
-                      <!-- <tr>
-                        <td data-label="CANTIDAD"> 01</td>
-                        <td data-label="DESCRIPCION">FLETE</td>
-                        <td data-label="PRECIO UNITARIO">{{ 4047 | currency : 'Lps' }}</td>
-                        <td data-label="DESC. Y REB OTORGADA">{{ 0    | currency : 'Lps' }}</td>
-                        <td data-label="IMPUESTO"> G </td>
-                        <td data-label="TOTAL">{{ 4047    | currency  : 'Lps'}}</td>
-                      </tr> -->
-
-                        <tr  *ngFor="let item of espaciosBlancos "> 
-                            <td class="espacioB"  colspan="6"></td>
+                    <tbody class="bordes2" *ngIf="tipo == 0">
+                        <tr *ngFor="let item of DcabeceraF; let i = index"> 
+                          <td data-label="CANTIDAD" class="contenidoF"> {{ item?.QAPCTC  | number }} </td>
+                          <td data-label="DESCRIPCION" class="contenidoF"> {{item?.TCMTRF }} </td>
+                          <td data-label="PRECIO UNITARIO" class="contenidoF">{{ retornarPrecioUnitario(i, item?.QAPCTC) | number : '1.2-2' }}</td>
+                          <td data-label="DESC. Y REB OTORGADA" class="contenidoF">{{ 0    | number : '1.2-2' }}</td>
+                          <td data-label="IMPUESTO" class="contenidoF"> {{ retornarLetra( item?.TCMTRF )}} </td>
+                          <td data-label="TOTAL" class="contenidoF"> {{ item?.IVLDCS    | number : '1.2-2' }}</td>
                         </tr>
-
-                        <tr > 
-                            <td style="text-align:left !important; font-size: 1.2em !important; " class="espacioB" colspan="6">
-                                {{Observaciones}}
-                            </td>
-                        </tr>
-                    
-                    </tbody>
-                    <tfoot class="mb-4">
-                        <tr >
-                                <!-- Número a letras -->
-                            <th class="legend left" colspan="4" >VALOR EN LETRAS: <span class="legend">
-                                <!-- CUATRO MIL SEICIENTOS CINCUENTA Y CUATRO LEMPIRAS 05/100 M.N -->
-                                {{ convertirNumLetra( retornarTotal(),[])}}
-                            </span></th>
-
-                        <th class="right"> SUBTOTAL L.</th>
-                        <th class="right"> {{ retornarSubtotal() | number : '1.2-2':'es' }} </th>
-                        </tr>
-                        <!-- Importe Exento -->
-                             <tr >
-                            <th  class="legend left"colspan="4" >NO. CORRELATIVO DE ORDEN DE COMPRA EXENTA: {{cabeceraF[0]['TOBCTC']}} </th>
-                            <th class="right"> Importe ExentoL.</th>
-                            <th class="right"> {{ 0 | number : '1.2-2':'es'}} </th>
+                 
+  
+                        <!-- <tr>
+                          <td data-label="CANTIDAD"> 01</td>
+                          <td data-label="DESCRIPCION">FLETE</td>
+                          <td data-label="PRECIO UNITARIO">{{ 4047 | currency : 'Lps' }}</td>
+                          <td data-label="DESC. Y REB OTORGADA">{{ 0    | currency : 'Lps' }}</td>
+                          <td data-label="IMPUESTO"> G </td>
+                          <td data-label="TOTAL">{{ 4047    | currency  : 'Lps'}}</td>
+                        </tr> -->
+  
+                          <tr  *ngFor="let item of espaciosBlancos "> 
+                              <td class="espacioB"  colspan="6"></td>
+                          </tr>
+  
+                          <tr> 
+                              <td style="text-align:left !important; font-size: 1.2em !important; " class="espacioB" colspan="5">
+                                  <!-- {{obs}} -->
+                                  {{ Observaciones }}
+                                  <!-- <p style="text-align:left !important; font-size: 0.9em !important; ">
+                                  </p> -->
+                              </td>
+                              <td style="text-align:left !important; font-size: 0.9em !important; " class="espacioB" colspan="1">
+                              </td>
+                          </tr>
+  
+                 
+                      
+                      </tbody>
+  
+                      <tbody class="bordes2" *ngIf="tipo == 1">
+                          <tr *ngFor="let item of detalleServicios; let i = index"> 
+                            <td data-label="CANTIDAD" class="contenidoF"> {{ item?.cantidad  | number }} </td>
+                            <td data-label="DESCRIPCION" class="contenidoF"> {{item?.descripcion }} </td>
+                            <td data-label="PRECIO UNITARIO" class="contenidoF">{{ item?.Punitario | number : '1.2-2' }}</td>
+                            <td data-label="DESC. Y REB OTORGADA" class="contenidoF">{{ 0    | number : '1.2-2' }}</td>
+                            <td data-label="IMPUESTO" class="contenidoF"> {{ item?.impuesto | uppercase }} </td>
+                            <td data-label="TOTAL" class="contenidoF">{{ item?.total    | number : '1.2-2' }}</td>
+                          </tr>
+                   
+    
+                          <!-- <tr>
+                            <td data-label="CANTIDAD"> 01</td>
+                            <td data-label="DESCRIPCION">FLETE</td>
+                            <td data-label="PRECIO UNITARIO">{{ 4047 | currency : 'Lps' }}</td>
+                            <td data-label="DESC. Y REB OTORGADA">{{ 0    | currency : 'Lps' }}</td>
+                            <td data-label="IMPUESTO"> G </td>
+                            <td data-label="TOTAL">{{ 4047    | currency  : 'Lps'}}</td>
+                          </tr> -->
+    
+                            <tr  *ngFor="let item of espaciosBlancos2"> 
+                                <td class="espacioB"  colspan="6"></td>
                             </tr>
-                        <!-- Importe Exonerado -->
-                        <tr >
-                            <th class="legend left" colspan="4" >NO. CORRELATIVO DE CONSTANCIA DE REGISTRO EXONERADO: {{cabeceraF[0]['TOBCTC2']}}</th>
-                            <th class="right" > Importe ExoneradoL.</th>
-                            <th class="right"> {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2':'es'}} </th>
-                        </tr>
-                           <!-- Importe Gravado al 15% -->
-                           <tr >
-                            <th class="legend left" colspan="4" >NO. IDENTIFICATIVO DEL REGISTRO DE LA SAG:</th>
-                            <th class="right" colspan="1"> Importe Gravado al 15%L.</th>
-                            <th class="right"> {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2':'es' }} </th>
-                        </tr>
-
-                          <!-- Importe Gravado al 18% -->
-                          <tr >
-                            <th colspan="4"></th>
-                            <th class="right" colspan="1"> Importe Gravado al 18%L.</th>
-                            <th class="right"> {{ 0 | number : '1.2-2':'es' }} </th>
-                        </tr>
-
-                        <!-- ISV 15% -->
-                        <tr >
-                            <th class="legend left" colspan="4" >**Vencido el plazo de pago de este documento genera 3% de interés***:</th>
-                            <th class="right"> I.S.V 15%L.</th>
-                            <th class="right"> {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2':'es' }} </th>
-                        </tr>
-
-                           <!-- ISV 18% -->
-                           <tr >
-                            <th class="legend left" colspan="4" >**Si su pago con cheque resulta rechazado tendrá un recargo de L400.00***:</th>
-                            <th class="right"> I.S.V 18%L.</th>
-                            <th class="right"> {{ 0 | number : '1.2-2'}} </th>
-                        </tr>
-                          <!-- Total a pagar -->
-                          <tr >
-                            <!-- <th ></th> -->
-                            <!-- <div >
-                            <label > INGRESADO POR MARIO VELASQUEZ</label>
-                            </div> -->
-                            <th class="right" colspan="5"> Total a pagarL.</th>
-                            <th class="right"> {{ retornarTotal() | number : '1.2-2':'es'}} </th>
-                        </tr>
-
-                        <tr >
-                            <!-- <th ></th> -->
-                            <th  colspan="3" style="padding-top: 7%;" class=" footE center legend"> FIRMA Y SELLO DEL CIENTE</th>
-                            <th  colspan="3" class=" footE rigth legend"> LA FACTURA ES BENEFICIO DE TODOS, EXIJALA</th>
-                        </tr>
-
-                    </tfoot>  
+    
+                            <tr> 
+                                <td style="text-align:left !important; font-size: 1.2em !important; " class="espacioB" colspan="5">
+                                    <!-- {{obs}} -->
+                                    {{ Observaciones }}
+                                    <!-- <p style="text-align:left !important; font-size: 0.9em !important; ">
+                                    </p> -->
+                                </td>
+                                <!-- <td style="text-align:left !important; font-size: 0.9em !important; " class="espacioB" colspan="1">
+                                </td> -->
+                            </tr>
+                        
+                          
+                          
+                        </tbody>
+  
+                        <tfoot>
+                            <tr class="legend">
+                                    <!-- Número a letras -->
+                                <th class="legend left"  colspan="4" rowspan="8" >
+                                    <p class="legend">
+                                        <span class="legend left"> VALOR EN LETRAS:   {{ convertirNumLetra( retornarTotal(),[])}}
+                                        </span>  <br><br>
+    
+                                        <!-- correlativo exenta -->
+                                        <span class="legend left" >
+                                            NO. CORRELATIVO DE ORDEN DE COMPRA EXENTA: {{cabeceraF[0]['TOBCTC']}}
+                                        </span> <br> <br> 
+                                    
+                                             <!-- correlativo exonerado -->
+                                         <span class="legend left">
+                                                NO. CORRELATIVO DE CONSTANCIA DE REGISTRO EXONERADO: {{cabeceraF[0]['TOBCTC2']}}
+                                        </span> <br> <br>
+            
+                                               <!-- Identificativo de la Sag -->
+                                        <span class="legend left">
+                                         NO. IDENTIFICATIVO DEL REGISTRO DE LA SAG:
+                                        </span> <br> <br>
+            
+                                        <!-- Vencido el pago -->
+                                        <span class="legend left">
+                                            **Vencido el plazo de pago de este documento genera 3% de interés***
+                                        </span> <br> 
+            
+                                           <!-- advertenci de cheque -->
+                                        <span class="legend left">
+                                            **Si su pago con cheque resulta rechazado tendrá un recargo de L400.00***
+                                        </span>
+                                    </p>
+                            </th>
+    
+                            <th class="right"> SUBTOTAL </th>
+                            <th class="left legend"> L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            
+                                {{ retornarSubtotal() | number : '1.2-2':'es' }}  </th>
+                            </tr>
+                            <!-- Importe Exento -->
+                                 <tr >
+                                <!-- <th  class="legend left bordeIz"colspan="4" style="border-bottom-style: hidden !important;" >NO. CORRELATIVO DE ORDEN DE COMPRA EXENTA: {{cabeceraF[0]['TOBCTC']}} </th> -->
+                                <th class="right"> Importe Exento </th>
+                                <th class="left"> L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            
+                                    {{ 0 | number : '1.2-2':'es'}}   </th>
+                                </tr>
+                            <!-- Importe Exonerado -->
+                            <tr >
+                                <!-- <th class="legend left bordeIz" colspan="4" >NO. CORRELATIVO DE CONSTANCIA DE REGISTRO EXONERADO: {{cabeceraF[0]['TOBCTC2']}}</th> -->
+                                <th class="right" > Importe Exonerado </th>
+                                <th class="left legend"> L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            
+                                    {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2':'es'}}  </th>
+                            </tr>
+                               <!-- Importe Gravado al 15% -->
+                               <tr >
+                                <!-- <th class="left bordeIz" colspan="4"  style="border-bottom-style: hidden !important;">NO. IDENTIFICATIVO DEL REGISTRO DE LA SAG:
+                                <br>
+                                </th> -->
+                                <th class="right" colspan="1"> Importe Gravado al 15%</th>
+                                <th class="left legend"> L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            
+                                    {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2':'es' }}  </th>
+                            </tr>
+    
+                              <!-- Importe Gravado al 18% -->
+                              <tr >
+                                <!-- <th colspan="4" class="bordeIz"></th> -->
+                                <th class="right" colspan="1"> Importe Gravado al 18% </th>
+                                <th class="left legend">  L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            
+                                    {{ 0 | number : '1.2-2':'es' }}  </th>
+                            </tr>
+    
+                            <!-- ISV 15% -->
+                            <tr >
+                                <!-- <th class="legend left bordeIz" colspan="4" style="border-bottom-style: hidden !important;">**Vencido el plazo de pago de este documento genera 3% de interés***:</th> -->
+                                <th class="right"> I.S.V 15% </th>
+                                <th class="left legend">   L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            
+                                    {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2':'es' }} </th>
+                            </tr>
+    
+                               <!-- ISV 18% -->
+                               <tr >
+                                <!-- <th class="legend left bordeIz" colspan="4" style="border-bottom-style: hidden !important;">**Si su pago con cheque resulta rechazado tendrá un recargo de L400.00***:</th> -->
+                                <th class="right"> I.S.V 18%</th>
+                                <th class="left legend"> L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            
+                                    {{ 0 | number : '1.2-2'}} </th>
+                            </tr>
+                              <!-- Total a pagar -->
+                              <tr >
+                                <!-- <th ></th> -->
+                                <!-- <th colspan="4"></th> -->
+                                <!-- <div >
+                                </div> -->
+                                <!-- <th colspan="4"></th> -->
+                                <th class="right" colspan="1"> Total a pagar</th>
+                                <th class="left legend"> L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            
+                                    {{ retornarTotal() | number : '1.2-2':'es'}}  </th>
+                            </tr>
+    <!--     
+                            <tr >
+                                <th  colspan="3" style="padding-top: 7%;" class=" footE center legend"> FIRMA Y SELLO DEL CIENTE</th>
+                                <th  colspan="3" class=" footE rigth legend"> LA FACTURA ES BENEFICIO DE TODOS, EXIJALA</th>
+                            </tr> -->
+    
+                        </tfoot>  
                   </table>
                </div>
         </div>
 
         <div class="row mt-4">
-            <div class="col-md-12 container footL">
+            <div class="col-md 12 mt-4 firma  container footL">
+                    <label class="center">  FIRMA Y SELLO DEL CIENTE </label>
+            </div>
+            <div class="col-md-12 container pertenece  footL">
                 <label class="center"> ORIGINAL: CLIENTE </label>
+            </div>
+            <div class="col-md 12 container footL">
+                    <label class="center">  LA FACTURA ES BENEFICIO DE TODOS, EXIJALA</label>
             </div>
             <!-- <div class="col-md-4 container footL">
                 <label class="center"> DUPLICADO: TRIBUTARIO EMISOR</label>
@@ -175,7 +315,7 @@
         </div>
             <div class="row container">
                 <div class="col-md-12 container">
-                    <label class="center" style="color:#FE9600 !important; padding-top: 3%;"> {{ parametros[0]['lemaFactura']}} </label>
+                    <label class="center" style="color:#FE9600 !important;"> {{ parametros[0]['lemaFactura']}} </label>
 
                 </div>
             </div>
@@ -198,7 +338,7 @@
 
        <div class="col-md-6 mt-4"  style="text-align: center !important;">
             <p>
-                <span >FACTURA</span> <br>
+                <span style = "font-size: 1.3em !important;">FACTURA</span> <br>
             <span style="text-align:left  !important; font-size: 1.2em !important;">
                     000-001-01-{{retornarCorrelativo()}}
                 </span>
@@ -245,108 +385,201 @@
                         <th class="contenidoF" scope="col">TOTAL</th>
                       </tr>
                     </thead>
-                    <tbody>
-                      <tr *ngFor="let item of DcabeceraF; let i = index">
-                        <td data-label="CANTIDAD" class="contenidoF"> {{ item?.QAPCTC  | number }} </td>
-                        <td data-label="DESCRIPCION" class="contenidoF"> {{item?.TCMTRF }} </td>
-                        <td data-label="PRECIO UNITARIO" class="contenidoF">{{ retornarPrecioUnitario(i, item?.QAPCTC) | number : '1.2-2' }}</td>
-                        <td data-label="DESC. Y REB OTORGADA" class="contenidoF">{{ 0    | number : '1.2-2' }}</td>
-                        <td data-label="IMPUESTO" class="contenidoF"> {{ retornarLetra( item?.TCMTRF )}} </td>
-                        <td data-label="TOTAL" class="contenidoF">{{ item?.IVLDCS    | number : '1.2-2' }}</td>
-                      </tr>
-
-                      <!-- <tr>
-                        <td data-label="CANTIDAD"> 01</td>
-                        <td data-label="DESCRIPCION">FLETE</td>
-                        <td data-label="PRECIO UNITARIO">{{ 4047 | currency : 'Lps' }}</td>
-                        <td data-label="DESC. Y REB OTORGADA">{{ 0    | currency : 'Lps' }}</td>
-                        <td data-label="IMPUESTO"> G </td>
-                        <td data-label="TOTAL">{{ 4047    | currency  : 'Lps'}}</td>
-                      </tr> -->
-
-                        <tr style=" border-collapse: collapse;"  *ngFor="let item of espaciosBlancos "> 
-                            <td class="espacioB"  colspan="6"></td>
+                    <tbody class="bordes2" *ngIf="tipo == 0">
+                        <tr *ngFor="let item of DcabeceraF; let i = index"> 
+                          <td data-label="CANTIDAD" class="contenidoF"> {{ item?.QAPCTC  | number }} </td>
+                          <td data-label="DESCRIPCION" class="contenidoF"> {{item?.TCMTRF }} </td>
+                          <td data-label="PRECIO UNITARIO" class="contenidoF">{{ retornarPrecioUnitario(i, item?.QAPCTC) | number : '1.2-2' }}</td>
+                          <td data-label="DESC. Y REB OTORGADA" class="contenidoF">{{ 0    | number : '1.2-2' }}</td>
+                          <td data-label="IMPUESTO" class="contenidoF"> {{ retornarLetra( item?.TCMTRF )}} </td>
+                          <td data-label="TOTAL" class="contenidoF"> {{ item?.IVLDCS    | number : '1.2-2' }}</td>
                         </tr>
-
-                        <tr style=" border-collapse: collapse;"> 
-                            <td style="text-align:left !important; font-size: 1.2em !important; " class="espacioB" colspan="6">
-                                {{Observaciones}}
-                            </td>
-                        </tr>
-                    
-                    </tbody>
-                    <tfoot>
-                        <tr >
-                                <!-- Número a letras -->
-                            <th class="legend left" colspan="4" >VALOR EN LETRAS: <span class="legend">
-                                <!-- CUATRO MIL SEICIENTOS CINCUENTA Y CUATRO LEMPIRAS 05/100 M.N -->
-                                {{ convertirNumLetra( retornarTotal(),[])}}
-                            </span></th>
-
-                        <th class="right"> SUBTOTAL L.</th>
-                        <th class="right"> {{ retornarSubtotal() | number : '1.2-2':'es' }} </th>
-                        </tr>
-                        <!-- Importe Exento -->
-                             <tr >
-                            <th  class="legend left"colspan="4" >NO. CORRELATIVO DE ORDEN DE COMPRA EXENTA: {{cabeceraF[0]['TOBCTC']}} </th>
-                            <th class="right"> Importe ExentoL.</th>
-                            <th class="right"> {{ 0 | number : '1.2-2':'es'}} </th>
+                 
+  
+                        <!-- <tr>
+                          <td data-label="CANTIDAD"> 01</td>
+                          <td data-label="DESCRIPCION">FLETE</td>
+                          <td data-label="PRECIO UNITARIO">{{ 4047 | currency : 'Lps' }}</td>
+                          <td data-label="DESC. Y REB OTORGADA">{{ 0    | currency : 'Lps' }}</td>
+                          <td data-label="IMPUESTO"> G </td>
+                          <td data-label="TOTAL">{{ 4047    | currency  : 'Lps'}}</td>
+                        </tr> -->
+  
+                          <tr  *ngFor="let item of espaciosBlancos "> 
+                              <td class="espacioB"  colspan="6"></td>
+                          </tr>
+  
+                          <tr> 
+                              <td style="text-align:left !important; font-size: 1.2em !important; " class="espacioB" colspan="5">
+                                  <!-- {{obs}} -->
+                                  {{ Observaciones }}
+                                  <!-- <p style="text-align:left !important; font-size: 0.9em !important; ">
+                                  </p> -->
+                              </td>
+                              <td style="text-align:left !important; font-size: 0.9em !important; " class="espacioB" colspan="1">
+                              </td>
+                          </tr>
+  
+                 
+                      
+                      </tbody>
+  
+                      <tbody class="bordes2" *ngIf="tipo == 1">
+                          <tr *ngFor="let item of detalleServicios; let i = index"> 
+                            <td data-label="CANTIDAD" class="contenidoF"> {{ item?.cantidad  | number }} </td>
+                            <td data-label="DESCRIPCION" class="contenidoF"> {{item?.descripcion }} </td>
+                            <td data-label="PRECIO UNITARIO" class="contenidoF">{{ item?.Punitario | number : '1.2-2' }}</td>
+                            <td data-label="DESC. Y REB OTORGADA" class="contenidoF">{{ 0    | number : '1.2-2' }}</td>
+                            <td data-label="IMPUESTO" class="contenidoF"> {{ item?.impuesto | uppercase }} </td>
+                            <td data-label="TOTAL" class="contenidoF">{{ item?.total    | number : '1.2-2' }}</td>
+                          </tr>
+                   
+    
+                          <!-- <tr>
+                            <td data-label="CANTIDAD"> 01</td>
+                            <td data-label="DESCRIPCION">FLETE</td>
+                            <td data-label="PRECIO UNITARIO">{{ 4047 | currency : 'Lps' }}</td>
+                            <td data-label="DESC. Y REB OTORGADA">{{ 0    | currency : 'Lps' }}</td>
+                            <td data-label="IMPUESTO"> G </td>
+                            <td data-label="TOTAL">{{ 4047    | currency  : 'Lps'}}</td>
+                          </tr> -->
+    
+                            <tr  *ngFor="let item of espaciosBlancos2"> 
+                                <td class="espacioB"  colspan="6"></td>
                             </tr>
-                        <!-- Importe Exonerado -->
-                        <tr >
-                            <th class="legend left" colspan="4" >NO. CORRELATIVO DE CONSTANCIA DE REGISTRO EXONERADO: {{cabeceraF[0]['TOBCTC2']}} </th>
-                            <th class="right" > Importe ExoneradoL.</th>
-                            <th class="right"> {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2':'es'}} </th>
-                        </tr>
-                           <!-- Importe Gravado al 15% -->
-                           <tr >
-                            <th class="legend left" colspan="4" >NO. IDENTIFICATIVO DEL REGISTRO DE LA SAG:</th>
-                            <th class="right" colspan="1"> Importe Gravado al 15%L.</th>
-                            <th class="right"> {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2':'es' }} </th>
-                        </tr>
+    
+                            <tr> 
+                                <td style="text-align:left !important; font-size: 1.2em !important; " class="espacioB" colspan="5">
+                                    <!-- {{obs}} -->
+                                    {{ Observaciones }}
+                                    <!-- <p style="text-align:left !important; font-size: 0.9em !important; ">
+                                    </p> -->
+                                </td>
+                                <!-- <td style="text-align:left !important; font-size: 0.9em !important; " class="espacioB" colspan="1">
+                                </td> -->
+                            </tr>
+                        
+                          
+                          
+                        </tbody>
+  
+                        <tfoot>
+                            <tr class="legend">
+                                    <!-- Número a letras -->
+                                <th class="legend left"  colspan="4" rowspan="8" >
+                                    <p class="legend">
+                                        <span class="legend left"> VALOR EN LETRAS:   {{ convertirNumLetra( retornarTotal(),[])}}
+                                        </span>  <br><br>
+    
+                                        <!-- correlativo exenta -->
+                                        <span class="legend left" >
+                                            NO. CORRELATIVO DE ORDEN DE COMPRA EXENTA: {{cabeceraF[0]['TOBCTC']}}
+                                        </span> <br> <br> 
+                                    
+                                             <!-- correlativo exonerado -->
+                                         <span class="legend left">
+                                                NO. CORRELATIVO DE CONSTANCIA DE REGISTRO EXONERADO: {{cabeceraF[0]['TOBCTC2']}}
+                                        </span> <br> <br>
+            
+                                               <!-- Identificativo de la Sag -->
+                                        <span class="legend left">
+                                         NO. IDENTIFICATIVO DEL REGISTRO DE LA SAG:
+                                        </span> <br> <br>
+            
+                                        <!-- Vencido el pago -->
+                                        <span class="legend left">
+                                            **Vencido el plazo de pago de este documento genera 3% de interés***
+                                        </span> <br> 
+            
+                                           <!-- advertenci de cheque -->
+                                        <span class="legend left">
+                                            **Si su pago con cheque resulta rechazado tendrá un recargo de L400.00***
+                                        </span>
+                                    </p>
+                            </th>
+    
+                            <th class="right"> SUBTOTAL </th>
+                            <th class="left legend"> L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            
+                                {{ retornarSubtotal() | number : '1.2-2':'es' }}  </th>
+                            </tr>
+                            <!-- Importe Exento -->
+                                 <tr >
+                                <!-- <th  class="legend left bordeIz"colspan="4" style="border-bottom-style: hidden !important;" >NO. CORRELATIVO DE ORDEN DE COMPRA EXENTA: {{cabeceraF[0]['TOBCTC']}} </th> -->
+                                <th class="right"> Importe Exento </th>
+                                <th class="left"> L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            
+                                    {{ 0 | number : '1.2-2':'es'}}   </th>
+                                </tr>
+                            <!-- Importe Exonerado -->
+                            <tr >
+                                <!-- <th class="legend left bordeIz" colspan="4" >NO. CORRELATIVO DE CONSTANCIA DE REGISTRO EXONERADO: {{cabeceraF[0]['TOBCTC2']}}</th> -->
+                                <th class="right" > Importe Exonerado </th>
+                                <th class="left legend"> L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            
+                                    {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2':'es'}}  </th>
+                            </tr>
+                               <!-- Importe Gravado al 15% -->
+                               <tr >
+                                <!-- <th class="left bordeIz" colspan="4"  style="border-bottom-style: hidden !important;">NO. IDENTIFICATIVO DEL REGISTRO DE LA SAG:
+                                <br>
+                                </th> -->
+                                <th class="right" colspan="1"> Importe Gravado al 15%</th>
+                                <th class="left legend"> L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            
+                                    {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2':'es' }}  </th>
+                            </tr>
+    
+                              <!-- Importe Gravado al 18% -->
+                              <tr >
+                                <!-- <th colspan="4" class="bordeIz"></th> -->
+                                <th class="right" colspan="1"> Importe Gravado al 18% </th>
+                                <th class="left legend">  L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            
+                                    {{ 0 | number : '1.2-2':'es' }}  </th>
+                            </tr>
+    
+                            <!-- ISV 15% -->
+                            <tr >
+                                <!-- <th class="legend left bordeIz" colspan="4" style="border-bottom-style: hidden !important;">**Vencido el plazo de pago de este documento genera 3% de interés***:</th> -->
+                                <th class="right"> I.S.V 15% </th>
+                                <th class="left legend">   L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            
+                                    {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2':'es' }} </th>
+                            </tr>
+    
+                               <!-- ISV 18% -->
+                               <tr >
+                                <!-- <th class="legend left bordeIz" colspan="4" style="border-bottom-style: hidden !important;">**Si su pago con cheque resulta rechazado tendrá un recargo de L400.00***:</th> -->
+                                <th class="right"> I.S.V 18%</th>
+                                <th class="left legend"> L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            
+                                    {{ 0 | number : '1.2-2'}} </th>
+                            </tr>
+                              <!-- Total a pagar -->
+                              <tr >
+                                <!-- <th ></th> -->
+                                <!-- <th colspan="4"></th> -->
+                                <!-- <div >
+                                </div> -->
+                                <!-- <th colspan="4"></th> -->
+                                <th class="right" colspan="1"> Total a pagar</th>
+                                <th class="left legend"> L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            
+                                    {{ retornarTotal() | number : '1.2-2':'es'}}  </th>
+                            </tr>
+    <!--     
+                            <tr >
+                                <th  colspan="3" style="padding-top: 7%;" class=" footE center legend"> FIRMA Y SELLO DEL CIENTE</th>
+                                <th  colspan="3" class=" footE rigth legend"> LA FACTURA ES BENEFICIO DE TODOS, EXIJALA</th>
+                            </tr> -->
+    
+                        </tfoot>   
 
-                          <!-- Importe Gravado al 18% -->
-                          <tr >
-                            <th colspan="4"></th>
-                            <th class="right" colspan="1"> Importe Gravado al 18%L.</th>
-                            <th class="right"> {{ 0 | number : '1.2-2':'es' }} </th>
-                        </tr>
-
-                        <!-- ISV 15% -->
-                        <tr >
-                            <th class="legend left" colspan="4" >**Vencido el plazo de pago de este documento genera 3% de interés***:</th>
-                            <th class="right"> I.S.V 15%L.</th>
-                            <th class="right"> {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2':'es' }} </th>
-                        </tr>
-
-                           <!-- ISV 18% -->
-                           <tr >
-                            <th class="legend left" colspan="4" >**Si su pago con cheque resulta rechazado tendrá un recargo de L400.00***:</th>
-                            <th class="right"> I.S.V 18%L.</th>
-                            <th class="right"> {{ 0 | number : '1.2-2'}} </th>
-                        </tr>
-                          <!-- Total a pagar -->
-                          <tr >
-                            <!-- <div >
-                            <label > INGRESADO POR MARIO VELASQUEZ</label>
-                            </div> -->
-                            <th class="right" colspan="5"> Total a pagarL.</th>
-                            <th class="right"> {{ retornarTotal() | number : '1.2-2':'es'}} </th>
-                        </tr>
-
-                        <tr >
-                            <!-- <th ></th> -->
-                            <th  colspan="3" style="padding-top: 7%;" class=" footE center legend"> FIRMA Y SELLO DEL CIENTE</th>
-                            <th  colspan="3" class=" footE rigth legend"> LA FACTURA ES BENEFICIO DE TODOS, EXIJALA</th>
-                        </tr>
-
-                    </tfoot>  
                   </table>
                </div>
         </div>
             <div class="row mt-4">
-                <div class="col-md-12 container footL">
+                <div class="col-md 12 firma  container footL">
+                 <label class="center">  FIRMA Y SELLO DEL CIENTE </label>
+                </div>
+                <div class="col-md-12 container pertenece footL">
                     <label class="center"> DUPLICADO: OBLIGADO TRIBUTARIO EMISOR </label>
+                </div>
+                        <div class="col-md 12 container footL">
+                    <label class="center">  LA FACTURA ES BENEFICIO DE TODOS, EXIJALA</label>
                 </div>
                 <!-- <div class="col-md-4 container footL">
                     <label class="center"> DUPLICADO: TRIBUTARIO EMISOR</label>
@@ -357,7 +590,7 @@
             </div>
             <div class="row container">
                 <div class="col-md-12 container">
-                    <label class="center" style="color:#050404 !important; padding-top: 3%;"> {{ parametros[0]['lemaFactura']}} </label>
+                    <label class="center" style="color:#050404 !important;"> {{ parametros[0]['lemaFactura']}} </label>
 
                 </div>
             </div>
@@ -380,7 +613,7 @@
 
         <div class="col-md-6 mt-4"  style="text-align: center !important;">
             <p>
-                <span >FACTURA</span> <br>
+                <span style = "font-size: 1.3em !important;">FACTURA</span> <br>
             <span style="text-align:left  !important; font-size: 1.2em !important;">
                     000-001-01-{{retornarCorrelativo()}}
                 </span>
@@ -427,106 +660,202 @@
                         <th class="contenidoF" scope="col">TOTAL</th>
                       </tr>
                     </thead>
-                    <tbody>
-                      <tr *ngFor="let item of DcabeceraF; let i = index">
-                        <td data-label="CANTIDAD" class="contenidoF"> {{ item?.QAPCTC  | number }} </td>
-                        <td data-label="DESCRIPCION" class="contenidoF"> {{item?.TCMTRF }} </td>
-                        <td data-label="PRECIO UNITARIO" class="contenidoF">{{ retornarPrecioUnitario(i, item?.QAPCTC) | number : '1.2-2' }}</td>
-                        <td data-label="DESC. Y REB OTORGADA" class="contenidoF">{{ 0    | number : '1.2-2' }}</td>
-                        <td data-label="IMPUESTO" class="contenidoF"> {{ retornarLetra( item?.TCMTRF )}} </td>
-                        <td data-label="TOTAL" class="contenidoF">{{ item?.IVLDCS    | number : '1.2-2' }}</td>
-                      </tr>
-
-                      <!-- <tr>
-                        <td data-label="CANTIDAD"> 01</td>
-                        <td data-label="DESCRIPCION">FLETE</td>
-                        <td data-label="PRECIO UNITARIO">{{ 4047 | currency : 'Lps' }}</td>
-                        <td data-label="DESC. Y REB OTORGADA">{{ 0    | currency : 'Lps' }}</td>
-                        <td data-label="IMPUESTO"> G </td>
-                        <td data-label="TOTAL">{{ 4047    | currency  : 'Lps'}}</td>
-                      </tr> -->
-
-                        <tr style=" border-collapse: collapse;"  *ngFor="let item of espaciosBlancos "> 
-                            <td class="espacioB"  colspan="6"></td>
+               
+                    <tbody class="bordes2" *ngIf="tipo == 0">
+                        <tr *ngFor="let item of DcabeceraF; let i = index"> 
+                          <td data-label="CANTIDAD" class="contenidoF"> {{ item?.QAPCTC  | number }} </td>
+                          <td data-label="DESCRIPCION" class="contenidoF"> {{item?.TCMTRF }} </td>
+                          <td data-label="PRECIO UNITARIO" class="contenidoF">{{ retornarPrecioUnitario(i, item?.QAPCTC) | number : '1.2-2' }}</td>
+                          <td data-label="DESC. Y REB OTORGADA" class="contenidoF">{{ 0    | number : '1.2-2' }}</td>
+                          <td data-label="IMPUESTO" class="contenidoF"> {{ retornarLetra( item?.TCMTRF )}} </td>
+                          <td data-label="TOTAL" class="contenidoF"> {{ item?.IVLDCS    | number : '1.2-2' }}</td>
                         </tr>
-
-                        <tr style=" border-collapse: collapse;"> 
-                            <td style="text-align:left !important; font-size: 1.2em !important; " class="espacioB" colspan="6">
-                                {{Observaciones}}
-                            </td>
-                        </tr>
-                    
-                    </tbody>
-                    <tfoot>
-                        <tr >
-                                <!-- Número a letras -->
-                            <th class="legend left" colspan="4" >VALOR EN LETRAS: <span class="legend">
-                                <!-- CUATRO MIL SEICIENTOS CINCUENTA Y CUATRO LEMPIRAS 05/100 M.N -->
-                                {{ convertirNumLetra( retornarTotal(),[])}}
-                            </span></th>
-
-                        <th class="right"> SUBTOTAL L.</th>
-                        <th class="right"> {{ retornarSubtotal() | number : '1.2-2':'es' }} </th>
-                        </tr>
-                        <!-- Importe Exento -->
-                             <tr >
-                            <th  class="legend left"colspan="4" >NO. CORRELATIVO DE ORDEN DE COMPRA EXENTA: {{cabeceraF[0]['TOBCTC']}} </th>
-                            <th class="right"> Importe ExentoL.</th>
-                            <th class="right"> {{ 0 | number : '1.2-2':'es'}} </th>
+                 
+  
+                        <!-- <tr>
+                          <td data-label="CANTIDAD"> 01</td>
+                          <td data-label="DESCRIPCION">FLETE</td>
+                          <td data-label="PRECIO UNITARIO">{{ 4047 | currency : 'Lps' }}</td>
+                          <td data-label="DESC. Y REB OTORGADA">{{ 0    | currency : 'Lps' }}</td>
+                          <td data-label="IMPUESTO"> G </td>
+                          <td data-label="TOTAL">{{ 4047    | currency  : 'Lps'}}</td>
+                        </tr> -->
+  
+                          <tr  *ngFor="let item of espaciosBlancos "> 
+                              <td class="espacioB"  colspan="6"></td>
+                          </tr>
+  
+                          <tr> 
+                              <td style="text-align:left !important; font-size: 1.2em !important; " class="espacioB" colspan="5">
+                                  <!-- {{obs}} -->
+                                  {{ Observaciones }}
+                                  <!-- <p style="text-align:left !important; font-size: 0.9em !important; ">
+                                  </p> -->
+                              </td>
+                              <td style="text-align:left !important; font-size: 0.9em !important; " class="espacioB" colspan="1">
+                              </td>
+                          </tr>
+  
+                 
+                      
+                      </tbody>
+  
+                      <tbody class="bordes2" *ngIf="tipo == 1">
+                          <tr *ngFor="let item of detalleServicios; let i = index"> 
+                            <td data-label="CANTIDAD" class="contenidoF"> {{ item?.cantidad  | number }} </td>
+                            <td data-label="DESCRIPCION" class="contenidoF"> {{item?.descripcion }} </td>
+                            <td data-label="PRECIO UNITARIO" class="contenidoF">{{ item?.Punitario | number : '1.2-2' }}</td>
+                            <td data-label="DESC. Y REB OTORGADA" class="contenidoF">{{ 0    | number : '1.2-2' }}</td>
+                            <td data-label="IMPUESTO" class="contenidoF"> {{ item?.impuesto | uppercase }} </td>
+                            <td data-label="TOTAL" class="contenidoF">{{ item?.total    | number : '1.2-2' }}</td>
+                          </tr>
+                   
+    
+                          <!-- <tr>
+                            <td data-label="CANTIDAD"> 01</td>
+                            <td data-label="DESCRIPCION">FLETE</td>
+                            <td data-label="PRECIO UNITARIO">{{ 4047 | currency : 'Lps' }}</td>
+                            <td data-label="DESC. Y REB OTORGADA">{{ 0    | currency : 'Lps' }}</td>
+                            <td data-label="IMPUESTO"> G </td>
+                            <td data-label="TOTAL">{{ 4047    | currency  : 'Lps'}}</td>
+                          </tr> -->
+    
+                            <tr  *ngFor="let item of espaciosBlancos2"> 
+                                <td class="espacioB"  colspan="6"></td>
                             </tr>
-                        <!-- Importe Exonerado -->
-                        <tr >
-                            <th class="legend left" colspan="4" >NO. CORRELATIVO DE CONSTANCIA DE REGISTRO EXONERADO: {{cabeceraF[0]['TOBCTC2']}} </th>
-                            <th class="right" > Importe ExoneradoL.</th>
-                            <th class="right"> {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2':'es'}} </th>
-                        </tr>
-                           <!-- Importe Gravado al 15% -->
-                           <tr >
-                            <th class="legend left" colspan="4" >NO. IDENTIFICATIVO DEL REGISTRO DE LA SAG:</th>
-                            <th class="right" colspan="1"> Importe Gravado al 15%L.</th>
-                            <th class="right"> {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2':'es' }} </th>
-                        </tr>
+    
+                            <tr> 
+                                <td style="text-align:left !important; font-size: 1.2em !important; " class="espacioB" colspan="5">
+                                    <!-- {{obs}} -->
+                                    {{ Observaciones }}
+                                    <!-- <p style="text-align:left !important; font-size: 0.9em !important; ">
+                                    </p> -->
+                                </td>
+                                <!-- <td style="text-align:left !important; font-size: 0.9em !important; " class="espacioB" colspan="1">
+                                </td> -->
+                            </tr>
+                        
+                          
+                          
+                        </tbody>
 
-                          <!-- Importe Gravado al 18% -->
-                          <tr >
-                            <th colspan="4"></th>
-                            <th class="right" colspan="1"> Importe Gravado al 18%L.</th>
-                            <th class="right"> {{ 0 | number : '1.2-2':'es' }} </th>
-                        </tr>
+                        <tfoot>
+                            <tr class="legend">
+                                    <!-- Número a letras -->
+                                <th class="legend left"  colspan="4" rowspan="8" >
+                                    <p class="legend">
+                                        <span class="legend left"> VALOR EN LETRAS:   {{ convertirNumLetra( retornarTotal(),[])}}
+                                        </span>  <br><br>
+    
+                                        <!-- correlativo exenta -->
+                                        <span class="legend left" >
+                                            NO. CORRELATIVO DE ORDEN DE COMPRA EXENTA: {{cabeceraF[0]['TOBCTC']}}
+                                        </span> <br> <br> 
+                                    
+                                             <!-- correlativo exonerado -->
+                                         <span class="legend left">
+                                                NO. CORRELATIVO DE CONSTANCIA DE REGISTRO EXONERADO: {{cabeceraF[0]['TOBCTC2']}}
+                                        </span> <br> <br>
+            
+                                               <!-- Identificativo de la Sag -->
+                                        <span class="legend left">
+                                         NO. IDENTIFICATIVO DEL REGISTRO DE LA SAG:
+                                        </span> <br> <br>
+            
+                                        <!-- Vencido el pago -->
+                                        <span class="legend left">
+                                            **Vencido el plazo de pago de este documento genera 3% de interés***
+                                        </span> <br> 
+            
+                                           <!-- advertenci de cheque -->
+                                        <span class="legend left">
+                                            **Si su pago con cheque resulta rechazado tendrá un recargo de L400.00***
+                                        </span>
+                                    </p>
+                            </th>
+    
+                            <th class="right"> SUBTOTAL </th>
+                            <th class="left legend"> L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            
+                                {{ retornarSubtotal() | number : '1.2-2':'es' }}  </th>
+                            </tr>
+                            <!-- Importe Exento -->
+                                 <tr >
+                                <!-- <th  class="legend left bordeIz"colspan="4" style="border-bottom-style: hidden !important;" >NO. CORRELATIVO DE ORDEN DE COMPRA EXENTA: {{cabeceraF[0]['TOBCTC']}} </th> -->
+                                <th class="right"> Importe Exento </th>
+                                <th class="left"> L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            
+                                    {{ 0 | number : '1.2-2':'es'}}   </th>
+                                </tr>
+                            <!-- Importe Exonerado -->
+                            <tr >
+                                <!-- <th class="legend left bordeIz" colspan="4" >NO. CORRELATIVO DE CONSTANCIA DE REGISTRO EXONERADO: {{cabeceraF[0]['TOBCTC2']}}</th> -->
+                                <th class="right" > Importe Exonerado </th>
+                                <th class="left legend"> L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            
+                                    {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2':'es'}}  </th>
+                            </tr>
+                               <!-- Importe Gravado al 15% -->
+                               <tr >
+                                <!-- <th class="left bordeIz" colspan="4"  style="border-bottom-style: hidden !important;">NO. IDENTIFICATIVO DEL REGISTRO DE LA SAG:
+                                <br>
+                                </th> -->
+                                <th class="right" colspan="1"> Importe Gravado al 15%</th>
+                                <th class="left legend"> L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            
+                                    {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2':'es' }}  </th>
+                            </tr>
+    
+                              <!-- Importe Gravado al 18% -->
+                              <tr >
+                                <!-- <th colspan="4" class="bordeIz"></th> -->
+                                <th class="right" colspan="1"> Importe Gravado al 18% </th>
+                                <th class="left legend">  L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            
+                                    {{ 0 | number : '1.2-2':'es' }}  </th>
+                            </tr>
+    
+                            <!-- ISV 15% -->
+                            <tr >
+                                <!-- <th class="legend left bordeIz" colspan="4" style="border-bottom-style: hidden !important;">**Vencido el plazo de pago de este documento genera 3% de interés***:</th> -->
+                                <th class="right"> I.S.V 15% </th>
+                                <th class="left legend">   L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            
+                                    {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2':'es' }} </th>
+                            </tr>
+    
+                               <!-- ISV 18% -->
+                               <tr >
+                                <!-- <th class="legend left bordeIz" colspan="4" style="border-bottom-style: hidden !important;">**Si su pago con cheque resulta rechazado tendrá un recargo de L400.00***:</th> -->
+                                <th class="right"> I.S.V 18%</th>
+                                <th class="left legend"> L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            
+                                    {{ 0 | number : '1.2-2'}} </th>
+                            </tr>
+                              <!-- Total a pagar -->
+                              <tr >
+                                <!-- <th ></th> -->
+                                <!-- <th colspan="4"></th> -->
+                                <!-- <div >
+                                </div> -->
+                                <!-- <th colspan="4"></th> -->
+                                <th class="right" colspan="1"> Total a pagar</th>
+                                <th class="left legend"> L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            
+                                    {{ retornarTotal() | number : '1.2-2':'es'}}  </th>
+                            </tr>
+    <!--     
+                            <tr >
+                                <th  colspan="3" style="padding-top: 7%;" class=" footE center legend"> FIRMA Y SELLO DEL CIENTE</th>
+                                <th  colspan="3" class=" footE rigth legend"> LA FACTURA ES BENEFICIO DE TODOS, EXIJALA</th>
+                            </tr> -->
+    
+                        </tfoot> 
 
-                        <!-- ISV 15% -->
-                        <tr >
-                            <th class="legend left" colspan="4" >NO. IDENTIFICATIVO DEL REGISTRO DE LA SAG:</th>
-                            <th class="right" colspan="1"> Importe Gravado al 15%L.</th>
-                            <th class="right"> {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2':'es' }} </th>
-                        </tr>
-
-                           <!-- ISV 18% -->
-                           <tr >
-                            <th class="legend left" colspan="4" >**Si su pago con cheque resulta rechazado tendrá un recargo de L400.00***:</th>
-                            <th class="right"> I.S.V 18%L.</th>
-                            <th class="right"> {{ 0 | number : '1.2-2'}} </th>
-                        </tr>
-                          <!-- Total a pagar -->
-                          <tr >
-                               <th class="right" colspan="5"> Total a pagarL.</th>
-
-                            <th class="right"> {{ retornarTotal() | number : '1.2-2':'es'}} </th>
-                        </tr>
-
-                        <tr >
-                            <!-- <th ></th> -->
-                            <th  colspan="3" style="padding-top: 7%;" class=" footE center legend"> FIRMA Y SELLO DEL CIENTE</th>
-                            <th  colspan="3" class=" footE rigth legend"> LA FACTURA ES BENEFICIO DE TODOS, EXIJALA</th>
-                        </tr>
-
-                    </tfoot>  
                   </table>
                </div>
         </div>
             <div class="row mt-4">
-                <div class="col-md-12 container footL">
+                <div class="col-md 12 firma container footL">
+                    <label class="center">  FIRMA Y SELLO DEL CIENTE </label>
+                </div>
+                <div class="col-md-12 container pertenece footL">
                     <label class="center"> TRIPLICADO: ARCHIVO </label>
+                </div>
+                        <div class="col-md 12 container footL">
+                    <label class="center">  LA FACTURA ES BENEFICIO DE TODOS, EXIJALA</label>
                 </div>
                 <!-- <div class="col-md-4 container footL">
                     <label class="center"> DUPLICADO: TRIBUTARIO EMISOR</label>
@@ -537,7 +866,7 @@
             </div>
             <div class="row container">
                 <div class="col-md-12 container">
-                    <label class="center" style="color:#050404 !important; padding-top: 3%;"> {{ parametros[0]['lemaFactura']}} </label>
+                    <label class="center" style="color:#050404 !important;"> {{ parametros[0]['lemaFactura']}} </label>
 
                 </div>
             </div>

@@ -17,7 +17,7 @@ const routes: Routes = [
   component : FacturacionComponent
  },
  {
-  path      : 'facturacionAh/:cliente/:documento',
+  path      : 'facturacionAh/:cliente/:documento/:tipo',
   component : FacturaAHComponent
  },
  {

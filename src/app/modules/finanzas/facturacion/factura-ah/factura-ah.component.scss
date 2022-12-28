@@ -10,6 +10,10 @@
 		.bordes2{
 		border : 1.5px solid #050404 !important;
 	}
+
+	.bordeIz{
+	   border-bottom-style: none !important;
+	}
 }
 
 .bordes{
@@ -21,8 +25,10 @@
 	border : 0.1px solid #050404;
 	// border-style: outset !important;
 	// color: #006F1D !important;
+	.bordeIz{
+		border-bottom-style: none !important;
+	 }
 }
-
 .contenidoF{
 	font-size: 0.9em !important;
 }
@@ -52,14 +58,7 @@
 	box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.3);
 	transform: translateY(-7px);
 }
-@media only screen and (max-width: 600px) {
- 	.btn-flotante {
-		font-size: 14px;
-		padding:   12px 20px;
-		bottom:    20px;
-		right:     20px;
-	}
-}
+
 
 div, p, span{
     color : #050404;
@@ -74,12 +73,13 @@ div, p, span{
     color: #006F1D !important;
     height: auto;
 	border-radius: 10px;
+	border-bottom-style: hidden !important;
 }
 
 .mat-divider {  border-top-color: #006F1D !important; }
 
 /* Alineacion */
-.left{  text-align: left !important; }
+.left{  text-align: left !important;}
 
 .right{ text-align: right !important; } 
 
@@ -100,29 +100,56 @@ thead{
 	th{
 		background-color: #ffffff !important;
 		color:  #050404 !important;	
+		.bordeIz{
+			border-bottom-style: none !important;
+		 }
 	}
+	.bordeIz{
+		border-bottom-style: none !important;
+	 }
 }
 
 tfoot{
 	tr{
 		background-color: #ffffff !important;	
 		font-size: x-small;
+	
+		.bordeIz{
+	border-bottom-style: none !important;
+		 }
+			.borderRg{
+				border: 0.5 solid #050404;
+			}
+
 	}
 	th{
 		border-style: outset !important;
-		border-color: #050404;
-		border: 0.1px;
+		// border-color: #050404;
+		// border: 0.1px;
 		background-color: #ffffff !important;
 	color: #050404 !important;
 	font-size: x-small;
+
+	.bordeIz{
+		border-bottom-style: none !important;
+	 }
+
+	.borderRg{
+		border: 0.2 solid #050404;
+	}
 }
+
+.bordeIz{
+	border-bottom-style: none !important;
+ }
+
 }
 
 /* FUENTES */
 .legend{
 	// text-align: left !important;
 	font-family: Arial, Helvetica, sans-serif;
-	font-size: 0.9em !important;
+	font-size: 1.1em !important;
 }
 
 .footL{
@@ -141,22 +168,33 @@ tbody{
 	font-size:   x-small;
 	tr{
 	font-size:   xx-small;
+	.bordeIz{
+		border-bottom-style: none !important;
+	 }
 
 	}
 	td{
 		background-color: #ffffff !important;
 		color: #050404 !important;
 		font-size: x-small;
+		.bordeIz{
+			border-bottom-style: none !important;
+		 }
 	}
+	.bordeIz{
+		border-bottom-style: none !important;
+	 }
 }
 
 table {
 	margin: 0;
 	padding: 0;
 	width: 100%;
-	// .tbody{
-	// 	border-bottom: 1px solid #050505 !important;
-	// }
+	
+.bordeIz{
+	border-bottom-style: none !important;
+ }
+
   }
   
   table caption {
@@ -167,67 +205,27 @@ table {
   table tr {
 	background-color: #ffffff;
 	padding: .35em;
+	.bordeIz{
+		border-bottom-style: none !important;
+	 }
   }
   
   table th,
   table td {
 	padding: .625em;
 	text-align: center;
+	.bordeIz{
+		border-bottom-style: none !important;
+	 }
   }
   
   table th {
 	font-size: .85em;
 	letter-spacing: .1em;
 	text-transform: uppercase;
-  }
-  
-  @media screen and (max-width: 600px) {
-	table {
-	  border: 0;
-	}
-  
-	table caption {
-	  font-size: 1.3em;
-	}
-	
-	table thead {
-	  border: none;
-	  clip: rect(0 0 0 0);
-	  height: 1px;
-	  margin: -1px;
-	  overflow: hidden;
-	  padding: 0;
-	  position: absolute;
-	  width: 1px;
-	}
-	
-	table tr {
-	  border-bottom: 0.1px solid #050505 !important;
-	  display: block;
-	  margin-bottom: .625em;
-	}
-	
-	table td {
-	  border-bottom: 0.1px solid #050505 !important;
-	  display: block;
-	  font-size: .8em;
-	  text-align: right;
-	}
-	
-	table td::before {
-	  /*
-	  * aria-label has no advantage, it won't be read inside a table
-	  content: attr(aria-label);
-	  */
-	  content: attr(data-label);
-	  float: left;
-	  font-weight: bold;
-	  text-transform: uppercase;
-	}
-	
-	table td:last-child {
-	  border-bottom: 0;
-	}
+	.bordeIz{
+		border-bottom-style: none !important;
+	 }
   }
   
   /* general styling */
@@ -268,6 +266,9 @@ table {
 		background-color: #ffffff !important;
 		color: #050404 !important;
 		border: 0.1px #050404 !important;
+		.bordeIz{
+			border-bottom-style: none !important;
+		 }
 }
 }
 
@@ -286,18 +287,26 @@ table{
 	padding: 0;
 	width: 100% !important;
 	border :  0.1px solid #050404 !important;
+	.bordeIz{
+		border-bottom-style: none !important;
+	 }
   }
   
   table caption {
 	font-size: 1.5em;
 	margin: .5em 0 .75em;
+	.bordeIz{
+		border-bottom-style: none !important;
+	 }
   }
   
   table tr {
 	background-color: #ffffff;
 	font-size: 0.75em !important;
 	padding: .35em;
-
+	.bordeIz{
+		border-bottom-style: none !important;
+	 }
   }
   
   table th{
@@ -308,12 +317,19 @@ table{
 	font: bold;
 	padding: .625em;
 	text-align: center;
+	.bordeIz{
+		border-bottom-style: none !important;
+	 }
+
   }
   
   table td {
 	padding: .625em;
 	text-align: center;
 	font-size: 1.1em !important;
+	.bordeIz{
+		border-bottom-style: none !important;
+	 }
   }
   
   .trHover:hover {
@@ -326,6 +342,22 @@ table{
 	font-size: .85em;
 	letter-spacing: .1em;
 	text-transform: uppercase;
+		.bordeIz{
+	   border-bottom-style: none !important;
+	}
   }
 
 /* Modificando clases padres*/
+
+
+
+.margin{
+	margin-top: 10px;
+}
+
+.firma{
+	margin-top: 50px;
+}
+.pertenece{
+	margin-top: 20px;
+}
