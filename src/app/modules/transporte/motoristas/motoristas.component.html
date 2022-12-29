@@ -66,6 +66,11 @@
                  <button mat-mini-fab class="buttonSecundary" [disabled]="!auth.Actualizacion()"  (click)="Modal( 3 , tr )" >
                    <mat-icon>create</mat-icon>
                </button>
+
+                   <!-- Documentos -->
+                   <button mat-mini-fab class="buttonSecundary" [disabled]="!auth.Actualizacion()"  (click)="Documentos( tr )" >
+                    <mat-icon>description</mat-icon>
+                </button>
                         <!-- Cambiar estado -->
                         <button mat-mini-fab class="search" [disabled]="!auth.Actualizacion()" class="buttonSecundary" *ngIf="tr?.estado == 1" (click)="CambiarEstado(tr?.idMotorista, 0)" title="Inhabilitar">
                             <mat-icon>toggle_on</mat-icon>

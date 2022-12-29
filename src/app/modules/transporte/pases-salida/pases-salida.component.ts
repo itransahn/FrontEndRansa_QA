@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
-import { Subscription } from 'rxjs';
+import { concat, Subscription } from 'rxjs';
 import { DataApi } from 'src/app/interfaces/dataApi';
 import { mensajes } from 'src/app/interfaces/generales';
 import { AuthService } from 'src/app/services/auth.service';
@@ -10,6 +10,7 @@ import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import { ToastServiceLocal } from 'src/app/services/toast.service';
 import { TransporteService } from '../transporte.service';
 import { CrearPaseSalidaComponent } from './crear-pase-salida/crear-pase-salida.component';
+import { MotivoSalidaComponent } from './motivo-salida/motivo-salida.component';
 
 @Component({
   selector: 'app-pases-salida',
@@ -101,6 +102,36 @@ next(event: PageEvent) {
     })
   }
 
+    
+  ModalPase (idPase, camion ){
+    const dialogReg = this.dialog.open( MotivoSalidaComponent,{
+      width :   '1000px',
+      height:   'auto',
+      maxWidth: 'auto',
+      data: {
+        idPase : idPase,
+        camion : camion
+        },
+      disableClose : true
+    })
+  }
+
+  cerrarPase( idPase : number , camion : string, hora : string){
+    let horaS = new Date();
+    let horaMinutos = horaS.toTimeString();
+    let horaMin2 = horaMinutos.substring(0,5);
+    let horaMin3 = horaMin2.replace(':','');
+    let cambioHora  = hora.substring(0,5);
+    let horaFinal   = cambioHora.replace(':','');
+
+    console.log( Number(horaMin3), Number(horaFinal) );
+    if( Number(horaMin3) > Number(horaFinal) )  {
+        this.ModalPase(idPase, camion);
+      }else{
+
+  this.aprobarPase(idPase, camion);
+      }
+  }
 
   aprobarPase( idPase : number , camion : string){
   this.sweel.mensajeConConfirmacion('¿Seguro de aprobar pase de salida?', `Placa de Camión ${camion}`,'warning' ).then(

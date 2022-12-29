@@ -27,6 +27,8 @@ import { PasesSalidaComponent } from './pases-salida/pases-salida.component';
 import { CrearPaseSalidaComponent } from './pases-salida/crear-pase-salida/crear-pase-salida.component';
 import { VistaPaseSalidaComponent } from './pases-salida/vista-pase-salida/vista-pase-salida.component';
 import { PasesSalidaHComponent } from './pases-salida/pases-salida-h/pases-salida-h.component';
+import { DocumentosComponent } from './motoristas/documentos/documentos.component';
+import { MotivoSalidaComponent } from './pases-salida/motivo-salida/motivo-salida.component';
 
 
 @NgModule({
@@ -55,6 +57,8 @@ PasesSalidaComponent,
 CrearPaseSalidaComponent,
 VistaPaseSalidaComponent,
 PasesSalidaHComponent,
+DocumentosComponent,
+MotivoSalidaComponent,
   ],
   imports: [
     CommonModule,

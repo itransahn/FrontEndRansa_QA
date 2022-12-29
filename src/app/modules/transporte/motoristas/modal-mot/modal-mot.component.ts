@@ -98,7 +98,6 @@ export class ModalMotComponent implements OnInit {
         vencimientoLicencia : new FormControl({ value: '', disabled : this.enable },   [] ),
         transportista : new FormControl({ value: '', disabled : this.enable },   [] )
       })
-
   }
 
   cargarFormPost(){

@@ -1,0 +1,27 @@
+<mat-card class="cardPersonalizada">
+ 
+    <mat-card-header class="header">    Documentos Motorista
+        <mat-icon style="float: right !important;" (click)="close()" > close </mat-icon>
+        </mat-card-header>
+
+        <mat-card-content>
+            <form [formGroup]="FormPrimario" #f="ngForm">
+                <div  class="col-md-12 container" >
+                    <mat-form-field  appearance="legacy">
+                        <mat-label> Tipo </mat-label>
+                        <mat-select  formControlName="motivo" > 
+                            <mat-option> - </mat-option> 
+                            <mat-option  *ngFor="let tr of catalogo['motivos']" [value]="tr?.idMotivo">
+                                {{  tr?.motivo | uppercase }}
+                            </mat-option> 
+                          </mat-select> 
+                      </mat-form-field>
+                </div>
+                <div class="container">
+                    <button class="buttonPrincipal" mat-raised-button type="submit" [disabled]="f.invalid"  (click)="aprobarPase()"  >Guardar</button>
+                </div>
+            </form>
+        </mat-card-content>
+
+
+</mat-card>

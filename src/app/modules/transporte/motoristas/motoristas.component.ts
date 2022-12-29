@@ -7,6 +7,7 @@ import { DataApi } from 'src/app/interfaces/dataApi';
 import { AdministracionService } from 'src/app/services/administracion.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { TransporteService } from '../transporte.service';
+import { DocumentosComponent } from './documentos/documentos.component';
 import { ModalMotComponent } from './modal-mot/modal-mot.component';
 
 @Component({
@@ -96,7 +97,15 @@ export class MotoristasComponent implements OnInit {
       })
     }
 
-
+    Documentos(  data ?: any ){
+      const dialogReg = this.dialog.open( DocumentosComponent,{
+        width :   '500px',
+        height:   'auto',
+        maxWidth: 'auto',
+        data: data,
+        disableClose : true
+      })
+    }
         
     Modal ( accion : number, data ?: any ){
       const dialogReg = this.dialog.open( ModalMotComponent,{

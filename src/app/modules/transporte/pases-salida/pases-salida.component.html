@@ -53,7 +53,7 @@
                 <div class="text-center">
 
                 <!-- Aprobar -->
-               <button mat-mini-fab class="buttonSecundary" [disabled]="(!auth.Actualizacion() || !auth.Insercion())" (click)="aprobarPase( tr.idPase, tr.camion  )" >
+               <button mat-mini-fab class="buttonSecundary" [disabled]="(!auth.Actualizacion() || !auth.Insercion())" (click)="cerrarPase( tr.idPase, tr.camion, tr.Hora )" >
                 <mat-icon>check_circle</mat-icon>
                 </button>
 

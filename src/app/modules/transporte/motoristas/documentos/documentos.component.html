@@ -1,0 +1,122 @@
+<mat-card class="cardPersonalizada">
+ 
+    <mat-card-header class="header">    Documentos Motorista
+        <mat-icon style="float: right !important;" (click)="close()" > close </mat-icon>
+        </mat-card-header>
+
+    <mat-card-content>
+        <form [formGroup]="FormPrimario">
+            <div  class="col-md-12 container" >
+                <mat-form-field  appearance="legacy">
+                    <mat-label> Tipo </mat-label>
+                    <mat-select  formControlName="tipo" (selectionChange)="cargarFormularios()" > 
+                        <mat-option> - </mat-option> 
+                        <mat-option  *ngFor="let tr of tipoD" [value]="tr?.id">
+                            {{  tr?.tipo | uppercase }}
+                        </mat-option> 
+                      </mat-select> 
+                  </mat-form-field>
+            </div>
+        </form>
+    </mat-card-content>
+
+    <mat-divider></mat-divider>
+
+    <form [formGroup]="FormAntecedentes" *ngIf="FormPrimario.value.tipo === 1" #PE="ngForm" >
+        <div  class="col-md-12 container" >
+            <mat-form-field appearance="legacy">
+                <mat-label>Fecha de Entrega </mat-label>
+                <input name="date" formControlName = "fechaEntrega" matInput [matDatepicker]="pickerNN">
+                <mat-datepicker-toggle matSuffix [for]="pickerNN"></mat-datepicker-toggle>
+                <mat-datepicker #pickerNN></mat-datepicker>
+              </mat-form-field>
+        </div>
+
+        <div  class="col-md-12 container" >
+            <mat-form-field appearance="legacy">
+                <mat-label>Fecha de Vencimiento </mat-label>
+                <input name="dateVV" formControlName = "fechaVencimiento" matInput [matDatepicker]="pickerVV">
+                <mat-datepicker-toggle matSuffix [for]="pickerVV"></mat-datepicker-toggle>
+                <mat-datepicker #pickerVV></mat-datepicker>
+              </mat-form-field>
+        </div>
+
+        <div class="col-md-12">
+            <mat-form-field appearance="legacy">
+                <mat-label>Detalle Antecedentes Penales</mat-label>
+                <textarea matInput [readonly]="enable" maxlength="50" placeholder="Detalle Antecedentes" formControlName ="detalleAntecedente"></textarea>
+            </mat-form-field>
+        </div>
+
+        <div class="container">
+            <button class="buttonPrincipal" mat-raised-button type="submit" [disabled]="PE.invalid" (click)="submit()"  >Guardar</button>
+        </div>
+    </form>
+    <!-- Antecedentes Policiales -->
+    <form [formGroup]="FormAntecedentes" *ngIf="FormPrimario.value.tipo === 2" #PO="ngForm">
+        <div  class="col-md-12 container" >
+            <mat-form-field appearance="legacy">
+                <mat-label>Fecha de Entrega </mat-label>
+                <input name="date" formControlName = "fechaEntrega" matInput [matDatepicker]="pickerN">
+                <mat-datepicker-toggle matSuffix [for]="pickerN"></mat-datepicker-toggle>
+                <mat-datepicker #pickerN></mat-datepicker>
+              </mat-form-field>
+        </div>
+
+        <div  class="col-md-12 container" >
+            <mat-form-field appearance="legacy">
+                <mat-label>Fecha de Vencimiento </mat-label>
+                <input name="dateV" formControlName = "fechaVencimiento" matInput [matDatepicker]="pickerV">
+                <mat-datepicker-toggle matSuffix [for]="pickerV"></mat-datepicker-toggle>
+                <mat-datepicker #pickerV></mat-datepicker>
+              </mat-form-field>
+        </div>
+
+        <div class="col-md-12">
+            <mat-form-field appearance="legacy">
+                <mat-label>Detalle Antecedente Policiales </mat-label>
+                <textarea matInput [readonly]="enable" maxlength="50" placeholder="Detalle Antecedentes" formControlName ="detalleAntecedente"></textarea>
+            </mat-form-field>
+        </div>
+
+        <div class="container">
+            <button class="buttonPrincipal" mat-raised-button type="submit" [disabled]="PO.invalid" (click)="submit()"  >Guardar</button>
+        </div>
+    </form>
+    <!-- Tarjeta de salud -->
+    <form [formGroup]="FormularioTarjeta" *ngIf="FormPrimario.value.tipo === 3" #T="ngForm">
+        <div  class="col-md-12 container" >
+            <mat-form-field appearance="legacy">
+                <mat-label>Fecha de Entrega </mat-label>
+                <input name="date" formControlName = "fechaEntrega" matInput [matDatepicker]="pickerN">
+                <mat-datepicker-toggle matSuffix [for]="pickerN"></mat-datepicker-toggle>
+                <mat-datepicker #pickerN></mat-datepicker>
+              </mat-form-field>
+        </div>
+
+        <div  class="col-md-12 container" >
+            <mat-form-field  appearance="legacy">
+                <mat-label> Tipo de Sangre </mat-label>
+                <mat-select  formControlName="tipoSangre" > 
+                    <mat-option  *ngFor="let tr of catalogo['tipoSangres']" [value]="tr?.id_tipoSangre">
+                        {{  tr?.tipoSangre | uppercase }}
+                    </mat-option> 
+                  </mat-select> 
+              </mat-form-field>
+        </div>
+
+        <div  class="col-md-12 container" >
+            <mat-form-field  appearance="legacy">
+                <mat-label> Reactivo </mat-label>
+                <mat-select  formControlName="reactivo" > 
+                    <mat-option  *ngFor="let tr of reactivo" [value]="tr?.id">
+                        {{  tr?.tipo | uppercase }}
+                    </mat-option> 
+                  </mat-select> 
+              </mat-form-field>
+        </div>
+        <div class="container">
+            <button class="buttonPrincipal" mat-raised-button type="submit" [disabled]="T.invalid"  (click)="submit()"  >Guardar</button>
+        </div>
+    </form>
+</mat-card>
