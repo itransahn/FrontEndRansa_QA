@@ -172,7 +172,7 @@ impuesto   : new FormControl('', [ Validators.required]),
       Documento : Number(this.documento)
     }
     let params = {
-     "query": `CALL DC@HONLIB.SP_AWS_LISTA_FACTURA('${paramsE['Empresa']}', 1,  ${paramsE['Cliente']},${paramsE['Documento']},${this.anioActual}0101, ${this.anioActual}1231)`,
+     "query": `CALL DC@HONLIB.SP_AWS_LISTA_FACTURA('${paramsE['Empresa']}', 1,  ${paramsE['Cliente']},${paramsE['Documento']},20220101, ${this.anioActual}1231)`,
       "env": "PRD"
     }
 

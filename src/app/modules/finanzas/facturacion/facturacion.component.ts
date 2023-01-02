@@ -60,6 +60,7 @@ export class FacturacionComponent implements OnInit {
     this.tipo = this.ruta.snapshot.params['tipo'];
     this.cliente   = (this.ruta.snapshot.params['cliente']);
     this.documento = '1000'+ (this.ruta.snapshot.params['documento']);
+    console.log(this.tipo,this.cliente, this.documento)
     this.validarCorrelativo();
     this.cargarParametrosF();
     this.cabeceraFac();
@@ -171,10 +172,10 @@ impuesto   : new FormControl('', [ Validators.required]),
     let paramsE = {
       Empresa   : this.Env,
       Cliente   : this.cliente,
-      Documento : Number(this.documento)
+      Documento : this.documento
     }
     let params = {
-     "query": `CALL DC@HONLIB.SP_AWS_LISTA_FACTURA('${paramsE['Empresa']}', 1,  ${paramsE['Cliente']},${paramsE['Documento']},${this.anioActual}0101, ${this.anioActual}1231)`,
+     "query": `CALL DC@HONLIB.SP_AWS_LISTA_FACTURA('${paramsE['Empresa']}', 1,  ${paramsE['Cliente']},${paramsE['Documento']},20220101, ${this.anioActual}1231)`,
       "env": "PRD"
     }
     // let params = {
@@ -182,10 +183,12 @@ impuesto   : new FormControl('', [ Validators.required]),
     //   "env": "PRD"
     // }
 
+    console.log( params )
+
   this.facturacionS.As400( params ).subscribe(
     (res:any)=>{
-      // console.log( res )
       this.cabeceraF = res;
+      console.log( this.cabeceraF )
       let fecha : string = String(this.cabeceraF[0]?.FDCCTC);
       this.dia  =  fecha.substring(6,8);
       this.mes  =  fecha.substring(4,6);
@@ -234,6 +237,7 @@ impuesto   : new FormControl('', [ Validators.required]),
         this.espaciosBlancos.push(j)
     }
     this.DcabeceraF =  this.descomponerArray(this.DcabeceraF);
+    console.log(this.DcabeceraF)
     this.cargarObservacionesFac()
     this.loading2 = true;
       }
