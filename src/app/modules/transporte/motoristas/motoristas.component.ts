@@ -109,7 +109,7 @@ export class MotoristasComponent implements OnInit {
         
     Modal ( accion : number, data ?: any ){
       const dialogReg = this.dialog.open( ModalMotComponent,{
-        width :   '500px',
+        width :   '1000px',
         height:   'auto',
         maxWidth: 'auto',
         data: { 

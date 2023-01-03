@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, Observable, Subject, tap } from 'rxjs';
 import { DataApi } from 'src/app/interfaces/dataApi';
+import { AuthService } from 'src/app/services/auth.service';
 import { MensajesHttpService } from 'src/app/services/mensajes-http.service';
 import { environment } from 'src/environments/environment';
 
@@ -17,7 +18,8 @@ public dataCatalogo : any;
 
   constructor(
    private http          :  HttpClient,
-   private _mensajesHttp :  MensajesHttpService
+   private _mensajesHttp :  MensajesHttpService,
+   private auth : AuthService
   ) {
     this.cargarCatalogo()
    }

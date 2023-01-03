@@ -28,7 +28,7 @@
             <!-- <caption>Statement Summary</caption> -->
             <thead>
               <tr>
-                <th scope="col">Camion</th>
+                <!-- <th scope="col">Camion</th> -->
                 <th scope="col">placa</th>
                 <th scope="col">Transporte</th>
                 <!-- <th scope="col">Dimensiones</th> -->
@@ -43,7 +43,7 @@
             </thead>
             <tbody>
               <tr *ngFor="let tr of camiones | search: this.filtro.value.filtrar:parametrosBusqueda | slice: desde: hasta " class="trHover">
-                <td data-label="Camion">{{ tr?.descripcionCamion }}</td>
+                <!-- <td data-label="Camion">{{ tr?.descripcionCamion }}</td> -->
                 <td data-label="placa">       {{ tr?.placa }}</td>
                 <td data-label="Transporte">  {{ tr?.nombreEmpresa }}</td>
                 <!-- <td data-label="Dimensiones"> {{ tr?.AltoXAnchoXLargo }}</td> -->

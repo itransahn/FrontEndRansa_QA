@@ -30,7 +30,7 @@
               <tr>
                 <th scope="col">Motorista</th>
                 <th scope="col">Propietario</th>
-                <th scope="col">Camión</th>
+                <!-- <th scope="col">Camión</th> -->
                 <th scope="col">Placa</th>
                 <th scope="col">Acciones</th>
               </tr>
@@ -39,7 +39,7 @@
               <tr *ngFor="let tr of Uniones | search: this.filtro.value.filtrar:parametrosBusqueda | slice: desde: hasta " class="trHover">
                 <td data-label="Motorista">{{    tr?.Motorista             }}</td>
                 <td data-label="Propietario">{{  tr?.Propietario             }}</td>
-                <td data-label="Camión">{{ tr?.Camion             }}</td>
+                <!-- <td data-label="Camión">{{ tr?.Camion             }}</td> -->
                 <td data-label="Placa">{{  tr?.placa             }}</td>
                 <td data-label="Acciones">
                 <div class="text-center">

@@ -34,6 +34,9 @@
                 <th scope="col">Transporte</th>
                 <th scope="col">Vencimiento Licencia</th>
                 <th scope="col">Sede</th>
+                <th scope="col">Ant. Penales</th>
+                <th scope="col">Ant. Policiales</th>
+                <th scope="col">Tarjeta Salud</th>
                 <th scope="col">Estado</th>
                 <th scope="col">Acciones</th>
               </tr>
@@ -46,12 +49,41 @@
                 <td data-label="Transporte"> {{ tr?.nombreEmpresa }}</td>
                 <td data-label="Vencimiento Licencia">{{ tr?.FechaVencimientoLicencia  | date  }}</td>
                 <td data-label="Sede">{{ tr?.SEDE }}</td>
+
+                <td data-label="Ant. Penales">
+                    <span *ngIf="tr?.AntPenales == '*'">
+                        <mat-icon class="success">check_box</mat-icon>
+                    </span>
+                    <span *ngIf="tr?.AntPenales == '-'">
+                        <mat-icon class="errorL">indeterminate_check_box</mat-icon>
+                    </span>    
+                </td>
+
+                <td data-label="Ant. Policiales">
+                    <span *ngIf="tr?.AntPoliciales == '*'">
+                        <mat-icon class="success">check_box</mat-icon>
+                    </span>
+                    <span *ngIf="tr?.AntPoliciales == '-'">
+                        <mat-icon class="errorL">indeterminate_check_box</mat-icon>
+                    </span>    
+                </td>
+
+                <td data-label="Tarjeta Salud">
+                    <span *ngIf="tr?.TarSalud == '*'">
+                        <mat-icon class="success">check_box</mat-icon>
+                    </span>
+                    <span *ngIf="tr?.TarSalud == '-'">
+                        <mat-icon class="errorL">indeterminate_check_box</mat-icon>
+                    </span>    
+                </td>
+
+
                 <td data-label="Estado">
                     <span *ngIf="tr?.estado == 1">
                         <mat-icon class="success">check_box</mat-icon>
                     </span>
                     <span *ngIf="tr?.estado != 1">
-                        <mat-icon class="error">indeterminate_check_box</mat-icon>
+                        <mat-icon class="errorL">indeterminate_check_box</mat-icon>
                     </span>    
                 </td>
 

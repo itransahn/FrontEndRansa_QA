@@ -20,7 +20,6 @@ export class VistaPaseSalidaComponent implements OnInit {
   validarData(){
    if ( localStorage.getItem('PaseSalida')){
     this.data = JSON.parse(localStorage.getItem('PaseSalida') );
-    console.log(this.data)
    } else{
     this.auth.redirecTo('/ransa/transporte/salidas')
    }

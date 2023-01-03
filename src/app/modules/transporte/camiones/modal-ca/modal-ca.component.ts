@@ -1,10 +1,17 @@
 import { Component, OnInit,Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { map, Observable, startWith } from 'rxjs';
 import { mensajes } from 'src/app/interfaces/generales';
 import { AuthService } from 'src/app/services/auth.service';
 import { ToastServiceLocal } from 'src/app/services/toast.service';
 import { TransporteService } from '../../transporte.service';
+
+
+export const _filter = ( opt : string[], value : string):string[]=>{
+  const filterValue = value.toLowerCase();
+  return opt?.filter( (item:string) => item.toLowerCase().indexOf(filterValue) === 0)
+};
 
 @Component({
   selector: 'app-modal-ca',
@@ -21,6 +28,7 @@ export class ModalCaComponent implements OnInit {
   public  catalogoT  : any;
   public  titulo     : string;
   public  subtitulo  : string;
+  filteredOptions : Observable<Transportes[]>;
   public opciones  = [
     {
       id    : 0,
@@ -31,6 +39,7 @@ export class ModalCaComponent implements OnInit {
       valor :'SI'
     }
   ]
+  myControl = new FormControl('');
   
   constructor(
     private dialogRef:MatDialogRef<ModalCaComponent>,
@@ -40,12 +49,29 @@ export class ModalCaComponent implements OnInit {
     public transporteService : TransporteService
   ) { }
 
-  
+
   ngOnInit() {
-    console.log(this.data)
-    this.catalogo  = this.auth.returnCatalogo();
     this.catalogoT = this.transporteService.returnCatalogo();
+    this.catalogo  = this.auth.returnCatalogo();
     this.validacion();
+    // this.Autocomplete();
+  }
+
+  Autocomplete (){
+    this.filteredOptions = this.modalForm.get('transporte')!.valueChanges
+    .pipe(
+      startWith(''),
+      map( (value:string) => this._filterGroup(value))
+    )
+  }
+  
+  private _filterGroup(value: string): Transportes[] {
+    if (value) {
+      return this.catalogoT?.['transportes']
+        .map(transporte => ( {nombreEmpresa: _filter(transporte, value)} ))
+        .filter(transporte => transporte.nombreEmpresa.length > 0);
+    }
+    return this.catalogoT?.['transportes'];
   }
 
   validacion(){
@@ -136,6 +162,8 @@ cargarFormPut(){
   })
 }
 
+
+
 SetForm(){
 this.modalForm.setValue({
   // camion       :  this.data['camion'], 
@@ -175,20 +203,21 @@ this.modalForm.setValue({
       anio               : this.modalForm.value.anio,
       color               : this.modalForm.value.color,
     } 
-    this.transporteService.put(url,params).subscribe(
-      res=>{
-        if(!res.hasError){
-            if ( res?.data.Table0[0]['codigo'] == -1 ){
-                this.toast.mensajeWarning(String(res?.data.Table0[0]['Mensaje']), mensajes.warning)
-            }else{
-              this.toast.mensajeSuccess(String(res?.data.Table0[0]['Mensaje']), mensajes.success)
-              this.dialogRef.close()
-            }
-        }else{
-          this.toast.mensajeError(String(res?.errors),"Error")
-        }
-      }
-    )
+console.log( params)
+    // this.transporteService.put(url,params).subscribe(
+    //   res=>{
+    //     if(!res.hasError){
+    //         if ( res?.data.Table0[0]['codigo'] == -1 ){
+    //             this.toast.mensajeWarning(String(res?.data.Table0[0]['Mensaje']), mensajes.warning)
+    //         }else{
+    //           this.toast.mensajeSuccess(String(res?.data.Table0[0]['Mensaje']), mensajes.success)
+    //           this.dialogRef.close()
+    //         }
+    //     }else{
+    //       this.toast.mensajeError(String(res?.errors),"Error")
+    //     }
+    //   }
+    // )
 }
 
 actualizar(){
@@ -209,7 +238,6 @@ actualizar(){
     anio               : this.modalForm.value.anio,
     color               : this.modalForm.value.color,
   } 
-  console.log( params )
   this.transporteService.put( url,params ).subscribe(
     res=>{
       if(!res.hasError){
@@ -239,4 +267,18 @@ close(){
   this.dialogRef.close()
 }
 
+}
+
+
+interface Transportes {
+idTransportista     ?: number, 
+nombreEmpresa       ?: string, 
+RTNEmpresa          ?: string, 
+direccionEmpresa    ?: string, 
+telefonoEmpresa     ?: string, 
+nombrePropietario   ?: string, 
+celularPropietario  ?: string, 
+estado              ?: string, 
+idSede              ?: string, 
+CODIGO              ?: string, 
 }

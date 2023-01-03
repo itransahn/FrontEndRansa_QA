@@ -88,7 +88,6 @@ impuesto   : new FormControl('', [ Validators.required]),
     for(let j=0; j<(15-this.detalleServicios.length); j++){
       this.espaciosBlancos2.push(j)
   }
-    console.log( this.detalleServicios)
     this.form.reset()
   }
   
@@ -223,8 +222,6 @@ this.loading1 = true;
       for( let i = 0; i < this.EstrObs2.length; i++ ){
        this.Observaciones += this.EstrObs2[i]['TOBCTC']
     }
-      console.log( this.EstrObs2)
-      console.log( this.Observaciones)
   
   }
 

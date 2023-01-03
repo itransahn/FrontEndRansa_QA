@@ -194,7 +194,7 @@ submit(){
   } 
   }
 
-  /* Tarjeta de Salud     */ 
+  /* Tarjeta de Salud*/ 
   if( this.FormPrimario.value.tipo == 3){ 
     if  (this.documentos['tarjetaSalud'].length > 0){
       this.actualizarTarjeta();
@@ -216,7 +216,6 @@ fechaEntrega       : this.FormAntecedentes.value.fechaEntrega,
 fechaVencimiento   : this.FormAntecedentes.value.fechaVencimiento,
 detalleAnt         : this.FormAntecedentes.value.detalleAntecedente,
   }
-
 this.transporteService.put(url,params).subscribe(
     res=>{
       if(!res.hasError){
@@ -242,6 +241,8 @@ fechaVencimiento    : this.FormAntecedentes.value.fechaVencimiento,
 detalleAntecedentes : this.FormAntecedentes.value.detalleAntecedente,
 tipoD               : this.FormPrimario.value.tipo,
   }
+
+console.log( params )
 
 this.transporteService.put(url,params).subscribe(
     res=>{
@@ -312,5 +313,3 @@ this.transporteService.put(url,params).subscribe(
 
 
 }
-
-

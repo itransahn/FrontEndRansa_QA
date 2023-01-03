@@ -41,7 +41,7 @@ export class PasesSalidaHComponent implements OnInit {
 
   ngOnInit(){
     this.LimpiarInformacionPase();
-    this.paginator.itemsPerPageLabel = 'Items por hoja.';
+    this.paginator.itemsPerPageLabel = 'Pases por hoja.';
     this.paginator.nextPageLabel     = 'Página Siguiente';
     this.paginator.previousPageLabel = 'Página Anterior';
 

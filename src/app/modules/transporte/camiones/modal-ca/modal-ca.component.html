@@ -21,7 +21,6 @@
                     <mat-form-field  appearance="legacy">
                         <mat-label>Tipo de unidad</mat-label>
                         <mat-select  formControlName="tipoUnidad" > 
-                            <mat-option> - </mat-option> 
                             <mat-option  *ngFor="let tu of catalogoT['tunidad']" [value]="tu?.id">
                                 {{  tu?.tipoUnidad | uppercase }}
                             </mat-option> 
@@ -41,13 +40,29 @@
                 <div  class="col-md-6 container" >
                     <mat-form-field  appearance="legacy">
                         <mat-label>Transporte</mat-label>
+
+                        
+                        <!-- <input 
+                        type="text"
+                        placeholder="Selecciona uno"
+                        aria-label="Transporte"
+                        matInput
+                        formControlName ="transporte"
+                        [matAutocomplete]="auto">
+                   <mat-autocomplete #auto="matAutocomplete">
+                   <mat-option *ngFor="let tu of filteredOptions | async" [value]="tu?.nombreEmpresa">
+                    {{  tu?.nombreEmpresa | uppercase }}
+                   </mat-option>
+                 </mat-autocomplete> -->
+
+                        
                         <mat-select  formControlName="transporte" > 
-                            <mat-option> - </mat-option> 
                             <mat-option *ngFor="let tu of catalogoT['transportes']" [value]="tu?.idTransportista">
                                 {{  tu?.nombreEmpresa | uppercase }}
                             </mat-option> 
                           </mat-select> 
-                      </mat-form-field>
+
+        </mat-form-field>
                 </div>
 
                 <!-- <div  class="col-md-6 container" >
@@ -66,7 +81,6 @@
                     <mat-form-field  appearance="legacy">
                         <mat-label>GPS </mat-label>
                         <mat-select  formControlName="gps" > 
-                            <mat-option> - </mat-option> 
                             <mat-option  *ngFor="let tu of opciones" [value]="tu?.id">
                                 {{  tu?.valor | uppercase }}
                             </mat-option> 
@@ -78,7 +92,6 @@
                     <mat-form-field appearance="legacy">
                         <mat-label>Rampa </mat-label>
                         <mat-select  formControlName="rampa" > 
-                            <mat-option> - </mat-option> 
                             <mat-option  *ngFor="let tu of opciones" [value]="tu?.id">
                                 {{  tu?.valor | uppercase }}
                             </mat-option> 
@@ -90,7 +103,6 @@
                     <mat-form-field  appearance="legacy">
                         <mat-label>Refrigerado </mat-label>
                         <mat-select  formControlName="refrigerado" > 
-                            <mat-option> - </mat-option> 
                             <mat-option  *ngFor="let tu of opciones" [value]="tu?.id">
                                 {{  tu?.valor | uppercase }}
                             </mat-option> 
@@ -102,7 +114,6 @@
                     <mat-form-field  appearance="legacy">
                         <mat-label>Sede </mat-label>
                         <mat-select  formControlName="sede" > 
-                            <mat-option> - </mat-option> 
                             <mat-option  *ngFor="let tu of catalogo['sedes']" [value]="tu?.id_sedeRansa">
                                 {{  tu?.sedeRansa | uppercase }}
                             </mat-option> 
@@ -115,7 +126,6 @@
                     <mat-form-field  appearance="legacy">
                         <mat-label>Color </mat-label>
                         <mat-select  formControlName="color" > 
-                            <mat-option> - </mat-option> 
                             <mat-option  *ngFor="let tu of catalogoT['colores']" [value]="tu?.idColor">
                                 {{  tu?.color | uppercase }}
                             </mat-option> 
@@ -127,7 +137,6 @@
                     <mat-form-field  appearance="legacy">
                         <mat-label> Marca </mat-label>
                         <mat-select  formControlName="marca" > 
-                            <mat-option> - </mat-option> 
                             <mat-option  *ngFor="let tu of catalogoT['marcas']" [value]="tu?.idMarca">
                                 {{  tu?.marca | uppercase }}
                             </mat-option> 
@@ -139,7 +148,6 @@
                     <mat-form-field  appearance="legacy">
                         <mat-label> Módelo </mat-label>
                         <mat-select  formControlName="modelo" > 
-                            <mat-option> - </mat-option> 
                             <!-- <mat-option  *ngFor="let tu of catalogoT['modelos']" [value]="tu?.idModelo">
                                 {{  tu?.modelo | uppercase }}
                             </mat-option>  -->
@@ -167,21 +175,17 @@
                 </div>
 
                 <div  class="col-md-6 container" >
-                    <mat-form-field  appearance="legacy">
-                        <mat-label> Metraje </mat-label>
-                        <mat-select  formControlName="metraje" > 
-                            <mat-option  *ngFor="let tu of catalogoT['metrajes']" [value]="tu?.idMetraje">
-                                {{  tu?.metraje | uppercase }}
-                            </mat-option> 
-              
-                          </mat-select> 
-                      </mat-form-field>
+                      <mat-form-field appearance="legacy">
+                        <mat-label> Metraje del camión(Mtrs) </mat-label>
+                        <input matInput [readonly]="enable" maxlength="50" placeholder=" Metraje del camión " formControlName ="metraje">
+                        <!-- <span>   <mat-label> Mtrs</mat-label>   </span> -->
+                    </mat-form-field>
                 </div>
 
                      <div class="col-md-4">
                     <mat-form-field appearance="legacy">
                         <mat-label> Año del camión </mat-label>
-                        <input matInput [readonly]="enable" maxlength="50" placeholder=" Año del camión " formControlName ="anio">
+                        <input matInput [readonly]="enable" maxlength="50" placeholder=" Año del camión " formControlName="anio">
                     </mat-form-field>
                 </div>
 

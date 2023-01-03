@@ -123,8 +123,6 @@ next(event: PageEvent) {
     let horaMin3 = horaMin2.replace(':','');
     let cambioHora  = hora.substring(0,5);
     let horaFinal   = cambioHora.replace(':','');
-
-    console.log( Number(horaMin3), Number(horaFinal) );
     if( Number(horaMin3) > Number(horaFinal) )  {
         this.ModalPase(idPase, camion);
       }else{

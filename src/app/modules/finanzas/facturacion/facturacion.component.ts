@@ -60,7 +60,6 @@ export class FacturacionComponent implements OnInit {
     this.tipo = this.ruta.snapshot.params['tipo'];
     this.cliente   = (this.ruta.snapshot.params['cliente']);
     this.documento = '1000'+ (this.ruta.snapshot.params['documento']);
-    console.log(this.tipo,this.cliente, this.documento)
     this.validarCorrelativo();
     this.cargarParametrosF();
     this.cabeceraFac();
@@ -82,7 +81,6 @@ llenarDataManual(){
   for(let j=0; j<(15-this.detalleServicios.length); j++){
     this.espaciosBlancos2.push(j)
 }
-  console.log( this.detalleServicios)
   this.form.reset()
 }
 
@@ -183,12 +181,9 @@ impuesto   : new FormControl('', [ Validators.required]),
     //   "env": "PRD"
     // }
 
-    console.log( params )
-
   this.facturacionS.As400( params ).subscribe(
     (res:any)=>{
       this.cabeceraF = res;
-      console.log( this.cabeceraF )
       let fecha : string = String(this.cabeceraF[0]?.FDCCTC);
       this.dia  =  fecha.substring(6,8);
       this.mes  =  fecha.substring(4,6);
@@ -237,7 +232,6 @@ impuesto   : new FormControl('', [ Validators.required]),
         this.espaciosBlancos.push(j)
     }
     this.DcabeceraF =  this.descomponerArray(this.DcabeceraF);
-    console.log(this.DcabeceraF)
     this.cargarObservacionesFac()
     this.loading2 = true;
       }

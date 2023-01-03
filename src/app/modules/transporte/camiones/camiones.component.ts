@@ -67,7 +67,6 @@ cargarCamiones(){
     (data : DataApi | any) =>{
       if( !data.hasError ){
         this.camiones = data?.data?.Table0;
-        // console.log(this.camiones)
       }    
     }
   )
@@ -123,7 +122,7 @@ cargarCamiones(){
           idModelo : data?.idModelo,
           idtonelada : data?.idtonelada,
           idColor    : data?.idColor,
-          idMetraje  : data?.idMetraje,
+          idMetraje  : data?.metraje,
           anio       : data?.anio
         },
         disableClose : true

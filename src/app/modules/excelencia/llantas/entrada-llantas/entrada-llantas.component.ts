@@ -115,7 +115,7 @@ pruebaAs400(){
 this.excelenciaS.pruebahttp( params ).subscribe(
   (res:any)=>{
 if (res){
-  console.log(res)
+  // console.log(res)
 }
   }
 )
