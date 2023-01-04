@@ -203,21 +203,20 @@ this.modalForm.setValue({
       anio               : this.modalForm.value.anio,
       color               : this.modalForm.value.color,
     } 
-console.log( params)
-    // this.transporteService.put(url,params).subscribe(
-    //   res=>{
-    //     if(!res.hasError){
-    //         if ( res?.data.Table0[0]['codigo'] == -1 ){
-    //             this.toast.mensajeWarning(String(res?.data.Table0[0]['Mensaje']), mensajes.warning)
-    //         }else{
-    //           this.toast.mensajeSuccess(String(res?.data.Table0[0]['Mensaje']), mensajes.success)
-    //           this.dialogRef.close()
-    //         }
-    //     }else{
-    //       this.toast.mensajeError(String(res?.errors),"Error")
-    //     }
-    //   }
-    // )
+    this.transporteService.put(url,params).subscribe(
+      res=>{
+        if(!res.hasError){
+            if ( res?.data.Table0[0]['codigo'] == -1 ){
+                this.toast.mensajeWarning(String(res?.data.Table0[0]['Mensaje']), mensajes.warning)
+            }else{
+              this.toast.mensajeSuccess(String(res?.data.Table0[0]['Mensaje']), mensajes.success)
+              this.dialogRef.close()
+            }
+        }else{
+          this.toast.mensajeError(String(res?.errors),"Error")
+        }
+      }
+    )
 }
 
 actualizar(){

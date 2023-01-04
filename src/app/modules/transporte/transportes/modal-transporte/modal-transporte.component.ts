@@ -49,7 +49,8 @@ export class ModalTransporteComponent implements OnInit {
 
     if ( this.data['bandera'] == 2 ){
       this.enable     = false;
-      this.botton     = true
+      this.botton     = true;
+      this.visible = true
       this.titulo     = `Nuevo Transporte`;
       this.subtitulo  = ''; 
       this.cargarFormPost()
@@ -90,8 +91,8 @@ export class ModalTransporteComponent implements OnInit {
       telefonoE  : new FormControl({ value: '', disabled : this.enable }, [] ),
       sede     : new FormControl({ value: '', disabled : this.enable }, [Validators.required] ),
       celularP   : new FormControl({ value: '', disabled : this.enable }, [Validators.required] ),
-      camiones    : new FormControl({ value: '', disabled : true }, [Validators.required] ),
-      Motoristas  : new FormControl({ value: '', disabled : true }, [Validators.required] ),
+      camiones    : new FormControl({ value: '', disabled : true }, [] ),
+      Motoristas  : new FormControl({ value: '', disabled : true }, [] ),
     })
 }
 
@@ -136,7 +137,7 @@ Motoristas  : this.data['Motoristas']
       sede    :   this.modalForm.value.sede , 
       usuario :  this.auth.dataUsuario['id_usuario'], 
     } 
-    this.transporteService.post(url,params).subscribe(
+    this.transporteService.put(url,params).subscribe(
       res=>{
         if(!res.hasError){
             if ( res?.data.Table0[0]['codigo'] == -1 ){
