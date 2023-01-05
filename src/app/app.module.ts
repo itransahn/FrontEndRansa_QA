@@ -36,7 +36,7 @@ import { SharedModule } from './modules/shared/shared.module';
     NoPageFoundComponent,
     FullComponentComponent,
     CambioContraComponent,
- 
+
   ],
   imports: [
     BrowserModule,

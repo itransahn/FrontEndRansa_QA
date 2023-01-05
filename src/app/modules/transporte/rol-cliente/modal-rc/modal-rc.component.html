@@ -27,7 +27,7 @@
                     <mat-form-field *ngIf="visible" appearance="legacy">
                         <mat-label>Cliente</mat-label>
                         <mat-select  formControlName="cliente"  multiple> 
-                            <mat-option  *ngFor="let cliente of otma['clientes']" [value]="cliente?.idCliente">
+                            <mat-option  *ngFor="let cliente of catalogo['clientes']" [value]="cliente?.idCliente">
                                 {{  cliente?.nombreCorto | uppercase }}
                             </mat-option> 
                           </mat-select> 

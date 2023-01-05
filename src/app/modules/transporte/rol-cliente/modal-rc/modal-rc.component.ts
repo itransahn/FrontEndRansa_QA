@@ -29,6 +29,7 @@ export class ModalRCComponent implements OnInit {
 
   ngOnInit(){
     this.catalogo = this.transporteS.returnCatalogo()
+    console.log(this.catalogo)
     this.validacion();
   }
 
