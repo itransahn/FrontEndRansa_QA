@@ -116,19 +116,30 @@ next(event: PageEvent) {
     })
   }
 
-  cerrarPase( idPase : number , camion : string, hora : string){
+  cerrarPase( idPase : number , camion : string, hora : string, fecha : Date){
     let horaS = new Date();
     let horaMinutos = horaS.toTimeString();
     let horaMin2 = horaMinutos.substring(0,5);
     let horaMin3 = horaMin2.replace(':','');
     let cambioHora  = hora.substring(0,5);
     let horaFinal   = cambioHora.replace(':','');
-    if( Number(horaMin3) > Number(horaFinal) )  {
-        this.ModalPase(idPase, camion);
-      }else{
+    let dia = fecha.toString();
+    let dia2 = dia.substring(0,2)
 
+console.log( dia2, horaS.getDate() );
+
+if ( Number(dia2) > Number(horaS.getDate())) {
   this.aprobarPase(idPase, camion);
-      }
+
+}else{
+  if( Number(horaMin3) > Number(horaFinal)  )  {
+    this.ModalPase(idPase, camion);
+  }else{
+
+this.aprobarPase(idPase, camion);
+  }
+}
+  
   }
 
   aprobarPase( idPase : number , camion : string){

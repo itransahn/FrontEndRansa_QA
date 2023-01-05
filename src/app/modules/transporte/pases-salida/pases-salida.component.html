@@ -41,7 +41,7 @@
             </thead>
             <tbody>
               <tr *ngFor="let tr of pases | search: this.filtro.value.filtrar:parametrosBusqueda | slice: desde: hasta " class="trHover">
-                <td data-label="Fecha">{{    tr?.Fecha | date : 'shortDate'            }}</td>
+                <td data-label="Fecha">{{    tr?.Fecha | date : 'MM/dd/yyyy'         }}</td>
                 <td data-label="Hora">{{     tr?.Hora           }}</td>
                 <td data-label="Transporte">{{    tr?.Transporte             }}</td>
                 <td data-label="Placa">{{     tr?.camion }}</td>
@@ -53,7 +53,7 @@
                 <div class="text-center">
 
                 <!-- Aprobar -->
-               <button mat-mini-fab class="buttonSecundary" [disabled]="(!auth.Actualizacion() || !auth.Insercion())" (click)="cerrarPase( tr.idPase, tr.camion, tr.Hora )" >
+               <button mat-mini-fab class="buttonSecundary" [disabled]="(!auth.Actualizacion() || !auth.Insercion())" (click)="cerrarPase( tr.idPase, tr.camion, tr.Hora, tr.Fecha )" >
                 <mat-icon>check_circle</mat-icon>
                 </button>
 
