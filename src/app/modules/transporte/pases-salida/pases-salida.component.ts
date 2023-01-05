@@ -126,25 +126,21 @@ next(event: PageEvent) {
     let dia = fecha.toString();
     let dia2 = dia.substring(0,2)
 
-console.log( dia2, horaS.getDate() );
 
-if ( Number(dia2) > Number(horaS.getDate())) {
-  this.aprobarPase(idPase, camion);
+if ( Number(dia2) >= Number(horaS.getDate())) {
+  // this.aprobarPase(idPase, camion);
   if( Number(horaMin3) > Number(horaFinal)  )  {
     this.ModalPase(idPase, camion);
   }else{
 
 this.aprobarPase(idPase, camion);
-  }
+}
 
 }else{
-  if( Number(horaMin3) > Number(horaFinal)  )  {
+  if (  Number(dia2) < Number(horaS.getDate()) ) {
     this.ModalPase(idPase, camion);
-  }else{
-
-this.aprobarPase(idPase, camion);
   }
-}
+} 
   
   }
 
