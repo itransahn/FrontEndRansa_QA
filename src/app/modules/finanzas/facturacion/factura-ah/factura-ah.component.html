@@ -63,22 +63,22 @@
         </div>
 
         <div class="col-md-6 mt-4" style="text-align: right !important;">
-            <p class="right" >
-                <span style="margin-right: 25%;"  >FACTURA</span> <br>
-                <span style="margin-right: 17%;"  class="correlativo">  000-001-01-{{retornarCorrelativo()}}  </span>
+            <p class="right factura" >
+                <span class="factura" >FACTURA</span> <br>
+                <span class="correlativo factura">  000-001-01-{{retornarCorrelativo()}}  </span>
             </p>
             <!-- <h4 > FECHA: {{ fecha | date:'mediumDate' | uppercase }} </h4> -->
         <mat-divider class="material-dividier"></mat-divider>
             <p class="rigth" > 
             CAI: {{ parametrosCai[0]['CAI']}} <br>
-            <span style="margin-right: 18%; font-size: 1.1em !important;"> Rango Autorizado: </span> <br>
+            <span style="font-size: 1.1em !important;"> Rango Autorizado: </span> <br>
             {{ parametrosCai[0]['desde'] }} AL {{ parametrosCai[0]['hasta'] }} <br>
-            <span style="margin-right: 2% !important;font-size: 1.1em !important;">Fecha Limite De Emisión: {{ parametrosCai[0]['fechaLimite'] | date: 'dd/MM/yyyy'}} </span>
-            </p> <br>
-            <span style="margin-right: 20% !important;font-size: 1.1em !important;"> Fecha: {{ dia }}/{{mes}}/{{anio}} </span>
+            <span style="font-size: 1.1em !important;">Fecha Limite De Emisión: {{ parametrosCai[0]['fechaLimite'] | date: 'dd/MM/yyyy'}} </span> <br>
+            <span style="font-size: 1.1em !important;"> Fecha: {{ dia }}/{{mes}}/{{anio}} </span>
+            </p>
         </div>
 
-        <div class="mt-2 container">
+        <div class=" container">
             <div class="row contain1 ">
                 <div class="col-md-6" >
                     <p>
@@ -88,7 +88,7 @@
                     </p>
                     </div>
         <div class="col-md-6 container2">
-                        <p style="margin-right: 13% !important;"> 
+                        <p > 
                      RTN: {{ cabeceraF[0]['NRUC2'] }}
                         </p>
                     </div>
@@ -195,7 +195,7 @@
                             <th class="legend left"  colspan="5" rowspan="8" >
                                 <p class="legend">
                                     <span class="legend left"> VALOR EN LETRAS:   {{ convertirNumLetra( retornarTotal(),[])}}
-                                    </span>  <br><br><br><br>
+                                    </span>  <br><br><br><br><br><br><br>
 
                                     <!-- correlativo exenta -->
                                     <span class="legend left" >
@@ -225,22 +225,36 @@
                         </th>
 
                         <th class="left" style="font-size: 0.7em !important;"> SUBTOTAL </th>
-                        <th class="left legend"> L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            
-                            {{ retornarSubtotal() | number : '1.2-2':'es' }}  </th>
+                        <th class="left legend"> L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  {{ retornarSubtotal() | number : '1.2-2':'es' }}  </th>
+                        
+                            <!-- <th > 
+                                <p class="center legend"> L   <span class="right legend" style="text-align: right !important; ">   {{ retornarSubtotal() | number : '1.2-2':'es' }} </span> </p>       
+                                
+                                    <div class="row">
+                                        <div class="col-md-4"> <span class="left legend"> L </span> </div>
+                                        <div class="col-md-4"> <span class="right legend">  {{ retornarSubtotal() | number : '1.2-2':'es' }} </span>  </div>        
+                                    </div>
+                               </th> -->
                         </tr>
                         <!-- Importe Exento -->
                              <tr >
                             <!-- <th  class="legend left bordeIz"colspan="4" style="border-bottom-style: hidden !important;" >NO. CORRELATIVO DE ORDEN DE COMPRA EXENTA: {{cabeceraF[0]['TOBCTC']}} </th> -->
                             <th class="left" style="font-size: 0.7em !important;"> Importe Exento </th>
-                            <th class="left"> L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            
-                            {{ 0 | number : '1.2-2':'es'}}   </th>
+                            <th class="left" *ngIf="retornarTotal() < 1000000 " >  L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2':'es'}}   </th>
+                            <th class="left" *ngIf="retornarTotal() >= 1000000 && retornarTotal() < 10000000 " >  L  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2':'es'}} </th>
+                            <th class="left" *ngIf="retornarTotal() >= 10000000 " >  L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2':'es'}} </th>
+                            
+
                             </tr>
                         <!-- Importe Exonerado -->
                         <tr >
                             <!-- <th class="legend left bordeIz" colspan="4" >NO. CORRELATIVO DE CONSTANCIA DE REGISTRO EXONERADO: {{cabeceraF[0]['TOBCTC2']}}</th> -->
                             <th class="left" style="font-size: 0.7em !important;"> Importe Exonerado </th>
-                            <th class="left legend"> L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            
-                                {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2':'es'}}  </th>
+
+                            <th class="left legend" *ngIf="cabeceraF[0]['IVLNAS'] > 0"> L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2':'es'}}  </th>
+                            <th class="left" *ngIf="cabeceraF[0]['IVLNAS'] == 0 && retornarTotal() < 1000000">    L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   {{ 0 | number : '1.2-2':'es'}}   </th>
+                            <th class="left" *ngIf="cabeceraF[0]['IVLNAS'] == 0 && retornarTotal() >= 1000000 && retornarTotal() < 10000000 " >  L  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2':'es'}} </th>
+                            <th class="left" *ngIf="cabeceraF[0]['IVLNAS'] == 0 && retornarTotal() >= 10000000 " >  L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2':'es'}} </th>
                         </tr>
                            <!-- Importe Gravado al 15% -->
                            <tr >
@@ -248,32 +262,43 @@
                             <br>
                             </th> -->
                             <th class="left" colspan="1" style="font-size: 0.7em !important;"> Importe Gravado al 15%</th>
-                            <th class="left legend"> L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            
-                                {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2':'es' }}  </th>
+                            <th class="left legend" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] > 0"> L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2':'es' }}  </th>
+                            <th class="left" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] == 0 && retornarTotal() < 1000000">    L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   {{ 0 | number : '1.2-2':'es'}}   </th>
+                            <th class="left" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] == 0 && retornarTotal() >= 1000000 && retornarTotal() < 10000000 " >  L  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2':'es'}} </th>
+                            <th class="left" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] == 0 && retornarTotal() >= 10000000 " >  L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2':'es'}} </th>
+
                         </tr>
 
                           <!-- Importe Gravado al 18% -->
                           <tr >
                             <!-- <th colspan="4" class="bordeIz"></th> -->
                             <th class="left" colspan="1" style="font-size: 0.7em !important;"> Importe Gravado al 18% </th>
-                            <th class="left legend">L  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            
-                                {{ 0 | number : '1.2-2':'es' }}  </th>
+                            <!-- <th class="left legend">L  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   {{ 0 | number : '1.2-2':'es' }}  </th> -->
+                            <th class="left" *ngIf="cabeceraF[0]['IVLNAS'] == 0 && retornarTotal() < 1000000">    L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   {{ 0 | number : '1.2-2':'es'}}   </th>
+                            <th class="left" *ngIf="retornarTotal() >= 1000000 && retornarTotal() < 10000000 " >  L  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2':'es'}} </th>
+                            <th class="left" *ngIf="retornarTotal() >= 10000000 " >  L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2':'es'}} </th>
                         </tr>
 
                         <!-- ISV 15% -->
                         <tr >
                             <!-- <th class="legend left bordeIz" colspan="4" style="border-bottom-style: hidden !important;">**Vencido el plazo de pago de este documento genera 3% de interés***:</th> -->
                             <th class="left" style="font-size: 0.7em !important;"> I.S.V 15% </th>
-                            <th class="left legend">L  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            
-                                {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2':'es' }} </th>
+                            <th class="left legend" *ngIf="cabeceraF[0]['IVLIGS'] > 0 ">L  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2':'es' }} </th>
+                            <th class="left" *ngIf="cabeceraF[0]['IVLIGS'] == 0 && retornarTotal() < 1000000">    L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   {{ 0 | number : '1.2-2':'es'}}   </th>
+                            <th class="left" *ngIf="cabeceraF[0]['IVLIGS'] == 0 && retornarTotal() >= 1000000 && retornarTotal() < 10000000 " >  L  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2':'es'}} </th>
+                            <th class="left" *ngIf="cabeceraF[0]['IVLIGS'] == 0 && retornarTotal() >= 10000000 " >  L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2':'es'}} </th>
                         </tr>
 
                            <!-- ISV 18% -->
                            <tr >
                             <!-- <th class="legend left bordeIz" colspan="4" style="border-bottom-style: hidden !important;">**Si su pago con cheque resulta rechazado tendrá un recargo de L400.00***:</th> -->
                             <th class="left" style="font-size: 0.7em !important;"> I.S.V 18%</th>
-                            <th class="left legend">L &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            
-                                {{ 0 | number : '1.2-2'}} </th>
+                            <!-- <th class="left legend">L &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   {{ 0 | number : '1.2-2'}} </th> -->
+                            <th class="left legend" *ngIf="cabeceraF[0]['IVLNAS'] > 0 ">L  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2':'es' }} </th>
+                            <th class="left legend" *ngIf="cabeceraF[0]['IVLNAS'] == 0 && retornarTotal() < 1000000">    L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   {{ 0 | number : '1.2-2':'es'}}   </th>
+                            <th class="left legend" *ngIf="retornarTotal() >= 1000000 && retornarTotal() < 10000000 " >  L  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2':'es'}} </th>
+                            <th class="left legend" *ngIf="retornarTotal() >= 10000000 " >  L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2':'es'}} </th>
+
                         </tr>
                           <!-- Total a pagar -->
                           <tr >
@@ -283,8 +308,11 @@
                             </div> -->
                             <!-- <th colspan="4"></th> -->
                             <th class="left" style="font-size: 0.7em !important;" colspan="1"> Total a pagar</th>
-                            <th class="left legend">L &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            
-                                {{ retornarTotal() | number : '1.2-2':'es'}}  </th>
+                            <th class="left legend" *ngIf="retornarTotal() > 0 ">L &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  {{ retornarTotal() | number : '1.2-2':'es'}}  </th>
+                            <th class="left legend" *ngIf="retornarTotal()== 0 && retornarTotal() < 1000000">    L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   {{ 0 | number : '1.2-2':'es'}}   </th>
+                            <th class="left legend" *ngIf="retornarTotal()== 0 && retornarTotal() >= 1000000 && retornarTotal() < 10000000 " >  L  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2':'es'}} </th>
+                            <th class="left legend" *ngIf="retornarTotal()== 0 && retornarTotal() >= 10000000 " >  L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2':'es'}} </th>
+
                         </tr>
 <!--     
                         <tr >
@@ -297,8 +325,8 @@
                </div>
         </div>
 
-        <div class="row" style="margin-top: 5% !important">
-            <div class="col-md 12 mt-4 firma  container footL">
+        <div class="row" style="margin-top: 2% !important">
+            <div class="col-md 12 firma  container footL">
                     <label class="center">  FIRMA Y SELLO DEL CIENTE </label>
             </div>
             <div class="col-md-12 container pertenece  footL">
@@ -338,22 +366,22 @@
         </div>
 
         <div class="col-md-6 mt-4" style="text-align: right !important;">
-            <p class="right" >
-                <span style="margin-right: 25%;"  >FACTURA</span> <br>
-                <span style="margin-right: 17%;" >  000-001-01-{{retornarCorrelativo()}}  </span>
+            <p class="right factura" >
+                <span class="factura" >FACTURA</span> <br>
+                <span class="correlativo factura">  000-001-01-{{retornarCorrelativo()}}  </span>
             </p>
             <!-- <h4 > FECHA: {{ fecha | date:'mediumDate' | uppercase }} </h4> -->
         <mat-divider class="material-dividier"></mat-divider>
             <p class="rigth" > 
             CAI: {{ parametrosCai[0]['CAI']}} <br>
-            <span style="margin-right: 18%; font-size: 1.1em !important;"> Rango Autorizado: </span> <br>
+            <span style="font-size: 1.1em !important;"> Rango Autorizado: </span> <br>
             {{ parametrosCai[0]['desde'] }} AL {{ parametrosCai[0]['hasta'] }} <br>
-            <span style="margin-right: 2% !important;font-size: 1.1em !important;">Fecha Limite De Emisión: {{ parametrosCai[0]['fechaLimite'] | date: 'dd/MM/yyyy'}} </span>
-            </p> <br>
-            <span style="margin-right: 20% !important;font-size: 1.1em !important;"> Fecha: {{ dia }}/{{mes}}/{{anio}} </span>
+            <span style="font-size: 1.1em !important;">Fecha Limite De Emisión: {{ parametrosCai[0]['fechaLimite'] | date: 'dd/MM/yyyy'}} </span> <br>
+            <span style="font-size: 1.1em !important;"> Fecha: {{ dia }}/{{mes}}/{{anio}} </span>
+            </p>
         </div>
 
-        <div class="mt-2 container">
+        <div class="container">
             <div class="row contain1 ">
                 <div class="col-md-6" >
                     <p>
@@ -363,7 +391,7 @@
                     </p>
                     </div>
         <div class="col-md-6 container2">
-                        <p style="margin-right: 13% !important;"> 
+                        <p> 
                      RTN: {{ cabeceraF[0]['NRUC2'] }}
                         </p>
                     </div>
@@ -469,7 +497,7 @@
                             <th class="legend left"  colspan="5" rowspan="8" >
                                 <p class="legend">
                                     <span class="legend left"> VALOR EN LETRAS:   {{ convertirNumLetra( retornarTotal(),[])}}
-                                    </span>  <br><br><br><br>
+                                    </span>  <br><br><br><br><br><br><br>
 
                                     <!-- correlativo exenta -->
                                     <span class="legend left" >
@@ -499,22 +527,36 @@
                         </th>
 
                         <th class="left" style="font-size: 0.7em !important;"> SUBTOTAL </th>
-                        <th class="left legend"> L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            
-                            {{ retornarSubtotal() | number : '1.2-2':'es' }}  </th>
+                        <th class="left legend"> L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  {{ retornarSubtotal() | number : '1.2-2':'es' }}  </th>
+                        
+                            <!-- <th > 
+                                <p class="center legend"> L   <span class="right legend" style="text-align: right !important; ">   {{ retornarSubtotal() | number : '1.2-2':'es' }} </span> </p>       
+                                
+                                    <div class="row">
+                                        <div class="col-md-4"> <span class="left legend"> L </span> </div>
+                                        <div class="col-md-4"> <span class="right legend">  {{ retornarSubtotal() | number : '1.2-2':'es' }} </span>  </div>        
+                                    </div>
+                               </th> -->
                         </tr>
                         <!-- Importe Exento -->
                              <tr >
                             <!-- <th  class="legend left bordeIz"colspan="4" style="border-bottom-style: hidden !important;" >NO. CORRELATIVO DE ORDEN DE COMPRA EXENTA: {{cabeceraF[0]['TOBCTC']}} </th> -->
                             <th class="left" style="font-size: 0.7em !important;"> Importe Exento </th>
-                            <th class="left"> L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            
-                            {{ 0 | number : '1.2-2':'es'}}   </th>
+                            <th class="left" *ngIf="retornarTotal() < 1000000 " >  L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2':'es'}}   </th>
+                            <th class="left" *ngIf="retornarTotal() >= 1000000 && retornarTotal() < 10000000 " >  L  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2':'es'}} </th>
+                            <th class="left" *ngIf="retornarTotal() >= 10000000 " >  L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2':'es'}} </th>
+                            
+
                             </tr>
                         <!-- Importe Exonerado -->
                         <tr >
                             <!-- <th class="legend left bordeIz" colspan="4" >NO. CORRELATIVO DE CONSTANCIA DE REGISTRO EXONERADO: {{cabeceraF[0]['TOBCTC2']}}</th> -->
                             <th class="left" style="font-size: 0.7em !important;"> Importe Exonerado </th>
-                            <th class="left legend"> L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            
-                                {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2':'es'}}  </th>
+
+                            <th class="left legend" *ngIf="cabeceraF[0]['IVLNAS'] > 0"> L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2':'es'}}  </th>
+                            <th class="left" *ngIf="cabeceraF[0]['IVLNAS'] == 0 && retornarTotal() < 1000000">    L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   {{ 0 | number : '1.2-2':'es'}}   </th>
+                            <th class="left" *ngIf="cabeceraF[0]['IVLNAS'] == 0 && retornarTotal() >= 1000000 && retornarTotal() < 10000000 " >  L  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2':'es'}} </th>
+                            <th class="left" *ngIf="cabeceraF[0]['IVLNAS'] == 0 && retornarTotal() >= 10000000 " >  L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2':'es'}} </th>
                         </tr>
                            <!-- Importe Gravado al 15% -->
                            <tr >
@@ -522,32 +564,43 @@
                             <br>
                             </th> -->
                             <th class="left" colspan="1" style="font-size: 0.7em !important;"> Importe Gravado al 15%</th>
-                            <th class="left legend"> L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            
-                                {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2':'es' }}  </th>
+                            <th class="left legend" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] > 0"> L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2':'es' }}  </th>
+                            <th class="left" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] == 0 && retornarTotal() < 1000000">    L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   {{ 0 | number : '1.2-2':'es'}}   </th>
+                            <th class="left" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] == 0 && retornarTotal() >= 1000000 && retornarTotal() < 10000000 " >  L  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2':'es'}} </th>
+                            <th class="left" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] == 0 && retornarTotal() >= 10000000 " >  L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2':'es'}} </th>
+
                         </tr>
 
                           <!-- Importe Gravado al 18% -->
                           <tr >
                             <!-- <th colspan="4" class="bordeIz"></th> -->
                             <th class="left" colspan="1" style="font-size: 0.7em !important;"> Importe Gravado al 18% </th>
-                            <th class="left legend">L  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            
-                                {{ 0 | number : '1.2-2':'es' }}  </th>
+                            <!-- <th class="left legend">L  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   {{ 0 | number : '1.2-2':'es' }}  </th> -->
+                            <th class="left" *ngIf="cabeceraF[0]['IVLNAS'] == 0 && retornarTotal() < 1000000">    L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   {{ 0 | number : '1.2-2':'es'}}   </th>
+                            <th class="left" *ngIf="retornarTotal() >= 1000000 && retornarTotal() < 10000000 " >  L  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2':'es'}} </th>
+                            <th class="left" *ngIf="retornarTotal() >= 10000000 " >  L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2':'es'}} </th>
                         </tr>
 
                         <!-- ISV 15% -->
                         <tr >
                             <!-- <th class="legend left bordeIz" colspan="4" style="border-bottom-style: hidden !important;">**Vencido el plazo de pago de este documento genera 3% de interés***:</th> -->
                             <th class="left" style="font-size: 0.7em !important;"> I.S.V 15% </th>
-                            <th class="left legend">L  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            
-                                {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2':'es' }} </th>
+                            <th class="left legend" *ngIf="cabeceraF[0]['IVLIGS'] > 0 ">L  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2':'es' }} </th>
+                            <th class="left" *ngIf="cabeceraF[0]['IVLIGS'] == 0 && retornarTotal() < 1000000">    L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   {{ 0 | number : '1.2-2':'es'}}   </th>
+                            <th class="left" *ngIf="cabeceraF[0]['IVLIGS'] == 0 && retornarTotal() >= 1000000 && retornarTotal() < 10000000 " >  L  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2':'es'}} </th>
+                            <th class="left" *ngIf="cabeceraF[0]['IVLIGS'] == 0 && retornarTotal() >= 10000000 " >  L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2':'es'}} </th>
                         </tr>
 
                            <!-- ISV 18% -->
                            <tr >
                             <!-- <th class="legend left bordeIz" colspan="4" style="border-bottom-style: hidden !important;">**Si su pago con cheque resulta rechazado tendrá un recargo de L400.00***:</th> -->
                             <th class="left" style="font-size: 0.7em !important;"> I.S.V 18%</th>
-                            <th class="left legend">L &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            
-                                {{ 0 | number : '1.2-2'}} </th>
+                            <!-- <th class="left legend">L &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   {{ 0 | number : '1.2-2'}} </th> -->
+                            <th class="left legend" *ngIf="cabeceraF[0]['IVLNAS'] > 0 ">L  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2':'es' }} </th>
+                            <th class="left legend" *ngIf="cabeceraF[0]['IVLNAS'] == 0 && retornarTotal() < 1000000">    L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   {{ 0 | number : '1.2-2':'es'}}   </th>
+                            <th class="left legend" *ngIf="retornarTotal() >= 1000000 && retornarTotal() < 10000000 " >  L  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2':'es'}} </th>
+                            <th class="left legend" *ngIf="retornarTotal() >= 10000000 " >  L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2':'es'}} </th>
+
                         </tr>
                           <!-- Total a pagar -->
                           <tr >
@@ -557,8 +610,11 @@
                             </div> -->
                             <!-- <th colspan="4"></th> -->
                             <th class="left" style="font-size: 0.7em !important;" colspan="1"> Total a pagar</th>
-                            <th class="left legend">L &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            
-                                {{ retornarTotal() | number : '1.2-2':'es'}}  </th>
+                            <th class="left legend" *ngIf="retornarTotal() > 0 ">L &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  {{ retornarTotal() | number : '1.2-2':'es'}}  </th>
+                            <th class="left legend" *ngIf="retornarTotal()== 0 && retornarTotal() < 1000000">    L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   {{ 0 | number : '1.2-2':'es'}}   </th>
+                            <th class="left legend" *ngIf="retornarTotal()== 0 && retornarTotal() >= 1000000 && retornarTotal() < 10000000 " >  L  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2':'es'}} </th>
+                            <th class="left legend" *ngIf="retornarTotal()== 0 && retornarTotal() >= 10000000 " >  L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2':'es'}} </th>
+
                         </tr>
 <!--     
                         <tr >
@@ -570,7 +626,7 @@
                   </table>
                </div>
         </div>
-            <div class="row" style="margin-top: 5% !important">
+            <div class="row" style="margin-top: 2% !important">
                 <div class="col-md 12 firma  container footL">
                  <label class="center">  FIRMA Y SELLO DEL CIENTE </label>
                 </div>
@@ -614,22 +670,22 @@
 
    
         <div class="col-md-6 mt-4" style="text-align: right !important;">
-            <p class="right" >
-                <span style="margin-right: 25%;"  >FACTURA</span> <br>
-                <span style="margin-right: 17%;" >  000-001-01-{{retornarCorrelativo()}}  </span>
+            <p class="right factura" >
+                <span class="factura" >FACTURA</span> <br>
+                <span class="correlativo factura">  000-001-01-{{retornarCorrelativo()}}  </span>
             </p>
             <!-- <h4 > FECHA: {{ fecha | date:'mediumDate' | uppercase }} </h4> -->
         <mat-divider class="material-dividier"></mat-divider>
             <p class="rigth" > 
             CAI: {{ parametrosCai[0]['CAI']}} <br>
-            <span style="margin-right: 18%; font-size: 1.1em !important;"> Rango Autorizado: </span> <br>
+            <span style="font-size: 1.1em !important;"> Rango Autorizado: </span> <br>
             {{ parametrosCai[0]['desde'] }} AL {{ parametrosCai[0]['hasta'] }} <br>
-            <span style="margin-right: 2% !important;font-size: 1.1em !important;">Fecha Limite De Emisión: {{ parametrosCai[0]['fechaLimite'] | date: 'dd/MM/yyyy'}} </span>
-            </p> <br>
-            <span style="margin-right: 20% !important;font-size: 1.1em !important;"> Fecha: {{ dia }}/{{mes}}/{{anio}} </span>
+            <span style="font-size: 1.1em !important;">Fecha Limite De Emisión: {{ parametrosCai[0]['fechaLimite'] | date: 'dd/MM/yyyy'}} </span> <br>
+            <span style="font-size: 1.1em !important;"> Fecha: {{ dia }}/{{mes}}/{{anio}} </span>
+            </p>
         </div>
 
-        <div class="mt-2 container">
+        <div class="container">
             <div class="row contain1 ">
                 <div class="col-md-6" >
                     <p>
@@ -639,7 +695,7 @@
                     </p>
                     </div>
         <div class="col-md-6 container2">
-                        <p style="margin-right: 13% !important;"> 
+                        <p> 
                      RTN: {{ cabeceraF[0]['NRUC2'] }}
                         </p>
                     </div>
@@ -746,7 +802,7 @@
                             <th class="legend left"  colspan="5" rowspan="8" >
                                 <p class="legend">
                                     <span class="legend left"> VALOR EN LETRAS:   {{ convertirNumLetra( retornarTotal(),[])}}
-                                    </span>  <br><br><br><br>
+                                    </span>  <br><br><br><br><br><br><br>
 
                                     <!-- correlativo exenta -->
                                     <span class="legend left" >
@@ -776,22 +832,36 @@
                         </th>
 
                         <th class="left" style="font-size: 0.7em !important;"> SUBTOTAL </th>
-                        <th class="left legend"> L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            
-                            {{ retornarSubtotal() | number : '1.2-2':'es' }}  </th>
+                        <th class="left legend"> L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  {{ retornarSubtotal() | number : '1.2-2':'es' }}  </th>
+                        
+                            <!-- <th > 
+                                <p class="center legend"> L   <span class="right legend" style="text-align: right !important; ">   {{ retornarSubtotal() | number : '1.2-2':'es' }} </span> </p>       
+                                
+                                    <div class="row">
+                                        <div class="col-md-4"> <span class="left legend"> L </span> </div>
+                                        <div class="col-md-4"> <span class="right legend">  {{ retornarSubtotal() | number : '1.2-2':'es' }} </span>  </div>        
+                                    </div>
+                               </th> -->
                         </tr>
                         <!-- Importe Exento -->
                              <tr >
                             <!-- <th  class="legend left bordeIz"colspan="4" style="border-bottom-style: hidden !important;" >NO. CORRELATIVO DE ORDEN DE COMPRA EXENTA: {{cabeceraF[0]['TOBCTC']}} </th> -->
                             <th class="left" style="font-size: 0.7em !important;"> Importe Exento </th>
-                            <th class="left"> L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            
-                            {{ 0 | number : '1.2-2':'es'}}   </th>
+                            <th class="left" *ngIf="retornarTotal() < 1000000 " >  L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2':'es'}}   </th>
+                            <th class="left" *ngIf="retornarTotal() >= 1000000 && retornarTotal() < 10000000 " >  L  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2':'es'}} </th>
+                            <th class="left" *ngIf="retornarTotal() >= 10000000 " >  L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2':'es'}} </th>
+                            
+
                             </tr>
                         <!-- Importe Exonerado -->
                         <tr >
                             <!-- <th class="legend left bordeIz" colspan="4" >NO. CORRELATIVO DE CONSTANCIA DE REGISTRO EXONERADO: {{cabeceraF[0]['TOBCTC2']}}</th> -->
                             <th class="left" style="font-size: 0.7em !important;"> Importe Exonerado </th>
-                            <th class="left legend"> L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            
-                                {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2':'es'}}  </th>
+
+                            <th class="left legend" *ngIf="cabeceraF[0]['IVLNAS'] > 0"> L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2':'es'}}  </th>
+                            <th class="left" *ngIf="cabeceraF[0]['IVLNAS'] == 0 && retornarTotal() < 1000000">    L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   {{ 0 | number : '1.2-2':'es'}}   </th>
+                            <th class="left" *ngIf="cabeceraF[0]['IVLNAS'] == 0 && retornarTotal() >= 1000000 && retornarTotal() < 10000000 " >  L  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2':'es'}} </th>
+                            <th class="left" *ngIf="cabeceraF[0]['IVLNAS'] == 0 && retornarTotal() >= 10000000 " >  L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2':'es'}} </th>
                         </tr>
                            <!-- Importe Gravado al 15% -->
                            <tr >
@@ -799,32 +869,43 @@
                             <br>
                             </th> -->
                             <th class="left" colspan="1" style="font-size: 0.7em !important;"> Importe Gravado al 15%</th>
-                            <th class="left legend"> L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            
-                                {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2':'es' }}  </th>
+                            <th class="left legend" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] > 0"> L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2':'es' }}  </th>
+                            <th class="left" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] == 0 && retornarTotal() < 1000000">    L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   {{ 0 | number : '1.2-2':'es'}}   </th>
+                            <th class="left" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] == 0 && retornarTotal() >= 1000000 && retornarTotal() < 10000000 " >  L  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2':'es'}} </th>
+                            <th class="left" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] == 0 && retornarTotal() >= 10000000 " >  L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2':'es'}} </th>
+
                         </tr>
 
                           <!-- Importe Gravado al 18% -->
                           <tr >
                             <!-- <th colspan="4" class="bordeIz"></th> -->
                             <th class="left" colspan="1" style="font-size: 0.7em !important;"> Importe Gravado al 18% </th>
-                            <th class="left legend">L  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            
-                                {{ 0 | number : '1.2-2':'es' }}  </th>
+                            <!-- <th class="left legend">L  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   {{ 0 | number : '1.2-2':'es' }}  </th> -->
+                            <th class="left" *ngIf="cabeceraF[0]['IVLNAS'] == 0 && retornarTotal() < 1000000">    L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   {{ 0 | number : '1.2-2':'es'}}   </th>
+                            <th class="left" *ngIf="retornarTotal() >= 1000000 && retornarTotal() < 10000000 " >  L  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2':'es'}} </th>
+                            <th class="left" *ngIf="retornarTotal() >= 10000000 " >  L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2':'es'}} </th>
                         </tr>
 
                         <!-- ISV 15% -->
                         <tr >
                             <!-- <th class="legend left bordeIz" colspan="4" style="border-bottom-style: hidden !important;">**Vencido el plazo de pago de este documento genera 3% de interés***:</th> -->
                             <th class="left" style="font-size: 0.7em !important;"> I.S.V 15% </th>
-                            <th class="left legend">L  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            
-                                {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2':'es' }} </th>
+                            <th class="left legend" *ngIf="cabeceraF[0]['IVLIGS'] > 0 ">L  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2':'es' }} </th>
+                            <th class="left" *ngIf="cabeceraF[0]['IVLIGS'] == 0 && retornarTotal() < 1000000">    L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   {{ 0 | number : '1.2-2':'es'}}   </th>
+                            <th class="left" *ngIf="cabeceraF[0]['IVLIGS'] == 0 && retornarTotal() >= 1000000 && retornarTotal() < 10000000 " >  L  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2':'es'}} </th>
+                            <th class="left" *ngIf="cabeceraF[0]['IVLIGS'] == 0 && retornarTotal() >= 10000000 " >  L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2':'es'}} </th>
                         </tr>
 
                            <!-- ISV 18% -->
                            <tr >
                             <!-- <th class="legend left bordeIz" colspan="4" style="border-bottom-style: hidden !important;">**Si su pago con cheque resulta rechazado tendrá un recargo de L400.00***:</th> -->
                             <th class="left" style="font-size: 0.7em !important;"> I.S.V 18%</th>
-                            <th class="left legend">L &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            
-                                {{ 0 | number : '1.2-2'}} </th>
+                            <!-- <th class="left legend">L &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   {{ 0 | number : '1.2-2'}} </th> -->
+                            <th class="left legend" *ngIf="cabeceraF[0]['IVLNAS'] > 0 ">L  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2':'es' }} </th>
+                            <th class="left legend" *ngIf="cabeceraF[0]['IVLNAS'] == 0 && retornarTotal() < 1000000">    L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   {{ 0 | number : '1.2-2':'es'}}   </th>
+                            <th class="left legend" *ngIf="retornarTotal() >= 1000000 && retornarTotal() < 10000000 " >  L  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2':'es'}} </th>
+                            <th class="left legend" *ngIf="retornarTotal() >= 10000000 " >  L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2':'es'}} </th>
+
                         </tr>
                           <!-- Total a pagar -->
                           <tr >
@@ -834,8 +915,11 @@
                             </div> -->
                             <!-- <th colspan="4"></th> -->
                             <th class="left" style="font-size: 0.7em !important;" colspan="1"> Total a pagar</th>
-                            <th class="left legend">L &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            
-                                {{ retornarTotal() | number : '1.2-2':'es'}}  </th>
+                            <th class="left legend" *ngIf="retornarTotal() > 0 ">L &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  {{ retornarTotal() | number : '1.2-2':'es'}}  </th>
+                            <th class="left legend" *ngIf="retornarTotal()== 0 && retornarTotal() < 1000000">    L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   {{ 0 | number : '1.2-2':'es'}}   </th>
+                            <th class="left legend" *ngIf="retornarTotal()== 0 && retornarTotal() >= 1000000 && retornarTotal() < 10000000 " >  L  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2':'es'}} </th>
+                            <th class="left legend" *ngIf="retornarTotal()== 0 && retornarTotal() >= 10000000 " >  L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2':'es'}} </th>
+
                         </tr>
 <!--     
                         <tr >
@@ -847,7 +931,7 @@
                   </table>
                </div>
         </div>
-            <div class="row" style="margin-top: 5% !important">
+            <div class="row" style="margin-top: 2% !important">
                 <div class="col-md 12 firma container footL">
                     <label class="center">  FIRMA Y SELLO DEL CIENTE </label>
                 </div>
