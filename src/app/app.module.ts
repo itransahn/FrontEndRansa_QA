@@ -1,7 +1,7 @@
-import {LOCALE_ID,NgModule } from '@angular/core';
+import {NgModule } from '@angular/core';
 import localeEs from '@angular/common/locales/es';
-import { registerLocaleData } from '@angular/common';
-registerLocaleData(localeEs, 'es')
+// import { registerLocaleData } from '@angular/common';
+// registerLocaleData(localeEs, 'es')
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -56,7 +56,7 @@ import { SharedModule } from './modules/shared/shared.module';
     ReactiveFormsModule,
     NoPageFoundComponent,
   ],
-  providers: [ { provide : LOCALE_ID, useValue: 'es' } ],
+  providers: [ ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

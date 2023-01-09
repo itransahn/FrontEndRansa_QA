@@ -27,6 +27,7 @@
 	.factura{
 		font-size: 1.5em !important;
 	}
+
 }
 
 .bordes{
@@ -72,10 +73,17 @@
 	transform: translateY(-7px);
 }
 
+.empresa{
+	font-size: 1.1em !important;
+	.label{
+	font-size: 1.9em !important;
+	}
+}
 
-div, p, span{
-    font-size: small;
- 	font-family: Arial, Helvetica, sans-serif
+div, span{
+	font-size: small ;
+ 	font-family: Arial, Helvetica, sans-serif;
+
 }
 // monospace
 
@@ -111,7 +119,7 @@ thead{
 	// font-size:   small;
 	th{
 		background-color: #ffffff !important;
-		color:  #050404 !important;	
+		// color:  #050404 !important;	
 		.bordeIz{
 			border-bottom-style: none !important;
 		 }
@@ -124,7 +132,7 @@ thead{
 tfoot{
 	tr{
 		background-color: #ffffff !important;	
-		font-size: 0.8em;
+		// font-size: 0.8em;
 		.bordeIz{
 	border-bottom-style: none !important;
 		 }
@@ -137,8 +145,8 @@ tfoot{
 		// border-color: #050404;
 		// border: 0.1px;
 		background-color: #ffffff !important;
-	color: #050404 !important;
-	font-size: 0.8em;
+	font-size: 0.8em !important;
+
 	.bordeIz{
 		border-bottom-style: none !important;
 	 }
@@ -155,9 +163,11 @@ tfoot{
 
 /* FUENTES */
 .legend{
-	// text-align: left !important;
-	// font-family: Arial, Helvetica, sans-serif;
 	font-size: 1.0em !important;
+}
+
+.lemas{
+	font-weight: normal !important;
 }
 
 .footL{
@@ -192,13 +202,16 @@ tbody{
 	.bordeIz{
 		border-bottom-style: none !important;
 	 }
+	.empresa{
+		font-size: 1.4em !important;
+	}
 }
 
 table {
 	margin: 0;
 	padding: 0;
 	width: 100%;
-	
+
 .bordeIz{
 	border-bottom-style: none !important;
  }
@@ -216,6 +229,9 @@ table {
 	.bordeIz{
 		border-bottom-style: none !important;
 	 }
+	 .empresa{
+		font-size: 1.4em !important;
+	}
   }
   
   table th,
@@ -225,6 +241,9 @@ table {
 	.bordeIz{
 		border-bottom-style: none !important;
 	 }
+	 .empresa{
+		font-size: 1.4em !important;
+	}
   }
   
   table th {
@@ -290,9 +309,13 @@ table {
 p {
 	font-size: 		1.1em !important;
 	span{
-		font-size: 1.1em !important;
+		font-size: 1.1em;
 	}
+	.nombre{
+		font-size: 1.4em !important;
+		}
 }
+
 
 
 }
@@ -301,9 +324,13 @@ p {
 	min-height: 28cm;
 	
 	.factura{
-		font-size: 1.5em !important;
+		font-size: 1.10em !important;
 	}
-	
+	.observa{
+		font-size: 1.3em !important;
+
+	}
+
 }
 
 .footerPC{
