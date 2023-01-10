@@ -36,8 +36,8 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let rol of roles  | search: this.filtro.value.filtrar:parametrosBusqueda | slice: desde: hasta " class="trHover">
-                <td data-label="Rol">{{    rol?.rol             }}</td>
+              <tr *ngFor="let act of roles  | search: this.filtro.value.filtrar:parametrosBusqueda | slice: desde: hasta " class="trHover">
+                <td data-label="Rol">{{    act?.actividad             }}</td>
                 <td data-label="Estado">
                     <span *ngIf="rol?.idEstado == 1">
                         <mat-icon class="success">check_box</mat-icon>

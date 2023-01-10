@@ -91,8 +91,8 @@
                   <tr *ngFor="let fac of facturas  | slice: desde: hasta " class="trHover">
                     <td data-label="Fecha  de factura"> {{ retornarFecha(fac?.FDCCTC) }}</td>
                     <td data-label="Número de factura"> {{ retornarFactura(fac?.NDCCTC)     }}</td>
-                    <td data-label="Impuesto"> {{ fac?.IVLIGS | currency:'Lps' }}</td>
-                    <td data-label="Total">    {{ fac?.ITTFCS | currency:'Lps' }}</td>
+                    <td data-label="Impuesto"> {{ fac?.IVLIGS | currency:'L' }}</td>
+                    <td data-label="Total">    {{ fac?.ITTFCS | currency:'L' }}</td>
               
                     <td data-label="Acciones">
                     <div class="text-center">

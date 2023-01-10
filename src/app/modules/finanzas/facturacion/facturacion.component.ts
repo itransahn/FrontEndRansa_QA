@@ -269,7 +269,7 @@ EstructurarObservaciones( array : any[]){
     }
 
     for( let i = 0; i < this.EstrObs2.length; i++ ){
-     this.Observaciones += ' ' + this.EstrObs2[i]['TOBCTC']
+     this.Observaciones += '    ' + '    ' + this.EstrObs2[i]['TOBCTC']
   }
     // console.log( this.EstrObs2)
     // console.log( this.Observaciones)
