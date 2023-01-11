@@ -71,10 +71,10 @@
         <!-- <mat-divider class="material-dividier"></mat-divider> -->
             <p class="rigth" > 
             CAI: {{ parametrosCai[0]['CAI']}} <br>
-            <span style="font-size: 1.1em !important;"> Rango Autorizado: </span> <br>
+            <span style="font-size: 1.1em !important; font-weight:  bold !important;"> Rango Autorizado: </span> <br>
             {{ parametrosCai[0]['desde'] }} AL {{ parametrosCai[0]['hasta'] }} <br>
-            <span style="font-size: 1.1em !important;">Fecha Limite De Emisión: {{ parametrosCai[0]['fechaLimite'] | date: 'dd/MM/yyyy'}} </span> <br>
-            <span style="font-size: 1.1em !important;"> Fecha: {{ dia }}/{{mes}}/{{anio}} </span>
+            <span style="font-size: 1.1em !important; font-weight:  bold !important;">Fecha Limite De Emisión: {{ parametrosCai[0]['fechaLimite'] | date: 'dd/MM/yyyy'}} </span> <br>
+            <span style="font-size: 1.1em !important; font-weight:  bold !important;"> Fecha: {{ dia }}/{{mes}}/{{anio}} </span>
             </p>
         </div>
 
@@ -442,14 +442,13 @@
         <div class="row">
         <div class="col-md-6">
             <img src="../../../../assets/images/LOGO_RANSA_BN.png" alt="">
-            <p class = "empresa">
-                <span class="nombre" > {{parametros[0]['nombreCompleto']}}</span> <br>
-                 RTN: {{parametros[0]['rtnEmpresa']}} <br>
-                 {{parametros[0]['direccion1']}}: {{ parametros[0]['direccion2']}} <br>
-                 Municipio: {{ parametros[0]['municipio']}}, Departamento: {{ parametros[0]['Departamento']}} <br> 
-                 Tel: {{parametros[0]['Telfijo']}}, {{parametros[0]['TelCel']}}  <br>
-                <span *ngIf="parametros[0]['correo']"> Correo: {{parametros[0]['correo']}}  </span>
-                </p>
+          <p class="rigth" > 
+            CAI: {{ parametrosCai[0]['CAI']}} <br>
+            <span style="font-size: 1.1em !important; font-weight:  bold !important;"> Rango Autorizado: </span> <br>
+            {{ parametrosCai[0]['desde'] }} AL {{ parametrosCai[0]['hasta'] }} <br>
+            <span style="font-size: 1.1em !important; font-weight:  bold !important;">Fecha Limite De Emisión: {{ parametrosCai[0]['fechaLimite'] | date: 'dd/MM/yyyy'}} </span> <br>
+            <span style="font-size: 1.1em !important; font-weight:  bold !important;"> Fecha: {{ dia }}/{{mes}}/{{anio}} </span>
+            </p>
         </div>
 
         <div class="col-md-6 mt-4" style="text-align: right !important;">
@@ -459,12 +458,12 @@
             </p>
             <!-- <h4 > FECHA: {{ fecha | date:'mediumDate' | uppercase }} </h4> -->
         <mat-divider class="material-dividier"></mat-divider>
-            <p class="rigth" > 
+        <p class="rigth" > 
             CAI: {{ parametrosCai[0]['CAI']}} <br>
-            <span style="font-size: 1.1em !important;"> Rango Autorizado: </span> <br>
+            <span style="font-size: 1.1em !important; font-weight:  bold !important;"> Rango Autorizado: </span> <br>
             {{ parametrosCai[0]['desde'] }} AL {{ parametrosCai[0]['hasta'] }} <br>
-            <span style="font-size: 1.1em !important;">Fecha Limite De Emisión: {{ parametrosCai[0]['fechaLimite'] | date: 'dd/MM/yyyy'}} </span> <br>
-            <span style="font-size: 1.1em !important;"> Fecha: {{ dia }}/{{mes}}/{{anio}} </span>
+            <span style="font-size: 1.1em !important; font-weight:  bold !important;">Fecha Limite De Emisión: {{ parametrosCai[0]['fechaLimite'] | date: 'dd/MM/yyyy'}} </span> <br>
+            <span style="font-size: 1.1em !important; font-weight:  bold !important;"> Fecha: {{ dia }}/{{mes}}/{{anio}} </span>
             </p>
         </div>
 
@@ -848,12 +847,12 @@
                 </p>
                 <!-- <h4 > FECHA: {{ fecha | date:'mediumDate' | uppercase }} </h4> -->
             <mat-divider class="material-dividier"></mat-divider>
-                <p class="rigth" > 
+            <p class="rigth" > 
                 CAI: {{ parametrosCai[0]['CAI']}} <br>
-                <span style="font-size: 1.1em !important;"> Rango Autorizado: </span> <br>
+                <span style="font-size: 1.1em !important; font-weight:  bold !important;"> Rango Autorizado: </span> <br>
                 {{ parametrosCai[0]['desde'] }} AL {{ parametrosCai[0]['hasta'] }} <br>
-                <span style="font-size: 1.1em !important;">Fecha Limite De Emisión: {{ parametrosCai[0]['fechaLimite'] | date: 'dd/MM/yyyy'}} </span> <br>
-                <span style="font-size: 1.1em !important;"> Fecha: {{ dia }}/{{mes}}/{{anio}} </span>
+                <span style="font-size: 1.1em !important; font-weight:  bold !important;">Fecha Limite De Emisión: {{ parametrosCai[0]['fechaLimite'] | date: 'dd/MM/yyyy'}} </span> <br>
+                <span style="font-size: 1.1em !important; font-weight:  bold !important;"> Fecha: {{ dia }}/{{mes}}/{{anio}} </span>
                 </p>
             </div>
     
@@ -1005,14 +1004,14 @@
                             <th class="left" style="font-size: 0.7em !important;"> SUBTOTAL </th>
                             <!-- <th class="center legend"> L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  {{ retornarSubtotal() | number : '1.2-2' }}  </th> -->
                             <!-- <th class="center2 legend"> <span class="letra">L    </span>  <span class="numeros"> {{ retornarSubtotal() | number : '1.2-2' }}</span> </th> -->
-                            <th class="right legend" *ngIf="retornarSubtotal() <= 0"                                      > <span  class="letra0"> L.       </span>{{ retornarSubtotal() | number : '1.2-2' }}  </th>
-                            <th class="right legend" *ngIf="retornarSubtotal() >  0        && retornarSubtotal() <= 99"      > <span  class="letra0"> L.        </span>{{ retornarSubtotal() | number : '1.2-2' }}  </th>
-                            <th class="right legend" *ngIf="retornarSubtotal() >= 100      && retornarSubtotal() <= 999"     > <span  class="letra100"> L.      </span>{{ retornarSubtotal() | number : '1.2-2' }}  </th>
-                            <th class="right legend" *ngIf="retornarSubtotal() >= 1000     && retornarSubtotal() <= 9999"    > <span  class="letra1000"> L.     </span>{{ retornarSubtotal() | number : '1.2-2' }}  </th>
-                            <th class="right legend" *ngIf="retornarSubtotal() >= 10000    && retornarSubtotal() <= 99999"   > <span  class="letra10000"> L.    </span>{{ retornarSubtotal() | number : '1.2-2' }}  </th>
-                            <th class="right legend" *ngIf="retornarSubtotal() >= 100000   && retornarSubtotal() <= 999999"  > <span  class="letra100000"> L.   </span>{{ retornarSubtotal() | number : '1.2-2' }}  </th>
-                            <th class="right legend" *ngIf="retornarSubtotal() >= 1000000  && retornarSubtotal() <= 9999999"> <span  class="letra1000000"> L.  </span>{{ retornarSubtotal() | number : '1.2-2' }}  </th>
-                            <th class="right legend" *ngIf="retornarSubtotal() >= 10000000 "                               > <span  class="letra10000000"> L. </span>{{ retornarSubtotal() | number : '1.2-2' }}  </th>
+                            <th class="right legend" *ngIf="retornarSubtotal() <= 0"                                      >    <span  class="letra0"> L.        </span> {{ retornarSubtotal() | number : '1.2-2' }}  </th>
+                            <th class="right legend" *ngIf="retornarSubtotal() >  0        && retornarSubtotal() <= 99"      > <span  class="letra0"> L.        </span> {{ retornarSubtotal() | number : '1.2-2' }}  </th>
+                            <th class="right legend" *ngIf="retornarSubtotal() >= 100      && retornarSubtotal() <= 999"     > <span  class="letra100"> L.      </span> {{ retornarSubtotal() | number : '1.2-2' }}  </th>
+                            <th class="right legend" *ngIf="retornarSubtotal() >= 1000     && retornarSubtotal() <= 9999"    > <span  class="letra1000"> L.     </span> {{ retornarSubtotal() | number : '1.2-2' }}  </th>
+                            <th class="right legend" *ngIf="retornarSubtotal() >= 10000    && retornarSubtotal() <= 99999"   > <span  class="letra10000"> L.    </span> {{ retornarSubtotal() | number : '1.2-2' }}  </th>
+                            <th class="right legend" *ngIf="retornarSubtotal() >= 100000   && retornarSubtotal() <= 999999"  > <span  class="letra100000"> L.   </span> {{ retornarSubtotal() | number : '1.2-2' }}  </th>
+                            <th class="right legend" *ngIf="retornarSubtotal() >= 1000000  && retornarSubtotal() <= 9999999">  <span  class="letra1000000"> L.  </span> {{ retornarSubtotal() | number : '1.2-2' }}  </th>
+                            <th class="right legend" *ngIf="retornarSubtotal() >= 10000000 "                               >   <span  class="letra10000000"> L. </span> {{ retornarSubtotal() | number : '1.2-2' }}  </th>
     
           <!-- <th > 
                                     <p class="center legend"> L   <span class="right legend" style="text-align: right !important; ">   {{ retornarSubtotal() | number : '1.2-2':'es' }} </span> </p>       

@@ -4,32 +4,34 @@
             <div class="col-md-6">
                 <img *ngIf="sede == 1" src="../../../../assets/images/logoRansa.ico" alt="">
                 <img *ngIf="sede == 2" src="../../../../../assets/images/Almahsa.png" alt="">
-                <p class="black">
-                {{ parametros[0]['nombreCompleto']}} <br>
-                {{ parametros[0]['direccion1']}}, Calle: {{ parametros[0]['direccion2'] }} Casa N°: S/N <br>
+                <p class="black empresa">
+                <span class="nombre"> {{ parametros[0]['nombreCompleto']}} </span> <br>
+                {{ parametros[0]['direccion1']}}, Calle: {{ parametros[0]['direccion2'] }}  <br>
+                <!-- Casa N°: S/N -->
                 Municipio: {{ parametros[0]['municipio']}}, Departamento: {{ parametros[0]['Departamento']}} <br>
                 Tel: {{ parametros[0]['Telfijo'] }} <br>
                 <span *ngIf="parametros[0]['TelCel']">     Cel   : {{ parametros[0]['TelCel'] }} <br> </span> 
                 <span *ngIf="parametros[0]['rtnEmpresa']"> R.T.N : {{ parametros[0]['rtnEmpresa'] }} </span> 
-                <span *ngIf="parametros[0]['correo']">     Correo: {{ parametros[0]['correo'] }} </span> <br>
+                <span *ngIf="parametros[0]['correo']">     Correo: {{ parametros[0]['correo'] }} </span> 
                 </p>
             </div>
     
-            <div class="col-md-6 mt-4 container">
+            <div class="col-md-6 mt-4 rigth">
                 <p class="black">
-                <span class="container">NOTA DE CREDITO </span>
-                <span *ngIf="ruta.snapshot.params['empresa'] == 'RH'" class="container correlativo" style="text-align:left !important; font:bold !important;  font-size: 1.2em !important;">
+                <span class="rigth factura">NOTA DE CREDITO </span> <br>
+                <span *ngIf="ruta.snapshot.params['empresa'] == 'RH'" class="rigth correlativo factura">
                         <!-- 000-001-01-{{retornarCorrelativo()}} -->
                         000-001-06-{{retornarCorrelativo()}}            
-                </span>
-                <span *ngIf="ruta.snapshot.params['empresa'] == 'AH'" class="container correlativo" style="text-align:left !important;  font:bold !important; font-size: 1.2em !important;">
+                </span> <br>
+                <span *ngIf="ruta.snapshot.params['empresa'] == 'AH'" class="rigth correlativo factura">
                     <!-- 000-001-01-{{retornarCorrelativo()}} -->
                     000-002-06-{{retornarCorrelativo()}}            
-            </span>
-                <span class="container">   C.A.I: {{parametrosCai[0]['CAI']}} </span>
-                <span class="container"> RANGO AUTORIZADO </span>
-                <span  class="container"> {{parametrosCai[0]['desde']}} - {{parametrosCai[0]['hasta']}} </span> 
-                 <span class="container">Fecha Limite de Emisión : {{ parametrosCai[0]['fechaLimite'] | date : 'dd/MM/yyyy' }} </span>
+            </span>  <br>
+                <span  class="rigth empresa">  C.A.I: {{parametrosCai[0]['CAI']}} </span> <br>
+                <span style="font-size: 1.1em !important; font-weight:  bold !important;"> Rango Autorizado: </span> <br>
+                <span  class="rigth empresa"> {{parametrosCai[0]['desde']}} - {{parametrosCai[0]['hasta']}} </span> <br>
+                <span style="font-size: 1.1em !important; font-weight:  bold !important;">Fecha Limite De Emisión: {{ parametrosCai[0]['fechaLimite'] | date: 'dd/MM/yyyy'}} </span> <br>
+                 <!-- <span class="rigth empresa"> Fecha Limite de Emisión : {{ parametrosCai[0]['fechaLimite'] | date : 'dd/MM/yyyy' }} </span> -->
                 </p>
             </div>
 
@@ -37,7 +39,7 @@
             <div class="container">
                 <div class="row contain1">
                     <div class="col-md-6 containB" style="width: 80% !important;">
-                    <p>
+                    <p class="empresa">
                     Sr.(a): {{ cabeceraN[0]['TCMPCL'] }} <br>
                     R.T.N : {{ cabeceraN[0]['NRUC2']}} <br>
                     Dirección: {{ cabeceraN[0]['TDRCOR'] }} <br>
@@ -46,8 +48,8 @@
                     Fecha de emisión comprobante: {{ dia }}  {{ mes }} {{ anio }} <br>
                     </p>
                     </div>
-                <div class="col-md-6 center containB container">
-                <p > Nota de Crédito por L. <span style="font-weight: bold !important;"> {{ (cabeceraN[0]['ITTFCS'] * -1) | number :'1.2-2' }} </span> </p>
+                <div class="col-md-6 center containB container2">
+                <p class="empresa"> Nota de Crédito por L. <span style="font-weight: bold !important;"> {{ (cabeceraN[0]['ITTFCS'] * -1) | number :'1.2-2' }} </span> </p>
                 </div>
                 </div>
             </div>
@@ -55,9 +57,10 @@
 
             <!-- Comentario de la nota de débito -->
             <div class="col-md-12">
-                <h4 class="container completo black"> En esta fecha hemos registrado en su cuenta el valor que indica la presente NOTA DE CREDITO, por el siguiente motivo:  </h4>
+                <h4 class="container completo empresa black"> En esta fecha hemos registrado en su cuenta el valor que indica la presente NOTA DE CREDITO, por el siguiente motivo:  </h4>
             </div>
-     <div class="tabla">
+        </div>
+     <div class="tabla mb-4">
                 <div class="table-responsive !important" >
                     <table>
                         <thead>
@@ -85,7 +88,7 @@
                                 <td class="espacioB"  colspan="6"></td>
                             </tr>
                             <tr style=" border-collapse: collapse;"> 
-                                <td style="text-align:left !important; font-size: 0.9em !important; " class="espacioB" colspan="3" >
+                                <td style="text-align:left !important;" class="espacioB" colspan="3" >
                                     <span *ngFor="let item of EstrObs2" >
                                         {{ item?.TOBCTC}}
                                     </span>
@@ -96,7 +99,7 @@
                             <tr style=" border-collapse: collapse;"> 
                                 <td style="text-align:left !important; font-size: 0.9em !important; " class="espacioB" colspan="3">
                                     <!-- CIENTO OCHENTA Y NUEVE MIL CUATROCIENTOS NOVENTA Y SEIS CON NOVENTA Y OCHO CENTAVOS -->
-                                    {{ letras }}
+                                    {{ letras | uppercase }}
                                 </td>
                                 <td class="espacioB" colspan="3"> </td>
                             </tr>
@@ -121,10 +124,44 @@
                         <tfoot>
                             <tr >
                                     <!-- Número a letras -->
-                                <th class="rigth" colspan="3" > TOTALES </th>
-                            <th class="espacioB center">  {{ (DcabeceraN[0]['IVLDCS'] ) * -1 | number :'1.2-2' }} </th>
-                            <th class="espacioB center">  {{ ( cabeceraN[0]['IVLIGS'] ) * -1 | number :'1.2-2' }}</th>
-                            <th class="espacioB center">  {{ (cabeceraN[0]['ITTFCS'] )  * -1 | number :'1.2-2' }} </th>
+     <th class="rigth" colspan="3" > TOTALES </th>
+    <th class="espacioB center" *ngIf="( (DcabeceraN[0]['IVLDCS'] ) * -1 ) <= 0 ">                                                        <span  class="letra0">        L. </span> {{ (DcabeceraN[0]['IVLDCS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (DcabeceraN[0]['IVLDCS'] ) * -1 ) >0 && ((DcabeceraN[0]['IVLDCS'] ) * -1 ) <= 99 ">             <span  class="letra0">        L. </span> {{ (DcabeceraN[0]['IVLDCS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (DcabeceraN[0]['IVLDCS'] ) * -1 ) >=100 && ((DcabeceraN[0]['IVLDCS'] ) * -1 ) <= 999  ">         <span  class="letra100">      L. </span> {{ (DcabeceraN[0]['IVLDCS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (DcabeceraN[0]['IVLDCS'] ) * -1 ) >=1000 && ((DcabeceraN[0]['IVLDCS'] ) * -1 ) <= 9999  ">       <span  class="letra1000">     L. </span> {{ (DcabeceraN[0]['IVLDCS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (DcabeceraN[0]['IVLDCS'] ) * -1 ) >=10000 && ((DcabeceraN[0]['IVLDCS'] ) * -1 ) <= 99999">       <span  class="letra10000">    L. </span> {{ (DcabeceraN[0]['IVLDCS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (DcabeceraN[0]['IVLDCS'] ) * -1 ) >=100000 && ((DcabeceraN[0]['IVLDCS'] ) * -1 ) <= 999999  ">   <span  class="letra100000">   L. </span> {{ (DcabeceraN[0]['IVLDCS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (DcabeceraN[0]['IVLDCS'] ) * -1 ) >=1000000 && ((DcabeceraN[0]['IVLDCS'] ) * -1 ) <= 9999999  "> <span  class="letra1000000">  L. </span> {{ (DcabeceraN[0]['IVLDCS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (DcabeceraN[0]['IVLDCS'] ) * -1 ) >= 10000000 ">                                                 <span  class="letra10000000"> L. </span> {{ (DcabeceraN[0]['IVLDCS'] ) * -1 | number :'1.2-2' }} </th>
+
+
+
+    <!-- <th class="espacioB center">  {{ ( cabeceraN[0]['IVLIGS'] ) * -1 | number :'1.2-2' }} </th> -->
+
+    <th class="espacioB center" *ngIf="( (cabeceraN [0]['IVLIGS'] ) * -1 ) <= 0 ">                                                        <span  class="letra0">        L. </span> {{ (cabeceraN [0]['IVLIGS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (cabeceraN [0]['IVLIGS'] ) * -1 ) >0 && ((cabeceraN [0]['IVLIGS'] ) * -1 ) <= 99 ">             <span  class="letra0">        L. </span> {{ (cabeceraN [0]['IVLIGS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (cabeceraN [0]['IVLIGS'] ) * -1 ) >=100 && ((cabeceraN [0]['IVLIGS'] ) * -1 ) <= 999  ">         <span  class="letra100">      L. </span> {{ (cabeceraN [0]['IVLIGS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (cabeceraN [0]['IVLIGS'] ) * -1 ) >=1000 && ((cabeceraN [0]['IVLIGS'] ) * -1 ) <= 9999  ">       <span  class="letra1000">     L. </span> {{ (cabeceraN [0]['IVLIGS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (cabeceraN [0]['IVLIGS'] ) * -1 ) >=10000 && ((cabeceraN [0]['IVLIGS'] ) * -1 ) <= 99999">       <span  class="letra10000">    L. </span> {{ (cabeceraN [0]['IVLIGS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (cabeceraN [0]['IVLIGS'] ) * -1 ) >=100000 && ((cabeceraN [0]['IVLIGS'] ) * -1 ) <= 999999  ">   <span  class="letra100000">   L. </span> {{ (cabeceraN [0]['IVLIGS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (cabeceraN [0]['IVLIGS'] ) * -1 ) >=1000000 && ((cabeceraN [0]['IVLIGS'] ) * -1 ) <= 9999999  "> <span  class="letra1000000">  L. </span> {{ (cabeceraN [0]['IVLIGS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (cabeceraN [0]['IVLIGS'] ) * -1 ) >= 10000000 ">                                                 <span  class="letra10000000"> L. </span> {{ (cabeceraN [0]['IVLIGS'] ) * -1 | number :'1.2-2' }} </th>
+
+
+
+    <!-- <th class="espacioB center">  {{ (cabeceraN[0]['ITTFCS'] )  * -1 | number :'1.2-2' }} </th> -->
+
+    <th class="espacioB center" *ngIf="( (cabeceraN [0]['ITTFCS'] ) * -1 ) <= 0 ">                                                        <span  class="letra0">        L. </span> {{ (cabeceraN [0]['ITTFCS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (cabeceraN [0]['ITTFCS'] ) * -1 ) >0 && ((cabeceraN [0]['ITTFCS'] ) * -1 ) <= 99 ">             <span  class="letra0">        L. </span> {{ (cabeceraN [0]['ITTFCS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (cabeceraN [0]['ITTFCS'] ) * -1 ) >=100 && ((cabeceraN [0]['ITTFCS'] ) * -1 ) <= 999  ">         <span  class="letra100">      L. </span> {{ (cabeceraN [0]['ITTFCS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (cabeceraN [0]['ITTFCS'] ) * -1 ) >=1000 && ((cabeceraN [0]['ITTFCS'] ) * -1 ) <= 9999  ">       <span  class="letra1000">     L. </span> {{ (cabeceraN [0]['ITTFCS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (cabeceraN [0]['ITTFCS'] ) * -1 ) >=10000 && ((cabeceraN [0]['ITTFCS'] ) * -1 ) <= 99999">       <span  class="letra10000">    L. </span> {{ (cabeceraN [0]['ITTFCS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (cabeceraN [0]['ITTFCS'] ) * -1 ) >=100000 && ((cabeceraN [0]['ITTFCS'] ) * -1 ) <= 999999  ">   <span  class="letra100000">   L. </span> {{ (cabeceraN [0]['ITTFCS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (cabeceraN [0]['ITTFCS'] ) * -1 ) >=1000000 && ((cabeceraN [0]['ITTFCS'] ) * -1 ) <= 9999999  "> <span  class="letra1000000">  L. </span> {{ (cabeceraN [0]['ITTFCS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (cabeceraN [0]['ITTFCS'] ) * -1 ) >= 10000000 ">                                                 <span  class="letra10000000"> L. </span> {{ (cabeceraN [0]['ITTFCS'] ) * -1 | number :'1.2-2' }} </th>
+
+
+
                             </tr>
                        
     
@@ -135,39 +172,41 @@
      
   <!-- Motivo de Nota de Crédito -->
 <div class="col-md-12 container">
-    <p class="black">
+    <p class="black empresa">
         Motivo de Emisión de la Nota de Crédito: 
     </p>
     <section class="example-section ml-4">
-        <mat-checkbox class="example-margin ml-2" [disabled]="disabled" [(ngModel)]="anulacion"><span>Anulación</span>  </mat-checkbox>
-        <mat-checkbox class="example-margin ml-2" [disabled]="disabled" [(ngModel)]="devolcion"><span>Devolución</span> </mat-checkbox>
-        <mat-checkbox class="example-margin ml-2" [disabled]="disabled" [(ngModel)]="descuento"><span>Descuento</span>  </mat-checkbox>
+        <mat-checkbox class="example-margin ml-2 empresa" [disabled]="disabled" [(ngModel)]="anulacion"><span>Anulación</span>  </mat-checkbox>
+        <mat-checkbox class="example-margin ml-2 empresa" [disabled]="disabled" [(ngModel)]="devolcion"><span>Devolución</span> </mat-checkbox>
+        <mat-checkbox class="example-margin ml-2 empresa" [disabled]="disabled" [(ngModel)]="descuento"><span>Descuento</span>  </mat-checkbox>
       </section>
 </div>
-<div class="col-md-12 completo black">
-    <h3 *ngIf="Motivo" class="completo">
+<div class="col-md-12 mt-4 completo black">
+    <h3 *ngIf="Motivo" class="completo empresa">
         Otros especifique: <span style="text-decoration: underline; margin-left: 1px;"> {{  Motivo }} </span>
     </h3>
-    <h3 *ngIf="!Motivo" class="completo">
+    <h3 *ngIf="!Motivo" class="completo empresa">
         Otros especifique:____________________________________________________________________________
     </h3>
     </div>
 
-<div class="col-md-6" style="font-size: x-small !important;">
-    <p class="black"> 
-       __________________________________________ <br>
-               <span style="margin-left: 20%;" class="black">    Elaborado por:  </span>
-    </p>
-   </div>
-   
-   <div class="col-md-6 black" style="font-size: x-small !important;">
-           Recibí Conforme: ______________________________________________ <br>
-           Identidad: ____________________________________________________ <br>
-           Firma: _______________________________________________________     
-   </div>
-
-<div class="col-md-12 container mt-4" style="color: black !important;">
-    <label class="center"> ORIGINAL : CLIENTE </label>
+<div class="row">
+    <div class="col-md-6 mt-4 mb-4 empresa" >
+        <p class="black "> 
+           __________________________________________ <br>
+                   <span style="margin-left: 22%;" class="black ">    Elaborado por:  </span>
+        </p>
+       </div>
+       
+       <div class="col-md-6 black empresa mt-4 mb-4 empresa" >
+               Recibí Conforme: ______________________________________ <br>
+               Identidad: ____________________________________________ <br>
+               Firma: _______________________________________________     
+       </div>
+    
+    <div class="col-md-12 container " style="color: black !important;">
+        <label class="center"> ORIGINAL : CLIENTE </label>
+    </div>
 </div>
 <!-- <div class="col-md-4 container footL">
     <label class="center"> DUPLICADO: TRIBUTARIO EMISOR</label>
@@ -175,7 +214,7 @@
 <!-- <div class="col-md-4 container footL">
     <label class="center"> TRIPLICADO: ARCHIVO</label>
 </div> -->
-        </div>
+      
     </mat-card>
 </div>
 
@@ -185,40 +224,42 @@
             <div class="col-md-6">
                 <img *ngIf="sede == 1" src="../../../../assets/images/LOGO_RANSA_BN.png" alt="">
                 <img *ngIf="sede == 2" src="../../../../../assets/images/Almahsa_BN.png" alt="">
-                <p class="black">
-                {{ parametros[0]['nombreCompleto']}} <br>
-                {{ parametros[0]['direccion1']}}, Calle: {{ parametros[0]['direccion2'] }} Casa N°: S/N <br>
+                <p class="black empresa">
+                <span class="nombre"> {{ parametros[0]['nombreCompleto']}} </span> <br>
+                {{ parametros[0]['direccion1']}}, Calle: {{ parametros[0]['direccion2'] }}  <br>
+                <!-- Casa N°: S/N -->
                 Municipio: {{ parametros[0]['municipio']}}, Departamento: {{ parametros[0]['Departamento']}} <br>
                 Tel: {{ parametros[0]['Telfijo'] }} <br>
                 <span *ngIf="parametros[0]['TelCel']">     Cel   : {{ parametros[0]['TelCel'] }} <br> </span> 
                 <span *ngIf="parametros[0]['rtnEmpresa']"> R.T.N : {{ parametros[0]['rtnEmpresa'] }} </span> 
-                <span *ngIf="parametros[0]['correo']">     Correo: {{ parametros[0]['correo'] }} </span> <br>
+                <span *ngIf="parametros[0]['correo']">     Correo: {{ parametros[0]['correo'] }} </span> 
                 </p>
             </div>
     
-            <div class="col-md-6 mt-4 container">
+            <div class="col-md-6 mt-4 rigth">
                 <p class="black">
-                <span class="container">NOTA DE CREDITO </span>
-                <span *ngIf="ruta.snapshot.params['empresa'] == 'RH'" class="container" style="text-align:left  !important; font-size: 1.2em !important;">
+                <span class="rigth factura">NOTA DE CREDITO </span> <br>
+                <span *ngIf="ruta.snapshot.params['empresa'] == 'RH'" class="rigth factura">
                         <!-- 000-001-01-{{retornarCorrelativo()}} -->
                         000-001-06-{{retornarCorrelativo()}}            
-                </span>
-                <span *ngIf="ruta.snapshot.params['empresa'] == 'AH'" class="container" style="text-align:left  !important; color:#FE9600 !important; font-size: 1.2em !important;">
+                </span> <br>
+                <span *ngIf="ruta.snapshot.params['empresa'] == 'AH'" class="rigth factura">
                     <!-- 000-001-01-{{retornarCorrelativo()}} -->
                     000-002-06-{{retornarCorrelativo()}}            
-            </span>
-                <span class="container">   C.A.I: {{parametrosCai[0]['CAI']}} </span>
-                <span class="container"> RANGO AUTORIZADO </span>
-                <span  class="container"> {{parametrosCai[0]['desde']}} - {{parametrosCai[0]['hasta']}} </span> 
-                 <span class="container">Fecha Limite de Emisión : {{ parametrosCai[0]['fechaLimite'] | date : 'dd/MM/yyyy' }} </span>
+            </span>  <br>
+                <span  class="rigth empresa">  C.A.I: {{parametrosCai[0]['CAI']}} </span> <br>
+                <span style="font-size: 1.1em !important; font-weight:  bold !important;"> Rango Autorizado: </span> <br>
+                <span  class="rigth empresa"> {{parametrosCai[0]['desde']}} - {{parametrosCai[0]['hasta']}} </span> <br>
+                <span style="font-size: 1.1em !important; font-weight:  bold !important;">Fecha Limite De Emisión: {{ parametrosCai[0]['fechaLimite'] | date: 'dd/MM/yyyy'}} </span> <br>
+                 <!-- <span class="rigth empresa"> Fecha Limite de Emisión : {{ parametrosCai[0]['fechaLimite'] | date : 'dd/MM/yyyy' }} </span> -->
                 </p>
             </div>
 
-              <!-- Detalle de la generación  -->
-              <div class="container">
+            <!-- Detalle de la generación  -->
+            <div class="container">
                 <div class="row contain1">
                     <div class="col-md-6 containB" style="width: 80% !important;">
-                    <p>
+                    <p class="empresa">
                     Sr.(a): {{ cabeceraN[0]['TCMPCL'] }} <br>
                     R.T.N : {{ cabeceraN[0]['NRUC2']}} <br>
                     Dirección: {{ cabeceraN[0]['TDRCOR'] }} <br>
@@ -227,8 +268,8 @@
                     Fecha de emisión comprobante: {{ dia }}  {{ mes }} {{ anio }} <br>
                     </p>
                     </div>
-                <div class="col-md-6 center containB container">
-                <p > Nota de Crédito por L. <span style="font-weight: bold !important;"> {{ (cabeceraN[0]['ITTFCS'] * -1) | number :'1.2-2' }} </span> </p>
+                <div class="col-md-6 center containB container2">
+                <p class="empresa"> Nota de Crédito por L. <span style="font-weight: bold !important;"> {{ (cabeceraN[0]['ITTFCS'] * -1) | number :'1.2-2' }} </span> </p>
                 </div>
                 </div>
             </div>
@@ -236,188 +277,10 @@
 
             <!-- Comentario de la nota de débito -->
             <div class="col-md-12">
-                <h4 class="container black completo"> En esta fecha hemos registrado en su cuenta el valor que indica la presente NOTA DE CREDITO, por el siguiente motivo:  </h4>
+                <h4 class="container completo empresa black"> En esta fecha hemos registrado en su cuenta el valor que indica la presente NOTA DE CREDITO, por el siguiente motivo:  </h4>
             </div>
-     <div class="tabla">
-                <div class="table-responsive !important" >
-                    <table>
-                        <thead>
-                          <tr>
-                            <th class="contenidoF" scope="col">No.</th>
-                            <th class="contenidoF" scope="col"colspan="2" >Descripcion</th>
-                            <th class="contenidoF" scope="col">Sub Total</th>
-                            <th class="contenidoF" scope="col">Impuesto</th>
-                            <th class="contenidoF" scope="col">Monto Total</th>
-                          </tr>
-                        </thead>
-                        <tbody class="bordes2">
-                          <tr *ngFor="let item of DcabeceraN; let i = index">
-                            <td data-label="No." class="contenidoF"> {{ i + 1  }} </td>
-                            <td data-label="Descripcion" colspan="2" class="contenidoF"> {{ item?.TCMTRF }} </td>
-                            <td data-label="Sub Total" class="contenidoF center"> {{ (item?.IVLDCS * -1 ) | number : '1.2-2' }}</td>
-                            <td data-label="Impuesto"  class="contenidoF center">  {{  ( cabeceraN[0]['IVLIGS'] * -1)  | number : '1.2-2' }}</td>
-                            <td data-label="Monto Total" class="contenidoF center"> {{ (cabeceraN[0]['ITTFCS'] * -1)  | number : '1.2-2' }} </td>
-                          </tr>
-                          
-                            <!-- <tr style=" border-collapse: collapse;"  *ngFor="let item of espaciosBlancos "> 
-                                <td class="espacioB"  colspan="6"></td>
-                            </tr> -->
-                            <tr style=" border-collapse: collapse;" > 
-                                <td class="espacioB"  colspan="6"></td>
-                            </tr>
-                            <tr style=" border-collapse: collapse;"> 
-                                <td style="text-align:left !important; font-size: 0.9em !important; " class="espacioB" colspan="3" >
-                                    <span *ngFor="let item of EstrObs2" >
-                                        {{ item?.TOBCTC}}
-                                    </span>
-                                </td>
-                                <td class="espacioB" colspan="3"> </td>
-                            </tr>
-                            
-                            <tr style=" border-collapse: collapse;"> 
-                                <td style="text-align:left !important; font-size: 0.9em !important; " class="espacioB" colspan="3">
-                                    <!-- CIENTO OCHENTA Y NUEVE MIL CUATROCIENTOS NOVENTA Y SEIS CON NOVENTA Y OCHO CENTAVOS -->
-                                    {{ letras }}
-                                </td>
-                                <td class="espacioB" colspan="3"> </td>
-                            </tr>
-<!--                         
-                            <tr style=" border-collapse: collapse;"> 
-                                <td style="font-size: 0.9em !important; " class="espacioB rigth" colspan="3">
-                                    TOTALES
-                                </td>
-                                <td style="font-size: 0.9em !important; " class="espacioB center">
-                                        {{ (DcabeceraN[0]['IVLDCS'] * -1) | number :'1.2-2' }}
-                                </td>
-                                <td style="font-size: 0.9em !important; " class="espacioB center">
-                                        {{ ( cabeceraN[0]['IVLIGS'] * -1)  | number :'1.2-2' }}
-                                </td>
-                                <td style="font-size: 0.9em !important; " class="espacioB center">
-                                    {{ (cabeceraN[0]['ITTFCS'] * -1) | number :'1.2-2' }}
-                            </td>
-                            </tr> -->
-
-
-                        </tbody>
-                        <tfoot>
-                            <tr >
-                                    <!-- Número a letras -->
-                             <th class="rigth" colspan="3" > TOTALES </th>
-                            <th class="espacioB center">  {{ (DcabeceraN[0]['IVLDCS'] ) * -1 | number :'1.2-2' }} </th>
-                            <th class="espacioB center">  {{ ( cabeceraN[0]['IVLIGS'] ) * -1 | number :'1.2-2' }}</th>
-                            <th class="espacioB center">  {{ (cabeceraN[0]['ITTFCS'] )  * -1 | number :'1.2-2' }} </th>
-                            </tr>
-                        </tfoot>  
-                      </table>
-                   </div>
-            </div>
-     
-  <!-- Motivo de Nota de Débito -->
-<div class="col-md-12 container">
-    <p class="black">
-        Motivo de Emisión de la Nota de Crédito: 
-    </p>
-    <section class="example-section ml-4">
-        <mat-checkbox class="example-margin ml-2" [disabled]="disabled" [(ngModel)]="anulacion">Anulación  </mat-checkbox>
-        <mat-checkbox class="example-margin ml-2" [disabled]="disabled" [(ngModel)]="devolcion">Devolución </mat-checkbox>
-        <mat-checkbox class="example-margin ml-2" [disabled]="disabled" [(ngModel)]="descuento">Descuento  </mat-checkbox>
-      </section>
-</div>
-<div class="col-md-12 completo black">
-    <h3 *ngIf="Motivo" class="completo">
-        Otros especifique: <span style="text-decoration: underline; margin-left: 1px;"> {{  Motivo }} </span>
-    </h3>
-    <h3 *ngIf="!Motivo" class="completo">
-        Otros especifique:____________________________________________________________________________
-    </h3>
-</div>
-    
-    <div class="col-md-6" style="font-size: x-small !important;">
-        <p class="black"> 
-           __________________________________________ <br>
-                   <span style="margin-left: 20%;" class="black">    Elaborado por:  </span>
-        </p>
-       </div>
-       
-       <div class="col-md-6 black" style="font-size: x-small !important;">
-               Recibí Conforme: ______________________________________________ <br>
-               Identidad: ____________________________________________________ <br>
-               Firma: _______________________________________________________     
-       </div>
-
-<!-- <div class="col-md-12 container mt-2 black">
-    <label class="center"> ORIGINAL : CLIENTE </label>
-</div> -->
-<div class="col-md-4 container mt-4 black">
-    <label class="center"> DUPLICADO: TRIBUTARIO EMISOR</label>
-</div>
-<!-- <div class="col-md-4 container footL black">
-    <label class="center"> TRIPLICADO: ARCHIVO</label>
-</div> -->
         </div>
-    </mat-card>
-</div>
-
-<div class="container completo mt-4" id="terceraNC" *ngIf="loading && loading1 && permitido">
-    <mat-card class="cardPersonalizada">
-        <div class="row">
-            <div class="col-md-6">
-                <img *ngIf="sede == 1" src="../../../../assets/images/LOGO_RANSA_BN.png" alt="">
-                <img *ngIf="sede == 2" src="../../../../../assets/images/Almahsa_BN.png" alt="">
-                <p class="black">
-                {{ parametros[0]['nombreCompleto']}} <br>
-                {{ parametros[0]['direccion1']}}, Calle: {{ parametros[0]['direccion2'] }} Casa N°: S/N <br>
-                Municipio: {{ parametros[0]['municipio']}}, Departamento: {{ parametros[0]['Departamento']}} <br>
-                Tel: {{ parametros[0]['Telfijo'] }} <br>
-                <span *ngIf="parametros[0]['TelCel']">     Cel   : {{ parametros[0]['TelCel'] }} <br> </span> 
-                <span *ngIf="parametros[0]['rtnEmpresa']"> R.T.N : {{ parametros[0]['rtnEmpresa'] }} </span> 
-                <span *ngIf="parametros[0]['correo']">     Correo: {{ parametros[0]['correo'] }} </span> <br>
-                </p>
-            </div>
-    
-            <div class="col-md-6 mt-4 container">
-                <p class="black">
-                <span class="container">NOTA DE CREDITO </span>
-                <span *ngIf="ruta.snapshot.params['empresa'] == 'RH'" class="container" style="text-align:left  !important; font-size: 1.2em !important;">
-                        <!-- 000-001-01-{{retornarCorrelativo()}} -->
-                        000-001-06-{{retornarCorrelativo()}}            
-                </span>
-                <span *ngIf="ruta.snapshot.params['empresa'] == 'AH'" class="container" style="text-align:left  !important; color:#FE9600 !important; font-size: 1.2em !important;">
-                    <!-- 000-001-01-{{retornarCorrelativo()}} -->
-                    000-002-06-{{retornarCorrelativo()}}            
-            </span>
-                <span class="container">   C.A.I: {{parametrosCai[0]['CAI']}} </span>
-                <span class="container"> RANGO AUTORIZADO </span>
-                <span  class="container"> {{parametrosCai[0]['desde']}} - {{parametrosCai[0]['hasta']}} </span> 
-                 <span class="container">Fecha Limite de Emisión : {{ parametrosCai[0]['fechaLimite'] | date : 'dd/MM/yyyy' }} </span>
-                </p>
-            </div>
-
-             <!-- Detalle de la generación  -->
-             <div class="container">
-                <div class="row contain1">
-                    <div class="col-md-6 containB" style="width: 80% !important;">
-                    <p>
-                    Sr.(a): {{ cabeceraN[0]['TCMPCL'] }} <br>
-                    R.T.N : {{ cabeceraN[0]['NRUC2']}} <br>
-                    Dirección: {{ cabeceraN[0]['TDRCOR'] }} <br>
-                    <!-- CAI del Comprobante:    <br>
-                    NO. Correlativo Comprobante: <br> -->
-                    Fecha de emisión comprobante: {{ dia }}  {{ mes }} {{ anio }} <br>
-                    </p>
-                    </div>
-                <div class="col-md-6 center containB container">
-                <p > Nota de Crédito por L. <span style="font-weight: bold !important;"> {{ (cabeceraN[0]['ITTFCS'] * -1) | number :'1.2-2' }} </span> </p>
-                </div>
-                </div>
-            </div>
-            <!-- Detalle de la generación  -->
-
-            <!-- Comentario de la nota de débito -->
-            <div class="col-md-12">
-                <h4 class="container black"> En esta fecha hemos registrado en su cuenta el valor que indica la presente NOTA DE CREDITO, por el siguiente motivo:  </h4>
-            </div>
-     <div class="tabla">
+     <div class="tabla mb-4">
                 <div class="table-responsive !important" >
                     <table>
                         <thead>
@@ -445,7 +308,7 @@
                                 <td class="espacioB"  colspan="6"></td>
                             </tr>
                             <tr style=" border-collapse: collapse;"> 
-                                <td style="text-align:left !important; font-size: 0.9em !important; " class="espacioB" colspan="3" >
+                                <td style="text-align:left !important;" class="espacioB" colspan="3" >
                                     <span *ngFor="let item of EstrObs2" >
                                         {{ item?.TOBCTC}}
                                     </span>
@@ -456,7 +319,7 @@
                             <tr style=" border-collapse: collapse;"> 
                                 <td style="text-align:left !important; font-size: 0.9em !important; " class="espacioB" colspan="3">
                                     <!-- CIENTO OCHENTA Y NUEVE MIL CUATROCIENTOS NOVENTA Y SEIS CON NOVENTA Y OCHO CENTAVOS -->
-                                    {{ letras }}
+                                    {{ letras | uppercase }}
                                 </td>
                                 <td class="espacioB" colspan="3"> </td>
                             </tr>
@@ -481,10 +344,44 @@
                         <tfoot>
                             <tr >
                                     <!-- Número a letras -->
-                            <th class="rigth" colspan="3" > TOTALES </th>
-                            <th class="espacioB center">  {{ (DcabeceraN[0]['IVLDCS'] ) * -1 | number :'1.2-2' }} </th>
-                            <th class="espacioB center">  {{ ( cabeceraN[0]['IVLIGS'] ) * -1 | number :'1.2-2' }}</th>
-                            <th class="espacioB center">  {{ (cabeceraN[0]['ITTFCS'] )  * -1 | number :'1.2-2' }} </th>
+     <th class="rigth" colspan="3" > TOTALES </th>
+    <th class="espacioB center" *ngIf="( (DcabeceraN[0]['IVLDCS'] ) * -1 ) <= 0 ">                                                        <span  class="letra0">        L. </span> {{ (DcabeceraN[0]['IVLDCS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (DcabeceraN[0]['IVLDCS'] ) * -1 ) >0 && ((DcabeceraN[0]['IVLDCS'] ) * -1 ) <= 99 ">             <span  class="letra0">        L. </span> {{ (DcabeceraN[0]['IVLDCS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (DcabeceraN[0]['IVLDCS'] ) * -1 ) >=100 && ((DcabeceraN[0]['IVLDCS'] ) * -1 ) <= 999  ">         <span  class="letra100">      L. </span> {{ (DcabeceraN[0]['IVLDCS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (DcabeceraN[0]['IVLDCS'] ) * -1 ) >=1000 && ((DcabeceraN[0]['IVLDCS'] ) * -1 ) <= 9999  ">       <span  class="letra1000">     L. </span> {{ (DcabeceraN[0]['IVLDCS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (DcabeceraN[0]['IVLDCS'] ) * -1 ) >=10000 && ((DcabeceraN[0]['IVLDCS'] ) * -1 ) <= 99999">       <span  class="letra10000">    L. </span> {{ (DcabeceraN[0]['IVLDCS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (DcabeceraN[0]['IVLDCS'] ) * -1 ) >=100000 && ((DcabeceraN[0]['IVLDCS'] ) * -1 ) <= 999999  ">   <span  class="letra100000">   L. </span> {{ (DcabeceraN[0]['IVLDCS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (DcabeceraN[0]['IVLDCS'] ) * -1 ) >=1000000 && ((DcabeceraN[0]['IVLDCS'] ) * -1 ) <= 9999999  "> <span  class="letra1000000">  L. </span> {{ (DcabeceraN[0]['IVLDCS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (DcabeceraN[0]['IVLDCS'] ) * -1 ) >= 10000000 ">                                                 <span  class="letra10000000"> L. </span> {{ (DcabeceraN[0]['IVLDCS'] ) * -1 | number :'1.2-2' }} </th>
+
+
+
+    <!-- <th class="espacioB center">  {{ ( cabeceraN[0]['IVLIGS'] ) * -1 | number :'1.2-2' }} </th> -->
+
+    <th class="espacioB center" *ngIf="( (cabeceraN [0]['IVLIGS'] ) * -1 ) <= 0 ">                                                        <span  class="letra0">        L. </span> {{ (cabeceraN [0]['IVLIGS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (cabeceraN [0]['IVLIGS'] ) * -1 ) >0 && ((cabeceraN [0]['IVLIGS'] ) * -1 ) <= 99 ">             <span  class="letra0">        L. </span> {{ (cabeceraN [0]['IVLIGS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (cabeceraN [0]['IVLIGS'] ) * -1 ) >=100 && ((cabeceraN [0]['IVLIGS'] ) * -1 ) <= 999  ">         <span  class="letra100">      L. </span> {{ (cabeceraN [0]['IVLIGS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (cabeceraN [0]['IVLIGS'] ) * -1 ) >=1000 && ((cabeceraN [0]['IVLIGS'] ) * -1 ) <= 9999  ">       <span  class="letra1000">     L. </span> {{ (cabeceraN [0]['IVLIGS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (cabeceraN [0]['IVLIGS'] ) * -1 ) >=10000 && ((cabeceraN [0]['IVLIGS'] ) * -1 ) <= 99999">       <span  class="letra10000">    L. </span> {{ (cabeceraN [0]['IVLIGS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (cabeceraN [0]['IVLIGS'] ) * -1 ) >=100000 && ((cabeceraN [0]['IVLIGS'] ) * -1 ) <= 999999  ">   <span  class="letra100000">   L. </span> {{ (cabeceraN [0]['IVLIGS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (cabeceraN [0]['IVLIGS'] ) * -1 ) >=1000000 && ((cabeceraN [0]['IVLIGS'] ) * -1 ) <= 9999999  "> <span  class="letra1000000">  L. </span> {{ (cabeceraN [0]['IVLIGS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (cabeceraN [0]['IVLIGS'] ) * -1 ) >= 10000000 ">                                                 <span  class="letra10000000"> L. </span> {{ (cabeceraN [0]['IVLIGS'] ) * -1 | number :'1.2-2' }} </th>
+
+
+
+    <!-- <th class="espacioB center">  {{ (cabeceraN[0]['ITTFCS'] )  * -1 | number :'1.2-2' }} </th> -->
+
+    <th class="espacioB center" *ngIf="( (cabeceraN [0]['ITTFCS'] ) * -1 ) <= 0 ">                                                        <span  class="letra0">        L. </span> {{ (cabeceraN [0]['ITTFCS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (cabeceraN [0]['ITTFCS'] ) * -1 ) >0 && ((cabeceraN [0]['ITTFCS'] ) * -1 ) <= 99 ">             <span  class="letra0">        L. </span> {{ (cabeceraN [0]['ITTFCS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (cabeceraN [0]['ITTFCS'] ) * -1 ) >=100 && ((cabeceraN [0]['ITTFCS'] ) * -1 ) <= 999  ">         <span  class="letra100">      L. </span> {{ (cabeceraN [0]['ITTFCS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (cabeceraN [0]['ITTFCS'] ) * -1 ) >=1000 && ((cabeceraN [0]['ITTFCS'] ) * -1 ) <= 9999  ">       <span  class="letra1000">     L. </span> {{ (cabeceraN [0]['ITTFCS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (cabeceraN [0]['ITTFCS'] ) * -1 ) >=10000 && ((cabeceraN [0]['ITTFCS'] ) * -1 ) <= 99999">       <span  class="letra10000">    L. </span> {{ (cabeceraN [0]['ITTFCS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (cabeceraN [0]['ITTFCS'] ) * -1 ) >=100000 && ((cabeceraN [0]['ITTFCS'] ) * -1 ) <= 999999  ">   <span  class="letra100000">   L. </span> {{ (cabeceraN [0]['ITTFCS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (cabeceraN [0]['ITTFCS'] ) * -1 ) >=1000000 && ((cabeceraN [0]['ITTFCS'] ) * -1 ) <= 9999999  "> <span  class="letra1000000">  L. </span> {{ (cabeceraN [0]['ITTFCS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (cabeceraN [0]['ITTFCS'] ) * -1 ) >= 10000000 ">                                                 <span  class="letra10000000"> L. </span> {{ (cabeceraN [0]['ITTFCS'] ) * -1 | number :'1.2-2' }} </th>
+
+
+
                             </tr>
                        
     
@@ -493,49 +390,273 @@
                    </div>
             </div>
      
-  <!-- Motivo de Nota de Débito -->
+  <!-- Motivo de Nota de Crédito -->
 <div class="col-md-12 container">
-    <p class="black">
+    <p class="black empresa">
         Motivo de Emisión de la Nota de Crédito: 
     </p>
     <section class="example-section ml-4">
-        <mat-checkbox class="example-margin ml-2" [disabled]="disabled" [(ngModel)]="anulacion">Anulación  </mat-checkbox>
-        <mat-checkbox class="example-margin ml-2" [disabled]="disabled" [(ngModel)]="devolcion">Devolución </mat-checkbox>
-        <mat-checkbox class="example-margin ml-2" [disabled]="disabled" [(ngModel)]="descuento">Descuento  </mat-checkbox>
+        <mat-checkbox class="example-margin ml-2 empresa" [disabled]="disabled" [(ngModel)]="anulacion"><span>Anulación</span>  </mat-checkbox>
+        <mat-checkbox class="example-margin ml-2 empresa" [disabled]="disabled" [(ngModel)]="devolcion"><span>Devolución</span> </mat-checkbox>
+        <mat-checkbox class="example-margin ml-2 empresa" [disabled]="disabled" [(ngModel)]="descuento"><span>Descuento</span>  </mat-checkbox>
       </section>
 </div>
-
-<div class="col-md-12 completo black">
-    <h3 *ngIf="Motivo" class="completo">
+<div class="col-md-12 mt-4 completo black">
+    <h3 *ngIf="Motivo" class="completo empresa">
         Otros especifique: <span style="text-decoration: underline; margin-left: 1px;"> {{  Motivo }} </span>
     </h3>
-    <h3 *ngIf="!Motivo" class="completo">
+    <h3 *ngIf="!Motivo" class="completo empresa">
         Otros especifique:____________________________________________________________________________
     </h3>
     </div>
-    
-    <div class="col-md-6" style="font-size: x-small !important;">
-        <p class="black"> 
+
+<div class="row">
+    <div class="col-md-6 mt-4 mb-4 empresa" >
+        <p class="black "> 
            __________________________________________ <br>
-                   <span style="margin-left: 20%;" class="black">    Elaborado por:  </span>
+                   <span style="margin-left: 22%;" class="black ">    Elaborado por:  </span>
         </p>
        </div>
        
-       <div class="col-md-6 black" style="font-size: x-small !important;">
-               Recibí Conforme: ______________________________________________ <br>
-               Identidad: ____________________________________________________ <br>
-               Firma: _______________________________________________________     
+       <div class="col-md-6 black empresa mt-4 mb-4 empresa" >
+               Recibí Conforme: ______________________________________ <br>
+               Identidad: ____________________________________________ <br>
+               Firma: _______________________________________________     
        </div>
-<!-- <div class="col-md-12 container mt-2 black">
-    <label class="center"> ORIGINAL : CLIENTE </label>
-</div> -->
-<!-- <div class="col-md-4 container mt-2 black">
+    
+    <div class="col-md-12 container " style="color: black !important;">
+        <!-- <label class="center"> ORIGINAL : CLIENTE </label> -->
+    <label class="center"> DUPLICADO: TRIBUTARIO EMISOR</label>
+    </div>
+</div>
+<!-- <div class="col-md-4 container footL">
     <label class="center"> DUPLICADO: TRIBUTARIO EMISOR</label>
 </div> -->
-<div class="col-md-4 container mt-4 black">
+<!-- <div class="col-md-4 container footL">
     <label class="center"> TRIPLICADO: ARCHIVO</label>
+</div> -->
+      
+    </mat-card>
 </div>
+
+<div class="container completo mt-4" id="terceraNC" *ngIf="loading && loading1 && permitido">
+    <mat-card class="cardPersonalizada">
+        <div class="row">
+            <div class="col-md-6">
+                <img *ngIf="sede == 1" src="../../../../assets/images/LOGO_RANSA_BN.png" alt="">
+                <img *ngIf="sede == 2" src="../../../../../assets/images/Almahsa_BN.png" alt="">
+                <p class="black empresa">
+                <span class="nombre"> {{ parametros[0]['nombreCompleto']}} </span> <br>
+                {{ parametros[0]['direccion1']}}, Calle: {{ parametros[0]['direccion2'] }}  <br>
+                <!-- Casa N°: S/N -->
+                Municipio: {{ parametros[0]['municipio']}}, Departamento: {{ parametros[0]['Departamento']}} <br>
+                Tel: {{ parametros[0]['Telfijo'] }} <br>
+                <span *ngIf="parametros[0]['TelCel']">     Cel   : {{ parametros[0]['TelCel'] }} <br> </span> 
+                <span *ngIf="parametros[0]['rtnEmpresa']"> R.T.N : {{ parametros[0]['rtnEmpresa'] }} </span> 
+                <span *ngIf="parametros[0]['correo']">     Correo: {{ parametros[0]['correo'] }} </span> 
+                </p>
+            </div>
+    
+            <div class="col-md-6 mt-4 rigth">
+                <p class="black">
+                <span class="rigth factura">NOTA DE CREDITO </span> <br>
+                <span *ngIf="ruta.snapshot.params['empresa'] == 'RH'" class="rigth factura">
+                        <!-- 000-001-01-{{retornarCorrelativo()}} -->
+                        000-001-06-{{retornarCorrelativo()}}            
+                </span> <br>
+                <span *ngIf="ruta.snapshot.params['empresa'] == 'AH'" class="rigth factura">
+                    <!-- 000-001-01-{{retornarCorrelativo()}} -->
+                    000-002-06-{{retornarCorrelativo()}}            
+            </span>  <br>
+                <span  class="rigth empresa">  C.A.I: {{parametrosCai[0]['CAI']}} </span> <br>
+                <span style="font-size: 1.1em !important; font-weight:  bold !important;"> Rango Autorizado: </span> <br>
+                <span  class="rigth empresa"> {{parametrosCai[0]['desde']}} - {{parametrosCai[0]['hasta']}} </span> <br>
+                <span style="font-size: 1.1em !important; font-weight:  bold !important;">Fecha Limite De Emisión: {{ parametrosCai[0]['fechaLimite'] | date: 'dd/MM/yyyy'}} </span> <br>
+                 <!-- <span class="rigth empresa"> Fecha Limite de Emisión : {{ parametrosCai[0]['fechaLimite'] | date : 'dd/MM/yyyy' }} </span> -->
+                </p>
+            </div>
+
+            <!-- Detalle de la generación  -->
+            <div class="container">
+                <div class="row contain1">
+                    <div class="col-md-6 containB" style="width: 80% !important;">
+                    <p class="empresa">
+                    Sr.(a): {{ cabeceraN[0]['TCMPCL'] }} <br>
+                    R.T.N : {{ cabeceraN[0]['NRUC2']}} <br>
+                    Dirección: {{ cabeceraN[0]['TDRCOR'] }} <br>
+                    <!-- CAI del Comprobante:    <br>
+                    NO. Correlativo Comprobante: <br> -->
+                    Fecha de emisión comprobante: {{ dia }}  {{ mes }} {{ anio }} <br>
+                    </p>
+                    </div>
+                <div class="col-md-6 center containB container2">
+                <p class="empresa"> Nota de Crédito por L. <span style="font-weight: bold !important;"> {{ (cabeceraN[0]['ITTFCS'] * -1) | number :'1.2-2' }} </span> </p>
+                </div>
+                </div>
+            </div>
+            <!-- Detalle de la generación  -->
+
+            <!-- Comentario de la nota de débito -->
+            <div class="col-md-12">
+                <h4 class="container completo empresa black"> En esta fecha hemos registrado en su cuenta el valor que indica la presente NOTA DE CREDITO, por el siguiente motivo:  </h4>
+            </div>
         </div>
+     <div class="tabla mb-4">
+                <div class="table-responsive !important" >
+                    <table>
+                        <thead>
+                          <tr>
+                            <th class="contenidoF" scope="col">No.</th>
+                            <th class="contenidoF" scope="col"colspan="2" >Descripcion</th>
+                            <th class="contenidoF" scope="col">Sub Total</th>
+                            <th class="contenidoF" scope="col">Impuesto</th>
+                            <th class="contenidoF" scope="col">Monto Total</th>
+                          </tr>
+                        </thead>
+                        <tbody class="bordes2">
+                          <tr *ngFor="let item of DcabeceraN; let i = index">
+                            <td data-label="No." class="contenidoF"> {{ i + 1  }} </td>
+                            <td data-label="Descripcion" colspan="2" class="contenidoF"> {{ item?.TCMTRF }} </td>
+                            <td data-label="Sub Total" class="contenidoF center"> {{ (item?.IVLDCS * -1 ) | number : '1.2-2' }}</td>
+                            <td data-label="Impuesto"  class="contenidoF center">  {{  ( cabeceraN[0]['IVLIGS'] * -1)  | number : '1.2-2' }}</td>
+                            <td data-label="Monto Total" class="contenidoF center"> {{ (cabeceraN[0]['ITTFCS'] * -1)  | number : '1.2-2' }} </td>
+                          </tr>
+                          
+                            <!-- <tr style=" border-collapse: collapse;"  *ngFor="let item of espaciosBlancos "> 
+                                <td class="espacioB"  colspan="6"></td>
+                            </tr> -->
+                            <tr style=" border-collapse: collapse;" > 
+                                <td class="espacioB"  colspan="6"></td>
+                            </tr>
+                            <tr style=" border-collapse: collapse;"> 
+                                <td style="text-align:left !important;" class="espacioB" colspan="3" >
+                                    <span *ngFor="let item of EstrObs2" >
+                                        {{ item?.TOBCTC}}
+                                    </span>
+                                </td>
+                                <td class="espacioB" colspan="3"> </td>
+                            </tr>
+                            
+                            <tr style=" border-collapse: collapse;"> 
+                                <td style="text-align:left !important; font-size: 0.9em !important; " class="espacioB" colspan="3">
+                                    <!-- CIENTO OCHENTA Y NUEVE MIL CUATROCIENTOS NOVENTA Y SEIS CON NOVENTA Y OCHO CENTAVOS -->
+                                    {{ letras | uppercase }}
+                                </td>
+                                <td class="espacioB" colspan="3"> </td>
+                            </tr>
+                        
+                            <!-- <tr style=" border-collapse: collapse;"> 
+                                <td style="font-size: 0.9em !important; " class="espacioB rigth" colspan="3">
+                                    TOTALES
+                                </td>
+                                <td style="font-size: 0.9em !important; " class="espacioB center">
+                                        {{ (DcabeceraN[0]['IVLDCS'] * -1) | number :'1.2-2' }}
+                                </td>
+                                <td style="font-size: 0.9em !important; " class="espacioB center">
+                                        {{ ( cabeceraN[0]['IVLIGS'] * -1)  | number :'1.2-2' }}
+                                </td>
+                                <td style="font-size: 0.9em !important; " class="espacioB center">
+                                    {{ (cabeceraN[0]['ITTFCS'] * -1) | number :'1.2-2' }}
+                            </td>
+                            </tr> -->
+
+
+                        </tbody>
+                        <tfoot>
+                            <tr >
+                                    <!-- Número a letras -->
+     <th class="rigth" colspan="3" > TOTALES </th>
+    <th class="espacioB center" *ngIf="( (DcabeceraN[0]['IVLDCS'] ) * -1 ) <= 0 ">                                                        <span  class="letra0">        L </span> {{ (DcabeceraN[0]['IVLDCS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (DcabeceraN[0]['IVLDCS'] ) * -1 ) >0 && ((DcabeceraN[0]['IVLDCS'] ) * -1 ) <= 99 ">             <span  class="letra0">        L </span> {{ (DcabeceraN[0]['IVLDCS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (DcabeceraN[0]['IVLDCS'] ) * -1 ) >=100 && ((DcabeceraN[0]['IVLDCS'] ) * -1 ) <= 999  ">         <span  class="letra100">      L </span> {{ (DcabeceraN[0]['IVLDCS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (DcabeceraN[0]['IVLDCS'] ) * -1 ) >=1000 && ((DcabeceraN[0]['IVLDCS'] ) * -1 ) <= 9999  ">       <span  class="letra1000">     L </span> {{ (DcabeceraN[0]['IVLDCS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (DcabeceraN[0]['IVLDCS'] ) * -1 ) >=10000 && ((DcabeceraN[0]['IVLDCS'] ) * -1 ) <= 99999">       <span  class="letra10000">    L </span> {{ (DcabeceraN[0]['IVLDCS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (DcabeceraN[0]['IVLDCS'] ) * -1 ) >=100000 && ((DcabeceraN[0]['IVLDCS'] ) * -1 ) <= 999999  ">   <span  class="letra100000">   L </span> {{ (DcabeceraN[0]['IVLDCS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (DcabeceraN[0]['IVLDCS'] ) * -1 ) >=1000000 && ((DcabeceraN[0]['IVLDCS'] ) * -1 ) <= 9999999  "> <span  class="letra1000000">  L </span> {{ (DcabeceraN[0]['IVLDCS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (DcabeceraN[0]['IVLDCS'] ) * -1 ) >= 10000000 ">                                                 <span  class="letra10000000"> L </span> {{ (DcabeceraN[0]['IVLDCS'] ) * -1 | number :'1.2-2' }} </th>
+
+
+
+    <!-- <th class="espacioB center">  {{ ( cabeceraN[0]['IVLIGS'] ) * -1 | number :'1.2-2' }} </th> -->
+
+    <th class="espacioB center" *ngIf="( (cabeceraN [0]['IVLIGS'] ) * -1 ) <= 0 ">                                                        <span  class="letra0">        L </span> {{ (cabeceraN [0]['IVLIGS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (cabeceraN [0]['IVLIGS'] ) * -1 ) >0 && ((cabeceraN [0]['IVLIGS'] ) * -1 ) <= 99 ">             <span  class="letra0">        L </span> {{ (cabeceraN [0]['IVLIGS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (cabeceraN [0]['IVLIGS'] ) * -1 ) >=100 && ((cabeceraN [0]['IVLIGS'] ) * -1 ) <= 999  ">         <span  class="letra100">      L </span> {{ (cabeceraN [0]['IVLIGS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (cabeceraN [0]['IVLIGS'] ) * -1 ) >=1000 && ((cabeceraN [0]['IVLIGS'] ) * -1 ) <= 9999  ">       <span  class="letra1000">     L </span> {{ (cabeceraN [0]['IVLIGS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (cabeceraN [0]['IVLIGS'] ) * -1 ) >=10000 && ((cabeceraN [0]['IVLIGS'] ) * -1 ) <= 99999">       <span  class="letra10000">    L </span> {{ (cabeceraN [0]['IVLIGS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (cabeceraN [0]['IVLIGS'] ) * -1 ) >=100000 && ((cabeceraN [0]['IVLIGS'] ) * -1 ) <= 999999  ">   <span  class="letra100000">   L </span> {{ (cabeceraN [0]['IVLIGS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (cabeceraN [0]['IVLIGS'] ) * -1 ) >=1000000 && ((cabeceraN [0]['IVLIGS'] ) * -1 ) <= 9999999  "> <span  class="letra1000000">  L </span> {{ (cabeceraN [0]['IVLIGS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (cabeceraN [0]['IVLIGS'] ) * -1 ) >= 10000000 ">                                                 <span  class="letra10000000"> L </span> {{ (cabeceraN [0]['IVLIGS'] ) * -1 | number :'1.2-2' }} </th>
+
+
+
+    <!-- <th class="espacioB center">  {{ (cabeceraN[0]['ITTFCS'] )  * -1 | number :'1.2-2' }} </th> -->
+
+    <th class="espacioB center" *ngIf="( (cabeceraN [0]['ITTFCS'] ) * -1 ) <= 0 ">                                                        <span  class="letra0">        L </span> {{ (cabeceraN [0]['ITTFCS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (cabeceraN [0]['ITTFCS'] ) * -1 ) >0 && ((cabeceraN [0]['ITTFCS'] ) * -1 ) <= 99 ">             <span  class="letra0">        L </span> {{ (cabeceraN [0]['ITTFCS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (cabeceraN [0]['ITTFCS'] ) * -1 ) >=100 && ((cabeceraN [0]['ITTFCS'] ) * -1 ) <= 999  ">         <span  class="letra100">      L </span> {{ (cabeceraN [0]['ITTFCS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (cabeceraN [0]['ITTFCS'] ) * -1 ) >=1000 && ((cabeceraN [0]['ITTFCS'] ) * -1 ) <= 9999  ">       <span  class="letra1000">     L </span> {{ (cabeceraN [0]['ITTFCS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (cabeceraN [0]['ITTFCS'] ) * -1 ) >=10000 && ((cabeceraN [0]['ITTFCS'] ) * -1 ) <= 99999">       <span  class="letra10000">    L </span> {{ (cabeceraN [0]['ITTFCS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (cabeceraN [0]['ITTFCS'] ) * -1 ) >=100000 && ((cabeceraN [0]['ITTFCS'] ) * -1 ) <= 999999  ">   <span  class="letra100000">   L </span> {{ (cabeceraN [0]['ITTFCS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (cabeceraN [0]['ITTFCS'] ) * -1 ) >=1000000 && ((cabeceraN [0]['ITTFCS'] ) * -1 ) <= 9999999  "> <span  class="letra1000000">  L </span> {{ (cabeceraN [0]['ITTFCS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB center" *ngIf="( (cabeceraN [0]['ITTFCS'] ) * -1 ) >= 10000000 ">                                                 <span  class="letra10000000"> L </span> {{ (cabeceraN [0]['ITTFCS'] ) * -1 | number :'1.2-2' }} </th>
+
+
+
+                            </tr>
+                       
+    
+                        </tfoot>  
+                      </table>
+                   </div>
+            </div>
+     
+  <!-- Motivo de Nota de Crédito -->
+<div class="col-md-12 container">
+    <p class="black empresa">
+        Motivo de Emisión de la Nota de Crédito: 
+    </p>
+    <section class="example-section ml-4">
+        <mat-checkbox class="example-margin ml-2 empresa" [disabled]="disabled" [(ngModel)]="anulacion"><span>Anulación</span>  </mat-checkbox>
+        <mat-checkbox class="example-margin ml-2 empresa" [disabled]="disabled" [(ngModel)]="devolcion"><span>Devolución</span> </mat-checkbox>
+        <mat-checkbox class="example-margin ml-2 empresa" [disabled]="disabled" [(ngModel)]="descuento"><span>Descuento</span>  </mat-checkbox>
+      </section>
+</div>
+<div class="col-md-12 mt-4 completo black">
+    <h3 *ngIf="Motivo" class="completo empresa">
+        Otros especifique: <span style="text-decoration: underline; margin-left: 1px;"> {{  Motivo }} </span>
+    </h3>
+    <h3 *ngIf="!Motivo" class="completo empresa">
+        Otros especifique:____________________________________________________________________________
+    </h3>
+    </div>
+
+<div class="row">
+    <div class="col-md-6 mt-4 mb-4 empresa" >
+        <p class="black "> 
+           __________________________________________ <br>
+                   <span style="margin-left: 22%;" class="black ">    Elaborado por:  </span>
+        </p>
+       </div>
+       
+       <div class="col-md-6 black empresa mt-4 mb-4 empresa" >
+               Recibí Conforme: ______________________________________ <br>
+               Identidad: ____________________________________________ <br>
+               Firma: _______________________________________________     
+       </div>
+    
+    <div class="col-md-12 container " style="color: black !important;">
+        <!-- <label class="center"> ORIGINAL : CLIENTE </label> -->
+      <label class="center"> TRIPLICADO: ARCHIVO</label>
+    </div>
+</div>
+<!-- <div class="col-md-4 container footL">
+    <label class="center"> DUPLICADO: TRIBUTARIO EMISOR</label>
+</div> -->
+<!-- <div class="col-md-4 container footL">
+    <label class="center"> TRIPLICADO: ARCHIVO</label>
+</div> -->
+      
     </mat-card>
 </div>
 

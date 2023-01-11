@@ -1,10 +1,28 @@
 .completo{
     font-size: small !important;
+
+	.correlativo{
+		color:#FE9600 !important;
+	}
+
+	
+	.factura{
+		font-size: 1.4em !important;
+	}
+
+}
+
+
+.empresa{
+	font-size: 1.1em !important;
+	.label{
+	font-size: 1.9em !important;
+	}
 }
 
 
 .cardPersonalizada{
-    width:  23cm;
+    width:  27cm;
     height: auto ;
     box-shadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2), 0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12);
 }
@@ -104,29 +122,29 @@ table{
 	tbody{
 		// font-weight: bold;
 		font-family: Arial, Helvetica, sans-serif;
-		font-size: 0.9em !important;
+		font-size: 1em !important;
 		tr{
 			font-family: Arial, Helvetica, sans-serif;
-			font-size: 0.9em !important;
+			font-size: 1em !important;
 		}
 		td{
 			background-color: #ffffff !important;
 			color: #050404 !important;
 			font-family: Arial, Helvetica, sans-serif;
-			font-size: 0.9em !important;
+			font-size: 1em !important;
 		}
 	}
 	
   }
   
   table caption {
-	font-size: 1.5em;
+	font-size: 1em;
 	// margin: .5em 0 .75em;
   }
   
   table tr {
 	background-color: #ffffff;
-	font-size: 0.9em !important;
+	font-size: 1em !important;
 	// padding: .35em;
   }
   
@@ -134,7 +152,7 @@ table{
 	background-color: #ffffff ;
 	color: #050404;
 	border : 0.01px solid #bcb9b9 !important;
-	font-size: 0.9em !important;
+	font-size: 1em !important;
 	font: bold;
 	// padding: .625em;
 	text-align: center;
@@ -143,7 +161,7 @@ table{
   table td {
 	// padding: .625em;
 	text-align: center;
-	font-size: 0.9em !important;
+	font-size: 1em !important;
   }
   
   .trHover:hover {
@@ -153,11 +171,84 @@ table{
   }
   
   table th {
-	font-size: .85em;
-	// letter-spacing: .1em;
+	font-size: 1m;
+	letter-spacing: .1em;
 	text-transform: uppercase;
   }
 
-
+  .container2{
+    // max-width: 1024px;
+    // width: 100%;
+    // height: 100%;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
 /* Modificando clases padres*/
 
+
+
+
+	.letra0{
+		position: relative;
+		font-size: 1.1em !important;
+		z-index:3;
+		right: 3.6em !important;
+
+	}
+	.letra100{
+		position: relative;
+		font-size: 1.1em !important;
+		z-index:3;
+		right: 2.8em !important;
+	}
+
+	.letra1000{
+		position: relative;
+		font-size: 1.1em !important;
+		z-index:3;
+		right: 2.4em !important;
+	}
+
+	.letra10000{
+		position: relative;
+		font-size: 1.1em !important;
+		z-index:3;
+		right: 2.2em !important;
+	}
+
+	.letra100000{
+		position: relative;
+		font-size: 1.1em !important;
+		z-index:3;
+		right: 1.9em !important;
+	}
+
+	.letra1000000{
+		position: relative;
+		font-size: 1.1em !important;
+		z-index:3;
+		right: 1.6em !important;
+	}
+
+	.letra10000000{
+		position: relative;
+		font-size: 1.1em !important;
+		z-index:3;
+		right: 1em !important;
+	}
+
+	.nombre{
+		font-size: 1.4em !important;
+		}
+
+
+		.correlativo{
+			color:#FE9600 !important;
+		}
+	
+		
+		.factura{
+			font-size: 1.4em !important;
+		}
+	
