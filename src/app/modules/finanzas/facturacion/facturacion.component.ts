@@ -78,7 +78,7 @@ llenarDataManual(){
    total       : String(  this.form.value.cantidad  * this.form.value.punitario ),
   })
 
-  for(let j=0; j<(15-this.detalleServicios.length); j++){
+  for(let j=0; j<(10-this.detalleServicios.length); j++){
     this.espaciosBlancos2.push(j)
 }
   this.form.reset()

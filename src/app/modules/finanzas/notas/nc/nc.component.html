@@ -2,8 +2,8 @@
     <mat-card class="cardPersonalizada">
         <div class="row">
             <div class="col-md-6">
-                <img *ngIf="sede == 1" src="../../../../assets/images/logoRansa.ico" alt="">
-                <img *ngIf="sede == 2" src="../../../../../assets/images/Almahsa.png" alt="">
+                <img *ngIf="sede == 1" src="../../../../assets/images/logoRansa.ico"  class="img" alt="">
+                <img *ngIf="sede == 2" src="../../../../../assets/images/Almahsa.png" class="img" alt="">
                 <p class="black empresa">
                 <span class="nombre"> {{ parametros[0]['nombreCompleto']}} </span> <br>
                 {{ parametros[0]['direccion1']}}, Calle: {{ parametros[0]['direccion2'] }}  <br>
@@ -36,20 +36,24 @@
             </div>
 
             <!-- Detalle de la generación  -->
-            <div class="container">
+            <div class="container mt-4">
                 <div class="row contain1">
                     <div class="col-md-6 containB" style="width: 80% !important;">
                     <p class="empresa">
                     Sr.(a): {{ cabeceraN[0]['TCMPCL'] }} <br>
-                    R.T.N : {{ cabeceraN[0]['NRUC2']}} <br>
                     Dirección: {{ cabeceraN[0]['TDRCOR'] }} <br>
-                    <!-- CAI del Comprobante:    <br>
-                    NO. Correlativo Comprobante: <br> -->
-                    Fecha de emisión comprobante: {{ dia }}  {{ mes }} {{ anio }} <br>
+             
                     </p>
                     </div>
-                <div class="col-md-6 center containB container2">
-                <p class="empresa"> Nota de Crédito por L. <span style="font-weight: bold !important;"> {{ (cabeceraN[0]['ITTFCS'] * -1) | number :'1.2-2' }} </span> </p>
+                <div class="col-md-6 rigth containB">
+                     <!-- <p class="empresa"> Nota de Crédito por L. <span style="font-weight: bold !important;"> {{ (cabeceraN[0]['ITTFCS'] * -1) | number :'1.2-2' }} </span> </p> -->
+                    <p class="empresa">
+                    R.T.N : {{ cabeceraN[0]['NRUC2']}} <br>
+                    Fecha de emisión comprobante: {{ dia }}  {{ mes }} {{ anio }} <br>
+                        <!-- CAI del Comprobante:    <br>
+                        NO. Correlativo Comprobante: <br> -->
+                    </p>
+
                 </div>
                 </div>
             </div>
@@ -60,6 +64,7 @@
                 <h4 class="container completo empresa black"> En esta fecha hemos registrado en su cuenta el valor que indica la presente NOTA DE CREDITO, por el siguiente motivo:  </h4>
             </div>
         </div>
+        
      <div class="tabla mb-4">
                 <div class="table-responsive !important" >
                     <table>
@@ -222,8 +227,8 @@
     <mat-card class="cardPersonalizada">
         <div class="row">
             <div class="col-md-6">
-                <img *ngIf="sede == 1" src="../../../../assets/images/LOGO_RANSA_BN.png" alt="">
-                <img *ngIf="sede == 2" src="../../../../../assets/images/Almahsa_BN.png" alt="">
+                <img *ngIf="sede == 1" src="../../../../assets/images/LOGO_RANSA_BN.png" class="img"  alt="">
+                <img *ngIf="sede == 2" src="../../../../../assets/images/Almahsa_BN.png" class="img"  alt="">
                 <p class="black empresa">
                 <span class="nombre"> {{ parametros[0]['nombreCompleto']}} </span> <br>
                 {{ parametros[0]['direccion1']}}, Calle: {{ parametros[0]['direccion2'] }}  <br>
@@ -256,20 +261,24 @@
             </div>
 
             <!-- Detalle de la generación  -->
-            <div class="container">
+            <div class="container mt-4">
                 <div class="row contain1">
                     <div class="col-md-6 containB" style="width: 80% !important;">
                     <p class="empresa">
                     Sr.(a): {{ cabeceraN[0]['TCMPCL'] }} <br>
-                    R.T.N : {{ cabeceraN[0]['NRUC2']}} <br>
                     Dirección: {{ cabeceraN[0]['TDRCOR'] }} <br>
-                    <!-- CAI del Comprobante:    <br>
-                    NO. Correlativo Comprobante: <br> -->
-                    Fecha de emisión comprobante: {{ dia }}  {{ mes }} {{ anio }} <br>
+             
                     </p>
                     </div>
-                <div class="col-md-6 center containB container2">
-                <p class="empresa"> Nota de Crédito por L. <span style="font-weight: bold !important;"> {{ (cabeceraN[0]['ITTFCS'] * -1) | number :'1.2-2' }} </span> </p>
+                <div class="col-md-6 rigth containB">
+                     <!-- <p class="empresa"> Nota de Crédito por L. <span style="font-weight: bold !important;"> {{ (cabeceraN[0]['ITTFCS'] * -1) | number :'1.2-2' }} </span> </p> -->
+                    <p class="empresa">
+                    R.T.N : {{ cabeceraN[0]['NRUC2']}} <br>
+                    Fecha de emisión comprobante: {{ dia }}  {{ mes }} {{ anio }} <br>
+                        <!-- CAI del Comprobante:    <br>
+                        NO. Correlativo Comprobante: <br> -->
+                    </p>
+
                 </div>
                 </div>
             </div>
@@ -443,8 +452,8 @@
     <mat-card class="cardPersonalizada">
         <div class="row">
             <div class="col-md-6">
-                <img *ngIf="sede == 1" src="../../../../assets/images/LOGO_RANSA_BN.png" alt="">
-                <img *ngIf="sede == 2" src="../../../../../assets/images/Almahsa_BN.png" alt="">
+                <img *ngIf="sede == 1" src="../../../../assets/images/LOGO_RANSA_BN.png" class="img"  alt="">
+                <img *ngIf="sede == 2" src="../../../../../assets/images/Almahsa_BN.png" class="img"  alt="">
                 <p class="black empresa">
                 <span class="nombre"> {{ parametros[0]['nombreCompleto']}} </span> <br>
                 {{ parametros[0]['direccion1']}}, Calle: {{ parametros[0]['direccion2'] }}  <br>
@@ -477,20 +486,24 @@
             </div>
 
             <!-- Detalle de la generación  -->
-            <div class="container">
+            <div class="container mt-4">
                 <div class="row contain1">
                     <div class="col-md-6 containB" style="width: 80% !important;">
                     <p class="empresa">
                     Sr.(a): {{ cabeceraN[0]['TCMPCL'] }} <br>
-                    R.T.N : {{ cabeceraN[0]['NRUC2']}} <br>
                     Dirección: {{ cabeceraN[0]['TDRCOR'] }} <br>
-                    <!-- CAI del Comprobante:    <br>
-                    NO. Correlativo Comprobante: <br> -->
-                    Fecha de emisión comprobante: {{ dia }}  {{ mes }} {{ anio }} <br>
+             
                     </p>
                     </div>
-                <div class="col-md-6 center containB container2">
-                <p class="empresa"> Nota de Crédito por L. <span style="font-weight: bold !important;"> {{ (cabeceraN[0]['ITTFCS'] * -1) | number :'1.2-2' }} </span> </p>
+                <div class="col-md-6 rigth containB">
+                     <!-- <p class="empresa"> Nota de Crédito por L. <span style="font-weight: bold !important;"> {{ (cabeceraN[0]['ITTFCS'] * -1) | number :'1.2-2' }} </span> </p> -->
+                    <p class="empresa">
+                    R.T.N : {{ cabeceraN[0]['NRUC2']}} <br>
+                    Fecha de emisión comprobante: {{ dia }}  {{ mes }} {{ anio }} <br>
+                        <!-- CAI del Comprobante:    <br>
+                        NO. Correlativo Comprobante: <br> -->
+                    </p>
+
                 </div>
                 </div>
             </div>

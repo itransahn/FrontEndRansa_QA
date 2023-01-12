@@ -1,5 +1,5 @@
 .completo{
-    font-size: small !important;
+    font-size: small;
 
 	.correlativo{
 		color:#FE9600 !important;
@@ -7,7 +7,7 @@
 
 	
 	.factura{
-		font-size: 1.4em !important;
+		font-size: 1.5em !important;
 	}
 
 }
@@ -188,14 +188,13 @@ table{
 
 
 
+.letra0{
+	position: relative;
+	font-size: 1.1em !important;
+	z-index:3;
+	right: 3.6em !important;
 
-	.letra0{
-		position: relative;
-		font-size: 1.1em !important;
-		z-index:3;
-		right: 3.6em !important;
-
-	}
+}
 	.letra100{
 		position: relative;
 		font-size: 1.1em !important;
@@ -249,6 +248,10 @@ table{
 	
 		
 		.factura{
-			font-size: 1.4em !important;
+			font-size: 1.5em !important;
 		}
 	
+		.img{
+			width:  200px !important;
+			height: 70px !important;
+		}

@@ -85,7 +85,7 @@ impuesto   : new FormControl('', [ Validators.required]),
      total       : String(  this.form.value.cantidad  * this.form.value.punitario ),
     })
   
-    for(let j=0; j<(15-this.detalleServicios.length); j++){
+    for(let j=0; j<(10-this.detalleServicios.length); j++){
       this.espaciosBlancos2.push(j)
   }
     this.form.reset()
@@ -264,7 +264,7 @@ this.loading1 = true;
     for(let j=0; j<(15-this.DcabeceraF.length); j++){
         this.espaciosBlancos.push(j)
     }
-    // console.log(this.DcabeceraF)
+    // console.log(this.espaciosBlancos)
     this.DcabeceraF =  this.descomponerArray(this.DcabeceraF);
     this.loading2 = true;
     // console.log(this.DcabeceraF)

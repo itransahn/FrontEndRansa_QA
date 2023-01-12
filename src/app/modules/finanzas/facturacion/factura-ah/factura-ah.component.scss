@@ -9,7 +9,7 @@
 }
 
 .factura{
-	font-size: 1.4em !important;
+	font-size: 1.3em !important;
 }
 
 *{
@@ -25,7 +25,7 @@
 	}
 
 	.factura{
-		font-size: 1.5em !important;
+		font-size: 1.3em !important;
 	}
 
 }
@@ -103,7 +103,27 @@ div, span{
 
 .right{ text-align: right !important; } 
 
-.center{    text-align: center !important; }
+
+.center{   
+	text-align: center !important;
+}
+
+.center2{   
+	 text-align: center !important; 
+	 background-color: red !important;
+			 .letra{
+	text-align: left !important;
+	position: fixed !important;
+	// z-index: 2;
+	align-items: flex-start !important;
+	// margin-right: 80% !important;
+
+}
+
+.numeros{
+text-align: right !important;
+}
+}
 /* Alineacion */
 
 .leftC{
@@ -270,7 +290,8 @@ table {
 
 .herencia{
 
-	
+	/* Manejo de espacios para los valores decimales de la factura*/
+
 	.letra0{
 		position: relative;
 		font-size: 1.1em !important;
@@ -319,14 +340,16 @@ table {
 		z-index:3;
 		right: 2.4em !important;
 	}
-	
+
+/* Manejo de espacios para los valores decimales de la factura*/
+
 	.img{
-		width:  200px;
-		height: 100px;
+		width:  200px !important;
+		height: 70px !important;
 	}
 
 	.factura{
-		font-size: 1.4em !important;
+		font-size: 1.3em !important;
 	}
 
 	.correlativo{
@@ -375,7 +398,7 @@ p {
 	min-height: 28cm;
 	
 	.factura{
-		font-size: 1.10em !important;
+		font-size: 1.3em !important;
 	}
 	.observa{
 		font-size: 1.3em !important;
@@ -423,7 +446,7 @@ table{
 	border : 0.1px solid #bcb9b9 !important;
 	font-size: 0.75em !important;
 	// font: bold;
-	padding: .625em;
+	// padding: .625em;
 	text-align: center;
 	.bordeIz{
 		border-bottom-style: none !important;
@@ -432,7 +455,7 @@ table{
   }
   
   table td {
-	padding: .625em;
+	// padding: .625em;
 	text-align: center;
 	font-size: 1.1em !important;
 	.bordeIz{
@@ -448,7 +471,7 @@ table{
   
   table th {
 	font-size: .85em;
-	letter-spacing: .1em;
+	// letter-spacing: .1em;
 	text-transform: uppercase;
 		.bordeIz{
 	   border-bottom-style: none !important;
