@@ -9,6 +9,8 @@ import { IntermediarioNComponent } from './notas/intermediario-n/intermediario-n
 import { NcComponent } from './notas/nc/nc.component';
 import { NdComponent } from './notas/nd/nd.component';
 import { ParametrosComponent } from './parametros/parametros.component';
+import { CargarDocumentoComponent } from './retenciones/cargar-documento/cargar-documento.component';
+import { ProveedoresFComponent } from './retenciones/proveedores-f/proveedores-f.component';
 
 
 const routes: Routes = [
@@ -53,7 +55,15 @@ const routes: Routes = [
   component : NcComponent
  },
 
+ {
+  path      : 'Cretenciones',
+  component : CargarDocumentoComponent
+ },
 
+ {
+  path      : 'proveedores',
+  component : ProveedoresFComponent
+ },
 
 
 ];

@@ -1,0 +1,91 @@
+<div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="uploadfilecontainer" (click)="fileInput.click()" style="display: flex; justify-content: center; align-items: center;">
+                <h3 class="text-center"> {{sharedS.ExcelName || 'Seleccionar archivo'}} 
+                </h3>
+                <input type="file" #fileInput hidden (change)="cargarData($event)" [disabled]="sharedS.ExcelName" required>
+                <mat-icon class="iconM" *ngIf="!sharedS.ExcelName">  attach_file </mat-icon>
+                <mat-icon class="iconM" *ngIf="sharedS.ExcelName" >  bar_chart   </mat-icon>
+
+            </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="text-right">
+            <button mat-raised-button class="buttonPrincipal" [hidden]="dataExcel.length <= 0" (click)="Retencion ( )">
+                <mat-icon>
+                  cloud_upload
+                </mat-icon>
+                Cargar
+            </button>
+        </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<mat-card class="mat-cardContainerCuerpo mat-elevation-z0 mt-4" *ngIf="dataExcel.length >0 ">
+    <form [formGroup]="filtro">
+        <div class="row">
+            <div class="col-md-6">
+    
+                <mat-form-field appearance="legacy">
+                    <mat-label>
+                        <mat-icon> search </mat-icon>
+                        Buscar
+                    </mat-label>
+                    <input matInput placeholder="Empresa, Documento " formControlName="filtrar">
+                </mat-form-field>
+    
+            </div>
+     
+        </div>
+    </form>
+       <div class="table-responsive !important">
+        <table  >
+            <!-- <caption>Statement Summary</caption> -->
+            <thead>
+              <tr>
+                <th scope="col">Empresa</th>
+                <th scope="col">Documento</th>
+                <th scope="col">RTN</th>
+                <th scope="col">impuesto</th>
+                <th scope="col">retencion</th>
+                <th scope="col">Tipo Retención</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let act of dataExcel  | search: this.filtro.value.filtrar:parametrosBusqueda | slice: desde: hasta " class="trHover">
+                <td data-label="Empresa">{{    act?.['Empresa']  }}</td>
+                <td data-label="Documento">{{    act?.['Documento']  }}</td>
+                <td data-label="RTN">{{        act?.['RTN']      }}</td>
+                <td data-label="impuesto">{{        act?.['impuesto']  | number : '1.2-2'   }}</td>
+                <td data-label="retencion">{{        act?.['retencion']  | number : '1.2-2'   }}</td>
+                <td data-label="Tipo Retención">{{        act?.['tipoRetencion']     }}</td>
+        
+      
+              </tr>
+            </tbody>
+          </table>
+          
+       </div>
+          <mat-paginator [length]="dataExcel.length" [pageSize]="pageSize " (page)="next($event)">
+        </mat-paginator>
+        
+
+ 
+</mat-card>
+
+
+<!-- <app-loading *ngIf="loading1"></app-loading> -->
+
+<app-loading2 *ngIf="loading1"></app-loading2>
+
+<app-loading2 *ngIf="loading2"></app-loading2>
+

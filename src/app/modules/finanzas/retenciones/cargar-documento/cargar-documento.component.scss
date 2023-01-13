@@ -1,0 +1,30 @@
+.uploadfilecontainer{
+    color:            #ffffff !important;
+    background-color: #006F1D  !important;
+    width: 100%;
+    mat-icon{
+        color:            #ffffff !important;
+        background-color: #006F1D  !important;
+    }
+}
+
+  
+  .uploadfilecontainer:hover {
+    color:            #006F1D !important;
+    background-color: #ffffff  !important;
+    cursor: pointer;
+     mat-icon{
+        color:            #006F1D !important;
+        background-color: #ffffff  !important;
+    }
+  }
+
+
+
+
+  .iconM{
+    position: relative;
+    z-index: 3;
+    bottom: 0.3em;
+    // left: 10em;
+  }

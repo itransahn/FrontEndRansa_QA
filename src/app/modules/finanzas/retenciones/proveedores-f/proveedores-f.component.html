@@ -1,0 +1,83 @@
+<mat-card class="mat-cardContainerCuerpo mat-elevation-z0">
+    <form [formGroup]="filtro">
+        <div class="row">
+            <div class="col-md-6">
+    
+                <mat-form-field appearance="legacy">
+                    <mat-label>
+                        <mat-icon> search </mat-icon>
+                        Buscar
+                    </mat-label>
+                    <input matInput placeholder="Usuario, Nombre, Rol, Usuario Ransa....." formControlName="filtrar">
+                </mat-form-field>
+    
+            </div>
+     
+            <div class="col-md-6">
+                <div class="text-right">
+                    <button mat-raised-button class="buttonPrincipal" (click)="Modal(2)" [disabled]="!auth.Insercion()">
+                        <mat-icon>
+                            add
+                        </mat-icon>
+                        Agregar Proveedor
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+       <div class="table-responsive !important">
+        <table  >
+            <!-- <caption>Statement Summary</caption> -->
+            <thead>
+              <tr>
+                <th scope="col">Proveedor</th>
+                <th scope="col">RTN</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of data  | search: this.filtro.value.filtrar:parametrosBusqueda | slice: desde: hasta " class="trHover">
+                <td data-label="Proveedor">{{    data?.proveedor }}</td>
+                <td data-label="RTN">      {{    data?.RTN       }}</td>
+                <td data-label="Estado">
+                    <span *ngIf="data?.estado == 1">
+                        <mat-icon class="success">check_box</mat-icon>
+                    </span>
+                    <span *ngIf="data?.estado != 1">
+                        <mat-icon style="color: red !important;" class="error">indeterminate_check_box</mat-icon>
+                    </span>    
+                </td>
+                <td data-label="Acciones">
+                <div class="text-center">
+
+               <!-- Ver -->
+               <!-- configuración ToolTip
+            #tooltip="matTooltip" matTooltip="Ver perfil del usuario" matTooltipPosition="left"
+            -->
+               <button mat-mini-fab class="buttonSecundary"(click)="Modal ( 1 , data )" >
+                   <mat-icon>visibility</mat-icon>
+               </button>
+                 <!-- Editar -->
+                 <button mat-mini-fab class="buttonSecundary" [disabled]="!auth.Actualizacion()" (click)="Modal( 3 , data )">
+                   <mat-icon>create</mat-icon>
+               </button>
+               <!-- Cambiar estado -->
+               <button mat-mini-fab class="search" [disabled]="!auth.Actualizacion()" class="buttonSecundary" *ngIf="data?.estado == 1" (click)="CambiarEstado(data?.idProveedor, 0)" title="Inhabilitar">
+                <mat-icon>toggle_on</mat-icon>
+            </button>
+        <button mat-mini-fab class="search" [disabled]="!auth.Actualizacion()" class="btnDelete" *ngIf="data?.estado != 1" (click)="CambiarEstado(data?.idProveedor, 1)" title="Habilitar">
+            <mat-icon>toggle_off</mat-icon>
+            </button>
+                </div>
+
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          
+       </div>
+          <mat-paginator [length]="data.length" [pageSize]="pageSize " (page)="next($event)">
+        </mat-paginator>
+        <app-scroll-top></app-scroll-top>
+</mat-card>

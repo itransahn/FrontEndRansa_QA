@@ -15,6 +15,9 @@ import { NdComponent } from './notas/nd/nd.component';
 import { NcComponent } from './notas/nc/nc.component';
 import { IntermediarioNComponent } from './notas/intermediario-n/intermediario-n.component';
 import { ModalNComponent } from './notas/intermediarioN/modal-n/modal-n.component';
+import { CargarDocumentoComponent } from './retenciones/cargar-documento/cargar-documento.component';
+import { ProveedoresFComponent } from './retenciones/proveedores-f/proveedores-f.component';
+import { ModalproveedorfComponent } from './retenciones/proveedores-f/modalproveedorf/modalproveedorf.component';
 
 
 
@@ -31,7 +34,10 @@ import { ModalNComponent } from './notas/intermediarioN/modal-n/modal-n.componen
     NdComponent,
     NcComponent,
     IntermediarioNComponent,
-    ModalNComponent
+    ModalNComponent,
+    CargarDocumentoComponent,
+    ProveedoresFComponent,
+    ModalproveedorfComponent
   ],
   imports: [
     CommonModule,
