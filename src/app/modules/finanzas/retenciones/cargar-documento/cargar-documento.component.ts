@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { EmailValidator, FormControl, FormGroup } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
 import { DataApi } from 'src/app/interfaces/dataApi';
 import { mensajes } from 'src/app/interfaces/generales';
@@ -75,46 +75,50 @@ export class CargarDocumentoComponent implements OnInit {
         }
 
 Retencion(){
-  for ( let i = 0; i <= this.dataExcel.length; i++){
+  let fecha = new Date();
+  for ( let i = 0; i <= this.dataExcel.length - 1; i++){
     this.loading2 = true;
 
     this.cargarRetencion(
-      this.dataExcel[i]?.Empresa,
-      this.dataExcel[i]?.RTN,
-      this.dataExcel[i]?.Documento,
-      this.dataExcel[i]?.fecha,
-      this.dataExcel[i]?.impuesto,
-      this.dataExcel[i]?.retencion,
-      this.dataExcel[i]?.tipoRetencion,
-      this.dataExcel[i]?.CAI
+      String(this.dataExcel[i]?.Empresa),
+      String(this.dataExcel[i]?.RTN),
+      String(this.dataExcel[i]?.Documento),
+      String(this.dataExcel[i]?.fecha),
+      // fecha,
+      Number(this.dataExcel[i]?.impuesto),
+      Number(this.dataExcel[i]?.retencion),
+      Number(this.dataExcel[i]?.tipoRetencion),
+      String(this.dataExcel[i]?.CAI)
      )
   }
   this.loading2 = false;
 }
 
-
+/* CREAR FORMATO DE FECHA dd/mm/yyyy */ 
 cargarRetencion( 
-  empresa   ?: any,
-  rtn       ?: any,
-  documento ?: any,
-  fecha     ?: any,
-  impuesto  ?: any,
-  retencion ?: any,
-  tipoRet   ?: any,
-  cai       ?: any
+  empresaP   ?: string,
+  rtnP       ?: string,
+  documentoP ?: string,
+  fechaP     ?: string,
+  impuestoP  ?: number,
+  retencionP ?: number,
+  tipoRetP   ?: number,
+  caiP       ?: string
 ){
+
+
   let url = 'finanzas/retencion';
   let params = {
-empresa       : empresa,
-rtn           : rtn,
-documento     : documento,
-fecha         : fecha,
-impuesto      : impuesto,
-retencion     : retencion,
-tipoRetencion : tipoRet,
-cai           : cai,
+empresa       : empresaP,
+rtn           : rtnP,
+documento     : documentoP,
+fecha         : fechaP,
+impuesto      : impuestoP,
+retencion     : retencionP,
+tipoRetencion : tipoRetP,
+cai           : caiP,
   }
-console.log( params )
+console.log(params)
   this.servicio.put( url, params ).subscribe (  )
 }
 
