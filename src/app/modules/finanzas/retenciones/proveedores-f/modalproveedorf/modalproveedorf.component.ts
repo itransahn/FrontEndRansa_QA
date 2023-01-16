@@ -62,7 +62,7 @@ export class ModalproveedorfComponent implements OnInit {
       this.enable     = false;
       this.visible    = true;
       this.botton     = true
-      this.titulo     = `Actualizacion del proveedor` 
+      this.titulo     = `Proveedor` 
       this.subtitulo  = String(this.data['data']?.proveedor); 
       this.cargarFormPut()
       this.SetForm()
