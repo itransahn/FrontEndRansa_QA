@@ -52,7 +52,13 @@ export class ModalCaiComponent implements OnInit {
     {
       id : 3,
       tipo   : 'NC'
-    }]
+    },
+    {
+      id : 4,
+      tipo   : 'Retencion'
+    },
+  
+  ]
 
   public sedes  = [
     {

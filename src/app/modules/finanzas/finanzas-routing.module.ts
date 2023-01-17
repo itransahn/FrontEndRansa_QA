@@ -11,6 +11,7 @@ import { NdComponent } from './notas/nd/nd.component';
 import { ParametrosComponent } from './parametros/parametros.component';
 import { CargarDocumentoComponent } from './retenciones/cargar-documento/cargar-documento.component';
 import { ProveedoresFComponent } from './retenciones/proveedores-f/proveedores-f.component';
+import { RetencionComponent } from './retenciones/retencion/retencion.component';
 
 
 const routes: Routes = [
@@ -65,6 +66,10 @@ const routes: Routes = [
   component : ProveedoresFComponent
  },
 
+ {
+  path      : 'retencion',
+  component : RetencionComponent
+ }
 
 ];
 

@@ -159,3 +159,5 @@ impuesto      ?: number,
 retencion     ?: number,
 tipoRetencion ?: number
 }
+
+

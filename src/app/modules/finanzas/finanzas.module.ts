@@ -18,6 +18,7 @@ import { ModalNComponent } from './notas/intermediarioN/modal-n/modal-n.componen
 import { CargarDocumentoComponent } from './retenciones/cargar-documento/cargar-documento.component';
 import { ProveedoresFComponent } from './retenciones/proveedores-f/proveedores-f.component';
 import { ModalproveedorfComponent } from './retenciones/proveedores-f/modalproveedorf/modalproveedorf.component';
+import { RetencionComponent } from './retenciones/retencion/retencion.component';
 
 
 
@@ -37,7 +38,8 @@ import { ModalproveedorfComponent } from './retenciones/proveedores-f/modalprove
     ModalNComponent,
     CargarDocumentoComponent,
     ProveedoresFComponent,
-    ModalproveedorfComponent
+    ModalproveedorfComponent,
+    RetencionComponent
   ],
   imports: [
     CommonModule,
