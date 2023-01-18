@@ -229,7 +229,6 @@ html2canvas(DATA, options).then((canvas) => {
 
  onChange(evt) :any{
   let data: any[]= [];
-
   const target: DataTransfer = <DataTransfer>(evt.target);
   this.ExcelName = target?.files[0].name;
   this.isExcelFile = !!target.files[0].name.match(/(.xls|.xlsx)/);

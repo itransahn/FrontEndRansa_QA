@@ -87,6 +87,13 @@
 	}
 }
 
+.empresaM{
+	font-size: 1.3em !important;
+	.label{
+	font-size: 2em !important;
+	}
+}
+
 div, span{
 	font-size: small ;
  	font-family: Arial, Helvetica, sans-serif;
@@ -331,7 +338,7 @@ table {
 		position: relative;
 		font-size: 1.1em !important;
 		z-index:3;
-		right: 1.6em !important;
+		right: 1.5em !important;
 	}
 
 	.letra1000000{

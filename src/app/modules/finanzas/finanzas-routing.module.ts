@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { ModalRCComponent } from '../transporte/rol-cliente/modal-rc/modal-rc.component';
 import { CaiComponent } from './facturacion/cai/cai.component';
 import { FacturaAHComponent } from './facturacion/factura-ah/factura-ah.component';
 import { FacturacionComponent } from './facturacion/facturacion.component';
@@ -10,6 +11,7 @@ import { NcComponent } from './notas/nc/nc.component';
 import { NdComponent } from './notas/nd/nd.component';
 import { ParametrosComponent } from './parametros/parametros.component';
 import { CargarDocumentoComponent } from './retenciones/cargar-documento/cargar-documento.component';
+import { IntermedioRetComponent } from './retenciones/intermedio-ret/intermedio-ret.component';
 import { ProveedoresFComponent } from './retenciones/proveedores-f/proveedores-f.component';
 import { RetencionComponent } from './retenciones/retencion/retencion.component';
 
@@ -68,8 +70,14 @@ const routes: Routes = [
 
  {
   path      : 'retencion',
+  component : IntermedioRetComponent
+ },
+
+ {
+  path      : 'retencion/:periodo/:dia/:anio/:proveedor/:empresa/:retencion',
   component : RetencionComponent
  }
+
 
 ];
 

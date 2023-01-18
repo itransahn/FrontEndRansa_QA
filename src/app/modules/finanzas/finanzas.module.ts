@@ -19,6 +19,8 @@ import { CargarDocumentoComponent } from './retenciones/cargar-documento/cargar-
 import { ProveedoresFComponent } from './retenciones/proveedores-f/proveedores-f.component';
 import { ModalproveedorfComponent } from './retenciones/proveedores-f/modalproveedorf/modalproveedorf.component';
 import { RetencionComponent } from './retenciones/retencion/retencion.component';
+import { IntermedioRetComponent } from './retenciones/intermedio-ret/intermedio-ret.component';
+import { ModalRComponent } from './retenciones/modal-r/modal-r.component';
 
 
 
@@ -39,7 +41,9 @@ import { RetencionComponent } from './retenciones/retencion/retencion.component'
     CargarDocumentoComponent,
     ProveedoresFComponent,
     ModalproveedorfComponent,
-    RetencionComponent
+    RetencionComponent,
+    IntermedioRetComponent,
+    ModalRComponent
   ],
   imports: [
     CommonModule,

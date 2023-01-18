@@ -1,6 +1,6 @@
 <div>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <div class="uploadfilecontainer" (click)="fileInput.click()" style="display: flex; justify-content: center; align-items: center;">
                 <h3 class="text-center"> {{sharedS.ExcelName || 'Seleccionar archivo'}} 
                 </h3>
@@ -10,17 +10,29 @@
 
             </div>
         </div>
+    </div>
 
-        <div class="col-md-6">
-          <div class="text-right">
-            <button mat-raised-button class="buttonPrincipal" [hidden]="dataExcel.length <= 0" (click)="Retencion ()">
-                <mat-icon>
-                  cloud_upload
-                </mat-icon>
-                Cargar
-            </button>
-        </div>
-        </div>
+    <div class="row mt-2">
+      <div class="col-md-6 container">
+        <div >
+          <button mat-raised-button class="buttonPrincipal" [hidden]="dataExcel.length <= 0" (click)="Retencion ()">
+              <mat-icon>
+                cloud_upload
+              </mat-icon>
+              Cargar
+          </button>
+      </div>
+      </div>
+      <div class="col-md-6 container">
+        <div >
+          <button mat-raised-button class="buttonPrincipal" [hidden]="dataExcel.length <= 0" (click)="Limpieza()">
+              <mat-icon>
+                clear
+              </mat-icon>
+              Limpiar
+          </button>
+      </div>
+      </div>
     </div>
 </div>
 
@@ -29,7 +41,7 @@
 
 
 
-<mat-card class="mat-cardContainerCuerpo mat-elevation-z0 mt-4" *ngIf="dataExcel.length >0 ">
+<mat-card class="mat-cardContainerCuerpo mat-elevation-z0 mt-4" *ngIf="dataExcel.length > 0 && !loading3 ">
     <form [formGroup]="filtro">
         <div class="row">
             <div class="col-md-6">
@@ -81,6 +93,36 @@
 
  
 </mat-card>
+
+
+
+<mat-card class="mat-cardContainerCuerpo mat-elevation-z0 mt-4" *ngIf="proveedoresF.length >0  && loading3">
+
+ <div class="table-responsive !important">
+      <table  >
+          <!-- <caption>Statement Summary</caption> -->
+          <thead>
+            <tr>
+              <th scope="col">Proveedores no encontrados </th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let act of proveedoresFR" class="trHover">
+              <td data-label="Empresa">{{    act?.proveedor  }}</td>
+      
+    
+            </tr>
+          </tbody>
+        </table>
+        
+     </div>
+        <!-- <mat-paginator [length]="dataExcel.length" [pageSize]="pageSize " (page)="next($event)"></mat-paginator> -->
+      
+
+
+</mat-card>
+
 
 
 <!-- <app-loading *ngIf="loading1"></app-loading> -->

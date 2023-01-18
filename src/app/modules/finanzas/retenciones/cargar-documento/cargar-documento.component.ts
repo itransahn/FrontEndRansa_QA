@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { EmailValidator, FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
-import { DataApi } from 'src/app/interfaces/dataApi';
-import { mensajes } from 'src/app/interfaces/generales';
 import { SharedService } from 'src/app/modules/shared/shared.service';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import { ToastServiceLocal } from 'src/app/services/toast.service';
@@ -32,6 +30,11 @@ export class CargarDocumentoComponent implements OnInit {
    public loading1 : Boolean = false;
    public loading2 : Boolean = false;
 
+   public loading3 : boolean = false;
+
+   public proveedoresF : proveedores[]=[];
+   public proveedoresFR : proveedores[]=[];
+
   constructor( 
     public sharedS  : SharedService,
     public servicio : FacturacionService,
@@ -44,9 +47,6 @@ export class CargarDocumentoComponent implements OnInit {
     this.filtro = new FormGroup({
       filtrar: new FormControl({ value:'',disabled: false})
     });
-
-    let fecha = '2022/11/30';
-    console.log( new Date(fecha))
   }
 
 
@@ -80,7 +80,6 @@ export class CargarDocumentoComponent implements OnInit {
         }
 
 Retencion(){
-
   this.sweel.mensajeConConfirmacion('¿Seguro de cargar Retenciones?', 'Carga de Retenciones','warning').then(
     res =>{
           if ( res ){
@@ -88,10 +87,7 @@ Retencion(){
               try{
                 this.loading2 = true;
                 let fecha : string;
-                
-          
                 fecha = String(this.dataExcel[i]?.fecha).substring(4,8)  + '/' + String(this.dataExcel[i]?.fecha).substring(2,4) + '/'+  String(this.dataExcel[i]?.fecha).substring(0,2);
-                // console.log(fecha)
                 this.cargarRetencion(
                   String(this.dataExcel[i]?.Empresa),
                   String(this.dataExcel[i]?.RTN),
@@ -108,17 +104,28 @@ Retencion(){
               }
              
           }
-          this.toast.mensajeSuccess("Data Cargada con éxito","Carga de datos")
+
+          this.toast.mensajeSuccess("Data Cargada con éxito","Carga de datos");
           this.loading2 = false;
-          }
+        }
+      }
+      )
+}
+
+Limpieza(){
+  this.sweel.mensajeConConfirmacion("¿Seguro de Limpiar data?","Limpieza","question").then(
+    res=>{
+      if ( res ){
+        this.proveedoresF = []
+        this.sharedS.CleanDataExcel()
+      }
     }
   )
-
 
 }
 
 /* CREAR FORMATO DE FECHA dd/mm/yyyy */ 
-cargarRetencion( 
+  cargarRetencion( 
   empresaP   ?: string,
   rtnP       ?: string,
   documentoP ?: string,
@@ -128,8 +135,6 @@ cargarRetencion(
   tipoRetP   ?: number,
   caiP       ?: string
 ){
-
-
 
   let url = 'finanzas/retencion';
   let params = {
@@ -141,10 +146,41 @@ impuesto      : impuestoP,
 retencion     : retencionP,
 tipoRetencion : tipoRetP,
 cai           : caiP,
-  }
+  };
 
-  console.log(params)
-  this.servicio.put( url, params ).subscribe (  )
+ this.servicio.put( url, params ).subscribe ( 
+  res=>{
+      if( res?.data?.Table0?.[0]['codigo'] != -1 ){
+      }else{
+
+  this.proveedoresF.push( {
+          proveedor : res?.data?.Table0?.[0]['proveedor']
+        });
+          if( this.proveedoresF.length > 0){
+        this.proveedoresFR = this.removeDuplicates(this.proveedoresF)
+            this.loading3 = true;
+          }
+
+
+        }
+    }
+   )
+}
+
+removeDuplicates(array : any[]){
+  let arrayOut = [];
+  array.forEach(  item =>{
+    try{
+      if ( JSON.stringify(arrayOut[arrayOut.length -1].proveedor  ) !== JSON.stringify(item.proveedor) ){
+        arrayOut.push(item);
+      }
+    }catch( err ) {
+      arrayOut.push(item)
+    }
+  })
+
+  return arrayOut;
+
 }
 
 }
@@ -161,3 +197,6 @@ tipoRetencion ?: number
 }
 
 
+interface proveedores{
+  proveedor ?: string
+}[]
