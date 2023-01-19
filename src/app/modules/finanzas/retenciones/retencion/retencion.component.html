@@ -1,4 +1,4 @@
-<div class="container padre herencia"  id="Retencion" *ngIf="retencionBD.length > 0">
+<div class="container padre herencia"  id="Retencion" *ngIf="retencionBD.length > 0 && permitido">
     <mat-card class="cardPersonalizada">
         <div class="row">
             <div class="col-md-6">
@@ -16,7 +16,7 @@
             <div class="col-md-6 mt-4" style="text-align: right !important;">
                 <p class="right factura" >
                     <span class="factura" > COMPROBANTE RETENCION </span> <br>
-                    <span class="correlativo factura">  000-001-05-0000{{retornarCorrelativo()}}  </span> 
+                    <span class="correlativo factura">  000-001-05-0000{{  correlativoN }}  </span> 
                   </p>
                   <!-- <h4 > FECHA: {{ fecha | date:'mediumDate' | uppercase }} </h4> -->
                   <!-- <mat-divider class="material-dividier"></mat-divider> -->
@@ -38,7 +38,7 @@
             <p class="empresaM">
 Por este medio hacemos constar que en esta fecha hemos retenido a: Tegucigalpa, M.D.C.           <span> {{DiaP}} </span> de <span> {{ cargarMes(mesP)}} </span> del <span> {{anioP}} </span><br>
 
-Sr(es): <span class="left" style="text-decoration: underline;" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ retencionBD[0]?.proveedor | uppercase }}  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>  con RTN : <span style="text-decoration: underline;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 08011991010208 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> <br>
+Sr(es): <span class="left" style="text-decoration: underline;" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ retencionBD[0]?.proveedor | uppercase }}  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>  con RTN : <span style="text-decoration: underline;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ retencionBD[0]?.RTN}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> <br>
 La cantidad de: <span style="text-decoration: underline;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ convertirNumLetra( retornarSubtotal('retencion135') ) | uppercase }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
 
             </p>
@@ -182,3 +182,18 @@ La cantidad de: <span style="text-decoration: underline;"> &nbsp;&nbsp;&nbsp;&nb
 (click)="GenerarPdf()">
     <mat-icon> picture_as_pdf </mat-icon>
 </button>
+
+
+<nav *ngIf="!permitido" aria-label="breadcrumb" class="container">
+  <ol class="breadcrumb container">
+   <h4> Rango de Documentos vencido </h4>
+  </ol>
+</nav>
+
+
+
+<nav *ngIf="retencionBD.length <= 0 && permitido" aria-label="breadcrumb">
+  <ol class="breadcrumb container">
+   <h4> No se encuentra información de Retención del proveedor seleccionado  </h4>
+  </ol>
+</nav>

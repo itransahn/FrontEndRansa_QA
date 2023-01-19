@@ -63,7 +63,12 @@ export class CaiComponent implements OnInit {
     {
       id : 3,
       tipo   : 'NC'
-    }]
+    },
+    {
+      id : 4,
+      tipo   : 'Retencion'
+    },
+  ]
 
   public maskCai = '9AAA-A999'
   constructor(
@@ -141,7 +146,7 @@ hasta   :  this.menuFormP.value.hasta,
 fechalimite   :  this.menuFormP.value.fechaLimite,
 sede    :  this.menuForm.value.sede,
 usuario : this.auth.dataUsuario['id_usuario'],
-tipo    : 3
+tipo    : this.menuForm.value.documento
 }
   this.sweel.mensajeConConfirmacion(`¿Seguro de Actualizar CAI ${ this.parametros['CAI'] }?`, `Actualización CAI`,"warning").then(
     res=>{

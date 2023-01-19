@@ -21,6 +21,7 @@ import { ModalproveedorfComponent } from './retenciones/proveedores-f/modalprove
 import { RetencionComponent } from './retenciones/retencion/retencion.component';
 import { IntermedioRetComponent } from './retenciones/intermedio-ret/intermedio-ret.component';
 import { ModalRComponent } from './retenciones/modal-r/modal-r.component';
+import { RetencionesGComponent } from './retenciones-g/retenciones-g.component';
 
 
 
@@ -43,7 +44,8 @@ import { ModalRComponent } from './retenciones/modal-r/modal-r.component';
     ModalproveedorfComponent,
     RetencionComponent,
     IntermedioRetComponent,
-    ModalRComponent
+    ModalRComponent,
+    RetencionesGComponent
   ],
   imports: [
     CommonModule,

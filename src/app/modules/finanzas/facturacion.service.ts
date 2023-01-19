@@ -47,6 +47,28 @@ export class FacturacionService {
   }
 
 
+    // Servicio de Retencion 
+    postRetencion( url?:string, params?:any){
+      let request$ = this.http.post<DataApi>(environment.UrlApi + url,params).pipe(
+        tap( ( result:DataApi | any )=>{
+          // this.refresh$.next();
+            return result
+        } ),
+        catchError( ( error: HttpErrorResponse) =>{
+          this._mensajesHttp.mostrarErrorHttp(error, String(error.error?.errors[0]['descripcion']), '');
+            return [
+              {
+                data     : error,
+                errors   : error,
+                hasError :  true 
+              }
+            ]
+        })
+      );
+      return request$
+    }
+
+
   // Servicio de Inserción 
   post( url?:string, params?:any){
     let request$ = this.http.post<DataApi>(environment.UrlApi + url,params).pipe(
