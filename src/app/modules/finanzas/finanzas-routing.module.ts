@@ -10,10 +10,13 @@ import { IntermediarioNComponent } from './notas/intermediario-n/intermediario-n
 import { NcComponent } from './notas/nc/nc.component';
 import { NdComponent } from './notas/nd/nd.component';
 import { ParametrosComponent } from './parametros/parametros.component';
+import { IntermediorgComponent } from './retenciones-g/intermediorg/intermediorg.component';
+import { RetencionesGComponent } from './retenciones-g/retenciones-g.component';
 import { CargarDocumentoComponent } from './retenciones/cargar-documento/cargar-documento.component';
 import { IntermedioRetComponent } from './retenciones/intermedio-ret/intermedio-ret.component';
 import { ProveedoresFComponent } from './retenciones/proveedores-f/proveedores-f.component';
 import { RetencionComponent } from './retenciones/retencion/retencion.component';
+import { RetencionesHComponent } from './retenciones/retenciones-h/retenciones-h.component';
 
 
 const routes: Routes = [
@@ -76,6 +79,18 @@ const routes: Routes = [
  {
   path      : 'retencion/:periodo/:dia/:anio/:proveedor/:empresa/:retencion',
   component : RetencionComponent
+ },
+ {
+  path      : 'retencion/:correlativo',
+  component : RetencionesGComponent
+ },
+ {
+  path      : 'retencionesG',
+  component : IntermediorgComponent
+ },
+ {
+  path      : 'retencionesH',
+  component : RetencionesHComponent
  }
 
 

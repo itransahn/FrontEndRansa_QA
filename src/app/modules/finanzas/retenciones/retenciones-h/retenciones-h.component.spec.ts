@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RetencionesGComponent } from './retenciones-g.component';
+import { RetencionesHComponent } from './retenciones-h.component';
 
-describe('RetencionesGComponent', () => {
-  let component: RetencionesGComponent;
-  let fixture: ComponentFixture<RetencionesGComponent>;
+describe('RetencionesHComponent', () => {
+  let component: RetencionesHComponent;
+  let fixture: ComponentFixture<RetencionesHComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RetencionesGComponent ]
+      declarations: [ RetencionesHComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(RetencionesGComponent);
+    fixture = TestBed.createComponent(RetencionesHComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

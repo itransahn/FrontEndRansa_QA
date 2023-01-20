@@ -139,7 +139,7 @@ convertirNumLetra( numero : any){
 }
 
  GenerarPdf(){  
-this.pdfRetencion('Retencion',  `${this.correlativoN}_ ${this.mesP }_${this.retencionBD[0]?.proveedor}RETOriginal`,'Retención Ransa', `Seguro de generar PDF de Retención del CLIENTE
+this.pdfRetencion('Retencion',  `${this.correlativoN}_ ${this.mesP }_${this.retencionBD[0]?.proveedor}_RETOriginal`,'Retención Ransa', `Seguro de generar PDF de Retención del CLIENTE
 ${this.retencionBD[0]?.proveedor}`,{
   numeroFactura: `${this.correlativoN}_${this.retencionBD[0]?.proveedor }`,
   factura : 'Retención Ransa',
@@ -227,7 +227,11 @@ guardarData(){
     usuario     : this.auth.dataUsuario['id_usuario'],
     sede        : this.sedeP,
     tipoR       : this.ruta.snapshot.params?.['retencion'],
-    rtn         : this.retencionBD[0]?.RTN
+    rtn         : this.retencionBD[0]?.RTN,
+    cai         : this.parametrosCai[0]?.['CAI'], 
+    desde       : this.parametrosCai[0]?.['desde'],
+    hasta       : this.parametrosCai[0]?.['hasta'],
+    fechaCAI    : this.parametrosCai[0]?.['fechaLimite']
   }
   this.facturacionS.post(url, params).subscribe( )
 

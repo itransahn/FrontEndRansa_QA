@@ -1,0 +1,143 @@
+<mat-card class="mat-cardContainerCuerpo">
+    <form [formGroup]="filtro" #f="ngForm">
+    <div class="row">
+        <div class="col-md-12 container">
+            <h4 class="h4"> Retenciones Generadas </h4>
+        </div>
+        <div class="col-md-4 container">
+                <mat-form-field appearance="fill">
+                    <mat-label>Desde</mat-label>
+                    <input name="date" formControlName = "desde" matInput [matDatepicker]="desde">
+                    <mat-datepicker-toggle matSuffix [for]="desde"></mat-datepicker-toggle>
+                    <mat-datepicker #desde></mat-datepicker>
+                  </mat-form-field>
+            
+         </div>
+    <div class="col-md-4 container">
+                <mat-form-field appearance="fill">
+                    <mat-label>Hasta</mat-label>
+                    <input name="date" formControlName = "hasta" matInput [matDatepicker]="hasta">
+                    <mat-datepicker-toggle matSuffix [for]="hasta"></mat-datepicker-toggle>
+                    <mat-datepicker #hasta></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="text-left">
+                        <button mat-raised-button class="buttonPrincipal"  [disabled]="f.invalid" (click)="CargarDocumentos()">
+                            <mat-icon>
+                                search
+                            </mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+</mat-card>
+
+<div #factura id ="Factura">
+    <mat-card class="mat-cardContainerCuerpo mt-4" *ngIf="loading">
+        <div class="row">
+            <div class="col-md-12 ">
+                <img src="../../../../../assets/images/logoRansa.ico" alt="">
+            </div>
+        
+            <div class="col-md-12 container">
+                <h4 class="h4">
+                  {{ filtro.value.desde | date :'shortDate' }} - {{ filtro.value.hasta | date :'shortDate' }}
+                </h4>
+            </div>
+            <div class="col-md-12 container">
+                <h4 class="h4"> RANSA</h4>
+            </div>
+        </div>
+
+        <form [formGroup]="busqueda">
+            <div class="row">
+                <div class="col-md-6">
+        
+                    <mat-form-field appearance="legacy">
+                        <mat-label>
+                            <mat-icon> search </mat-icon>
+                            Buscar
+                        </mat-label>
+                        <input matInput placeholder="Proveedor, Rtn, Correlativo " formControlName="filtrar">
+                    </mat-form-field>
+        
+                </div>
+         
+            </div>
+        </form>
+    
+        <div class="table-responsive !important" *ngIf="loading">
+            <table  >
+                <!-- <caption>Statement Summary</caption> -->
+                <thead>
+                  <tr> 
+                    <th scope="col">Proveeodr      </th>
+                    <th scope="col">Rtn            </th>
+                    <th scope="col">Fecha Generada </th>
+                    <th scope="col">correlativo    </th>
+                    <th scope="col">sede           </th>
+                    <th scope="col">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let dat of data | search: this.busqueda.value.filtrar:parametrosBusqueda | slice: desdeF:hastaF " class="trHover">
+                    <td data-label="Proveeodr">      {{  dat?.proveedor  }}</td>
+                    <td data-label="Rtn">            {{  dat?.rtn           }}</td>
+                    <td data-label="Fecha Generada"> {{  dat?.fechaGenerada | date:'shortDate' }}</td>
+                    <td data-label="correlativo">    {{  dat?.correlativo         }}</td>
+                    <td data-label="sede">           {{  dat?.sede  }}</td>
+                    <td data-label="Acciones">
+                        <div class="text-center">
+        
+                       <!-- Ver -->
+                       <button mat-mini-fab class="buttonSecundary"   #tooltip="matTooltip" matTooltip="Ver Retención" (click)="retencion( dat?.correlativo, dat?.proveedor )"  matTooltipPosition="above">
+                           <mat-icon>visibility</mat-icon>
+                       </button>
+                        </div>
+        
+                        </td>
+
+                  </tr>
+                </tbody>
+                </table>  
+           </div>
+    
+              <mat-paginator #paginator [length]="data.length" [pageSize]="pageSize " (page)="next($event)">
+            </mat-paginator>
+    </mat-card>
+
+</div>
+
+<!-- <mat-card class="mat-cardContainerCuerpo mt-4" *ngIf="loading">
+        <div class="row mb-4">
+            <div class="col-md-12 container">
+                <h4 class="h4"> Opciones </h4>
+            </div>
+            <div class="col-md-6 container">
+                <div class="text-rigth">
+                    <button mat-raised-button class="buttonPrincipal" 
+                    #tooltip="matTooltip" matTooltip="Imprimir" matTooltipPosition="above" 
+                    [disabled]="f.invalid" (click)="sharedS.printComponent('Factura')">
+                        <mat-icon>
+                            print
+                        </mat-icon>
+                    </button>
+                </div>
+            </div>
+
+            <div class="col-md-6 container">
+                <div class="text-left">
+                    <button mat-raised-button class="buttonPrincipal"  
+                    #tooltip="matTooltip" matTooltip="Documento PDF" matTooltipPosition="above" 
+                    [disabled]="f.invalid" (click)="sharedS.downloadPDF('Factura', 'Factura_cco','Factura por centro de costo', 'Seguro de imprimir factura')">
+                        <mat-icon>
+                            picture_as_pdf
+                        </mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+</mat-card> -->

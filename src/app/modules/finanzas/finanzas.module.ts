@@ -22,6 +22,9 @@ import { RetencionComponent } from './retenciones/retencion/retencion.component'
 import { IntermedioRetComponent } from './retenciones/intermedio-ret/intermedio-ret.component';
 import { ModalRComponent } from './retenciones/modal-r/modal-r.component';
 import { RetencionesGComponent } from './retenciones-g/retenciones-g.component';
+import { IntermediorgComponent } from './retenciones-g/intermediorg/intermediorg.component';
+import { ModalrgComponent } from './retenciones-g/modalrg/modalrg.component';
+import { RetencionesHComponent } from './retenciones/retenciones-h/retenciones-h.component';
 
 
 
@@ -45,7 +48,10 @@ import { RetencionesGComponent } from './retenciones-g/retenciones-g.component';
     RetencionComponent,
     IntermedioRetComponent,
     ModalRComponent,
-    RetencionesGComponent
+    RetencionesGComponent,
+    IntermediorgComponent,
+    ModalrgComponent,
+    RetencionesHComponent
   ],
   imports: [
     CommonModule,

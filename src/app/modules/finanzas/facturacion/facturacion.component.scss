@@ -1,5 +1,5 @@
 .cardPersonalizada{
-    width:  27cm;
+    width:  29cm;
     height: auto ;
     box-shadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2), 0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12);
 }
@@ -81,7 +81,7 @@
 }
 
 div, span{
-	font-size: small ;
+	// font-size: small ;
  	font-family: Arial, Helvetica, sans-serif;
 
 }
@@ -134,52 +134,24 @@ text-align: right !important;
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: smaller !important;
 }
-thead{
-	// font-weight: bold;
-	// font-size:   small;
-	th{
-		background-color: #ffffff !important;
-		// color:  #050404 !important;	
-		.bordeIz{
-			border-bottom-style: none !important;
-		 }
-	}
-	.bordeIz{
-		border-bottom-style: none !important;
-	 }
-}
 
-tfoot{
-	tr{
-		background-color: #ffffff !important;	
-		// font-size: 0.8em;
-		.bordeIz{
-	border-bottom-style: none !important;
-		 }
-			.borderRg{
-				border: 0.5 solid #050404;
-			}
-	}
-	th{
-		border-style: outset !important;
-		// border-color: #050404;
-		// border: 0.1px;
-		background-color: #ffffff !important;
-	font-size: 0.8em !important;
 
-	.bordeIz{
-		border-bottom-style: none !important;
-	 }
-	.borderRg{
-		border: 0.2 solid #050404;
-	}
-}
+// thead{
+// 	// font-weight: bold;
+// 	// font-size:   small;
+// 	th{
+// 		background-color: #ffffff !important;
+// 		// color:  #050404 !important;	
+// 		.bordeIz{
+// 			border-bottom-style: none !important;
+// 		 }
+// 	}
+// 	.bordeIz{
+// 		border-bottom-style: none !important;
+// 	 }
+// }
 
-.bordeIz{
-	border-bottom-style: none !important;
- }
 
-}
 
 /* FUENTES */
 .legend{
@@ -190,90 +162,90 @@ tfoot{
 	font-weight: normal !important;
 }
 
-.footL{
-		// font-family: Arial, Helvetica, sans-serif;
-		font-size: 1em !important; 
-}
+// .footL{
+// 		// font-family: Arial, Helvetica, sans-serif;
+// 		font-size: 1em !important; 
+// }
 
-/* FUENTES */
-.footE{
-	width: 100%;
-	height: 100px !important;
-}
+// /* FUENTES */
+// .footE{
+// 	width: 100%;
+// 	height: 100px !important;
+// }
 
-tbody{
-	// font-weight: bold;
-	font-size: 0.8em;
-	tr{
-		font-size: 0.8em;
-	.bordeIz{
-		border-bottom-style: none !important;
-	 }
+// tbody{
+// 	// font-weight: bold;
+// 	font-size: 0.8em;
+// 	tr{
+// 		font-size: 0.8em;
+// 	.bordeIz{
+// 		border-bottom-style: none !important;
+// 	 }
 
-	}
-	td{
-		background-color: #ffffff !important;
-		color: #050404 !important;
-		font-size: 0.8em;
-		.bordeIz{
-			border-bottom-style: none !important;
-		 }
-	}
-	.bordeIz{
-		border-bottom-style: none !important;
-	 }
-	.empresa{
-		font-size: 1.4em !important;
-	}
-}
+// 	}
+// 	td{
+// 		background-color: #ffffff !important;
+// 		color: #050404 !important;
+// 		font-size: 0.8em;
+// 		.bordeIz{
+// 			border-bottom-style: none !important;
+// 		 }
+// 	}
+// 	.bordeIz{
+// 		border-bottom-style: none !important;
+// 	 }
+// 	.empresa{
+// 		font-size: 1.4em !important;
+// 	}
+// }
 
-table {
-	margin: 0;
-	padding: 0;
-	width: 100%;
+// table {
+// 	margin: 0;
+// 	padding: 0;
+// 	width: 100%;
 
-.bordeIz{
-	border-bottom-style: none !important;
- }
+// .bordeIz{
+// 	border-bottom-style: none !important;
+//  }
 
-  }
+//   }
   
-  table caption {
-	font-size: 0.8em;
-	margin: .5em 0 .75em;
-  }
+//   table caption {
+// 	font-size: 0.8em;
+// 	margin: .5em 0 .75em;
+//   }
   
-  table tr {
-	background-color: #ffffff;
-	padding: .35em;
-	.bordeIz{
-		border-bottom-style: none !important;
-	 }
-	 .empresa{
-		font-size: 1.4em !important;
-	}
-  }
+//   table tr {
+// 	background-color: #ffffff;
+// 	padding: .35em;
+// 	.bordeIz{
+// 		border-bottom-style: none !important;
+// 	 }
+// 	 .empresa{
+// 		font-size: 1.4em !important;
+// 	}
+//   }
   
-  table th,
-  table td {
-	padding: .625em;
-	text-align: center;
-	.bordeIz{
-		border-bottom-style: none !important;
-	 }
-	 .empresa{
-		font-size: 1.4em !important;
-	}
-  }
+//   table th,
+//   table td {
+// 	padding: .625em;
+// 	text-align: center;
+// 	.bordeIz{
+// 		border-bottom-style: none !important;
+// 	 }
+// 	 .empresa{
+// 		font-size: 1.4em !important;
+// 	}
+//   }
   
-  table th {
-	font-size: 0.8em;
-	letter-spacing: .1em;
-	text-transform: uppercase;
-	.bordeIz{
-		border-bottom-style: none !important;
-	 }
-  }
+//   table th {
+// 	font-size: 0.8em;
+// 	letter-spacing: .1em;
+// 	text-transform: uppercase;
+// 	.bordeIz{
+// 		border-bottom-style: none !important;
+// 	 }
+//   }
   
   /* general styling */
   body {
@@ -296,49 +268,49 @@ table {
 		position: relative;
 		font-size: 1.1em !important;
 		z-index:3;
-		right: 7.2em !important;
+		right: 6.6em !important;
 
 	}
 	.letra100{
 		position: relative;
 		font-size: 1.1em !important;
 		z-index:3;
-		right: 6em !important;
+		right: 5.4em !important;
 	}
 
 	.letra1000{
 		position: relative;
 		font-size: 1.1em !important;
 		z-index:3;
-		right: 5em !important;
+		right: 4.4em !important;
 	}
 
 	.letra10000{
 		position: relative;
 		font-size: 1.1em !important;
 		z-index:3;
-		right: 4.5em !important;
+		right: 3.9em !important;
 	}
 
 	.letra100000{
 		position: relative;
 		font-size: 1.1em !important;
 		z-index:3;
-		right: 4em !important;
+		right: 3.4em !important;
 	}
 
 	.letra1000000{
 		position: relative;
 		font-size: 1.1em !important;
 		z-index:3;
-		right: 3em !important;
+		right: 2.4em !important;
 	}
 
 	.letra10000000{
 		position: relative;
 		font-size: 1.1em !important;
 		z-index:3;
-		right: 2.4em !important;
+		right: 1.9em !important;
 	}
 
 /* Manejo de espacios para los valores decimales de la factura*/
@@ -421,6 +393,37 @@ table{
 	.bordeIz{
 		border-bottom-style: none !important;
 	 }
+
+	 tfoot{
+		tr{
+			background-color: #ffffff !important;	
+			font-size: 0.9em;
+			.bordeIz{
+		border-bottom-style: none !important;
+					}
+				.borderRg{
+					border: 0.5 solid #050404;
+						 }
+		}
+		th{
+			border-style: outset !important;
+			// border-color: #050404;
+			// border: 0.1px;
+			background-color: #ffffff !important;
+		font-size: 0.9em !important;
+	
+		.bordeIz {
+			border-bottom-style: none !important;
+		 }
+		.borderRg{
+			border: 0.2 solid #050404;
+		}
+	}
+	.bordeIz{
+		border-bottom-style: none !important;
+	 }
+	}
+
   }
   
   table caption {
@@ -433,7 +436,7 @@ table{
   
   table tr {
 	background-color: #ffffff;
-	font-size: 1.1em !important;
+	font-size: 0.9em !important;
 	// padding: .35em;
 	.bordeIz{
 		border-bottom-style: none !important;
@@ -457,7 +460,7 @@ table{
   table td {
 	// padding: .625em;
 	text-align: center;
-	font-size: 1.1em !important;
+	font-size: 0.9em !important;
 	.bordeIz{
 		border-bottom-style: none !important;
 	 }
