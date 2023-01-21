@@ -1,5 +1,5 @@
 .cardPersonalizada{
-    width:  29cm;
+    width:  30cm;
     height: auto ;
     box-shadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2), 0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12);
 }
@@ -44,7 +44,7 @@
 	 }
 }
 .contenidoF{
-	font-size: 0.8em !important;
+	font-size: 1.2em !important;
 }
 
 .btn-flotante {
@@ -160,6 +160,8 @@ text-align: right !important;
 
 .lemas{
 	font-weight: normal !important;
+	font-size: 1.0em !important;
+
 }
 
 // .footL{
@@ -262,6 +264,10 @@ text-align: right !important;
 
 .herencia{
 
+	.contenidoF{
+		font-size: 1.2em !important;
+	}
+	
 	/* Manejo de espacios para los valores decimales de la factura*/
 
 	.letra0{
@@ -394,7 +400,7 @@ table{
 		border-bottom-style: none !important;
 	 }
 
-	 tfoot{
+tfoot{
 		tr{
 			background-color: #ffffff !important;	
 			font-size: 0.9em;
@@ -405,12 +411,12 @@ table{
 					border: 0.5 solid #050404;
 						 }
 		}
-		th{
+	th{
 			border-style: outset !important;
 			// border-color: #050404;
 			// border: 0.1px;
 			background-color: #ffffff !important;
-		font-size: 0.9em !important;
+		font-size: 1em !important;
 	
 		.bordeIz {
 			border-bottom-style: none !important;
@@ -434,6 +440,30 @@ table{
 	 }
   }
   
+// table tbody {
+// 	tr {
+// 		background-color: #ffffff;
+// 		font-size: 0.9em !important;
+// 		// padding: .35em;
+// 		.bordeIz{
+// 			border-bottom-style: none !important;
+// 		 }
+// 	}
+
+// 	th{
+// 		background-color: #ffffff ;
+// 		color: #050404;
+// 		border : 0.9px solid #bcb9b9 !important;
+// 		font-size: 1em !important;
+// 		// font: bold;
+// 		// padding: .625em;
+// 		text-align: center;
+// 		.bordeIz{
+// 			border-bottom-style: none !important;
+// 		 }
+// 	}
+// }
+
   table tr {
 	background-color: #ffffff;
 	font-size: 0.9em !important;
@@ -446,8 +476,8 @@ table{
   table th{
 	background-color: #ffffff ;
 	color: #050404;
-	border : 0.1px solid #bcb9b9 !important;
-	font-size: 0.75em !important;
+	border : 0.9px solid #bcb9b9 !important;
+	font-size: 1em !important;
 	// font: bold;
 	// padding: .625em;
 	text-align: center;
