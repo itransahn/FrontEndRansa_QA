@@ -316,7 +316,7 @@ text-align: right !important;
 		position: relative;
 		font-size: 1.1em !important;
 		z-index:3;
-		right: 1.9em !important;
+		right: 1.7em !important;
 	}
 
 /* Manejo de espacios para los valores decimales de la factura*/
@@ -349,14 +349,14 @@ text-align: right !important;
 		border : 0.1px groove #050404 !important;
 	}
 
-.tabla{
-		background-color: #ffffff !important;
-		color: #050404 !important;
-		border: 0.1px #050404 !important;
-		.bordeIz{
-			border-bottom-style: none !important;
-		 }
-}
+// .tabla{
+// 		background-color: #ffffff !important;
+// 		color: #050404 !important;
+// 		border: 0.1px #050404 !important;
+// 		.bordeIz{
+// 			border-bottom-style: none !important;
+// 		 }
+// }
 
 p {
 	font-size: 		1.1em !important;
@@ -416,14 +416,8 @@ tfoot{
 			// border-color: #050404;
 			// border: 0.1px;
 			background-color: #ffffff !important;
-		font-size: 1em !important;
-	
-		.bordeIz {
-			border-bottom-style: none !important;
-		 }
-		.borderRg{
-			border: 0.2 solid #050404;
-		}
+		font-size: 1em !important;	
+		height: 5% !important;
 	}
 	.bordeIz{
 		border-bottom-style: none !important;
@@ -478,8 +472,6 @@ tfoot{
 	color: #050404;
 	border : 0.9px solid #bcb9b9 !important;
 	font-size: 1em !important;
-	// font: bold;
-	// padding: .625em;
 	text-align: center;
 	.bordeIz{
 		border-bottom-style: none !important;

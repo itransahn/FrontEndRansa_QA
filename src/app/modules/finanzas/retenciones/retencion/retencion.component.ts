@@ -32,8 +32,8 @@ export class RetencionComponent implements OnInit {
   public DiaP        : number = 0;
   public mesP        : number = 0;
   public anioP       : number = 0;
-  public proveedorP  : number = 0;
-  public sedeP       : number = 0;
+  public proveedorP  : number;
+  public sedeP       : number;
   public tipoR       : string;
 
   public anulacion = false;
@@ -61,11 +61,11 @@ export class RetencionComponent implements OnInit {
   ) { }
 
   ngOnInit(){
-    this.cargarParametros()
+    this.cargarParametros();
     this.cargarParametrosF();
     // this.correlativo();
     // this.validarCorrelativo();
-    this.CargarRetencion();
+   
     // this.CargarRetencionG();
   }
 
@@ -77,7 +77,12 @@ correlativo(){
  this.subs = this.facturacionS.post(url,params).subscribe(
     ( res:DataApi)=>{
         if(res){
-            this.correlativoN = res?.data?.Table0[0]?.['Correlativo'];        
+            this.correlativoN = res?.data?.Table0[0]?.['Correlativo'];     
+            console.log(this.correlativoN)   
+            if ( this.correlativoN === '-1'){
+                 this.permitido = false;
+              console.log(this.correlativoN,this.permitido)
+            }
             this.validarCorrelativo()
           }
         }
@@ -85,12 +90,13 @@ correlativo(){
 }
 
 cargarParametros(){
-  this.correlativo()
-this.DiaP        = this.ruta.snapshot.params?.['dia'] ,
-this.mesP        = this.ruta.snapshot.params?.['periodo'] ,
-this.anioP       = this.ruta.snapshot.params?.['anio'] ,
-this.proveedorP  = this.ruta.snapshot.params?.['proveedor'],
-this.sedeP       = this.ruta.snapshot.params?.['empresa']
+  this.DiaP        = this.ruta.snapshot.params?.['dia'] ,
+  this.mesP        = this.ruta.snapshot.params?.['periodo'] ,
+  this.anioP       = this.ruta.snapshot.params?.['anio'] ,
+  this.proveedorP  = this.ruta.snapshot.params?.['proveedor'],
+  this.sedeP       = this.ruta.snapshot.params?.['empresa'],
+  this.correlativo();
+  this.CargarRetencion();
 
 if( this.ruta.snapshot.params?.['retencion'] == 135 ){
   this.tipoR  = 'retencion135'
@@ -197,7 +203,7 @@ CargarRetencion(){
     this.espaciosBlancos = [];
     let url = '/finanzas/Cargarretencion';
     let params = {
-      tipo      : 135,  
+      tipo      : this.ruta.snapshot.params?.['retencion'],  
       proveedor : this.proveedorP,  
       anio      : this.anioP,  
       mes       : this.mesP,  
@@ -242,11 +248,10 @@ cambiarEstadoRetencion(){
   let url    = '/finanzas/estadoRetencion';
 for (let i = 0 ; i < this.retencionBD.length; i++ ){
     let params = {
-    retencion  : this.retencionBD[i]?.ID
+    retencion  : this.retencionBD[i]?.ID,
+    tipoR      : this.ruta.snapshot.params?.['retencion']
   } 
-this.facturacionS.post(url,params).subscribe( )
-
-  
+this.facturacionS.post(url,params).subscribe( ) 
 }
 
 

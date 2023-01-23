@@ -88,10 +88,10 @@ this.servicio.get(url,params).subscribe(
 CambiarEstado(idProveedor ?: number, estado?: number){
   let url = 'finanzas/Eproveedores';
   let params = {
-    idProveedor: idProveedor,
-    estado   : estado
+    idProveedor : idProveedor,
+    estado      : estado
   };
-  this.servicio.post(url, params).subscribe( data =>{
+  this.servicio.put(url, params).subscribe( data =>{
     if( !data.hasError ){
             this.cargarData()
     }
