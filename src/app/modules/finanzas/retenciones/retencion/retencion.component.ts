@@ -109,6 +109,10 @@ if( this.ruta.snapshot.params?.['retencion'] == 112 ){
 if( this.ruta.snapshot.params?.['retencion'] == 217 ){
   this.tipoR  = 'retencion217'
 }
+
+if( this.ruta.snapshot.params?.['retencion'] == 113 ){
+  this.tipoR  = 'retencion113'
+}
   }
 
 cargarParametrosF(){
@@ -181,7 +185,7 @@ pdfRetencion( id?:string, NombreFinal ?: string, detalle?: string, titulo ?: str
     }).then( (docResult) => {
       docResult.save(`${NombreFinal}.pdf`);
   
-      // this.pdfFacturaD('cliente',data['numeroFactura']+'FACCliente', 'Seguro','PDF' )
+      this.sharedS.pdfFacturaD('Retencion2', data['numeroFactura'] +'_RETCCPROVEEDOR', 'Seguro','PDF' )
       // this.pdfFacturaD('archivo',data['numeroFactura']+'FACArchivo', 'Seguro','PDF' )
   
       this.toast.mensajeSuccess("Documento generado correctamente","Generación de PDF");
@@ -239,7 +243,8 @@ guardarData(){
     hasta       : this.parametrosCai[0]?.['hasta'],
     fechaCAI    : this.parametrosCai[0]?.['fechaLimite']
   }
-  this.facturacionS.post(url, params).subscribe( )
+  console.log(params)
+  this.facturacionS.post(url, params).subscribe( res=>{ console.log(res)})
 
 }
 

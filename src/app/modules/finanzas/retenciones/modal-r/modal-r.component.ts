@@ -36,12 +36,17 @@ export class ModalRComponent implements OnInit {
     },
     {
       idTipo : 112,
-      retencion   : '12 %',
+      retencion   : '12.5 %',
       valor : 'retencion112'
     },
     {
       idTipo : 217,
       retencion   : '15 %',
+      valor : 'retencion217'
+    },
+    {
+      idTipo : 113,
+      retencion   : '10 %',
       valor : 'retencion217'
     }
   ]

@@ -73,7 +73,6 @@ export class RetencionesGComponent implements OnInit {
 
 
 cargarParametrosF(){
-  console.log(this.sedeP)
     let url='seguridad/parametrosF';
     let params = {
       sede : this.sedeP,
@@ -138,6 +137,10 @@ if( retencionT == 112 ){
 if( retencionT == 217 ){
   this.tipoR  = 'retencion217'
 }
+
+if( retencionT == 113 ){
+  this.tipoR  = 'retencion113'
+}
 for(let j=0; j<(20-this.retencionBD.length); j++){
   this.espaciosBlancos.push(j)
 }
@@ -183,7 +186,8 @@ GenerarPdf(){
       }).then( (docResult) => {
         docResult.save(`${NombreFinal}.pdf`);
     
-        // this.pdfFacturaD('cliente',data['numeroFactura']+'FACCliente', 'Seguro','PDF' )
+        this.sharedS.pdfFacturaD('RetencionGcc', data['numeroFactura'] +'_RETCCPROVEEDOR_RI', 'Seguro','PDF' )
+
         // this.pdfFacturaD('archivo',data['numeroFactura']+'FACArchivo', 'Seguro','PDF' )
     
         this.toast.mensajeSuccess("Documento generado correctamente","Generación de PDF");

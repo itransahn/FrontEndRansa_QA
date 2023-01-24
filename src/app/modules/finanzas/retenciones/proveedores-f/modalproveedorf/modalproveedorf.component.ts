@@ -24,6 +24,19 @@ export class ModalproveedorfComponent implements OnInit {
   public  catalogo  : any;
   public  titulo    : string;
   public  subtitulo : string;
+
+
+  public sedes = [
+    {
+      idSede : 1,
+      sede   : 'CD SAUCE'
+    },
+    {
+      idSede : 2,
+      sede   : 'ALMAHSA'
+    },
+
+  ]
   
   constructor(
     private dialogRef:MatDialogRef<ModalproveedorfComponent>,
@@ -72,29 +85,33 @@ export class ModalproveedorfComponent implements OnInit {
   cargarFormGet(){
       this.modalF = new FormGroup({
         proveedor    : new FormControl({ value: '', disabled : this.enable }, [] ),
-        rtn    : new FormControl( { value: '', disabled : this.enable }, [Validators.required] )
+        rtn    : new FormControl( { value: '', disabled : this.enable }, [Validators.required] ),
+        sede    : new FormControl( { value: '', disabled : this.enable }, [Validators.required] ),
       })
 
   }
 
-  cargarFormPost(){
+cargarFormPost(){
     this.modalF = new FormGroup({
       proveedor : new FormControl({ value: '', disabled : this.enable }, [Validators.required] ),
-      rtn       : new FormControl( { value: '', disabled : this.enable }, [Validators.required] )
+      rtn       : new FormControl( { value: '', disabled : this.enable }, [Validators.required] ),
+      sede       : new FormControl( { value: '', disabled : this.enable }, [Validators.required] ),
     })
 }
 
 cargarFormPut(){
   this.modalF = new FormGroup({
     proveedor : new FormControl( { value: '', disabled : this.enable }, [Validators.required] ),
-    rtn       : new FormControl( { value: '', disabled : this.enable }, [Validators.required] )
+    rtn       : new FormControl( { value: '', disabled : this.enable }, [Validators.required] ),
+    sede       : new FormControl( { value: '', disabled : this.enable }, [Validators.required] ),
   })
 }
 
 SetForm(){
   this.modalF.setValue({
     proveedor     : this.data['data']?.proveedor,
-    rtn     : this.data['data']?.RTN
+    rtn     : this.data['data']?.RTN,
+    sede     : this.data['data']?.idSede,
   })
 }
 
@@ -103,7 +120,8 @@ SetForm(){
     let url    = 'finanzas/Iproveedores';
     let params = {
       proveedor   : this.modalF.value.proveedor,
-      rtn         : this.modalF.value.rtn
+      rtn         : this.modalF.value.rtn,
+      sede        : this.modalF.value.sede
     }
     this.servicio.put(url,params).subscribe(
       res=>{
@@ -127,6 +145,7 @@ actualizar(){
     idProveedor   : this.data['data']?.idProveedor,
     proveedor     : this.modalF.value.proveedor,
     rtn           : this.modalF.value.rtn,
+    sede          : this.modalF.value.sede
   } 
   this.servicio.put( url,params ).subscribe(
     res=>{

@@ -16,17 +16,18 @@
     
             <div class="col-md-6 mt-4" style="text-align: right !important;">
                 <p class="right factura" >
-                    <span class="factura" > COMPROBANTE RETENCION </span> <br>
+                    <span class="factura" > COMPROBANTE DE RETENCION </span> <br>
                     <span class="correlativo factura">  000-001-05-0000{{  correlativoN }}  </span> 
                   </p>
                   <!-- <h4 > FECHA: {{ fecha | date:'mediumDate' | uppercase }} </h4> -->
                   <!-- <mat-divider class="material-dividier"></mat-divider> -->
                   <p class="rigth" > 
-                  <span style="font-size: 1.1em !important; font-weight:  bold !important;"> Fecha: {{ DiaP }}/{{mesP}}/{{anioP}} </span> <br>
+                  <!-- <span style="font-size: 1.1em !important; font-weight:  bold !important;"> Fecha: {{ DiaP }}/{{mesP}}/{{anioP}} </span> <br> -->
+              <span style="font-size: 1.1em !important; font-weight:  bold !important;"> Tegucigalpa, M.D.C.  <span> {{DiaP}} </span> de <span> {{ cargarMes(mesP)}} </span> del <span> {{anioP}} </span> </span>  <br>
                 CAI: {{ cai }} <br>
                 <span style="font-size: 1.1em !important; font-weight:  bold !important;"> Rango Autorizado: </span> <br>
                 {{ desde }} AL {{ hasta }} <br>
-                <span style="font-size: 1.1em !important; font-weight:  bold !important;">Fecha Limite De Emisión: {{ fechaLimite | date: 'shortDate'}} </span> <br>
+                <span style="font-size: 1.1em !important; font-weight:  bold !important;">Fecha Limite De Emisión: {{ fechaLimite | date: 'dd/MM/yyyy'}} </span> <br>
                 <!-- <span style="font-size: 1.1em !important; font-weight:  bold !important;"> Fecha: 30/12/2023 </span> -->
                 </p>
             </div>
@@ -37,7 +38,7 @@
             <div class="col-md-12 left">
             
             <p class="empresaM">
-Por este medio hacemos constar que en esta fecha hemos retenido a: Tegucigalpa, M.D.C.           <span> {{DiaP}} </span> de <span> {{ cargarMes(mesP)}} </span> del <span> {{anioP}} </span><br>
+Por este medio hacemos constar que en esta fecha hemos retenido a:  <br>
 
 Sr(es): <span class="left" style="text-decoration: underline;" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ retencionBD[0]?.proveedor | uppercase }}  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>  con RTN : <span style="text-decoration: underline;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ retencionBD[0]?.RTN}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> <br>
 La cantidad de: <span style="text-decoration: underline;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ convertirNumLetra( retornarSubtotal(tipoR) ) | uppercase }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
@@ -61,108 +62,104 @@ La cantidad de: <span style="text-decoration: underline;"> &nbsp;&nbsp;&nbsp;&nb
                 </div>
 
                 <div class="tabla mt-2" >
-                    <div class="table-responsive !important" >
-                        <table>
-                            <thead>
+                  <div class="table-responsive !important" >
+                      <table>
+                          <thead>
+                            <tr >
+                              <th class="contenidoF" scope="col">Fecha Factura</th>
+                              <th class="contenidoF" colspan="3" scope="col">CAI</th>
+                              <th class="contenidoF" colspan="2" scope="col">Factura  </th>
+                              <th class="contenidoF" scope="col">% de Retención</th>
+                              <th class="contenidoF" scope="col">Base Retención</th>
+                              <th class="contenidoF" scope="col">Monto Retenido</th>
+                            </tr>
+                          </thead>
+      
+      
+                          <tbody class="bordes2">
+                            <tr *ngFor="let item of retencionBD; let i = index"> 
+                              <td data-label="Fecha Factura" class="contenidoF">          {{ item?.fecha   | date : 'shortDate' }} </td>
+                              <td data-label="CAI"  colspan="3" class="contenidoF">       {{ item?.CAI                          }} </td>
+                              <td data-label="Factura"  colspan="2" class="contenidoF">   {{ item?.documento                    }}</td>
+                              <td data-label="% de Retención" class="contenidoF">         {{ item?.TipRetencion                 }}</td>
+                              <td data-label="Base Retención" class="contenidoF right">   {{ item?.baseRetencion | number : '1.2-2'   }}</td>
+                              <td data-label="Monto Retenido" class="contenidoF right" *ngIf="tipoR === 'retencion112'">   {{ item?.retencion112  | number : '1.2-2'  }} </td>
+                              <td data-label="Monto Retenido" class="contenidoF right" *ngIf="tipoR === 'retencion135'">   {{ item?.retencion135  | number : '1.2-2'  }} </td>
+                              <td data-label="Monto Retenido" class="contenidoF right" *ngIf="tipoR === 'retencion217'">   {{ item?.retencion217  | number : '1.2-2'  }} </td>
+                              <td data-label="Monto Retenido" class="contenidoF right" *ngIf="tipoR === 'retencion113'">   {{ item?.retencion113  | number : '1.2-2'  }} </td>
+  
+                            </tr>
+                     
+      
+                            <!-- <tr>
+                              <td data-label="CANTIDAD"> 01</td>
+                              <td data-label="DESCRIPCION">FLETE</td>
+                              <td data-label="PRECIO UNITARIO">{{ 4047 | currency : 'Lps' }}</td>
+                              <td data-label="DESC. Y REB OTORGADA">{{ 0    | currency : 'Lps' }}</td>
+                              <td data-label="IMPUESTO"> G </td>
+                              <td data-label="TOTAL">{{ 4047    | currency  : 'Lps'}}</td>
+                            </tr> -->
+      
+                              <tr  *ngFor="let item of espaciosBlancos"> 
+                                  <td class="espacioB"  colspan="6"></td>
+                              </tr>
+  
+                              <tr  > 
+                                <td class="espacioB"  > ***************</td>
+                                <td class="espacioB" colspan="3"  > ***************</td>
+                                <td class="espacioB" colspan="2" > ***************</td>
+                                <td class="espacioB"  > ***************</td>
+                                <td class="espacioB right"  > ***************</td>
+                                <td class="espacioB right"  > ***************</td>
+  
+  
+                            </tr>
+  
+                          </tbody>
+      
+      
+                            <tfoot>
                               <tr >
-                                <th class="contenidoF" scope="col">Fecha Factura</th>
-                                <th class="contenidoF" colspan="3" scope="col">CAI</th>
-                                <th class="contenidoF" colspan="2" scope="col">Factura  </th>
-                                <th class="contenidoF" scope="col">% de Retención</th>
-                                <th class="contenidoF" scope="col">Base Retención</th>
-                                <th class="contenidoF" scope="col">Monto Retenido</th>
-                              </tr>
-                            </thead>
-        
-        
-                            <tbody class="bordes2">
-                              <tr *ngFor="let item of retencionBD; let i = index"> 
-                                <td data-label="Fecha Factura" class="contenidoF">          {{ item?.fecha   | date : 'shortDate' }} </td>
-                                <td data-label="CAI"  colspan="3" class="contenidoF">       {{ item?.CAI                          }} </td>
-                                <td data-label="Factura"  colspan="2" class="contenidoF">   {{ item?.documento                    }}</td>
-                                <!-- <td data-label="% de Retención" class="contenidoF">         {{ item?.TipRetencion                 }}</td> -->
-                                <td data-label="% de Retención" class="contenidoF" *ngIf="tipoR == 'retencion135'" >  1%  </td>
-                                <td data-label="% de Retención" class="contenidoF" *ngIf="tipoR == 'retencion112'" >  12% </td>
-                                <td data-label="% de Retención" class="contenidoF" *ngIf="tipoR == 'retencion217'" >  15% </td>
-
-
-                                
-                                <td data-label="Base Retención" class="contenidoF right">   {{ item?.baseRetencion | number : '1.2-2'   }}</td>
-                                <td data-label="Monto Retenido" class="contenidoF right" *ngIf="tipoR == 'retencion135'">   {{ item?.retencion135  | number : '1.2-2'  }} </td>
-                                <td data-label="Monto Retenido" class="contenidoF right" *ngIf="tipoR == 'retencion112'">   {{ item?.retencion112  | number : '1.2-2'  }} </td>
-                                <td data-label="Monto Retenido" class="contenidoF right" *ngIf="tipoR == 'retencion217'">   {{ item?.retencion217  | number : '1.2-2'  }} </td>
-                              </tr>
-                       
-        
-                              <!-- <tr>
-                                <td data-label="CANTIDAD"> 01</td>
-                                <td data-label="DESCRIPCION">FLETE</td>
-                                <td data-label="PRECIO UNITARIO">{{ 4047 | currency : 'Lps' }}</td>
-                                <td data-label="DESC. Y REB OTORGADA">{{ 0    | currency : 'Lps' }}</td>
-                                <td data-label="IMPUESTO"> G </td>
-                                <td data-label="TOTAL">{{ 4047    | currency  : 'Lps'}}</td>
-                              </tr> -->
-        
-                                <tr  *ngFor="let item of espaciosBlancos"> 
-                                    <td class="espacioB"  colspan="6"></td>
-                                </tr>
-
-                                <tr  > 
-                                  <td class="espacioB"  > ***************</td>
-                                  <td class="espacioB" colspan="3"  > ***************</td>
-                                  <td class="espacioB" colspan="2" > ***************</td>
-                                  <td class="espacioB"  > ***************</td>
-                                  <td class="espacioB right"  > ***************</td>
-                                  <td class="espacioB right"  > ***************</td>
-
-
-                              </tr>
-
-                            </tbody>
-        
-        
-                              <tfoot>
-                                <tr >
-                                           <!-- Número a letras -->
-                                           <th class="right" colspan="7" >Totales  </th>
-                                    
-                                    <!-- vista de base de retenciones -->
-                                           <!-- <th class="center" style="font-size: 0.7em !important;"> {{ retornarSubtotal('baseR')  | number }} </th> -->
-
-
-                                           <th class="right legend" *ngIf=" retornarSubtotal('baseRetencion') <= 0"                                      > <span  class="letra0"> L.        </span>                    {{ retornarSubtotal('baseRetencion') | number : '1.2-2' }}  </th>
-                                           <th class="right legend" *ngIf=" retornarSubtotal('baseRetencion') >  0        && retornarSubtotal('baseRetencion') <= 99"      > <span  class="letra0"> L.        </span>  {{ retornarSubtotal('baseRetencion') | number : '1.2-2' }}  </th>
-                                           <th class="right legend" *ngIf=" retornarSubtotal('baseRetencion') >= 100      && retornarSubtotal('baseRetencion') <= 999"     > <span  class="letra100"> L.      </span>  {{ retornarSubtotal('baseRetencion') | number : '1.2-2' }}  </th>
-                                           <th class="right legend" *ngIf=" retornarSubtotal('baseRetencion') >= 1000     && retornarSubtotal('baseRetencion') <= 9999"    > <span  class="letra1000"> L.     </span>  {{ retornarSubtotal('baseRetencion') | number : '1.2-2' }}  </th>
-                                           <th class="right legend" *ngIf=" retornarSubtotal('baseRetencion') >= 10000    && retornarSubtotal('baseRetencion') <= 99999"   > <span  class="letra10000"> L.    </span>  {{ retornarSubtotal('baseRetencion') | number : '1.2-2' }}  </th>
-                                           <th class="right legend" *ngIf=" retornarSubtotal('baseRetencion') >= 100000   && retornarSubtotal('baseRetencion') <= 999999"  > <span  class="letra100000"> L.   </span>  {{ retornarSubtotal('baseRetencion') | number : '1.2-2' }}  </th>
-                                           <th class="right legend" *ngIf=" retornarSubtotal('baseRetencion') >= 1000000  && retornarSubtotal('baseRetencion') <= 9999999" > <span  class="letra1000000"> L.  </span>  {{ retornarSubtotal('baseRetencion') | number : '1.2-2' }}  </th>
-                                           <th class="right legend" *ngIf=" retornarSubtotal('baseRetencion') >= 10000000 "                              > <span  class="letra10000000"> L. </span>                    {{ retornarSubtotal('baseRetencion') | number : '1.2-2' }}  </th>
-
-
-
-                                    <!-- vista de monto retenido -->
-                                    <!-- <th class="center" style="font-size: 0.7em !important;"> {{ retornarSubtotal('montoR') | number }}</th> -->
-
-                                    <th class="right legend" *ngIf=" retornarSubtotal(tipoR) <= 0"                                      > <span  class="letra0"> L.        </span>          {{ retornarSubtotal(tipoR) | number : '1.2-2' }}  </th>
-                                    <th class="right legend" *ngIf=" retornarSubtotal(tipoR) >  0        && retornarSubtotal(tipoR) <= 99"      > <span  class="letra0"> L.        </span>  {{ retornarSubtotal(tipoR) | number : '1.2-2' }}  </th>
-                                    <th class="right legend" *ngIf=" retornarSubtotal(tipoR) >= 100      && retornarSubtotal(tipoR) <= 999"     > <span  class="letra100"> L.      </span>  {{ retornarSubtotal(tipoR) | number : '1.2-2' }}  </th>
-                                    <th class="right legend" *ngIf=" retornarSubtotal(tipoR) >= 1000     && retornarSubtotal(tipoR) <= 9999"    > <span  class="letra1000"> L.     </span>  {{ retornarSubtotal(tipoR) | number : '1.2-2' }}  </th>
-                                    <th class="right legend" *ngIf=" retornarSubtotal(tipoR) >= 10000    && retornarSubtotal(tipoR) <= 99999"   > <span  class="letra10000"> L.    </span>  {{ retornarSubtotal(tipoR) | number : '1.2-2' }}  </th>
-                                    <th class="right legend" *ngIf=" retornarSubtotal(tipoR) >= 100000   && retornarSubtotal(tipoR) <= 999999"  > <span  class="letra100000"> L.   </span>  {{ retornarSubtotal(tipoR) | number : '1.2-2' }}  </th>
-                                    <th class="right legend" *ngIf=" retornarSubtotal(tipoR) >= 1000000  && retornarSubtotal(tipoR) <= 9999999" > <span  class="letra1000000"> L.  </span>  {{ retornarSubtotal(tipoR) | number : '1.2-2' }}  </th>
-                                    <th class="right legend" *ngIf=" retornarSubtotal(tipoR) >= 10000000 "                              > <span  class="letra10000000"> L. </span>          {{ retornarSubtotal( tipoR) | number : '1.2-2' }}  </th>
-
-
-
-
-
-        
-        
-                            </tfoot>   
-                          </table>
-                       </div>
-                </div>
+                                         <!-- Número a letras -->
+                                         <th class="right" colspan="7" >Totales  </th>
+                                  
+                                  <!-- vista de base de retenciones -->
+                                         <!-- <th class="center" style="font-size: 0.7em !important;"> {{ retornarSubtotal('baseR')  | number }} </th> -->
+  
+  
+                                         <th class="right legend" *ngIf=" retornarSubtotal('baseRetencion') <= 0"                                      > <span  class="letra0"> L.        </span>            {{ retornarSubtotal('baseRetencion') | number : '1.2-2' }}  </th>
+                                         <th class="right legend" *ngIf=" retornarSubtotal('baseRetencion') >  0        && retornarSubtotal('baseRetencion') <= 99"      > <span  class="letra0"> L.        </span>  {{ retornarSubtotal('baseRetencion') | number : '1.2-2' }}  </th>
+                                         <th class="right legend" *ngIf=" retornarSubtotal('baseRetencion') >= 100      && retornarSubtotal('baseRetencion') <= 999"     > <span  class="letra100"> L.      </span>  {{ retornarSubtotal('baseRetencion') | number : '1.2-2' }}  </th>
+                                         <th class="right legend" *ngIf=" retornarSubtotal('baseRetencion') >= 1000     && retornarSubtotal('baseRetencion') <= 9999"    > <span  class="letra1000"> L.     </span>  {{ retornarSubtotal('baseRetencion') | number : '1.2-2' }}  </th>
+                                         <th class="right legend" *ngIf=" retornarSubtotal('baseRetencion') >= 10000    && retornarSubtotal('baseRetencion') <= 99999"   > <span  class="letra10000"> L.    </span>  {{ retornarSubtotal('baseRetencion') | number : '1.2-2' }}  </th>
+                                         <th class="right legend" *ngIf=" retornarSubtotal('baseRetencion') >= 100000   && retornarSubtotal('baseRetencion') <= 999999"  > <span  class="letra100000"> L.   </span>  {{ retornarSubtotal('baseRetencion') | number : '1.2-2' }}  </th>
+                                         <th class="right legend" *ngIf=" retornarSubtotal('baseRetencion') >= 1000000  && retornarSubtotal('baseRetencion') <= 9999999" > <span  class="letra1000000"> L.  </span>  {{ retornarSubtotal('baseRetencion') | number : '1.2-2' }}  </th>
+                                         <th class="right legend" *ngIf=" retornarSubtotal('baseRetencion') >= 10000000 "                              > <span  class="letra10000000"> L. </span>            {{ retornarSubtotal('baseRetencion') | number : '1.2-2' }}  </th>
+  
+  
+  
+                                  <!-- vista de monto retenido -->
+                                  <!-- <th class="center" style="font-size: 0.7em !important;"> {{ retornarSubtotal('montoR') | number }}</th> -->
+  
+                                  <th class="right legend" *ngIf=" retornarSubtotal(tipoR) <= 0"                                      > <span  class="letra0"> L.        </span>          {{ retornarSubtotal(tipoR) | number : '1.2-2' }}  </th>
+                                  <th class="right legend" *ngIf=" retornarSubtotal(tipoR) >  0        && retornarSubtotal(tipoR) <= 99"      > <span  class="letra0"> L.        </span>  {{ retornarSubtotal(tipoR) | number : '1.2-2' }}  </th>
+                                  <th class="right legend" *ngIf=" retornarSubtotal(tipoR) >= 100      && retornarSubtotal(tipoR) <= 999"     > <span  class="letra100"> L.      </span>  {{ retornarSubtotal(tipoR) | number : '1.2-2' }}  </th>
+                                  <th class="right legend" *ngIf=" retornarSubtotal(tipoR) >= 1000     && retornarSubtotal(tipoR) <= 9999"    > <span  class="letra1000"> L.     </span>  {{ retornarSubtotal(tipoR) | number : '1.2-2' }}  </th>
+                                  <th class="right legend" *ngIf=" retornarSubtotal(tipoR) >= 10000    && retornarSubtotal(tipoR) <= 99999"   > <span  class="letra10000"> L.    </span>  {{ retornarSubtotal(tipoR) | number : '1.2-2' }}  </th>
+                                  <th class="right legend" *ngIf=" retornarSubtotal(tipoR) >= 100000   && retornarSubtotal(tipoR) <= 999999"  > <span  class="letra100000"> L.   </span>  {{ retornarSubtotal(tipoR) | number : '1.2-2' }}  </th>
+                                  <th class="right legend" *ngIf=" retornarSubtotal(tipoR) >= 1000000  && retornarSubtotal(tipoR) <= 9999999" > <span  class="letra1000000"> L.  </span>  {{ retornarSubtotal(tipoR) | number : '1.2-2' }}  </th>
+                                  <th class="right legend" *ngIf=" retornarSubtotal(tipoR) >= 10000000 "                              > <span  class="letra10000000"> L. </span>            {{ retornarSubtotal( tipoR) | number : '1.2-2' }}  </th>
+  
+  
+  
+  
+  
+      
+      
+                          </tfoot>   
+                        </table>
+                     </div>
+              </div>
 
                 <div class="row mt-2">
                   <p>
@@ -185,7 +182,6 @@ La cantidad de: <span style="text-decoration: underline;"> &nbsp;&nbsp;&nbsp;&nb
     </mat-card>
 </div>
 
-
 <div class="container padre herencia mt-4"  id="RetencionGcc" *ngIf="retencionBD.length > 0">
   <mat-card class="cardPersonalizada">
       <div class="row">
@@ -204,17 +200,18 @@ La cantidad de: <span style="text-decoration: underline;"> &nbsp;&nbsp;&nbsp;&nb
   
           <div class="col-md-6 mt-4" style="text-align: right !important;">
               <p class="right factura" >
-                  <span class="factura" > COMPROBANTE RETENCION </span> <br>
+                  <span class="factura" > COMPROBANTE DE RETENCION </span> <br>
                   <span class="factura">  000-001-05-0000{{  correlativoN }}  </span> 
                 </p>
                 <!-- <h4 > FECHA: {{ fecha | date:'mediumDate' | uppercase }} </h4> -->
                 <!-- <mat-divider class="material-dividier"></mat-divider> -->
                 <p class="rigth" > 
-                <span style="font-size: 1.1em !important; font-weight:  bold !important;"> Fecha: {{ DiaP }}/{{mesP}}/{{anioP}} </span> <br>
+                <!-- <span style="font-size: 1.1em !important; font-weight:  bold !important;"> Fecha: {{ DiaP }}/{{mesP}}/{{anioP}} </span> <br> -->
+              <span style="font-size: 1.1em !important; font-weight:  bold !important;"> Tegucigalpa, M.D.C.  <span> {{DiaP}} </span> de <span> {{ cargarMes(mesP)}} </span> del <span> {{anioP}} </span> </span>  <br>
               CAI: {{ cai }} <br>
               <span style="font-size: 1.1em !important; font-weight:  bold !important;"> Rango Autorizado: </span> <br>
               {{ desde }} AL {{ hasta }} <br>
-              <span style="font-size: 1.1em !important; font-weight:  bold !important;">Fecha Limite De Emisión: {{ fechaLimite | date: 'shortDate'}} </span> <br>
+              <span style="font-size: 1.1em !important; font-weight:  bold !important;">Fecha Limite De Emisión: {{ fechaLimite | date: 'dd/MM/yyyy'}} </span> <br>
               <!-- <span style="font-size: 1.1em !important; font-weight:  bold !important;"> Fecha: 30/12/2023 </span> -->
               </p>
           </div>
@@ -225,7 +222,7 @@ La cantidad de: <span style="text-decoration: underline;"> &nbsp;&nbsp;&nbsp;&nb
           <div class="col-md-12 left">
           
           <p class="empresaM">
-Por este medio hacemos constar que en esta fecha hemos retenido a: Tegucigalpa, M.D.C.           <span> {{DiaP}} </span> de <span> {{ cargarMes(mesP)}} </span> del <span> {{anioP}} </span><br>
+Por este medio hacemos constar que en esta fecha hemos retenido a:  <br>
 
 Sr(es): <span class="left" style="text-decoration: underline;" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ retencionBD[0]?.proveedor | uppercase }}  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>  con RTN : <span style="text-decoration: underline;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ retencionBD[0]?.RTN}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> <br>
 La cantidad de: <span style="text-decoration: underline;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ convertirNumLetra( retornarSubtotal(tipoR) ) | uppercase }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
@@ -249,108 +246,109 @@ La cantidad de: <span style="text-decoration: underline;"> &nbsp;&nbsp;&nbsp;&nb
               </div>
 
               <div class="tabla mt-2" >
-                  <div class="table-responsive !important" >
-                      <table>
-                          <thead>
+                <div class="table-responsive !important" >
+                    <table>
+                        <thead>
+                          <tr >
+                            <th class="contenidoF" scope="col">Fecha Factura</th>
+                            <th class="contenidoF" colspan="3" scope="col">CAI</th>
+                            <th class="contenidoF" colspan="2" scope="col">Factura  </th>
+                            <th class="contenidoF" scope="col">% de Retención</th>
+                            <th class="contenidoF" scope="col">Base Retención</th>
+                            <th class="contenidoF" scope="col">Monto Retenido</th>
+                          </tr>
+                        </thead>
+    
+    
+                        <tbody class="bordes2">
+                          <tr *ngFor="let item of retencionBD; let i = index"> 
+                            <td data-label="Fecha Factura" class="contenidoF">          {{ item?.fecha   | date : 'shortDate' }} </td>
+                            <td data-label="CAI"  colspan="3" class="contenidoF">       {{ item?.CAI                          }} </td>
+                            <td data-label="Factura"  colspan="2" class="contenidoF">   {{ item?.documento                    }}</td>
+                            <!-- <td data-label="% de Retención" class="contenidoF">         {{ item?.TipRetencion                 }}</td> -->
+                            <td data-label="% de Retención" class="contenidoF" *ngIf="tipoR == 'retencion135'" >  1%  </td>
+                            <td data-label="% de Retención" class="contenidoF" *ngIf="tipoR == 'retencion112'" >  12% </td>
+                            <td data-label="% de Retención" class="contenidoF" *ngIf="tipoR == 'retencion217'" >  15% </td>
+                            <td data-label="% de Retención" class="contenidoF" *ngIf="tipoR == 'retencion113'" >  10% </td>
+
+                            
+                            <td data-label="Base Retención" class="contenidoF right">   {{ item?.baseRetencion | number : '1.2-2'   }}</td>
+                            <td data-label="Monto Retenido" class="contenidoF right" *ngIf="tipoR == 'retencion135'">   {{ item?.retencion135  | number : '1.2-2'  }} </td>
+                            <td data-label="Monto Retenido" class="contenidoF right" *ngIf="tipoR == 'retencion112'">   {{ item?.retencion112  | number : '1.2-2'  }} </td>
+                            <td data-label="Monto Retenido" class="contenidoF right" *ngIf="tipoR == 'retencion217'">   {{ item?.retencion217  | number : '1.2-2'  }} </td>
+                            <td data-label="Monto Retenido" class="contenidoF right" *ngIf="tipoR == 'retencion113'">   {{ item?.retencion113  | number : '1.2-2'  }} </td>
+                          </tr>
+                   
+    
+                          <!-- <tr>
+                            <td data-label="CANTIDAD"> 01</td>
+                            <td data-label="DESCRIPCION">FLETE</td>
+                            <td data-label="PRECIO UNITARIO">{{ 4047 | currency : 'Lps' }}</td>
+                            <td data-label="DESC. Y REB OTORGADA">{{ 0    | currency : 'Lps' }}</td>
+                            <td data-label="IMPUESTO"> G </td>
+                            <td data-label="TOTAL">{{ 4047    | currency  : 'Lps'}}</td>
+                          </tr> -->
+    
+                            <tr  *ngFor="let item of espaciosBlancos"> 
+                                <td class="espacioB"  colspan="6"></td>
+                            </tr>
+
+                            <tr  > 
+                              <td class="espacioB"  > ***************</td>
+                              <td class="espacioB" colspan="3"  > ***************</td>
+                              <td class="espacioB" colspan="2" > ***************</td>
+                              <td class="espacioB"  > ***************</td>
+                              <td class="espacioB right"  > ***************</td>
+                              <td class="espacioB right"  > ***************</td>
+
+
+                          </tr>
+
+                        </tbody>
+    
+    
+                          <tfoot>
                             <tr >
-                              <th class="contenidoF" scope="col">Fecha Factura</th>
-                              <th class="contenidoF" colspan="3" scope="col">CAI</th>
-                              <th class="contenidoF" colspan="2" scope="col">Factura  </th>
-                              <th class="contenidoF" scope="col">% de Retención</th>
-                              <th class="contenidoF" scope="col">Base Retención</th>
-                              <th class="contenidoF" scope="col">Monto Retenido</th>
-                            </tr>
-                          </thead>
-      
-      
-                          <tbody class="bordes2">
-                            <tr *ngFor="let item of retencionBD; let i = index"> 
-                              <td data-label="Fecha Factura" class="contenidoF">          {{ item?.fecha   | date : 'shortDate' }} </td>
-                              <td data-label="CAI"  colspan="3" class="contenidoF">       {{ item?.CAI                          }} </td>
-                              <td data-label="Factura"  colspan="2" class="contenidoF">   {{ item?.documento                    }}</td>
-                              <!-- <td data-label="% de Retención" class="contenidoF">         {{ item?.TipRetencion                 }}</td> -->
-                              <td data-label="% de Retención" class="contenidoF" *ngIf="tipoR == 'retencion135'" >  1%  </td>
-                              <td data-label="% de Retención" class="contenidoF" *ngIf="tipoR == 'retencion112'" >  12% </td>
-                              <td data-label="% de Retención" class="contenidoF" *ngIf="tipoR == 'retencion217'" >  15% </td>
+                                       <!-- Número a letras -->
+                                       <th class="right" colspan="7" >Totales  </th>
+                                
+                                <!-- vista de base de retenciones -->
+                                       <!-- <th class="center" style="font-size: 0.7em !important;"> {{ retornarSubtotal('baseR')  | number }} </th> -->
 
 
-                              
-                              <td data-label="Base Retención" class="contenidoF right">   {{ item?.baseRetencion | number : '1.2-2'   }}</td>
-                              <td data-label="Monto Retenido" class="contenidoF right" *ngIf="tipoR == 'retencion135'">   {{ item?.retencion135  | number : '1.2-2'  }} </td>
-                              <td data-label="Monto Retenido" class="contenidoF right" *ngIf="tipoR == 'retencion112'">   {{ item?.retencion112  | number : '1.2-2'  }} </td>
-                              <td data-label="Monto Retenido" class="contenidoF right" *ngIf="tipoR == 'retencion217'">   {{ item?.retencion217  | number : '1.2-2'  }} </td>
-                            </tr>
-                     
-      
-                            <!-- <tr>
-                              <td data-label="CANTIDAD"> 01</td>
-                              <td data-label="DESCRIPCION">FLETE</td>
-                              <td data-label="PRECIO UNITARIO">{{ 4047 | currency : 'Lps' }}</td>
-                              <td data-label="DESC. Y REB OTORGADA">{{ 0    | currency : 'Lps' }}</td>
-                              <td data-label="IMPUESTO"> G </td>
-                              <td data-label="TOTAL">{{ 4047    | currency  : 'Lps'}}</td>
-                            </tr> -->
-      
-                              <tr  *ngFor="let item of espaciosBlancos"> 
-                                  <td class="espacioB"  colspan="6"></td>
-                              </tr>
-
-                              <tr  > 
-                                <td class="espacioB"  > ***************</td>
-                                <td class="espacioB" colspan="3"  > ***************</td>
-                                <td class="espacioB" colspan="2" > ***************</td>
-                                <td class="espacioB"  > ***************</td>
-                                <td class="espacioB right"  > ***************</td>
-                                <td class="espacioB right"  > ***************</td>
-
-
-                            </tr>
-
-                          </tbody>
-      
-      
-                            <tfoot>
-                              <tr >
-                                         <!-- Número a letras -->
-                                         <th class="right" colspan="7" >Totales  </th>
-                                  
-                                  <!-- vista de base de retenciones -->
-                                         <!-- <th class="center" style="font-size: 0.7em !important;"> {{ retornarSubtotal('baseR')  | number }} </th> -->
-
-
-                                         <th class="right legend" *ngIf=" retornarSubtotal('baseRetencion') <= 0"                                      > <span  class="letra0"> L.        </span>                    {{ retornarSubtotal('baseRetencion') | number : '1.2-2' }}  </th>
-                                         <th class="right legend" *ngIf=" retornarSubtotal('baseRetencion') >  0        && retornarSubtotal('baseRetencion') <= 99"      > <span  class="letra0"> L.        </span>  {{ retornarSubtotal('baseRetencion') | number : '1.2-2' }}  </th>
-                                         <th class="right legend" *ngIf=" retornarSubtotal('baseRetencion') >= 100      && retornarSubtotal('baseRetencion') <= 999"     > <span  class="letra100"> L.      </span>  {{ retornarSubtotal('baseRetencion') | number : '1.2-2' }}  </th>
-                                         <th class="right legend" *ngIf=" retornarSubtotal('baseRetencion') >= 1000     && retornarSubtotal('baseRetencion') <= 9999"    > <span  class="letra1000"> L.     </span>  {{ retornarSubtotal('baseRetencion') | number : '1.2-2' }}  </th>
-                                         <th class="right legend" *ngIf=" retornarSubtotal('baseRetencion') >= 10000    && retornarSubtotal('baseRetencion') <= 99999"   > <span  class="letra10000"> L.    </span>  {{ retornarSubtotal('baseRetencion') | number : '1.2-2' }}  </th>
-                                         <th class="right legend" *ngIf=" retornarSubtotal('baseRetencion') >= 100000   && retornarSubtotal('baseRetencion') <= 999999"  > <span  class="letra100000"> L.   </span>  {{ retornarSubtotal('baseRetencion') | number : '1.2-2' }}  </th>
-                                         <th class="right legend" *ngIf=" retornarSubtotal('baseRetencion') >= 1000000  && retornarSubtotal('baseRetencion') <= 9999999" > <span  class="letra1000000"> L.  </span>  {{ retornarSubtotal('baseRetencion') | number : '1.2-2' }}  </th>
-                                         <th class="right legend" *ngIf=" retornarSubtotal('baseRetencion') >= 10000000 "                              > <span  class="letra10000000"> L. </span>                    {{ retornarSubtotal('baseRetencion') | number : '1.2-2' }}  </th>
+                                       <th class="right legend" *ngIf=" retornarSubtotal('baseRetencion') <= 0"                                      > <span  class="letra0"> L.        </span>                    {{ retornarSubtotal('baseRetencion') | number : '1.2-2' }}  </th>
+                                       <th class="right legend" *ngIf=" retornarSubtotal('baseRetencion') >  0        && retornarSubtotal('baseRetencion') <= 99"      > <span  class="letra0"> L.        </span>  {{ retornarSubtotal('baseRetencion') | number : '1.2-2' }}  </th>
+                                       <th class="right legend" *ngIf=" retornarSubtotal('baseRetencion') >= 100      && retornarSubtotal('baseRetencion') <= 999"     > <span  class="letra100"> L.      </span>  {{ retornarSubtotal('baseRetencion') | number : '1.2-2' }}  </th>
+                                       <th class="right legend" *ngIf=" retornarSubtotal('baseRetencion') >= 1000     && retornarSubtotal('baseRetencion') <= 9999"    > <span  class="letra1000"> L.     </span>  {{ retornarSubtotal('baseRetencion') | number : '1.2-2' }}  </th>
+                                       <th class="right legend" *ngIf=" retornarSubtotal('baseRetencion') >= 10000    && retornarSubtotal('baseRetencion') <= 99999"   > <span  class="letra10000"> L.    </span>  {{ retornarSubtotal('baseRetencion') | number : '1.2-2' }}  </th>
+                                       <th class="right legend" *ngIf=" retornarSubtotal('baseRetencion') >= 100000   && retornarSubtotal('baseRetencion') <= 999999"  > <span  class="letra100000"> L.   </span>  {{ retornarSubtotal('baseRetencion') | number : '1.2-2' }}  </th>
+                                       <th class="right legend" *ngIf=" retornarSubtotal('baseRetencion') >= 1000000  && retornarSubtotal('baseRetencion') <= 9999999" > <span  class="letra1000000"> L.  </span>  {{ retornarSubtotal('baseRetencion') | number : '1.2-2' }}  </th>
+                                       <th class="right legend" *ngIf=" retornarSubtotal('baseRetencion') >= 10000000 "                              > <span  class="letra10000000"> L. </span>                    {{ retornarSubtotal('baseRetencion') | number : '1.2-2' }}  </th>
 
 
 
-                                  <!-- vista de monto retenido -->
-                                  <!-- <th class="center" style="font-size: 0.7em !important;"> {{ retornarSubtotal('montoR') | number }}</th> -->
+                                <!-- vista de monto retenido -->
+                                <!-- <th class="center" style="font-size: 0.7em !important;"> {{ retornarSubtotal('montoR') | number }}</th> -->
 
-                                  <th class="right legend" *ngIf=" retornarSubtotal(tipoR) <= 0"                                      > <span  class="letra0"> L.        </span>          {{ retornarSubtotal(tipoR) | number : '1.2-2' }}  </th>
-                                  <th class="right legend" *ngIf=" retornarSubtotal(tipoR) >  0        && retornarSubtotal(tipoR) <= 99"      > <span  class="letra0"> L.        </span>  {{ retornarSubtotal(tipoR) | number : '1.2-2' }}  </th>
-                                  <th class="right legend" *ngIf=" retornarSubtotal(tipoR) >= 100      && retornarSubtotal(tipoR) <= 999"     > <span  class="letra100"> L.      </span>  {{ retornarSubtotal(tipoR) | number : '1.2-2' }}  </th>
-                                  <th class="right legend" *ngIf=" retornarSubtotal(tipoR) >= 1000     && retornarSubtotal(tipoR) <= 9999"    > <span  class="letra1000"> L.     </span>  {{ retornarSubtotal(tipoR) | number : '1.2-2' }}  </th>
-                                  <th class="right legend" *ngIf=" retornarSubtotal(tipoR) >= 10000    && retornarSubtotal(tipoR) <= 99999"   > <span  class="letra10000"> L.    </span>  {{ retornarSubtotal(tipoR) | number : '1.2-2' }}  </th>
-                                  <th class="right legend" *ngIf=" retornarSubtotal(tipoR) >= 100000   && retornarSubtotal(tipoR) <= 999999"  > <span  class="letra100000"> L.   </span>  {{ retornarSubtotal(tipoR) | number : '1.2-2' }}  </th>
-                                  <th class="right legend" *ngIf=" retornarSubtotal(tipoR) >= 1000000  && retornarSubtotal(tipoR) <= 9999999" > <span  class="letra1000000"> L.  </span>  {{ retornarSubtotal(tipoR) | number : '1.2-2' }}  </th>
-                                  <th class="right legend" *ngIf=" retornarSubtotal(tipoR) >= 10000000 "                              > <span  class="letra10000000"> L. </span>          {{ retornarSubtotal( tipoR) | number : '1.2-2' }}  </th>
+                                <th class="right legend" *ngIf=" retornarSubtotal(tipoR) <= 0"                                      > <span  class="letra0"> L.        </span>          {{ retornarSubtotal(tipoR) | number : '1.2-2' }}  </th>
+                                <th class="right legend" *ngIf=" retornarSubtotal(tipoR) >  0        && retornarSubtotal(tipoR) <= 99"      > <span  class="letra0"> L.        </span>  {{ retornarSubtotal(tipoR) | number : '1.2-2' }}  </th>
+                                <th class="right legend" *ngIf=" retornarSubtotal(tipoR) >= 100      && retornarSubtotal(tipoR) <= 999"     > <span  class="letra100"> L.      </span>  {{ retornarSubtotal(tipoR) | number : '1.2-2' }}  </th>
+                                <th class="right legend" *ngIf=" retornarSubtotal(tipoR) >= 1000     && retornarSubtotal(tipoR) <= 9999"    > <span  class="letra1000"> L.     </span>  {{ retornarSubtotal(tipoR) | number : '1.2-2' }}  </th>
+                                <th class="right legend" *ngIf=" retornarSubtotal(tipoR) >= 10000    && retornarSubtotal(tipoR) <= 99999"   > <span  class="letra10000"> L.    </span>  {{ retornarSubtotal(tipoR) | number : '1.2-2' }}  </th>
+                                <th class="right legend" *ngIf=" retornarSubtotal(tipoR) >= 100000   && retornarSubtotal(tipoR) <= 999999"  > <span  class="letra100000"> L.   </span>  {{ retornarSubtotal(tipoR) | number : '1.2-2' }}  </th>
+                                <th class="right legend" *ngIf=" retornarSubtotal(tipoR) >= 1000000  && retornarSubtotal(tipoR) <= 9999999" > <span  class="letra1000000"> L.  </span>  {{ retornarSubtotal(tipoR) | number : '1.2-2' }}  </th>
+                                <th class="right legend" *ngIf=" retornarSubtotal(tipoR) >= 10000000 "                              > <span  class="letra10000000"> L. </span>          {{ retornarSubtotal( tipoR) | number : '1.2-2' }}  </th>
 
 
 
 
 
-      
-      
-                          </tfoot>   
-                        </table>
-                     </div>
-              </div>
+    
+    
+                        </tfoot>   
+                      </table>
+                   </div>
+            </div>
 
               <div class="row mt-2">
                 <p>

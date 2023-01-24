@@ -26,18 +26,17 @@
                     </mat-form-field>
                 </div>
 
-<!-- 
+
                 <div  class="col-md-12 container" >
-                    <mat-form-field *ngIf="visible" appearance="legacy">
-                        <mat-label>Estado</mat-label>
-                        <mat-select  formControlName="estado" > 
-                            <mat-option> - </mat-option> 
-                            <mat-option  *ngFor="let estado of catalogo['estados']" [value]="estado?.id_estadoGeneral">
-                                {{  estado?.estadoGeneral | uppercase }}
+                    <mat-form-field appearance="legacy">
+                        <mat-label> Empresa </mat-label>
+                        <mat-select  formControlName="sede" > 
+                            <mat-option  *ngFor="let item of sedes" [value]="item?.idSede">
+                                {{  item?.sede | uppercase }}
                             </mat-option> 
                           </mat-select> 
                       </mat-form-field>
-                </div> -->
+                </div>
 
                 </div>
             <div class="container">

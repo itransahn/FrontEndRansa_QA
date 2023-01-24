@@ -2,51 +2,51 @@
 const mesesd = () =>{
     return [        
     {
-        idMes : 1,
+        idMes : '01',
         mes   : "Enero"
     },
     {
-        idMes : 2,
+        idMes : '02',
         mes   : "Febrero"
     },
     {
-        idMes : 3,
+        idMes : '03',
         mes   : "Marzo"
     },
     {
-        idMes : 4,
+        idMes : '04',
         mes   : "Abril"
     },
     {
-        idMes : 5,
+        idMes : '05',
         mes   : "Mayo"
     },
     {
-        idMes : 6,
+        idMes : '06',
         mes   : "Junio"
     },
     {
-        idMes : 7,
+        idMes : '07',
         mes   : "Julio"
     },
     {
-        idMes : 8,
+        idMes : '08',
         mes   : "Agosto"
     },
     {
-        idMes : 9,
+        idMes : '09',
         mes   : "Septiembre"
     },
     {
-        idMes : 10,
+        idMes : '10',
         mes   : "Octubre"
     },
     {
-        idMes : 11,
+        idMes : '11',
         mes   : "Noviembre"
     },
     {
-        idMes : 12,
+        idMes : '12',
         mes   : "Diciembre"
     }
     ]
