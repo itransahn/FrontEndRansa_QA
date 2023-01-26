@@ -150,7 +150,6 @@ tipoRetencion : tipoRetP,
 cai           : caiP,
 sede          : sede
   };
-console.log(params)
  this.servicio.put( url, params ).subscribe ( 
   res=>{
       if( res?.data?.Table0?.[0]['codigo'] != -1 ){
@@ -163,7 +162,6 @@ console.log(params)
         this.proveedoresFR = this.removeDuplicates(this.proveedoresF)
             this.loading3 = true;
           }
-          console.log(this.proveedoresF)
 
         }
     }
