@@ -97,7 +97,8 @@ Retencion(){
                   this.dataExcel[i]?.impuesto,
                   this.dataExcel[i]?.retencion,
                   this.dataExcel[i]?.tipoRetencion,
-                  String(this.dataExcel[i]?.CAI)
+                  String(this.dataExcel[i]?.CAI),
+                  this.dataExcel[i]?.sede,
                  )
               }catch( err ){
                 this.toast.mensajeError(err,'Error')
@@ -133,7 +134,8 @@ Limpieza(){
   impuestoP  ?: number,
   retencionP ?: number,
   tipoRetP   ?: number,
-  caiP       ?: string
+  caiP       ?: string,
+  sede       ?: number
 ){
 
   let url = 'finanzas/retencion';
@@ -146,8 +148,9 @@ impuesto      : impuestoP,
 retencion     : retencionP,
 tipoRetencion : tipoRetP,
 cai           : caiP,
+sede          : sede
   };
-
+console.log(params)
  this.servicio.put( url, params ).subscribe ( 
   res=>{
       if( res?.data?.Table0?.[0]['codigo'] != -1 ){
@@ -160,7 +163,7 @@ cai           : caiP,
         this.proveedoresFR = this.removeDuplicates(this.proveedoresF)
             this.loading3 = true;
           }
-
+          console.log(this.proveedoresF)
 
         }
     }
@@ -193,7 +196,8 @@ RTN           ?: string,
 fecha         ?: string,
 impuesto      ?: number,
 retencion     ?: number,
-tipoRetencion ?: number
+tipoRetencion ?: number,
+sede          ?: number
 }
 
 

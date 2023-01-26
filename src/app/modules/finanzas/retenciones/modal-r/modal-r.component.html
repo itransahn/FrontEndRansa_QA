@@ -9,7 +9,7 @@
 
                 <div class="col-md-12">
                     <mat-form-field  appearance="legacy">
-                        <mat-label> Sede  </mat-label>
+                        <mat-label> Empresa  </mat-label>
                         <mat-select  formControlName="sede" > 
                             <mat-option  *ngFor="let tu of sedes" [value]="tu?.idSede">
                                 {{  tu?.sede | uppercase }}
@@ -49,12 +49,24 @@
                       </mat-form-field>
                 </div>
 
-                <div class="col-md-12">
+                <!-- <div class="col-md-12">
                     <mat-form-field appearance="legacy">
                         <mat-label> Día </mat-label>
                         <input matInput maxlength="2" placeholder="Día" mask="99" formControlName ="dia">
                     </mat-form-field>
+                </div> -->
+
+                <div class="col-md-12">
+                    <mat-form-field  appearance="legacy">
+                        <mat-label> Día de Generación  </mat-label>
+                        <mat-select  formControlName="dia" > 
+                            <mat-option  *ngFor="let tu of dias" [value]="tu?.idDia">
+                                {{  tu?.dia | uppercase }}
+                            </mat-option> 
+                          </mat-select> 
+                      </mat-form-field>
                 </div>
+
 
                 <div class="col-md-12">
                     <mat-form-field appearance="legacy">

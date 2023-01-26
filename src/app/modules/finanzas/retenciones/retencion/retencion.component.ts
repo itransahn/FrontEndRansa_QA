@@ -211,7 +211,9 @@ CargarRetencion(){
       proveedor : this.proveedorP,  
       anio      : this.anioP,  
       mes       : this.mesP,  
+      sede      : this.sedeP
     }
+    console.log( params )
     this.facturacionS.post (url,params).subscribe(
       res=>{
         this.retencionBD = res?.data?.Table0;

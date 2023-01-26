@@ -20,7 +20,7 @@ export class ModalRComponent implements OnInit {
   public sedes = [
     {
       idSede : 1,
-      sede   : 'CD SAUCE'
+      sede   : 'RANSA'
     },
     {
       idSede : 2,
@@ -49,6 +49,25 @@ export class ModalRComponent implements OnInit {
       retencion   : '10 %',
       valor : 'retencion217'
     }
+  ]
+
+  public dias = [
+    {
+      idDia : 28,
+      dia   : '28'
+    },
+    {
+      idDia : 29,
+      dia   : '29'
+    },
+    {
+      idDia : 30,
+      dia   : '30'
+    },
+    {
+      idDia : 31,
+      dia   : '31'
+    },
   ]
   constructor(
     private dialogRef:MatDialogRef<ModalRComponent>, 

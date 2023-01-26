@@ -322,6 +322,7 @@ html2canvas(DATA, options).then((canvas) => {
 CleanDataExcel(){
   this.Excel$.next([]);
   this.ExcelName = '';
+  this.isExcelFile = '';
 }
 
 
