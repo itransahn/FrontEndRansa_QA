@@ -89,16 +89,16 @@ Retencion(){
                 let fecha : string;
                 fecha = String(this.dataExcel[i]?.fecha).substring(4,8)  + '/' + String(this.dataExcel[i]?.fecha).substring(2,4) + '/'+  String(this.dataExcel[i]?.fecha).substring(0,2);
                 this.cargarRetencion(
-                  String(this.dataExcel[i]?.Empresa),
+                  String(this.dataExcel[i]?.Proveedor),
                   String(this.dataExcel[i]?.RTN),
                   String(this.dataExcel[i]?.Documento),
                   fecha,
                   // fecha,
-                  this.dataExcel[i]?.impuesto,
-                  this.dataExcel[i]?.retencion,
+                  this.dataExcel[i]?.BaseImponible,
+                  this.dataExcel[i]?.Impuesto,
                   this.dataExcel[i]?.tipoRetencion,
                   String(this.dataExcel[i]?.CAI),
-                  this.dataExcel[i]?.sede,
+                  this.dataExcel[i]?.Sociedad,
                  )
               }catch( err ){
                 this.toast.mensajeError(err,'Error')
@@ -189,13 +189,13 @@ removeDuplicates(array : any[]){
 interface retenciones {
 CAI           ?: string,
 Documento     ?: string,
-Empresa       ?: string,
+Proveedor     ?: string,
 RTN           ?: string,
 fecha         ?: string,
-impuesto      ?: number,
-retencion     ?: number,
+BaseImponible ?: number,
+Impuesto      ?: number,
 tipoRetencion ?: number,
-sede          ?: number
+Sociedad      ?: number
 }
 
 

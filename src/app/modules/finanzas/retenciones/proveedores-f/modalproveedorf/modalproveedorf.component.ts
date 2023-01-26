@@ -29,7 +29,7 @@ export class ModalproveedorfComponent implements OnInit {
   public sedes = [
     {
       idSede : 1,
-      sede   : 'CD SAUCE'
+      sede   : 'RANSA'
     },
     {
       idSede : 2,
@@ -85,7 +85,7 @@ export class ModalproveedorfComponent implements OnInit {
   cargarFormGet(){
       this.modalF = new FormGroup({
         proveedor    : new FormControl({ value: '', disabled : this.enable }, [] ),
-        rtn    : new FormControl( { value: '', disabled : this.enable }, [Validators.required] ),
+        rtn    : new FormControl( { value: '', disabled : this.enable },  [Validators.required] ),
         sede    : new FormControl( { value: '', disabled : this.enable }, [Validators.required] ),
       })
 

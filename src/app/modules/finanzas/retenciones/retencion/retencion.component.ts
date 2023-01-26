@@ -213,7 +213,6 @@ CargarRetencion(){
       mes       : this.mesP,  
       sede      : this.sedeP
     }
-    console.log( params )
     this.facturacionS.post (url,params).subscribe(
       res=>{
         this.retencionBD = res?.data?.Table0;
@@ -245,7 +244,6 @@ guardarData(){
     hasta       : this.parametrosCai[0]?.['hasta'],
     fechaCAI    : this.parametrosCai[0]?.['fechaLimite']
   }
-  console.log(params)
   this.facturacionS.post(url, params).subscribe( res=>{ console.log(res)})
 
 }

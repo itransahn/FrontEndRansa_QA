@@ -32,16 +32,17 @@
               <tr>
                 <th scope="col">Proveedor</th>
                 <th scope="col">RTN</th>
-                <th scope="col">Sede</th>
+                <th scope="col">Sociedad</th>
                 <th scope="col">Estado</th>
                 <th scope="col">Acciones</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let data of data  | search: this.filtro.value.filtrar:parametrosBusqueda | slice: desde: hasta " class="trHover">
-                <td data-label="Proveedor">{{    data?.proveedor }}</td>
-                <td data-label="RTN">      {{    data?.RTN       }}</td>
-                <td data-label="Sede">      {{    data?.sede       }}</td>
+                <td data-label="Proveedor">  {{    data?.proveedor }}</td>
+                <td data-label="RTN">        {{    data?.RTN       }}</td>
+                <td data-label="Sociedad">   {{ sociedad  (data?.sede)        }}</td>
+                
                 <td data-label="Estado">
                     <span *ngIf="data?.estado == 1">
                         <mat-icon class="success">check_box</mat-icon>

@@ -62,7 +62,13 @@ export class ProveedoresFComponent implements OnInit {
  
   }
 
-
+sociedad( nombre : string ){
+  if ( nombre == 'CD SAUCE'){
+    return 'RANSA'
+  }else{
+    return 'ALMAHSA'
+  }
+}
   
  ngOnDestroy()  {
   this.sub.unsubscribe()

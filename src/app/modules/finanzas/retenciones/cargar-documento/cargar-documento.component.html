@@ -74,11 +74,11 @@
             </thead>
             <tbody>
               <tr *ngFor="let act of dataExcel  | search: this.filtro.value.filtrar:parametrosBusqueda | slice: desde: hasta " class="trHover">
-                <td data-label="Empresa">{{    act?.['Empresa']  }}</td>
+                <td data-label="Empresa">{{    act?.['Proveedor']  }}</td>
                 <td data-label="Documento">{{    act?.['Documento']  }}</td>
                 <td data-label="RTN">{{        act?.['RTN']      }}</td>
-                <td data-label="impuesto">{{        act?.['impuesto']  | number : '1.2-2'   }}</td>
-                <td data-label="retencion">{{        act?.['retencion']  | number : '1.2-2'   }}</td>
+                <td data-label="impuesto">{{        act?.['BaseImponible']  | number : '1.2-2'   }}</td>
+                <td data-label="retencion">{{        act?.['Impuesto']  | number : '1.2-2'   }}</td>
                 <td data-label="Tipo Retención">{{        act?.['tipoRetencion']     }}</td>
         
       

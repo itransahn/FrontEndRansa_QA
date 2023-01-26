@@ -75,7 +75,7 @@ La cantidad de: <span style="text-decoration: underline;"> &nbsp;&nbsp;&nbsp;&nb
         
                             <tbody class="bordes2">
                               <tr *ngFor="let item of retencionBD; let i = index"> 
-                                <td data-label="Fecha Factura" class="contenidoF">          {{ item?.fecha   | date : 'shortDate' }} </td>
+                                <td data-label="Fecha Factura" class="contenidoF">          {{ item?.fecha   | date : 'dd/MM/yyyy' }} </td>
                                 <td data-label="CAI"  colspan="3" class="contenidoF">       {{ item?.CAI                          }} </td>
                                 <td data-label="Factura"  colspan="2" class="contenidoF">   {{ item?.documento                    }}</td>
                                 <td data-label="% de Retención" class="contenidoF">         {{ item?.TipRetencion                 }}</td>
