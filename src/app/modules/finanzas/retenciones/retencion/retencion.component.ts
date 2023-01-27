@@ -81,7 +81,6 @@ correlativo(){
             console.log(this.correlativoN)   
             if ( this.correlativoN === '-1'){
                  this.permitido = false;
-              console.log(this.correlativoN,this.permitido)
             }
             this.validarCorrelativo()
           }
@@ -216,10 +215,13 @@ CargarRetencion(){
     this.facturacionS.post (url,params).subscribe(
       res=>{
         this.retencionBD = res?.data?.Table0;
-        if ( this.retencionBD.length <= 22 ){
-          for(let j=0; j<(22-this.retencionBD.length); j++){
+        console.log(this.retencionBD.length)
+        if ( this.retencionBD.length < 20 ){
+          for(let j = this.retencionBD.length; j<(40-this.retencionBD.length); j++){
             this.espaciosBlancos.push(j)
           }
+        }else{
+          
         }
   })
 }

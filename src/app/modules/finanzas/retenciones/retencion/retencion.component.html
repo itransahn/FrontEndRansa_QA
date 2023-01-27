@@ -7,7 +7,7 @@
                 <p class = "empresa">
                 <span class="nombre" > {{parametros[0]?.['nombreCompleto']}}</span> <br>
                  RTN: {{parametros[0]?.['rtnEmpresa']}} <br>
-                 {{parametros[0]?.['direccion1']}}: {{ parametros[0]?.['direccion2']}} <br>
+                 {{parametros[0]?.['direccion1']}} {{ parametros[0]?.['direccion2']}} <br>
                  Municipio: {{ parametros[0]?.['municipio']}}, Departamento: {{ parametros[0]?.['Departamento']}} <br> 
                  Tel: {{parametros[0]?.['Telfijo']}}, {{parametros[0]?.['TelCel']}}  <br>
                 <span *ngIf="parametros[0]?.['correo']"> Correo: {{parametros[0]?.['correo']}}  </span>
@@ -23,8 +23,10 @@
                   <!-- <mat-divider class="material-dividier"></mat-divider> -->
                   <p class="rigth" > 
                   <!-- <span style="font-size: 1.1em !important; font-weight:  bold !important;"> Fecha: {{ DiaP }}/{{mesP}}/{{anioP}} </span> <br> -->
-                  <span style="font-size: 1.1em !important; font-weight:  bold !important;"> Tegucigalpa, M.D.C.  <span> {{DiaP}} </span> de <span> {{ cargarMes(mesP)}} </span> del <span> {{anioP}} </span> </span>  <br>
-                CAI: {{ parametrosCai[0]?.['CAI']}} <br>
+                  <!-- <span style="font-size: 1.1em !important; font-weight:  bold !important;"> Tegucigalpa, M.D.C.  <span> {{DiaP}} </span> de <span> {{ cargarMes(mesP)}} </span> del <span> {{anioP}} </span> </span>  <br> -->
+                  <span style="font-size: 1.1em !important; font-weight:  bold !important;"> Fecha:  <span> {{DiaP}} </span> / <span> {{ mesP }} </span> / <span> {{anioP}} </span> </span>  <br>
+          
+                  CAI: {{ parametrosCai[0]?.['CAI']}} <br>
                 <span style="font-size: 1.1em !important; font-weight:  bold !important;"> Rango Autorizado: </span> <br>
                 {{ parametrosCai[0]?.['desde'] }} AL {{ parametrosCai[0]?.['hasta'] }} <br>
                 <span style="font-size: 1.1em !important; font-weight:  bold !important;">Fecha Limite De Emisión: {{ parametrosCai[0]?.['fechaLimite'] | date: 'dd/MM/yyyy'}} </span> <br>
@@ -45,17 +47,15 @@ La cantidad de: <span style="text-decoration: underline;"> &nbsp;&nbsp;&nbsp;&nb
 
             </p>
                         </div>
-             <div class="col-md-12">
+             <!-- <div class="col-md-12">
                             <p class="black empresaM">
                                 En concepto de retención de: 
 
                                 <mat-checkbox class="radio" disabled="true" [(ngModel)]="anulacion"><span style="font-size: 0.9em !important; font-family: Arial, Helvetica, sans-serif !important;">Impuesto sobre la renta</span>  </mat-checkbox>
                                 <mat-checkbox class="radio" disabled="true" [(ngModel)]="devolcion"><span style="font-size: 0.9em !important; font-family: Arial, Helvetica, sans-serif !important;">Impuesto sobre venta</span> </mat-checkbox>
                             </p>
-                            <!-- <section class="example-section ">
-                               
-                              </section> -->
-                        </div>
+                
+                        </div> -->
                 </div>
 
                 <div class="tabla mt-2" >
@@ -166,15 +166,16 @@ La cantidad de: <span style="text-decoration: underline;"> &nbsp;&nbsp;&nbsp;&nb
                 </div>
 
 
-                <div class="row container" style="margin-top: 5% !important">
+                <div class="row container firmaCliente" style="margin-top: 5% !important">
                   _____________________________________________ <br>
                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Firma Autorizada y Sello del Agente Retenedor
 
+                   <div class="row " style="margin-top: 2% !important">
+                    <div class="col-md 12 firm container footL">   <label class="center">  Original Proveedor </label>  </div>
+                </div>
 
               </div>
-                <div class="row " style="margin-top: 2% !important">
-                  <div class="col-md 12 firm container footL">   <label class="center">  Original Proveedor </label>  </div>
-              </div>
+             
         </div>
     </mat-card>
 </div>
@@ -189,7 +190,7 @@ La cantidad de: <span style="text-decoration: underline;"> &nbsp;&nbsp;&nbsp;&nb
             <p class = "empresa">
             <span class="nombre" > {{parametros[0]?.['nombreCompleto']}}</span> <br>
              RTN: {{parametros[0]?.['rtnEmpresa']}} <br>
-             {{parametros[0]?.['direccion1']}}: {{ parametros[0]?.['direccion2']}} <br>
+             {{parametros[0]?.['direccion1']}} {{ parametros[0]?.['direccion2']}} <br>
              Municipio: {{ parametros[0]?.['municipio']}}, Departamento: {{ parametros[0]?.['Departamento']}} <br> 
              Tel: {{parametros[0]?.['Telfijo']}}, {{parametros[0]?.['TelCel']}}  <br>
             <span *ngIf="parametros[0]?.['correo']"> Correo: {{parametros[0]?.['correo']}}  </span>
@@ -205,7 +206,7 @@ La cantidad de: <span style="text-decoration: underline;"> &nbsp;&nbsp;&nbsp;&nb
               <!-- <mat-divider class="material-dividier"></mat-divider> -->
               <p class="rigth" > 
               <!-- <span style="font-size: 1.1em !important; font-weight:  bold !important;"> Fecha: {{ DiaP }}/{{mesP}}/{{anioP}} </span> <br> -->
-              <span style="font-size: 1.1em !important; font-weight:  bold !important;"> Tegucigalpa, M.D.C.  <span> {{DiaP}} </span> de <span> {{ cargarMes(mesP)}} </span> del <span> {{anioP}} </span> </span>  <br>
+              <span style="font-size: 1.1em !important; font-weight:  bold !important;"> Fecha:  <span> {{DiaP}} </span> / <span> {{ mesP }} </span> / <span> {{anioP}} </span> </span>  <br>
             CAI: {{ parametrosCai[0]?.['CAI']}} <br>
             <span style="font-size: 1.1em !important; font-weight:  bold !important;"> Rango Autorizado: </span> <br>
             {{ parametrosCai[0]?.['desde'] }} AL {{ parametrosCai[0]?.['hasta'] }} <br>
@@ -230,17 +231,14 @@ La cantidad de: <span style="text-decoration: underline;"> &nbsp;&nbsp;&nbsp;&nb
 
 
                       </div>
-           <div class="col-md-12">
+           <!-- <div class="col-md-12">
                           <p class="black empresaM">
                               En concepto de retención de: 
 
                               <mat-checkbox class="radio" disabled="true" [(ngModel)]="anulacion"><span style="font-size: 0.9em !important; font-family: Arial, Helvetica, sans-serif !important;">Impuesto sobre la renta</span>  </mat-checkbox>
                               <mat-checkbox class="radio" disabled="true" [(ngModel)]="devolcion"><span style="font-size: 0.9em !important; font-family: Arial, Helvetica, sans-serif !important;">Impuesto sobre venta</span> </mat-checkbox>
-                          </p>
-                          <!-- <section class="example-section ">
-                             
-                            </section> -->
-                      </div>
+                          </p> 
+                      </div> -->
               </div>
 
               <div class="tabla mt-2" >
@@ -351,7 +349,7 @@ La cantidad de: <span style="text-decoration: underline;"> &nbsp;&nbsp;&nbsp;&nb
               </div>
 
 
-              <div class="row" style="margin-top: 5% !important">
+              <div class="row firmaCliente" style="margin-top: 5% !important">
                 <div class="col-md-6 container">
                   _____________________________________________ <br>
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Recibido Proveedor
@@ -361,12 +359,12 @@ La cantidad de: <span style="text-decoration: underline;"> &nbsp;&nbsp;&nbsp;&nb
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Firma Autorizada y Sello del Agente Retenedor
                 </div>
             
-
+                <div class="row " >
+                  <div class="col-md 12 firm container footL" style="margin-top: 3% !important">   <label class="center">  Obligado Tributario Emisor (Registro Contable) </label>  </div>
+              </div>
 
             </div>
-              <div class="row " style="margin-top: 2% !important">
-                <div class="col-md 12 firm container footL">   <label class="center">  Obligado Tributario Emisor (Registro Contable) </label>  </div>
-            </div>
+           
       </div>
   </mat-card>
 </div>
