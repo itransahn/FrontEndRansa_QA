@@ -216,8 +216,8 @@ CargarRetencion(){
     this.facturacionS.post (url,params).subscribe(
       res=>{
         this.retencionBD = res?.data?.Table0;
-        if ( this.retencionBD.length <= 20 ){
-          for(let j=0; j<(20-this.retencionBD.length); j++){
+        if ( this.retencionBD.length <= 22 ){
+          for(let j=0; j<(22-this.retencionBD.length); j++){
             this.espaciosBlancos.push(j)
           }
         }
