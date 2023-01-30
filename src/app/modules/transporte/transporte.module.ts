@@ -29,11 +29,13 @@ import { VistaPaseSalidaComponent } from './pases-salida/vista-pase-salida/vista
 import { PasesSalidaHComponent } from './pases-salida/pases-salida-h/pases-salida-h.component';
 import { DocumentosComponent } from './motoristas/documentos/documentos.component';
 import { MotivoSalidaComponent } from './pases-salida/motivo-salida/motivo-salida.component';
+import { PasesEstandarComponent } from './pases-estandar/pases-estandar.component';
+import { CrearpaseEstandarComponent } from './pases-estandar/crearpase-estandar/crearpase-estandar.component';
 
 
 @NgModule({
   declarations: [
-    TransportesComponent,
+TransportesComponent,
 CamionesComponent,
 MotoristasComponent,
 ClientesTComponent,
@@ -59,12 +61,15 @@ VistaPaseSalidaComponent,
 PasesSalidaHComponent,
 DocumentosComponent,
 MotivoSalidaComponent,
+PasesEstandarComponent,
+CrearpaseEstandarComponent,
   ],
   imports: [
     CommonModule,
     transporteRoutingModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class TransporteModule { }

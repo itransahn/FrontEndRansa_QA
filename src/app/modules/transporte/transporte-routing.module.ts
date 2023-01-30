@@ -5,6 +5,7 @@ import { CamionesComponent } from './camiones/camiones.component';
 import { ClientesTComponent } from './clientes-t/clientes-t.component';
 import { MotoristaCamionComponent } from './motorista-camion/motorista-camion.component';
 import { MotoristasComponent } from './motoristas/motoristas.component';
+import { PasesEstandarComponent } from './pases-estandar/pases-estandar.component';
 import { CrearPaseSalidaComponent } from './pases-salida/crear-pase-salida/crear-pase-salida.component';
 import { PasesSalidaHComponent } from './pases-salida/pases-salida-h/pases-salida-h.component';
 import { PasesSalidaComponent } from './pases-salida/pases-salida.component';
@@ -74,6 +75,10 @@ const routes: Routes = [
     {
         path : 'PasesalidasH',
         component : PasesSalidaHComponent
+    },
+    {
+        path : 'PasesalidasE',
+        component : PasesEstandarComponent
     }
 
   ];

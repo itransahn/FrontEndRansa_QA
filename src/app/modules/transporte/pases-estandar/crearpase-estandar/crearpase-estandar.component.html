@@ -1,0 +1,78 @@
+
+
+<mat-card class="cardPersonalizada">
+ 
+    <mat-card-header class="header">    Nuevo Pase de Salida
+    <mat-icon style="float: right !important;" (click)="close()" > close </mat-icon>
+    </mat-card-header>
+    <mat-card-content>
+     <form [formGroup]="modalForm"  #f2="ngForm" style="margin-top: 2%;">
+        <div class="row">
+    
+    <div class="col-md-6 container">
+        <mat-form-field appearance="legacy" >
+            <mat-label>Fecha de Salida </mat-label>
+            <input name="date" formControlName = "fechaSalida" matInput [matDatepicker]="pickerN">
+            <mat-datepicker-toggle matSuffix [for]="pickerN"></mat-datepicker-toggle>
+            <mat-datepicker #pickerN></mat-datepicker>
+          </mat-form-field>
+    </div>
+   
+    <div class="col-md-6 container">
+        <mat-form-field appearance="legacy">
+            <mat-label> Hora Salida </mat-label>
+            <input matInput type="time" placeholder="Hora de Salida" formControlName ="HoraSalida">
+        </mat-form-field>
+    </div>
+
+    <div class="col-md-12 container">
+        <mat-form-field class="example-full-width" appearance="legacy">
+            <mat-label>Nombre Completo</mat-label>
+            <input matInput #identidad formControlName ="nombre"  placeholder="Nombre" >
+          </mat-form-field>
+    </div>
+
+    <div class="col-md-12 container">
+        <mat-form-field class="example-full-width" hintLabel="Max 250 Caracteres" appearance="legacy">
+            <mat-label>Identidad</mat-label>
+            <input matInput #identidad formControlName ="identidad" [mask]="mask.identidad" placeholder="Identidad" >
+            <mat-hint align="end">{{contenido.value?.length || 0}}/250</mat-hint>
+          </mat-form-field>
+    </div>
+
+    <div  class="col-md-6 container" >
+        <mat-form-field  appearance="legacy">
+            <mat-label>Transporte </mat-label>
+            <mat-select   formControlName="transporte" (selectionChange)="placaChange()"> 
+                <mat-option  *ngFor="let item of transporte" [value]="item?.id">
+                    {{  item?.obj | uppercase }}
+                </mat-option> 
+              </mat-select> 
+          </mat-form-field>
+    </div>
+
+    <div class="col-md-6 container">
+        <mat-form-field class="example-full-width"  appearance="legacy">
+            <mat-label>PLACA</mat-label>
+            <input matInput #placa maxlength="8" [readonly]="readonly" style="text-transform:uppercase;" formControlName ="placa" [mask]="mask.placa" placeholder="placa" >
+          </mat-form-field>
+    </div>
+
+
+
+    <div class="col-md-12 container">
+        <mat-form-field class="example-full-width" hintLabel="Max 250 Caracteres" appearance="legacy">
+            <mat-label>Contenido</mat-label>
+            <textarea matInput #contenido formControlName ="contenido" placeholder="Contenido " ></textarea>
+            <mat-hint align="end">{{contenido.value?.length || 0}}/250</mat-hint>
+          </mat-form-field>
+    </div>
+</div>
+            <div class="container">
+                <button class="buttonPrincipal" mat-raised-button type="submit" [disabled]="f2.invalid" (click)="submit()"  >Guardar</button>
+            </div>
+        </form>
+    </mat-card-content>
+    
+</mat-card>  
+

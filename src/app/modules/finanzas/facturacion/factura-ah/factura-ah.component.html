@@ -55,7 +55,7 @@
             <p class = "empresa">
                 <span class="nombre" > {{parametros[0]['nombreCompleto']}}</span> <br>
                  RTN: {{parametros[0]['rtnEmpresa']}} <br>
-                 {{parametros[0]['direccion1']}}: {{ parametros[0]['direccion2']}} <br>
+                 {{parametros[0]['direccion1']}} {{ parametros[0]['direccion2']}} <br>
                  Municipio: {{ parametros[0]['municipio']}}, Departamento: {{ parametros[0]['Departamento']}} <br> 
                  Tel: {{parametros[0]['Telfijo']}}, {{parametros[0]['TelCel']}}  <br>
                 <span *ngIf="parametros[0]['correo']"> Correo: {{parametros[0]['correo']}}  </span>
@@ -89,7 +89,7 @@
                     </div>
         <div class="col-md-6 container2">
                         <p > 
-                     RTN: {{ cabeceraF[0]['NRUC2'] }}
+                    <span style="text-align: right !important;">   RTN: {{ cabeceraF[0]['NRUC2'] }} </span> <br>
                         </p>
                     </div>
             </div>
@@ -114,7 +114,7 @@
                     <tbody class="bordes2" *ngIf="tipo == 0">
                       <tr *ngFor="let item of DcabeceraF; let i = index"> 
                         <td data-label="CANTIDAD" class="contenidoF"> {{ item?.QAPCTC  | number }} </td>
-                        <td data-label="DESCRIPCION"  colspan="2" class="contenidoF"> {{item?.TCMTRF }} </td>
+                        <td data-label="DESCRIPCION"  colspan="2" class="contenidoF left"> {{item?.TCMTRF }} </td>
                         <td data-label="PRECIO UNITARIO" class="contenidoF">{{ retornarPrecioUnitario(i, item?.QAPCTC) | number : '1.2-2' }}</td>
                         <td data-label="DESC. Y REB OTORGADA" class="contenidoF">{{ 0    | number : '1.2-2' }}</td>
                         <td data-label="IMPUESTO" class="contenidoF"> {{ retornarLetra( item?.TCMTRF )}} </td>
@@ -153,7 +153,7 @@
                     <tbody class="bordes2" *ngIf="tipo == 1">
                         <tr *ngFor="let item of detalleServicios; let i = index"> 
                           <td data-label="CANTIDAD" class="contenidoF"> {{ item?.cantidad  | number }} </td>
-                          <td data-label="DESCRIPCION" colspan="2" class="contenidoF"> {{item?.descripcion | uppercase }} </td>
+                          <td data-label="DESCRIPCION" colspan="2" class="contenidoF left"> {{item?.descripcion | uppercase }} </td>
                           <td data-label="PRECIO UNITARIO" class="contenidoF">{{ item?.Punitario | number : '1.2-2' }}</td>
                           <td data-label="DESC. Y REB OTORGADA" class="contenidoF">{{ 0    | number : '1.2-2' }}</td>
                           <td data-label="IMPUESTO" class="contenidoF"> {{ item?.impuesto | uppercase }} </td>
@@ -228,14 +228,14 @@
             <th class="left" colspan="2" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" > SUBTOTAL </th>
                         <!-- <th class="center legend"> L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  {{ retornarSubtotal() | number : '1.2-2' }}  </th> -->
                         <!-- <th class="center2 legend"> <span class="letra">L    </span>  <span class="numeros"> {{ retornarSubtotal() | number : '1.2-2' }}</span> </th> -->
-                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal() <= 0"                                      > <span  class="letra0"> L.       </span>{{ retornarSubtotal() | number : '1.2-2' }}  </th>
-                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal() >  0        && retornarSubtotal() <= 99"      > <span  class="letra0"> L.        </span>{{ retornarSubtotal() | number : '1.2-2' }}  </th>
-                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal() >= 100      && retornarSubtotal() <= 999"     > <span  class="letra100"> L.      </span>{{ retornarSubtotal() | number : '1.2-2' }}  </th>
-                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal() >= 1000     && retornarSubtotal() <= 9999"    > <span  class="letra1000"> L.     </span>{{ retornarSubtotal() | number : '1.2-2' }}  </th>
-                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal() >= 10000    && retornarSubtotal() <= 99999"   > <span  class="letra10000"> L.    </span>{{ retornarSubtotal() | number : '1.2-2' }}  </th>
-                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal() >= 100000   && retornarSubtotal() <= 999999"  > <span  class="letra100000"> L.   </span>{{ retornarSubtotal() | number : '1.2-2' }}  </th>
-                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal() >= 1000000  && retornarSubtotal() <= 9999999"> <span  class="letra1000000"> L.  </span>{{ retornarSubtotal() | number : '1.2-2' }}  </th>
-                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal() >= 10000000 "                               > <span  class="letra10000000"> L. </span>{{ retornarSubtotal() | number : '1.2-2' }}  </th>
+                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal() <= 0"                                      > <span  class="letra0"> L       </span>{{ retornarSubtotal() | number : '1.2-2' }}  </th>
+                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal() >  0        && retornarSubtotal() <= 99"      > <span  class="letra0"> L        </span>{{ retornarSubtotal() | number : '1.2-2' }}  </th>
+                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal() >= 100      && retornarSubtotal() <= 999"     > <span  class="letra100"> L      </span>{{ retornarSubtotal() | number : '1.2-2' }}  </th>
+                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal() >= 1000     && retornarSubtotal() <= 9999"    > <span  class="letra1000"> L     </span>{{ retornarSubtotal() | number : '1.2-2' }}  </th>
+                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal() >= 10000    && retornarSubtotal() <= 99999"   > <span  class="letra10000"> L    </span>{{ retornarSubtotal() | number : '1.2-2' }}  </th>
+                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal() >= 100000   && retornarSubtotal() <= 999999"  > <span  class="letra100000"> L   </span>{{ retornarSubtotal() | number : '1.2-2' }}  </th>
+                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal() >= 1000000  && retornarSubtotal() <= 9999999"> <span  class="letra1000000"> L  </span>{{ retornarSubtotal() | number : '1.2-2' }}  </th>
+                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal() >= 10000000 "                               > <span  class="letra10000000"> L </span>{{ retornarSubtotal() | number : '1.2-2' }}  </th>
 
       <!-- <th > 
                                 <p class="center legend"> L   <span class="right legend" style="text-align: right !important; ">   {{ retornarSubtotal() | number : '1.2-2':'es' }} </span> </p>       
@@ -250,7 +250,7 @@
                              <tr >
                             <!-- <th  class="legend left bordeIz"colspan="4" style="border-bottom-style: hidden !important;" >NO. CORRELATIVO DE ORDEN DE COMPRA EXENTA: {{cabeceraF[0]['TOBCTC']}} </th> -->
                             <th class="left" colspan="2" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;"> Importe Exento </th>
-                            <th class="right" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;"> <span class="letra0"> L. </span>  {{ 0 | number : '1.2-2'}} </th>
+                            <th class="right" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;"> <span class="letra0"> L </span>  {{ 0 | number : '1.2-2'}} </th>
 
     
 
@@ -267,14 +267,14 @@
                             <th class="left" colspan="2" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;"> Importe Exonerado </th>
                             <!-- <th class="right legend" > <span class="letra"> L. </span> {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2'}}  </th> -->
 
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] <= 0"                                      >       <span  class="letra0"> L.        </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >  0        && cabeceraF[0]['IVLNAS'] <= 99"      > <span  class="letra0"> L.        </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 100      && cabeceraF[0]['IVLNAS'] <= 999"     > <span  class="letra100"> L.      </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 1000     && cabeceraF[0]['IVLNAS'] <= 9999"    > <span  class="letra1000"> L.     </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 10000    && cabeceraF[0]['IVLNAS'] <= 99999"   > <span  class="letra10000"> L.    </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 100000   && cabeceraF[0]['IVLNAS'] <= 999999"  > <span  class="letra100000"> L.   </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 1000000  && cabeceraF[0]['IVLNAS'] <= 9999999">  <span  class="letra1000000"> L.  </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 10000000 "                               >       <span  class="letra10000000"> L. </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] <= 0"                                      >       <span  class="letra0"> L        </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >  0        && cabeceraF[0]['IVLNAS'] <= 99"      > <span  class="letra0"> L        </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 100      && cabeceraF[0]['IVLNAS'] <= 999"     > <span  class="letra100"> L      </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 1000     && cabeceraF[0]['IVLNAS'] <= 9999"    > <span  class="letra1000"> L     </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 10000    && cabeceraF[0]['IVLNAS'] <= 99999"   > <span  class="letra10000"> L    </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 100000   && cabeceraF[0]['IVLNAS'] <= 999999"  > <span  class="letra100000"> L   </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 1000000  && cabeceraF[0]['IVLNAS'] <= 9999999">  <span  class="letra1000000"> L  </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 10000000 "                               >       <span  class="letra10000000"> L </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
             
                             <!-- <th class="left legend" *ngIf="cabeceraF[0]['IVLNAS'] > 0"> L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2'}}  </th> -->
                             <!-- <th class="left" *ngIf="retornarTotal() >= 0 && retornarTotal() < 999 " >  L      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2'}} </th> -->
@@ -295,14 +295,14 @@
                             <!-- <th class="right legend" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] > 0"> <span class="letra"> L. </span> {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2'}}  </th>
                             <th class="right"  *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] == 0  " >   <span class="letra"> L. </span>  {{ 0 | number : '1.2-2'}} </th> -->
 
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] <= 0"                                      >                          <span  class="letra0"> L.                            </span>  {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] >  0        && retornarSubtotal()-cabeceraF[0]['IVLNAS'] <= 99"      > <span  class="letra0"> L.        </span>  {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] >= 100      && retornarSubtotal()-cabeceraF[0]['IVLNAS'] <= 999"     > <span  class="letra100"> L.      </span>  {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] >= 1000     && retornarSubtotal()-cabeceraF[0]['IVLNAS'] <= 9999"    > <span  class="letra1000"> L.     </span>  {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] >= 10000    && retornarSubtotal()-cabeceraF[0]['IVLNAS'] <= 99999"   > <span  class="letra10000"> L.    </span>  {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] >= 100000   && retornarSubtotal()-cabeceraF[0]['IVLNAS'] <= 999999"  > <span  class="letra100000"> L.   </span>  {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] >= 1000000  && retornarSubtotal()-cabeceraF[0]['IVLNAS'] <= 9999999">  <span  class="letra1000000"> L.  </span>  {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] >= 10000000 "                               >                         <span  class="letra10000000"> L.                    </span>  {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] <= 0"                                      >                          <span  class="letra0"> L                            </span>  {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] >  0        && retornarSubtotal()-cabeceraF[0]['IVLNAS'] <= 99"      > <span  class="letra0"> L        </span>  {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] >= 100      && retornarSubtotal()-cabeceraF[0]['IVLNAS'] <= 999"     > <span  class="letra100"> L      </span>  {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] >= 1000     && retornarSubtotal()-cabeceraF[0]['IVLNAS'] <= 9999"    > <span  class="letra1000"> L     </span>  {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] >= 10000    && retornarSubtotal()-cabeceraF[0]['IVLNAS'] <= 99999"   > <span  class="letra10000"> L    </span>  {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] >= 100000   && retornarSubtotal()-cabeceraF[0]['IVLNAS'] <= 999999"  > <span  class="letra100000"> L   </span>  {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] >= 1000000  && retornarSubtotal()-cabeceraF[0]['IVLNAS'] <= 9999999">  <span  class="letra1000000"> L. </span>  {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] >= 10000000 "                               >                         <span  class="letra10000000"> L                    </span>  {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
 
 
 
@@ -319,7 +319,7 @@
                           <tr >
                             <!-- <th colspan="4" class="bordeIz"></th> -->
                             <th class="left" colspan="2" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;"> Importe Gravado al 18% </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;"> <span class="letra0"> L. </span>  {{ 0 | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;"> <span class="letra0"> L </span>  {{ 0 | number : '1.2-2' }}  </th>
                            
                             <!-- <th class="left legend" *ngIf="retornarTotal() > 0 &&   retornarTotal() <= 999 ">L  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  {{  0| number : '1.2-2' }} </th> -->
                             <!-- <th class="left legend" *ngIf="retornarTotal() > 999 && retornarTotal() < 10000 ">L  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  {{ 0 | number : '1.2-2' }} </th> -->
@@ -343,14 +343,14 @@
                             <!-- <th class="right legend" *ngIf="cabeceraF[0]['IVLIGS'] > 0">    <span class="letra"> L. </span> {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2' }} </th> 
                             <th class="right legend" *ngIf="cabeceraF[0]['IVLIGS'] === 0">  <span class="letra"> L. </span> {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2' }} </th>  -->
 
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" cabeceraF[0]['IVLIGS'] <= 0"                                      >        <span  class="letra0"> L.        </span>  {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" cabeceraF[0]['IVLIGS'] >  0        && cabeceraF[0]['IVLIGS'] <= 99"      > <span  class="letra0"> L.        </span>  {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" cabeceraF[0]['IVLIGS'] >= 100      && cabeceraF[0]['IVLIGS'] <= 999"     > <span  class="letra100"> L.      </span>  {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" cabeceraF[0]['IVLIGS'] >= 1000     && cabeceraF[0]['IVLIGS'] <= 9999"    > <span  class="letra1000"> L.     </span>  {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" cabeceraF[0]['IVLIGS'] >= 10000    && cabeceraF[0]['IVLIGS'] <= 99999"   > <span  class="letra10000"> L.    </span>  {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" cabeceraF[0]['IVLIGS'] >= 100000   && cabeceraF[0]['IVLIGS'] <= 999999"  > <span  class="letra100000"> L.   </span>  {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" cabeceraF[0]['IVLIGS'] >= 1000000  && cabeceraF[0]['IVLIGS'] <= 9999999" > <span  class="letra1000000"> L.  </span>  {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" cabeceraF[0]['IVLIGS'] >= 10000000 "                                     > <span  class="letra10000000"> L. </span>  {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" cabeceraF[0]['IVLIGS'] <= 0"                                      >        <span  class="letra0"> L        </span>  {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" cabeceraF[0]['IVLIGS'] >  0        && cabeceraF[0]['IVLIGS'] <= 99"      > <span  class="letra0"> L        </span>  {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" cabeceraF[0]['IVLIGS'] >= 100      && cabeceraF[0]['IVLIGS'] <= 999"     > <span  class="letra100"> L     </span>  {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" cabeceraF[0]['IVLIGS'] >= 1000     && cabeceraF[0]['IVLIGS'] <= 9999"    > <span  class="letra1000"> L     </span>  {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" cabeceraF[0]['IVLIGS'] >= 10000    && cabeceraF[0]['IVLIGS'] <= 99999"   > <span  class="letra10000"> L    </span>  {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" cabeceraF[0]['IVLIGS'] >= 100000   && cabeceraF[0]['IVLIGS'] <= 999999"  > <span  class="letra100000"> L   </span>  {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" cabeceraF[0]['IVLIGS'] >= 1000000  && cabeceraF[0]['IVLIGS'] <= 9999999" > <span  class="letra1000000"> L  </span>  {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" cabeceraF[0]['IVLIGS'] >= 10000000 "                                     > <span  class="letra10000000"> L </span>  {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2' }}  </th>
 
                         </tr>
 
@@ -366,7 +366,7 @@
                             <!-- <th class="left legend" *ngIf="retornarTotal() > 10000000 " >  L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2'}} </th> -->
                             <!-- <th class="left"        *ngIf="retornarTotal() >= 0 && retornarTotal() <= 10000 " >  L      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2'}} </th> -->
 
-                             <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;"><span class="letra0"> L. </span> {{ 0 | number : '1.2-2'}}  </th>
+                             <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;"><span class="letra0"> L </span> {{ 0 | number : '1.2-2'}}  </th>
                             
                         </tr>
                           <!-- Total a pagar -->
@@ -388,14 +388,14 @@
 
 
 
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" retornarTotal() <= 0"                                      > <span  class="letra0"> L.        </span>  {{ retornarTotal() | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" retornarTotal() >  0        && retornarTotal() <= 99"      > <span  class="letra0"> L.        </span> {{ retornarTotal() | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" retornarTotal() >= 100      && retornarTotal() <= 999"     > <span  class="letra100"> L.      </span>  {{ retornarTotal() | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" retornarTotal() >= 1000     && retornarTotal() <= 9999"    > <span  class="letra1000"> L.     </span>  {{ retornarTotal() | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" retornarTotal() >= 10000    && retornarTotal() <= 99999"   > <span  class="letra10000"> L.    </span>   {{ retornarTotal() | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" retornarTotal() >= 100000   && retornarTotal() <= 999999"  > <span  class="letra100000"> L.   </span>   {{ retornarTotal() | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" retornarTotal() >= 1000000  && retornarTotal() <= 9999999" > <span  class="letra1000000"> L.  </span>   {{ retornarTotal() | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" retornarTotal() >= 10000000 "                              > <span  class="letra10000000"> L. </span>  {{ retornarTotal() | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" retornarTotal() <= 0"                                      > <span  class="letra0"> L        </span>  {{ retornarTotal() | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" retornarTotal() >  0        && retornarTotal() <= 99"      > <span  class="letra0"> L       </span> {{ retornarTotal() | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" retornarTotal() >= 100      && retornarTotal() <= 999"     > <span  class="letra100"> L      </span>  {{ retornarTotal() | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" retornarTotal() >= 1000     && retornarTotal() <= 9999"    > <span  class="letra1000"> L    </span>  {{ retornarTotal() | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" retornarTotal() >= 10000    && retornarTotal() <= 99999"   > <span  class="letra10000"> L    </span>   {{ retornarTotal() | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" retornarTotal() >= 100000   && retornarTotal() <= 999999"  > <span  class="letra100000"> L   </span>   {{ retornarTotal() | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" retornarTotal() >= 1000000  && retornarTotal() <= 9999999" > <span  class="letra1000000"> L  </span>   {{ retornarTotal() | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" retornarTotal() >= 10000000 "                              > <span  class="letra10000000"> L </span>  {{ retornarTotal() | number : '1.2-2' }}  </th>
 
 
 
@@ -411,7 +411,7 @@
                </div>
         </div>
 
-        <div class="row" style="margin-top: 2% !important">
+        <div class="row" style="margin-top: 5% !important">
             <div class="col-md 12 firma  container footL">
                     <label class="center">  FIRMA Y SELLO DEL CIENTE </label>
             </div>
@@ -444,7 +444,7 @@
             <p class = "empresa">
                 <span class="nombre" > {{parametros[0]['nombreCompleto']}}</span> <br>
                  RTN: {{parametros[0]['rtnEmpresa']}} <br>
-                 {{parametros[0]['direccion1']}}: {{ parametros[0]['direccion2']}} <br>
+                 {{parametros[0]['direccion1']}} {{ parametros[0]['direccion2']}} <br>
                  Municipio: {{ parametros[0]['municipio']}}, Departamento: {{ parametros[0]['Departamento']}} <br> 
                  Tel: {{parametros[0]['Telfijo']}}, {{parametros[0]['TelCel']}}  <br>
                 <span *ngIf="parametros[0]['correo']"> Correo: {{parametros[0]['correo']}}  </span>
@@ -477,9 +477,9 @@
                     </p>
                     </div>
         <div class="col-md-6 container2">
-                        <p> 
-                     RTN: {{ cabeceraF[0]['NRUC2'] }}
-                        </p>
+            <p > 
+                <span style="text-align: right !important;">   RTN: {{ cabeceraF[0]['NRUC2'] }} </span> <br>
+                    </p>
                     </div>
             </div>
         </div>
@@ -502,7 +502,7 @@
                     <tbody class="bordes2" *ngIf="tipo == 0">
                       <tr *ngFor="let item of DcabeceraF; let i = index"> 
                         <td data-label="CANTIDAD" class="contenidoF"> {{ item?.QAPCTC  | number }} </td>
-                        <td data-label="DESCRIPCION"  colspan="2" class="contenidoF"> {{item?.TCMTRF }} </td>
+                        <td data-label="DESCRIPCION"  colspan="2" class="contenidoF left"> {{item?.TCMTRF }} </td>
                         <td data-label="PRECIO UNITARIO" class="contenidoF">{{ retornarPrecioUnitario(i, item?.QAPCTC) | number : '1.2-2' }}</td>
                         <td data-label="DESC. Y REB OTORGADA" class="contenidoF">{{ 0    | number : '1.2-2' }}</td>
                         <td data-label="IMPUESTO" class="contenidoF"> {{ retornarLetra( item?.TCMTRF )}} </td>
@@ -541,7 +541,7 @@
                     <tbody class="bordes2" *ngIf="tipo == 1">
                         <tr *ngFor="let item of detalleServicios; let i = index"> 
                           <td data-label="CANTIDAD" class="contenidoF"> {{ item?.cantidad  | number }} </td>
-                          <td data-label="DESCRIPCION" colspan="2" class="contenidoF"> {{item?.descripcion | uppercase }} </td>
+                          <td data-label="DESCRIPCION" colspan="2" class="contenidoF left"> {{item?.descripcion | uppercase }} </td>
                           <td data-label="PRECIO UNITARIO" class="contenidoF">{{ item?.Punitario | number : '1.2-2' }}</td>
                           <td data-label="DESC. Y REB OTORGADA" class="contenidoF">{{ 0    | number : '1.2-2' }}</td>
                           <td data-label="IMPUESTO" class="contenidoF"> {{ item?.impuesto | uppercase }} </td>
@@ -616,14 +616,14 @@
             <th class="left" colspan="2" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" > SUBTOTAL </th>
                         <!-- <th class="center legend"> L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  {{ retornarSubtotal() | number : '1.2-2' }}  </th> -->
                         <!-- <th class="center2 legend"> <span class="letra">L    </span>  <span class="numeros"> {{ retornarSubtotal() | number : '1.2-2' }}</span> </th> -->
-                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal() <= 0"                                      > <span  class="letra0"> L.       </span>{{ retornarSubtotal() | number : '1.2-2' }}  </th>
-                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal() >  0        && retornarSubtotal() <= 99"      > <span  class="letra0"> L.        </span>{{ retornarSubtotal() | number : '1.2-2' }}  </th>
-                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal() >= 100      && retornarSubtotal() <= 999"     > <span  class="letra100"> L.      </span>{{ retornarSubtotal() | number : '1.2-2' }}  </th>
-                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal() >= 1000     && retornarSubtotal() <= 9999"    > <span  class="letra1000"> L.     </span>{{ retornarSubtotal() | number : '1.2-2' }}  </th>
-                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal() >= 10000    && retornarSubtotal() <= 99999"   > <span  class="letra10000"> L.    </span>{{ retornarSubtotal() | number : '1.2-2' }}  </th>
-                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal() >= 100000   && retornarSubtotal() <= 999999"  > <span  class="letra100000"> L.   </span>{{ retornarSubtotal() | number : '1.2-2' }}  </th>
-                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal() >= 1000000  && retornarSubtotal() <= 9999999"> <span  class="letra1000000"> L.  </span>{{ retornarSubtotal() | number : '1.2-2' }}  </th>
-                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal() >= 10000000 "                               > <span  class="letra10000000"> L. </span>{{ retornarSubtotal() | number : '1.2-2' }}  </th>
+                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal() <= 0"                                      > <span  class="letra0"> L       </span>{{ retornarSubtotal() | number : '1.2-2' }}  </th>
+                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal() >  0        && retornarSubtotal() <= 99"      > <span  class="letra0"> L        </span>{{ retornarSubtotal() | number : '1.2-2' }}  </th>
+                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal() >= 100      && retornarSubtotal() <= 999"     > <span  class="letra100"> L      </span>{{ retornarSubtotal() | number : '1.2-2' }}  </th>
+                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal() >= 1000     && retornarSubtotal() <= 9999"    > <span  class="letra1000"> L     </span>{{ retornarSubtotal() | number : '1.2-2' }}  </th>
+                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal() >= 10000    && retornarSubtotal() <= 99999"   > <span  class="letra10000"> L    </span>{{ retornarSubtotal() | number : '1.2-2' }}  </th>
+                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal() >= 100000   && retornarSubtotal() <= 999999"  > <span  class="letra100000"> L   </span>{{ retornarSubtotal() | number : '1.2-2' }}  </th>
+                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal() >= 1000000  && retornarSubtotal() <= 9999999"> <span  class="letra1000000"> L  </span>{{ retornarSubtotal() | number : '1.2-2' }}  </th>
+                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal() >= 10000000 "                               > <span  class="letra10000000"> L </span>{{ retornarSubtotal() | number : '1.2-2' }}  </th>
 
       <!-- <th > 
                                 <p class="center legend"> L   <span class="right legend" style="text-align: right !important; ">   {{ retornarSubtotal() | number : '1.2-2':'es' }} </span> </p>       
@@ -638,7 +638,7 @@
                              <tr >
                             <!-- <th  class="legend left bordeIz"colspan="4" style="border-bottom-style: hidden !important;" >NO. CORRELATIVO DE ORDEN DE COMPRA EXENTA: {{cabeceraF[0]['TOBCTC']}} </th> -->
                             <th class="left" colspan="2" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;"> Importe Exento </th>
-                            <th class="right" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;"> <span class="letra0"> L. </span>  {{ 0 | number : '1.2-2'}} </th>
+                            <th class="right" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;"> <span class="letra0"> L </span>  {{ 0 | number : '1.2-2'}} </th>
 
     
 
@@ -655,14 +655,14 @@
                             <th class="left" colspan="2" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;"> Importe Exonerado </th>
                             <!-- <th class="right legend" > <span class="letra"> L. </span> {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2'}}  </th> -->
 
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] <= 0"                                      >       <span  class="letra0"> L.        </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >  0        && cabeceraF[0]['IVLNAS'] <= 99"      > <span  class="letra0"> L.        </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 100      && cabeceraF[0]['IVLNAS'] <= 999"     > <span  class="letra100"> L.      </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 1000     && cabeceraF[0]['IVLNAS'] <= 9999"    > <span  class="letra1000"> L.     </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 10000    && cabeceraF[0]['IVLNAS'] <= 99999"   > <span  class="letra10000"> L.    </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 100000   && cabeceraF[0]['IVLNAS'] <= 999999"  > <span  class="letra100000"> L.   </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 1000000  && cabeceraF[0]['IVLNAS'] <= 9999999">  <span  class="letra1000000"> L.  </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 10000000 "                               >       <span  class="letra10000000"> L. </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] <= 0"                                      >       <span  class="letra0"> L        </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >  0        && cabeceraF[0]['IVLNAS'] <= 99"      > <span  class="letra0"> L        </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 100      && cabeceraF[0]['IVLNAS'] <= 999"     > <span  class="letra100"> L      </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 1000     && cabeceraF[0]['IVLNAS'] <= 9999"    > <span  class="letra1000"> L     </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 10000    && cabeceraF[0]['IVLNAS'] <= 99999"   > <span  class="letra10000"> L    </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 100000   && cabeceraF[0]['IVLNAS'] <= 999999"  > <span  class="letra100000"> L   </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 1000000  && cabeceraF[0]['IVLNAS'] <= 9999999">  <span  class="letra1000000"> L  </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 10000000 "                               >       <span  class="letra10000000"> L </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
             
                             <!-- <th class="left legend" *ngIf="cabeceraF[0]['IVLNAS'] > 0"> L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2'}}  </th> -->
                             <!-- <th class="left" *ngIf="retornarTotal() >= 0 && retornarTotal() < 999 " >  L      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2'}} </th> -->
@@ -683,14 +683,14 @@
                             <!-- <th class="right legend" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] > 0"> <span class="letra"> L. </span> {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2'}}  </th>
                             <th class="right"  *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] == 0  " >   <span class="letra"> L. </span>  {{ 0 | number : '1.2-2'}} </th> -->
 
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] <= 0"                                      >                          <span  class="letra0"> L.                            </span>  {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] >  0        && retornarSubtotal()-cabeceraF[0]['IVLNAS'] <= 99"      > <span  class="letra0"> L.        </span>  {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] >= 100      && retornarSubtotal()-cabeceraF[0]['IVLNAS'] <= 999"     > <span  class="letra100"> L.      </span>  {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] >= 1000     && retornarSubtotal()-cabeceraF[0]['IVLNAS'] <= 9999"    > <span  class="letra1000"> L.     </span>  {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] >= 10000    && retornarSubtotal()-cabeceraF[0]['IVLNAS'] <= 99999"   > <span  class="letra10000"> L.    </span>  {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] >= 100000   && retornarSubtotal()-cabeceraF[0]['IVLNAS'] <= 999999"  > <span  class="letra100000"> L.   </span>  {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] >= 1000000  && retornarSubtotal()-cabeceraF[0]['IVLNAS'] <= 9999999">  <span  class="letra1000000"> L.  </span>  {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] >= 10000000 "                               >                         <span  class="letra10000000"> L.                    </span>  {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] <= 0"                                      >                          <span  class="letra0"> L                            </span>  {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] >  0        && retornarSubtotal()-cabeceraF[0]['IVLNAS'] <= 99"      > <span  class="letra0"> L        </span>  {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] >= 100      && retornarSubtotal()-cabeceraF[0]['IVLNAS'] <= 999"     > <span  class="letra100"> L      </span>  {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] >= 1000     && retornarSubtotal()-cabeceraF[0]['IVLNAS'] <= 9999"    > <span  class="letra1000"> L     </span>  {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] >= 10000    && retornarSubtotal()-cabeceraF[0]['IVLNAS'] <= 99999"   > <span  class="letra10000"> L    </span>  {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] >= 100000   && retornarSubtotal()-cabeceraF[0]['IVLNAS'] <= 999999"  > <span  class="letra100000"> L   </span>  {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] >= 1000000  && retornarSubtotal()-cabeceraF[0]['IVLNAS'] <= 9999999">  <span  class="letra1000000"> L. </span>  {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] >= 10000000 "                               >                         <span  class="letra10000000"> L                    </span>  {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
 
 
 
@@ -707,7 +707,7 @@
                           <tr >
                             <!-- <th colspan="4" class="bordeIz"></th> -->
                             <th class="left" colspan="2" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;"> Importe Gravado al 18% </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;"> <span class="letra0"> L. </span>  {{ 0 | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;"> <span class="letra0"> L </span>  {{ 0 | number : '1.2-2' }}  </th>
                            
                             <!-- <th class="left legend" *ngIf="retornarTotal() > 0 &&   retornarTotal() <= 999 ">L  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  {{  0| number : '1.2-2' }} </th> -->
                             <!-- <th class="left legend" *ngIf="retornarTotal() > 999 && retornarTotal() < 10000 ">L  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  {{ 0 | number : '1.2-2' }} </th> -->
@@ -731,14 +731,14 @@
                             <!-- <th class="right legend" *ngIf="cabeceraF[0]['IVLIGS'] > 0">    <span class="letra"> L. </span> {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2' }} </th> 
                             <th class="right legend" *ngIf="cabeceraF[0]['IVLIGS'] === 0">  <span class="letra"> L. </span> {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2' }} </th>  -->
 
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" cabeceraF[0]['IVLIGS'] <= 0"                                      >        <span  class="letra0"> L.        </span>  {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" cabeceraF[0]['IVLIGS'] >  0        && cabeceraF[0]['IVLIGS'] <= 99"      > <span  class="letra0"> L.        </span>  {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" cabeceraF[0]['IVLIGS'] >= 100      && cabeceraF[0]['IVLIGS'] <= 999"     > <span  class="letra100"> L.      </span>  {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" cabeceraF[0]['IVLIGS'] >= 1000     && cabeceraF[0]['IVLIGS'] <= 9999"    > <span  class="letra1000"> L.     </span>  {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" cabeceraF[0]['IVLIGS'] >= 10000    && cabeceraF[0]['IVLIGS'] <= 99999"   > <span  class="letra10000"> L.    </span>  {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" cabeceraF[0]['IVLIGS'] >= 100000   && cabeceraF[0]['IVLIGS'] <= 999999"  > <span  class="letra100000"> L.   </span>  {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" cabeceraF[0]['IVLIGS'] >= 1000000  && cabeceraF[0]['IVLIGS'] <= 9999999" > <span  class="letra1000000"> L.  </span>  {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" cabeceraF[0]['IVLIGS'] >= 10000000 "                                     > <span  class="letra10000000"> L. </span>  {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" cabeceraF[0]['IVLIGS'] <= 0"                                      >        <span  class="letra0"> L        </span>  {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" cabeceraF[0]['IVLIGS'] >  0        && cabeceraF[0]['IVLIGS'] <= 99"      > <span  class="letra0"> L        </span>  {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" cabeceraF[0]['IVLIGS'] >= 100      && cabeceraF[0]['IVLIGS'] <= 999"     > <span  class="letra100"> L     </span>  {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" cabeceraF[0]['IVLIGS'] >= 1000     && cabeceraF[0]['IVLIGS'] <= 9999"    > <span  class="letra1000"> L     </span>  {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" cabeceraF[0]['IVLIGS'] >= 10000    && cabeceraF[0]['IVLIGS'] <= 99999"   > <span  class="letra10000"> L    </span>  {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" cabeceraF[0]['IVLIGS'] >= 100000   && cabeceraF[0]['IVLIGS'] <= 999999"  > <span  class="letra100000"> L   </span>  {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" cabeceraF[0]['IVLIGS'] >= 1000000  && cabeceraF[0]['IVLIGS'] <= 9999999" > <span  class="letra1000000"> L  </span>  {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" cabeceraF[0]['IVLIGS'] >= 10000000 "                                     > <span  class="letra10000000"> L </span>  {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2' }}  </th>
 
                         </tr>
 
@@ -754,7 +754,7 @@
                             <!-- <th class="left legend" *ngIf="retornarTotal() > 10000000 " >  L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2'}} </th> -->
                             <!-- <th class="left"        *ngIf="retornarTotal() >= 0 && retornarTotal() <= 10000 " >  L      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2'}} </th> -->
 
-                             <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;"><span class="letra0"> L. </span> {{ 0 | number : '1.2-2'}}  </th>
+                             <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;"><span class="letra0"> L </span> {{ 0 | number : '1.2-2'}}  </th>
                             
                         </tr>
                           <!-- Total a pagar -->
@@ -776,14 +776,14 @@
 
 
 
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" retornarTotal() <= 0"                                      > <span  class="letra0"> L.        </span>  {{ retornarTotal() | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" retornarTotal() >  0        && retornarTotal() <= 99"      > <span  class="letra0"> L.        </span> {{ retornarTotal() | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" retornarTotal() >= 100      && retornarTotal() <= 999"     > <span  class="letra100"> L.      </span>  {{ retornarTotal() | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" retornarTotal() >= 1000     && retornarTotal() <= 9999"    > <span  class="letra1000"> L.     </span>  {{ retornarTotal() | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" retornarTotal() >= 10000    && retornarTotal() <= 99999"   > <span  class="letra10000"> L.    </span>   {{ retornarTotal() | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" retornarTotal() >= 100000   && retornarTotal() <= 999999"  > <span  class="letra100000"> L.   </span>   {{ retornarTotal() | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" retornarTotal() >= 1000000  && retornarTotal() <= 9999999" > <span  class="letra1000000"> L.  </span>   {{ retornarTotal() | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" retornarTotal() >= 10000000 "                              > <span  class="letra10000000"> L. </span>  {{ retornarTotal() | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" retornarTotal() <= 0"                                      > <span  class="letra0"> L        </span>  {{ retornarTotal() | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" retornarTotal() >  0        && retornarTotal() <= 99"      > <span  class="letra0"> L       </span> {{ retornarTotal() | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" retornarTotal() >= 100      && retornarTotal() <= 999"     > <span  class="letra100"> L      </span>  {{ retornarTotal() | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" retornarTotal() >= 1000     && retornarTotal() <= 9999"    > <span  class="letra1000"> L    </span>  {{ retornarTotal() | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" retornarTotal() >= 10000    && retornarTotal() <= 99999"   > <span  class="letra10000"> L    </span>   {{ retornarTotal() | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" retornarTotal() >= 100000   && retornarTotal() <= 999999"  > <span  class="letra100000"> L   </span>   {{ retornarTotal() | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" retornarTotal() >= 1000000  && retornarTotal() <= 9999999" > <span  class="letra1000000"> L  </span>   {{ retornarTotal() | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" retornarTotal() >= 10000000 "                              > <span  class="letra10000000"> L </span>  {{ retornarTotal() | number : '1.2-2' }}  </th>
 
 
 
@@ -798,7 +798,7 @@
                   </table>
                </div>
         </div>
-            <div class="row" style="margin-top: 2% !important">
+            <div class="row" style="margin-top: 5% !important">
                 <div class="col-md 12 firma  container footL">
                  <label class="center">  FIRMA Y SELLO DEL CIENTE </label>
                 </div>
@@ -833,7 +833,7 @@
             <p class = "empresa">
                 <span class="nombre" > {{parametros[0]['nombreCompleto']}}</span> <br>
                  RTN: {{parametros[0]['rtnEmpresa']}} <br>
-                 {{parametros[0]['direccion1']}}: {{ parametros[0]['direccion2']}} <br>
+                 {{parametros[0]['direccion1']}} {{ parametros[0]['direccion2']}} <br>
                  Municipio: {{ parametros[0]['municipio']}}, Departamento: {{ parametros[0]['Departamento']}} <br> 
                  Tel: {{parametros[0]['Telfijo']}}, {{parametros[0]['TelCel']}}  <br>
                 <span *ngIf="parametros[0]['correo']"> Correo: {{parametros[0]['correo']}}  </span>
@@ -866,9 +866,9 @@
                     </p>
                     </div>
         <div class="col-md-6 container2">
-                        <p> 
-                     RTN: {{ cabeceraF[0]['NRUC2'] }}
-                        </p>
+            <p > 
+                <span style="text-align: right !important;">   RTN: {{ cabeceraF[0]['NRUC2'] }} </span> <br>
+                    </p>
                     </div>
             </div>
         </div>
@@ -891,7 +891,7 @@
                     <tbody class="bordes2" *ngIf="tipo == 0">
                       <tr *ngFor="let item of DcabeceraF; let i = index"> 
                         <td data-label="CANTIDAD" class="contenidoF"> {{ item?.QAPCTC  | number }} </td>
-                        <td data-label="DESCRIPCION"  colspan="2" class="contenidoF"> {{item?.TCMTRF }} </td>
+                        <td data-label="DESCRIPCION"  colspan="2" class="contenidoF left"> {{item?.TCMTRF }} </td>
                         <td data-label="PRECIO UNITARIO" class="contenidoF">{{ retornarPrecioUnitario(i, item?.QAPCTC) | number : '1.2-2' }}</td>
                         <td data-label="DESC. Y REB OTORGADA" class="contenidoF">{{ 0    | number : '1.2-2' }}</td>
                         <td data-label="IMPUESTO" class="contenidoF"> {{ retornarLetra( item?.TCMTRF )}} </td>
@@ -930,7 +930,7 @@
                     <tbody class="bordes2" *ngIf="tipo == 1">
                         <tr *ngFor="let item of detalleServicios; let i = index"> 
                           <td data-label="CANTIDAD" class="contenidoF"> {{ item?.cantidad  | number }} </td>
-                          <td data-label="DESCRIPCION" colspan="2" class="contenidoF"> {{item?.descripcion | uppercase }} </td>
+                          <td data-label="DESCRIPCION" colspan="2" class="contenidoF left"> {{item?.descripcion | uppercase }} </td>
                           <td data-label="PRECIO UNITARIO" class="contenidoF">{{ item?.Punitario | number : '1.2-2' }}</td>
                           <td data-label="DESC. Y REB OTORGADA" class="contenidoF">{{ 0    | number : '1.2-2' }}</td>
                           <td data-label="IMPUESTO" class="contenidoF"> {{ item?.impuesto | uppercase }} </td>
@@ -1005,14 +1005,14 @@
             <th class="left" colspan="2" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" > SUBTOTAL </th>
                         <!-- <th class="center legend"> L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  {{ retornarSubtotal() | number : '1.2-2' }}  </th> -->
                         <!-- <th class="center2 legend"> <span class="letra">L    </span>  <span class="numeros"> {{ retornarSubtotal() | number : '1.2-2' }}</span> </th> -->
-                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal() <= 0"                                      > <span  class="letra0"> L.       </span>{{ retornarSubtotal() | number : '1.2-2' }}  </th>
-                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal() >  0        && retornarSubtotal() <= 99"      > <span  class="letra0"> L.        </span>{{ retornarSubtotal() | number : '1.2-2' }}  </th>
-                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal() >= 100      && retornarSubtotal() <= 999"     > <span  class="letra100"> L.      </span>{{ retornarSubtotal() | number : '1.2-2' }}  </th>
-                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal() >= 1000     && retornarSubtotal() <= 9999"    > <span  class="letra1000"> L.     </span>{{ retornarSubtotal() | number : '1.2-2' }}  </th>
-                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal() >= 10000    && retornarSubtotal() <= 99999"   > <span  class="letra10000"> L.    </span>{{ retornarSubtotal() | number : '1.2-2' }}  </th>
-                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal() >= 100000   && retornarSubtotal() <= 999999"  > <span  class="letra100000"> L.   </span>{{ retornarSubtotal() | number : '1.2-2' }}  </th>
-                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal() >= 1000000  && retornarSubtotal() <= 9999999"> <span  class="letra1000000"> L.  </span>{{ retornarSubtotal() | number : '1.2-2' }}  </th>
-                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal() >= 10000000 "                               > <span  class="letra10000000"> L. </span>{{ retornarSubtotal() | number : '1.2-2' }}  </th>
+                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal() <= 0"                                      > <span  class="letra0"> L       </span>{{ retornarSubtotal() | number : '1.2-2' }}  </th>
+                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal() >  0        && retornarSubtotal() <= 99"      > <span  class="letra0"> L        </span>{{ retornarSubtotal() | number : '1.2-2' }}  </th>
+                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal() >= 100      && retornarSubtotal() <= 999"     > <span  class="letra100"> L      </span>{{ retornarSubtotal() | number : '1.2-2' }}  </th>
+                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal() >= 1000     && retornarSubtotal() <= 9999"    > <span  class="letra1000"> L     </span>{{ retornarSubtotal() | number : '1.2-2' }}  </th>
+                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal() >= 10000    && retornarSubtotal() <= 99999"   > <span  class="letra10000"> L    </span>{{ retornarSubtotal() | number : '1.2-2' }}  </th>
+                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal() >= 100000   && retornarSubtotal() <= 999999"  > <span  class="letra100000"> L   </span>{{ retornarSubtotal() | number : '1.2-2' }}  </th>
+                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal() >= 1000000  && retornarSubtotal() <= 9999999"> <span  class="letra1000000"> L  </span>{{ retornarSubtotal() | number : '1.2-2' }}  </th>
+                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal() >= 10000000 "                               > <span  class="letra10000000"> L </span>{{ retornarSubtotal() | number : '1.2-2' }}  </th>
 
       <!-- <th > 
                                 <p class="center legend"> L   <span class="right legend" style="text-align: right !important; ">   {{ retornarSubtotal() | number : '1.2-2':'es' }} </span> </p>       
@@ -1027,7 +1027,7 @@
                              <tr >
                             <!-- <th  class="legend left bordeIz"colspan="4" style="border-bottom-style: hidden !important;" >NO. CORRELATIVO DE ORDEN DE COMPRA EXENTA: {{cabeceraF[0]['TOBCTC']}} </th> -->
                             <th class="left" colspan="2" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;"> Importe Exento </th>
-                            <th class="right" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;"> <span class="letra0"> L. </span>  {{ 0 | number : '1.2-2'}} </th>
+                            <th class="right" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;"> <span class="letra0"> L </span>  {{ 0 | number : '1.2-2'}} </th>
 
     
 
@@ -1044,14 +1044,14 @@
                             <th class="left" colspan="2" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;"> Importe Exonerado </th>
                             <!-- <th class="right legend" > <span class="letra"> L. </span> {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2'}}  </th> -->
 
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] <= 0"                                      >       <span  class="letra0"> L.        </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >  0        && cabeceraF[0]['IVLNAS'] <= 99"      > <span  class="letra0"> L.        </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 100      && cabeceraF[0]['IVLNAS'] <= 999"     > <span  class="letra100"> L.      </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 1000     && cabeceraF[0]['IVLNAS'] <= 9999"    > <span  class="letra1000"> L.     </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 10000    && cabeceraF[0]['IVLNAS'] <= 99999"   > <span  class="letra10000"> L.    </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 100000   && cabeceraF[0]['IVLNAS'] <= 999999"  > <span  class="letra100000"> L.   </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 1000000  && cabeceraF[0]['IVLNAS'] <= 9999999">  <span  class="letra1000000"> L.  </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 10000000 "                               >       <span  class="letra10000000"> L. </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] <= 0"                                      >       <span  class="letra0"> L        </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >  0        && cabeceraF[0]['IVLNAS'] <= 99"      > <span  class="letra0"> L        </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 100      && cabeceraF[0]['IVLNAS'] <= 999"     > <span  class="letra100"> L      </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 1000     && cabeceraF[0]['IVLNAS'] <= 9999"    > <span  class="letra1000"> L     </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 10000    && cabeceraF[0]['IVLNAS'] <= 99999"   > <span  class="letra10000"> L    </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 100000   && cabeceraF[0]['IVLNAS'] <= 999999"  > <span  class="letra100000"> L   </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 1000000  && cabeceraF[0]['IVLNAS'] <= 9999999">  <span  class="letra1000000"> L  </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 10000000 "                               >       <span  class="letra10000000"> L </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
             
                             <!-- <th class="left legend" *ngIf="cabeceraF[0]['IVLNAS'] > 0"> L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2'}}  </th> -->
                             <!-- <th class="left" *ngIf="retornarTotal() >= 0 && retornarTotal() < 999 " >  L      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2'}} </th> -->
@@ -1072,14 +1072,14 @@
                             <!-- <th class="right legend" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] > 0"> <span class="letra"> L. </span> {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2'}}  </th>
                             <th class="right"  *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] == 0  " >   <span class="letra"> L. </span>  {{ 0 | number : '1.2-2'}} </th> -->
 
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] <= 0"                                      >                          <span  class="letra0"> L.                            </span>  {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] >  0        && retornarSubtotal()-cabeceraF[0]['IVLNAS'] <= 99"      > <span  class="letra0"> L.        </span>  {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] >= 100      && retornarSubtotal()-cabeceraF[0]['IVLNAS'] <= 999"     > <span  class="letra100"> L.      </span>  {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] >= 1000     && retornarSubtotal()-cabeceraF[0]['IVLNAS'] <= 9999"    > <span  class="letra1000"> L.     </span>  {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] >= 10000    && retornarSubtotal()-cabeceraF[0]['IVLNAS'] <= 99999"   > <span  class="letra10000"> L.    </span>  {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] >= 100000   && retornarSubtotal()-cabeceraF[0]['IVLNAS'] <= 999999"  > <span  class="letra100000"> L.   </span>  {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] >= 1000000  && retornarSubtotal()-cabeceraF[0]['IVLNAS'] <= 9999999">  <span  class="letra1000000"> L.  </span>  {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] >= 10000000 "                               >                         <span  class="letra10000000"> L.                    </span>  {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] <= 0"                                      >                          <span  class="letra0"> L                            </span>  {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] >  0        && retornarSubtotal()-cabeceraF[0]['IVLNAS'] <= 99"      > <span  class="letra0"> L        </span>  {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] >= 100      && retornarSubtotal()-cabeceraF[0]['IVLNAS'] <= 999"     > <span  class="letra100"> L      </span>  {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] >= 1000     && retornarSubtotal()-cabeceraF[0]['IVLNAS'] <= 9999"    > <span  class="letra1000"> L     </span>  {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] >= 10000    && retornarSubtotal()-cabeceraF[0]['IVLNAS'] <= 99999"   > <span  class="letra10000"> L    </span>  {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] >= 100000   && retornarSubtotal()-cabeceraF[0]['IVLNAS'] <= 999999"  > <span  class="letra100000"> L   </span>  {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] >= 1000000  && retornarSubtotal()-cabeceraF[0]['IVLNAS'] <= 9999999">  <span  class="letra1000000"> L. </span>  {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="retornarSubtotal()-cabeceraF[0]['IVLNAS'] >= 10000000 "                               >                         <span  class="letra10000000"> L                    </span>  {{ retornarSubtotal()-cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
 
 
 
@@ -1096,7 +1096,7 @@
                           <tr >
                             <!-- <th colspan="4" class="bordeIz"></th> -->
                             <th class="left" colspan="2" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;"> Importe Gravado al 18% </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;"> <span class="letra0"> L. </span>  {{ 0 | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;"> <span class="letra0"> L </span>  {{ 0 | number : '1.2-2' }}  </th>
                            
                             <!-- <th class="left legend" *ngIf="retornarTotal() > 0 &&   retornarTotal() <= 999 ">L  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  {{  0| number : '1.2-2' }} </th> -->
                             <!-- <th class="left legend" *ngIf="retornarTotal() > 999 && retornarTotal() < 10000 ">L  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  {{ 0 | number : '1.2-2' }} </th> -->
@@ -1120,14 +1120,14 @@
                             <!-- <th class="right legend" *ngIf="cabeceraF[0]['IVLIGS'] > 0">    <span class="letra"> L. </span> {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2' }} </th> 
                             <th class="right legend" *ngIf="cabeceraF[0]['IVLIGS'] === 0">  <span class="letra"> L. </span> {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2' }} </th>  -->
 
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" cabeceraF[0]['IVLIGS'] <= 0"                                      >        <span  class="letra0"> L.        </span>  {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" cabeceraF[0]['IVLIGS'] >  0        && cabeceraF[0]['IVLIGS'] <= 99"      > <span  class="letra0"> L.        </span>  {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" cabeceraF[0]['IVLIGS'] >= 100      && cabeceraF[0]['IVLIGS'] <= 999"     > <span  class="letra100"> L.      </span>  {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" cabeceraF[0]['IVLIGS'] >= 1000     && cabeceraF[0]['IVLIGS'] <= 9999"    > <span  class="letra1000"> L.     </span>  {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" cabeceraF[0]['IVLIGS'] >= 10000    && cabeceraF[0]['IVLIGS'] <= 99999"   > <span  class="letra10000"> L.    </span>  {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" cabeceraF[0]['IVLIGS'] >= 100000   && cabeceraF[0]['IVLIGS'] <= 999999"  > <span  class="letra100000"> L.   </span>  {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" cabeceraF[0]['IVLIGS'] >= 1000000  && cabeceraF[0]['IVLIGS'] <= 9999999" > <span  class="letra1000000"> L.  </span>  {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" cabeceraF[0]['IVLIGS'] >= 10000000 "                                     > <span  class="letra10000000"> L. </span>  {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" cabeceraF[0]['IVLIGS'] <= 0"                                      >        <span  class="letra0"> L        </span>  {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" cabeceraF[0]['IVLIGS'] >  0        && cabeceraF[0]['IVLIGS'] <= 99"      > <span  class="letra0"> L        </span>  {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" cabeceraF[0]['IVLIGS'] >= 100      && cabeceraF[0]['IVLIGS'] <= 999"     > <span  class="letra100"> L     </span>  {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" cabeceraF[0]['IVLIGS'] >= 1000     && cabeceraF[0]['IVLIGS'] <= 9999"    > <span  class="letra1000"> L     </span>  {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" cabeceraF[0]['IVLIGS'] >= 10000    && cabeceraF[0]['IVLIGS'] <= 99999"   > <span  class="letra10000"> L    </span>  {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" cabeceraF[0]['IVLIGS'] >= 100000   && cabeceraF[0]['IVLIGS'] <= 999999"  > <span  class="letra100000"> L   </span>  {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" cabeceraF[0]['IVLIGS'] >= 1000000  && cabeceraF[0]['IVLIGS'] <= 9999999" > <span  class="letra1000000"> L  </span>  {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" cabeceraF[0]['IVLIGS'] >= 10000000 "                                     > <span  class="letra10000000"> L </span>  {{ cabeceraF[0]['IVLIGS'] | number : '1.2-2' }}  </th>
 
                         </tr>
 
@@ -1143,7 +1143,7 @@
                             <!-- <th class="left legend" *ngIf="retornarTotal() > 10000000 " >  L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2'}} </th> -->
                             <!-- <th class="left"        *ngIf="retornarTotal() >= 0 && retornarTotal() <= 10000 " >  L      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2'}} </th> -->
 
-                             <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;"><span class="letra0"> L. </span> {{ 0 | number : '1.2-2'}}  </th>
+                             <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;"><span class="letra0"> L </span> {{ 0 | number : '1.2-2'}}  </th>
                             
                         </tr>
                           <!-- Total a pagar -->
@@ -1165,14 +1165,14 @@
 
 
 
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" retornarTotal() <= 0"                                      > <span  class="letra0"> L.        </span>  {{ retornarTotal() | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" retornarTotal() >  0        && retornarTotal() <= 99"      > <span  class="letra0"> L.        </span> {{ retornarTotal() | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" retornarTotal() >= 100      && retornarTotal() <= 999"     > <span  class="letra100"> L.      </span>  {{ retornarTotal() | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" retornarTotal() >= 1000     && retornarTotal() <= 9999"    > <span  class="letra1000"> L.     </span>  {{ retornarTotal() | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" retornarTotal() >= 10000    && retornarTotal() <= 99999"   > <span  class="letra10000"> L.    </span>   {{ retornarTotal() | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" retornarTotal() >= 100000   && retornarTotal() <= 999999"  > <span  class="letra100000"> L.   </span>   {{ retornarTotal() | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" retornarTotal() >= 1000000  && retornarTotal() <= 9999999" > <span  class="letra1000000"> L.  </span>   {{ retornarTotal() | number : '1.2-2' }}  </th>
-                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" retornarTotal() >= 10000000 "                              > <span  class="letra10000000"> L. </span>  {{ retornarTotal() | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" retornarTotal() <= 0"                                      > <span  class="letra0"> L        </span>  {{ retornarTotal() | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" retornarTotal() >  0        && retornarTotal() <= 99"      > <span  class="letra0"> L       </span> {{ retornarTotal() | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" retornarTotal() >= 100      && retornarTotal() <= 999"     > <span  class="letra100"> L      </span>  {{ retornarTotal() | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" retornarTotal() >= 1000     && retornarTotal() <= 9999"    > <span  class="letra1000"> L    </span>  {{ retornarTotal() | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" retornarTotal() >= 10000    && retornarTotal() <= 99999"   > <span  class="letra10000"> L    </span>   {{ retornarTotal() | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" retornarTotal() >= 100000   && retornarTotal() <= 999999"  > <span  class="letra100000"> L   </span>   {{ retornarTotal() | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" retornarTotal() >= 1000000  && retornarTotal() <= 9999999" > <span  class="letra1000000"> L  </span>   {{ retornarTotal() | number : '1.2-2' }}  </th>
+                            <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf=" retornarTotal() >= 10000000 "                              > <span  class="letra10000000"> L </span>  {{ retornarTotal() | number : '1.2-2' }}  </th>
 
 
 
@@ -1183,11 +1183,11 @@
                             <th  colspan="3" class=" footE rigth legend"> LA FACTURA ES BENEFICIO DE TODOS, EXIJALA</th>
                         </tr> -->
 
-                    </tfoot>   
+                    </tfoot>  
                   </table>
                </div>
         </div>
-            <div class="row" style="margin-top: 2% !important">
+            <div class="row" style="margin-top: 5% !important">
                 <div class="col-md 12 firma  container footL">
                  <label class="center">  FIRMA Y SELLO DEL CIENTE </label>
                 </div>

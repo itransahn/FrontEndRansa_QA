@@ -1,0 +1,78 @@
+<mat-card class="mat-cardContainerCuerpo mat-elevation-z0">
+    <form [formGroup]="filtro">
+        <div class="row">
+            <div class="col-md-6">
+                <mat-form-field appearance="legacy">
+                    <mat-label>
+                        <mat-icon> search </mat-icon>
+                        Buscar
+                    </mat-label>
+                    <input matInput placeholder="Transporte, Placa , Motorista, Solicitador por" formControlName="filtrar">
+                </mat-form-field>
+            </div>
+     
+            <div class="col-md-6">
+                <div class="text-right">
+                    <button mat-raised-button class="buttonPrincipal" [hidden]="!auth.Insercion()" (click)="Modal ( )">
+                        <mat-icon>
+                            add
+                        </mat-icon>
+                        Agregar Pase Salida
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+       <div class="table-responsive !important">
+        <table  >
+            <!-- <caption>Statement Summary</caption> -->
+            <thead>
+              <tr>
+                <th scope="col">Fecha</th>
+                <th scope="col">Hora</th>
+                <th scope="col">Persona</th>
+                <th scope="col">Placa</th>
+                <!-- <th scope="col">Motivo</th> -->
+                <th scope="col">Contenido</th>
+                <th scope="col">Autoriza </th>
+                <th scope="col">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let tr of pases | search: this.filtro.value.filtrar:parametrosBusqueda | slice: desde: hasta " class="trHover">
+                <td data-label="Fecha">{{    tr?.fechaSalida | date: 'dd/MM/yyyy' }}</td>
+                <td data-label="Hora">{{     tr?.horaSalida           }}</td>
+                <td data-label="Persona">{{     tr?.nombreCompleto | uppercase }}</td>
+                <td data-label="Placa">{{ tr?.placa | uppercase }}</td>
+                <!-- <td data-label="Motivo">{{    tr?.TIPOD  }}</td> -->
+                <td data-label="Contenido">{{    tr?.contenido  }}</td>
+                <td data-label="Autoriza ">{{    tr?.NombreUsuario  }}</td>
+                <td data-label="Acciones">
+                <div class="text-center">
+
+                <!-- Aprobar -->
+               <button mat-mini-fab class="buttonSecundary" [disabled]="(!auth.Actualizacion())" (click)="cerrarPase( tr.idPase, tr.camion, tr.Hora, tr.Fecha )" >
+                <mat-icon>check_circle</mat-icon>
+                </button>
+
+
+
+                <!-- Ver Pase -->
+                <button mat-mini-fab class="buttonSecundary" [hidden]="!auth.Actualizacion()"  (click)="enviarLocalStorage(tr)"  >
+                    <mat-icon>visibility</mat-icon>
+                    </button>
+                </div>
+                <!-- Eliminar -->
+                <button mat-mini-fab class="btnDelete" [hidden]="!auth.Eliminacion()"  (click)="eliminarPase( tr.idPase, tr.camion  )"  >
+                    <mat-icon>delete</mat-icon>
+                    </button>
+
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          
+       </div>
+          <mat-paginator [length]="pases.length" [pageSize]="pageSize " (page)="next($event)">
+        </mat-paginator>
+</mat-card>

@@ -291,9 +291,10 @@ const mensajes = {
 const mask = {
     numberPhone : '9999-9999',
     decimal     : '0*.00',
-    identidad   : '9999-9999-99999',
-    lote        : 'A99999999',
-    cantidad    : "9999"
+    identidad   : 'XXXX-XXXX-XXXXX',
+    lote        : 'AXXXXXXXX',
+    cantidad    : "9999",
+    placa       : "AAA-XXXX"
 }
 
 
