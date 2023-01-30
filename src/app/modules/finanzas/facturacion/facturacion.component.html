@@ -114,7 +114,7 @@
                     <tbody class="bordes2" *ngIf="tipo == 0">
                       <tr *ngFor="let item of DcabeceraF; let i = index"> 
                         <td data-label="CANTIDAD" class="contenidoF"> {{ item?.QAPCTC  | number }} </td>
-                        <td data-label="DESCRIPCION"  colspan="2" class="contenidoF"> {{item?.TCMTRF }} </td>
+                        <td data-label="DESCRIPCION"  colspan="2" class="contenidoF left"> {{item?.TCMTRF }} </td>
                         <td data-label="PRECIO UNITARIO" class="contenidoF">{{ retornarPrecioUnitario(i, item?.QAPCTC) | number : '1.2-2' }}</td>
                         <td data-label="DESC. Y REB OTORGADA" class="contenidoF">{{ 0    | number : '1.2-2' }}</td>
                         <td data-label="IMPUESTO" class="contenidoF"> {{ retornarLetra( item?.TCMTRF )}} </td>
@@ -153,7 +153,7 @@
                     <tbody class="bordes2" *ngIf="tipo == 1">
                         <tr *ngFor="let item of detalleServicios; let i = index"> 
                           <td data-label="CANTIDAD" class="contenidoF"> {{ item?.cantidad  | number }} </td>
-                          <td data-label="DESCRIPCION" colspan="2" class="contenidoF"> {{item?.descripcion  | uppercase }} </td>
+                          <td data-label="DESCRIPCION" colspan="2" class="contenidoF left"> {{item?.descripcion  | uppercase }} </td>
                           <td data-label="PRECIO UNITARIO" class="contenidoF">{{ item?.Punitario | number : '1.2-2' }}</td>
                           <td data-label="DESC. Y REB OTORGADA" class="contenidoF">{{ 0    | number : '1.2-2' }}</td>
                           <td data-label="IMPUESTO" class="contenidoF"> {{ item?.impuesto | uppercase }} </td>
@@ -505,7 +505,7 @@
                     <tbody class="bordes2" *ngIf="tipo == 0">
                       <tr *ngFor="let item of DcabeceraF; let i = index"> 
                         <td data-label="CANTIDAD" class="contenidoF"  > {{ item?.QAPCTC  | number }} </td>
-                        <td data-label="DESCRIPCION"  colspan="2" class="contenidoF"> {{item?.TCMTRF }} </td>
+                        <td data-label="DESCRIPCION"  colspan="2" class="contenidoF left"> {{item?.TCMTRF }} </td>
                         <td data-label="PRECIO UNITARIO" class="contenidoF">{{ retornarPrecioUnitario(i, item?.QAPCTC) | number : '1.2-2' }}</td>
                         <td data-label="DESC. Y REB OTORGADA" class="contenidoF">{{ 0    | number : '1.2-2' }}</td>
                         <td data-label="IMPUESTO" class="contenidoF"> {{ retornarLetra( item?.TCMTRF )}} </td>
@@ -544,7 +544,7 @@
                     <tbody class="bordes2" *ngIf="tipo == 1">
                         <tr *ngFor="let item of detalleServicios; let i = index"> 
                           <td data-label="CANTIDAD" class="contenidoF"> {{ item?.cantidad  | number }} </td>
-                          <td data-label="DESCRIPCION" colspan="2" class="contenidoF"> {{item?.descripcion  | uppercase }} </td>
+                          <td data-label="DESCRIPCION" colspan="2" class="contenidoF left"> {{item?.descripcion  | uppercase }} </td>
                           <td data-label="PRECIO UNITARIO" class="contenidoF">{{ item?.Punitario | number : '1.2-2' }}</td>
                           <td data-label="DESC. Y REB OTORGADA" class="contenidoF">{{ 0    | number : '1.2-2' }}</td>
                           <td data-label="IMPUESTO" class="contenidoF"> {{ item?.impuesto | uppercase }} </td>
@@ -895,7 +895,7 @@
                         <tbody class="bordes2" *ngIf="tipo == 0">
                           <tr *ngFor="let item of DcabeceraF; let i = index"> 
                             <td data-label="CANTIDAD" class="contenidoF"> {{ item?.QAPCTC  | number }} </td>
-                            <td data-label="DESCRIPCION"  colspan="2" class="contenidoF"> {{item?.TCMTRF }} </td>
+                            <td data-label="DESCRIPCION"  colspan="2" class="contenidoF left"> {{item?.TCMTRF }} </td>
                             <td data-label="PRECIO UNITARIO" class="contenidoF">{{ retornarPrecioUnitario(i, item?.QAPCTC) | number : '1.2-2' }}</td>
                             <td data-label="DESC. Y REB OTORGADA" class="contenidoF">{{ 0    | number : '1.2-2' }}</td>
                             <td data-label="IMPUESTO" class="contenidoF"> {{ retornarLetra( item?.TCMTRF )}} </td>
@@ -934,7 +934,7 @@
                         <tbody class="bordes2" *ngIf="tipo == 1">
                             <tr *ngFor="let item of detalleServicios; let i = index"> 
                               <td data-label="CANTIDAD" class="contenidoF"> {{ item?.cantidad  | number }} </td>
-                              <td data-label="DESCRIPCION" colspan="2" class="contenidoF"> {{item?.descripcion  | uppercase }} </td>
+                              <td data-label="DESCRIPCION" colspan="2" class="contenidoF left"> {{item?.descripcion  | uppercase }} </td>
                               <td data-label="PRECIO UNITARIO" class="contenidoF">{{ item?.Punitario | number : '1.2-2' }}</td>
                               <td data-label="DESC. Y REB OTORGADA" class="contenidoF">{{ 0    | number : '1.2-2' }}</td>
                               <td data-label="IMPUESTO" class="contenidoF"> {{ item?.impuesto | uppercase }} </td>
