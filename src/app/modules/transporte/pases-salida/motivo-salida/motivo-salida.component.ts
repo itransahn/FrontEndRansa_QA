@@ -43,6 +43,8 @@ aprobarPase( ){
         let params = {
           usuario : this.auth.dataUsuario['id_usuario'],
           idPase  : this.data['idPase'],
+          tipo    : this.data['tipo'],
+          motivo  : this.FormPrimario.value.motivo
         } 
         this.transporteService.put(url,params).subscribe(
           (res)=> {

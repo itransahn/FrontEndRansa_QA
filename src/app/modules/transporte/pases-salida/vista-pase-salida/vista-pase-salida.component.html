@@ -16,7 +16,7 @@
         </div>
   
 <div class="row texto1">
-    <h4>
+     <h4>
          Anillo periférico, El SAUCE Francisco Morazán {{ data['Fecha'] }}
     </h4>
 </div>
@@ -44,6 +44,10 @@
         Tipo camión con mercadería de Proveedor: <span class="subrayado">{{ data?.['Hacia'] }}</span> <br>
         Contenido de Camión:   <span class="subrayado"> {{ data?.['contenido'] }} </span>
     </h4>
+    <h4 *ngIf="data['tipo']===3">
+        <!-- Tipo camión con mercadería de Persona Natural: <span class="subrayado">{{ data?.['Hacia'] }}</span> <br> -->
+        Contenido de Camión:   <span class="subrayado"> {{ data?.['contenido'] }} </span>
+    </h4>
 </div>
 
 
@@ -67,8 +71,9 @@
 <div class="row container mt-4" >
     <div class="col-md-12 container" >
         <h4 style="color:red; font-weight: bold; font-size: medium ;">
-           {{data?.['NombreUsuario']}}
+           {{data?.['NombreUsuario'] | uppercase }}
         </h4>
+        
     </div>
     <div class="col-md-12 container" >
         <h4 style="color:red; font-weight: bold; font-size: medium ;">

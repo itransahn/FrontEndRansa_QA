@@ -9,6 +9,7 @@ import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import { ToastServiceLocal } from 'src/app/services/toast.service';
 import { CrearpaseEstandarComponent } from './crearpase-estandar/crearpase-estandar.component';
 import { TransporteService } from '../transporte.service';
+import { mensajes } from 'src/app/interfaces/generales';
 
 @Component({
   selector: 'app-pases-estandar',
@@ -95,5 +96,40 @@ Modal ( ){
     disableClose : true
   })
 }
+
+
+eliminarPase( idPase : number, nombrePersona, tipo){
+  this.sweel.mensajeConConfirmacion('¿Seguro de eliminar pase de salida?', `${nombrePersona}`,'warning' ).then(
+    res=>{
+      if( res ){
+        let url    = 'transporte/EliminarpaseSalida';
+        let params = {
+          idPase     : idPase,
+          usuario    : this.auth.dataUsuario['id_usuario'], 
+          tipo       : tipo
+        } 
+        this.transporteService.delete(url,params).subscribe(
+          (res)=> {
+            if(!res.hasError){
+                if ( res?.data.Table0[0]['codigo'] == -1 ){
+                    this.toast.mensajeWarning(String(res?.data.Table0[0]['Mensaje']), mensajes.warning)
+                }else{
+                    this.toast.mensajeSuccess(String(res?.data.Table0[0]['Mensaje']), mensajes.success)
+                }
+            }else{
+              this.toast.mensajeError(String(res?.errors),"Error")
+            }
+          }
+        )
+      }
+    }
+  )  
+  }
+
+
+  enviarLocalStorage( data){
+    localStorage.setItem('PaseSalida', JSON.stringify(data));
+    this.auth.redirecTo('ransa/transporte/Pasesalidas')
+  }
 
 }

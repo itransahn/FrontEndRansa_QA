@@ -53,6 +53,11 @@ const routes: Routes = [
         path : 'transporte',
         canActivate : [AccessGuard],
         loadChildren : () => import('./modules/transporte/transporte-routing.module').then(m => m.transporteRoutingModule )
+      },
+      {
+        path : 'ssoma',
+        canActivate : [],
+        loadChildren : () => import('./modules/SSOMA/ssoma-routing.module').then(m => m.ssomaRoutingModule)
       }
     ]
 

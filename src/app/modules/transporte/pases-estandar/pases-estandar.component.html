@@ -40,10 +40,10 @@
             </thead>
             <tbody>
               <tr *ngFor="let tr of pases | search: this.filtro.value.filtrar:parametrosBusqueda | slice: desde: hasta " class="trHover">
-                <td data-label="Fecha">{{    tr?.fechaSalida | date: 'dd/MM/yyyy' }}</td>
-                <td data-label="Hora">{{     tr?.horaSalida           }}</td>
-                <td data-label="Persona">{{     tr?.nombreCompleto | uppercase }}</td>
-                <td data-label="Placa">{{ tr?.placa | uppercase }}</td>
+                <td data-label="Fecha">{{    tr?.Fecha }}</td>
+                <td data-label="Hora">{{     tr?.Hora           }}</td>
+                <td data-label="Persona">{{     tr?.Nombre | uppercase }}</td>
+                <td data-label="Placa">{{ tr?.camion | uppercase }}</td>
                 <!-- <td data-label="Motivo">{{    tr?.TIPOD  }}</td> -->
                 <td data-label="Contenido">{{    tr?.contenido  }}</td>
                 <td data-label="Autoriza ">{{    tr?.NombreUsuario  }}</td>
@@ -51,10 +51,9 @@
                 <div class="text-center">
 
                 <!-- Aprobar -->
-               <button mat-mini-fab class="buttonSecundary" [disabled]="(!auth.Actualizacion())" (click)="cerrarPase( tr.idPase, tr.camion, tr.Hora, tr.Fecha )" >
+               <!-- <button mat-mini-fab class="buttonSecundary" [disabled]="(!auth.Actualizacion())" (click)="cerrarPase( tr.idPase, tr.camion, tr.Hora, tr.Fecha )" >
                 <mat-icon>check_circle</mat-icon>
-                </button>
-
+                </button> -->
 
 
                 <!-- Ver Pase -->
@@ -63,7 +62,7 @@
                     </button>
                 </div>
                 <!-- Eliminar -->
-                <button mat-mini-fab class="btnDelete" [hidden]="!auth.Eliminacion()"  (click)="eliminarPase( tr.idPase, tr.camion  )"  >
+                <button mat-mini-fab class="btnDelete" [hidden]="!auth.Eliminacion()"  (click)="eliminarPase( tr?.idPase, tr?.Nombre, tr?.tipo)"  >
                     <mat-icon>delete</mat-icon>
                     </button>
 

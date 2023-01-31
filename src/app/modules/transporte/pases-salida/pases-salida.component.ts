@@ -65,6 +65,7 @@ export class PasesSalidaComponent implements OnInit {
   ngOnDestroy()  {
     this.sub.unsubscribe()
 }
+
 cargarPases(){
   let url = 'transporte/pasesSalida';
   let params = {};
@@ -116,7 +117,7 @@ next(event: PageEvent) {
     })
   }
 
-  cerrarPase( idPase : number , camion : string, hora : string, fecha : Date){
+  cerrarPase( idPase : number , camion : string, hora : string, fecha : Date, tipo){
     let horaS = new Date();
     let horaMinutos = horaS.toTimeString();
     let horaMin2 = horaMinutos.substring(0,5);
@@ -133,7 +134,7 @@ if ( Number(dia2) >= Number(horaS.getDate())) {
     this.ModalPase(idPase, camion);
   }else{
 
-this.aprobarPase(idPase, camion);
+this.aprobarPase(idPase, camion, tipo);
 }
 
 }else{
@@ -144,7 +145,7 @@ this.aprobarPase(idPase, camion);
   
   }
 
-  aprobarPase( idPase : number , camion : string){
+  aprobarPase( idPase : number , camion : string, tipo){
   this.sweel.mensajeConConfirmacion('¿Seguro de aprobar pase de salida?', `Placa de Camión ${camion}`,'warning' ).then(
     res=>{
       if( res ){
@@ -152,6 +153,7 @@ this.aprobarPase(idPase, camion);
         let params = {
           usuario : this.auth.dataUsuario['id_usuario'],
           idPase  : idPase,
+          tipo: tipo
         } 
         this.transporteService.put(url,params).subscribe(
           (res)=> {
@@ -172,13 +174,16 @@ this.aprobarPase(idPase, camion);
   }
 
 
- eliminarPase( idPase : number , camion : string){
+ eliminarPase( idPase : number , camion : string, tipo ){
     this.sweel.mensajeConConfirmacion('¿Seguro de eliminar pase de salida?', `Placa de Camión ${camion}`,'warning' ).then(
       res=>{
         if( res ){
           let url    = 'transporte/EliminarpaseSalida';
           let params = {
             idPase  : idPase,
+            usuario : this.auth.dataUsuario['id_usuario'],
+            tipo    : tipo
+
           } 
           this.transporteService.delete(url,params).subscribe(
             (res)=> {

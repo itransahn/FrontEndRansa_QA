@@ -48,8 +48,19 @@ export class LoginComponent implements OnInit {
         localStorage.setItem("dataUsuario", JSON.stringify( data.result.data.dataUsuario))
         localStorage.setItem("modulos", JSON.stringify( data.result.data.modulosPermitidos))
         this.login.cargarCatalogo()
-        this.login.redirecTo('/modulos')
-        this.login.extraerData()
+
+
+        this.login.redirecTo('/modulos');
+        this.login.extraerData();
+
+
+        // if( data.result.data.dataUsuario?.['id_rol'] === 29){
+        //   this.login.redirecTo('#/ransa/ssoma/paseSalida')
+        //   }else{
+        //     this.login.redirecTo('/modulos')
+        //     this.login.extraerData()
+        //   }
+
       }else{
         this.toast.mensajeError(String(data?.result.errors),"Error")
         // this.sweet.mensajeError(String(data?.result.errors))

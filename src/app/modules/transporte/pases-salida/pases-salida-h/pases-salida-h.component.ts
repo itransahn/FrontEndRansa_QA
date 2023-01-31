@@ -61,6 +61,7 @@ export class PasesSalidaHComponent implements OnInit {
   ngOnDestroy()  {
     this.sub.unsubscribe()
 }
+
 cargarPases(){
   let url = 'transporte/paseSalidaH';
   let params = {};

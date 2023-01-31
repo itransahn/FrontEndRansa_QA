@@ -1,5 +1,5 @@
 <mat-card class="mat-cardContainerCuerpo mat-elevation-z0">
-    <form [formGroup]="filtro" *ngIf="detonador != 1">
+    <form [formGroup]="filtro">
         <div class="row">
             <div class="col-md-6">
                 <mat-form-field appearance="legacy">
@@ -11,16 +11,6 @@
                 </mat-form-field>
             </div>
      
-            <div class="col-md-6">
-                <div class="text-right">
-                    <button mat-raised-button class="buttonPrincipal" [hidden]="!auth.Insercion()" (click)="Modal ( )">
-                        <mat-icon>
-                            add
-                        </mat-icon>
-                        Agregar Pase Salida
-                    </button>
-                </div>
-            </div>
         </div>
     </form>
        <div class="table-responsive !important">
@@ -44,28 +34,28 @@
                 <td data-label="Fecha">{{    tr?.Fecha }}</td>
                 <td data-label="Hora">{{     tr?.Hora           }}</td>
                 <td data-label="Transporte">{{    tr?.Transporte             }}</td>
-                <td data-label="Placa">{{     tr?.camion }}</td>
+                <td data-label="Placa">{{     tr?.camion | uppercase }}</td>
                 <td data-label="Motorista">{{ tr?.Nombre }}</td>
                 <!-- <td data-label="Motivo">{{    tr?.TIPOD  }}</td> -->
-                <td data-label="Contenido">{{    tr?.contenido  }}</td>
+                <td data-label="Contenido" >{{    tr?.Resumen  }}</td>
                 <td data-label="Solicitado por">{{    tr?.Hacia  }}</td>
                 <td data-label="Acciones">
                 <div class="text-center">
 
                 <!-- Aprobar -->
-               <!-- <button mat-mini-fab class="buttonSecundary" [disabled]="(!auth.Actualizacion())" (click)="cerrarPase( tr.idPase, tr.camion, tr.Hora, tr.Fecha )" >
+               <button mat-mini-fab class="buttonSecundary"  [disabled]="(!auth.Actualizacion())" (click)="cerrarPase( tr.idPase, tr.camion, tr.Hora, tr.Fecha, tr.tipo )" >
                 <mat-icon>check_circle</mat-icon>
-                </button> -->
+                </button>
 
                 <!-- Ver Pase -->
-                <button mat-mini-fab class="buttonSecundary" [hidden]="!auth.Actualizacion()"  (click)="enviarLocalStorage(tr)"  >
+                <button mat-mini-fab class="buttonSecundary" [hidden]="!auth.Insercion()"  (click)="enviarLocalStorage(tr)"  >
                     <mat-icon>visibility</mat-icon>
                     </button>
                 </div>
                 <!-- Eliminar -->
-                <button mat-mini-fab class="btnDelete" [hidden]="!auth.Eliminacion()"  (click)="eliminarPase( tr.idPase, tr.camion, tr.tipo )"  >
+                <!-- <button mat-mini-fab class="btnDelete" [hidden]="!auth.Eliminacion()"  (click)="eliminarPase( tr.idPase, tr.camion  )"  >
                     <mat-icon>delete</mat-icon>
-                    </button>
+                    </button> -->
 
                 </td>
               </tr>
