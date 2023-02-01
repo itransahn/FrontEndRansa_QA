@@ -22,9 +22,9 @@
                 <th scope="col">Hora</th>
                 <th scope="col">Transporte</th>
                 <th scope="col">Placa</th>
+                <th scope="col">Identidad</th>
                 <th scope="col">Motorista</th>
                 <!-- <th scope="col">Motivo</th> -->
-                <th scope="col">Contenido</th>
                 <th scope="col">Solicitado por</th>
                 <th scope="col">Acciones</th>
               </tr>
@@ -35,9 +35,9 @@
                 <td data-label="Hora">{{     tr?.Hora           }}</td>
                 <td data-label="Transporte">{{    tr?.Transporte             }}</td>
                 <td data-label="Placa">{{     tr?.camion | uppercase }}</td>
+                <td data-label="Identidad" >{{    tr?.identidad  }}</td>
                 <td data-label="Motorista">{{ tr?.Nombre }}</td>
                 <!-- <td data-label="Motivo">{{    tr?.TIPOD  }}</td> -->
-                <td data-label="Contenido" >{{    tr?.Resumen  }}</td>
                 <td data-label="Solicitado por">{{    tr?.Hacia  }}</td>
                 <td data-label="Acciones">
                 <div class="text-center">

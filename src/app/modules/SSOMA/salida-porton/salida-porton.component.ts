@@ -28,7 +28,7 @@ export class SalidaPortonComponent implements OnInit {
   public pageSize = 50;
   public filter :string  = '';
   public filtro: FormGroup;
-  public parametrosBusqueda = ['NombreUsuario', 'Transporte','Nombre','Hacia','camion'];
+  public parametrosBusqueda = ['NombreUsuario', 'Transporte','Nombre','Hacia','camion','identidad',];
   public pases : any[] = [];
   private sub : Subscription = new Subscription();
 
