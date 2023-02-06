@@ -11,6 +11,7 @@ import { PasesSalidaHComponent } from './pases-salida/pases-salida-h/pases-salid
 import { PasesSalidaComponent } from './pases-salida/pases-salida.component';
 import { VistaPaseSalidaComponent } from './pases-salida/vista-pase-salida/vista-pase-salida.component';
 import { ProveedoresTComponent } from './proveedores-t/proveedores-t.component';
+import { RecibosComponent } from './recibos/recibos/recibos.component';
 import { RolClienteComponent } from './rol-cliente/rol-cliente.component';
 import { RolProveedorComponent } from './rol-proveedor/rol-proveedor.component';
 import { TransClienteComponent } from './trans-cliente/trans-cliente.component';
@@ -79,6 +80,10 @@ const routes: Routes = [
     {
         path : 'PasesalidasE',
         component : PasesEstandarComponent
+    },
+    {
+        path : 'recibos',
+        component : RecibosComponent
     }
 
   ];

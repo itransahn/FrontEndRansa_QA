@@ -1,0 +1,108 @@
+<mat-card class="mat-cardContainerCuerpo mat-elevation-z0">
+    <form [formGroup]="filtro">
+        <div class="row">
+            <div class="col-md-6">
+                <mat-form-field appearance="legacy">
+                    <mat-label>
+                        <mat-icon> search </mat-icon>
+                        Buscar
+                    </mat-label>
+                    <input matInput placeholder="Transporte, Rtn, Propietario, Sede" formControlName="filtrar">
+                </mat-form-field>
+            </div>
+     
+            <div class="col-md-6">
+                <div class="text-right">
+                    <button mat-raised-button class="buttonPrincipal" [disabled]="!auth.Insercion()" (click)="Modal ( 2 )">
+                        <mat-icon>
+                            add
+                        </mat-icon>
+                        Agregar Transporte
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+       <div class="table-responsive !important">
+        <table  >
+            <!-- <caption>Statement Summary</caption> -->
+            <thead>
+              <tr>
+                <th scope="col">Fecha Recibo </th>
+                <th scope="col">Recibo</th>
+                <th scope="col">Servido A</th>
+                <th scope="col">Placa</th>
+                <th scope="col">Valor Recibo</th>
+                <th scope="col">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let tr of dataE | search: this.filtro.value.filtrar:parametrosBusqueda | slice: desde: hasta " class="trHover">
+                <td data-label="Fecha Recibo">{{    tr?.fechaR   | date : 'shortDate'          }}</td>
+                <td data-label="Recibo">{{    tr?.ReciboC             }}</td>
+                <td data-label="Servido A">{{    tr?.servidoAC             }}</td>
+                <td data-label="Placa">{{    tr?.placa             }}</td>
+                <td data-label="Valor Recibo">{{    tr?.valorRecibo             }}</td>
+                <td data-label="Acciones">
+                <div class="text-center">
+
+               <!-- Ver -->
+               <button mat-mini-fab class="buttonSecundary"  (click)="Modal ( 1 , tr )" >
+                   <mat-icon>visibility</mat-icon>
+               </button>
+                 <!-- Editar -->
+                 <button mat-mini-fab class="buttonSecundary" [disabled]="!auth.Actualizacion()"  (click)="Modal ( 3 , tr )">
+                   <mat-icon>create</mat-icon>
+               </button>
+                <!-- Cambiar estado -->
+                <button mat-mini-fab class="search" [disabled]="!auth.Actualizacion()" class="buttonSecundary" (click)="CambiarEstado(tr?.ID, 0)" title="Cerrar">
+                    <mat-icon>clear</mat-icon>
+                </button>
+               <!-- Eliminar -->
+               <button mat-mini-fab class="btnDelete"         [disabled]="!auth.Eliminacion()" (click)="eliminarTransporte(tr.nombreEmpresa, tr.ID)"  >
+                            <mat-icon>delete_forever</mat-icon>
+               </button>
+                      
+                </div>
+
+                </td>
+              </tr>
+            </tbody>
+
+            <tfoot *ngIf=" hasta >= dataE.length">
+                <tr >
+                    <th ></th>
+                    <th ></th>
+                    <th ></th>
+                    <th ></th>
+                    <th > {{ total | currency : 'Lps '}} </th>
+                    <th ></th>
+
+                    </tr>
+                <!-- ISV -->
+                    <!-- <tr class="footer">
+                    <th class="footer"></th>
+                    <th class="footer"></th>
+                    <th class="footer"></th>
+                    <th class="footer"></th>
+                    <th class="footerDetalle titulo"> ISV </th>
+                    <th class="footerDetalle"> {{ ( subTotal * 0.15 ) | currency : 'Lps '}} </th>
+                    </tr>
+                <tr class="footer">
+                <th class="footer"></th>
+                <th class="footer"></th>
+                <th class="footer"></th>
+                <th class="footer"></th>
+                <th class="footerDetalle titulo"> Total Factura </th>
+                <th class="footerDetalle"> {{ ( subTotal * 0.15 ) + subTotal | currency : 'Lps '}} </th> -->
+                <!-- </tr> -->
+              
+              </tfoot>  
+
+          </table>
+          
+       </div>
+          <mat-paginator [length]="dataE.length" [pageSize]="pageSize " (page)="next($event)">
+        </mat-paginator>
+ 
+</mat-card>

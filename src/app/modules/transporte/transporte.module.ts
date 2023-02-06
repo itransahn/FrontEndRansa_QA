@@ -31,6 +31,7 @@ import { DocumentosComponent } from './motoristas/documentos/documentos.componen
 import { MotivoSalidaComponent } from './pases-salida/motivo-salida/motivo-salida.component';
 import { PasesEstandarComponent } from './pases-estandar/pases-estandar.component';
 import { CrearpaseEstandarComponent } from './pases-estandar/crearpase-estandar/crearpase-estandar.component';
+import { RecibosComponent } from './recibos/recibos/recibos.component';
 
 
 @NgModule({
@@ -63,6 +64,7 @@ DocumentosComponent,
 MotivoSalidaComponent,
 PasesEstandarComponent,
 CrearpaseEstandarComponent,
+RecibosComponent,
   ],
   imports: [
     CommonModule,
