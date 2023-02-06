@@ -15,6 +15,7 @@ import { TransporteService } from '../../transporte.service';
   templateUrl: './recibos.component.html',
   styleUrls: ['./recibos.component.scss']
 })
+
 export class RecibosComponent implements OnInit {
   public page = 0;
   public pageEvent : PageEvent;
@@ -26,7 +27,7 @@ export class RecibosComponent implements OnInit {
   public pageSize = 50;
   public filter :string  = '';
   public filtro: FormGroup;
-  public parametrosBusqueda = ['SEDE', 'cco','ReciboC','proveedor','Combustible','servidorAC', 'placa',];
+  public parametrosBusqueda = ['SEDE', 'cco','ReciboC','proveedor','Combustible','servidoAC', 'placa',];
   public dataE : any[] = [];
   private sub : Subscription = new Subscription();
   public total : number = 0;
