@@ -62,7 +62,7 @@ placa" formControlName="filtrar">
                    <mat-icon>create</mat-icon>
                </button>
                 <!-- Cambiar estado -->
-                <button mat-mini-fab class="search" [disabled]="!auth.Actualizacion()" class="buttonSecundary" (click)="CambiarEstado(tr?.ID, 0)" title="Cerrar">
+                <button mat-mini-fab class="search" [disabled]="!auth.Eliminacion()" class="buttonSecundary" (click)="CambiarEstado(tr?.ID, 0)" title="Cerrar">
                     <mat-icon>clear</mat-icon>
                 </button>
                <!-- Eliminar -->
