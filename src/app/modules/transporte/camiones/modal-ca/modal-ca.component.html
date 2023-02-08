@@ -32,7 +32,7 @@
                 <div class="col-md-6">
                     <mat-form-field appearance="legacy">
                         <mat-label>Placa </mat-label>
-                        <input matInput [readonly]="enable" maxlength="50" placeholder="Placa" formControlName ="placa">
+                        <input matInput [readonly]="enable" [mask]="mask.placa"  maxlength="50" placeholder="Placa" formControlName ="placa">
                     </mat-form-field>
                 </div>
             
@@ -177,7 +177,7 @@
                 <div  class="col-md-6 container" >
                       <mat-form-field appearance="legacy">
                         <mat-label> Metraje del camión(Mtrs) </mat-label>
-                        <input matInput [readonly]="enable" maxlength="50" placeholder=" Metraje del camión " formControlName ="metraje">
+                        <input matInput [readonly]="enable" type="number"  placeholder=" Metraje del camión " formControlName ="metraje">
                         <!-- <span>   <mat-label> Mtrs</mat-label>   </span> -->
                     </mat-form-field>
                 </div>
@@ -185,7 +185,7 @@
                      <div class="col-md-4">
                     <mat-form-field appearance="legacy">
                         <mat-label> Año del camión </mat-label>
-                        <input matInput [readonly]="enable" maxlength="50" placeholder=" Año del camión " formControlName="anio">
+                        <input matInput [readonly]="enable" maxlength="50" [mask]="mask.anio" placeholder=" Año del camión " formControlName="anio">
                     </mat-form-field>
                 </div>
 

@@ -2,7 +2,7 @@ import { Component, OnInit,Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { map, Observable, startWith } from 'rxjs';
-import { mensajes } from 'src/app/interfaces/generales';
+import { mask, mensajes } from 'src/app/interfaces/generales';
 import { AuthService } from 'src/app/services/auth.service';
 import { ToastServiceLocal } from 'src/app/services/toast.service';
 import { TransporteService } from '../../transporte.service';
@@ -28,6 +28,7 @@ export class ModalCaComponent implements OnInit {
   public  catalogoT  : any;
   public  titulo     : string;
   public  subtitulo  : string;
+  public  mask       = mask
   filteredOptions : Observable<Transportes[]>;
   public opciones  = [
     {

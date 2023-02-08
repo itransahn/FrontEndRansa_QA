@@ -289,12 +289,14 @@ const mensajes = {
     success   : 'Acción correcta'
 }
 const mask = {
-    numberPhone : '9999-9999',
+    numberPhone : 'XXXX-XXXX',
     decimal     : '0*.00',
     identidad   : 'XXXX-XXXX-XXXXX',
     lote        : 'AXXXXXXXX',
-    cantidad    : "9999",
-    placa       : "AAA-XXXX"
+    cantidad    : "0000",
+    placa       : "AAA-0000",
+    RTN         : 'XXXX-XXXX-XXXXX-X',
+    anio        : '0000'
 }
 
 

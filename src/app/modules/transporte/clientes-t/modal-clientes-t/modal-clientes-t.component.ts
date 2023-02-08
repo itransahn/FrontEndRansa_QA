@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { mensajes } from 'src/app/interfaces/generales';
+import { mask, mensajes } from 'src/app/interfaces/generales';
 import { AuthService } from 'src/app/services/auth.service';
 import { ToastServiceLocal } from 'src/app/services/toast.service';
 import { TransporteService } from '../../transporte.service';
@@ -20,6 +20,7 @@ export class ModalClientesTComponent implements OnInit {
   public  catalogoT  : any;
   public  titulo     : string;
   public  subtitulo  : string;
+  public mask = mask
   constructor(
     private dialogRef:MatDialogRef<ModalClientesTComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any, 
