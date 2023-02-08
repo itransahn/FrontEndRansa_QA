@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import { ToastServiceLocal } from 'src/app/services/toast.service';
 import { TransporteService } from '../../transporte.service';
+import { ModalRecibosComponent } from './modal-recibos/modal-recibos.component';
 
 @Component({
   selector: 'app-recibos',
@@ -56,9 +57,12 @@ export class RecibosComponent implements OnInit {
          this.cargarData()
       }
     )
+
+ 
   
   }
 
+  
   ngOnDestroy()  {
     this.sub.unsubscribe()
 }
@@ -70,10 +74,8 @@ cargarData(){
   this.transporteService.get(url,params).subscribe(
     (data : DataApi | any) =>{
       if( !data.hasError ){
-        console.log(data)
         this.dataE = data?.data?.Table0;
         this.total =  Acumulador( this.dataE, 'valorRecibo' );
-        console.log(this.total)
       }    
     }
 
@@ -108,7 +110,17 @@ cargarData(){
       })
     }
  Modal ( accion : number, data ?: any ){
-    
+  const dialogReg = this.dialog.open( ModalRecibosComponent,{
+    width :   '1000px',
+    height:   'auto',
+    maxWidth: 'auto',
+    minWidth : '1000px',
+    data: {
+     bandera : accion,
+     data    : data
+      },
+    disableClose : true
+  })
     }
     eliminarTransporte(  transporte?:string ,idTr?:number){
       this.sweel.mensajeConConfirmacion(`¿Seguro de Eliminar el Transporte ${ transporte }?`, `Eliminación de Transporte`,"question").then(

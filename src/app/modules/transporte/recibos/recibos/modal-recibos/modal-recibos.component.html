@@ -1,1 +1,259 @@
-<p>modal-recibos works!</p>
+<mat-card class="cardPersonalizada">
+ 
+    <mat-card-header class="header">    Recibo de Combustible
+    <mat-icon style="float: right !important;" (click)="close()" > close </mat-icon>
+    </mat-card-header>
+
+    <mat-card-content>
+        <form [formGroup]="formTipo" #f="ngForm" style="margin-top: 2%;">
+            <div class="row">
+         
+                <div  class="col-md-12 container" >
+                    <mat-form-field  appearance="legacy">
+                        <mat-label>Tipo </mat-label>
+                        <mat-select  formControlName="tipo" (selectionChange)="cargarCatalogos( )"> 
+                            <mat-option *ngFor="let tu of tiposRecibo" [value]="tu?.id">
+                                {{  tu?.tipo | uppercase }}
+                            </mat-option> 
+                          </mat-select> 
+                      </mat-form-field>
+                </div>
+                </div>
+        </form>
+
+    <mat-divider *ngIf="formTipo.value.tipo"  class="mt-4 mb-4"></mat-divider>
+
+   <form [formGroup]="formRecibo" #f1="ngForm" *ngIf="formTipo.value.tipo &&  formTipo.value.tipo  === 2"> 
+    <div class="row">
+        <div class="col-md-6">
+            <mat-form-field  appearance="legacy">
+                <mat-label> Proveedor Combustible </mat-label>
+                <mat-select  formControlName="proveedorC"> 
+                    <mat-option *ngFor="let tu of catalogo?.['proveedoresC']" [value]="tu?.idProveedor">
+                        {{  tu?.proveedor | uppercase }}
+                    </mat-option> 
+                  </mat-select> 
+              </mat-form-field>
+        </div>
+
+        <div class="col-md-6">
+            <mat-form-field  appearance="legacy">
+                <mat-label> Tipo de Combustible </mat-label>
+                <mat-select  formControlName="tipoC"> 
+                    <mat-option *ngFor="let tu of catalogo?.['tiposC']" [value]="tu?.idCombustible">
+                        {{  tu?.combustible | uppercase }}
+                    </mat-option> 
+                  </mat-select> 
+              </mat-form-field>
+        </div>
+
+        <div class="col-md-6">
+            <mat-form-field appearance="legacy" >
+                <mat-label>Fecha Recibo </mat-label>
+                <input name="date" formControlName = "fechaR" matInput [matDatepicker]="pickerN" min="{{start != undefined ? start : fecha | date: 'yyyy-MM-dd'}}">
+                <mat-datepicker-toggle matSuffix [for]="pickerN"></mat-datepicker-toggle>
+                <mat-datepicker #pickerN></mat-datepicker>
+              </mat-form-field>
+        </div>
+
+
+        <div class="col-md-6">
+            <mat-form-field appearance="legacy">
+                <mat-label>Recibo</mat-label>
+                <input matInput #recibo [readonly]="enable" maxlength="50" [mask]="mask.recibo" placeholder="Recibo" formControlName ="reciboC">
+            </mat-form-field>
+        </div>
+
+
+    <div  class="col-md-6" >
+        <mat-form-field  appearance="legacy">
+            <mat-label> Cliente </mat-label>
+            <mat-select  formControlName="cliente"> 
+                <mat-option *ngFor="let tu of catalogo?.['clientes']" [value]="tu?.idCliente">
+                    {{  tu?.cliente | uppercase }}
+                </mat-option> 
+              </mat-select> 
+          </mat-form-field>
+    </div>
+
+    <div  class="col-md-6" >
+        <mat-form-field  appearance="legacy">
+            <mat-label> Centro de Costo </mat-label>
+            <mat-select  formControlName="cco"> 
+                <ng-container *ngFor="let item of catalogo?.['ccoT']">
+                    <div *ngIf="item.idCliente === formRecibo.value.cliente || item.idCliente === data?.['data']['idCliente']">
+                        <mat-option [value]="item?.idCeco">
+                            {{  item?.cco | uppercase }}
+                        </mat-option>
+                    </div>
+                </ng-container>
+              </mat-select> 
+          </mat-form-field>
+    </div>
+
+
+    <div  class="col-md-6" >
+        <mat-form-field  appearance="legacy">
+            <mat-label> Servido a </mat-label>
+            <mat-select  formControlName="servidoA"> 
+                <ng-container *ngFor="let item of catalogo?.['transportes']">
+                    <div *ngIf="item.idCliente === formRecibo.value.cliente || item.idCliente === data?.['data']['idCliente']">
+                        <mat-option [value]="item?.idTransportista">
+                            {{  item?.nombreEmpresa | uppercase }}
+                        </mat-option>
+                    </div>
+                </ng-container>
+              </mat-select> 
+          </mat-form-field>
+    </div>
+
+    <div  class="col-md-6" >
+        <mat-form-field  appearance="legacy">
+            <mat-label> Unidad </mat-label>
+            <mat-select  formControlName="placa"> 
+                <ng-container *ngFor="let item of catalogo?.['camiones']">
+                    <div *ngIf="item.idTransportista === formRecibo.value.servidoA">
+                        <mat-option [value]="item?.placa">
+                            {{  item?.placa | uppercase }}
+                        </mat-option>
+                    </div>
+                </ng-container>
+              </mat-select> 
+          </mat-form-field>
+    </div>
+
+    <div class="col-md-12"  style="text-align:right !important">
+        <mat-form-field appearance="legacy">
+            <mat-label> Valor Recibo </mat-label>
+            <input  matInput mask="separator.2" thousandSeparator="" separatorLimit="99999999999999" maxlength="100" placeholder="Monto"  formControlName ="valorRecibo">
+        </mat-form-field>
+    </div>
+
+    <div class="col-md-12 container">
+        <mat-form-field class="example-full-width" hintLabel="Max 250 Caracteres" appearance="legacy">
+            <mat-label> Observaciones </mat-label>
+            <textarea matInput #contenido formControlName ="observaciones" placeholder="Observaciones..." maxlength="250" ></textarea>
+            <mat-hint align="end">{{contenido.value?.length || 0}}/250</mat-hint>
+          </mat-form-field>
+    </div>
+
+</div>
+            <div class="container">
+                <button class="buttonPrincipal" mat-raised-button type="submit" [disabled]="f1.invalid" (click)="submit()"  >Guardar</button>
+            </div>
+   </form>
+    
+
+   <form [formGroup]="formRecibo" #f2="ngForm"  *ngIf="formTipo.value.tipo &&  formTipo.value.tipo  === 1"> 
+    <div class="row">
+        <div class="col-md-6">
+            <mat-form-field  appearance="legacy">
+                <mat-label> Proveedor Combustible </mat-label>
+                <mat-select  formControlName="proveedorC"> 
+                    <mat-option *ngFor="let tu of catalogo?.['proveedoresC']" [value]="tu?.idProveedor">
+                        {{  tu?.proveedor | uppercase }}
+                    </mat-option> 
+                  </mat-select> 
+              </mat-form-field>
+        </div>
+
+        <div class="col-md-6">
+            <mat-form-field  appearance="legacy">
+                <mat-label> Tipo de Combustible </mat-label>
+                <mat-select  formControlName="tipoC"> 
+                    <mat-option *ngFor="let tu of catalogo?.['tiposC']" [value]="tu?.idCombustible">
+                        {{  tu?.combustible | uppercase }}
+                    </mat-option> 
+                  </mat-select> 
+              </mat-form-field>
+        </div>
+
+        <div class="col-md-6">
+            <mat-form-field appearance="legacy" >
+                <mat-label>Fecha Recibo </mat-label>
+                <input name="date" formControlName = "fechaR" matInput [matDatepicker]="pickerN" min="{{start != undefined ? start : fecha | date: 'yyyy-MM-dd'}}">
+                <mat-datepicker-toggle matSuffix [for]="pickerN"></mat-datepicker-toggle>
+                <mat-datepicker #pickerN></mat-datepicker>
+              </mat-form-field>
+        </div>
+
+
+        <div class="col-md-6">
+            <mat-form-field appearance="legacy">
+                <mat-label>Recibo</mat-label>
+                <input matInput #recibo [readonly]="enable" maxlength="50" [mask]="mask.recibo" placeholder="Recibo" formControlName ="reciboC">
+            </mat-form-field>
+        </div>
+
+        <div  class="col-md-6" >
+            <mat-form-field  appearance="legacy">
+                <mat-label> Servido a </mat-label>
+                <mat-select  formControlName="servidoA"> 
+                    <ng-container *ngFor="let item of catalogo?.['personas']">
+                            <mat-option [value]="item?.id_usuario">
+                                {{  item?.nombreCompleto | uppercase }}
+                            </mat-option>  
+                    </ng-container>
+                  </mat-select> 
+              </mat-form-field>
+        </div>
+
+    <div  class="col-md-6" >
+        <mat-form-field  appearance="legacy">
+            <mat-label> Centro de Costo </mat-label>
+            <mat-select  formControlName="cco"> 
+                <ng-container *ngFor="let item of catalogo?.['ccoE']">
+                    <div *ngIf="item.idCliente === formRecibo.value.servidoA">
+                        <mat-option [value]="item?.idCeco">
+                            {{  item?.cco | uppercase }}
+                        </mat-option>
+                    </div>
+                </ng-container>
+              </mat-select> 
+          </mat-form-field>
+    </div>
+
+
+ 
+
+    <div  class="col-md-6" >
+        <mat-form-field  appearance="legacy">
+            <mat-label> Unidad </mat-label>
+            <mat-select  formControlName="placa"> 
+                <ng-container *ngFor="let item of catalogo?.['placasPersonas']">
+                    <div *ngIf="item.id_usuario === formRecibo.value.servidoA">
+                        <mat-option [value]="item?.placa">
+                            {{  item?.placa | uppercase }}
+                        </mat-option>
+                    </div>
+                </ng-container>
+              </mat-select> 
+          </mat-form-field>
+    </div>
+
+    <div class="col-md-12"  style="text-align:right !important">
+        <mat-form-field appearance="legacy">
+            <mat-label> Valor Recibo </mat-label>
+            <input  matInput mask="separator.2" thousandSeparator="" separatorLimit="99999999999999"  maxlength="100" placeholder="Monto"  formControlName ="valorRecibo">
+        </mat-form-field>
+    </div>
+
+    <div class="col-md-12 container">
+        <mat-form-field class="example-full-width" hintLabel="Max 250 Caracteres" appearance="legacy">
+            <mat-label> Observaciones </mat-label>
+            <textarea matInput #contenido formControlName ="observaciones" placeholder="Observaciones..." ></textarea>
+            <mat-hint align="end">{{contenido.value?.length || 0}}/250</mat-hint>
+          </mat-form-field>
+    </div>
+
+</div>
+
+     <div class="container">
+         <button class="buttonPrincipal" mat-raised-button type="submit" [disabled]="f2.invalid" (click)="submit()" >Guardar</button>
+     </div>
+
+   </form>
+
+    </mat-card-content>
+    
+</mat-card>  

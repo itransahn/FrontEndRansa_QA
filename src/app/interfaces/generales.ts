@@ -296,7 +296,8 @@ const mask = {
     cantidad    : "0000",
     placa       : "AAA-0000",
     RTN         : 'XXXX-XXXX-XXXXX-X',
-    anio        : '0000'
+    anio        : '0000',
+    recibo      : '00000'
 }
 
 

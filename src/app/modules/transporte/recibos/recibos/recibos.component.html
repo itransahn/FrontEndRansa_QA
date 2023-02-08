@@ -24,7 +24,7 @@ placa" formControlName="filtrar">
                         <mat-icon>
                             add
                         </mat-icon>
-                        Agregar Transporte
+                        Agregar Recibo
                     </button>
                 </div>
             </div>
@@ -36,6 +36,7 @@ placa" formControlName="filtrar">
             <thead>
               <tr>
                 <th scope="col">Fecha Recibo </th>
+                <th scope="col">Tipo Recibo </th>
                 <th scope="col">Recibo</th>
                 <th scope="col">Servido A</th>
                 <th scope="col">Placa</th>
@@ -46,6 +47,7 @@ placa" formControlName="filtrar">
             <tbody>
               <tr *ngFor="let tr of dataE | search: this.filtro.value.filtrar:parametrosBusqueda | slice: desde: hasta " class="trHover">
                 <td data-label="Fecha Recibo">{{    tr?.fechaR   | date : 'shortDate'          }}</td>
+                <td data-label="Recibo">{{    tr?.ORDEN             }}</td>
                 <td data-label="Recibo">{{    tr?.ReciboC             }}</td>
                 <td data-label="Servido A">{{    tr?.servidoAC             }}</td>
                 <td data-label="Placa">{{    tr?.placa             }}</td>
@@ -82,9 +84,9 @@ placa" formControlName="filtrar">
                     <th ></th>
                     <th ></th>
                     <th ></th>
+                    <th ></th>
                     <th > {{ total | currency : 'Lps '}} </th>
                     <th ></th>
-
                     </tr>
                 <!-- ISV -->
                     <!-- <tr class="footer">
