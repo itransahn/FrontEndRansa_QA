@@ -55,7 +55,7 @@
             <p class = "empresa">
             <span class="nombre" > {{parametros[0]['nombreCompleto']}}</span> <br>
              RTN: {{parametros[0]['rtnEmpresa']}} <br>
-             {{parametros[0]['direccion1']}}: {{ parametros[0]['direccion2']}} <br>
+             {{parametros[0]['direccion1']}} {{ parametros[0]['direccion2']}} <br>
              Municipio: {{ parametros[0]['municipio']}}, Departamento: {{ parametros[0]['Departamento']}} <br> 
              Tel: {{parametros[0]['Telfijo']}}, {{parametros[0]['TelCel']}}  <br>
             <span *ngIf="parametros[0]['correo']"> Correo: {{parametros[0]['correo']}}  </span>
@@ -203,8 +203,9 @@
                                     
                                              <!-- correlativo exonerado -->
                                          <span class="lemas">
-                                                NO. CORRELATIVO DE CONSTANCIA DE REGISTRO EXONERADO: {{cabeceraF[0]['TOBCTC2']}} 
-                                        </span> <br>
+                                                NO. CORRELATIVO DE CONSTANCIA DE REGISTRO EXONERADO: <br>
+                                            <span class="lemas" style="margin-left: 75% !important;">  {{cabeceraF[0]['TOBCTC2']}}  </span>
+                                            </span> <br>
             
                                                <!-- Identificativo de la Sag -->
                                         <span class="lemas">
@@ -446,7 +447,7 @@
             <p class = "empresa">
                 <span class="nombre" > {{parametros[0]['nombreCompleto']}}</span> <br>
                  RTN: {{parametros[0]['rtnEmpresa']}} <br>
-                 {{parametros[0]['direccion1']}}: {{ parametros[0]['direccion2']}} <br>
+                 {{parametros[0]['direccion1']}} {{ parametros[0]['direccion2']}} <br>
                  Municipio: {{ parametros[0]['municipio']}}, Departamento: {{ parametros[0]['Departamento']}} <br> 
                  Tel: {{parametros[0]['Telfijo']}}, {{parametros[0]['TelCel']}}  <br>
                 <span *ngIf="parametros[0]['correo']"> Correo: {{parametros[0]['correo']}}  </span>
@@ -593,9 +594,10 @@
                                         </span> <br>
                                     
                                              <!-- correlativo exonerado -->
-                                         <span class="lemas">
-                                                NO. CORRELATIVO DE CONSTANCIA DE REGISTRO EXONERADO: {{cabeceraF[0]['TOBCTC2']}} 
-                                        </span> <br>
+                                             <span class="lemas">
+                                                NO. CORRELATIVO DE CONSTANCIA DE REGISTRO EXONERADO: <br>
+                                            <span class="lemas" style="margin-left: 75% !important;">  {{cabeceraF[0]['TOBCTC2']}}  </span>
+                                            </span> <br>
             
                                                <!-- Identificativo de la Sag -->
                                         <span class="lemas">
@@ -836,7 +838,7 @@
                 <p class = "empresa">
                     <span class="nombre" > {{parametros[0]['nombreCompleto']}}</span> <br>
                      RTN: {{parametros[0]['rtnEmpresa']}} <br>
-                     {{parametros[0]['direccion1']}}: {{ parametros[0]['direccion2']}} <br>
+                     {{parametros[0]['direccion1']}} {{ parametros[0]['direccion2']}} <br>
                      Municipio: {{ parametros[0]['municipio']}}, Departamento: {{ parametros[0]['Departamento']}} <br> 
                      Tel: {{parametros[0]['Telfijo']}}, {{parametros[0]['TelCel']}}  <br>
                     <span *ngIf="parametros[0]['correo']"> Correo: {{parametros[0]['correo']}}  </span>
@@ -983,9 +985,10 @@
                                             </span> <br>
                                         
                                                  <!-- correlativo exonerado -->
-                                             <span class="lemas">
-                                                    NO. CORRELATIVO DE CONSTANCIA DE REGISTRO EXONERADO: {{cabeceraF[0]['TOBCTC2']}} 
-                                            </span> <br>
+                                                 <span class="lemas">
+                                                    NO. CORRELATIVO DE CONSTANCIA DE REGISTRO EXONERADO: <br>
+                                                <span class="lemas" style="margin-left: 75% !important;">  {{cabeceraF[0]['TOBCTC2']}}  </span>
+                                                </span> <br>
                 
                                                    <!-- Identificativo de la Sag -->
                                             <span class="lemas">
