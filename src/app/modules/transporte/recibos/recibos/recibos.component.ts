@@ -122,15 +122,17 @@ cargarData(){
     disableClose : true
   })
     }
-    eliminarTransporte(  transporte?:string ,idTr?:number){
-      this.sweel.mensajeConConfirmacion(`¿Seguro de Eliminar el Transporte ${ transporte }?`, `Eliminación de Transporte`,"question").then(
+    anularRecibo(  idRecibo : number, recibo : string ){
+      this.sweel.mensajeConConfirmacion(`¿Seguro de anular el Recibo ${ recibo }?`, `Anulación de Recibo`,"warning").then(
         res=>{
             if ( res ){
-                  let url    = '/transporte/transporte';
+                  let url    = '/transporte/anularRecibo';
                   let params = {
-                    idTransporte : idTr
+                    idRecibo : idRecibo,
+                    recibo   : recibo, 
+                    usuario  : this.auth.dataUsuario['id_usuario']  
                   } 
-                  this.transporteService.delete(url, params).subscribe(
+                  this.transporteService.post(url, params).subscribe(
                     res=>{
                       if ( res?.data.Table0[0]['codigo'] == -1 ){
                         this.toast.mensajeWarning(String(res?.data.Table0[0]['Mensaje']), mensajes.warning)
@@ -145,4 +147,6 @@ cargarData(){
       )
     }
 
+
+  
 }

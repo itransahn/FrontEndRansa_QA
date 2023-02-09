@@ -125,7 +125,9 @@
     <div class="col-md-12"  style="text-align:right !important">
         <mat-form-field appearance="legacy">
             <mat-label> Valor Recibo </mat-label>
-            <input  matInput mask="separator.2" thousandSeparator="" separatorLimit="99999999999999" maxlength="100" placeholder="Monto"  formControlName ="valorRecibo">
+            <input  matInput mask="separator.2" thousandSeparator="," *ngIf="data['bandera'] === 2" separatorLimit="99999999999999" maxlength="100" placeholder="Monto"  formControlName ="valorRecibo">
+            <input  matInput mask="separator.2" thousandSeparator="" *ngIf="data['bandera'] != 2" separatorLimit="99999999999999" maxlength="100" placeholder="Monto"  formControlName ="valorRecibo">
+
         </mat-form-field>
     </div>
 
@@ -234,7 +236,9 @@
     <div class="col-md-12"  style="text-align:right !important">
         <mat-form-field appearance="legacy">
             <mat-label> Valor Recibo </mat-label>
-            <input  matInput mask="separator.2" thousandSeparator="" separatorLimit="99999999999999"  maxlength="100" placeholder="Monto"  formControlName ="valorRecibo">
+            <input  matInput mask="separator.2" thousandSeparator="," *ngIf="data['bandera'] === 2" separatorLimit="99999999999999" maxlength="100" placeholder="Monto"  formControlName ="valorRecibo">
+            <input  matInput mask="separator.2" thousandSeparator="" *ngIf="data['bandera'] != 2" separatorLimit="99999999999999" maxlength="100" placeholder="Monto"  formControlName ="valorRecibo">
+
         </mat-form-field>
     </div>
 

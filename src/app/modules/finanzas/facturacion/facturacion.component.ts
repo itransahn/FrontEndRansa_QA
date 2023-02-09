@@ -45,6 +45,9 @@ export class FacturacionComponent implements OnInit {
   public mes : string;
   public anio : string;
 
+
+  public exento  = false;
+  
   public obs : string = "SERVICIO TRAMITE ADUANAL, BL NO MEDUX5035795, FACTURA NO:MINB4944 CONTENEDORES: MEDU9423500, FFAU3016235, MSMU4209438, MSMU4722250 MSMU8235780, CAIU4870715,CAIU75744086, MSMU4715760"
 
   constructor( 
@@ -183,6 +186,8 @@ impuesto   : new FormControl('', [ Validators.required]),
 
   this.facturacionS.As400( params ).subscribe(
     (res:any)=>{
+      console.log(res)
+
       this.cabeceraF = res;
       let fecha : string = String(this.cabeceraF[0]?.FDCCTC);
       this.dia  =  fecha.substring(6,8);
@@ -231,6 +236,15 @@ impuesto   : new FormControl('', [ Validators.required]),
     for(let j=0; j<(15-this.DcabeceraF.length); j++){
         this.espaciosBlancos.push(j)
     }
+        /* SABER SI EXISTE EXENTO */ 
+        for( let x = 0 ; x < this.DcabeceraF.length; x++){
+          if( String(this.DcabeceraF[x].TCMTRF).includes('EXENTO') ){
+            this.exento = true;
+            break
+          }
+      }
+  
+      /* SABER SI EXISTE EXENTO */ 
     this.DcabeceraF =  this.descomponerArray(this.DcabeceraF);
     this.cargarObservacionesFac()
     this.loading2 = true;

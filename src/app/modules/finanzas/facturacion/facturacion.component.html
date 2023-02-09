@@ -247,27 +247,15 @@
                                     </div>
                                </th> -->
                         </tr>
-                        <!-- Importe Exento -->
-                             <tr >
-                            <!-- <th  class="legend left bordeIz"colspan="4" style="border-bottom-style: hidden !important;" >NO. CORRELATIVO DE ORDEN DE COMPRA EXENTA: {{cabeceraF[0]['TOBCTC']}} </th> -->
+                       <!-- Importe Exento -->
+
+                       <tr *ngIf="!exento"> 
+                        <th class="left" colspan="2" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;"> Importe Exento </th>
+                        <th class="right" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;"> <span class="letra0"> L </span>  {{ 0 | number : '1.2-2'}} </th>
+                        </tr>
+
+                        <tr *ngIf="exento"> 
                             <th class="left" colspan="2" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;"> Importe Exento </th>
-                            <th class="right" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;"> <span class="letra0"> L </span>  {{ 0 | number : '1.2-2'}} </th>
-
-    
-
-                            <!-- <th class="left" *ngIf="retornarTotal() >= 0 && retornarTotal() < 999 " >  L      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2'}} </th>
-                            <th class="left" *ngIf="retornarTotal() >= 999 && retornarTotal() < 10000 " >  L      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2'}} </th>
-                            <th class="left" *ngIf="retornarTotal() >= 10000 && retornarTotal() < 1000000 " >  L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2'}}   </th>
-                            <th class="left" *ngIf="retornarTotal() >= 1000000 && retornarTotal() < 10000000 " >  L  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2'}} </th>
-                            <th class="left" *ngIf="retornarTotal() >= 10000000 " >  L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2'}} </th> -->
-
-                            </tr>
-                        <!-- Importe Exonerado -->
-                        <tr >
-                            <!-- <th class="legend left bordeIz" colspan="4" >NO. CORRELATIVO DE CONSTANCIA DE REGISTRO EXONERADO: {{cabeceraF[0]['TOBCTC2']}}</th> -->
-                            <th class="left" colspan="2" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;"> Importe Exonerado </th>
-                            <!-- <th class="right legend" > <span class="letra"> L. </span> {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2'}}  </th> -->
-
                             <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] <= 0"                                      >       <span  class="letra0"> L        </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
                             <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >  0        && cabeceraF[0]['IVLNAS'] <= 99"      > <span  class="letra0"> L        </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
                             <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 100      && cabeceraF[0]['IVLNAS'] <= 999"     > <span  class="letra100"> L      </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
@@ -276,16 +264,39 @@
                             <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 100000   && cabeceraF[0]['IVLNAS'] <= 999999"  > <span  class="letra100000"> L   </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
                             <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 1000000  && cabeceraF[0]['IVLNAS'] <= 9999999">  <span  class="letra1000000"> L  </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
                             <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 10000000 "                               >       <span  class="letra10000000"> L </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
-            
-                            <!-- <th class="left legend" *ngIf="cabeceraF[0]['IVLNAS'] > 0"> L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2'}}  </th> -->
-                            <!-- <th class="left" *ngIf="retornarTotal() >= 0 && retornarTotal() < 999 " >  L      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2'}} </th> -->
-                            <!-- <th class="left" *ngIf="retornarTotal() >= 999 && retornarTotal() < 10000 " >  L      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2'}} </th> -->
-                            <!-- <th class="left" *ngIf="retornarTotal() >= 10000 && retornarTotal() < 1000000 " >  L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2'}}   </th> -->
-                            <!-- <th class="left" *ngIf="retornarTotal() >= 1000000 && retornarTotal() < 10000000 " >  L  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2'}} </th> -->
-                            <!-- <th class="left" *ngIf="retornarTotal() >= 10000000 " >  L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2'}} </th> -->
-                            <!-- <th class="left" *ngIf="retornarTotal() >= 0 && retornarTotal() < 10000 " >  L      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2'}} </th> -->
-                            
                         </tr>
+
+
+                    <!-- Importe Exonerado -->
+                    <tr *ngIf="exento"> 
+                        <th class="left" colspan="2" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;"> Importe Exonerado </th>
+                        <th class="right" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;"> <span class="letra0"> L </span>  {{ 0 | number : '1.2-2'}} </th>
+                    </tr>
+
+
+                    <tr *ngIf="!exento">
+                        <!-- <th class="legend left bordeIz" colspan="4" >NO. CORRELATIVO DE CONSTANCIA DE REGISTRO EXONERADO: {{cabeceraF[0]['TOBCTC2']}}</th> -->
+                        <th class="left" colspan="2" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;"> Importe Exonerado </th>
+                        <!-- <th class="right legend" > <span class="letra"> L. </span> {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2'}}  </th> -->
+
+                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] <= 0"                                      >       <span  class="letra0"> L        </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >  0        && cabeceraF[0]['IVLNAS'] <= 99"      > <span  class="letra0"> L        </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 100      && cabeceraF[0]['IVLNAS'] <= 999"     > <span  class="letra100"> L      </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 1000     && cabeceraF[0]['IVLNAS'] <= 9999"    > <span  class="letra1000"> L     </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 10000    && cabeceraF[0]['IVLNAS'] <= 99999"   > <span  class="letra10000"> L    </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 100000   && cabeceraF[0]['IVLNAS'] <= 999999"  > <span  class="letra100000"> L   </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 1000000  && cabeceraF[0]['IVLNAS'] <= 9999999">  <span  class="letra1000000"> L  </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 10000000 "                               >       <span  class="letra10000000"> L </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+        
+                        <!-- <th class="left legend" *ngIf="cabeceraF[0]['IVLNAS'] > 0"> L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2'}}  </th> -->
+                        <!-- <th class="left" *ngIf="retornarTotal() >= 0 && retornarTotal() < 999 " >  L      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2'}} </th> -->
+                        <!-- <th class="left" *ngIf="retornarTotal() >= 999 && retornarTotal() < 10000 " >  L      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2'}} </th> -->
+                        <!-- <th class="left" *ngIf="retornarTotal() >= 10000 && retornarTotal() < 1000000 " >  L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2'}}   </th> -->
+                        <!-- <th class="left" *ngIf="retornarTotal() >= 1000000 && retornarTotal() < 10000000 " >  L  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2'}} </th> -->
+                        <!-- <th class="left" *ngIf="retornarTotal() >= 10000000 " >  L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2'}} </th> -->
+                        <!-- <th class="left" *ngIf="retornarTotal() >= 0 && retornarTotal() < 10000 " >  L      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2'}} </th> -->
+                        
+                    </tr>
                            <!-- Importe Gravado al 15% -->
                            <tr >
                             <!-- <th class="left bordeIz" colspan="4"  style="border-bottom-style: hidden !important;">NO. IDENTIFICATIVO DEL REGISTRO DE LA SAG:
@@ -640,22 +651,33 @@
                                </th> -->
                         </tr>
                         <!-- Importe Exento -->
-                             <tr >
-                            <!-- <th  class="legend left bordeIz"colspan="4" style="border-bottom-style: hidden !important;" >NO. CORRELATIVO DE ORDEN DE COMPRA EXENTA: {{cabeceraF[0]['TOBCTC']}} </th> -->
+
+                        <tr *ngIf="!exento"> 
                             <th class="left" colspan="2" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;"> Importe Exento </th>
                             <th class="right" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;"> <span class="letra0"> L </span>  {{ 0 | number : '1.2-2'}} </th>
-
-    
-
-                            <!-- <th class="left" *ngIf="retornarTotal() >= 0 && retornarTotal() < 999 " >  L      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2'}} </th>
-                            <th class="left" *ngIf="retornarTotal() >= 999 && retornarTotal() < 10000 " >  L      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2'}} </th>
-                            <th class="left" *ngIf="retornarTotal() >= 10000 && retornarTotal() < 1000000 " >  L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2'}}   </th>
-                            <th class="left" *ngIf="retornarTotal() >= 1000000 && retornarTotal() < 10000000 " >  L  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2'}} </th>
-                            <th class="left" *ngIf="retornarTotal() >= 10000000 " >  L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2'}} </th> -->
-
                             </tr>
+
+                            <tr *ngIf="exento"> 
+                                <th class="left" colspan="2" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;"> Importe Exento </th>
+                                <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] <= 0"                                      >       <span  class="letra0"> L        </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                                <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >  0        && cabeceraF[0]['IVLNAS'] <= 99"      > <span  class="letra0"> L        </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                                <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 100      && cabeceraF[0]['IVLNAS'] <= 999"     > <span  class="letra100"> L      </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                                <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 1000     && cabeceraF[0]['IVLNAS'] <= 9999"    > <span  class="letra1000"> L     </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                                <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 10000    && cabeceraF[0]['IVLNAS'] <= 99999"   > <span  class="letra10000"> L    </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                                <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 100000   && cabeceraF[0]['IVLNAS'] <= 999999"  > <span  class="letra100000"> L   </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                                <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 1000000  && cabeceraF[0]['IVLNAS'] <= 9999999">  <span  class="letra1000000"> L  </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                                <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 10000000 "                               >       <span  class="letra10000000"> L </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                            </tr>
+
+
                         <!-- Importe Exonerado -->
-                        <tr >
+                        <tr *ngIf="exento"> 
+                            <th class="left" colspan="2" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;"> Importe Exonerado </th>
+                            <th class="right" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;"> <span class="letra0"> L </span>  {{ 0 | number : '1.2-2'}} </th>
+                        </tr>
+
+
+                        <tr *ngIf="!exento">
                             <!-- <th class="legend left bordeIz" colspan="4" >NO. CORRELATIVO DE CONSTANCIA DE REGISTRO EXONERADO: {{cabeceraF[0]['TOBCTC2']}}</th> -->
                             <th class="left" colspan="2" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;"> Importe Exonerado </th>
                             <!-- <th class="right legend" > <span class="letra"> L. </span> {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2'}}  </th> -->
@@ -1030,45 +1052,56 @@
                                         </div>
                                    </th> -->
                             </tr>
-                            <!-- Importe Exento -->
-                                 <tr >
-                                <!-- <th  class="legend left bordeIz"colspan="4" style="border-bottom-style: hidden !important;" >NO. CORRELATIVO DE ORDEN DE COMPRA EXENTA: {{cabeceraF[0]['TOBCTC']}} </th> -->
-                                <th class="left" colspan="2" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;"> Importe Exento </th>
-                                <th class="right" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;"> <span class="letra0"> L </span>  {{ 0 | number : '1.2-2'}} </th>
-    
+                                  <!-- Importe Exento -->
+
+                                  <tr *ngIf="!exento"> 
+                                    <th class="left" colspan="2" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;"> Importe Exento </th>
+                                    <th class="right" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;"> <span class="letra0"> L </span>  {{ 0 | number : '1.2-2'}} </th>
+                                    </tr>
         
-    
-                                <!-- <th class="left" *ngIf="retornarTotal() >= 0 && retornarTotal() < 999 " >  L      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2'}} </th>
-                                <th class="left" *ngIf="retornarTotal() >= 999 && retornarTotal() < 10000 " >  L      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2'}} </th>
-                                <th class="left" *ngIf="retornarTotal() >= 10000 && retornarTotal() < 1000000 " >  L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2'}}   </th>
-                                <th class="left" *ngIf="retornarTotal() >= 1000000 && retornarTotal() < 10000000 " >  L  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2'}} </th>
-                                <th class="left" *ngIf="retornarTotal() >= 10000000 " >  L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2'}} </th> -->
-    
+                                    <tr *ngIf="exento"> 
+                                        <th class="left" colspan="2" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;"> Importe Exento </th>
+                                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] <= 0"                                      >       <span  class="letra0"> L        </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >  0        && cabeceraF[0]['IVLNAS'] <= 99"      > <span  class="letra0"> L        </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 100      && cabeceraF[0]['IVLNAS'] <= 999"     > <span  class="letra100"> L      </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 1000     && cabeceraF[0]['IVLNAS'] <= 9999"    > <span  class="letra1000"> L     </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 10000    && cabeceraF[0]['IVLNAS'] <= 99999"   > <span  class="letra10000"> L    </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 100000   && cabeceraF[0]['IVLNAS'] <= 999999"  > <span  class="letra100000"> L   </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 1000000  && cabeceraF[0]['IVLNAS'] <= 9999999">  <span  class="letra1000000"> L  </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                                        <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 10000000 "                               >       <span  class="letra10000000"> L </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                                    </tr>
+        
+        
+                                <!-- Importe Exonerado -->
+                                <tr *ngIf="exento"> 
+                                    <th class="left" colspan="2" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;"> Importe Exonerado </th>
+                                    <th class="right" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;"> <span class="letra0"> L </span>  {{ 0 | number : '1.2-2'}} </th>
                                 </tr>
-                            <!-- Importe Exonerado -->
-                            <tr >
-                                <!-- <th class="legend left bordeIz" colspan="4" >NO. CORRELATIVO DE CONSTANCIA DE REGISTRO EXONERADO: {{cabeceraF[0]['TOBCTC2']}}</th> -->
-                                <th class="left" colspan="2" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;"> Importe Exonerado </th>
-                                <!-- <th class="right legend" > <span class="letra"> L. </span> {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2'}}  </th> -->
-    
-                                <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] <= 0"                                      >       <span  class="letra0"> L        </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
-                                <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >  0        && cabeceraF[0]['IVLNAS'] <= 99"      > <span  class="letra0"> L        </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
-                                <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 100      && cabeceraF[0]['IVLNAS'] <= 999"     > <span  class="letra100"> L      </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
-                                <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 1000     && cabeceraF[0]['IVLNAS'] <= 9999"    > <span  class="letra1000"> L     </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
-                                <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 10000    && cabeceraF[0]['IVLNAS'] <= 99999"   > <span  class="letra10000"> L    </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
-                                <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 100000   && cabeceraF[0]['IVLNAS'] <= 999999"  > <span  class="letra100000"> L   </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
-                                <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 1000000  && cabeceraF[0]['IVLNAS'] <= 9999999">  <span  class="letra1000000"> L  </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
-                                <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 10000000 "                               >       <span  class="letra10000000"> L </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
-                
-                                <!-- <th class="left legend" *ngIf="cabeceraF[0]['IVLNAS'] > 0"> L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2'}}  </th> -->
-                                <!-- <th class="left" *ngIf="retornarTotal() >= 0 && retornarTotal() < 999 " >  L      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2'}} </th> -->
-                                <!-- <th class="left" *ngIf="retornarTotal() >= 999 && retornarTotal() < 10000 " >  L      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2'}} </th> -->
-                                <!-- <th class="left" *ngIf="retornarTotal() >= 10000 && retornarTotal() < 1000000 " >  L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2'}}   </th> -->
-                                <!-- <th class="left" *ngIf="retornarTotal() >= 1000000 && retornarTotal() < 10000000 " >  L  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2'}} </th> -->
-                                <!-- <th class="left" *ngIf="retornarTotal() >= 10000000 " >  L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2'}} </th> -->
-                                <!-- <th class="left" *ngIf="retornarTotal() >= 0 && retornarTotal() < 10000 " >  L      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2'}} </th> -->
-                                
-                            </tr>
+        
+        
+                                <tr *ngIf="!exento">
+                                    <!-- <th class="legend left bordeIz" colspan="4" >NO. CORRELATIVO DE CONSTANCIA DE REGISTRO EXONERADO: {{cabeceraF[0]['TOBCTC2']}}</th> -->
+                                    <th class="left" colspan="2" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;"> Importe Exonerado </th>
+                                    <!-- <th class="right legend" > <span class="letra"> L. </span> {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2'}}  </th> -->
+        
+                                    <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] <= 0"                                      >       <span  class="letra0"> L        </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                                    <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >  0        && cabeceraF[0]['IVLNAS'] <= 99"      > <span  class="letra0"> L        </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                                    <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 100      && cabeceraF[0]['IVLNAS'] <= 999"     > <span  class="letra100"> L      </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                                    <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 1000     && cabeceraF[0]['IVLNAS'] <= 9999"    > <span  class="letra1000"> L     </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                                    <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 10000    && cabeceraF[0]['IVLNAS'] <= 99999"   > <span  class="letra10000"> L    </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                                    <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 100000   && cabeceraF[0]['IVLNAS'] <= 999999"  > <span  class="letra100000"> L   </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                                    <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 1000000  && cabeceraF[0]['IVLNAS'] <= 9999999">  <span  class="letra1000000"> L  </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                                    <th class="right legend" style="font-size: 1em !important; border-style: solid !important; border-color: black !important; height: 5px !important;" *ngIf="cabeceraF[0]['IVLNAS'] >= 10000000 "                               >       <span  class="letra10000000"> L </span>  {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2' }}  </th>
+                    
+                                    <!-- <th class="left legend" *ngIf="cabeceraF[0]['IVLNAS'] > 0"> L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ cabeceraF[0]['IVLNAS'] | number : '1.2-2'}}  </th> -->
+                                    <!-- <th class="left" *ngIf="retornarTotal() >= 0 && retornarTotal() < 999 " >  L      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2'}} </th> -->
+                                    <!-- <th class="left" *ngIf="retornarTotal() >= 999 && retornarTotal() < 10000 " >  L      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2'}} </th> -->
+                                    <!-- <th class="left" *ngIf="retornarTotal() >= 10000 && retornarTotal() < 1000000 " >  L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2'}}   </th> -->
+                                    <!-- <th class="left" *ngIf="retornarTotal() >= 1000000 && retornarTotal() < 10000000 " >  L  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2'}} </th> -->
+                                    <!-- <th class="left" *ngIf="retornarTotal() >= 10000000 " >  L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2'}} </th> -->
+                                    <!-- <th class="left" *ngIf="retornarTotal() >= 0 && retornarTotal() < 10000 " >  L      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ 0 | number : '1.2-2'}} </th> -->
+                                    
+                                </tr>
                                <!-- Importe Gravado al 15% -->
                                <tr >
                                 <!-- <th class="left bordeIz" colspan="4"  style="border-bottom-style: hidden !important;">NO. IDENTIFICATIVO DEL REGISTRO DE LA SAG:

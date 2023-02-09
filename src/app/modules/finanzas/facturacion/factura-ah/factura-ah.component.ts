@@ -46,6 +46,9 @@ export class FacturaAHComponent implements OnInit {
   public anio : string;
 
 
+  public exento  = false;
+
+
   constructor( 
     public sharedS      : SharedService,
     public facturacionS : FacturacionService,
@@ -178,7 +181,7 @@ impuesto   : new FormControl('', [ Validators.required]),
   this.facturacionS.As400( params ).subscribe(
     (res:any)=>{
       if( res ){
-this.cabeceraF = res
+this.cabeceraF = res;
 let fecha : string = String(this.cabeceraF[0]?.FDCCTC);
 this.dia  =  fecha.substring(6,8);
 this.mes  =  fecha.substring(4,6);
@@ -264,6 +267,17 @@ this.loading1 = true;
     for(let j=0; j<(15-this.DcabeceraF.length); j++){
         this.espaciosBlancos.push(j)
     }
+
+    /* SABER SI EXISTE EXENTO */ 
+    for( let x = 0 ; x < this.DcabeceraF.length; x++){
+        if( String(this.DcabeceraF[x].TCMTRF).includes('EXENTO') ){
+          this.exento = true;
+          break
+        }
+    }
+
+    /* SABER SI EXISTE EXENTO */ 
+
     // console.log(this.espaciosBlancos)
     this.DcabeceraF =  this.descomponerArray(this.DcabeceraF);
     this.loading2 = true;
@@ -303,12 +317,17 @@ this.loading1 = true;
   }
 
   retornarLetra( campo : string){
-    if( campo.includes(" - EXP") || campo.includes(" EXP") || campo.includes(" EXONERADO")) {
-        return 'E'
+    if( campo.includes(" - EXP") || campo.includes(" EXP") || campo.includes(" EXONERADO") || campo.includes('EXENTO')) {
+        return 'E';
     }else{
       return 'G'
     }
+
+   
+
   }
+
+
 
   retornarCorrelativo(){
     let correlativo : string = this.cabeceraF[0]['NDCCTC'];
