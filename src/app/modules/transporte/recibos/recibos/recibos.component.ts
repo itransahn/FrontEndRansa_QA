@@ -111,10 +111,11 @@ cargarData(){
     }
  Modal ( accion : number, data ?: any ){
   const dialogReg = this.dialog.open( ModalRecibosComponent,{
-    width :   '1000px',
+    width :   '1200px',
     height:   'auto',
-    maxWidth: 'auto',
-    minWidth : '1000px',
+    minWidth :  '800px',
+    maxWidth:   '800px',
+    maxHeight : '800px',
     data: {
      bandera : accion,
      data    : data

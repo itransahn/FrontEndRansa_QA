@@ -11,6 +11,7 @@ import { TransporteService } from '../../../transporte.service';
 import { DataApi } from 'src/app/interfaces/dataApi';
 import { mask, mensajes } from 'src/app/interfaces/generales';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
+import { concat } from 'rxjs';
 const moment = _rollupMoment || _moment;
 
 export const MY_FORMATS = {
@@ -44,6 +45,7 @@ export class ModalRecibosComponent implements OnInit {
   public  enable     : boolean = false;
   public  enable2    : boolean = false;
   public  enable3    : boolean = false;
+  public  enable4    : boolean = true;
 
   public  botton     : boolean = false;
 
@@ -56,7 +58,13 @@ export class ModalRecibosComponent implements OnInit {
   public mask = mask;
   public cco  : number = 0;
 
-  public fecha = '02/08/2023';
+  public fechaG  = new Date();
+  public fechaF  : string;
+
+  // public fecha = '02/08/2023' ;
+
+  public fecha : string ;
+  
 
 
   public tiposRecibo = [
@@ -80,9 +88,18 @@ export class ModalRecibosComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.fecha = `${this.retornarValorMes(this.fechaG.getMonth()+1)}/01/${this.fechaG.getFullYear()}`;
     this.catalogoF = this.auth.returnCatalogo();
     this.Validacion();
     console.log(this.data)
+  }
+
+  retornarValorMes( mes : number ){
+    if ( mes < 10){
+      return `0${String(mes)}`
+    }else{
+      return String(mes)
+    }
   }
 
   Validacion(){
@@ -100,20 +117,22 @@ export class ModalRecibosComponent implements OnInit {
 
       if ( this.data?.['data']['tipoRecibo'] == 1){
           this.cargarFormReciboInterno();
+          this.cargarFormFacturaMR();
           this.setForm( this.data?.['data']['tipoRecibo'] )
       }else{
         this.cargarFormReciboExterno();
+        this.cargarFormFacturaMR();
         this.setForm( this.data?.['data']['tipoRecibo'] )
       }
     }
 /*
-    BANDERA
+     BANDERA
     2 Insertar */
     if ( this.data?.['bandera'] == 2 ){
       this.enable = false;
       this.enable3 = false;
       this.cargarFormTipo();
-
+      this.cargarCatalogo()
     }
 /*
     BANDERA
@@ -130,9 +149,11 @@ export class ModalRecibosComponent implements OnInit {
 
       if ( this.data?.['data']['tipoRecibo'] == 1){
           this.cargarFormReciboInterno();
+          this.cargarFormFacturaMR()
           this.setForm( this.data?.['data']['tipoRecibo'] )
       }else{
         this.cargarFormReciboExterno();
+        this.cargarFormFacturaMR()
         this.setForm( this.data?.['data']['tipoRecibo'] )
       }
 
@@ -143,7 +164,24 @@ export class ModalRecibosComponent implements OnInit {
     */
     if ( this.data?.['bandera'] == 4 ){
       this.enable = true;
-      this.cargarFormTipo()
+      this.enable  = true;
+      this.enable2 = true;
+      this.enable3 = true;
+      this.enable4 = false;
+      this.fechaF = this.data?.['data']['fechaR'];
+      this.cargarFormTipo();
+      this.formTipo.patchValue({
+        tipo : this.data?.['data']['tipoRecibo']
+      })
+      this.cargarFormFacturaR()
+      if ( this.data?.['data']['tipoRecibo'] == 1){
+          this.cargarFormReciboInterno();
+          this.setForm( this.data?.['data']['tipoRecibo'] )
+      }else{
+        this.cargarFormReciboExterno();
+        this.setForm( this.data?.['data']['tipoRecibo'] )
+      }
+   
     }
 
   }
@@ -232,6 +270,23 @@ export class ModalRecibosComponent implements OnInit {
     })
   }
 
+
+  cargarFormFacturaR(){
+    this.formFactura = new FormGroup({
+      Nfactura : new FormControl({ value : '', disabled : this.enable4 }, [Validators.required]),
+      fechaF   : new FormControl({ value:''  , disabled : this.enable4 }, [Validators.required]),
+      valorF   : new FormControl({ value:''  , disabled : this.enable4 }, [Validators.required])
+    })
+  }
+
+  cargarFormFacturaMR(){
+    this.formFactura = new FormGroup({
+      Nfactura : new FormControl({ value : '', disabled : false }, []),
+      fechaF   : new FormControl({ value:''  , disabled : false }, []),
+      valorF   : new FormControl({ value:''  , disabled : false }, [])
+    })
+  }
+
   cargarCatalogo(){
     let url = '/transporte/catalogoRec';
     let params = {
@@ -305,23 +360,20 @@ valorR          : this.formRecibo.value.valorRecibo,
 obs             : this.formRecibo.value.observaciones,
 usuarioM        : this.auth.dataUsuario['id_usuario'],
   }
-
-  console.log(params)
-// this.transporteService.put(url,params).subscribe(
-//   res=>{
-//     console.log(res)
-//     if(!res.hasError){
-//       if ( res?.data.Table0[0]['codigo'] == -1 ){
-//           this.toast.mensajeWarning(String(res?.data.Table0[0]['Mensaje']), mensajes.warning);
-//       }else{
-//         this.toast.mensajeSuccess(String(res?.data.Table0[0]['Mensaje']), mensajes.success);
-//         this.dialogRef.close();
-//       }
-//   }else{
-//        this.toast.mensajeError(String(res?.errors),"Error")
-//   }
-//   }
-// )
+this.transporteService.put(url,params).subscribe(
+  res=>{
+    if(!res.hasError){
+      if ( res?.data.Table0[0]['codigo'] == -1 ){
+          this.toast.mensajeWarning(String(res?.data.Table0[0]['Mensaje']), mensajes.warning);
+      }else{
+        this.toast.mensajeSuccess(String(res?.data.Table0[0]['Mensaje']), mensajes.success);
+        this.dialogRef.close();
+      }
+  }else{
+       this.toast.mensajeError(String(res?.errors),"Error")
+  }
+  }
+)
 }
 
 submit(){
@@ -337,6 +389,36 @@ submit(){
 
     }  
 
+}
+
+cerrarRecibo( ){
+
+  this.sweel.mensajeConConfirmacion(`¿Seguro de cerrar Recibo ${ this.data?.['data'][''] }?`, `Anulación de Recibo`,"warning").then(
+    res=>{
+        if ( res ){
+          let url = '/transporte/Cerrarrecibos';
+          let params = {
+        idRecibo      : this.data?.['data']['idRecibo'],
+        Nfactura      : this.formFactura.value.Nfactura,
+        fechaFactura  : this.formFactura.value.fechaF,
+        valorFactura  : this.formFactura.value.valorF,
+        usuarioM      : this.auth.dataUsuario['id_usuario'],
+          }
+        this.transporteService.put(url,params).subscribe(
+          res=>{
+            if(!res.hasError){
+              if ( res?.data.Table0[0]['codigo'] == -1 ){
+                  this.toast.mensajeWarning(String(res?.data.Table0[0]['Mensaje']), mensajes.warning);
+              }else{
+                this.toast.mensajeSuccess(String(res?.data.Table0[0]['Mensaje']), mensajes.success);
+                this.dialogRef.close();
+              }
+          }else{
+               this.toast.mensajeError(String(res?.errors),"Error")
+          }
+          }
+        )
+        }})
 
 }
 

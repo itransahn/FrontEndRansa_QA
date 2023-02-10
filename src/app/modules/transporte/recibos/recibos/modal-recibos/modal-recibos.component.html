@@ -1,4 +1,4 @@
-<mat-card class="cardPersonalizada">
+<mat-card class="cardPersonalizada scroll">
  
     <mat-card-header class="header">    Recibo de Combustible
     <mat-icon style="float: right !important;" (click)="close()" > close </mat-icon>
@@ -50,7 +50,7 @@
         <div class="col-md-6">
             <mat-form-field appearance="legacy" >
                 <mat-label>Fecha Recibo </mat-label>
-                <input name="date" formControlName = "fechaR" matInput [matDatepicker]="pickerN" min="{{start != undefined ? start : fecha | date: 'yyyy-MM-dd'}}">
+                <input name="date" formControlName = "fechaR" matInput [matDatepicker]="pickerN" min="{{start != undefined ? start : fecha | date }}">
                 <mat-datepicker-toggle matSuffix [for]="pickerN"></mat-datepicker-toggle>
                 <mat-datepicker #pickerN></mat-datepicker>
               </mat-form-field>
@@ -76,7 +76,7 @@
           </mat-form-field>
     </div>
 
-    <div  class="col-md-6" >
+    <div  class="col-md-6" *ngIf="data?.['bandera'] != 2 " >
         <mat-form-field  appearance="legacy">
             <mat-label> Centro de Costo </mat-label>
             <mat-select  formControlName="cco"> 
@@ -91,8 +91,23 @@
           </mat-form-field>
     </div>
 
+    <div  class="col-md-6" *ngIf="data?.['bandera'] == 2" >
+        <mat-form-field  appearance="legacy">
+            <mat-label> Centro de Costo </mat-label>
+            <mat-select  formControlName="cco"> 
+                <ng-container *ngFor="let item of catalogo?.['ccoT']">
+                    <div *ngIf="item.idCliente === formRecibo.value.cliente">
+                        <mat-option [value]="item?.idCeco">
+                            {{  item?.cco | uppercase }}
+                        </mat-option>
+                    </div>
+                </ng-container>
+              </mat-select> 
+          </mat-form-field>
+    </div>
 
-    <div  class="col-md-6" >
+
+    <div  class="col-md-6" *ngIf="data?.['bandera'] !=2">
         <mat-form-field  appearance="legacy">
             <mat-label> Servido a </mat-label>
             <mat-select  formControlName="servidoA"> 
@@ -106,6 +121,22 @@
               </mat-select> 
           </mat-form-field>
     </div>
+
+    <div  class="col-md-6" *ngIf="data?.['bandera'] == 2">
+        <mat-form-field  appearance="legacy">
+            <mat-label> Servido a </mat-label>
+            <mat-select  formControlName="servidoA"> 
+                <ng-container *ngFor="let item of catalogo?.['transportes']">
+                    <div *ngIf="item.idCliente === formRecibo.value.cliente ">
+                        <mat-option [value]="item?.idTransportista">
+                            {{  item?.nombreEmpresa | uppercase }}
+                        </mat-option>
+                    </div>
+                </ng-container>
+              </mat-select> 
+          </mat-form-field>
+    </div>
+
 
     <div  class="col-md-6" >
         <mat-form-field  appearance="legacy">
@@ -140,7 +171,7 @@
     </div>
 
 </div>
-            <div class="container">
+            <div class="container" *ngIf="data?.['bandera'] === 2 || data?.['bandera'] === 3 ">
                 <button class="buttonPrincipal" mat-raised-button type="submit" [disabled]="f1.invalid" (click)="submit()"  >Guardar</button>
             </div>
    </form>
@@ -252,12 +283,47 @@
 
 </div>
 
-     <div class="container">
-         <button class="buttonPrincipal" mat-raised-button type="submit" [disabled]="f2.invalid" (click)="submit()" >Guardar</button>
-     </div>
+<div class="container" *ngIf="data?.['bandera'] === 2 || data?.['bandera'] === 3 ">
+    <button class="buttonPrincipal" mat-raised-button type="submit" [disabled]="f2.invalid"  (click)="submit()" >Guardar</button>
+</div>
 
-   </form>
 
+</form>
+
+<mat-divider class="mt-4 mb-4"></mat-divider>
+
+   <form [formGroup]="formFactura" #f4="ngForm" *ngIf="data?.['bandera'] === 4">
+    <div class="row">
+        
+        <div class="col-md-12">
+            <mat-form-field appearance="legacy">
+                <mat-label> N° Factura </mat-label>
+                <input matInput #recibo [readonly]="enable4" maxlength="50" [mask]="mask.factura" placeholder="Número de Factura" formControlName ="Nfactura">
+            </mat-form-field>
+        </div>
+
+        <div class="col-md-6">
+            <mat-form-field appearance="legacy" >
+                <mat-label>Fecha Factura </mat-label>
+                <input name="date" formControlName = "fechaF" matInput [matDatepicker]="pickerN" min="{{start != undefined ? start : fechaF | date: 'yyyy-MM-dd'}}">
+                <mat-datepicker-toggle matSuffix [for]="pickerN"></mat-datepicker-toggle>
+                <mat-datepicker #pickerN></mat-datepicker>
+              </mat-form-field>
+        </div>
+
+        <div class="col-md-6"  style="text-align:right !important">
+            <mat-form-field appearance="legacy">
+                <mat-label> Valor Factura </mat-label>
+                <input  matInput mask="separator.2" thousandSeparator=","  separatorLimit="99999999999999" maxlength="100" placeholder="Monto"  formControlName ="valorF">
+    
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="container" *ngIf="data?.['bandera'] === 4 ">
+        <button class="buttonPrincipal" mat-raised-button type="submit" [disabled]="f4.invalid"  (click)="submit()" >Guardar</button>
+    </div>
+
+</form>
     </mat-card-content>
     
 </mat-card>  
