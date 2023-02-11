@@ -187,7 +187,6 @@ impuesto   : new FormControl('', [ Validators.required]),
   this.facturacionS.As400( params ).subscribe(
     (res:any)=>{
       console.log(res)
-
       this.cabeceraF = res;
       let fecha : string = String(this.cabeceraF[0]?.FDCCTC);
       this.dia  =  fecha.substring(6,8);
@@ -210,6 +209,7 @@ impuesto   : new FormControl('', [ Validators.required]),
      }
   this.facturacionS.As400( params ).subscribe(
     (res:any[])=>{
+      console.log(res)
       if( res.length > 0 ){
              // this.DcabeceraF = res;
       for(let i=0; i< res.length; i++){
@@ -306,7 +306,7 @@ EstructurarObservaciones( array : any[]){
   }
 
   retornarLetra( campo : string){
-    if( campo.includes(" - EXP") || campo.includes(" EXP") || campo.includes(" EXONERADO")) {
+    if( campo.includes(" - EXP") || campo.includes(" EXP") || campo.includes(" EXONERADO") || campo.includes('EXENTO') || campo.includes("EXENTA")) {
         return 'E'
     }else{
       return 'G'
