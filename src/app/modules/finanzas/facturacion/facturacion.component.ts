@@ -186,7 +186,6 @@ impuesto   : new FormControl('', [ Validators.required]),
 
   this.facturacionS.As400( params ).subscribe(
     (res:any)=>{
-      console.log(res)
       this.cabeceraF = res;
       let fecha : string = String(this.cabeceraF[0]?.FDCCTC);
       this.dia  =  fecha.substring(6,8);
@@ -209,7 +208,6 @@ impuesto   : new FormControl('', [ Validators.required]),
      }
   this.facturacionS.As400( params ).subscribe(
     (res:any[])=>{
-      console.log(res)
       if( res.length > 0 ){
              // this.DcabeceraF = res;
       for(let i=0; i< res.length; i++){

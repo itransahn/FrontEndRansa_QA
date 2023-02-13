@@ -180,7 +180,6 @@ impuesto   : new FormControl('', [ Validators.required]),
 
   this.facturacionS.As400( params ).subscribe(
     (res:any)=>{
-      console.log(res)
       if( res ){
 this.cabeceraF = res;
 let fecha : string = String(this.cabeceraF[0]?.FDCCTC);
@@ -207,7 +206,6 @@ this.loading1 = true;
      }
      this.facturacionS.As400( params ).subscribe(
       (res:any[])=>{
-        console.log(res)
         if( res ){
             this.EstrObs1 = res;
             this.EstructurarObservaciones( this.EstrObs1)
@@ -243,7 +241,6 @@ this.loading1 = true;
      }
   this.facturacionS.As400( params ).subscribe(
     (res:any[])=>{
-      console.log(res)
       if( res.length > 0 ){
              // this.DcabeceraF = res;
       for(let i=0; i< res.length; i++){

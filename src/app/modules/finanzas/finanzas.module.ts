@@ -25,8 +25,7 @@ import { RetencionesGComponent } from './retenciones-g/retenciones-g.component';
 import { IntermediorgComponent } from './retenciones-g/intermediorg/intermediorg.component';
 import { ModalrgComponent } from './retenciones-g/modalrg/modalrg.component';
 import { RetencionesHComponent } from './retenciones/retenciones-h/retenciones-h.component';
-
-
+import { RecibosComponent } from './recibos/recibos.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +50,8 @@ import { RetencionesHComponent } from './retenciones/retenciones-h/retenciones-h
     RetencionesGComponent,
     IntermediorgComponent,
     ModalrgComponent,
-    RetencionesHComponent
+    RetencionesHComponent,
+    RecibosComponent
   ],
   imports: [
     CommonModule,

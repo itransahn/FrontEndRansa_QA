@@ -1,0 +1,128 @@
+<mat-card class="mat-cardContainerCuerpo">
+    <form [formGroup]="filtro" #f="ngForm">
+    <div class="row">
+        <div class="col-md-12 container">
+            <h4 class="h4"> Facturas de combustible </h4>
+        </div>
+
+        <div class="col-md-4 container">
+                <mat-form-field appearance="fill">
+                    <mat-label>Desde</mat-label>
+                    <input name="date" formControlName = "desde" matInput [matDatepicker]="desde">
+                    <mat-datepicker-toggle matSuffix [for]="desde"></mat-datepicker-toggle>
+                    <mat-datepicker #desde></mat-datepicker>
+                  </mat-form-field>
+            
+         </div>
+    <div class="col-md-4 container">
+                <mat-form-field appearance="fill">
+                    <mat-label>Hasta</mat-label>
+                    <input name="date" formControlName = "hasta" matInput [matDatepicker]="hasta">
+                    <mat-datepicker-toggle matSuffix [for]="hasta"></mat-datepicker-toggle>
+                    <mat-datepicker #hasta></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="text-rigth" >
+                        <button mat-raised-button class="buttonPrincipal"  [disabled]="f.invalid" (click)="CargarData()">
+                            <mat-icon>
+                                search
+                            </mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+</mat-card>
+
+<div #factura id ="Factura">
+    <mat-card class="mat-cardContainerCuerpo mt-4" *ngIf="loading">
+        <div class="row">
+            <div class="col-md-12 ">
+                <img src="../../../../../assets/images/logoRansa.ico" alt="">
+            </div>
+        
+            <div class="col-md-12 container">
+                <h4 class="h4">
+              {{ filtro.value.desde | date :'shortDate' }} - {{ filtro.value.hasta | date :'shortDate' }}
+                </h4>
+            </div>
+            <div class="col-md-12 container">
+                <h4 class="h4"> RANSA CD SAUCE</h4>
+            </div>
+        </div>
+    
+    <!-- 
+        <div *ngIf="!loading">
+            <app-loading></app-loading>
+        </div> -->
+    
+        <div class="table-responsive !important">
+            <table  >
+                <!-- <caption>Statement Summary</caption> -->
+                <thead>
+                  <tr> 
+                      <th scope="col">Fecha Recibo     </th>
+                      <th scope="col">Fecha Factura    </th>
+                      <th scope="col">Sede             </th>
+                      <th scope="col">Proveedor        </th>
+                      <th scope="col">Tipo de Recibo   </th>
+                    <th scope="col">Recibo         </th>
+                    <th scope="col">Factura        </th>
+                    <th scope="col">Valor Recibo   </th>
+                    <th scope="col">Valor Factura  </th>
+
+
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of data | slice: desdeF: hastaF" class="trHover">
+                    <td data-label="Fecha Recibo">   {{   item?.fechaR        | date  }}</td>
+                    <td data-label="Fecha Factura">  {{   item?.fechaFactura  | date     }}</td>
+                    <td data-label="Sede">           {{  item?.SEDE          }}</td> 
+                    <td data-label="Proveedor">      {{  item?.proveedor     }}</td> 
+                    <td data-label="Tipo de Recibo"> {{  item?.ORDEN         }}</td>
+                    <td data-label="Recibo">         {{  item?.ReciboC       }}</td>
+                    <td data-label="Factura">        {{  item?.Nfactura      }}</td>
+                    <td data-label="Valor Recibo">   {{  item?.valorRecibo    | currency: 'Lps '   }}</td>
+                    <td data-label="Valor Factura" [ngStyle]="{'color':item?.valorFacturaa > item?.valorRecibo ? 'red' : 'green' }" >  {{  item?.valorFacturaa  | currency: 'Lps '  }}</td>
+                  </tr>
+                </tbody>
+                <tfoot *ngIf=" hastaF >= data.length">
+                    <tr >
+                        <th ></th>
+                        <th ></th>
+                        <th ></th>
+                        <th ></th>
+                        <th ></th>
+                        <th ></th>
+                        <th > TOTALES</th>
+                        <th > {{ recibos  | currency : 'Lps '}} </th>
+                        <th > {{ facturas | currency : 'Lps '}} </th>
+
+                    </tr>
+    
+                    <!-- ISV -->
+                        <!-- <tr class="footer">
+                        <th class="footer"></th>
+                        <th class="footerDetalle titulo"> ISV </th>
+                        <th class="footerDetalle"> {{ ( subTotal * 0.15 ) | currency : 'Lps '}} </th>
+                        </tr>
+                
+                    <tr class="footer">
+                    <th class="footer"></th>
+                    <th class="footerDetalle titulo"> Total Factura </th>
+                    <th class="footerDetalle"> {{ ( subTotal * 0.15 ) + subTotal | currency : 'Lps '}} </th>
+                    </tr> -->
+                  </tfoot>  
+            </table>  
+           </div>
+    
+              <mat-paginator [length]="data.length" [pageSize]="pageSize " (page)="next($event)">
+            </mat-paginator>
+    </mat-card>
+
+</div>
+

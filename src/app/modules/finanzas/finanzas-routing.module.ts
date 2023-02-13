@@ -10,6 +10,7 @@ import { IntermediarioNComponent } from './notas/intermediario-n/intermediario-n
 import { NcComponent } from './notas/nc/nc.component';
 import { NdComponent } from './notas/nd/nd.component';
 import { ParametrosComponent } from './parametros/parametros.component';
+import { RecibosComponent } from './recibos/recibos.component';
 import { IntermediorgComponent } from './retenciones-g/intermediorg/intermediorg.component';
 import { RetencionesGComponent } from './retenciones-g/retenciones-g.component';
 import { CargarDocumentoComponent } from './retenciones/cargar-documento/cargar-documento.component';
@@ -91,6 +92,10 @@ const routes: Routes = [
  {
   path      : 'retencionesH',
   component : RetencionesHComponent
+ },
+ {
+  path      : 'recibos',
+  component : RecibosComponent
  }
 
 

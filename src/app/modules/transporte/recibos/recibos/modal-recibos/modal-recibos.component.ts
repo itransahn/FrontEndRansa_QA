@@ -270,7 +270,6 @@ export class ModalRecibosComponent implements OnInit {
     })
   }
 
-
   cargarFormFacturaR(){
     this.formFactura = new FormGroup({
       Nfactura : new FormControl({ value : '', disabled : this.enable4 }, [Validators.required]),
@@ -386,14 +385,14 @@ submit(){
     }  
 
     if ( this.data?.bandera === 4 ){  
-
+      this.cerrarRecibo()
     }  
 
 }
 
 cerrarRecibo( ){
 
-  this.sweel.mensajeConConfirmacion(`¿Seguro de cerrar Recibo ${ this.data?.['data'][''] }?`, `Anulación de Recibo`,"warning").then(
+  this.sweel.mensajeConConfirmacion(`¿Seguro de cerrar Recibo ${ this.data?.['data']['ReciboC'] }?`, `Cierre de Recibo`,"warning").then(
     res=>{
         if ( res ){
           let url = '/transporte/Cerrarrecibos';
