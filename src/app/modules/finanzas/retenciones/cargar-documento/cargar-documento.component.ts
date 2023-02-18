@@ -32,7 +32,7 @@ export class CargarDocumentoComponent implements OnInit {
 
    public loading3 : boolean = false;
 
-   public proveedoresF : proveedores[]=[];
+   public proveedoresF :  proveedores[]=[];
    public proveedoresFR : proveedores[]=[];
 
   constructor( 
@@ -154,7 +154,6 @@ sede          : sede
   res=>{
       if( res?.data?.Table0?.[0]['codigo'] != -1 ){
       }else{
-
   this.proveedoresF.push( {
           proveedor : res?.data?.Table0?.[0]['proveedor']
         });

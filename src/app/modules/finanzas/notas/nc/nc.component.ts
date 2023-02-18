@@ -36,7 +36,7 @@ export class NcComponent implements OnInit {
   public parametros    : any[]= [];
   public parametrosCai : any[]= [];
 
-  public espaciosBlancos = [1,2,3,4];
+  public espaciosBlancos = [];
   public anulacion = false;
   public devolcion = false;
   public descuento = false;
@@ -129,6 +129,9 @@ cargarCabeceraN(){
           this.cargarObservacionesFac()
           this.loading1 = true;
         }
+          for(let j = this.DcabeceraN.length; j<(40-this.DcabeceraN.length); j++){
+            this.espaciosBlancos.push(j)
+          }
       }
     }
   )

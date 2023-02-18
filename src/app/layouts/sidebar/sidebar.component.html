@@ -26,10 +26,10 @@
                                      
                                 <mat-divider></mat-divider>
                                 <!-- [routerLinkActive]="['is-active']" [routerLink]="menuitem.url"  -->
-                                <mat-list-item (click)="redireccionarHijos(menuitem?.url, menuitem)" style="width: 100% !important; ">
+                                <mat-list-item (click)="redireccionarHijos(menuitem?.url, menuitem)" style="width: 100% !important;" [ngStyle]="{'background-color' :menuitem?.idMenuHijo === retornarHijoStorage() ? '#F3A505' : 'white'  }">
                              
-                                <div mat-line class="textSide " >
-                                    <mat-icon class="icon text-center"> {{ menuitem?.icon }} </mat-icon>
+                                <div mat-line class="textSide "  >
+                                    <mat-icon class="icon text-center" > {{ menuitem?.icon }} </mat-icon>
                                     <!-- <i class="{{menuitem.icon}} icon text-center" ></i>
                                     {{menuitem.menuHijo }} -->
                                     {{menuitem?.menuHijo }} 

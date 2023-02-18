@@ -38,9 +38,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
         this.cargarMenus()
       }
     )
-    
   }
 
+  
   redireccionar(){
       this.auth_.redirecTo('/modulos')
   }
@@ -54,6 +54,15 @@ export class SidebarComponent implements OnInit, OnDestroy {
     }
     this.auth_.redirecTo(`ransa${url}`);
     localStorage.setItem("dataHijo", JSON.stringify(dataHijo))
+}
+
+
+retornarHijoStorage(){
+  let hijo : number;
+  let data : any[] = [];
+  data = JSON.parse(localStorage.getItem("dataHijo"))
+  hijo = data?.['idMenuHijo'];
+  return hijo;
 }
 
   cargarMenus(){
@@ -77,6 +86,6 @@ this.subscrption =  this.auth_.menus(url ,  params).subscribe(
     this.subscrption.unsubscribe()
   }
 
-  salir() {
+  salir(){
     this.auth.redirecToLogin()
   }}

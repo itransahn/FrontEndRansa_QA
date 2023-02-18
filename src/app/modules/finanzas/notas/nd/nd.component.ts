@@ -35,6 +35,8 @@ export class NdComponent implements OnInit {
   public permitido = false;
   public parametros    : any[]= [];
   public parametrosCai : any[]= [];
+  public espaciosBlancos = [];
+
   public anulacion = false;
   public devolcion = false;
   public descuento = false;
@@ -127,6 +129,9 @@ export class NdComponent implements OnInit {
             if ( this.DcabeceraN.length > 0){
               this.cargarObservacionesFac()
               this.loading1 = true;
+            }
+            for(let j = this.DcabeceraN.length; j<(40-this.DcabeceraN.length); j++){
+              this.espaciosBlancos.push(j)
             }
           }
         }
