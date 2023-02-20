@@ -26,12 +26,14 @@
                 <span *ngIf="ruta.snapshot.params['empresa'] == 'AH'" class="rigth correlativo factura">
                     <!-- 000-001-01-{{retornarCorrelativo()}} -->
                     000-002-06-{{retornarCorrelativo()}}            
-            </span>  <br>
+            </span>
+            <span style="font-size: 1.1em !important; font-weight:  bold !important;"> Fecha: {{ dia }}/{{mesN}}/{{anio}} </span><br><br>
                 <span  class="rigth empresa">  C.A.I: {{parametrosCai[0]['CAI']}} </span> <br>
                 <span style="font-size: 1.1em !important; font-weight:  bold !important;"> Rango Autorizado: </span> <br>
                 <span  class="rigth empresa"> {{parametrosCai[0]['desde']}} - {{parametrosCai[0]['hasta']}} </span> <br>
                 <span style="font-size: 1.1em !important; font-weight:  bold !important;">Fecha Limite De Emisión: {{ parametrosCai[0]['fechaLimite'] | date: 'dd/MM/yyyy'}} </span> <br>
                  <!-- <span class="rigth empresa"> Fecha Limite de Emisión : {{ parametrosCai[0]['fechaLimite'] | date : 'dd/MM/yyyy' }} </span> -->
+         
                 </p>
             </div>
 
@@ -45,11 +47,11 @@
              
                     </p>
                     </div>
-                <div class="col-md-6 rigth containB">
+                <div class="col-md-6 rigth container2" style="color:black !important ">
                      <!-- <p class="empresa"> Nota de Crédito por L. <span style="font-weight: bold !important;"> {{ (cabeceraN[0]['ITTFCS'] * -1) | number :'1.2-2' }} </span> </p> -->
-                    <p class="empresa">
-                    R.T.N : {{ cabeceraN[0]['NRUC2']}} <br>
-                    Fecha de emisión comprobante: {{ dia }}  {{ mes }} {{ anio }} <br>
+                    <p class="empresa container2">
+                    RTN : {{ cabeceraN[0]['NRUC2']}} <br>
+                    <!-- Fecha de emisión comprobante: {{ dia }}  {{ mes }} {{ anio }} <br> -->
                         <!-- CAI del Comprobante:    <br>
                         NO. Correlativo Comprobante: <br> -->
                     </p>
@@ -101,13 +103,13 @@
                                 <td class="espacioB" colspan="3"> </td>
                             </tr>
                             
-                            <tr style=" border-collapse: collapse;"> 
+                            <!-- <tr style=" border-collapse: collapse;"> 
                                 <td style="text-align:left !important; font-size: 0.9em !important; " class="espacioB" colspan="3">
-                                    <!-- CIENTO OCHENTA Y NUEVE MIL CUATROCIENTOS NOVENTA Y SEIS CON NOVENTA Y OCHO CENTAVOS -->
+                                    CIENTO OCHENTA Y NUEVE MIL CUATROCIENTOS NOVENTA Y SEIS CON NOVENTA Y OCHO CENTAVOS
                                     {{ letras | uppercase }}
                                 </td>
                                 <td class="espacioB" colspan="3"> </td>
-                            </tr>
+                            </tr> -->
                         
                             <!-- <tr style=" border-collapse: collapse;"> 
                                 <td style="font-size: 0.9em !important; " class="espacioB rigth" colspan="3">
@@ -172,9 +174,13 @@
     
                         </tfoot>  
                       </table>
+           
                    </div>
+                   <span class="left mb-4" style="color:black !important;">
+                    {{ letras | uppercase }}
+            </span>
             </div>
-     
+ 
   <!-- Motivo de Nota de Crédito -->
 <div class="col-md-12 container">
     <p class="black empresa">
@@ -186,7 +192,7 @@
         <mat-checkbox class="example-margin ml-2 empresa" [disabled]="disabled" [(ngModel)]="descuento"><span>Descuento</span>  </mat-checkbox>
       </section>
 </div>
-<div class="col-md-12 mt-4 completo black">
+<div class="col-md-12 mb-4 completo black">
     <h3 *ngIf="Motivo" class="completo empresa">
         Otros especifique: <span style="text-decoration: underline; margin-left: 1px;"> {{  Motivo }} </span>
     </h3>
@@ -195,21 +201,22 @@
     </h3>
     </div>
 
-<div class="row">
+<div class="row" style="margin-top: 10% !important;">
     <div class="col-md-6 mt-4 mb-4 empresa" >
         <p class="black "> 
            __________________________________________ <br>
-                   <span style="margin-left: 22%;" class="black ">    Elaborado por:  </span>
+                   <span style="margin-left: 22%;" class="black ">    Elaborado por </span>
         </p>
        </div>
        
-       <div class="col-md-6 black empresa mt-4 mb-4 empresa" >
-               Recibí Conforme: ______________________________________ <br>
-               Identidad: ____________________________________________ <br>
-               Firma: _______________________________________________     
+       <div class="col-md-6 black empresa mt-4 mb-4 empresa" style="text-align: right;" >
+        __________________________________________ <br>
+
+               <span style="margin-right: 22%;" class="black ">   Recibí Conforme  </span>
+
        </div>
     
-    <div class="col-md-12 container " style="color: black !important;">
+    <div class="col-md-12 container ">
         <label class="center"> ORIGINAL : CLIENTE </label>
     </div>
 </div>
@@ -251,7 +258,7 @@
                 <span *ngIf="ruta.snapshot.params['empresa'] == 'AH'" class="rigth factura">
                     <!-- 000-001-01-{{retornarCorrelativo()}} -->
                     000-002-06-{{retornarCorrelativo()}}            
-            </span>  <br>
+            </span> <span style="font-size: 1.1em !important; font-weight:  bold !important;"> Fecha: {{ dia }}/{{mesN}}/{{anio}} </span><br><br>
                 <span  class="rigth empresa">  C.A.I: {{parametrosCai[0]['CAI']}} </span> <br>
                 <span style="font-size: 1.1em !important; font-weight:  bold !important;"> Rango Autorizado: </span> <br>
                 <span  class="rigth empresa"> {{parametrosCai[0]['desde']}} - {{parametrosCai[0]['hasta']}} </span> <br>
@@ -270,16 +277,16 @@
              
                     </p>
                     </div>
-                <div class="col-md-6 rigth containB">
-                     <!-- <p class="empresa"> Nota de Crédito por L. <span style="font-weight: bold !important;"> {{ (cabeceraN[0]['ITTFCS'] * -1) | number :'1.2-2' }} </span> </p> -->
-                    <p class="empresa">
-                    R.T.N : {{ cabeceraN[0]['NRUC2']}} <br>
-                    Fecha de emisión comprobante: {{ dia }}  {{ mes }} {{ anio }} <br>
-                        <!-- CAI del Comprobante:    <br>
-                        NO. Correlativo Comprobante: <br> -->
-                    </p>
-
-                </div>
+                    <div class="col-md-6 rigth container2" style="color:black !important ">
+                        <!-- <p class="empresa"> Nota de Crédito por L. <span style="font-weight: bold !important;"> {{ (cabeceraN[0]['ITTFCS'] * -1) | number :'1.2-2' }} </span> </p> -->
+                       <p class="empresa container2">
+                       RTN : {{ cabeceraN[0]['NRUC2']}} <br>
+                       <!-- Fecha de emisión comprobante: {{ dia }}  {{ mes }} {{ anio }} <br> -->
+                           <!-- CAI del Comprobante:    <br>
+                           NO. Correlativo Comprobante: <br> -->
+                       </p>
+   
+                   </div>
                 </div>
             </div>
             <!-- Detalle de la generación  -->
@@ -324,15 +331,7 @@
                                 </td>
                                 <td class="espacioB" colspan="3"> </td>
                             </tr>
-                            
-                            <tr style=" border-collapse: collapse;"> 
-                                <td style="text-align:left !important; font-size: 0.9em !important; " class="espacioB" colspan="3">
-                                    <!-- CIENTO OCHENTA Y NUEVE MIL CUATROCIENTOS NOVENTA Y SEIS CON NOVENTA Y OCHO CENTAVOS -->
-                                    {{ letras | uppercase }}
-                                </td>
-                                <td class="espacioB" colspan="3"> </td>
-                            </tr>
-                        
+                                                    
                             <!-- <tr style=" border-collapse: collapse;"> 
                                 <td style="font-size: 0.9em !important; " class="espacioB rigth" colspan="3">
                                     TOTALES
@@ -397,6 +396,9 @@
                         </tfoot>  
                       </table>
                    </div>
+                   <span class="left mb-4" style="color:black !important;">
+                    {{ letras | uppercase }}
+            </span>
             </div>
      
   <!-- Motivo de Nota de Crédito -->
@@ -410,7 +412,7 @@
         <mat-checkbox class="example-margin ml-2 empresa" [disabled]="disabled" [(ngModel)]="descuento"><span>Descuento</span>  </mat-checkbox>
       </section>
 </div>
-<div class="col-md-12 mt-4 completo black">
+<div class="col-md-12 completo black">
     <h3 *ngIf="Motivo" class="completo empresa">
         Otros especifique: <span style="text-decoration: underline; margin-left: 1px;"> {{  Motivo }} </span>
     </h3>
@@ -419,25 +421,25 @@
     </h3>
     </div>
 
-<div class="row">
-    <div class="col-md-6 mt-4 mb-4 empresa" >
-        <p class="black "> 
-           __________________________________________ <br>
-                   <span style="margin-left: 22%;" class="black ">    Elaborado por:  </span>
-        </p>
-       </div>
-       
-       <div class="col-md-6 black empresa mt-4 mb-4 empresa" >
-               Recibí Conforme: ______________________________________ <br>
-               Identidad: ____________________________________________ <br>
-               Firma: _______________________________________________     
-       </div>
+    <div class="row" style="margin-top: 10% !important;">
+        <div class="col-md-6 mt-4 mb-4 empresa" >
+            <p class="black "> 
+               __________________________________________ <br>
+                       <span style="margin-left: 22%;" class="black ">    Elaborado por </span>
+            </p>
+           </div>
+           
+           <div class="col-md-6 black empresa mt-4 mb-4 empresa" style="text-align: right;" >
+            __________________________________________ <br>
     
-    <div class="col-md-12 container " style="color: black !important;">
-        <!-- <label class="center"> ORIGINAL : CLIENTE </label> -->
+                   <span style="margin-right: 22%;" class="black ">   Recibí Conforme  </span>
+    
+           </div>
+        
+<div class="col-md-4 container" style="color: black !important;">
     <label class="center"> DUPLICADO: TRIBUTARIO EMISOR</label>
-    </div>
 </div>
+    </div>
 <!-- <div class="col-md-4 container footL">
     <label class="center"> DUPLICADO: TRIBUTARIO EMISOR</label>
 </div> -->
@@ -476,7 +478,7 @@
                 <span *ngIf="ruta.snapshot.params['empresa'] == 'AH'" class="rigth factura">
                     <!-- 000-001-01-{{retornarCorrelativo()}} -->
                     000-002-06-{{retornarCorrelativo()}}            
-            </span>  <br>
+            </span> <span style="font-size: 1.1em !important; font-weight:  bold !important;"> Fecha: {{ dia }}/{{mesN}}/{{anio}} </span><br><br>
                 <span  class="rigth empresa">  C.A.I: {{parametrosCai[0]['CAI']}} </span> <br>
                 <span style="font-size: 1.1em !important; font-weight:  bold !important;"> Rango Autorizado: </span> <br>
                 <span  class="rigth empresa"> {{parametrosCai[0]['desde']}} - {{parametrosCai[0]['hasta']}} </span> <br>
@@ -495,16 +497,16 @@
              
                     </p>
                     </div>
-                <div class="col-md-6 rigth containB">
-                     <!-- <p class="empresa"> Nota de Crédito por L. <span style="font-weight: bold !important;"> {{ (cabeceraN[0]['ITTFCS'] * -1) | number :'1.2-2' }} </span> </p> -->
-                    <p class="empresa">
-                    R.T.N : {{ cabeceraN[0]['NRUC2']}} <br>
-                    Fecha de emisión comprobante: {{ dia }}  {{ mes }} {{ anio }} <br>
-                        <!-- CAI del Comprobante:    <br>
-                        NO. Correlativo Comprobante: <br> -->
-                    </p>
-
-                </div>
+                    <div class="col-md-6 rigth container2" style="color:black !important ">
+                        <!-- <p class="empresa"> Nota de Crédito por L. <span style="font-weight: bold !important;"> {{ (cabeceraN[0]['ITTFCS'] * -1) | number :'1.2-2' }} </span> </p> -->
+                       <p class="empresa container2">
+                       RTN : {{ cabeceraN[0]['NRUC2']}} <br>
+                       <!-- Fecha de emisión comprobante: {{ dia }}  {{ mes }} {{ anio }} <br> -->
+                           <!-- CAI del Comprobante:    <br>
+                           NO. Correlativo Comprobante: <br> -->
+                       </p>
+   
+                   </div>
                 </div>
             </div>
             <!-- Detalle de la generación  -->
@@ -546,14 +548,6 @@
                                     <span *ngFor="let item of EstrObs2" >
                                         {{ item?.TOBCTC}}
                                     </span>
-                                </td>
-                                <td class="espacioB" colspan="3"> </td>
-                            </tr>
-                            
-                            <tr style=" border-collapse: collapse;"> 
-                                <td style="text-align:left !important; font-size: 0.9em !important; " class="espacioB" colspan="3">
-                                    <!-- CIENTO OCHENTA Y NUEVE MIL CUATROCIENTOS NOVENTA Y SEIS CON NOVENTA Y OCHO CENTAVOS -->
-                                    {{ letras | uppercase }}
                                 </td>
                                 <td class="espacioB" colspan="3"> </td>
                             </tr>
@@ -622,6 +616,9 @@
                         </tfoot>  
                       </table>
                    </div>
+                   <span class="left mb-4" style="color:black !important;">
+                    {{ letras | uppercase }}
+            </span>
             </div>
      
   <!-- Motivo de Nota de Crédito -->
@@ -635,7 +632,7 @@
         <mat-checkbox class="example-margin ml-2 empresa" [disabled]="disabled" [(ngModel)]="descuento"><span>Descuento</span>  </mat-checkbox>
       </section>
 </div>
-<div class="col-md-12 mt-4 completo black">
+<div class="col-md-12 completo black">
     <h3 *ngIf="Motivo" class="completo empresa">
         Otros especifique: <span style="text-decoration: underline; margin-left: 1px;"> {{  Motivo }} </span>
     </h3>
@@ -644,18 +641,20 @@
     </h3>
     </div>
 
-<div class="row">
+<div class="row" style="margin-top: 10% !important;">
+
     <div class="col-md-6 mt-4 mb-4 empresa" >
         <p class="black "> 
            __________________________________________ <br>
-                   <span style="margin-left: 22%;" class="black ">    Elaborado por:  </span>
+                   <span style="margin-left: 22%;" class="black ">    Elaborado por </span>
         </p>
        </div>
        
-       <div class="col-md-6 black empresa mt-4 mb-4 empresa" >
-               Recibí Conforme: ______________________________________ <br>
-               Identidad: ____________________________________________ <br>
-               Firma: _______________________________________________     
+       <div class="col-md-6 black empresa mt-4 mb-4 empresa" style="text-align: right;" >
+        __________________________________________ <br>
+
+               <span style="margin-right: 22%;" class="black ">   Recibí Conforme  </span>
+
        </div>
     
     <div class="col-md-12 container " style="color: black !important;">

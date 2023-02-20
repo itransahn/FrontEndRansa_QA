@@ -28,6 +28,7 @@ export class NcComponent implements OnInit {
   public EstrObs2 : any[] = [];
   public dia : string;
   public mes : string;
+  public mesN : string;
   public anio : string;
   public letras : string;
   public loading = false;
@@ -91,12 +92,14 @@ cargarCabeceraN(){
   this.facturacionS.As400( params ).subscribe(
     (res:any)=>{
       this.cabeceraN = res;
+      console.log(this.cabeceraN)
       if ( this.cabeceraN.length > 0) {
         this.loading = true;
       }
       let fecha : string = String(this.cabeceraN[0]?.FDCCTC);
       this.dia  =  fecha.substring(6,8);
       this.mes  =  fecha.substring(4,6);
+      this.mesN  =  fecha.substring(4,6);
       this.mes  =  retornarMes(this.mes);
       this.letras = numeroALetras((Number(this.cabeceraN[0]['ITTFCS']) * -1),{})
       this.anio =  fecha.substring(0,4);
@@ -116,6 +119,7 @@ cargarCabeceraN(){
      }
   this.facturacionS.As400( params ).subscribe(
     (res:any[])=>{
+      console.log(res)
       if( res.length > 0 ){
         // this.DcabeceraN = res 
         // console.log( this.DcabeceraN )
@@ -129,7 +133,7 @@ cargarCabeceraN(){
           this.cargarObservacionesFac()
           this.loading1 = true;
         }
-          for(let j = this.DcabeceraN.length; j<(40-this.DcabeceraN.length); j++){
+          for(let j = this.DcabeceraN.length; j<(30-this.DcabeceraN.length); j++){
             this.espaciosBlancos.push(j)
           }
       }
@@ -207,6 +211,7 @@ cargarCabeceraN(){
     }
     this.facturacionS.post( url, params ).subscribe(
       (res:DataApi)=>{
+        console.log(params,res)
         if(!res.hasError){
           if ( res?.data.Table0[0]['codigo'] != -1 && res?.data.Table0[0]['codigo'] != 1 ){
               this.toast.mensajeWarning(String(res?.data.Table0[0]['Mensaje']), mensajes.warning);

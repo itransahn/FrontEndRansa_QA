@@ -28,6 +28,7 @@ export class NdComponent implements OnInit {
   public EstrObs2 : any[] = [];
   public dia    : string;
   public mes    : string;
+  public mesN   : string;
   public anio   : string;
   public letras : string;
   public loading   = false;
@@ -97,6 +98,7 @@ export class NdComponent implements OnInit {
           let fecha : string = String(this.cabeceraN[0]?.FDCCTC);
           this.dia  =  fecha.substring(6,8);
           this.mes  =  fecha.substring(4,6);
+          this.mesN =  fecha.substring(4,6);
           this.mes  =  retornarMes(this.mes);
           // console.log('Cantidad', this.cabeceraN[0]['ITTFCS'])
           this.letras = numeroALetras( Number(this.cabeceraN[0]['ITTFCS']),{})
@@ -130,7 +132,7 @@ export class NdComponent implements OnInit {
               this.cargarObservacionesFac()
               this.loading1 = true;
             }
-            for(let j = this.DcabeceraN.length; j<(40-this.DcabeceraN.length); j++){
+            for(let j = this.DcabeceraN.length; j<(30-this.DcabeceraN.length); j++){
               this.espaciosBlancos.push(j)
             }
           }
