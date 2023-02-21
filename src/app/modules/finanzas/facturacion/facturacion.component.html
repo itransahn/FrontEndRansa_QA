@@ -53,12 +53,12 @@
         <div class="col-md-6">
             <img src="../../../../assets/images/logoRansa.ico" class="img" alt="">
             <p class = "empresa">
-            <span class="nombre" > {{parametros[0]['nombreCompleto']}}</span> <br>
-             RTN: {{parametros[0]['rtnEmpresa']}} <br>
-             {{parametros[0]['direccion1']}} {{ parametros[0]['direccion2']}} <br>
-             Municipio: {{ parametros[0]['municipio']}}, Departamento: {{ parametros[0]['Departamento']}} <br> 
-             Tel: {{parametros[0]['Telfijo']}}, {{parametros[0]['TelCel']}}  <br>
-            <span *ngIf="parametros[0]['correo']"> Correo: {{parametros[0]['correo']}}  </span>
+            <span class="nombre" > {{parametros[0]?.['nombreCompleto']}}</span> <br>
+             RTN: {{parametros[0]?.['rtnEmpresa']}} <br>
+             {{parametros[0]?.['direccion1']}} {{ parametros[0]?.['direccion2']}} <br>
+             Municipio: {{ parametros[0]?.['municipio']}}, Departamento: {{ parametros[0]?.['Departamento']}} <br> 
+             Tel: {{parametros[0]?.['Telfijo']}}, {{parametros[0]?.['TelCel']}}  <br>
+            <span *ngIf="parametros[0]?.['correo']"> Correo: {{parametros[0]?.['correo']}}  </span>
             </p>
         </div>
 
@@ -74,7 +74,7 @@
             CAI: {{ parametrosCai[0]['CAI']}} <br>
             <span style="font-size: 1.1em !important; font-weight:  bold !important;"> Rango Autorizado: </span> <br>
             {{ parametrosCai[0]['desde'] }} AL {{ parametrosCai[0]['hasta'] }} <br>
-            <span style="font-size: 1.1em !important; font-weight:  bold !important;">Fecha Limite De Emisión: {{ parametrosCai[0]['fechaLimite'] | date: 'dd/MM/yyyy'}} </span> <br>
+            <span style="font-size: 1.1em !important; font-weight:  bold !important;">Fecha Limite De Emisión: {{ parametrosCai[0]?.['fechaLimite'] | date: 'dd/MM/yyyy'}} </span> <br>
             </p>
         </div>
 
@@ -82,14 +82,14 @@
             <div class="row contain1">
                 <div class="col-md-6" >
                     <p>
-                    <span style="text-align: left !important; font-size: 1.1em !important;" class="leftC"> CLIENTE: {{  cabeceraF[0]['TCMPCL'] }} </span> <br>
-                    <span style="text-align: left !important; font-size: 1.1em !important;"> DIRECCION: {{cabeceraF[0]['TDRCOR'] }} </span> <br>
+                    <span style="text-align: left !important; font-size: 1.1em !important;" class="leftC"> CLIENTE: {{  cabeceraF[0]?.['TCMPCL'] }} </span> <br>
+                    <span style="text-align: left !important; font-size: 1.1em !important;"> DIRECCION: {{cabeceraF[0]?.['TDRCOR'] }} </span> <br>
                     <!-- <span style="text-align: left !important;"> TELEFONO : 2290-0200</span> -->
                     </p>
                     </div>
         <div class="col-md-6 container2">
             <p > 
-                <span style="text-align: right !important;">   RTN: {{ cabeceraF[0]['NRUC2'] }} </span> <br>
+                <span style="text-align: right !important;">   RTN: {{ cabeceraF[0]?.['NRUC2'] }} </span> <br>
                     </p>
                     </div>
             </div>
@@ -198,13 +198,13 @@
     
                                         <!-- correlativo exenta -->
                                         <span class="lemas">
-                                            NO. CORRELATIVO DE ORDEN DE COMPRA EXENTA: {{cabeceraF[0]['TOBCTC']}}
+                                            NO. CORRELATIVO DE ORDEN DE COMPRA EXENTA: {{cabeceraF[0]?.['TOBCTC']}}
                                         </span> <br>
                                     
                                              <!-- correlativo exonerado -->
                                          <span class="lemas">
                                                 NO. CORRELATIVO DE CONSTANCIA DE REGISTRO EXONERADO: <br>
-                                            <span class="lemas" style="margin-left: 75% !important;">  {{cabeceraF[0]['TOBCTC2']}}  </span>
+                                            <span class="lemas" style="margin-left: 75% !important;">  {{cabeceraF[0]?.['TOBCTC2']}}  </span>
                                             </span> <br>
             
                                                <!-- Identificativo de la Sag -->
@@ -456,12 +456,12 @@
         <div class="col-md-6">
             <img src="../../../../assets/images/LOGO_RANSA_BN.png" class="img" alt="">
             <p class = "empresa">
-                <span class="nombre" > {{parametros[0]['nombreCompleto']}}</span> <br>
-                 RTN: {{parametros[0]['rtnEmpresa']}} <br>
-                 {{parametros[0]['direccion1']}} {{ parametros[0]['direccion2']}} <br>
-                 Municipio: {{ parametros[0]['municipio']}}, Departamento: {{ parametros[0]['Departamento']}} <br> 
-                 Tel: {{parametros[0]['Telfijo']}}, {{parametros[0]['TelCel']}}  <br>
-                <span *ngIf="parametros[0]['correo']"> Correo: {{parametros[0]['correo']}}  </span>
+                <span class="nombre" > {{parametros[0]?.['nombreCompleto']}}</span> <br>
+                 RTN: {{parametros[0]?.['rtnEmpresa']}} <br>
+                 {{parametros[0]?.['direccion1']}} {{ parametros[0]?.['direccion2']}} <br>
+                 Municipio: {{ parametros[0]?.['municipio']}}, Departamento: {{ parametros[0]?.['Departamento']}} <br> 
+                 Tel: {{parametros[0]?.['Telfijo']}}, {{parametros[0]?.['TelCel']}}  <br>
+                <span *ngIf="parametros[0]?.['correo']"> Correo: {{parametros[0]?.['correo']}}  </span>
                 </p>
         </div>
 
@@ -858,12 +858,12 @@
             <div class="col-md-6">
                 <img src="../../../../assets/images/LOGO_RANSA_BN.png" class="img" alt="">
                 <p class = "empresa">
-                    <span class="nombre" > {{parametros[0]['nombreCompleto']}}</span> <br>
-                     RTN: {{parametros[0]['rtnEmpresa']}} <br>
-                     {{parametros[0]['direccion1']}} {{ parametros[0]['direccion2']}} <br>
-                     Municipio: {{ parametros[0]['municipio']}}, Departamento: {{ parametros[0]['Departamento']}} <br> 
-                     Tel: {{parametros[0]['Telfijo']}}, {{parametros[0]['TelCel']}}  <br>
-                    <span *ngIf="parametros[0]['correo']"> Correo: {{parametros[0]['correo']}}  </span>
+                    <span class="nombre" > {{parametros[0]?.['nombreCompleto']}}</span> <br>
+                     RTN: {{parametros[0]?.['rtnEmpresa']}} <br>
+                     {{parametros[0]?.['direccion1']}} {{ parametros[0]?.['direccion2']}} <br>
+                     Municipio: {{ parametros[0]['municipio']}}, Departamento: {{ parametros[0]?.['Departamento']}} <br> 
+                     Tel: {{parametros[0]?.['Telfijo']}}, {{parametros[0]?.['TelCel']}}  <br>
+                    <span *ngIf="parametros[0]?.['correo']"> Correo: {{parametros[0]?.['correo']}}  </span>
                     </p>
             </div>
     
@@ -887,14 +887,14 @@
                 <div class="row contain1">
                     <div class="col-md-6" >
                         <p>
-                        <span style="text-align: left !important;" class="leftC"> CLIENTE: {{  cabeceraF[0]['TCMPCL'] }} </span> <br>
-                        <span style="text-align: left !important;"> DIRECCION: {{cabeceraF[0]['TDRCOR'] }} </span> <br>
+                        <span style="text-align: left !important;" class="leftC"> CLIENTE: {{  cabeceraF[0]?.['TCMPCL'] }} </span> <br>
+                        <span style="text-align: left !important;"> DIRECCION: {{cabeceraF[0]?.['TDRCOR'] }} </span> <br>
                         <!-- <span style="text-align: left !important;"> TELEFONO : 2290-0200</span> -->
                         </p>
                         </div>
                         <div class="col-md-6 container2">
                             <p > 
-                                <span style="text-align: right !important;">   RTN: {{ cabeceraF[0]['NRUC2'] }} </span> <br>
+                                <span style="text-align: right !important;">   RTN: {{ cabeceraF[0]?.['NRUC2'] }} </span> <br>
                                     </p>
                         </div>
                 </div>
