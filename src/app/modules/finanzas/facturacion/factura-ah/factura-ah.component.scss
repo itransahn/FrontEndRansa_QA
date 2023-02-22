@@ -399,18 +399,62 @@ table{
 	.bordeIz{
 		border-bottom-style: none !important;
 	 }
-	tbody{
+	//  tbody{
+	// 	tr{
+	// 		border :  0.8px #050404 !important;
+	// 	}
+	// }
+
+	.filas{
 	border :  0.5px solid #050404 !important;
+
 	}
-// thead{
-// 	border :  0.3px solid #050404 !important;
-// 	th{
-// 	border :  0.3px solid #050404 !important;
-// 	}
-// }
+thead{
+	// tr{
+	// 	border :  0.1px solid #050404 !important;
+	// 	border-bottom:  0.1px solid #050404 !important;
+	// }
+	// th{
+	// 	border :  0.1px solid #050404 !important;
+	// }
+	.detalletfoot{
+		border-bottom:  0.1px solid #050404 !important;
+		border-left:    none !important;
+		border-right:   0.5px solid #050404 !important;
+		border-top:     none !important;
+	}
+	.detalletfootR{
+		border-bottom:  0.1px solid #050404 !important;
+		border-left:    none !important;
+		border-right:   none !important;
+		border-top:     none !important;
+	}
+	
+}
 
 tfoot{
-	border :  0.3px solid #050404 !important;
+	.exp{
+		border-bottom: 0.5px solid #050404 !important;
+		border-left: none !important;
+		border-right: none !important;
+		border-top: 0.5px solid #050404 !important;
+	}
+
+	.detalletfoot{
+		border-bottom:  none !important;
+		border-left:    0.5px solid #050404 !important;
+		border-right:   0.5px solid #050404 !important;
+		border-top:     0.5px solid #050404 !important;
+	}
+
+	.detalletfootR{
+		border-bottom:  none !important;
+		border-left:    none !important;
+		border-right:   none !important;
+		border-top:     0.5px solid #050404 !important;
+	}
+
+	border :  0.8px solid #050404 !important;
 		tr{
 			background-color: #ffffff !important;	
 			font-size: 0.9em;
