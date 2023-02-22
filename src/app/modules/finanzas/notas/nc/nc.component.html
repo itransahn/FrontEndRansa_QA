@@ -4,16 +4,14 @@
             <div class="col-md-6">
                 <img *ngIf="sede == 1" src="../../../../assets/images/logoRansa.ico"  class="img" alt="">
                 <img *ngIf="sede == 2" src="../../../../../assets/images/Almahsa.png" class="img" alt="">
-                <p class="black empresa">
-                <span class="nombre"> {{ parametros[0]['nombreCompleto']}} </span> <br>
-                {{ parametros[0]['direccion1']}} Calle: {{ parametros[0]['direccion2'] }}  <br>
-                <!-- Casa N°: S/N -->
-                Municipio: {{ parametros[0]['municipio']}}, Departamento: {{ parametros[0]['Departamento']}} <br>
-                Tel: {{ parametros[0]['Telfijo'] }} <br>
-                <span *ngIf="parametros[0]['TelCel']">     Cel   : {{ parametros[0]['TelCel'] }} <br> </span> 
-                <span *ngIf="parametros[0]['rtnEmpresa']"> R.T.N : {{ parametros[0]['rtnEmpresa'] }} </span> 
-                <span *ngIf="parametros[0]['correo']">     Correo: {{ parametros[0]['correo'] }} </span> 
-                </p>
+                <p class = "black empresa">
+                    <span class="nombre" > {{parametros[0]?.['nombreCompleto']}}</span> <br>
+                     RTN: {{parametros[0]?.['rtnEmpresa']}} <br>
+                     {{parametros[0]?.['direccion1']}} {{ parametros[0]?.['direccion2']}} <br>
+                     Municipio: {{ parametros[0]?.['municipio']}}, Departamento: {{ parametros[0]?.['Departamento']}} <br> 
+                     Tel: {{parametros[0]?.['Telfijo']}}, {{parametros[0]?.['TelCel']}}  <br>
+                    <span *ngIf="parametros[0]?.['correo']"> Correo: {{parametros[0]?.['correo']}}  </span>
+                    </p>
             </div>
     
             <div class="col-md-6 mt-4 rigth">
@@ -27,11 +25,11 @@
                     <!-- 000-001-01-{{retornarCorrelativo()}} -->
                     000-002-06-{{retornarCorrelativo()}}            
             </span>
-            <span style="font-size: 1.1em !important; font-weight:  bold !important;"> Fecha: {{ dia }}/{{mesN}}/{{anio}} </span><br><br>
+            <span style="font-size: 1.4em !important; font-weight:  bold !important;"> Fecha: {{ dia }}/{{mesN}}/{{anio}} </span><br><br>
                 <span  class="rigth empresa">  C.A.I: {{parametrosCai[0]['CAI']}} </span> <br>
-                <span style="font-size: 1.1em !important; font-weight:  bold !important;"> Rango Autorizado: </span> <br>
+                <span style="font-size: 1.4em !important; font-weight:  bold !important;"> Rango Autorizado: </span> <br>
                 <span  class="rigth empresa"> {{parametrosCai[0]['desde']}} - {{parametrosCai[0]['hasta']}} </span> <br>
-                <span style="font-size: 1.1em !important; font-weight:  bold !important;">Fecha Limite De Emisión: {{ parametrosCai[0]['fechaLimite'] | date: 'dd/MM/yyyy'}} </span> <br>
+                <span style="font-size: 1.4em !important; font-weight:  bold !important;">Fecha Limite De Emisión: {{ parametrosCai[0]['fechaLimite'] | date: 'dd/MM/yyyy'}} </span> <br>
                  <!-- <span class="rigth empresa"> Fecha Limite de Emisión : {{ parametrosCai[0]['fechaLimite'] | date : 'dd/MM/yyyy' }} </span> -->
          
                 </p>
@@ -41,7 +39,7 @@
             <div class="container mt-4">
                 <div class="row contain1">
                     <div class="col-md-6 containB" style="width: 80% !important;">
-                    <p class="empresa">
+                    <p class="empresa" style="text-align: left !important; font-size: 1.3em !important;">
                     Sr.(a): {{ cabeceraN[0]['TCMPCL'] }} <br>
                     Dirección: {{ cabeceraN[0]['TDRCOR'] }} <br>
              
@@ -49,7 +47,7 @@
                     </div>
                 <div class="col-md-6 rigth container2" style="color:black !important ">
                      <!-- <p class="empresa"> Nota de Crédito por L. <span style="font-weight: bold !important;"> {{ (cabeceraN[0]['ITTFCS'] * -1) | number :'1.2-2' }} </span> </p> -->
-                    <p class="empresa container2">
+                    <p class="empresa container2" style="text-align: left !important; font-size: 1.3em !important;">
                     RTN : {{ cabeceraN[0]['NRUC2']}} <br>
                     <!-- Fecha de emisión comprobante: {{ dia }}  {{ mes }} {{ anio }} <br> -->
                         <!-- CAI del Comprobante:    <br>
@@ -194,9 +192,9 @@
 </div>
 <div class="col-md-12 mb-4 completo black">
     <h3 *ngIf="Motivo" class="completo empresa">
-        Otros especifique: <span style="text-decoration: underline; margin-left: 1px;"> {{  Motivo }} </span>
+        Otros especifique: <span style="text-decoration: underline; margin-left: 1px; font-size: 1.3em !important;"> {{  Motivo }} </span>
     </h3>
-    <h3 *ngIf="!Motivo" class="completo empresa">
+    <h3 *ngIf="!Motivo" class="completo empresa" style="font-size: 1.3em !important;">
         Otros especifique:____________________________________________________________________________
     </h3>
     </div>
@@ -236,16 +234,14 @@
             <div class="col-md-6">
                 <img *ngIf="sede == 1" src="../../../../assets/images/LOGO_RANSA_BN.png" class="img"  alt="">
                 <img *ngIf="sede == 2" src="../../../../../assets/images/Almahsa_BN.png" class="img"  alt="">
-                <p class="black empresa">
-                <span class="nombre"> {{ parametros[0]['nombreCompleto']}} </span> <br>
-                {{ parametros[0]['direccion1']}} Calle: {{ parametros[0]['direccion2'] }}  <br>
-                <!-- Casa N°: S/N -->
-                Municipio: {{ parametros[0]['municipio']}}, Departamento: {{ parametros[0]['Departamento']}} <br>
-                Tel: {{ parametros[0]['Telfijo'] }} <br>
-                <span *ngIf="parametros[0]['TelCel']">     Cel   : {{ parametros[0]['TelCel'] }} <br> </span> 
-                <span *ngIf="parametros[0]['rtnEmpresa']"> R.T.N : {{ parametros[0]['rtnEmpresa'] }} </span> 
-                <span *ngIf="parametros[0]['correo']">     Correo: {{ parametros[0]['correo'] }} </span> 
-                </p>
+                <p class = "black empresa">
+                    <span class="nombre" > {{parametros[0]?.['nombreCompleto']}}</span> <br>
+                     RTN: {{parametros[0]?.['rtnEmpresa']}} <br>
+                     {{parametros[0]?.['direccion1']}} {{ parametros[0]?.['direccion2']}} <br>
+                     Municipio: {{ parametros[0]?.['municipio']}}, Departamento: {{ parametros[0]?.['Departamento']}} <br> 
+                     Tel: {{parametros[0]?.['Telfijo']}}, {{parametros[0]?.['TelCel']}}  <br>
+                    <span *ngIf="parametros[0]?.['correo']"> Correo: {{parametros[0]?.['correo']}}  </span>
+                    </p>
             </div>
     
             <div class="col-md-6 mt-4 rigth">
@@ -258,11 +254,11 @@
                 <span *ngIf="ruta.snapshot.params['empresa'] == 'AH'" class="rigth factura">
                     <!-- 000-001-01-{{retornarCorrelativo()}} -->
                     000-002-06-{{retornarCorrelativo()}}            
-            </span> <span style="font-size: 1.1em !important; font-weight:  bold !important;"> Fecha: {{ dia }}/{{mesN}}/{{anio}} </span><br><br>
+            </span> <span style="font-size: 1.5em !important; font-weight:  bold !important;"> Fecha: {{ dia }}/{{mesN}}/{{anio}} </span><br><br>
                 <span  class="rigth empresa">  C.A.I: {{parametrosCai[0]['CAI']}} </span> <br>
-                <span style="font-size: 1.1em !important; font-weight:  bold !important;"> Rango Autorizado: </span> <br>
+                <span style="font-size: 1.4em !important; font-weight:  bold !important;"> Rango Autorizado: </span> <br>
                 <span  class="rigth empresa"> {{parametrosCai[0]['desde']}} - {{parametrosCai[0]['hasta']}} </span> <br>
-                <span style="font-size: 1.1em !important; font-weight:  bold !important;">Fecha Limite De Emisión: {{ parametrosCai[0]['fechaLimite'] | date: 'dd/MM/yyyy'}} </span> <br>
+                <span style="font-size: 1.4em !important; font-weight:  bold !important;">Fecha Limite De Emisión: {{ parametrosCai[0]['fechaLimite'] | date: 'dd/MM/yyyy'}} </span> <br>
                  <!-- <span class="rigth empresa"> Fecha Limite de Emisión : {{ parametrosCai[0]['fechaLimite'] | date : 'dd/MM/yyyy' }} </span> -->
                 </p>
             </div>
@@ -271,7 +267,7 @@
             <div class="container mt-4">
                 <div class="row contain1">
                     <div class="col-md-6 containB" style="width: 80% !important;">
-                    <p class="empresa">
+                    <p class="empresa"  style="text-align: left !important; font-size: 1.3em !important;">
                     Sr.(a): {{ cabeceraN[0]['TCMPCL'] }} <br>
                     Dirección: {{ cabeceraN[0]['TDRCOR'] }} <br>
              
@@ -279,7 +275,7 @@
                     </div>
                     <div class="col-md-6 rigth container2" style="color:black !important ">
                         <!-- <p class="empresa"> Nota de Crédito por L. <span style="font-weight: bold !important;"> {{ (cabeceraN[0]['ITTFCS'] * -1) | number :'1.2-2' }} </span> </p> -->
-                       <p class="empresa container2">
+                       <p class="empresa container2"  style="text-align: left !important; font-size: 1.3em !important;">
                        RTN : {{ cabeceraN[0]['NRUC2']}} <br>
                        <!-- Fecha de emisión comprobante: {{ dia }}  {{ mes }} {{ anio }} <br> -->
                            <!-- CAI del Comprobante:    <br>
@@ -414,9 +410,9 @@
 </div>
 <div class="col-md-12 completo black">
     <h3 *ngIf="Motivo" class="completo empresa">
-        Otros especifique: <span style="text-decoration: underline; margin-left: 1px;"> {{  Motivo }} </span>
+        Otros especifique: <span style="text-decoration: underline; margin-left: 1px;font-size: 1.3em !important;"> {{  Motivo }} </span>
     </h3>
-    <h3 *ngIf="!Motivo" class="completo empresa">
+    <h3 *ngIf="!Motivo" class="completo empresa" style="font-size: 1.3em !important;">
         Otros especifique:____________________________________________________________________________
     </h3>
     </div>
@@ -456,16 +452,14 @@
             <div class="col-md-6">
                 <img *ngIf="sede == 1" src="../../../../assets/images/LOGO_RANSA_BN.png" class="img"  alt="">
                 <img *ngIf="sede == 2" src="../../../../../assets/images/Almahsa_BN.png" class="img"  alt="">
-                <p class="black empresa">
-                <span class="nombre"> {{ parametros[0]['nombreCompleto']}} </span> <br>
-                {{ parametros[0]['direccion1']}} Calle: {{ parametros[0]['direccion2'] }}  <br>
-                <!-- Casa N°: S/N -->
-                Municipio: {{ parametros[0]['municipio']}}, Departamento: {{ parametros[0]['Departamento']}} <br>
-                Tel: {{ parametros[0]['Telfijo'] }} <br>
-                <span *ngIf="parametros[0]['TelCel']">     Cel   : {{ parametros[0]['TelCel'] }} <br> </span> 
-                <span *ngIf="parametros[0]['rtnEmpresa']"> R.T.N : {{ parametros[0]['rtnEmpresa'] }} </span> 
-                <span *ngIf="parametros[0]['correo']">     Correo: {{ parametros[0]['correo'] }} </span> 
-                </p>
+                <p class = "black empresa">
+                    <span class="nombre" > {{parametros[0]?.['nombreCompleto']}}</span> <br>
+                     RTN: {{parametros[0]?.['rtnEmpresa']}} <br>
+                     {{parametros[0]?.['direccion1']}} {{ parametros[0]?.['direccion2']}} <br>
+                     Municipio: {{ parametros[0]?.['municipio']}}, Departamento: {{ parametros[0]?.['Departamento']}} <br> 
+                     Tel: {{parametros[0]?.['Telfijo']}}, {{parametros[0]?.['TelCel']}}  <br>
+                    <span *ngIf="parametros[0]?.['correo']"> Correo: {{parametros[0]?.['correo']}}  </span>
+                    </p>
             </div>
     
             <div class="col-md-6 mt-4 rigth">
@@ -478,11 +472,11 @@
                 <span *ngIf="ruta.snapshot.params['empresa'] == 'AH'" class="rigth factura">
                     <!-- 000-001-01-{{retornarCorrelativo()}} -->
                     000-002-06-{{retornarCorrelativo()}}            
-            </span> <span style="font-size: 1.1em !important; font-weight:  bold !important;"> Fecha: {{ dia }}/{{mesN}}/{{anio}} </span><br><br>
+            </span> <span style="font-size: 1.5em !important; font-weight:  bold !important;"> Fecha: {{ dia }}/{{mesN}}/{{anio}} </span><br><br>
                 <span  class="rigth empresa">  C.A.I: {{parametrosCai[0]['CAI']}} </span> <br>
-                <span style="font-size: 1.1em !important; font-weight:  bold !important;"> Rango Autorizado: </span> <br>
+                <span style="font-size: 1.4em !important; font-weight:  bold !important;"> Rango Autorizado: </span> <br>
                 <span  class="rigth empresa"> {{parametrosCai[0]['desde']}} - {{parametrosCai[0]['hasta']}} </span> <br>
-                <span style="font-size: 1.1em !important; font-weight:  bold !important;">Fecha Limite De Emisión: {{ parametrosCai[0]['fechaLimite'] | date: 'dd/MM/yyyy'}} </span> <br>
+                <span style="font-size: 1.4em !important; font-weight:  bold !important;">Fecha Limite De Emisión: {{ parametrosCai[0]['fechaLimite'] | date: 'dd/MM/yyyy'}} </span> <br>
                  <!-- <span class="rigth empresa"> Fecha Limite de Emisión : {{ parametrosCai[0]['fechaLimite'] | date : 'dd/MM/yyyy' }} </span> -->
                 </p>
             </div>
@@ -491,7 +485,7 @@
             <div class="container mt-4">
                 <div class="row contain1">
                     <div class="col-md-6 containB" style="width: 80% !important;">
-                    <p class="empresa">
+                    <p class="empresa"  style="text-align: left !important; font-size: 1.3em !important;">
                     Sr.(a): {{ cabeceraN[0]['TCMPCL'] }} <br>
                     Dirección: {{ cabeceraN[0]['TDRCOR'] }} <br>
              
@@ -499,7 +493,7 @@
                     </div>
                     <div class="col-md-6 rigth container2" style="color:black !important ">
                         <!-- <p class="empresa"> Nota de Crédito por L. <span style="font-weight: bold !important;"> {{ (cabeceraN[0]['ITTFCS'] * -1) | number :'1.2-2' }} </span> </p> -->
-                       <p class="empresa container2">
+                       <p class="empresa container2"  style="text-align: left !important; font-size: 1.3em !important;">
                        RTN : {{ cabeceraN[0]['NRUC2']}} <br>
                        <!-- Fecha de emisión comprobante: {{ dia }}  {{ mes }} {{ anio }} <br> -->
                            <!-- CAI del Comprobante:    <br>
@@ -634,9 +628,9 @@
 </div>
 <div class="col-md-12 completo black">
     <h3 *ngIf="Motivo" class="completo empresa">
-        Otros especifique: <span style="text-decoration: underline; margin-left: 1px;"> {{  Motivo }} </span>
+        Otros especifique: <span style="text-decoration: underline; margin-left: 1px; font-size: 1.3em !important;"> {{  Motivo }} </span>
     </h3>
-    <h3 *ngIf="!Motivo" class="completo empresa">
+    <h3 *ngIf="!Motivo" class="completo empresa" style="font-size: 1.3em !important;">
         Otros especifique:____________________________________________________________________________
     </h3>
     </div>

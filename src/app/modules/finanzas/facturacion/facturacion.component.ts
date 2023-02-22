@@ -60,9 +60,9 @@ export class FacturacionComponent implements OnInit {
 
   ngOnInit(){
     this.cargarForm();
-    this.tipo = this.ruta.snapshot.params['tipo'];
-    this.cliente   = (this.ruta.snapshot.params['cliente']);
-    this.documento = '1000'+ (this.ruta.snapshot.params['documento']);
+    this.tipo = this.ruta.snapshot.params?.['tipo'];
+    this.cliente   = (this.ruta.snapshot.params?.['cliente']);
+    this.documento = '1000'+ (this.ruta.snapshot.params?.['documento']);
     this.validarCorrelativo();
     this.cargarParametrosF();
     this.cabeceraFac();
@@ -98,8 +98,8 @@ impuesto   : new FormControl('', [ Validators.required]),
   }
 
   validacion(){
-    this.cliente   = (this.ruta.snapshot.params['cliente']);
-    this.documento = '1000'+ (this.ruta.snapshot.params['documento'])
+    this.cliente   = (this.ruta.snapshot.params?.['cliente']);
+    this.documento = '1000'+ (this.ruta.snapshot.params?.['documento'])
     if ( this.cliente == '0' && this.documento == '0' ){
       this.modal()
     }else{
@@ -112,7 +112,7 @@ impuesto   : new FormControl('', [ Validators.required]),
   validarCorrelativo(){
     let url = 'finanzas/validarNum'
     let params = {
-      correlativo : this.ruta.snapshot.params['documento'],
+      correlativo : this.ruta.snapshot.params?.['documento'],
       sede        : this.sede,
       tipo        : 1
     }
@@ -281,7 +281,7 @@ EstructurarObservaciones( array : any[]){
     }
 
     for( let i = 0; i < this.EstrObs2.length; i++ ){
-     this.Observaciones += '    ' + '    ' + this.EstrObs2[i]['TOBCTC']
+     this.Observaciones += '    ' + '    ' + this.EstrObs2[i]?.['TOBCTC']
   }
     // console.log( this.EstrObs2)
     // console.log( this.Observaciones)
@@ -299,7 +299,7 @@ EstructurarObservaciones( array : any[]){
     return Acumulador(this.DcabeceraF,'IVLDCS')
   }
   retornarTotal(){
-    let total : number = Acumulador(this.DcabeceraF,'IVLDCS') + Number(this.cabeceraF[0]['IVLIGS'])
+    let total : number = Acumulador(this.DcabeceraF,'IVLDCS') + Number(this.cabeceraF[0]?.['IVLIGS'])
     return total;
   }
 
@@ -312,18 +312,18 @@ EstructurarObservaciones( array : any[]){
   }
 
   retornarCorrelativo(){
-    let correlativo : string = this.cabeceraF[0]['NDCCTC'];
+    let correlativo : string = this.cabeceraF[0]?.['NDCCTC'];
     return correlativo.substring(1,correlativo.length)
   }
   retornarCorrelativoPDF(){
-    let correlativo : string = this.cabeceraF[0]['NDCCTC'];
+    let correlativo : string = this.cabeceraF[0]?.['NDCCTC'];
     return correlativo.substring(3,correlativo.length)
   }
 
   GenerarPdf(){
-    this.sharedS.pdfFactura('Factura',  `${this.retornarCorrelativoPDF()}_${this.cabeceraF[0]['TCMPCL']}FACOriginal`,'Factura Ransa', `Seguro de generar PDF de FACTURA ${this.cabeceraF[0]['NDCCTC']} del CLIENTE
+    this.sharedS.pdfFactura('Factura',  `${this.retornarCorrelativoPDF()}_${this.cabeceraF[0]['TCMPCL']}FACOriginal`,'Factura Ransa', `Seguro de generar PDF de FACTURA ${this.cabeceraF[0]?.['NDCCTC']} del CLIENTE
     ${this.cabeceraF[0]['TCMPCL']}`,{
-      numeroFactura: `${this.retornarCorrelativoPDF()}_${this.cabeceraF[0]['TCMPCL']}`,
+      numeroFactura: `${this.retornarCorrelativoPDF()}_${this.cabeceraF[0]?.['TCMPCL']}`,
       factura : 'Factura Ransa',
       titulo : ''
     })
@@ -340,17 +340,17 @@ EstructurarObservaciones( array : any[]){
       // console.log(array[0])
       // arrayC.push(array[0]);
       arrayC = [{
-CCNCSD:array[0]['CCNCSD'],
-CRBCTC:array[0]['CRBCTC'],
-CUNCNA:array[0]['CUNCNA'],
-CUTCTC:array[0]['CUTCTC'],
-ITRCTC:array[0]['ITRCTC'],
-IVLDCD:array[0]['IVLDCD'],
+CCNCSD:array[0]?.['CCNCSD'],
+CRBCTC:array[0]?.['CRBCTC'],
+CUNCNA:array[0]?.['CUNCNA'],
+CUTCTC:array[0]?.['CUTCTC'],
+ITRCTC:array[0]?.['ITRCTC'],
+IVLDCD:array[0]?.['IVLDCD'],
 IVLDCS:0,
-NCRDCC:array[0]['NCRDCC'],
-NDCCTC:array[0]['NDCCTC'],
-QAPCTC:array[0]['QAPCTC'],
-TCMTRF:array[0]['TCMTRF']
+NCRDCC:array[0]?.['NCRDCC'],
+NDCCTC:array[0]?.['NDCCTC'],
+QAPCTC:array[0]?.['QAPCTC'],
+TCMTRF:array[0]?.['TCMTRF']
       }]
       
       for( let i = 0; i < array.length; i++ ){
@@ -363,9 +363,9 @@ TCMTRF:array[0]['TCMTRF']
       */
                 let bandera = false;
                for(let j = 0; j < arrayC.length; j++){
-              if(arrayC[j]['TCMTRF'] == array[i]['TCMTRF'] ){
+              if(arrayC[j]?.['TCMTRF'] == array[i]?.['TCMTRF'] ){
                 bandera = true;
-                arrayC[j]['IVLDCS']  +=  Number(array[i]['IVLDCS'])
+                arrayC[j]['IVLDCS']  +=  Number(array[i]?.['IVLDCS'])
                 // arrayC[j]['ITRCTC']  +=  Number(array[i]['IVLDCS'])
                }else{
                  //  break
@@ -375,17 +375,17 @@ TCMTRF:array[0]['TCMTRF']
               if( !bandera ){
                 arrayC.push(
                {
-                CCNCSD:array[i]['CCNCSD'],
-                CRBCTC:array[i]['CRBCTC'],
-                CUNCNA:array[i]['CUNCNA'],
-                CUTCTC:array[i]['CUTCTC'],
-                ITRCTC:Number(array[i]['ITRCTC']),
-                IVLDCD:array[i]['IVLDCD'],
+                CCNCSD:array[i]?.['CCNCSD'],
+                CRBCTC:array[i]?.['CRBCTC'],
+                CUNCNA:array[i]?.['CUNCNA'],
+                CUTCTC:array[i]?.['CUTCTC'],
+                ITRCTC:Number(array[i]?.['ITRCTC']),
+                IVLDCD:array[i]?.['IVLDCD'],
                 IVLDCS:Number(array[i]['IVLDCS']),
-                NCRDCC:array[i]['NCRDCC'],
-                NDCCTC:array[i]['NDCCTC'],
-                QAPCTC:array[i]['QAPCTC'],
-                TCMTRF:array[i]['TCMTRF']
+                NCRDCC:array[i]?.['NCRDCC'],
+                NDCCTC:array[i]?.['NDCCTC'],
+                QAPCTC:array[i]?.['QAPCTC'],
+                TCMTRF:array[i]?.['TCMTRF']
                }
                 );
               }

@@ -2,8 +2,6 @@
     width:  30cm;
     height: auto ;
     box-shadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2), 0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12);
-    max-width:  30cm !important;
-	
 }
 
 .correlativo{
@@ -17,9 +15,9 @@
 *{
 	// font-family: Arial, Helvetica, sans-serif;
 	// border-color: #050404;
-	border: 0.1px !important;
+	border: 0.3px !important;
 		.bordes2{
-		border : 1.5px solid #050404 !important;
+		border : 0.3px solid #050404 !important;
 	}
 
 	.bordeIz{
@@ -29,12 +27,8 @@
 	.factura{
 		font-size: 1.3em !important;
 	}
+
 }
-
-body{
-	zoom: 270% !important;
-  }
-
 
 .bordes{
 	// border-style: solid !important; 
@@ -42,7 +36,7 @@ body{
 	// border-style: outset !important;
 	// border-color: #050404 !important;
 	// border : 1px outset #050505 !important;
-	border : 0.1px solid #050404;
+	border : 0.3px solid #050404;
 	// border-style: outset !important;
 	// color: #006F1D !important;
 	.bordeIz{
@@ -95,7 +89,7 @@ div, span{
 
 .contain1{
 	width: 100%;
-    border : 0.1px solid #006F1D;
+    border : 0.3px solid #006F1D;
     color: #006F1D !important;
     height: auto;
 	border-radius: 10px;
@@ -274,56 +268,58 @@ text-align: right !important;
 		font-size: 1.2em !important;
 	}
 	
-	.letra0{
-		position: relative;
-		font-size: 1.1em !important;
-		z-index:3;
-		right: 6.65em !important;
-	
-	}
-	.letra100{
-		position: relative;
-		font-size: 1.1em !important;
-		z-index:3;
-		right: 5.6em !important;
-	}
-	
-	.letra1000{
-		position: relative;
-		font-size: 1.1em !important;
-		z-index:3;
-		right: 4.6em !important;
-	}
-	
-	.letra10000{
-		position: relative;
-		font-size: 1.1em !important;
-		z-index:3;
-		right: 3.9em !important;
-	}
-	
-	.letra100000{
-		position: relative;
-		font-size: 1.1em !important;
-		z-index:3;
-		right: 3.3em !important;
-	}
-	
-	.letra1000000{
-		position: relative;
-		font-size: 1.1em !important;
-		z-index:3;
-		right: 2.4em !important;
-	}
-	
-	.letra10000000{
-		position: relative;
-		font-size: 1.1em !important;
-		z-index:3;
-		right: 1.8em !important;
-	}
-	
-	/* Manejo de espacios para los valores decimales de la factura*/
+/* Manejo de espacios para los valores decimales de la factura*/
+
+.letra0{
+	position: relative;
+	font-size: 1.1em !important;
+	z-index:3;
+	right: 6.65em !important;
+
+}
+.letra100{
+	position: relative;
+	font-size: 1.1em !important;
+	z-index:3;
+	right: 5.6em !important;
+}
+
+.letra1000{
+	position: relative;
+	font-size: 1.1em !important;
+	z-index:3;
+	right: 4.6em !important;
+}
+
+.letra10000{
+	position: relative;
+	font-size: 1.1em !important;
+	z-index:3;
+	right: 3.9em !important;
+}
+
+.letra100000{
+	position: relative;
+	font-size: 1.1em !important;
+	z-index:3;
+	right: 3.3em !important;
+}
+
+.letra1000000{
+	position: relative;
+	font-size: 1.1em !important;
+	z-index:3;
+	right: 2.4em !important;
+}
+
+.letra10000000{
+	position: relative;
+	font-size: 1.1em !important;
+	z-index:3;
+	right: 1.8em !important;
+}
+
+/* Manejo de espacios para los valores decimales de la factura*/
 
 	.img{
 		width:  200px !important;
@@ -350,17 +346,17 @@ text-align: right !important;
 		color: #050404 !important;
 	}
 	.contain1{
-		border : 0.1px groove #050404 !important;
+		border : 0.3px groove #050404 !important;
 	}
 
-.tabla{
-		background-color: #ffffff !important;
-		color: #050404 !important;
-		border: 0.1px #050404 !important;
-		.bordeIz{
-			border-bottom-style: none !important;
-		 }
-}
+// .tabla{
+// 		background-color: #ffffff !important;
+// 		color: #050404 !important;
+// 		border: 0.1px #050404 !important;
+// 		.bordeIz{
+// 			border-bottom-style: none !important;
+// 		 }
+// }
 
 p {
 	font-size: 		1.1em !important;
@@ -399,12 +395,22 @@ table{
 	margin: 0;
 	padding: 0;
 	width: 100% !important;
-	border :  0.1px solid #050404 !important;
+	border :  0.3px solid #050404 !important;
 	.bordeIz{
 		border-bottom-style: none !important;
 	 }
+	tbody{
+	border :  0.5px solid #050404 !important;
+	}
+// thead{
+// 	border :  0.3px solid #050404 !important;
+// 	th{
+// 	border :  0.3px solid #050404 !important;
+// 	}
+// }
 
 tfoot{
+	border :  0.3px solid #050404 !important;
 		tr{
 			background-color: #ffffff !important;	
 			font-size: 0.9em;
@@ -412,7 +418,7 @@ tfoot{
 		border-bottom-style: none !important;
 					}
 				.borderRg{
-					border: 0.5 solid #050404;
+					border: 0.3 solid #050404;
 						 }
 		}
 	th{
@@ -420,14 +426,8 @@ tfoot{
 			// border-color: #050404;
 			// border: 0.1px;
 			background-color: #ffffff !important;
-		font-size: 1em !important;
-	
-		.bordeIz {
-			border-bottom-style: none !important;
-		 }
-		.borderRg{
-			border: 0.2 solid #050404;
-		}
+		font-size: 1em !important;	
+		height: 5% !important;
 	}
 	.bordeIz{
 		border-bottom-style: none !important;
@@ -480,10 +480,8 @@ tfoot{
   table th{
 	background-color: #ffffff ;
 	color: #050404;
-	border : 0.9px solid #bcb9b9 !important;
+	border : 0.3px solid #bcb9b9 !important;
 	font-size: 1em !important;
-	// font: bold;
-	// padding: .625em;
 	text-align: center;
 	.bordeIz{
 		border-bottom-style: none !important;

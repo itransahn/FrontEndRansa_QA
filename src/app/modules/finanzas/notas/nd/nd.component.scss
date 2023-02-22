@@ -1,5 +1,5 @@
 .completo{
-    font-size: small;
+    font-size: small ;
 
 	.correlativo{
 		color:#FE9600 !important;
@@ -7,7 +7,7 @@
 
 	
 	.factura{
-		font-size: 1.5em !important;
+		font-size: 1.6em !important;
 	}
 
 }
@@ -39,6 +39,10 @@
 	border: 0.1px !important;
 	.bordes2{
 		border : 1.5px solid #050404 !important;
+	}
+
+	.factura{
+		font-size: 1.6em !important;
 	}
 }
 
@@ -248,9 +252,10 @@ table{
 	
 		
 		.factura{
-			font-size: 1.5em !important;
+			font-size: 1.4em !important;
 		}
 	
+		
 		.img{
 			width:  200px !important;
 			height: 70px !important;

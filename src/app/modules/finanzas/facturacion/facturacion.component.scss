@@ -15,9 +15,9 @@
 *{
 	// font-family: Arial, Helvetica, sans-serif;
 	// border-color: #050404;
-	border: 0.1px !important;
+	border: 0.3px !important;
 		.bordes2{
-		border : 1.5px solid #050404 !important;
+		border : 0.3px solid #050404 !important;
 	}
 
 	.bordeIz{
@@ -36,7 +36,7 @@
 	// border-style: outset !important;
 	// border-color: #050404 !important;
 	// border : 1px outset #050505 !important;
-	border : 0.1px solid #050404;
+	border : 0.3px solid #050404;
 	// border-style: outset !important;
 	// color: #006F1D !important;
 	.bordeIz{
@@ -89,7 +89,7 @@ div, span{
 
 .contain1{
 	width: 100%;
-    border : 0.1px solid #006F1D;
+    border : 0.3px solid #006F1D;
     color: #006F1D !important;
     height: auto;
 	border-radius: 10px;
@@ -346,7 +346,7 @@ text-align: right !important;
 		color: #050404 !important;
 	}
 	.contain1{
-		border : 0.1px groove #050404 !important;
+		border : 0.3px groove #050404 !important;
 	}
 
 // .tabla{
@@ -395,12 +395,22 @@ table{
 	margin: 0;
 	padding: 0;
 	width: 100% !important;
-	border :  0.1px solid #050404 !important;
+	border :  0.3px solid #050404 !important;
 	.bordeIz{
 		border-bottom-style: none !important;
 	 }
+	tbody{
+	border :  0.5px solid #050404 !important;
+	}
+// thead{
+// 	border :  0.3px solid #050404 !important;
+// 	th{
+// 	border :  0.3px solid #050404 !important;
+// 	}
+// }
 
 tfoot{
+	border :  0.3px solid #050404 !important;
 		tr{
 			background-color: #ffffff !important;	
 			font-size: 0.9em;
@@ -408,7 +418,7 @@ tfoot{
 		border-bottom-style: none !important;
 					}
 				.borderRg{
-					border: 0.5 solid #050404;
+					border: 0.3 solid #050404;
 						 }
 		}
 	th{
@@ -470,7 +480,7 @@ tfoot{
   table th{
 	background-color: #ffffff ;
 	color: #050404;
-	border : 0.9px solid #bcb9b9 !important;
+	border : 0.3px solid #bcb9b9 !important;
 	font-size: 1em !important;
 	text-align: center;
 	.bordeIz{
