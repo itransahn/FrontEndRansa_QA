@@ -15,11 +15,12 @@ export class VistaPaseSalidaComponent implements OnInit {
   ) { }
 
   ngOnInit(){
-    this.validarData()
+    this.validarData();
   }
   validarData(){
    if ( localStorage.getItem('PaseSalida')){
-    this.data = JSON.parse(localStorage.getItem('PaseSalida') );
+    this.data = JSON.parse(localStorage.getItem('PaseSalida'));
+
    } else{
     this.auth.redirecTo('/ransa/transporte/salidas')
    }

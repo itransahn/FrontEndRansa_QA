@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AprobacionPaseComponent } from '../transporte/pasesf/aprobacion-pase/aprobacion-pase.component';
+import { PasesfComponent } from '../transporte/pasesf/pasesf.component';
 import { ModalRCComponent } from '../transporte/rol-cliente/modal-rc/modal-rc.component';
 import { CaiComponent } from './facturacion/cai/cai.component';
 import { FacturaAHComponent } from './facturacion/factura-ah/factura-ah.component';
@@ -96,6 +98,14 @@ const routes: Routes = [
  {
   path      : 'recibos',
   component : RecibosComponent
+ },
+ {
+  path      : 'paseF',
+  component : PasesfComponent
+ },
+ {
+  path      : 'AprobapaseF',
+  component : AprobacionPaseComponent
  }
 
 

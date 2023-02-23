@@ -34,6 +34,9 @@ import { CrearpaseEstandarComponent } from './pases-estandar/crearpase-estandar/
 import { RecibosComponent } from './recibos/recibos/recibos.component';
 import { ModalRecibosComponent } from './recibos/recibos/modal-recibos/modal-recibos.component';
 import { CancelarrecibosComponent } from './recibos/cancelarrecibos/cancelarrecibos.component';
+import { PasesfComponent } from './pasesf/pasesf.component';
+import { ModalpasefComponent } from './pasesf/modalpasef/modalpasef.component';
+import { AprobacionPaseComponent } from './pasesf/aprobacion-pase/aprobacion-pase.component';
 
 
 @NgModule({
@@ -69,6 +72,9 @@ CrearpaseEstandarComponent,
 RecibosComponent,
 ModalRecibosComponent,
 CancelarrecibosComponent,
+PasesfComponent,
+ModalpasefComponent,
+AprobacionPaseComponent
   ],
   imports: [
     CommonModule,

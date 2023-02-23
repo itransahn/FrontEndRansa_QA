@@ -1,0 +1,62 @@
+<mat-card class="mat-cardContainerCuerpo mat-elevation-z0">
+    <form [formGroup]="filtro">
+        <div class="row">
+            <div class="col-md-6">
+                <mat-form-field appearance="legacy">
+                    <mat-label>
+                        <mat-icon> search </mat-icon>
+                        Buscar
+                    </mat-label>
+                    <input matInput placeholder="Transporte, Placa , Motorista, Autoriza " formControlName="filtrar">
+                </mat-form-field>
+            </div>
+     
+        </div>
+    </form>
+       <div class="table-responsive !important">
+        <table  >
+            <!-- <caption>Statement Summary</caption> -->
+            <thead>
+              <tr>
+                <th scope="col">Fecha</th>
+                <th scope="col">Hora</th>
+                <th scope="col">Persona</th>
+                <th scope="col">Placa</th>
+                <!-- <th scope="col">Motivo</th> -->
+                <th scope="col">Contenido</th>
+                <th scope="col">Autoriza </th>
+                <th scope="col">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let tr of pases | search: this.filtro.value.filtrar:parametrosBusqueda | slice: desde: hasta " class="trHover">
+                <td data-label="Fecha">{{    tr?.Fecha }}</td>
+                <td data-label="Hora">{{     tr?.Hora           }}</td>
+                <td data-label="Persona">{{     tr?.Nombre | uppercase }}</td>
+                <td data-label="Placa">{{ tr?.camion | uppercase }}</td>
+                <!-- <td data-label="Motivo">{{    tr?.TIPOD  }}</td> -->
+                <td data-label="Contenido">{{    tr?.contenido  }}</td>
+                <td data-label="Autoriza ">{{    tr?.NombreUsuario  }}</td>
+                <td data-label="Acciones">
+                <div class="text-center">
+
+                <!-- Aprobar -->
+               <button mat-mini-fab class="buttonSecundary" [disabled]="(!auth.Actualizacion())" (click)="aprobacion( tr.idPase, 1 )" title="Aprobación">
+                <mat-icon>check_circle</mat-icon>
+                </button>
+
+                      <!-- denegar -->
+               <button mat-mini-fab class="btnDelete" [disabled]="(!auth.Actualizacion())" (click)="aprobacion( tr.idPase, 1 )" title="Anular">
+                <mat-icon>clear</mat-icon>
+                </button>
+
+                </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          
+       </div>
+          <mat-paginator [length]="pases.length" [pageSize]="pageSize " (page)="next($event)">
+        </mat-paginator>
+</mat-card>
