@@ -46,6 +46,8 @@ export class ModalpasefComponent implements OnInit {
   public  subtitulo  : string;
   public readonly    : boolean = true;
   public mask      =   mask;
+  public fechaG  = new Date();
+  public fecha : string;
   public transporte = [
     {
       id  : 1, 
@@ -66,8 +68,16 @@ export class ModalpasefComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-  this.cargarForm()
+  this.cargarForm();
+  this.fecha = `${this.retornarValorMes(this.fechaG.getMonth()+1)}/01/${this.fechaG.getFullYear()}`;
+  }
 
+  retornarValorMes( mes : number ){
+    if ( mes < 10){
+      return `0${String(mes)}`
+    }else{
+      return String(mes)
+    }
   }
 
   cargarForm(){

@@ -11,16 +11,6 @@
                 </mat-form-field>
             </div>
      
-            <div class="col-md-6">
-                <div class="text-right">
-                    <button mat-raised-button class="buttonPrincipal" [hidden]="!auth.Insercion()" (click)="Modal ( )">
-                        <mat-icon>
-                            add
-                        </mat-icon>
-                        Agregar Pase Salida
-                    </button>
-                </div>
-            </div>
         </div>
     </form>
        <div class="table-responsive !important">
@@ -36,6 +26,7 @@
                 <th scope="col">Contenido</th>
                 <th scope="col">Autoriza </th>
                 <th scope="col">Estado </th>
+                <th scope="col">Valor </th>
                 <th scope="col">Acciones</th>
               </tr>
             </thead>
@@ -49,32 +40,42 @@
                 <td data-label="Contenido">{{    tr?.contenido  }}</td>
                 <td data-label="Autoriza ">{{    tr?.NombreUsuario  }}</td>
                 <td role="cell" data-label="Estado" class="text-center">
-                    <span *ngIf="tr.estado === 2" class="badge badge-pill badge-warning">   Pendiente    </span>
-                    <span *ngIf="tr.estado ===  0" class="badge badge-pill badge-success">  Confirmado </span>
-                    <span *ngIf="tr.estado === -1" class="badge badge-pill badge-danger">   Denegado   </span>
+                    <span *ngIf="tr.estado ===  2" class="badge badge-pill badge-warning">   Pendiente  </span>
+                    <span *ngIf="tr.estado ===  0" class="badge badge-pill badge-success">   Aprobado   </span>
+                    <span *ngIf="tr.estado === -1" class="badge badge-pill badge-danger">    Denegado   </span>
+                    <span *ngIf="tr.estado ===  1" class="badge badge-pill badge-success">   Expedido   </span>
+
                 </td>
+                <td data-label="Valor ">   {{    tr?.Valor | currency :'L. '  }}</td>
                 <td data-label="Acciones">
                 <div class="text-center">
 
-                <!-- Aprobar -->
-               <!-- <button mat-mini-fab class="buttonSecundary" [disabled]="(!auth.Actualizacion())" (click)="cerrarPase( tr.idPase, tr.camion, tr.Hora, tr.Fecha )" >
-                <mat-icon>check_circle</mat-icon>
+            
+            <!-- Ver Pase -->
+            <button mat-mini-fab class="buttonSecundary" [hidden]="!auth.Actualizacion()"  (click)="enviarLocalStorage(tr)"  >
+                <mat-icon>visibility</mat-icon>
+                </button>
+
+                      <!-- denegar -->
+               <!-- <button mat-mini-fab class="btnDelete" [disabled]="(!auth.Actualizacion())" (click)="aprobacion( tr.idPase, 2 )" title="Anular">
+                <mat-icon>clear</mat-icon>
                 </button> -->
 
-
-                <!-- Ver Pase -->
-                <button mat-mini-fab class="buttonSecundary" [hidden]="!auth.Actualizacion()"  (click)="enviarLocalStorage(tr)"  >
-                    <mat-icon>visibility</mat-icon>
-                    </button>
                 </div>
-                <!-- Eliminar -->
-                <button mat-mini-fab class="btnDelete" [hidden]="!auth.Eliminacion() || tr?.estado == -1"  (click)="eliminarPase( tr?.idPase, tr?.Nombre, tr?.tipo)"  >
-                    <mat-icon>delete</mat-icon>
-                    </button>
-
                 </td>
               </tr>
             </tbody>
+            <tfoot *ngIf=" hasta >= pases.length">
+                <th ></th>
+                <th ></th>
+                <th ></th>
+                <th ></th>
+                <th ></th>
+                <th ></th>
+                <th > TOTAL</th>
+                <th > {{ subTotal | currency : 'Lps '}} </th>
+                <th ></th>
+            </tfoot>  
           </table>
           
        </div>

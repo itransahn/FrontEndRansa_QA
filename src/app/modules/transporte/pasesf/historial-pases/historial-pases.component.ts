@@ -4,18 +4,18 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 import { Subscription } from 'rxjs';
 import { DataApi } from 'src/app/interfaces/dataApi';
-import { mensajes } from 'src/app/interfaces/generales';
+import { Acumulador } from 'src/app/interfaces/generales';
 import { AuthService } from 'src/app/services/auth.service';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import { ToastServiceLocal } from 'src/app/services/toast.service';
 import { TransporteService } from '../../transporte.service';
 
 @Component({
-  selector: 'app-aprobacion-pase',
-  templateUrl: './aprobacion-pase.component.html',
-  styleUrls: ['./aprobacion-pase.component.scss']
+  selector: 'app-historial-pases',
+  templateUrl: './historial-pases.component.html',
+  styleUrls: ['./historial-pases.component.scss']
 })
-export class AprobacionPaseComponent implements OnInit {
+export class HistorialPasesComponent implements OnInit {
 //Paginacion
 public page = 0;
 public pageEvent : PageEvent;
@@ -25,6 +25,7 @@ public hasta = 50;
 nextPageLabel     = 'Página Siguiente';
 previousPageLabel = 'Página Anterior';
 public pageSize = 50;
+public subTotal: any;
 public filter :string  = '';
 public filtro: FormGroup;
 public parametrosBusqueda = ['NombreUsuario', 'Transporte','Nombre','Hacia','camion'];
@@ -37,10 +38,9 @@ private sub : Subscription = new Subscription();
     private transporteService : TransporteService, 
     private sweel             : SweetAlertService,
     private toast             : ToastServiceLocal 
-    
   ) { }
 
-  ngOnInit() {
+  ngOnInit(){
     this.paginator.itemsPerPageLabel = 'Items por hoja.';
     this.paginator.nextPageLabel     = 'Página Siguiente';
     this.paginator.previousPageLabel = 'Página Anterior';
@@ -58,67 +58,22 @@ private sub : Subscription = new Subscription();
     )
   }
 
-
   cargarPases(){
-    let url = 'transporte/paseSalidafP';
+    let url = 'transporte/paseSalidafH';
     let params = {};
     this.transporteService.get(url,params).subscribe(
       (data : DataApi | any) =>{
         if( !data.hasError ){
           this.pases = data?.data?.Table0;
+          this.subTotal =  Acumulador( this.pases, 'Valor' )
+
         }    
       }
   
     )
   }
-
-
-  aprobacion(idPase ?:number, accionU ?: number ){
-    let accion : number;
-    let leyenda  : string;
-    let leyenda2 : string;
-    if ( accionU === 1 ){
-        accion = 1;
-        leyenda = 'Aprobar';
-        leyenda2 = 'Aprobación';
-    }else{
-      accion = 5;
-        leyenda = 'Denegar';
-        leyenda2 = 'Denegación';
-    }
-
-    this.sweel.mensajeConConfirmacion(`Seguro de ${leyenda} pase de salida`,`${leyenda2} de pase`,'warning' ).then(
-      res=>{
-          if ( res ){
-              let url    = 'transporte/ApaseSalidaf';
-              let params = {
-                   idPase  : idPase,
-                   usuario : this.auth.dataUsuario['id_usuario'], 
-                   accion  : accion,
-              }
-
-              this.transporteService.put(url,params).subscribe(
-                res=>{
-                  if(!res.hasError){
-                      if ( res?.data.Table0[0]['codigo'] == -1 ){
-                          this.toast.mensajeWarning(String(res?.data.Table0[0]['Mensaje']), mensajes.warning)
-                      }else{
-                        this.toast.mensajeSuccess(String(res?.data.Table0[0]['Mensaje']), mensajes.success)
-                          this.cargarPases()
-                      }
-                  }else{
-                    this.toast.mensajeError(String(res?.errors),"Error")
-                  }
-                }
-              )
-          }
-      }
-    )
-
-  }
-
   
-      //Paginación de la tabla
+    //Paginación de la tabla
 next(event: PageEvent) {
   if (event.pageIndex === this.pageIndex + 1) {
     this.desde = this.desde + this.pageSize;
@@ -131,5 +86,9 @@ next(event: PageEvent) {
   this.pageIndex = event.pageIndex;
 }
 
+enviarLocalStorage( data){
+  localStorage.setItem('PaseSalida', JSON.stringify(data));
+  this.auth.redirecTo('ransa/transporte/Pasesalidas')
+}
 
 }

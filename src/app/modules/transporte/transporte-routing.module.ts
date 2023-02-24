@@ -10,6 +10,7 @@ import { CrearPaseSalidaComponent } from './pases-salida/crear-pase-salida/crear
 import { PasesSalidaHComponent } from './pases-salida/pases-salida-h/pases-salida-h.component';
 import { PasesSalidaComponent } from './pases-salida/pases-salida.component';
 import { VistaPaseSalidaComponent } from './pases-salida/vista-pase-salida/vista-pase-salida.component';
+import { HistorialPasesComponent } from './pasesf/historial-pases/historial-pases.component';
 import { ProveedoresTComponent } from './proveedores-t/proveedores-t.component';
 import { CancelarrecibosComponent } from './recibos/cancelarrecibos/cancelarrecibos.component';
 import { RecibosComponent } from './recibos/recibos/recibos.component';
@@ -89,8 +90,11 @@ const routes: Routes = [
     {
         path : 'cancelarRecibo',
         component : CancelarrecibosComponent
-    }
-
+    },
+{
+    path : 'PasesalidasfH',
+    component : HistorialPasesComponent
+}
   ];
   
   @NgModule({

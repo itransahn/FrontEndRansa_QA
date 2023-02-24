@@ -37,6 +37,7 @@ import { CancelarrecibosComponent } from './recibos/cancelarrecibos/cancelarreci
 import { PasesfComponent } from './pasesf/pasesf.component';
 import { ModalpasefComponent } from './pasesf/modalpasef/modalpasef.component';
 import { AprobacionPaseComponent } from './pasesf/aprobacion-pase/aprobacion-pase.component';
+import { HistorialPasesComponent } from './pasesf/historial-pases/historial-pases.component';
 
 
 @NgModule({
@@ -74,7 +75,8 @@ ModalRecibosComponent,
 CancelarrecibosComponent,
 PasesfComponent,
 ModalpasefComponent,
-AprobacionPaseComponent
+AprobacionPaseComponent,
+HistorialPasesComponent
   ],
   imports: [
     CommonModule,

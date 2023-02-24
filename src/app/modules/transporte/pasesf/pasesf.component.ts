@@ -44,7 +44,7 @@ private sub : Subscription = new Subscription();
     this.paginator.itemsPerPageLabel = 'Items por hoja.';
     this.paginator.nextPageLabel     = 'Página Siguiente';
     this.paginator.previousPageLabel = 'Página Anterior';
-
+    
     this.filtro = new FormGroup({
       filtrar: new FormControl({ value:'',disabled: false})
     })
@@ -63,6 +63,7 @@ private sub : Subscription = new Subscription();
     let params = {};
     this.transporteService.get(url,params).subscribe(
       (data : DataApi | any) =>{
+          console.log(data?.data?.Table0)
         if( !data.hasError ){
           this.pases = data?.data?.Table0;
         }    

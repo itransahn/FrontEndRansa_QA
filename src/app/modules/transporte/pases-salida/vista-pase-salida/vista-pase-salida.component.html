@@ -64,7 +64,7 @@
 
 <div class="row texto3" *ngIf="data['tipo']=== 4" >
     <h4>
-        Valor Mercancía: <span class="subrayado">L. {{ data?.['Valor']}}</span>    
+        Valor Mercancía: <span class="subrayado"> {{ data?.['Valor'] | currency :'L. '}}</span>    
     </h4>
 </div>
 
