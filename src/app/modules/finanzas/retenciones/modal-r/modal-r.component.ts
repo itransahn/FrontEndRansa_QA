@@ -5,13 +5,36 @@ import { AuthService } from 'src/app/services/auth.service';
 import { SeguridadService } from 'src/app/services/seguridad.service';
 import { ToastServiceLocal } from 'src/app/services/toast.service';
 
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import * as _moment       from 'moment';
+import * as _rollupMoment from 'moment';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
+
+
 import { mesesd } from 'src/app/data/data';
 import { FacturacionService } from '../../facturacion.service';
+
+const moment = _rollupMoment || _moment;
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'LL',
+  },
+  display: {
+    dateInput: 'YYYY-MM-DD',
+    monthYearLabel: 'YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'YYYY',
+  },
+};
 
 @Component({
   selector: 'app-modal-r',
   templateUrl: './modal-r.component.html',
-  styleUrls: ['./modal-r.component.scss']
+  styleUrls: ['./modal-r.component.scss'],
+  providers : [
+    {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+    {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
+   ]
 })
 export class ModalRComponent implements OnInit {
   public menuForm : FormGroup;
@@ -85,11 +108,12 @@ export class ModalRComponent implements OnInit {
   public formMenu(){
     this.menuForm = new FormGroup({
       proveedor : new FormControl ('' , [ Validators.required,]),
-      periodo   : new FormControl ('' , [ Validators.required,]),
-      anio      : new FormControl ('' , [ Validators.required,]),
-      dia       : new FormControl ('' , [ Validators.required,]),
+      // periodo   : new FormControl ('' , [ Validators.required,]),
+      // anio      : new FormControl ('' , [ Validators.required,]),
+      // dia       : new FormControl ('' , [ Validators.required,]),
       sede      : new FormControl ('' , [ Validators.required,]),
-      tipoR     : new FormControl ('' , [ Validators.required,])
+      tipoR     : new FormControl ('' , [ Validators.required,]),
+      fecha     : new FormControl ('', [Validators.required])
     })
 }
 
@@ -107,7 +131,8 @@ cargarProveedores(){
 }
 
   redireccionar(){
-    this.auth.redirecTo(`/ransa/finanzas/retencion/${this.menuForm.value.periodo}/${this.menuForm.value.dia}/${this.menuForm.value.anio}/${this.menuForm.value.proveedor}/${this.menuForm.value.sede}/${this.menuForm.value.tipoR}`);
+    this.auth.redirecTo(`/ransa/finanzas/retencion/${this.menuForm.value.fecha?._i?.month + 1}/${this.menuForm.value.fecha?._i?.date}/${this.menuForm.value.fecha?._i?.year}/${this.menuForm.value.proveedor}/${this.menuForm.value.sede}/${this.menuForm.value.tipoR}`);
+    // this.auth.redirecTo(`/ransa/finanzas/retencion/${this.menuForm.value.periodo}/${this.menuForm.value.dia}/${this.menuForm.value.anio}/${this.menuForm.value.proveedor}/${this.menuForm.value.sede}/${this.menuForm.value.tipoR}`);
     this.dialogRef.close()
   }
 

@@ -44,7 +44,7 @@
 	 }
 }
 .contenidoF{
-	font-size: 1.2em !important;
+	font-size: 1em !important;
 }
 
 .btn-flotante {
@@ -392,10 +392,14 @@ p {
 
 /* Modificando clases padres*/
 table{
+	// border-bottom:  0.5px solid #050404 !important;
+	// border-left:    0.5px solid #050404 !important;
+	// border-right:   1px solid #050404 !important;
+	// border-top:     0.5px solid #050404 !important;
 	margin: 0;
 	padding: 0;
 	width: 100% !important;
-	border :  0.3px solid #050404 !important;
+	// border :  0.3px solid #050404 !important;
 	.bordeIz{
 		border-bottom-style: none !important;
 	 }
@@ -409,6 +413,19 @@ table{
 	border :  0.5px solid #050404 !important;
 
 	}
+	.bodyTed{
+		border-bottom:  none !important;
+		border-left:    0.1px solid #050404 !important;
+		border-right:   0.1px solid #050404 !important;
+		border-top:     none !important;
+	}
+
+	.bodyTed2{
+		border-bottom:  1px solid #050404 !important;
+		border-left:    0.1px solid #050404 !important;
+		border-right:   0.1px solid #050404 !important;
+		border-top:     none !important;
+	}
 thead{
 	// tr{
 	// 	border :  0.1px solid #050404 !important;
@@ -418,64 +435,94 @@ thead{
 	// 	border :  0.1px solid #050404 !important;
 	// }
 	.detalletfoot{
-		border-bottom:  0.1px solid #050404 !important;
-		border-left:    none !important;
-		border-right:   0.5px solid #050404 !important;
-		border-top:     none !important;
+		border-bottom:  0.5px solid #050404 !important;
+		border-left:    0.2px solid #050404 !important;
+		border-right:   none !important;
+		border-top:     0.1px solid #050404!important;
 	}
 	.detalletfootR{
 		border-bottom:  0.1px solid #050404 !important;
-		border-left:    none !important;
-		border-right:   none !important;
-		border-top:     none !important;
+		border-left:    0.2px solid #050404 !important;
+		border-right:   0.1px solid #050404 !important;
+		border-top:     0.1px solid #050404 !important;
 	}
-	
+	.detalletfootI{
+		border-bottom:  0.1px solid #050404 !important;
+		border-left:    0.1px solid #050404 !important;
+		border-right:   none !important;
+		border-top:     0.1px solid #050404 !important;
+	}
 }
 
 tfoot{
+	// border-left: 0.1px solid #050404 !important;
+	// border-bottom: 1px solid #050404 !important;
+	.filaS{
+		border-top:  3.5px solid #050404 !important;
+		border-left: 3.5px solid #050404 !important;
+	}	
+	.filaEspecial{
+		border-left:    0.1px solid #050404 !important;
+		border-top:     3.9px solid #050404 !important;
+	}
+	// .exp{
+	// 	border-bottom: 1px solid #050404 !important;
+	// 	border-left:   1px solid #050404 !important;
+	// 	border-right:  none !important;
+	// 	border-top:    1px solid #050404 !important;
+	// }
 	.exp{
-		border-bottom: 0.5px solid #050404 !important;
-		border-left: none !important;
-		border-right: none !important;
-		border-top: 0.5px solid #050404 !important;
+		border-left:     0.1px solid #050404 !important;
+		// border-right:  none !important;
+		border-bottom:   0.1px solid #050404 !important;
+
 	}
 
 	.detalletfoot{
 		border-bottom:  none !important;
-		border-left:    0.5px solid #050404 !important;
-		border-right:   0.5px solid #050404 !important;
-		border-top:     0.5px solid #050404 !important;
+		border-left:    0.3px solid #050404 !important;
+		border-right:   0.3px solid #050404 !important;
+		border-top:     0.1px solid #050404 !important;
 	}
 
 	.detalletfootR{
-		border-bottom:  none !important;
+		border-bottom:  0.1px solid #050404 !important;
 		border-left:    none !important;
-		border-right:   none !important;
-		border-top:     0.5px solid #050404 !important;
+		border-right:   0.1px solid #050404 !important;
+		border-top:     none !important;
+	}
+	.detalletEspecial{
+		border-bottom:  0.1px solid #050404 !important;
+	}	
+	.detalletEspecia2{
+		// border-bottom:  0.1px solid #050404 !important;
+		border-left:    0.2px solid #050404 !important;
+		border-right:   0.2px solid #050404 !important;
+		border-top:     none !important;
 	}
 
-	border :  0.8px solid #050404 !important;
-		tr{
-			background-color: #ffffff !important;	
-			font-size: 0.9em;
-			.bordeIz{
-		border-bottom-style: none !important;
-					}
-				.borderRg{
-					border: 0.3 solid #050404;
-						 }
-		}
-	th{
-			border-style: outset !important;
-			// border-color: #050404;
-			// border: 0.1px;
-			background-color: #ffffff !important;
-		font-size: 1em !important;	
-		height: 5% !important;
-	}
-	.bordeIz{
-		border-bottom-style: none !important;
-	 }
+	// 	tr{
+	// 		background-color: #ffffff !important;	
+	// 		font-size: 0.9em;
+	// 		.bordeIz{
+	// 	border-bottom-style: none !important;
+	// 				}
+	// 			.borderRg{
+	// 				border: 0.1 solid #050404;
+	// 					 }
+	// 	}
+
+	// th{
+	// 		border-style: outset !important;
+	// 		// border-color: #050404;
+	// 		// border: 0.1px;
+	// 		background-color: #ffffff !important;
+	// 	font-size: 1em !important;	
+	// 	height: 5% !important;
+	// }
+	// .bordeIz{
+	// 	border-bottom-style: none !important;
+	//  }
 	}
 
   }

@@ -112,7 +112,7 @@
 
 
                     <tbody class="bordes2" *ngIf="tipo == 0">
-                      <tr *ngFor="let item of DcabeceraF; let i = index"> 
+                      <tr *ngFor="let item of DcabeceraF; let i = index" class="bodyTed"> 
                         <td data-label="CANTIDAD" class="contenidoF"> {{ item?.QAPCTC  | number }} </td>
                         <td data-label="DESCRIPCION"  colspan="2" class="contenidoF left"> {{item?.TCMTRF }} </td>
                         <td data-label="PRECIO UNITARIO" class="contenidoF">{{ retornarPrecioUnitario(i, item?.QAPCTC) | number : '1.2-2' }}</td>
@@ -131,20 +131,18 @@
                         <td data-label="TOTAL">{{ 4047    | currency  : 'Lps'}}</td>
                       </tr> -->
 
-                        <tr  *ngFor="let item of espaciosBlancos"> 
-                            <td class="espacioB"  colspan="6"></td>
-                        </tr>
+                      <tr  *ngFor="let item of espaciosBlancos" class="bodyTed"> 
+                        <td class="espacioB"  colspan="7"></td>
+                     </tr>
 
-                        <tr> 
-                            <td  class=" left contenidoF observa espacioB" colspan="5">
-                                <!-- {{obs}} -->
-                                {{ Observaciones }}
-                                <!-- <p style="text-align:left !important; font-size: 0.9em !important; ">
-                                </p> -->
-                            </td>
-                            <td style="text-align:left !important; font-size: 0.9em !important; " class="espacioB" colspan="1">
-                            </td>
-                        </tr>
+                    <tr> 
+                        <td class="observa espacioB contenidoF left bodyTed" colspan="7">
+                            <!-- {{obs}} -->
+                            {{ Observaciones }}
+                            <!-- <p style="text-align:left !important; font-size: 0.9em !important; ">
+                            </p> -->
+                        </td>
+                    </tr>
 
                
                     
@@ -170,20 +168,20 @@
                           <td data-label="TOTAL">{{ 4047    | currency  : 'Lps'}}</td>
                         </tr> -->
   
-                          <tr  *ngFor="let item of espaciosBlancos2"> 
-                              <td class="espacioB"  colspan="6"></td>
-                          </tr>
-  
-                          <tr> 
-                              <td style="text-align:left !important; font-size: 1.2em !important; " class="espacioB" colspan="5">
-                                  <!-- {{obs}} -->
-                                  {{ Observaciones }}
-                                  <!-- <p style="text-align:left !important; font-size: 0.9em !important; ">
-                                  </p> -->
-                              </td>
-                              <!-- <td style="text-align:left !important; font-size: 0.9em !important; " class="espacioB" colspan="1">
-                              </td> -->
-                          </tr>
+                          
+                  
+                        <tr  *ngFor="let item of espaciosBlancos" class="bodyTed"> 
+                            <td class="espacioB"  colspan="7"></td>
+                        </tr>
+
+                        <tr> 
+                            <td class="observa espacioB left contenidoF bodyTed" colspan="7">
+                                <!-- {{obs}} -->
+                                {{ Observaciones }}
+                                <!-- <p style="text-align:left !important; font-size: 0.9em !important; ">
+                                </p> -->
+                            </td>
+                        </tr>
                       
                         
                         
@@ -388,7 +386,7 @@
                             <!-- <div >
                             </div> -->
                             <!-- <th colspan="4"></th> -->
-                            <th class="left detalletfoot" colspan="2 " style="font-size: 1em !important; height: 5px !important;"> Total a pagar</th>
+                            <th class="left detalletfoot detalletEspecial" colspan="2 " style="font-size: 1em !important; height: 5px !important;"> Total a pagar</th>
                            
                             <!-- <th class="left legend" *ngIf="retornarTotal() > 0 ">L &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  {{ retornarTotal() | number : '1.2-2'}}  </th> -->
                             <!-- <th class="left legend" *ngIf="retornarTotal()== 0 && retornarTotal() < 1000000">    L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   {{ 0 | number : '1.2-2'}}   </th> -->
@@ -400,14 +398,14 @@
 
 
 
-                            <th class="right legend detalletfootR" style="font-size: 1em !important; height: 5px !important;" *ngIf=" retornarTotal() <= 0"                                      > <span  class="letra0"> L        </span>  {{ retornarTotal() | number : '1.2-2' }}  </th>
-                            <th class="right legend detalletfootR" style="font-size: 1em !important; height: 5px !important;" *ngIf=" retornarTotal() >  0        && retornarTotal() <= 99"      > <span  class="letra0"> L       </span> {{ retornarTotal() | number : '1.2-2' }}  </th>
-                            <th class="right legend detalletfootR" style="font-size: 1em !important; height: 5px !important;" *ngIf=" retornarTotal() >= 100      && retornarTotal() <= 999"     > <span  class="letra100"> L      </span>  {{ retornarTotal() | number : '1.2-2' }}  </th>
-                            <th class="right legend detalletfootR" style="font-size: 1em !important; height: 5px !important;" *ngIf=" retornarTotal() >= 1000     && retornarTotal() <= 9999"    > <span  class="letra1000"> L    </span>  {{ retornarTotal() | number : '1.2-2' }}  </th>
-                            <th class="right legend detalletfootR" style="font-size: 1em !important; height: 5px !important;" *ngIf=" retornarTotal() >= 10000    && retornarTotal() <= 99999"   > <span  class="letra10000"> L    </span>   {{ retornarTotal() | number : '1.2-2' }}  </th>
-                            <th class="right legend detalletfootR" style="font-size: 1em !important; height: 5px !important;" *ngIf=" retornarTotal() >= 100000   && retornarTotal() <= 999999"  > <span  class="letra100000"> L   </span>   {{ retornarTotal() | number : '1.2-2' }}  </th>
-                            <th class="right legend detalletfootR" style="font-size: 1em !important; height: 5px !important;" *ngIf=" retornarTotal() >= 1000000  && retornarTotal() <= 9999999" > <span  class="letra1000000"> L  </span>   {{ retornarTotal() | number : '1.2-2' }}  </th>
-                            <th class="right legend detalletfootR" style="font-size: 1em !important; height: 5px !important;" *ngIf=" retornarTotal() >= 10000000 "                              > <span  class="letra10000000"> L </span>  {{ retornarTotal() | number : '1.2-2' }}  </th>
+                            <th class="right legend detalletfootR detalletEspecial" style="font-size: 1em !important; height: 5px !important;" *ngIf=" retornarTotal() <= 0"                                      > <span  class="letra0"> L        </span>  {{ retornarTotal() | number : '1.2-2' }}  </th>
+                            <th class="right legend detalletfootR detalletEspecial" style="font-size: 1em !important; height: 5px !important;" *ngIf=" retornarTotal() >  0        && retornarTotal() <= 99"      > <span  class="letra0"> L       </span> {{ retornarTotal() | number : '1.2-2' }}  </th>
+                            <th class="right legend detalletfootR detalletEspecial" style="font-size: 1em !important; height: 5px !important;" *ngIf=" retornarTotal() >= 100      && retornarTotal() <= 999"     > <span  class="letra100"> L      </span>  {{ retornarTotal() | number : '1.2-2' }}  </th>
+                            <th class="right legend detalletfootR detalletEspecial" style="font-size: 1em !important; height: 5px !important;" *ngIf=" retornarTotal() >= 1000     && retornarTotal() <= 9999"    > <span  class="letra1000"> L    </span>  {{ retornarTotal() | number : '1.2-2' }}  </th>
+                            <th class="right legend detalletfootR detalletEspecial" style="font-size: 1em !important; height: 5px !important;" *ngIf=" retornarTotal() >= 10000    && retornarTotal() <= 99999"   > <span  class="letra10000"> L    </span>   {{ retornarTotal() | number : '1.2-2' }}  </th>
+                            <th class="right legend detalletfootR detalletEspecial" style="font-size: 1em !important; height: 5px !important;" *ngIf=" retornarTotal() >= 100000   && retornarTotal() <= 999999"  > <span  class="letra100000"> L   </span>   {{ retornarTotal() | number : '1.2-2' }}  </th>
+                            <th class="right legend detalletfootR detalletEspecial" style="font-size: 1em !important; height: 5px !important;" *ngIf=" retornarTotal() >= 1000000  && retornarTotal() <= 9999999" > <span  class="letra1000000"> L  </span>   {{ retornarTotal() | number : '1.2-2' }}  </th>
+                            <th class="right legend detalletfootR detalletEspecial" style="font-size: 1em !important; height: 5px !important;" *ngIf=" retornarTotal() >= 10000000 "                              > <span  class="letra10000000"> L </span>  {{ retornarTotal() | number : '1.2-2' }}  </th>
 
 
 
@@ -531,20 +529,18 @@
                         <td data-label="TOTAL">{{ 4047    | currency  : 'Lps'}}</td>
                       </tr> -->
 
-                        <tr  *ngFor="let item of espaciosBlancos"> 
-                            <td class="espacioB"  colspan="6"></td>
-                        </tr>
+                      <tr  *ngFor="let item of espaciosBlancos" class="bodyTed"> 
+                        <td class="espacioB"  colspan="7"></td>
+                     </tr>
 
-                        <tr> 
-                            <td style="text-align:left !important; font-size: 1.3em !important; " class="observa espacioB" colspan="5">
-                                <!-- {{obs}} -->
-                                {{ Observaciones }}
-                                <!-- <p style="text-align:left !important; font-size: 0.9em !important; ">
-                                </p> -->
-                            </td>
-                            <td style="text-align:left !important; font-size: 0.9em !important; " class="espacioB" colspan="1">
-                            </td>
-                        </tr>
+                    <tr> 
+                        <td class="observa espacioB contenidoF left bodyTed" colspan="7">
+                            <!-- {{obs}} -->
+                            {{ Observaciones }}
+                            <!-- <p style="text-align:left !important; font-size: 0.9em !important; ">
+                            </p> -->
+                        </td>
+                    </tr>
 
                
                     
@@ -570,20 +566,18 @@
                           <td data-label="TOTAL">{{ 4047    | currency  : 'Lps'}}</td>
                         </tr> -->
   
-                          <tr  *ngFor="let item of espaciosBlancos2"> 
-                              <td class="espacioB"  colspan="6"></td>
-                          </tr>
-  
-                          <tr> 
-                              <td style="text-align:left !important; font-size: 1.2em !important; " class="espacioB" colspan="5">
-                                  <!-- {{obs}} -->
-                                  {{ Observaciones }}
-                                  <!-- <p style="text-align:left !important; font-size: 0.9em !important; ">
-                                  </p> -->
-                              </td>
-                              <!-- <td style="text-align:left !important; font-size: 0.9em !important; " class="espacioB" colspan="1">
-                              </td> -->
-                          </tr>
+                        <tr  *ngFor="let item of espaciosBlancos" class="bodyTed"> 
+                            <td class="espacioB"  colspan="7"></td>
+                        </tr>
+    
+                        <tr> 
+                            <td class="observa espacioB contenidoF left bodyTed" colspan="7">
+                                <!-- {{obs}} -->
+                                {{ Observaciones }}
+                                <!-- <p style="text-align:left !important; font-size: 0.9em !important; ">
+                                </p> -->
+                            </td>
+                        </tr>
                       
                         
                         
@@ -788,7 +782,7 @@
                             <!-- <div >
                             </div> -->
                             <!-- <th colspan="4"></th> -->
-                            <th class="left detalletfoot" colspan="2 " style="font-size: 1em !important; height: 5px !important;"> Total a pagar</th>
+                            <th class="left detalletfoot detalletEspecial" colspan="2 " style="font-size: 1em !important; height: 5px !important;"> Total a pagar</th>
                            
                             <!-- <th class="left legend" *ngIf="retornarTotal() > 0 ">L &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  {{ retornarTotal() | number : '1.2-2'}}  </th> -->
                             <!-- <th class="left legend" *ngIf="retornarTotal()== 0 && retornarTotal() < 1000000">    L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   {{ 0 | number : '1.2-2'}}   </th> -->
@@ -800,14 +794,14 @@
 
 
 
-                            <th class="right legend detalletfootR" style="font-size: 1em !important; height: 5px !important;" *ngIf=" retornarTotal() <= 0"                                      > <span  class="letra0"> L        </span>  {{ retornarTotal() | number : '1.2-2' }}  </th>
-                            <th class="right legend detalletfootR" style="font-size: 1em !important; height: 5px !important;" *ngIf=" retornarTotal() >  0        && retornarTotal() <= 99"      > <span  class="letra0"> L       </span> {{ retornarTotal() | number : '1.2-2' }}  </th>
-                            <th class="right legend detalletfootR" style="font-size: 1em !important; height: 5px !important;" *ngIf=" retornarTotal() >= 100      && retornarTotal() <= 999"     > <span  class="letra100"> L      </span>  {{ retornarTotal() | number : '1.2-2' }}  </th>
-                            <th class="right legend detalletfootR" style="font-size: 1em !important; height: 5px !important;" *ngIf=" retornarTotal() >= 1000     && retornarTotal() <= 9999"    > <span  class="letra1000"> L    </span>  {{ retornarTotal() | number : '1.2-2' }}  </th>
-                            <th class="right legend detalletfootR" style="font-size: 1em !important; height: 5px !important;" *ngIf=" retornarTotal() >= 10000    && retornarTotal() <= 99999"   > <span  class="letra10000"> L    </span>   {{ retornarTotal() | number : '1.2-2' }}  </th>
-                            <th class="right legend detalletfootR" style="font-size: 1em !important; height: 5px !important;" *ngIf=" retornarTotal() >= 100000   && retornarTotal() <= 999999"  > <span  class="letra100000"> L   </span>   {{ retornarTotal() | number : '1.2-2' }}  </th>
-                            <th class="right legend detalletfootR" style="font-size: 1em !important; height: 5px !important;" *ngIf=" retornarTotal() >= 1000000  && retornarTotal() <= 9999999" > <span  class="letra1000000"> L  </span>   {{ retornarTotal() | number : '1.2-2' }}  </th>
-                            <th class="right legend detalletfootR" style="font-size: 1em !important; height: 5px !important;" *ngIf=" retornarTotal() >= 10000000 "                              > <span  class="letra10000000"> L </span>  {{ retornarTotal() | number : '1.2-2' }}  </th>
+                            <th class="right legend detalletfootR detalletEspecial" style="font-size: 1em !important; height: 5px !important;" *ngIf=" retornarTotal() <= 0"                                      > <span  class="letra0"> L        </span>  {{ retornarTotal() | number : '1.2-2' }}  </th>
+                            <th class="right legend detalletfootR detalletEspecial" style="font-size: 1em !important; height: 5px !important;" *ngIf=" retornarTotal() >  0        && retornarTotal() <= 99"      > <span  class="letra0"> L       </span> {{ retornarTotal() | number : '1.2-2' }}  </th>
+                            <th class="right legend detalletfootR detalletEspecial" style="font-size: 1em !important; height: 5px !important;" *ngIf=" retornarTotal() >= 100      && retornarTotal() <= 999"     > <span  class="letra100"> L      </span>  {{ retornarTotal() | number : '1.2-2' }}  </th>
+                            <th class="right legend detalletfootR detalletEspecial" style="font-size: 1em !important; height: 5px !important;" *ngIf=" retornarTotal() >= 1000     && retornarTotal() <= 9999"    > <span  class="letra1000"> L    </span>  {{ retornarTotal() | number : '1.2-2' }}  </th>
+                            <th class="right legend detalletfootR detalletEspecial" style="font-size: 1em !important; height: 5px !important;" *ngIf=" retornarTotal() >= 10000    && retornarTotal() <= 99999"   > <span  class="letra10000"> L    </span>   {{ retornarTotal() | number : '1.2-2' }}  </th>
+                            <th class="right legend detalletfootR detalletEspecial" style="font-size: 1em !important; height: 5px !important;" *ngIf=" retornarTotal() >= 100000   && retornarTotal() <= 999999"  > <span  class="letra100000"> L   </span>   {{ retornarTotal() | number : '1.2-2' }}  </th>
+                            <th class="right legend detalletfootR detalletEspecial" style="font-size: 1em !important; height: 5px !important;" *ngIf=" retornarTotal() >= 1000000  && retornarTotal() <= 9999999" > <span  class="letra1000000"> L  </span>   {{ retornarTotal() | number : '1.2-2' }}  </th>
+                            <th class="right legend detalletfootR detalletEspecial" style="font-size: 1em !important; height: 5px !important;" *ngIf=" retornarTotal() >= 10000000 "                              > <span  class="letra10000000"> L </span>  {{ retornarTotal() | number : '1.2-2' }}  </th>
 
 
 
@@ -932,20 +926,19 @@
                         <td data-label="TOTAL">{{ 4047    | currency  : 'Lps'}}</td>
                       </tr> -->
 
-                        <tr  *ngFor="let item of espaciosBlancos"> 
-                            <td class="espacioB"  colspan="6"></td>
-                        </tr>
+                    
+                      <tr  *ngFor="let item of espaciosBlancos" class="bodyTed"> 
+                        <td class="espacioB"  colspan="7"></td>
+                    </tr>
 
-                        <tr> 
-                            <td style="text-align:left !important; font-size: 1.3em !important; " class="observa espacioB" colspan="5">
-                                <!-- {{obs}} -->
-                                {{ Observaciones }}
-                                <!-- <p style="text-align:left !important; font-size: 0.9em !important; ">
-                                </p> -->
-                            </td>
-                            <td style="text-align:left !important; font-size: 0.9em !important; " class="espacioB" colspan="1">
-                            </td>
-                        </tr>
+                    <tr> 
+                        <td class="observa espacioB left contenidoF bodyTed" colspan="7">
+                            <!-- {{obs}} -->
+                            {{ Observaciones }}
+                            <!-- <p style="text-align:left !important; font-size: 0.9em !important; ">
+                            </p> -->
+                        </td>
+                    </tr>
 
                
                     
@@ -1189,7 +1182,7 @@
                             <!-- <div >
                             </div> -->
                             <!-- <th colspan="4"></th> -->
-                            <th class="left detalletfoot" colspan="2 " style="font-size: 1em !important; height: 5px !important;"> Total a pagar</th>
+                            <th class="left detalletfoot detalletEspecial" colspan="2 " style="font-size: 1em !important; height: 5px !important;"> Total a pagar</th>
                            
                             <!-- <th class="left legend" *ngIf="retornarTotal() > 0 ">L &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  {{ retornarTotal() | number : '1.2-2'}}  </th> -->
                             <!-- <th class="left legend" *ngIf="retornarTotal()== 0 && retornarTotal() < 1000000">    L     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   {{ 0 | number : '1.2-2'}}   </th> -->
@@ -1201,14 +1194,14 @@
 
 
 
-                            <th class="right legend detalletfootR" style="font-size: 1em !important; height: 5px !important;" *ngIf=" retornarTotal() <= 0"                                      > <span  class="letra0"> L        </span>  {{ retornarTotal() | number : '1.2-2' }}  </th>
-                            <th class="right legend detalletfootR" style="font-size: 1em !important; height: 5px !important;" *ngIf=" retornarTotal() >  0        && retornarTotal() <= 99"      > <span  class="letra0"> L       </span> {{ retornarTotal() | number : '1.2-2' }}  </th>
-                            <th class="right legend detalletfootR" style="font-size: 1em !important; height: 5px !important;" *ngIf=" retornarTotal() >= 100      && retornarTotal() <= 999"     > <span  class="letra100"> L      </span>  {{ retornarTotal() | number : '1.2-2' }}  </th>
-                            <th class="right legend detalletfootR" style="font-size: 1em !important; height: 5px !important;" *ngIf=" retornarTotal() >= 1000     && retornarTotal() <= 9999"    > <span  class="letra1000"> L    </span>  {{ retornarTotal() | number : '1.2-2' }}  </th>
-                            <th class="right legend detalletfootR" style="font-size: 1em !important; height: 5px !important;" *ngIf=" retornarTotal() >= 10000    && retornarTotal() <= 99999"   > <span  class="letra10000"> L    </span>   {{ retornarTotal() | number : '1.2-2' }}  </th>
-                            <th class="right legend detalletfootR" style="font-size: 1em !important; height: 5px !important;" *ngIf=" retornarTotal() >= 100000   && retornarTotal() <= 999999"  > <span  class="letra100000"> L   </span>   {{ retornarTotal() | number : '1.2-2' }}  </th>
-                            <th class="right legend detalletfootR" style="font-size: 1em !important; height: 5px !important;" *ngIf=" retornarTotal() >= 1000000  && retornarTotal() <= 9999999" > <span  class="letra1000000"> L  </span>   {{ retornarTotal() | number : '1.2-2' }}  </th>
-                            <th class="right legend detalletfootR" style="font-size: 1em !important; height: 5px !important;" *ngIf=" retornarTotal() >= 10000000 "                              > <span  class="letra10000000"> L </span>  {{ retornarTotal() | number : '1.2-2' }}  </th>
+                            <th class="right legend detalletfootR detalletEspecial" style="font-size: 1em !important; height: 5px !important;" *ngIf=" retornarTotal() <= 0"                                      > <span  class="letra0"> L        </span>  {{ retornarTotal() | number : '1.2-2' }}  </th>
+                            <th class="right legend detalletfootR detalletEspecial" style="font-size: 1em !important; height: 5px !important;" *ngIf=" retornarTotal() >  0        && retornarTotal() <= 99"      > <span  class="letra0"> L       </span> {{ retornarTotal() | number : '1.2-2' }}  </th>
+                            <th class="right legend detalletfootR detalletEspecial" style="font-size: 1em !important; height: 5px !important;" *ngIf=" retornarTotal() >= 100      && retornarTotal() <= 999"     > <span  class="letra100"> L      </span>  {{ retornarTotal() | number : '1.2-2' }}  </th>
+                            <th class="right legend detalletfootR detalletEspecial" style="font-size: 1em !important; height: 5px !important;" *ngIf=" retornarTotal() >= 1000     && retornarTotal() <= 9999"    > <span  class="letra1000"> L    </span>  {{ retornarTotal() | number : '1.2-2' }}  </th>
+                            <th class="right legend detalletfootR detalletEspecial" style="font-size: 1em !important; height: 5px !important;" *ngIf=" retornarTotal() >= 10000    && retornarTotal() <= 99999"   > <span  class="letra10000"> L    </span>   {{ retornarTotal() | number : '1.2-2' }}  </th>
+                            <th class="right legend detalletfootR detalletEspecial" style="font-size: 1em !important; height: 5px !important;" *ngIf=" retornarTotal() >= 100000   && retornarTotal() <= 999999"  > <span  class="letra100000"> L   </span>   {{ retornarTotal() | number : '1.2-2' }}  </th>
+                            <th class="right legend detalletfootR detalletEspecial" style="font-size: 1em !important; height: 5px !important;" *ngIf=" retornarTotal() >= 1000000  && retornarTotal() <= 9999999" > <span  class="letra1000000"> L  </span>   {{ retornarTotal() | number : '1.2-2' }}  </th>
+                            <th class="right legend detalletfootR detalletEspecial" style="font-size: 1em !important; height: 5px !important;" *ngIf=" retornarTotal() >= 10000000 "                              > <span  class="letra10000000"> L </span>  {{ retornarTotal() | number : '1.2-2' }}  </th>
 
 
 

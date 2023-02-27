@@ -392,6 +392,10 @@ p {
 
 /* Modificando clases padres*/
 table{
+	border-bottom:  0.5px solid #050404 !important;
+	border-left:    0.5px solid #050404 !important;
+	border-right:   0.5px solid #050404 !important;
+	border-top:     0.5px solid #050404 !important;
 	margin: 0;
 	padding: 0;
 	width: 100% !important;
@@ -409,6 +413,12 @@ table{
 	border :  0.5px solid #050404 !important;
 
 	}
+	.bodyTed{
+		border-bottom:  none  !important;
+		border-left:    1px solid #050404 !important;
+		border-right:   1px solid #050404 !important;
+		border-top:     none !important;
+	}
 thead{
 	// tr{
 	// 	border :  0.1px solid #050404 !important;
@@ -418,43 +428,45 @@ thead{
 	// 	border :  0.1px solid #050404 !important;
 	// }
 	.detalletfoot{
-		border-bottom:  0.1px solid #050404 !important;
-		border-left:    none !important;
-		border-right:   0.5px solid #050404 !important;
-		border-top:     none !important;
+		border-bottom:  0.5px solid #050404 !important;
+		border-left:    0.2px solid #050404 !important;
+		border-right:   none !important;
+		border-top:     0.2px solid #050404 !important;
 	}
 	.detalletfootR{
 		border-bottom:  0.1px solid #050404 !important;
-		border-left:    none !important;
-		border-right:   none !important;
-		border-top:     none !important;
+		border-left:    0.2px solid #050404 !important;
+		border-right:   0.2px solid #050404 !important;
+		border-top:     0.2px solid #050404 !important;
 	}
 	
 }
 
 tfoot{
 	.exp{
-		border-bottom: 0.5px solid #050404 !important;
-		border-left: none !important;
-		border-right: none !important;
-		border-top: 0.5px solid #050404 !important;
+		border-bottom:   0.2px solid #050404 !important;
+		border-left:   0.2px solid #050404 !important;
+		border-right:  none !important;
+		border-top:    0.5px solid #050404 !important;
 	}
 
 	.detalletfoot{
 		border-bottom:  none !important;
-		border-left:    0.5px solid #050404 !important;
-		border-right:   0.5px solid #050404 !important;
+		border-left:    0.2px solid #050404 !important;
+		border-right:   0.2px solid #050404 !important;
 		border-top:     0.5px solid #050404 !important;
 	}
 
 	.detalletfootR{
 		border-bottom:  none !important;
 		border-left:    none !important;
-		border-right:   none !important;
+		border-right:   0.2px solid #050404 !important;
 		border-top:     0.5px solid #050404 !important;
 	}
+	.detalletEspecial{
+		border-bottom:  0.2px solid #050404 !important;
+	}
 
-	border :  0.8px solid #050404 !important;
 		tr{
 			background-color: #ffffff !important;	
 			font-size: 0.9em;
