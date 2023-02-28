@@ -45,7 +45,6 @@ export class FacturaAHComponent implements OnInit {
   public mes : string;
   public anio : string;
 
-
   public exento  = false;
 
 

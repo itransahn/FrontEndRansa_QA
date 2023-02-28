@@ -214,8 +214,8 @@ CargarRetencion(){
     }
     this.facturacionS.post (url,params).subscribe(
       res=>{
+        console.log(res)
         this.retencionBD = res?.data?.Table0;
-        console.log(this.retencionBD.length)
         if ( this.retencionBD.length < 20 ){
           for(let j = this.retencionBD.length; j<(40-this.retencionBD.length); j++){
             this.espaciosBlancos.push(j)
@@ -225,6 +225,14 @@ CargarRetencion(){
         }
   })
 }
+retornarMes(periodo : number){  
+  if (periodo < 10){
+    return `0${periodo.toString()}`
+  }else{
+    return periodo.toString()
+  }
+}
+
 
 guardarData(){
   let fecha : string = String(this.DiaP) + '/'+ String(this.mesP) + '/' + String(this.anioP);
