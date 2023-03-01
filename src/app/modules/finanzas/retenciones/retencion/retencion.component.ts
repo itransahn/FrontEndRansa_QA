@@ -235,7 +235,7 @@ retornarMes(periodo : number){
 
 
 guardarData(){
-  let fecha : string = String(this.DiaP) + '/'+ String(this.mesP) + '/' + String(this.anioP);
+  let fecha : string = String(this.DiaP) + '/'+ String(this.retornarMes(this.mesP)) + '/' + String(this.anioP);
   let proveedor : string = String(this.retencionBD[0]?.proveedor);
   let data = this.retencionBD;
   let correlativo = this.correlativoN;
@@ -254,7 +254,8 @@ guardarData(){
     hasta       : this.parametrosCai[0]?.['hasta'],
     fechaCAI    : this.parametrosCai[0]?.['fechaLimite']
   }
-  this.facturacionS.post(url, params).subscribe( res=>{ console.log(res)})
+  this.facturacionS.post(url, params).subscribe( res=>{ 
+    console.log(res)})
 
 }
 
