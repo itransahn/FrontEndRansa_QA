@@ -301,10 +301,15 @@ export let numeroALetras = (function() {
     
             if (data.centavos > 0) {
                 data.letrasCentavos = 'CON ' + (function () {
-                        if (data.centavos == 1)
-                            return Millones(data.centavos) + ' ' + data.letrasMonedaCentavoSingular;
-                        else
-                            return Millones(data.centavos) + ' ' + data.letrasMonedaCentavoPlural;
+                        // if (data.centavos == 1)
+                        //     return Millones(data.centavos) + ' ' + data.letrasMonedaCentavoSingular;
+                        // else
+                        //     return Millones(data.centavos) + ' ' + data.letrasMonedaCentavoPlural;
+                        //       if (data.centavos == 1)
+                        //     return Millones(data.centavos) + ' ' + ;
+                        // else
+                        //     return Millones(data.centavos) + ' ' + ;
+                        return `${data.centavos}/100 M.N.` 
                     })();
             };
     
