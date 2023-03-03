@@ -71,7 +71,7 @@
                         <thead>
                           <tr>
                             <th class="contenidoF detalletfootI" scope="col">No.</th>
-                            <th class="contenidoF detalletfoot"  scope="col"colspan="2" >Descripcion</th>
+                            <th class="contenidoF detalletfoot"  scope="col"colspan="3" >Descripcion</th>
                             <th class="contenidoF detalletfoot"  scope="col">Sub Total</th>
                             <th class="contenidoF detalletfoot"  scope="col">Impuesto</th>
                             <th class="contenidoF detalletfootR" scope="col">Monto Total</th>
@@ -80,17 +80,17 @@
                         <tbody class="bordes2">
                           <tr *ngFor="let item of DcabeceraN; let i = index" class="bodyTed">
                             <td data-label="No." class="contenidoF"> {{ i + 1  }} </td>
-                            <td data-label="Descripcion" colspan="2" class="contenidoF"> {{ item?.TCMTRF }} </td>
+                            <td data-label="Descripcion" colspan="3" class="contenidoF left"> {{ item?.TCMTRF }} </td>
                             <td data-label="Sub Total" class="contenidoF center"> {{ (item?.IVLDCS * -1 ) | number : '1.2-2' }}</td>
                             <td data-label="Impuesto"  class="contenidoF center">  {{  ( cabeceraN[0]['IVLIGS'] * -1)  | number : '1.2-2' }}</td>
                             <td data-label="Monto Total" class="contenidoF center"> {{ (cabeceraN[0]['ITTFCS'] * -1)  | number : '1.2-2' }} </td>
                           </tr>
                           
                             <tr  *ngFor="let item of espaciosBlancos"  class="expTable"> 
-                                <td class="espacioB"  colspan="6"></td>
+                                <td class="espacioB"  colspan="7"></td>
                             </tr>
                             <tr> 
-                                <td style="text-align:left !important; " class="espacioB bodyTed2" colspan="6" >
+                                <td style="text-align:left !important; " class="espacioB bodyTed2" colspan="7" >
                                     <span *ngFor="let item of EstrObs2" >
                                         {{ item?.TOBCTC}}
                                     </span>
@@ -126,7 +126,7 @@
                         <tfoot>
                             <tr >
                                     <!-- Número a letras -->
-     <th class="rigth exp" colspan="3" > TOTALES </th>
+     <th class="rigth exp" colspan="4" > TOTALES </th>
     <th class="espacioB exp2 center" *ngIf="( (DcabeceraN[0]['IVLDCS'] ) * -1 ) <= 0 ">                                                        <span  class="letra0">        L </span> {{ (DcabeceraN[0]['IVLDCS'] ) * -1 | number :'1.2-2' }} </th>
     <th class="espacioB exp2 center" *ngIf="( (DcabeceraN[0]['IVLDCS'] ) * -1 ) >0 && ((DcabeceraN[0]['IVLDCS'] ) * -1 ) <= 99 ">             <span   class="letra0">         L </span> {{ (DcabeceraN[0]['IVLDCS'] ) * -1 | number :'1.2-2' }} </th>
     <th class="espacioB exp2 center" *ngIf="( (DcabeceraN[0]['IVLDCS'] ) * -1 ) >=100 && ((DcabeceraN[0]['IVLDCS'] ) * -1 ) <= 999  ">         <span  class="letra100">      L </span> {{ (DcabeceraN[0]['IVLDCS'] ) * -1 | number :'1.2-2' }} </th>
@@ -207,7 +207,7 @@
        </div>
     
     <div class="col-md-12 container ">
-        <label class="center correlativo"> ORIGINAL : CLIENTE </label>
+        <label class="center" style="color: black !important;"> ORIGINAL : CLIENTE </label>
     </div>
     <div class="col-md-12 container">
         <label class="center correlativo" > {{ parametros[0]?.['lemaFactura']}} </label>

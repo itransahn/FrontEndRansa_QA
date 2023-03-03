@@ -227,7 +227,16 @@ table{
 
   }
 
-  
+  /* Alineacion */
+.left{  text-align: left !important;}
+
+.right{ text-align: right !important; } 
+
+
+.center{   
+	text-align: center !important;
+}
+
   table tfoot{
 	border-left  : 0.1px solid #050404 !important;
 	border-bottom: 0.1px solid #050404 !important;
