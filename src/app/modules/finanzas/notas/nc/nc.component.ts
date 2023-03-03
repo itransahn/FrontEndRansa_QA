@@ -76,7 +76,7 @@ export class NcComponent implements OnInit {
   }
 
   convertirNumLetra( numero : any){
-    return numeroALetras((Number(this.cabeceraN[0]['ITTFCS']) * -1),{})
+    return numeroALetras((Number(this.cabeceraN[0]?.['ITTFCS']) * -1),{})
 }
 
 cargarCabeceraN(){
@@ -86,7 +86,7 @@ cargarCabeceraN(){
       Documento : Number(this.documento)
     }
     let params = {
-     "query": `CALL DC@HONLIB.SP_AWS_LISTA_FACTURA('${paramsE['Empresa']}', 3,  ${paramsE['Cliente']},${paramsE['Documento']},20220101, ${this.anioActual}1231)`,
+     "query": `CALL DC@HONLIB.SP_AWS_LISTA_FACTURA('${paramsE['Empresa']}', 3,  ${paramsE['Cliente']},${paramsE['Documento']},20200101, ${this.anioActual}1231)`,
       "env": "PRD"
     }
   this.facturacionS.As400( params ).subscribe(
@@ -101,7 +101,7 @@ cargarCabeceraN(){
       this.mes  =  fecha.substring(4,6);
       this.mesN  =  fecha.substring(4,6);
       this.mes  =  retornarMes(this.mes);
-      this.letras = numeroALetras((Number(this.cabeceraN[0]['ITTFCS']) * -1),{})
+      this.letras = numeroALetras((Number(this.cabeceraN[0]?.['ITTFCS']) * -1),{})
       this.anio =  fecha.substring(0,4);
     }
   )
@@ -124,7 +124,7 @@ cargarCabeceraN(){
         // this.DcabeceraN = res 
         // console.log( this.DcabeceraN )
         for(let i=0; i< res.length; i++){
-    if( res[i]['TCMTRF'] == 'IVA' || res[i]['TCMTRF'] == 'IMPUESTO AL VALOR AGREGADO'){
+    if( res[i]?.['TCMTRF'] == 'IVA' || res[i]?.['TCMTRF'] == 'IMPUESTO AL VALOR AGREGADO'){
           }else{
         this.DcabeceraN.push(res[i]);
           }

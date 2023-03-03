@@ -13,6 +13,7 @@ import { MomentDateAdapter } from '@angular/material-moment-adapter';
 
 import { mesesd } from 'src/app/data/data';
 import { FacturacionService } from '../../facturacion.service';
+import { map, Observable, startWith } from 'rxjs';
 
 const moment = _rollupMoment || _moment;
 export const MY_FORMATS = {
@@ -39,7 +40,10 @@ export const MY_FORMATS = {
 export class ModalRComponent implements OnInit {
   public menuForm : FormGroup;
   public meses = mesesd();
+  proveedor = new FormControl('');
+  options: string[] = ['One', 'Two', 'Three'];
   public proveedores : any[] = [];
+  filteredOptions: Observable<string[]>;
   public sedes = [
     {
       idSede : 1,
@@ -100,14 +104,27 @@ export class ModalRComponent implements OnInit {
     // @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
-  ngOnInit() {
+  ngOnInit(){
     this.formMenu();
     this.cargarProveedores();
+    this.filteredOptions =  this.menuForm.get('proveedor').valueChanges.pipe(
+      startWith(''),
+      map(value => {
+      const  proveedor = typeof value === 'string' ? value : value?.proveedor;
+      return  this._filter(proveedor || '')
+      }),
+    );
+
+    // this.filteredOptions = this.myControl.valueChanges.pipe(
+    //   startWith(''),
+    //   map(value => this._filter(value || '')),
+    // );
+
   }
   
   public formMenu(){
     this.menuForm = new FormGroup({
-      proveedor : new FormControl ('' , [ Validators.required,]),
+      proveedor      : new FormControl ('' , [ Validators.required,]),
       // periodo   : new FormControl ('' , [ Validators.required,]),
       // anio      : new FormControl ('' , [ Validators.required,]),
       // dia       : new FormControl ('' , [ Validators.required,]),
@@ -131,14 +148,28 @@ cargarProveedores(){
 }
 
   redireccionar(){
-    this.auth.redirecTo(`/ransa/finanzas/retencion/${this.menuForm.value.fecha?._i?.month + 1}/${this.menuForm.value.fecha?._i?.date}/${this.menuForm.value.fecha?._i?.year}/${this.menuForm.value.proveedor}/${this.menuForm.value.sede}/${this.menuForm.value.tipoR}`);
+    console.log(this.menuForm.value.proveedor)
+    console.log(document.getElementById("prov"))
+    // this.auth.redirecTo(`/ransa/finanzas/retencion/${this.menuForm.value.fecha?._i?.month + 1}/${this.menuForm.value.fecha?._i?.date}/${this.menuForm.value.fecha?._i?.year}/${this.menuForm.value.proveedor}/${this.menuForm.value.sede}/${this.menuForm.value.tipoR}`);
     // this.auth.redirecTo(`/ransa/finanzas/retencion/${this.menuForm.value.periodo}/${this.menuForm.value.dia}/${this.menuForm.value.anio}/${this.menuForm.value.proveedor}/${this.menuForm.value.sede}/${this.menuForm.value.tipoR}`);
-    this.dialogRef.close()
+    // this.dialogRef.close()
   }
 
   close(){
     this.dialogRef.close()
   }
 
+  public _filter(value: string): string[]{
+    let idProveedor;
+    const filterValue = value.toLowerCase();
+    idProveedor = this.proveedores.filter((option?:any) => option?.proveedor.toLowerCase().includes(filterValue));
+    return this.proveedores.filter((option?:any) => option?.proveedor.toLowerCase().includes(filterValue));
+  }  
 
+  onSelectionChange(event: any){
+    console.log('onSelectionChange called', event.value);
+    this.menuForm.patchValue({
+      proveedor: event.option.value?.idProveedor,
+    })
+  }
 }
