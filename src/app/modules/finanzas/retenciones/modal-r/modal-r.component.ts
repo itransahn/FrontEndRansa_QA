@@ -40,7 +40,7 @@ export const MY_FORMATS = {
 export class ModalRComponent implements OnInit {
   public menuForm : FormGroup;
   public meses = mesesd();
-  proveedor = new FormControl('');
+  public idProveedor : number ;
   options: string[] = ['One', 'Two', 'Three'];
   public proveedores : any[] = [];
   filteredOptions: Observable<string[]>;
@@ -148,11 +148,10 @@ cargarProveedores(){
 }
 
   redireccionar(){
-    console.log(this.menuForm.value.proveedor)
-    console.log(document.getElementById("prov"))
-    // this.auth.redirecTo(`/ransa/finanzas/retencion/${this.menuForm.value.fecha?._i?.month + 1}/${this.menuForm.value.fecha?._i?.date}/${this.menuForm.value.fecha?._i?.year}/${this.menuForm.value.proveedor}/${this.menuForm.value.sede}/${this.menuForm.value.tipoR}`);
-    // this.auth.redirecTo(`/ransa/finanzas/retencion/${this.menuForm.value.periodo}/${this.menuForm.value.dia}/${this.menuForm.value.anio}/${this.menuForm.value.proveedor}/${this.menuForm.value.sede}/${this.menuForm.value.tipoR}`);
-    // this.dialogRef.close()
+    // console.log(this.idProveedor)
+    this.auth.redirecTo(`/ransa/finanzas/retencion/${this.menuForm.value.fecha?._i?.month + 1}/${this.menuForm.value.fecha?._i?.date}/${this.menuForm.value.fecha?._i?.year}/${this.idProveedor}/${this.menuForm.value.sede}/${this.menuForm.value.tipoR}`);
+    // this.auth.redirecTo(`/ransa/finanzas/retencion/${this.menuForm.value.periodo}/${this.menuForm.value.dia}/${this.menuForm.value.anio}/${this.idProveedor}/${this.menuForm.value.sede}/${this.menuForm.value.tipoR}`);
+    this.dialogRef.close()
   }
 
   close(){
@@ -160,16 +159,12 @@ cargarProveedores(){
   }
 
   public _filter(value: string): string[]{
-    let idProveedor;
     const filterValue = value.toLowerCase();
-    idProveedor = this.proveedores.filter((option?:any) => option?.proveedor.toLowerCase().includes(filterValue));
     return this.proveedores.filter((option?:any) => option?.proveedor.toLowerCase().includes(filterValue));
   }  
 
-  onSelectionChange(event: any){
-    console.log('onSelectionChange called', event.value);
-    this.menuForm.patchValue({
-      proveedor: event.option.value?.idProveedor,
-    })
+
+  setearProveedor( data ?: any){
+this.idProveedor = data?.idProveedor;
   }
 }

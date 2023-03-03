@@ -46,7 +46,7 @@
                         <mat-autocomplete  #auto="matAutocomplete">
                             <div  *ngFor="let option of filteredOptions | async" >
                                 <div    *ngIf="option?.idSede === menuForm.value.sede">
-                                    <mat-option value="{{option.idProveedor }} - {{option.proveedor}}">
+                                    <mat-option value=" {{option.proveedor}}" (click)="setearProveedor(option)" >
                                     {{  option?.proveedor | uppercase }}        
                                     </mat-option>
                                 </div>

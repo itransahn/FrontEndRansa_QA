@@ -77,8 +77,7 @@ correlativo(){
  this.subs = this.facturacionS.post(url,params).subscribe(
     ( res:DataApi)=>{
         if(res){
-            this.correlativoN = res?.data?.Table0[0]?.['Correlativo'];     
-            console.log(this.correlativoN)   
+            this.correlativoN = res?.data?.Table0[0]?.['Correlativo'];  
             if ( this.correlativoN === '-1'){
                  this.permitido = false;
             }
@@ -214,7 +213,6 @@ CargarRetencion(){
     }
     this.facturacionS.post (url,params).subscribe(
       res=>{
-        console.log(res)
         this.retencionBD = res?.data?.Table0;
         if ( this.retencionBD.length < 20 ){
           for(let j = this.retencionBD.length; j<(40-this.retencionBD.length); j++){
@@ -254,8 +252,7 @@ guardarData(){
     hasta       : this.parametrosCai[0]?.['hasta'],
     fechaCAI    : this.parametrosCai[0]?.['fechaLimite']
   }
-  this.facturacionS.post(url, params).subscribe( res=>{ 
-    console.log(res)})
+  this.facturacionS.post(url, params).subscribe( res=>{ })
 
 }
 
