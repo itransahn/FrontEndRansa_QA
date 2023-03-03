@@ -431,6 +431,21 @@ table{
 	.bordeIz{
 		border-bottom-style: none !important;
 	 }
+
+	 .bodyTed{
+		border-bottom:  none !important;
+		border-left:    0.1px solid #050404 !important;
+		border-right:   0.1px solid #050404 !important;
+		border-top:     none !important;
+	}
+
+.exp1{ 
+	border-left:    0.1px solid #050404 !important;
+}
+.exp2{
+	border-right:   0.1px solid #050404 !important;
+}
+
   }
   
   table caption {
@@ -453,7 +468,7 @@ table{
 	th{
 		background-color: #ffffff ;
 		color: #050404;
-		border : 0.1px solid #bcb9b9 !important;
+		border : 0.1px solid #050404 !important;
 		font-size: 0.75em !important;
 		// font: bold;
 		// padding: .625em;
@@ -496,7 +511,7 @@ table{
 	th{
 		background-color: #ffffff ;
 		color: #050404;
-		border : 0.1px solid #bcb9b9 !important;
+		border : 0.1px solid #050404 !important;
 		font-size: 0.75em !important;
 		// font: bold;
 		// padding: .625em;
