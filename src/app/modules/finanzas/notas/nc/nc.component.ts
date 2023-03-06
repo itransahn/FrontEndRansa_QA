@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DataApi } from 'src/app/interfaces/dataApi';
 import { cabeceraFactura, detalleCabecera, retornarMes } from 'src/app/interfaces/Factura';
-import { mensajes } from 'src/app/interfaces/generales';
+import { Acumulador, mensajes } from 'src/app/interfaces/generales';
 import { SharedService } from 'src/app/modules/shared/shared.service';
 import { ToastServiceLocal } from 'src/app/services/toast.service';
 import { numeroALetras } from 'src/app/shared/functions/conversorNumLetras';
@@ -42,6 +42,10 @@ export class NcComponent implements OnInit {
   public devolcion = false;
   public descuento = false;
   public disabled  = true;
+
+  public subtotal : number ;
+  public impuesto : number ;
+  public totaN    : number ;
 
  constructor(
     public facturacionS : FacturacionService,
@@ -161,6 +165,34 @@ cargarCabeceraN(){
     )
   }
   
+
+  retornarTotal(){
+    let total : number = Acumulador(this.DcabeceraN, 'IVLDCS')
+    return total;
+  }
+
+  retornarTotalIsv(){
+  let total: number;
+  total = this.retornarTotal() * 0.15;
+  return total;
+  }
+  
+
+  retornarTotalN(){
+    let total: number;
+    total = this.retornarTotal() + this.retornarTotalIsv();
+    return total;
+    }
+
+  calcularImpuesto( monto ){
+    return (monto * 0.15) * -1
+  }
+
+  total(monto){ 
+    let isv : number;
+    isv = (monto * 0.15) * -1;
+    return ( monto * -1 ) + isv
+  }
   
   EstructurarObservaciones( array : any[]){
       for( let i = 0; i < array.length; i++ ){

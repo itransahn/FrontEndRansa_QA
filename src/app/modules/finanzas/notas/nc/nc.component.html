@@ -24,7 +24,7 @@
                 <span *ngIf="ruta.snapshot.params['empresa'] == 'AH'" class="rigth correlativo factura">
                     <!-- 000-001-01-{{retornarCorrelativo()}} -->
                     000-002-06-{{retornarCorrelativo()}}            
-            </span>
+            </span><br>
             <span style="font-size: 1.3em !important; font-weight:  bold !important;"> Fecha: {{ dia }}/{{mesN}}/{{anio}} </span><br><br>
                 <span  class="rigth empresa">  C.A.I: {{parametrosCai[0]['CAI']}} </span> <br>
                 <span style="font-size: 1.3em !important; font-weight:  bold !important;"> Rango Autorizado: </span> <br>
@@ -82,8 +82,8 @@
                             <td data-label="No." class="contenidoF"> {{ i + 1  }} </td>
                             <td data-label="Descripcion" colspan="2" class="contenidoF left"> {{ item?.TCMTRF }} </td>
                             <td data-label="Sub Total" class="contenidoF center"> {{ (item?.IVLDCS * -1 ) | number : '1.2-2' }}</td>
-                            <td data-label="Impuesto"  class="contenidoF center">  {{  ( cabeceraN[0]['IVLIGS'] * -1)  | number : '1.2-2' }}</td>
-                            <td data-label="Monto Total" class="contenidoF center"> {{ (cabeceraN[0]['ITTFCS'] * -1)  | number : '1.2-2' }} </td>
+                            <td data-label="Impuesto"  class="contenidoF center">  {{  calcularImpuesto(item?.IVLDCS)  | number : '1.2-2' }}</td>
+                            <td data-label="Monto Total" class="contenidoF center"> {{ total(item?.IVLDCS)  | number : '1.2-2' }} </td>
                           </tr>
                           
                             <tr  *ngFor="let item of espaciosBlancos"  class="expTable"> 
@@ -127,40 +127,39 @@
                             <tr >
                                     <!-- Número a letras -->
      <th class="rigth exp" colspan="3" > TOTALES </th>
-    <th class="espacioB exp2 center" *ngIf="( (DcabeceraN[0]['IVLDCS'] ) * -1 ) <= 0 ">                                                        <span  class="letra0">        L </span> {{ (DcabeceraN[0]['IVLDCS'] ) * -1 | number :'1.2-2' }} </th>
-    <th class="espacioB exp2 center" *ngIf="( (DcabeceraN[0]['IVLDCS'] ) * -1 ) >0 && ((DcabeceraN[0]['IVLDCS'] ) * -1 ) <= 99 ">             <span   class="letra0">         L </span> {{ (DcabeceraN[0]['IVLDCS'] ) * -1 | number :'1.2-2' }} </th>
-    <th class="espacioB exp2 center" *ngIf="( (DcabeceraN[0]['IVLDCS'] ) * -1 ) >=100 && ((DcabeceraN[0]['IVLDCS'] ) * -1 ) <= 999  ">         <span  class="letra100">      L </span> {{ (DcabeceraN[0]['IVLDCS'] ) * -1 | number :'1.2-2' }} </th>
-    <th class="espacioB exp2 center" *ngIf="( (DcabeceraN[0]['IVLDCS'] ) * -1 ) >=1000 && ((DcabeceraN[0]['IVLDCS'] ) * -1 ) <= 9999  ">       <span  class="letra1000">     L </span> {{ (DcabeceraN[0]['IVLDCS'] ) * -1 | number :'1.2-2' }} </th>
-    <th class="espacioB exp2 center" *ngIf="( (DcabeceraN[0]['IVLDCS'] ) * -1 ) >=10000 && ((DcabeceraN[0]['IVLDCS'] ) * -1 ) <= 99999">       <span  class="letra10000">    L </span> {{ (DcabeceraN[0]['IVLDCS'] ) * -1 | number :'1.2-2' }} </th>
-    <th class="espacioB exp2 center" *ngIf="( (DcabeceraN[0]['IVLDCS'] ) * -1 ) >=100000 && ((DcabeceraN[0]['IVLDCS'] ) * -1 ) <= 999999  ">   <span  class="letra100000">   L </span> {{ (DcabeceraN[0]['IVLDCS'] ) * -1 | number :'1.2-2' }} </th>
-    <th class="espacioB exp2 center" *ngIf="( (DcabeceraN[0]['IVLDCS'] ) * -1 ) >=1000000 && ((DcabeceraN[0]['IVLDCS'] ) * -1 ) <= 9999999  "> <span  class="letra1000000">  L </span> {{ (DcabeceraN[0]['IVLDCS'] ) * -1 | number :'1.2-2' }} </th>
-    <th class="espacioB exp2 center" *ngIf="( (DcabeceraN[0]['IVLDCS'] ) * -1 ) >= 10000000 ">                                                 <span  class="letra10000000"> L </span> {{ (DcabeceraN[0]['IVLDCS'] ) * -1 | number :'1.2-2' }} </th>
-
+    <th class="espacioB exp2 center" *ngIf="( (retornarTotal() ) * -1 ) <= 0 ">                                                        <span  class="letra0">        L </span> {{ retornarTotal() * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB exp2 center" *ngIf="( (retornarTotal() ) * -1 ) >0 &&        ( retornarTotal() * -1 ) <= 99 ">             <span   class="letra0">         L </span>   {{ retornarTotal() * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB exp2 center" *ngIf="( (retornarTotal() ) * -1 ) >=100 &&     ( retornarTotal() * -1 ) <= 999  ">         <span  class="letra100">      L </span>       {{ retornarTotal() * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB exp2 center" *ngIf="( (retornarTotal() ) * -1 ) >=1000 &&    ( retornarTotal() * -1 ) <= 9999  ">       <span  class="letra1000">     L </span>        {{ retornarTotal() * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB exp2 center" *ngIf="( (retornarTotal() ) * -1 ) >=10000 &&   ( retornarTotal() * -1 ) <= 99999">       <span  class="letra10000">    L </span>         {{ retornarTotal() * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB exp2 center" *ngIf="( (retornarTotal() ) * -1 ) >=100000 &&  ( retornarTotal() * -1 ) <= 999999  ">   <span  class="letra100000">   L </span>          {{ retornarTotal() * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB exp2 center" *ngIf="( (retornarTotal() ) * -1 ) >=1000000 && ( retornarTotal() * -1 ) <= 9999999  "> <span  class="letra1000000">  L </span>           {{ retornarTotal() * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB exp2 center" *ngIf="( (retornarTotal() ) * -1 ) >= 10000000 ">                                                 <span  class="letra10000000"> L </span> {{ retornarTotal() * -1 | number :'1.2-2' }} </th>
 
 
     <!-- <th class="espacioB center">  {{ ( cabeceraN[0]['IVLIGS'] ) * -1 | number :'1.2-2' }} </th> -->
 
-    <th class="espacioB exp2 center" *ngIf="( (cabeceraN [0]['IVLIGS'] ) * -1 ) <= 0 ">                                                        <span  class="letra0">        L </span> {{ (cabeceraN [0]['IVLIGS'] ) * -1 | number :'1.2-2' }} </th>
-    <th class="espacioB exp2 center" *ngIf="( (cabeceraN [0]['IVLIGS'] ) * -1 ) >0 && ((cabeceraN [0]['IVLIGS'] ) * -1 ) <= 99 ">             <span  class="letra0">         L </span> {{ (cabeceraN [0]['IVLIGS'] ) * -1 | number :'1.2-2' }} </th>
-    <th class="espacioB exp2 center" *ngIf="( (cabeceraN [0]['IVLIGS'] ) * -1 ) >=100 && ((cabeceraN [0]['IVLIGS'] ) * -1 ) <= 999  ">         <span  class="letra100">      L </span> {{ (cabeceraN [0]['IVLIGS'] ) * -1 | number :'1.2-2' }} </th>
-    <th class="espacioB exp2 center" *ngIf="( (cabeceraN [0]['IVLIGS'] ) * -1 ) >=1000 && ((cabeceraN [0]['IVLIGS'] ) * -1 ) <= 9999  ">       <span  class="letra1000">     L </span> {{ (cabeceraN [0]['IVLIGS'] ) * -1 | number :'1.2-2' }} </th>
-    <th class="espacioB exp2 center" *ngIf="( (cabeceraN [0]['IVLIGS'] ) * -1 ) >=10000 && ((cabeceraN [0]['IVLIGS'] ) * -1 ) <= 99999">       <span  class="letra10000">    L </span> {{ (cabeceraN [0]['IVLIGS'] ) * -1 | number :'1.2-2' }} </th>
-    <th class="espacioB exp2 center" *ngIf="( (cabeceraN [0]['IVLIGS'] ) * -1 ) >=100000 && ((cabeceraN [0]['IVLIGS'] ) * -1 ) <= 999999  ">   <span  class="letra100000">   L </span> {{ (cabeceraN [0]['IVLIGS'] ) * -1 | number :'1.2-2' }} </th>
-    <th class="espacioB exp2 center" *ngIf="( (cabeceraN [0]['IVLIGS'] ) * -1 ) >=1000000 && ((cabeceraN [0]['IVLIGS'] ) * -1 ) <= 9999999  "> <span  class="letra1000000">  L </span> {{ (cabeceraN [0]['IVLIGS'] ) * -1 | number :'1.2-2' }} </th>
-    <th class="espacioB exp2 center" *ngIf="( (cabeceraN [0]['IVLIGS'] ) * -1 ) >= 10000000 ">                                                 <span  class="letra10000000"> L </span> {{ (cabeceraN [0]['IVLIGS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB exp2 center" *ngIf="( retornarTotalIsv() * -1 ) <= 0 ">                                                        <span  class="letra0">        L </span> {{ retornarTotalIsv() * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB exp2 center" *ngIf="( retornarTotalIsv() * -1 ) >0 &&        ( retornarTotalIsv() * -1 ) <= 99 ">             <span  class="letra0">         L </span> {{ retornarTotalIsv() * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB exp2 center" *ngIf="( retornarTotalIsv() * -1 ) >=100 &&     ( retornarTotalIsv() * -1 ) <= 999  ">         <span  class="letra100">      L </span>    {{ retornarTotalIsv() * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB exp2 center" *ngIf="( retornarTotalIsv() * -1 ) >=1000 &&    ( retornarTotalIsv() * -1 ) <= 9999  ">       <span  class="letra1000">     L </span>     {{ retornarTotalIsv() * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB exp2 center" *ngIf="( retornarTotalIsv() * -1 ) >=10000 &&   ( retornarTotalIsv() * -1 ) <= 99999">       <span  class="letra10000">    L </span>      {{ retornarTotalIsv() * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB exp2 center" *ngIf="( retornarTotalIsv() * -1 ) >=100000 &&  ( retornarTotalIsv() * -1 ) <= 999999  ">   <span  class="letra100000">   L </span>       {{ retornarTotalIsv() * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB exp2 center" *ngIf="( retornarTotalIsv() * -1 ) >=1000000 && ( retornarTotalIsv() * -1 ) <= 9999999  "> <span  class="letra1000000">  L </span>        {{ retornarTotalIsv() * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB exp2 center" *ngIf="( retornarTotalIsv() * -1 ) >= 10000000 ">  <span  class="letra10000000"> L </span>                                                {{ retornarTotalIsv() * -1 | number :'1.2-2' }} </th>
 
 
 
     <!-- <th class="espacioB center">  {{ (cabeceraN[0]['ITTFCS'] )  * -1 | number :'1.2-2' }} </th> -->
 
-    <th class="espacioB exp3 center" *ngIf="( (cabeceraN [0]['ITTFCS'] ) * -1 ) <= 0 ">                                                        <span  class="letra0">        L </span> {{ (cabeceraN [0]['ITTFCS'] ) * -1 | number :'1.2-2' }} </th>
-    <th class="espacioB exp3 center" *ngIf="( (cabeceraN [0]['ITTFCS'] ) * -1 ) >0 && ((cabeceraN [0]['ITTFCS'] ) * -1 ) <= 99 ">             <span  class="letra0">         L </span> {{ (cabeceraN [0]['ITTFCS'] ) * -1 | number :'1.2-2' }} </th>
-    <th class="espacioB exp3 center" *ngIf="( (cabeceraN [0]['ITTFCS'] ) * -1 ) >=100 && ((cabeceraN [0]['ITTFCS'] ) * -1 ) <= 999  ">         <span  class="letra100">      L </span> {{ (cabeceraN [0]['ITTFCS'] ) * -1 | number :'1.2-2' }} </th>
-    <th class="espacioB exp3 center" *ngIf="( (cabeceraN [0]['ITTFCS'] ) * -1 ) >=1000 && ((cabeceraN [0]['ITTFCS'] ) * -1 ) <= 9999  ">       <span  class="letra1000">     L </span> {{ (cabeceraN [0]['ITTFCS'] ) * -1 | number :'1.2-2' }} </th>
-    <th class="espacioB exp3 center" *ngIf="( (cabeceraN [0]['ITTFCS'] ) * -1 ) >=10000 && ((cabeceraN [0]['ITTFCS'] ) * -1 ) <= 99999">       <span  class="letra10000">    L </span> {{ (cabeceraN [0]['ITTFCS'] ) * -1 | number :'1.2-2' }} </th>
-    <th class="espacioB exp3 center" *ngIf="( (cabeceraN [0]['ITTFCS'] ) * -1 ) >=100000 && ((cabeceraN [0]['ITTFCS'] ) * -1 ) <= 999999  ">   <span  class="letra100000">   L </span> {{ (cabeceraN [0]['ITTFCS'] ) * -1 | number :'1.2-2' }} </th>
-    <th class="espacioB exp3 center" *ngIf="( (cabeceraN [0]['ITTFCS'] ) * -1 ) >=1000000 && ((cabeceraN [0]['ITTFCS'] ) * -1 ) <= 9999999  "> <span  class="letra1000000">  L </span> {{ (cabeceraN [0]['ITTFCS'] ) * -1 | number :'1.2-2' }} </th>
-    <th class="espacioB exp3 center" *ngIf="( (cabeceraN [0]['ITTFCS'] ) * -1 ) >= 10000000 ">                                                 <span  class="letra10000000"> L </span> {{ (cabeceraN [0]['ITTFCS'] ) * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB exp3 center" *ngIf="( retornarTotalN() * -1 ) <= 0 ">                                                        <span  class="letra0">        L </span> {{ retornarTotalN() * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB exp3 center" *ngIf="( retornarTotalN() * -1 ) >0 &&        ( retornarTotalN() * -1 ) <= 99 ">             <span  class="letra0">         L </span>   {{ retornarTotalN() * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB exp3 center" *ngIf="( retornarTotalN() * -1 ) >=100 &&     ( retornarTotalN() * -1 ) <= 999  ">         <span  class="letra100">      L </span>      {{ retornarTotalN() * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB exp3 center" *ngIf="( retornarTotalN() * -1 ) >=1000 &&    ( retornarTotalN() * -1 ) <= 9999  ">       <span  class="letra1000">     L </span>       {{ retornarTotalN() * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB exp3 center" *ngIf="( retornarTotalN() * -1 ) >=10000 &&   ( retornarTotalN() * -1 ) <= 99999">       <span  class="letra10000">    L </span>        {{ retornarTotalN() * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB exp3 center" *ngIf="( retornarTotalN() * -1 ) >=100000 &&  ( retornarTotalN() * -1 ) <= 999999  ">   <span  class="letra100000">   L </span>         {{ retornarTotalN() * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB exp3 center" *ngIf="( retornarTotalN() * -1 ) >=1000000 && ( retornarTotalN() * -1 ) <= 9999999  "> <span  class="letra1000000">  L </span>          {{ retornarTotalN() * -1 | number :'1.2-2' }} </th>
+    <th class="espacioB exp3 center" *ngIf="( retornarTotalN() * -1 ) >= 10000000 ">                                                 <span  class="letra10000000"> L </span> {{ retornarTotalN() * -1 | number :'1.2-2' }} </th>
                             </tr>
                         </tfoot>  
                       </table>
@@ -249,7 +248,7 @@
                 <span *ngIf="ruta.snapshot.params['empresa'] == 'AH'" class="rigth correlativo factura">
                     <!-- 000-001-01-{{retornarCorrelativo()}} -->
                     000-002-06-{{retornarCorrelativo()}}            
-            </span>
+            </span> <br>
             <span style="font-size: 1.3em !important; font-weight:  bold !important;"> Fecha: {{ dia }}/{{mesN}}/{{anio}} </span><br><br>
                 <span  class="rigth empresa">  C.A.I: {{parametrosCai[0]['CAI']}} </span> <br>
                 <span style="font-size: 1.3em !important; font-weight:  bold !important;"> Rango Autorizado: </span> <br>
@@ -306,8 +305,8 @@
                         <td data-label="No." class="contenidoF"> {{ i + 1  }} </td>
                         <td data-label="Descripcion" colspan="2" class="contenidoF left"> {{ item?.TCMTRF }} </td>
                         <td data-label="Sub Total" class="contenidoF center"> {{ (item?.IVLDCS * -1 ) | number : '1.2-2' }}</td>
-                        <td data-label="Impuesto"  class="contenidoF center">  {{  ( cabeceraN[0]['IVLIGS'] * -1)  | number : '1.2-2' }}</td>
-                        <td data-label="Monto Total" class="contenidoF center"> {{ (cabeceraN[0]['ITTFCS'] * -1)  | number : '1.2-2' }} </td>
+                        <td data-label="Impuesto"  class="contenidoF center">  {{  calcularImpuesto(item?.IVLDCS)  | number : '1.2-2' }}</td>
+                        <td data-label="Monto Total" class="contenidoF center"> {{ total(item?.IVLDCS)  | number : '1.2-2' }} </td>
                       </tr>
                       
                         <tr  *ngFor="let item of espaciosBlancos"  class="expTable"> 
@@ -351,40 +350,39 @@
                         <tr >
                                 <!-- Número a letras -->
  <th class="rigth exp" colspan="3" > TOTALES </th>
-<th class="espacioB exp2 center" *ngIf="( (DcabeceraN[0]['IVLDCS'] ) * -1 ) <= 0 ">                                                        <span  class="letra0">        L </span> {{ (DcabeceraN[0]['IVLDCS'] ) * -1 | number :'1.2-2' }} </th>
-<th class="espacioB exp2 center" *ngIf="( (DcabeceraN[0]['IVLDCS'] ) * -1 ) >0 && ((DcabeceraN[0]['IVLDCS'] ) * -1 ) <= 99 ">             <span   class="letra0">         L </span> {{ (DcabeceraN[0]['IVLDCS'] ) * -1 | number :'1.2-2' }} </th>
-<th class="espacioB exp2 center" *ngIf="( (DcabeceraN[0]['IVLDCS'] ) * -1 ) >=100 && ((DcabeceraN[0]['IVLDCS'] ) * -1 ) <= 999  ">         <span  class="letra100">      L </span> {{ (DcabeceraN[0]['IVLDCS'] ) * -1 | number :'1.2-2' }} </th>
-<th class="espacioB exp2 center" *ngIf="( (DcabeceraN[0]['IVLDCS'] ) * -1 ) >=1000 && ((DcabeceraN[0]['IVLDCS'] ) * -1 ) <= 9999  ">       <span  class="letra1000">     L </span> {{ (DcabeceraN[0]['IVLDCS'] ) * -1 | number :'1.2-2' }} </th>
-<th class="espacioB exp2 center" *ngIf="( (DcabeceraN[0]['IVLDCS'] ) * -1 ) >=10000 && ((DcabeceraN[0]['IVLDCS'] ) * -1 ) <= 99999">       <span  class="letra10000">    L </span> {{ (DcabeceraN[0]['IVLDCS'] ) * -1 | number :'1.2-2' }} </th>
-<th class="espacioB exp2 center" *ngIf="( (DcabeceraN[0]['IVLDCS'] ) * -1 ) >=100000 && ((DcabeceraN[0]['IVLDCS'] ) * -1 ) <= 999999  ">   <span  class="letra100000">   L </span> {{ (DcabeceraN[0]['IVLDCS'] ) * -1 | number :'1.2-2' }} </th>
-<th class="espacioB exp2 center" *ngIf="( (DcabeceraN[0]['IVLDCS'] ) * -1 ) >=1000000 && ((DcabeceraN[0]['IVLDCS'] ) * -1 ) <= 9999999  "> <span  class="letra1000000">  L </span> {{ (DcabeceraN[0]['IVLDCS'] ) * -1 | number :'1.2-2' }} </th>
-<th class="espacioB exp2 center" *ngIf="( (DcabeceraN[0]['IVLDCS'] ) * -1 ) >= 10000000 ">                                                 <span  class="letra10000000"> L </span> {{ (DcabeceraN[0]['IVLDCS'] ) * -1 | number :'1.2-2' }} </th>
-
+<th class="espacioB exp2 center" *ngIf="( (retornarTotal() ) * -1 ) <= 0 ">                                                        <span  class="letra0">        L </span> {{ retornarTotal() * -1 | number :'1.2-2' }} </th>
+<th class="espacioB exp2 center" *ngIf="( (retornarTotal() ) * -1 ) >0 &&        ( retornarTotal() * -1 ) <= 99 ">             <span   class="letra0">         L </span>   {{ retornarTotal() * -1 | number :'1.2-2' }} </th>
+<th class="espacioB exp2 center" *ngIf="( (retornarTotal() ) * -1 ) >=100 &&     ( retornarTotal() * -1 ) <= 999  ">         <span  class="letra100">      L </span>       {{ retornarTotal() * -1 | number :'1.2-2' }} </th>
+<th class="espacioB exp2 center" *ngIf="( (retornarTotal() ) * -1 ) >=1000 &&    ( retornarTotal() * -1 ) <= 9999  ">       <span  class="letra1000">     L </span>        {{ retornarTotal() * -1 | number :'1.2-2' }} </th>
+<th class="espacioB exp2 center" *ngIf="( (retornarTotal() ) * -1 ) >=10000 &&   ( retornarTotal() * -1 ) <= 99999">       <span  class="letra10000">    L </span>         {{ retornarTotal() * -1 | number :'1.2-2' }} </th>
+<th class="espacioB exp2 center" *ngIf="( (retornarTotal() ) * -1 ) >=100000 &&  ( retornarTotal() * -1 ) <= 999999  ">   <span  class="letra100000">   L </span>          {{ retornarTotal() * -1 | number :'1.2-2' }} </th>
+<th class="espacioB exp2 center" *ngIf="( (retornarTotal() ) * -1 ) >=1000000 && ( retornarTotal() * -1 ) <= 9999999  "> <span  class="letra1000000">  L </span>           {{ retornarTotal() * -1 | number :'1.2-2' }} </th>
+<th class="espacioB exp2 center" *ngIf="( (retornarTotal() ) * -1 ) >= 10000000 ">                                                 <span  class="letra10000000"> L </span> {{ retornarTotal() * -1 | number :'1.2-2' }} </th>
 
 
 <!-- <th class="espacioB center">  {{ ( cabeceraN[0]['IVLIGS'] ) * -1 | number :'1.2-2' }} </th> -->
 
-<th class="espacioB exp2 center" *ngIf="( (cabeceraN [0]['IVLIGS'] ) * -1 ) <= 0 ">                                                        <span  class="letra0">        L </span> {{ (cabeceraN [0]['IVLIGS'] ) * -1 | number :'1.2-2' }} </th>
-<th class="espacioB exp2 center" *ngIf="( (cabeceraN [0]['IVLIGS'] ) * -1 ) >0 && ((cabeceraN [0]['IVLIGS'] ) * -1 ) <= 99 ">             <span  class="letra0">         L </span> {{ (cabeceraN [0]['IVLIGS'] ) * -1 | number :'1.2-2' }} </th>
-<th class="espacioB exp2 center" *ngIf="( (cabeceraN [0]['IVLIGS'] ) * -1 ) >=100 && ((cabeceraN [0]['IVLIGS'] ) * -1 ) <= 999  ">         <span  class="letra100">      L </span> {{ (cabeceraN [0]['IVLIGS'] ) * -1 | number :'1.2-2' }} </th>
-<th class="espacioB exp2 center" *ngIf="( (cabeceraN [0]['IVLIGS'] ) * -1 ) >=1000 && ((cabeceraN [0]['IVLIGS'] ) * -1 ) <= 9999  ">       <span  class="letra1000">     L </span> {{ (cabeceraN [0]['IVLIGS'] ) * -1 | number :'1.2-2' }} </th>
-<th class="espacioB exp2 center" *ngIf="( (cabeceraN [0]['IVLIGS'] ) * -1 ) >=10000 && ((cabeceraN [0]['IVLIGS'] ) * -1 ) <= 99999">       <span  class="letra10000">    L </span> {{ (cabeceraN [0]['IVLIGS'] ) * -1 | number :'1.2-2' }} </th>
-<th class="espacioB exp2 center" *ngIf="( (cabeceraN [0]['IVLIGS'] ) * -1 ) >=100000 && ((cabeceraN [0]['IVLIGS'] ) * -1 ) <= 999999  ">   <span  class="letra100000">   L </span> {{ (cabeceraN [0]['IVLIGS'] ) * -1 | number :'1.2-2' }} </th>
-<th class="espacioB exp2 center" *ngIf="( (cabeceraN [0]['IVLIGS'] ) * -1 ) >=1000000 && ((cabeceraN [0]['IVLIGS'] ) * -1 ) <= 9999999  "> <span  class="letra1000000">  L </span> {{ (cabeceraN [0]['IVLIGS'] ) * -1 | number :'1.2-2' }} </th>
-<th class="espacioB exp2 center" *ngIf="( (cabeceraN [0]['IVLIGS'] ) * -1 ) >= 10000000 ">                                                 <span  class="letra10000000"> L </span> {{ (cabeceraN [0]['IVLIGS'] ) * -1 | number :'1.2-2' }} </th>
+<th class="espacioB exp2 center" *ngIf="( retornarTotalIsv() * -1 ) <= 0 ">                                                        <span  class="letra0">        L </span> {{ retornarTotalIsv() * -1 | number :'1.2-2' }} </th>
+<th class="espacioB exp2 center" *ngIf="( retornarTotalIsv() * -1 ) >0 &&        ( retornarTotalIsv() * -1 ) <= 99 ">             <span  class="letra0">         L </span> {{ retornarTotalIsv() * -1 | number :'1.2-2' }} </th>
+<th class="espacioB exp2 center" *ngIf="( retornarTotalIsv() * -1 ) >=100 &&     ( retornarTotalIsv() * -1 ) <= 999  ">         <span  class="letra100">      L </span>    {{ retornarTotalIsv() * -1 | number :'1.2-2' }} </th>
+<th class="espacioB exp2 center" *ngIf="( retornarTotalIsv() * -1 ) >=1000 &&    ( retornarTotalIsv() * -1 ) <= 9999  ">       <span  class="letra1000">     L </span>     {{ retornarTotalIsv() * -1 | number :'1.2-2' }} </th>
+<th class="espacioB exp2 center" *ngIf="( retornarTotalIsv() * -1 ) >=10000 &&   ( retornarTotalIsv() * -1 ) <= 99999">       <span  class="letra10000">    L </span>      {{ retornarTotalIsv() * -1 | number :'1.2-2' }} </th>
+<th class="espacioB exp2 center" *ngIf="( retornarTotalIsv() * -1 ) >=100000 &&  ( retornarTotalIsv() * -1 ) <= 999999  ">   <span  class="letra100000">   L </span>       {{ retornarTotalIsv() * -1 | number :'1.2-2' }} </th>
+<th class="espacioB exp2 center" *ngIf="( retornarTotalIsv() * -1 ) >=1000000 && ( retornarTotalIsv() * -1 ) <= 9999999  "> <span  class="letra1000000">  L </span>        {{ retornarTotalIsv() * -1 | number :'1.2-2' }} </th>
+<th class="espacioB exp2 center" *ngIf="( retornarTotalIsv() * -1 ) >= 10000000 ">  <span  class="letra10000000"> L </span>                                                {{ retornarTotalIsv() * -1 | number :'1.2-2' }} </th>
 
 
 
 <!-- <th class="espacioB center">  {{ (cabeceraN[0]['ITTFCS'] )  * -1 | number :'1.2-2' }} </th> -->
 
-<th class="espacioB exp3 center" *ngIf="( (cabeceraN [0]['ITTFCS'] ) * -1 ) <= 0 ">                                                        <span  class="letra0">        L </span> {{ (cabeceraN [0]['ITTFCS'] ) * -1 | number :'1.2-2' }} </th>
-<th class="espacioB exp3 center" *ngIf="( (cabeceraN [0]['ITTFCS'] ) * -1 ) >0 && ((cabeceraN [0]['ITTFCS'] ) * -1 ) <= 99 ">             <span  class="letra0">         L </span> {{ (cabeceraN [0]['ITTFCS'] ) * -1 | number :'1.2-2' }} </th>
-<th class="espacioB exp3 center" *ngIf="( (cabeceraN [0]['ITTFCS'] ) * -1 ) >=100 && ((cabeceraN [0]['ITTFCS'] ) * -1 ) <= 999  ">         <span  class="letra100">      L </span> {{ (cabeceraN [0]['ITTFCS'] ) * -1 | number :'1.2-2' }} </th>
-<th class="espacioB exp3 center" *ngIf="( (cabeceraN [0]['ITTFCS'] ) * -1 ) >=1000 && ((cabeceraN [0]['ITTFCS'] ) * -1 ) <= 9999  ">       <span  class="letra1000">     L </span> {{ (cabeceraN [0]['ITTFCS'] ) * -1 | number :'1.2-2' }} </th>
-<th class="espacioB exp3 center" *ngIf="( (cabeceraN [0]['ITTFCS'] ) * -1 ) >=10000 && ((cabeceraN [0]['ITTFCS'] ) * -1 ) <= 99999">       <span  class="letra10000">    L </span> {{ (cabeceraN [0]['ITTFCS'] ) * -1 | number :'1.2-2' }} </th>
-<th class="espacioB exp3 center" *ngIf="( (cabeceraN [0]['ITTFCS'] ) * -1 ) >=100000 && ((cabeceraN [0]['ITTFCS'] ) * -1 ) <= 999999  ">   <span  class="letra100000">   L </span> {{ (cabeceraN [0]['ITTFCS'] ) * -1 | number :'1.2-2' }} </th>
-<th class="espacioB exp3 center" *ngIf="( (cabeceraN [0]['ITTFCS'] ) * -1 ) >=1000000 && ((cabeceraN [0]['ITTFCS'] ) * -1 ) <= 9999999  "> <span  class="letra1000000">  L </span> {{ (cabeceraN [0]['ITTFCS'] ) * -1 | number :'1.2-2' }} </th>
-<th class="espacioB exp3 center" *ngIf="( (cabeceraN [0]['ITTFCS'] ) * -1 ) >= 10000000 ">                                                 <span  class="letra10000000"> L </span> {{ (cabeceraN [0]['ITTFCS'] ) * -1 | number :'1.2-2' }} </th>
+<th class="espacioB exp3 center" *ngIf="( retornarTotalN() * -1 ) <= 0 ">                                                        <span  class="letra0">        L </span> {{ retornarTotalN() * -1 | number :'1.2-2' }} </th>
+<th class="espacioB exp3 center" *ngIf="( retornarTotalN() * -1 ) >0 &&        ( retornarTotalN() * -1 ) <= 99 ">             <span  class="letra0">         L </span>   {{ retornarTotalN() * -1 | number :'1.2-2' }} </th>
+<th class="espacioB exp3 center" *ngIf="( retornarTotalN() * -1 ) >=100 &&     ( retornarTotalN() * -1 ) <= 999  ">         <span  class="letra100">      L </span>      {{ retornarTotalN() * -1 | number :'1.2-2' }} </th>
+<th class="espacioB exp3 center" *ngIf="( retornarTotalN() * -1 ) >=1000 &&    ( retornarTotalN() * -1 ) <= 9999  ">       <span  class="letra1000">     L </span>       {{ retornarTotalN() * -1 | number :'1.2-2' }} </th>
+<th class="espacioB exp3 center" *ngIf="( retornarTotalN() * -1 ) >=10000 &&   ( retornarTotalN() * -1 ) <= 99999">       <span  class="letra10000">    L </span>        {{ retornarTotalN() * -1 | number :'1.2-2' }} </th>
+<th class="espacioB exp3 center" *ngIf="( retornarTotalN() * -1 ) >=100000 &&  ( retornarTotalN() * -1 ) <= 999999  ">   <span  class="letra100000">   L </span>         {{ retornarTotalN() * -1 | number :'1.2-2' }} </th>
+<th class="espacioB exp3 center" *ngIf="( retornarTotalN() * -1 ) >=1000000 && ( retornarTotalN() * -1 ) <= 9999999  "> <span  class="letra1000000">  L </span>          {{ retornarTotalN() * -1 | number :'1.2-2' }} </th>
+<th class="espacioB exp3 center" *ngIf="( retornarTotalN() * -1 ) >= 10000000 ">                                                 <span  class="letra10000000"> L </span> {{ retornarTotalN() * -1 | number :'1.2-2' }} </th>
                         </tr>
                     </tfoot>  
                   </table>
@@ -472,7 +470,7 @@
                 <span *ngIf="ruta.snapshot.params['empresa'] == 'AH'" class="rigth correlativo factura">
                     <!-- 000-001-01-{{retornarCorrelativo()}} -->
                     000-002-06-{{retornarCorrelativo()}}            
-            </span>
+            </span> <br>
             <span style="font-size: 1.3em !important; font-weight:  bold !important;"> Fecha: {{ dia }}/{{mesN}}/{{anio}} </span><br><br>
                 <span  class="rigth empresa">  C.A.I: {{parametrosCai[0]['CAI']}} </span> <br>
                 <span style="font-size: 1.3em !important; font-weight:  bold !important;"> Rango Autorizado: </span> <br>
@@ -529,8 +527,8 @@
                         <td data-label="No." class="contenidoF"> {{ i + 1  }} </td>
                         <td data-label="Descripcion" colspan="2" class="contenidoF left"> {{ item?.TCMTRF }} </td>
                         <td data-label="Sub Total" class="contenidoF center"> {{ (item?.IVLDCS * -1 ) | number : '1.2-2' }}</td>
-                        <td data-label="Impuesto"  class="contenidoF center">  {{  ( cabeceraN[0]['IVLIGS'] * -1)  | number : '1.2-2' }}</td>
-                        <td data-label="Monto Total" class="contenidoF center"> {{ (cabeceraN[0]['ITTFCS'] * -1)  | number : '1.2-2' }} </td>
+                        <td data-label="Impuesto"  class="contenidoF center">  {{  calcularImpuesto(item?.IVLDCS)  | number : '1.2-2' }}</td>
+                        <td data-label="Monto Total" class="contenidoF center"> {{ total(item?.IVLDCS)  | number : '1.2-2' }} </td>
                       </tr>
                       
                         <tr  *ngFor="let item of espaciosBlancos"  class="expTable"> 
@@ -574,40 +572,39 @@
                         <tr >
                                 <!-- Número a letras -->
  <th class="rigth exp" colspan="3" > TOTALES </th>
-<th class="espacioB exp2 center" *ngIf="( (DcabeceraN[0]['IVLDCS'] ) * -1 ) <= 0 ">                                                        <span  class="letra0">        L </span> {{ (DcabeceraN[0]['IVLDCS'] ) * -1 | number :'1.2-2' }} </th>
-<th class="espacioB exp2 center" *ngIf="( (DcabeceraN[0]['IVLDCS'] ) * -1 ) >0 && ((DcabeceraN[0]['IVLDCS'] ) * -1 ) <= 99 ">             <span   class="letra0">         L </span> {{ (DcabeceraN[0]['IVLDCS'] ) * -1 | number :'1.2-2' }} </th>
-<th class="espacioB exp2 center" *ngIf="( (DcabeceraN[0]['IVLDCS'] ) * -1 ) >=100 && ((DcabeceraN[0]['IVLDCS'] ) * -1 ) <= 999  ">         <span  class="letra100">      L </span> {{ (DcabeceraN[0]['IVLDCS'] ) * -1 | number :'1.2-2' }} </th>
-<th class="espacioB exp2 center" *ngIf="( (DcabeceraN[0]['IVLDCS'] ) * -1 ) >=1000 && ((DcabeceraN[0]['IVLDCS'] ) * -1 ) <= 9999  ">       <span  class="letra1000">     L </span> {{ (DcabeceraN[0]['IVLDCS'] ) * -1 | number :'1.2-2' }} </th>
-<th class="espacioB exp2 center" *ngIf="( (DcabeceraN[0]['IVLDCS'] ) * -1 ) >=10000 && ((DcabeceraN[0]['IVLDCS'] ) * -1 ) <= 99999">       <span  class="letra10000">    L </span> {{ (DcabeceraN[0]['IVLDCS'] ) * -1 | number :'1.2-2' }} </th>
-<th class="espacioB exp2 center" *ngIf="( (DcabeceraN[0]['IVLDCS'] ) * -1 ) >=100000 && ((DcabeceraN[0]['IVLDCS'] ) * -1 ) <= 999999  ">   <span  class="letra100000">   L </span> {{ (DcabeceraN[0]['IVLDCS'] ) * -1 | number :'1.2-2' }} </th>
-<th class="espacioB exp2 center" *ngIf="( (DcabeceraN[0]['IVLDCS'] ) * -1 ) >=1000000 && ((DcabeceraN[0]['IVLDCS'] ) * -1 ) <= 9999999  "> <span  class="letra1000000">  L </span> {{ (DcabeceraN[0]['IVLDCS'] ) * -1 | number :'1.2-2' }} </th>
-<th class="espacioB exp2 center" *ngIf="( (DcabeceraN[0]['IVLDCS'] ) * -1 ) >= 10000000 ">                                                 <span  class="letra10000000"> L </span> {{ (DcabeceraN[0]['IVLDCS'] ) * -1 | number :'1.2-2' }} </th>
-
+<th class="espacioB exp2 center" *ngIf="( (retornarTotal() ) * -1 ) <= 0 ">                                                        <span  class="letra0">        L </span> {{ retornarTotal() * -1 | number :'1.2-2' }} </th>
+<th class="espacioB exp2 center" *ngIf="( (retornarTotal() ) * -1 ) >0 &&        ( retornarTotal() * -1 ) <= 99 ">             <span   class="letra0">         L </span>   {{ retornarTotal() * -1 | number :'1.2-2' }} </th>
+<th class="espacioB exp2 center" *ngIf="( (retornarTotal() ) * -1 ) >=100 &&     ( retornarTotal() * -1 ) <= 999  ">         <span  class="letra100">      L </span>       {{ retornarTotal() * -1 | number :'1.2-2' }} </th>
+<th class="espacioB exp2 center" *ngIf="( (retornarTotal() ) * -1 ) >=1000 &&    ( retornarTotal() * -1 ) <= 9999  ">       <span  class="letra1000">     L </span>        {{ retornarTotal() * -1 | number :'1.2-2' }} </th>
+<th class="espacioB exp2 center" *ngIf="( (retornarTotal() ) * -1 ) >=10000 &&   ( retornarTotal() * -1 ) <= 99999">       <span  class="letra10000">    L </span>         {{ retornarTotal() * -1 | number :'1.2-2' }} </th>
+<th class="espacioB exp2 center" *ngIf="( (retornarTotal() ) * -1 ) >=100000 &&  ( retornarTotal() * -1 ) <= 999999  ">   <span  class="letra100000">   L </span>          {{ retornarTotal() * -1 | number :'1.2-2' }} </th>
+<th class="espacioB exp2 center" *ngIf="( (retornarTotal() ) * -1 ) >=1000000 && ( retornarTotal() * -1 ) <= 9999999  "> <span  class="letra1000000">  L </span>           {{ retornarTotal() * -1 | number :'1.2-2' }} </th>
+<th class="espacioB exp2 center" *ngIf="( (retornarTotal() ) * -1 ) >= 10000000 ">                                                 <span  class="letra10000000"> L </span> {{ retornarTotal() * -1 | number :'1.2-2' }} </th>
 
 
 <!-- <th class="espacioB center">  {{ ( cabeceraN[0]['IVLIGS'] ) * -1 | number :'1.2-2' }} </th> -->
 
-<th class="espacioB exp2 center" *ngIf="( (cabeceraN [0]['IVLIGS'] ) * -1 ) <= 0 ">                                                        <span  class="letra0">        L </span> {{ (cabeceraN [0]['IVLIGS'] ) * -1 | number :'1.2-2' }} </th>
-<th class="espacioB exp2 center" *ngIf="( (cabeceraN [0]['IVLIGS'] ) * -1 ) >0 && ((cabeceraN [0]['IVLIGS'] ) * -1 ) <= 99 ">             <span  class="letra0">         L </span> {{ (cabeceraN [0]['IVLIGS'] ) * -1 | number :'1.2-2' }} </th>
-<th class="espacioB exp2 center" *ngIf="( (cabeceraN [0]['IVLIGS'] ) * -1 ) >=100 && ((cabeceraN [0]['IVLIGS'] ) * -1 ) <= 999  ">         <span  class="letra100">      L </span> {{ (cabeceraN [0]['IVLIGS'] ) * -1 | number :'1.2-2' }} </th>
-<th class="espacioB exp2 center" *ngIf="( (cabeceraN [0]['IVLIGS'] ) * -1 ) >=1000 && ((cabeceraN [0]['IVLIGS'] ) * -1 ) <= 9999  ">       <span  class="letra1000">     L </span> {{ (cabeceraN [0]['IVLIGS'] ) * -1 | number :'1.2-2' }} </th>
-<th class="espacioB exp2 center" *ngIf="( (cabeceraN [0]['IVLIGS'] ) * -1 ) >=10000 && ((cabeceraN [0]['IVLIGS'] ) * -1 ) <= 99999">       <span  class="letra10000">    L </span> {{ (cabeceraN [0]['IVLIGS'] ) * -1 | number :'1.2-2' }} </th>
-<th class="espacioB exp2 center" *ngIf="( (cabeceraN [0]['IVLIGS'] ) * -1 ) >=100000 && ((cabeceraN [0]['IVLIGS'] ) * -1 ) <= 999999  ">   <span  class="letra100000">   L </span> {{ (cabeceraN [0]['IVLIGS'] ) * -1 | number :'1.2-2' }} </th>
-<th class="espacioB exp2 center" *ngIf="( (cabeceraN [0]['IVLIGS'] ) * -1 ) >=1000000 && ((cabeceraN [0]['IVLIGS'] ) * -1 ) <= 9999999  "> <span  class="letra1000000">  L </span> {{ (cabeceraN [0]['IVLIGS'] ) * -1 | number :'1.2-2' }} </th>
-<th class="espacioB exp2 center" *ngIf="( (cabeceraN [0]['IVLIGS'] ) * -1 ) >= 10000000 ">                                                 <span  class="letra10000000"> L </span> {{ (cabeceraN [0]['IVLIGS'] ) * -1 | number :'1.2-2' }} </th>
+<th class="espacioB exp2 center" *ngIf="( retornarTotalIsv() * -1 ) <= 0 ">                                                        <span  class="letra0">        L </span> {{ retornarTotalIsv() * -1 | number :'1.2-2' }} </th>
+<th class="espacioB exp2 center" *ngIf="( retornarTotalIsv() * -1 ) >0 &&        ( retornarTotalIsv() * -1 ) <= 99 ">             <span  class="letra0">         L </span> {{ retornarTotalIsv() * -1 | number :'1.2-2' }} </th>
+<th class="espacioB exp2 center" *ngIf="( retornarTotalIsv() * -1 ) >=100 &&     ( retornarTotalIsv() * -1 ) <= 999  ">         <span  class="letra100">      L </span>    {{ retornarTotalIsv() * -1 | number :'1.2-2' }} </th>
+<th class="espacioB exp2 center" *ngIf="( retornarTotalIsv() * -1 ) >=1000 &&    ( retornarTotalIsv() * -1 ) <= 9999  ">       <span  class="letra1000">     L </span>     {{ retornarTotalIsv() * -1 | number :'1.2-2' }} </th>
+<th class="espacioB exp2 center" *ngIf="( retornarTotalIsv() * -1 ) >=10000 &&   ( retornarTotalIsv() * -1 ) <= 99999">       <span  class="letra10000">    L </span>      {{ retornarTotalIsv() * -1 | number :'1.2-2' }} </th>
+<th class="espacioB exp2 center" *ngIf="( retornarTotalIsv() * -1 ) >=100000 &&  ( retornarTotalIsv() * -1 ) <= 999999  ">   <span  class="letra100000">   L </span>       {{ retornarTotalIsv() * -1 | number :'1.2-2' }} </th>
+<th class="espacioB exp2 center" *ngIf="( retornarTotalIsv() * -1 ) >=1000000 && ( retornarTotalIsv() * -1 ) <= 9999999  "> <span  class="letra1000000">  L </span>        {{ retornarTotalIsv() * -1 | number :'1.2-2' }} </th>
+<th class="espacioB exp2 center" *ngIf="( retornarTotalIsv() * -1 ) >= 10000000 ">  <span  class="letra10000000"> L </span>                                                {{ retornarTotalIsv() * -1 | number :'1.2-2' }} </th>
 
 
 
 <!-- <th class="espacioB center">  {{ (cabeceraN[0]['ITTFCS'] )  * -1 | number :'1.2-2' }} </th> -->
 
-<th class="espacioB exp3 center" *ngIf="( (cabeceraN [0]['ITTFCS'] ) * -1 ) <= 0 ">                                                        <span  class="letra0">        L </span> {{ (cabeceraN [0]['ITTFCS'] ) * -1 | number :'1.2-2' }} </th>
-<th class="espacioB exp3 center" *ngIf="( (cabeceraN [0]['ITTFCS'] ) * -1 ) >0 && ((cabeceraN [0]['ITTFCS'] ) * -1 ) <= 99 ">             <span  class="letra0">         L </span> {{ (cabeceraN [0]['ITTFCS'] ) * -1 | number :'1.2-2' }} </th>
-<th class="espacioB exp3 center" *ngIf="( (cabeceraN [0]['ITTFCS'] ) * -1 ) >=100 && ((cabeceraN [0]['ITTFCS'] ) * -1 ) <= 999  ">         <span  class="letra100">      L </span> {{ (cabeceraN [0]['ITTFCS'] ) * -1 | number :'1.2-2' }} </th>
-<th class="espacioB exp3 center" *ngIf="( (cabeceraN [0]['ITTFCS'] ) * -1 ) >=1000 && ((cabeceraN [0]['ITTFCS'] ) * -1 ) <= 9999  ">       <span  class="letra1000">     L </span> {{ (cabeceraN [0]['ITTFCS'] ) * -1 | number :'1.2-2' }} </th>
-<th class="espacioB exp3 center" *ngIf="( (cabeceraN [0]['ITTFCS'] ) * -1 ) >=10000 && ((cabeceraN [0]['ITTFCS'] ) * -1 ) <= 99999">       <span  class="letra10000">    L </span> {{ (cabeceraN [0]['ITTFCS'] ) * -1 | number :'1.2-2' }} </th>
-<th class="espacioB exp3 center" *ngIf="( (cabeceraN [0]['ITTFCS'] ) * -1 ) >=100000 && ((cabeceraN [0]['ITTFCS'] ) * -1 ) <= 999999  ">   <span  class="letra100000">   L </span> {{ (cabeceraN [0]['ITTFCS'] ) * -1 | number :'1.2-2' }} </th>
-<th class="espacioB exp3 center" *ngIf="( (cabeceraN [0]['ITTFCS'] ) * -1 ) >=1000000 && ((cabeceraN [0]['ITTFCS'] ) * -1 ) <= 9999999  "> <span  class="letra1000000">  L </span> {{ (cabeceraN [0]['ITTFCS'] ) * -1 | number :'1.2-2' }} </th>
-<th class="espacioB exp3 center" *ngIf="( (cabeceraN [0]['ITTFCS'] ) * -1 ) >= 10000000 ">                                                 <span  class="letra10000000"> L </span> {{ (cabeceraN [0]['ITTFCS'] ) * -1 | number :'1.2-2' }} </th>
+<th class="espacioB exp3 center" *ngIf="( retornarTotalN() * -1 ) <= 0 ">                                                        <span  class="letra0">        L </span> {{ retornarTotalN() * -1 | number :'1.2-2' }} </th>
+<th class="espacioB exp3 center" *ngIf="( retornarTotalN() * -1 ) >0 &&        ( retornarTotalN() * -1 ) <= 99 ">             <span  class="letra0">         L </span>   {{ retornarTotalN() * -1 | number :'1.2-2' }} </th>
+<th class="espacioB exp3 center" *ngIf="( retornarTotalN() * -1 ) >=100 &&     ( retornarTotalN() * -1 ) <= 999  ">         <span  class="letra100">      L </span>      {{ retornarTotalN() * -1 | number :'1.2-2' }} </th>
+<th class="espacioB exp3 center" *ngIf="( retornarTotalN() * -1 ) >=1000 &&    ( retornarTotalN() * -1 ) <= 9999  ">       <span  class="letra1000">     L </span>       {{ retornarTotalN() * -1 | number :'1.2-2' }} </th>
+<th class="espacioB exp3 center" *ngIf="( retornarTotalN() * -1 ) >=10000 &&   ( retornarTotalN() * -1 ) <= 99999">       <span  class="letra10000">    L </span>        {{ retornarTotalN() * -1 | number :'1.2-2' }} </th>
+<th class="espacioB exp3 center" *ngIf="( retornarTotalN() * -1 ) >=100000 &&  ( retornarTotalN() * -1 ) <= 999999  ">   <span  class="letra100000">   L </span>         {{ retornarTotalN() * -1 | number :'1.2-2' }} </th>
+<th class="espacioB exp3 center" *ngIf="( retornarTotalN() * -1 ) >=1000000 && ( retornarTotalN() * -1 ) <= 9999999  "> <span  class="letra1000000">  L </span>          {{ retornarTotalN() * -1 | number :'1.2-2' }} </th>
+<th class="espacioB exp3 center" *ngIf="( retornarTotalN() * -1 ) >= 10000000 ">                                                 <span  class="letra10000000"> L </span> {{ retornarTotalN() * -1 | number :'1.2-2' }} </th>
                         </tr>
                     </tfoot>  
                   </table>
