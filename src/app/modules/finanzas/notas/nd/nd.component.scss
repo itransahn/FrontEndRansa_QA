@@ -1,16 +1,4 @@
-.completo{
-    font-size: small ;
 
-	.correlativo{
-		color:#FE9600 !important;
-	}
-
-	
-	.factura{
-		font-size: 1.6em !important;
-	}
-
-}
 
 
 .empresa{
@@ -40,8 +28,12 @@
 		border : 1.5px solid #050404 !important;
 	}
 
+	.rtn{
+		font-size: 1.1em !important;
+	}
+
 	.factura{
-		font-size: 1.3em !important;
+		font-size: 1.6em !important;
 	}
 
 	.exp{
@@ -101,9 +93,6 @@
 	z-index: 99;
     box-shadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2), 0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12);
 }
-// $verde-primario  : #006F1D;
-// $verde-secundario: #008F4C;
-// $verde-tercero   : #00A72C;
 
 .btn-flotante:hover {
 	background-color: #00A72C; /* Color de fondo al pasar el cursor */
@@ -122,7 +111,6 @@
 
 .espacioB{
 	width: 100% !important;
-	// border-color: #050404 !important;
   }
 
 .contain1{
@@ -227,7 +215,16 @@ table{
 
   }
 
-  
+  /* Alineacion */
+.left{  text-align: left !important;}
+
+.right{ text-align: right !important; } 
+
+
+.center{   
+	text-align: center !important;
+}
+
   table tfoot{
 	border-left  : 0.1px solid #050404 !important;
 	border-bottom: 0.1px solid #050404 !important;
@@ -385,7 +382,7 @@ table{
 	
 		
 		.factura{
-			font-size: 1.4em !important;
+			font-size: 1.6em !important;
 		}
 	
 		

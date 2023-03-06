@@ -6,7 +6,7 @@
                 <img *ngIf="sede == 2" src="../../../../../assets/images/Almahsa.png" class="img" alt="">
                 <p class = "black empresa">
                     <span class="nombre" > {{parametros[0]?.['nombreCompleto']}}</span> <br>
-                    <span > RTN: {{parametros[0]?.['rtnEmpresa']}}</span>  <br>
+                    <span class="rtn"> RTN: {{parametros[0]?.['rtnEmpresa']}}</span>  <br>
                      {{parametros[0]?.['direccion1']}} {{ parametros[0]?.['direccion2']}} <br>
                      Municipio: {{ parametros[0]?.['municipio']}}, Departamento: {{ parametros[0]?.['Departamento']}} <br> 
                      Tel: {{parametros[0]?.['Telfijo']}}, {{parametros[0]?.['TelCel']}}  <br>
@@ -25,12 +25,12 @@
                     <!-- 000-001-01-{{retornarCorrelativo()}} -->
                     000-002-06-{{retornarCorrelativo()}}            
             </span>  
-            <span style="font-size: 1.5em !important; font-weight:  bold !important;"> Fecha: {{ dia }}/{{mesN}}/{{anio}} </span><br><br>
-                <span  class="rigth empresa">  C.A.I: {{parametrosCai[0]['CAI']}} </span> <br>
-                <span style="font-size: 1.4em !important; font-weight:  bold !important;"> Rango Autorizado: </span> <br>
-                <span  class="rigth empresa"> {{parametrosCai[0]['desde']}} - {{parametrosCai[0]['hasta']}} </span> <br>
-                <span style="font-size: 1.4em !important; font-weight:  bold !important;">Fecha Limite De Emisión: {{ parametrosCai[0]['fechaLimite'] | date: 'dd/MM/yyyy'}} </span> <br>
-                 <!-- <span class="rigth empresa"> Fecha Limite de Emisión : {{ parametrosCai[0]['fechaLimite'] | date : 'dd/MM/yyyy' }} </span> -->
+            <span style="font-size: 1.3em !important; font-weight:  bold !important;"> Fecha: {{ dia }}/{{mesN}}/{{anio}} </span><br><br>
+            <span  class="rigth empresa">  C.A.I: {{parametrosCai[0]['CAI']}} </span> <br>
+            <span style="font-size: 1.3em !important; font-weight:  bold !important;"> Rango Autorizado: </span> <br>
+            <span  class="rigth empresa"> {{parametrosCai[0]['desde']}} - {{parametrosCai[0]['hasta']}} </span> <br>
+            <span style="font-size: 1.3em !important; font-weight:  bold !important;">Fecha Limite De Emisión: {{ parametrosCai[0]['fechaLimite'] | date: 'dd/MM/yyyy'}} </span> <br>
+             <!-- <span class="rigth empresa"> Fecha Limite de Emisión : {{ parametrosCai[0]['fechaLimite'] | date : 'dd/MM/yyyy' }} </span> -->
                 </p>
             </div>
 
@@ -221,11 +221,11 @@
     <mat-card class="cardPersonalizada">
         <div class="row">
             <div class="col-md-6">
-                <img *ngIf="sede == 1" src="../../../../assets/images/LOGO_RANSA_BN.png" class="img" alt="">
-                <img *ngIf="sede == 2" src="../../../../../assets/images/Almahsa_BN.png" class="img" alt="">
+                <img *ngIf="sede == 1" src="../../../../assets/images/logoRansa.ico"  class="img" alt="">
+                <img *ngIf="sede == 2" src="../../../../../assets/images/Almahsa.png" class="img" alt="">
                 <p class = "black empresa">
                     <span class="nombre" > {{parametros[0]?.['nombreCompleto']}}</span> <br>
-                    <span > RTN: {{parametros[0]?.['rtnEmpresa']}}</span>  <br>
+                    <span class="rtn"> RTN: {{parametros[0]?.['rtnEmpresa']}}</span>  <br>
                      {{parametros[0]?.['direccion1']}} {{ parametros[0]?.['direccion2']}} <br>
                      Municipio: {{ parametros[0]?.['municipio']}}, Departamento: {{ parametros[0]?.['Departamento']}} <br> 
                      Tel: {{parametros[0]?.['Telfijo']}}, {{parametros[0]?.['TelCel']}}  <br>
@@ -244,14 +244,13 @@
                     <!-- 000-001-01-{{retornarCorrelativo()}} -->
                     000-002-06-{{retornarCorrelativo()}}            
             </span>   
-             <span style="font-size: 1.5em !important; font-weight:  bold !important;"> Fecha: {{ dia }}/{{mesN}}/{{anio}} </span><br><br>
-
-                <span  class="rigth empresa">  C.A.I: {{parametrosCai[0]['CAI']}} </span> <br>
-                <span style="font-size: 1.4em !important; font-weight:  bold !important;"> Rango Autorizado: </span> <br>
-                <span  class="rigth empresa"> {{parametrosCai[0]['desde']}} - {{parametrosCai[0]['hasta']}} </span> <br>
-                <span style="font-size: 1.4em !important; font-weight:  bold !important;">Fecha Limite De Emisión: {{ parametrosCai[0]['fechaLimite'] | date: 'dd/MM/yyyy'}} </span> <br>
-                 <!-- <span class="rigth empresa"> Fecha Limite de Emisión : {{ parametrosCai[0]['fechaLimite'] | date : 'dd/MM/yyyy' }} </span> -->
-                </p>
+            <span style="font-size: 1.3em !important; font-weight:  bold !important;"> Fecha: {{ dia }}/{{mesN}}/{{anio}} </span><br><br>
+            <span  class="rigth empresa">  C.A.I: {{parametrosCai[0]['CAI']}} </span> <br>
+            <span style="font-size: 1.3em !important; font-weight:  bold !important;"> Rango Autorizado: </span> <br>
+            <span  class="rigth empresa"> {{parametrosCai[0]['desde']}} - {{parametrosCai[0]['hasta']}} </span> <br>
+            <span style="font-size: 1.3em !important; font-weight:  bold !important;">Fecha Limite De Emisión: {{ parametrosCai[0]['fechaLimite'] | date: 'dd/MM/yyyy'}} </span> <br>
+             <!-- <span class="rigth empresa"> Fecha Limite de Emisión : {{ parametrosCai[0]['fechaLimite'] | date : 'dd/MM/yyyy' }} </span> -->
+      </p>
             </div>
 
             <!-- Detalle de la generación  -->
@@ -443,12 +442,12 @@
 <div class="container  mt-4" id="tercera" *ngIf="loading && loading1">
     <mat-card class="cardPersonalizada">
         <div class="row">
-            <div class="col-md-6"> 
-                <img *ngIf="sede == 1" src="../../../../assets/images/LOGO_RANSA_BN.png" class="img" alt="">
-                <img *ngIf="sede == 2" src="../../../../../assets/images/Almahsa_BN.png" class="img" alt="">
+            <div class="col-md-6">
+                <img *ngIf="sede == 1" src="../../../../assets/images/logoRansa.ico"  class="img" alt="">
+                <img *ngIf="sede == 2" src="../../../../../assets/images/Almahsa.png" class="img" alt="">
                 <p class = "black empresa">
                     <span class="nombre" > {{parametros[0]?.['nombreCompleto']}}</span> <br>
-                    <span > RTN: {{parametros[0]?.['rtnEmpresa']}}</span>  <br>
+                    <span class="rtn"> RTN: {{parametros[0]?.['rtnEmpresa']}}</span>  <br>
                      {{parametros[0]?.['direccion1']}} {{ parametros[0]?.['direccion2']}} <br>
                      Municipio: {{ parametros[0]?.['municipio']}}, Departamento: {{ parametros[0]?.['Departamento']}} <br> 
                      Tel: {{parametros[0]?.['Telfijo']}}, {{parametros[0]?.['TelCel']}}  <br>
@@ -466,13 +465,14 @@
                 <span *ngIf="ruta.snapshot.params['empresa'] == 'AH'" class="rigth factura">
                     <!-- 000-001-01-{{retornarCorrelativo()}} -->
                     000-002-06-{{retornarCorrelativo()}}            
-            </span>    <span style="font-size: 1.5em !important; font-weight:  bold !important;"> Fecha: {{ dia }}/{{mesN}}/{{anio}} </span><br><br>
-
-                <span  class="rigth empresa">  C.A.I: {{parametrosCai[0]['CAI']}} </span> <br>
-                <span style="font-size: 1.4em !important; font-weight:  bold !important;"> Rango Autorizado: </span> <br>
-                <span  class="rigth empresa"> {{parametrosCai[0]['desde']}} - {{parametrosCai[0]['hasta']}} </span> <br>
-                <span style="font-size: 1.4em !important; font-weight:  bold !important;">Fecha Limite De Emisión: {{ parametrosCai[0]['fechaLimite'] | date: 'dd/MM/yyyy'}} </span> <br>
-                 <!-- <span class="rigth empresa"> Fecha Limite de Emisión : {{ parametrosCai[0]['fechaLimite'] | date : 'dd/MM/yyyy' }} </span> -->
+            </span>   
+            <span style="font-size: 1.3em !important; font-weight:  bold !important;"> Fecha: {{ dia }}/{{mesN}}/{{anio}} </span><br><br>
+            <span  class="rigth empresa">  C.A.I: {{parametrosCai[0]['CAI']}} </span> <br>
+            <span style="font-size: 1.3em !important; font-weight:  bold !important;"> Rango Autorizado: </span> <br>
+            <span  class="rigth empresa"> {{parametrosCai[0]['desde']}} - {{parametrosCai[0]['hasta']}} </span> <br>
+            <span style="font-size: 1.3em !important; font-weight:  bold !important;">Fecha Limite De Emisión: {{ parametrosCai[0]['fechaLimite'] | date: 'dd/MM/yyyy'}} </span> <br>
+             <!-- <span class="rigth empresa"> Fecha Limite de Emisión : {{ parametrosCai[0]['fechaLimite'] | date : 'dd/MM/yyyy' }} </span> -->
+     
                 </p>
             </div>
 
