@@ -90,7 +90,7 @@ cargarCabeceraN(){
       Documento : Number(this.documento)
     }
     let params = {
-     "query": `CALL DC@HONLIB.SP_AWS_LISTA_FACTURA('${paramsE['Empresa']}', 3,  ${paramsE['Cliente']},${paramsE['Documento']},20200101, ${this.anioActual}1231)`,
+     "query": `CALL DC@HONLIB.SP_AWS_LISTA_FACTURA('${paramsE['Empresa']}', 3,  ${paramsE['Cliente']},${paramsE['Documento']},20180101, ${this.anioActual}1231)`,
       "env": "PRD"
     }
   this.facturacionS.As400( params ).subscribe(
