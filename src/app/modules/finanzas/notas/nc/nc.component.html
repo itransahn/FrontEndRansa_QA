@@ -16,7 +16,7 @@
     
             <div class="col-md-6 mt-4 rigth">
                 <p class="black">
-                <span class="rigth factura">NOTA DE CREDITO </span> <br>
+                <span class="rigth factura">NOTA DE CREDITO </span>
                 <span *ngIf="ruta.snapshot.params['empresa'] == 'RH'" class="rigth correlativo factura">
                         <!-- 000-001-01-{{retornarCorrelativo()}} -->
                         000-001-06-{{retornarCorrelativo()}}            
@@ -226,8 +226,8 @@
     <mat-card class="cardPersonalizada">
         <div class="row">
             <div class="col-md-6">
-                <img *ngIf="sede == 1" src="../../../../assets/images/logoRansa.ico"  class="img" alt="">
-                <img *ngIf="sede == 2" src="../../../../../assets/images/Almahsa.png" class="img" alt="">
+                <img *ngIf="sede == 1" src="../../../../assets/images/LOGO_RANSA_BN.png" class="img" alt="">
+                <img *ngIf="sede == 2" src="../../../../../assets/images/Almahsa_BN.png" class="img" alt="">
                 <p class = "black empresa">
                     <span class="nombre" > {{parametros[0]?.['nombreCompleto']}}</span> <br>
                     <span class="rtn"> RTN: {{parametros[0]?.['rtnEmpresa']}}</span>  <br>
@@ -240,12 +240,12 @@
 
             <div class="col-md-6 mt-4 rigth">
                 <p class="black">
-                <span class="rigth factura">NOTA DE CREDITO </span> <br>
-                <span *ngIf="ruta.snapshot.params['empresa'] == 'RH'" class="rigth correlativo factura">
+                <span class="rigth factura">NOTA DE CREDITO </span>
+                <span *ngIf="ruta.snapshot.params['empresa'] == 'RH'" class="rigth factura">
                         <!-- 000-001-01-{{retornarCorrelativo()}} -->
                         000-001-06-{{retornarCorrelativo()}}            
                 </span> <br>
-                <span *ngIf="ruta.snapshot.params['empresa'] == 'AH'" class="rigth correlativo factura">
+                <span *ngIf="ruta.snapshot.params['empresa'] == 'AH'" class="rigth factura">
                     <!-- 000-001-01-{{retornarCorrelativo()}} -->
                     000-002-06-{{retornarCorrelativo()}}            
             </span> <br>
@@ -448,8 +448,8 @@
     <mat-card class="cardPersonalizada">
         <div class="row">
             <div class="col-md-6">
-                <img *ngIf="sede == 1" src="../../../../assets/images/logoRansa.ico"  class="img" alt="">
-                <img *ngIf="sede == 2" src="../../../../../assets/images/Almahsa.png" class="img" alt="">
+                <img *ngIf="sede == 1" src="../../../../assets/images/LOGO_RANSA_BN.png" class="img" alt="">
+                <img *ngIf="sede == 2" src="../../../../../assets/images/Almahsa_BN.png" class="img" alt="">
                 <p class = "black empresa">
                     <span class="nombre" > {{parametros[0]?.['nombreCompleto']}}</span> <br>
                     <span class="rtn"> RTN: {{parametros[0]?.['rtnEmpresa']}}</span>  <br>
@@ -462,12 +462,12 @@
     
 <div class="col-md-6 mt-4 rigth">
                 <p class="black">
-                <span class="rigth factura">NOTA DE CREDITO </span> <br>
-                <span *ngIf="ruta.snapshot.params['empresa'] == 'RH'" class="rigth correlativo factura">
+                <span class="rigth factura">NOTA DE CREDITO </span>
+                <span *ngIf="ruta.snapshot.params['empresa'] == 'RH'" class="rigth factura">
                         <!-- 000-001-01-{{retornarCorrelativo()}} -->
                         000-001-06-{{retornarCorrelativo()}}            
                 </span> <br>
-                <span *ngIf="ruta.snapshot.params['empresa'] == 'AH'" class="rigth correlativo factura">
+                <span *ngIf="ruta.snapshot.params['empresa'] == 'AH'" class="rigth factura">
                     <!-- 000-001-01-{{retornarCorrelativo()}} -->
                     000-002-06-{{retornarCorrelativo()}}            
             </span> <br>
