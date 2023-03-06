@@ -475,12 +475,6 @@ thead{
 		border-left:    0.1px solid #050404 !important;
 		border-top:     3.9px solid #050404 !important;
 	}
-	// .exp{
-	// 	border-bottom: 1px solid #050404 !important;
-	// 	border-left:   1px solid #050404 !important;
-	// 	border-right:  none !important;
-	// 	border-top:    1px solid #050404 !important;
-	// }
 
 		.exp{
 			border-left:     0.1px solid #050404 !important;
@@ -491,8 +485,6 @@ thead{
 			border-bottom:     0.1px solid #050404 !important;
 			padding-left: 0.3% !important;
 		}
-		// border-right:  none !important;
-
 
 	.detalletfoot{
 		border-bottom:  none !important;
@@ -502,11 +494,18 @@ thead{
 	}
 
 	.detalletfootR{
-		border-bottom:  0.1px solid #050404 !important;
+		border-bottom:  none !important;
+		border-left:    none !important;
+		border-right:   0.1px solid #050404 !important;
+		border-top:     0.1px solid #050404 !important;
+	}
+	.detalletfootREspeci{
+		border-bottom:  none !important;
 		border-left:    none !important;
 		border-right:   0.1px solid #050404 !important;
 		border-top:     none !important;
 	}
+
 	.detalletEspecial{
 		border-bottom:  0.1px solid #050404 !important;
 	}	
@@ -517,28 +516,7 @@ thead{
 		border-top:     none !important;
 	}
 
-	// 	tr{
-	// 		background-color: #ffffff !important;	
-	// 		font-size: 0.9em;
-	// 		.bordeIz{
-	// 	border-bottom-style: none !important;
-	// 				}
-	// 			.borderRg{
-	// 				border: 0.1 solid #050404;
-	// 					 }
-	// 	}
 
-	// th{
-	// 		border-style: outset !important;
-	// 		// border-color: #050404;
-	// 		// border: 0.1px;
-	// 		background-color: #ffffff !important;
-	// 	font-size: 1em !important;	
-	// 	height: 5% !important;
-	// }
-	// .bordeIz{
-	// 	border-bottom-style: none !important;
-	//  }
 	}
 
   
