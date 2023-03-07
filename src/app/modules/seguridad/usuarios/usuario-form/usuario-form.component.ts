@@ -55,8 +55,8 @@ export class UsuarioFormComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.cargarForm();
     this.cargarCatalogo();
+    this.cargarForm();
     this.validarRuta()
   }
 
