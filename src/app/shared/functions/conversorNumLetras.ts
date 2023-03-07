@@ -299,7 +299,7 @@ export let numeroALetras = (function() {
                 letrasMonedaCentavoSingular: currency.centSingular || 'Centavo'
             };
     
-            if (data.centavos > 0) {
+            if (data.centavos >= 0) {
                 data.letrasCentavos = 'CON ' + (function () {
                         // if (data.centavos == 1)
                         //     return Millones(data.centavos) + ' ' + data.letrasMonedaCentavoSingular;
