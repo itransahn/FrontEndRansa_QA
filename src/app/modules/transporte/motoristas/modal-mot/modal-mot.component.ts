@@ -11,6 +11,8 @@ import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/materia
 import * as _moment       from 'moment';
 import * as _rollupMoment from 'moment';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import { map, Observable, startWith } from 'rxjs';
+import { SharedService } from 'src/app/modules/shared/shared.service';
 const moment = _rollupMoment || _moment;
 
 
@@ -44,14 +46,17 @@ export class ModalMotComponent implements OnInit {
   public  catalogoF  : any;
   public  titulo     : string;
   public  subtitulo  : string;
-  public  mask = mask
+  public  mask = mask;
+  public idValor : number;
+  filteredOptions : Observable<any[]>;
 
   constructor(
     private dialogRef:MatDialogRef<ModalMotComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any, 
     public auth : AuthService,
     public toast: ToastServiceLocal, 
-    public transporteService : TransporteService
+    public transporteService : TransporteService,
+    public sharedS : SharedService
   ) { }
 
 
@@ -59,8 +64,20 @@ export class ModalMotComponent implements OnInit {
     this.catalogo = this.auth.returnCatalogo();
     this.catalogoF = this.transporteService.returnCatalogo();
     this.validacion();
+    this.idValor = this.data?.['idTransportista'];
+    this.filteredOptions =  this.modalForm.get('transportista').valueChanges.pipe(
+      startWith(''),
+      map(value => {
+      const  proveedor = typeof value === 'string' ? value : value?.proveedor;
+      return  this.sharedS._filter(this.catalogoF?.['transportes'], proveedor, 'nombreEmpresa')
+      }),
+    );
+    
   }
 
+  setearValor( data ?: any){
+    this.idValor = data?.idTransportista;
+      }
   validacion(){
     if ( this.data['bandera'] == 1 ){
       this.enable     = true;
@@ -127,7 +144,7 @@ nombre     : this.data['Nombre'],
 celular    : this.data['celular'],
 identidad  : this.data['identidad'],
 vencimientoLicencia : this.data['FechaVencimientoLicencia'],
-transportista   : this.data['idTransportista']
+transportista   : this.data['nombreEmpresa']
   })
 }
 
@@ -139,7 +156,7 @@ transportista   : this.data['idTransportista']
       licencia  : this.modalForm.value.identidad, 
       vencimientoLicencia   : this.modalForm.value.vencimientoLicencia , 
       identidad   :   this.modalForm.value.identidad , 
-      transportista  :   this.modalForm.value.transportista , 
+      transportista  :  this.idValor, 
       usuario :  this.auth.dataUsuario['id_usuario'], 
     } 
     this.transporteService.put(url,params).subscribe(
@@ -167,7 +184,7 @@ actualizar(){
     licencia  : this.modalForm.value.identidad, 
     vencimientoLicencia   : this.modalForm.value.vencimientoLicencia , 
     identidad   :   this.modalForm.value.identidad , 
-    transportista  :   this.modalForm.value.transportista , 
+    transportista  :   this.idValor , 
     usuario :  this.auth.dataUsuario['id_usuario'], 
   } 
   this.transporteService.put( url,params ).subscribe(

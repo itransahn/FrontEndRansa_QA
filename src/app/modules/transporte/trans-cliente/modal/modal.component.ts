@@ -1,7 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { map, Observable, startWith } from 'rxjs';
 import { mensajes } from 'src/app/interfaces/generales';
+import { SharedService } from 'src/app/modules/shared/shared.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ToastServiceLocal } from 'src/app/services/toast.service';
 import { TransporteService } from '../../transporte.service';
@@ -18,21 +20,35 @@ export class ModalComponent implements OnInit {
   public  botton     : boolean = false;
   public  catalogo  : any;
   public  titulo    : string;
-  public  subtitulo : string;
+  public  subtitulo : string; 
+   public  idValor    : number;
+  filteredOptions : Observable<any[]>;
 
   constructor(
     private dialogRef:MatDialogRef<ModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any, 
     public auth        :AuthService,
     public toast       :ToastServiceLocal,
-    public transporteS : TransporteService
+    public transporteS : TransporteService,
+    public sharedS : SharedService
   ) { }
 
   ngOnInit(){
     this.catalogo = this.transporteS.returnCatalogo()
     this.validacion();
+    this.filteredOptions =  this.modalForm.get('transporte').valueChanges.pipe(
+      startWith(''),
+      map(value => {
+      const  proveedor = typeof value === 'string' ? value : value?.proveedor;
+      return  this.sharedS._filter(this.catalogo?.['transportes'],proveedor, 'nombreEmpresa')
+      }),
+    );
   }
 
+  setearValor( data ?: any){
+    this.idValor = data?.idTransportista;
+      }
+  
   validacion(){
 
     if ( this.data['bandera'] == 2 ){
@@ -59,7 +75,7 @@ submit(){
    for( let i=0 ; i < array.length; i++) {
     let url    = 'transporte/clienteTransporte';
     let params = {
-      transporte : this.modalForm.value.transporte,
+      transporte : this.idValor,
       cliente    : array[i]
     };
     this.transporteS.put(url,params).subscribe(
@@ -68,8 +84,6 @@ submit(){
             if ( res?.data.Table0[0]['codigo'] == -1 ){
                 this.toast.mensajeWarning(String(res?.data.Table0[0]['Mensaje']), mensajes.warning);
             }else{
-              // this.toast.mensajeSuccess(String(res?.data.Table0[0]['Mensaje']), mensajes.success);
-              // this.dialogRef.close();
             }
               }else{
           this.toast.mensajeError(String(res?.errors),"Error")

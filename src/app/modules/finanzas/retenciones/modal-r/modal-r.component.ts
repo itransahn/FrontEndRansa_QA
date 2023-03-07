@@ -14,6 +14,7 @@ import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { mesesd } from 'src/app/data/data';
 import { FacturacionService } from '../../facturacion.service';
 import { map, Observable, startWith } from 'rxjs';
+import { SharedService } from 'src/app/modules/shared/shared.service';
 
 const moment = _rollupMoment || _moment;
 export const MY_FORMATS = {
@@ -78,47 +79,37 @@ export class ModalRComponent implements OnInit {
     }
   ]
 
-  public dias = [
-    {
-      idDia : 28,
-      dia   : '28'
-    },
-    {
-      idDia : 29,
-      dia   : '29'
-    },
-    {
-      idDia : 30,
-      dia   : '30'
-    },
-    {
-      idDia : 31,
-      dia   : '31'
-    },
-  ]
+ 
   constructor(
     private dialogRef:MatDialogRef<ModalRComponent>, 
     public auth:AuthService,
     public seguridad : SeguridadService, 
     public servicio : FacturacionService,
+    public sharedS  : SharedService
     // @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
   ngOnInit(){
     this.formMenu();
     this.cargarProveedores();
-    this.filteredOptions =  this.menuForm.get('proveedor').valueChanges.pipe(
+
+
+    // this.filteredOptions =  this.menuForm.get('proveedor').valueChanges.pipe(
+    //   startWith(''),
+    //   map(value => {
+    //   const  proveedor = typeof value === 'string' ? value : value?.proveedor;
+    //   return  this._filter(proveedor || '')
+    //   }),
+    // );
+
+
+     this.filteredOptions =  this.menuForm.get('proveedor').valueChanges.pipe(
       startWith(''),
       map(value => {
       const  proveedor = typeof value === 'string' ? value : value?.proveedor;
-      return  this._filter(proveedor || '')
+      return  this.sharedS._filter(this.proveedores,proveedor, 'proveedor')
       }),
     );
-
-    // this.filteredOptions = this.myControl.valueChanges.pipe(
-    //   startWith(''),
-    //   map(value => this._filter(value || '')),
-    // );
 
   }
   

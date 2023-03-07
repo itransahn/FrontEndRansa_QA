@@ -38,31 +38,33 @@
             
 
                 <div  class="col-md-6 container" >
-                    <mat-form-field  appearance="legacy">
-                        <mat-label>Transporte</mat-label>
-
-                        
-                        <!-- <input 
-                        type="text"
-                        placeholder="Selecciona uno"
-                        aria-label="Transporte"
-                        matInput
-                        formControlName ="transporte"
-                        [matAutocomplete]="auto">
-                   <mat-autocomplete #auto="matAutocomplete">
-                   <mat-option *ngFor="let tu of filteredOptions | async" [value]="tu?.nombreEmpresa">
-                    {{  tu?.nombreEmpresa | uppercase }}
-                   </mat-option>
-                 </mat-autocomplete> -->
-
-                        
-                        <mat-select  formControlName="transporte" > 
+                    <!-- <mat-form-field  appearance="legacy">
+                        <mat-label>Transporte</mat-label> <mat-select  formControlName="transporte" > 
                             <mat-option *ngFor="let tu of catalogoT['transportes']" [value]="tu?.idTransportista">
                                 {{  tu?.nombreEmpresa | uppercase }}
                             </mat-option> 
                           </mat-select> 
 
-        </mat-form-field>
+        </mat-form-field> -->
+
+        <mat-form-field appearance="legacy">
+            <mat-label>Transporte</mat-label>
+            <input type="text"
+                   placeholder="Transporte"
+                   matInput
+                   formControlName="transporte"
+                   [matAutocomplete]="auto">
+            <mat-autocomplete  #auto="matAutocomplete">
+                <div  *ngFor="let option of filteredOptions | async" >
+                    <div>
+                        <mat-option value=" {{option.nombreEmpresa}}" (click)="setearValor(option)" (keyup.enter)="setearProveedor(option)">
+                        {{  option?.nombreEmpresa | uppercase }}        
+                        </mat-option>
+                    </div>
+                </div>            
+            </mat-autocomplete>
+          </mat-form-field>
+
                 </div>
 
                 <!-- <div  class="col-md-6 container" >

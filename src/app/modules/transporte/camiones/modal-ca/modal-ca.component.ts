@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { map, Observable, startWith } from 'rxjs';
 import { mask, mensajes } from 'src/app/interfaces/generales';
+import { SharedService } from 'src/app/modules/shared/shared.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ToastServiceLocal } from 'src/app/services/toast.service';
 import { TransporteService } from '../../transporte.service';
@@ -28,8 +29,10 @@ export class ModalCaComponent implements OnInit {
   public  catalogoT  : any;
   public  titulo     : string;
   public  subtitulo  : string;
-  public  mask       = mask
-  filteredOptions : Observable<Transportes[]>;
+  public  mask       = mask;
+  public  idValor    : number;
+  filteredOptions : Observable<any[]>;
+
   public opciones  = [
     {
       id    : 0,
@@ -47,7 +50,8 @@ export class ModalCaComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any, 
     public auth : AuthService,
     public toast: ToastServiceLocal, 
-    public transporteService : TransporteService
+    public transporteService : TransporteService,
+    public sharedS : SharedService
   ) { }
 
 
@@ -55,16 +59,18 @@ export class ModalCaComponent implements OnInit {
     this.catalogoT = this.transporteService.returnCatalogo();
     this.catalogo  = this.auth.returnCatalogo();
     this.validacion();
-    // this.Autocomplete();
+    this.filteredOptions =  this.modalForm.get('transporte').valueChanges.pipe(
+      startWith(''),
+      map(value => {
+      const  proveedor = typeof value === 'string' ? value : value?.proveedor;
+      return  this.sharedS._filter(this.catalogoT?.['transportes'],proveedor, 'nombreEmpresa')
+      }),
+    );
+
+
   }
 
-  Autocomplete (){
-    this.filteredOptions = this.modalForm.get('transporte')!.valueChanges
-    .pipe(
-      startWith(''),
-      map( (value:string) => this._filterGroup(value))
-    )
-  }
+
   
   private _filterGroup(value: string): Transportes[] {
     if (value) {
@@ -163,14 +169,16 @@ cargarFormPut(){
   })
 }
 
-
+setearValor( data ?: any){
+  this.idValor = data?.idTransportista;
+    }
 
 SetForm(){
 this.modalForm.setValue({
   // camion       :  this.data['camion'], 
   tipoUnidad   :  this.data['idUnidad'], 
   placa        :  this.data['placa'], 
-  transporte   :  this.data['idTransportista'], 
+  transporte   :  this.data?.['transporte'], 
   gps          :  this.data['GPS'], 
   rampa        :  this.data['Rampa'], 
   refrigerado  :  this.data['Refrigerado'], 
@@ -191,7 +199,7 @@ this.modalForm.setValue({
       // descripcionCamion  : this.modalForm.value.camion,
       tipoUnidad         : this.modalForm.value.tipoUnidad,
       placa              : this.modalForm.value.placa,
-      idTransportista    : this.modalForm.value.transporte,
+      idTransportista    : this.idValor,
       gps                : this.modalForm.value.gps,
       rampa              : this.modalForm.value.rampa,
       refrigerado        : this.modalForm.value.refrigerado,
@@ -226,7 +234,7 @@ actualizar(){
     idCamion           : this.data['idCamion'],
     tipoUnidad         : this.modalForm.value.tipoUnidad,
     placa              : this.modalForm.value.placa,
-    idTransportista    : this.modalForm.value.transporte,
+    idTransportista    : this.idValor,
     gps                : this.modalForm.value.gps,
     rampa              : this.modalForm.value.rampa,
     refrigerado        : this.modalForm.value.refrigerado,

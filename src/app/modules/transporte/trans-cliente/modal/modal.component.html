@@ -11,14 +11,22 @@
         <form [formGroup]="modalForm" #f="ngForm" style="margin-top: 2%;">
             <div class="row">
                 <div  class="col-md-12 container" >
-                    <mat-form-field *ngIf="visible" appearance="legacy">
+                      <mat-form-field appearance="legacy">
                         <mat-label>Transporte</mat-label>
-                        <mat-select  formControlName="transporte" > 
-                            <!-- <mat-option> - </mat-option>  -->
-                            <mat-option  *ngFor="let transporte of catalogo['transportes']" [value]="transporte?.idTransportista">
-                                {{  transporte?.nombreEmpresa | uppercase }}
-                            </mat-option> 
-                          </mat-select> 
+                        <input type="text"
+                               placeholder="Transporte"
+                               matInput
+                               formControlName="transporte"
+                               [matAutocomplete]="auto">
+                        <mat-autocomplete  #auto="matAutocomplete">
+                            <div  *ngFor="let option of filteredOptions | async" >
+                                <div>
+                                    <mat-option value=" {{option.nombreEmpresa}}" (click)="setearValor(option)" (keyup.enter)="setearProveedor(option)">
+                                    {{  option?.nombreEmpresa | uppercase }}        
+                                    </mat-option>
+                                </div>
+                            </div>            
+                        </mat-autocomplete>
                       </mat-form-field>
                 </div>
 

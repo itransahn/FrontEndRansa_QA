@@ -326,4 +326,10 @@ CleanDataExcel(){
 }
 
 
+public _filter(array:any[],value: string, valorBuscar : string): string[]{
+  const filterValue = value.toLowerCase();
+  return array.filter((option?:any) => option?.[`${valorBuscar}`].toLowerCase().includes(filterValue));
+}  
+
+
 }

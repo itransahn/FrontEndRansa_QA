@@ -1,7 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { map, Observable, startWith } from 'rxjs';
 import { mensajes } from 'src/app/interfaces/generales';
+import { SharedService } from 'src/app/modules/shared/shared.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ToastServiceLocal } from 'src/app/services/toast.service';
 import { TransporteService } from '../../transporte.service';
@@ -29,10 +31,11 @@ export class ModalRCComponent implements OnInit {
 
   ngOnInit(){
     this.catalogo = this.transporteS.returnCatalogo()
-    console.log(this.catalogo)
     this.validacion();
+
   }
 
+  
   validacion(){
 
     if ( this.data['bandera'] == 2 ){

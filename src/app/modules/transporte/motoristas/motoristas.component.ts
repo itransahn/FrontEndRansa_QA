@@ -119,7 +119,8 @@ export class MotoristasComponent implements OnInit {
           identidad : data?.identidad,
           FechaVencimientoLicencia : data?.FechaVencimientoLicencia,
           idTransportista : data?.idTransportista,
-          idMotorista : data?.idMotorista
+          idMotorista : data?.idMotorista,
+          nombreEmpresa : data?.nombreEmpresa
         },
         disableClose : true
       })

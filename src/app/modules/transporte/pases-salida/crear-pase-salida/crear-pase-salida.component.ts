@@ -11,6 +11,8 @@ import { TransporteService } from '../../transporte.service';
 import { DataApi } from 'src/app/interfaces/dataApi';
 import { mensajes } from 'src/app/interfaces/generales';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
+import { map, Observable, startWith } from 'rxjs';
+import { SharedService } from 'src/app/modules/shared/shared.service';
 const moment = _rollupMoment || _moment;
 
 
@@ -46,6 +48,13 @@ export class CrearPaseSalidaComponent implements OnInit {
   public  titulo     : string;
   public  subtitulo  : string;
 
+  public  destino    : number;
+  public  transporte : number;
+
+  filteredOptions  : Observable<any[]>;
+  filteredOptions2 : Observable<any[]>;
+
+
   public motivos = [
     {
       id: 1,
@@ -62,7 +71,9 @@ export class CrearPaseSalidaComponent implements OnInit {
     public auth : AuthService,
     public toast: ToastServiceLocal, 
     public transporteService : TransporteService,
-    public sweel : SweetAlertService
+    public sweel : SweetAlertService,
+    public sharedS : SharedService
+
   ) { }
 
   ngOnInit() {
@@ -78,6 +89,13 @@ export class CrearPaseSalidaComponent implements OnInit {
     })
 }
 
+setearValorD( data ?: any ){
+  this.destino = data?.ID;
+}
+
+setearValorT( data ?: any ){
+  this.transporte = data?.idTransportista;
+}
   cargarForm2(){
     this.modalForm2 = new FormGroup({
       transporte    : new FormControl({ value: '', disabled : this.enable }, [Validators.required] ),
@@ -100,10 +118,43 @@ cargarCatalogo( ){
   this.transporteService.post(url,params).subscribe(
     (data : DataApi | any) =>{
         this.catalogoF = data;   
-    }
-  )
+        this.filteredOptions =  this.modalForm2.get('destino').valueChanges.pipe(
+          startWith(''),
+          map(value => {
+          const  proveedor = typeof value === 'string' ? value : value?.Destino;
+          return  this.sharedS._filter(this.catalogoF?.['data'],proveedor, 'Destino')
+          }),
+        );
 
+        this.filteredOptions2 =  this.modalForm2.get('transporte').valueChanges.pipe(
+          startWith(''),
+          map(value => {
+          const  proveedor = typeof value === 'string' ? value : value?.nombreEmpresa;
+          return  this._filter2(this.catalogoF?.['Transportes'],proveedor, 'nombreEmpresa')
+          }),
+        );
+    
+    }
+   
+  )
+ 
 }
+
+cargarData(){
+  this.filteredOptions2 =  this.modalForm2.get('transporte').valueChanges.pipe(
+    startWith(''),
+    map(value => {
+      console.log(value)
+    const  proveedor = typeof value === 'string' ? value : value;
+    return  this._filter2(this.catalogoF?.['Transportes'],proveedor, 'nombreEmpresa')
+    }),
+  );
+}
+
+public _filter2(array:any[],value: string, valorBuscar : string): string[]{
+  const filterValue = value.toLowerCase();
+  return array.filter((option?:any) => option?.[`${valorBuscar}`].toLowerCase().includes(filterValue));
+} 
 
 close(){
   this.dialogRef.close()
@@ -123,7 +174,7 @@ submit(){
           fechaSalida     : this.modalForm2.value.fechaSalida,
           horaSalida      : this.modalForm2.value.HoraSalida,
           tipo            : this.modalForm.value.tipo,
-          idDestino       : this.modalForm2.value.destino,
+          idDestino       : this.destino,
           contenido       : this.modalForm2.value.contenido,
         } 
         this.transporteService.put(url,params).subscribe(

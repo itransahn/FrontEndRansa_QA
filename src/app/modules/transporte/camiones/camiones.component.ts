@@ -123,7 +123,8 @@ cargarCamiones(){
           idtonelada : data?.idtonelada,
           idColor    : data?.idColor,
           idMetraje  : data?.metraje,
-          anio       : data?.anio
+          anio       : data?.anio,
+          transporte : data?.nombreEmpresa
         },
         disableClose : true
       })

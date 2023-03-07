@@ -12,14 +12,23 @@
             <div class="row">
          
                 <div  class="col-md-12 container" >
-                    <mat-form-field  appearance="legacy">
-                        <mat-label>Transporte </mat-label>
-                        <mat-select  formControlName="transporte" > 
-                            <mat-option> - </mat-option> 
-                            <mat-option *ngFor="let tu of catalogo['transportes']" [value]="tu?.idTransportista">
-                                {{  tu?.nombreEmpresa | uppercase }}
-                            </mat-option> 
-                          </mat-select> 
+
+                      <mat-form-field appearance="legacy">
+                        <mat-label>Transporte</mat-label>
+                        <input type="text"
+                               placeholder="Transporte"
+                               matInput
+                               formControlName="transporte"
+                               [matAutocomplete]="auto">
+                        <mat-autocomplete  #auto="matAutocomplete">
+                            <div  *ngFor="let option of filteredOptions | async" >
+                                <div>
+                                    <mat-option value=" {{option.nombreEmpresa}}" (click)="setearValor(option)" (keyup.enter)="setearProveedor(option)">
+                                    {{  option?.nombreEmpresa | uppercase }}        
+                                    </mat-option>
+                                </div>
+                            </div>            
+                        </mat-autocomplete>
                       </mat-form-field>
                 </div>
 
@@ -33,7 +42,7 @@
                             </mat-option>  -->
 
                             <ng-container *ngFor="let item of catalogo['motoristas']">
-                                <div *ngIf="item.idTransportista === modalForm.value.transporte">
+                                <div *ngIf="item.idTransportista === idValor">
                                     <mat-option [value]="item?.idMotorista">
                                         {{  item?.Nombre | uppercase }}
                                     </mat-option>
@@ -47,14 +56,14 @@
                 <div  class="col-md-12 container" >
                     <mat-form-field  appearance="legacy">
                         <mat-label>Camión</mat-label>
-                        <mat-select  formControlName="camion" > 
+                        <mat-select  formControlName="camion" multiple> 
                             <!-- <mat-option> - </mat-option> 
                             <mat-option *ngFor="let tu of catalogo['camiones']" [value]="tu?.idCamion">
                                 {{  tu?.placa | uppercase }}
                             </mat-option>  -->
-                            <ng-container *ngFor="let item of catalogo['camiones']">
-                                <div *ngIf="item.idTransportista === modalForm.value.transporte">
-                                    <mat-option [value]="item?.idCamion">
+                            <ng-container *ngFor="let item of catalogo['camiones']" >
+                                <div *ngIf="item.idTransportista === idValor" >
+                                    <mat-option [value]="item?.idCamion" >
                                         {{  item?.placa | uppercase }}
                                     </mat-option>
                                 </div>

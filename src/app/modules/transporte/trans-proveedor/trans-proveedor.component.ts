@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { DataApi } from 'src/app/interfaces/dataApi';
 import { mensajes } from 'src/app/interfaces/generales';
 import { AuthService } from 'src/app/services/auth.service';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import { ToastServiceLocal } from 'src/app/services/toast.service';
+import { SharedService } from '../../shared/shared.service';
 import { TransporteService } from '../transporte.service';
 import { ModalProComponent } from './modal-pro/modal-pro.component';
 
