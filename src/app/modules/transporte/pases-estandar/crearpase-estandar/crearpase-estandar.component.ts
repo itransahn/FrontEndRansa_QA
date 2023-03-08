@@ -8,7 +8,6 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AuthService } from 'src/app/services/auth.service';
 import { ToastServiceLocal } from 'src/app/services/toast.service';
 import { TransporteService } from '../../transporte.service';
-import { DataApi } from 'src/app/interfaces/dataApi';
 import { mensajes,  GeneraRandomPassword, mask, } from 'src/app/interfaces/generales';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 

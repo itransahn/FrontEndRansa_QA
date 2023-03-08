@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from "../seguridad/dashboard/dashboard.component";
 import { CamionesComponent } from './camiones/camiones.component';
 import { ClientesTComponent } from './clientes-t/clientes-t.component';
+import { DeducciontComponent } from './deducciont/deducciont.component';
 import { MotoristaCamionComponent } from './motorista-camion/motorista-camion.component';
 import { MotoristasComponent } from './motoristas/motoristas.component';
 import { PasesEstandarComponent } from './pases-estandar/pases-estandar.component';
@@ -94,6 +95,10 @@ const routes: Routes = [
 {
     path : 'PasesalidasfH',
     component : HistorialPasesComponent
+},
+{
+    path : 'Deducciones',
+    component : DeducciontComponent
 }
   ];
   

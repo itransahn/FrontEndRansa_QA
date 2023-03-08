@@ -135,9 +135,6 @@ cargarCatalogo( ){
           return  this.sharedS._filter(this.catalogoF?.['data'],proveedor, 'Destino')
           }),
         );
-
-
-    
     }
    
   )

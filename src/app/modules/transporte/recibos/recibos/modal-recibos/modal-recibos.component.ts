@@ -11,7 +11,8 @@ import { TransporteService } from '../../../transporte.service';
 import { DataApi } from 'src/app/interfaces/dataApi';
 import { mask, mensajes } from 'src/app/interfaces/generales';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
-import { concat } from 'rxjs';
+import { concat, map, Observable, startWith } from 'rxjs';
+import { SharedService } from 'src/app/modules/shared/shared.service';
 const moment = _rollupMoment || _moment;
 
 export const MY_FORMATS = {
@@ -40,13 +41,13 @@ export class ModalRecibosComponent implements OnInit {
   public  formTipo     : FormGroup;
   public  formRecibo   : FormGroup;
   public  formFactura  : FormGroup;
-
   public  visible    : boolean = false; 
   public  enable     : boolean = false;
   public  enable2    : boolean = false;
   public  enable3    : boolean = false;
   public  enable4    : boolean = true;
-
+  filteredOptions:  Observable<string[]>;
+  filteredOptions2: Observable<string[]>;
   public  botton     : boolean = false;
 
   public  catalogo   : any;
@@ -65,8 +66,9 @@ export class ModalRecibosComponent implements OnInit {
 
   public fecha : string ;
   
-
-
+  /* Nuevas Variables */
+idCliente : number;
+servidaA : number;
   public tiposRecibo = [
     {
       id : 1,
@@ -84,14 +86,15 @@ export class ModalRecibosComponent implements OnInit {
     public auth : AuthService,
     public toast: ToastServiceLocal, 
     public transporteService : TransporteService,
-    public sweel             : SweetAlertService
+    public sweel             : SweetAlertService,
+    public sharedS           : SharedService
   ) { }
 
   ngOnInit() {
     this.fecha = `${this.retornarValorMes(this.fechaG.getMonth()+1)}/01/${this.fechaG.getFullYear()}`;
+    this.cargarCatalogo()
     this.catalogoF = this.auth.returnCatalogo();
     this.Validacion();
-    console.log(this.data)
   }
 
   retornarValorMes( mes : number ){
@@ -102,11 +105,17 @@ export class ModalRecibosComponent implements OnInit {
     }
   }
 
+
+  setearCliente(data ){
+    this.idCliente = data?.idCliente;
+  } 
+
+  setearservidaA(data ){
+    this.servidaA = data?.idTransportista;
+  } 
+
   Validacion(){
-    this.cargarCatalogo();
-    /*
-    BANDERA
-    1 VISUALIZAR*/
+    /*  BANDERA 1 VISUALIZAR*/
     if ( this.data?.['bandera'] == 1 ){
       this.enable  = true;
       this.enable2 = true;
@@ -139,9 +148,12 @@ export class ModalRecibosComponent implements OnInit {
     3 Actualizar
     */
     if ( this.data?.['bandera'] == 3 ){
+      this.cargarCatalogo()
       this.enable = true;
       this.enable2 = false;
       this.enable3 = true;
+      this.idCliente = this.data?.['data']['idCliente']
+      this.servidaA = this.data?.['data']['servidoA']
       this.cargarFormTipo();
       this.formTipo.patchValue({
         tipo : this.data?.['data']['tipoRecibo']
@@ -153,7 +165,7 @@ export class ModalRecibosComponent implements OnInit {
           this.setForm( this.data?.['data']['tipoRecibo'] )
       }else{
         this.cargarFormReciboExterno();
-        this.cargarFormFacturaMR()
+        this.cargarFormFacturaMR();
         this.setForm( this.data?.['data']['tipoRecibo'] )
       }
 
@@ -187,6 +199,7 @@ export class ModalRecibosComponent implements OnInit {
   }
 
   setForm(tipo : number){
+
       if ( tipo == 1) {
         this.formRecibo.patchValue({
           cco           : this.data?.['data']['idCco'],
@@ -200,20 +213,20 @@ export class ModalRecibosComponent implements OnInit {
           observaciones : this.data?.['data']['Observaciones']
         })
       }
-
-      if ( tipo == 2) {
+    if ( tipo == 2) {
         this.formRecibo.patchValue({
           cco           : this.data?.['data']['idCco'],
           reciboC       : this.data?.['data']['ReciboC'],
           fechaR        : this.data?.['data']['fechaR'],
           proveedorC    : this.data?.['data']['proveedorCombustible'],
           tipoC         : this.data?.['data']['tipoCombustible'],
-          servidoA      : this.data?.['data']['servidoA'],
+          servidoA      : this.data?.['data']['servidoAC'],
           placa         : this.data?.['data']['placa'],
           valorRecibo   : this.data?.['data']['valorRecibo'],
           observaciones : this.data?.['data']['Observaciones'],
-          cliente       : this.data?.['data']['idCliente']
+          cliente       : this.data?.['data']['cliente']
         })
+
       }
   }
 
@@ -229,7 +242,7 @@ export class ModalRecibosComponent implements OnInit {
     this.cargarFormReciboInterno()
   }else{
     this.cargarCatalogo();
-    this.cargarFormReciboExterno()
+    this.cargarFormReciboExterno();
   }
   }
 
@@ -268,7 +281,46 @@ export class ModalRecibosComponent implements OnInit {
       observaciones : new FormControl({ value:'', disabled: this.enable2}, [Validators.required]),
       cliente       : new FormControl({ value:'', disabled: this.enable3}, [Validators.required]),
     })
+    this.precargarAutoComplete();
   }
+
+
+precargarAutoComplete(){
+if(this.catalogo?.['transportes'].length > 0 ){
+  this.filteredOptions =  this.formRecibo.get('cliente').valueChanges.pipe(
+    startWith(''),
+    map(value => {
+    const  proveedor = typeof value === 'string' ? value : value?.cliente;
+    return  this.sharedS._filter(this.catalogo?.['clientes'],proveedor, 'cliente')
+    }),
+  );
+  this.filteredOptions2 =  this.formRecibo.get('servidoA').valueChanges.pipe(
+    startWith(''),
+    map(value => {
+    const  proveedor = typeof value === 'string' ? value : value?.nombreEmpresa;
+    return  this.sharedS._filter(this.catalogo?.['transportes'],proveedor, 'nombreEmpresa')
+    }),
+  );
+}else{
+  this.filteredOptions =  this.formRecibo.get('cliente').valueChanges.pipe(
+    startWith(''),
+    map(value => {
+    const  proveedor = typeof value === 'string' ? value : value?.cliente;
+    return  this.sharedS._filter(this.catalogo?.['clientes'],proveedor, 'cliente')
+    }),
+  );
+  this.filteredOptions2 =  this.formRecibo.get('servidoA').valueChanges.pipe(
+    startWith(''),
+    map(value => {
+    const  proveedor = typeof value === 'string' ? value : value?.nombreEmpresa;
+    return  this.sharedS._filter(this.catalogo?.['transportes'],proveedor, 'nombreEmpresa')
+    }),
+  );
+}
+
+
+  
+}
 
   cargarFormFacturaR(){
     this.formFactura = new FormGroup({
@@ -307,11 +359,14 @@ close(){
 crearRecibo(){
   let url = '/transporte/Insrecibos';
   let cliente :number;
+  let servidoA :number;
   if( this.formTipo.value.tipo  == 1){
     cliente = 0;
+    servidoA = this.formRecibo.value.servidoA
   }else{
-    cliente = this.formRecibo.value.cliente
-  }
+    cliente  = this.idCliente;
+    servidoA = this.servidaA;
+   }
   let params = {
 tipoRecibo      : this.formTipo.value.tipo,
 sede            : this.auth.dataUsuario['sede'],
@@ -320,7 +375,7 @@ reciboC         : this.formRecibo.value.reciboC,
 fechaR          : this.formRecibo.value.fechaR,
 proveedorC      : this.formRecibo.value.proveedorC,
 tipoCombustible : this.formRecibo.value.tipoC,
-servidoA        : this.formRecibo.value.servidoA,
+servidoA        : servidoA,
 placa           : this.formRecibo.value.placa,
 valorRecibo     : this.formRecibo.value.valorRecibo,
 observaciones   : this.formRecibo.value.observaciones,
@@ -345,6 +400,15 @@ this.transporteService.put(url,params).subscribe(
 }
 
 actualizarRecibo(){
+  let cliente :number;
+  let servidoA :number;
+  if( this.formTipo.value.tipo  == 1){
+    cliente = 0;
+    servidoA = this.formRecibo.value.servidoA
+  }else{
+    cliente  = this.idCliente | this.data?.['data']['idCliente'];
+    servidoA = this.servidaA  | this.data?.['data']['servidoA'];
+   }
   let url = '/transporte/Updrecibos';
   let params = {
 idRecibo        : this.data?.['data']['idRecibo'],

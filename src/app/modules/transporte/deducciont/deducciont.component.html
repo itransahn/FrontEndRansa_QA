@@ -1,0 +1,190 @@
+<div style="position: relative; margin-bottom: 5px;" class="container" >
+    <mat-card style="color:green !important; width: 100% !important;">
+        <form [formGroup]="form" #f="ngForm">
+            <div class="row">
+                <div class="col-md-12">
+                        <mat-form-field  appearance="legacy">
+                            <mat-label>Centro de Costo</mat-label>
+                            <mat-select  formControlName="cco" (selectionChange)="cargarData()"> 
+                                <mat-option *ngFor="let tu of ccos" [value]="tu?.id_cco">
+                                    {{  tu?.cco | uppercase }}
+                                </mat-option> 
+                              </mat-select> 
+                          </mat-form-field>
+                   
+                </div>
+           
+                <div class="col-md-12">
+                    <mat-form-field appearance="legacy">
+                        <mat-label>Transporte</mat-label>
+                        <input type="text"
+                               placeholder="Transporte"
+                               matInput
+                               formControlName="transporte"
+                               [matAutocomplete]="auto" >
+                        <mat-autocomplete  #auto="matAutocomplete">
+                            <div  *ngFor="let option of filteredOptions | async" >
+                                <div *ngIf="option?.idSede === idSede">
+                                    <mat-option value=" {{option.nombreEmpresa}}" (click)="setearValor(option)" (keyup.enter)="setearProveedor(option)">
+                                    {{  option?.nombreEmpresa | uppercase }}        
+                                    </mat-option>
+                                </div>
+                            </div>            
+                        </mat-autocomplete>
+                      </mat-form-field>
+                </div>
+                
+                <div class="col-md-12">
+                    <mat-form-field appearance="legacy">
+                        <mat-label>Fecha Cancelación</mat-label>
+                        <input name="date" formControlName = "fecha" matInput [matDatepicker]="pickerN">
+                        <mat-datepicker-toggle matSuffix [for]="pickerN"></mat-datepicker-toggle>
+                        <mat-datepicker #pickerN></mat-datepicker>
+                      </mat-form-field>
+                </div>
+
+                <div class="container">
+                    <button class="buttonPrincipal" mat-raised-button type="submit" [disabled]="f.invalid" (click)="cargarDeducciones()" > Buscar </button>
+                </div>
+            </div>
+        </form>
+    </mat-card>
+</div>
+
+
+
+<div class="container padre herencia mt-4"  id="Deduccion" *ngIf="dataRec.length > 0 && loading1">
+    <mat-card class="cardPersonalizada">
+        <div class="row">
+  
+          <div class="col-md-6">
+            <img *ngIf="idSede == 1" src="../../../../../assets/images/logoRansa.ico" class="img" alt="">
+            <img *ngIf="idSede == 2" src="../../../../../assets/images/Almahsa.png" class="img" alt="">
+              <!-- <p class = "empresa">
+              <span class="nombre" > {{parametros[0]?.['nombreCompleto']}}</span> <br>
+               RTN: {{parametros[0]?.['rtnEmpresa']}} <br>
+               {{parametros[0]?.['direccion1']}} {{ parametros[0]?.['direccion2']}} <br>
+               Municipio: {{ parametros[0]?.['municipio']}}, Departamento: {{ parametros[0]?.['Departamento']}} <br> 
+               Tel: {{parametros[0]?.['Telfijo']}}, {{parametros[0]?.['TelCel']}}  <br>
+              <span *ngIf="parametros[0]?.['correo']"> Correo: {{parametros[0]?.['correo']}}  </span>
+              </p> -->
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 container">
+                <h4 class="subtitle" style="color: #006F1D !important">   RECIBO DEDUCCION DE COMBUSTIBLE </h4>
+            </div>
+            <div class="col-md-12 container">
+                <h4 class="subtitle" style="color: #006F1D !important">   {{ dataRec[0]?.Transporte }} </h4>
+            </div>
+        </div>
+
+  
+                <div class="tabla mt-2" >
+                  <div class="table-responsive !important" >
+                      <table>
+                          <thead>
+                            <tr>
+                              <th class="contenidoF" scope="col">Cliente   </th>
+                              <th class="contenidoF" scope="col">Placa   </th>
+                              <th class="contenidoF" scope="col">N° Recibo </th>
+                              <th class="contenidoF" scope="col">Fecha Recibo  </th>
+                              <th class="contenidoF" scope="col">Valor Recibo  </th>
+                              <th class="contenidoF" colspan="2" scope="col">N° Factura </th>
+                              <th class="contenidoF" scope="col">Fecha Factura  </th>
+                              <th class="contenidoF" scope="col">Valor Factura </th>
+                            </tr>
+                          </thead>      
+                          <tbody class="bordes2">
+                            <tr *ngFor="let item of dataRec; let i = index" class="bodyTed"> 
+                              <td data-label="Cliente" class="contenidoF exp1">                {{ item?.Cliente   }} </td>
+                              <td data-label="Placa"  class="contenidoF"  >                    {{ item?.placa  }} </td>
+                              <td data-label="N° Recibo"      class="contenidoF"  >            {{ item?.ReciboC  }} </td>     
+                              <td data-label="Fecha Recibo"   class="contenidoF"  >            {{ item?.fechaR | date : 'dd/MM/yyyy'    }} </td>      
+                              <td data-label="Valor Recibo"   class="contenidoF right" >             {{ item?.valorRecibo | number    }}</td>
+                              <td data-label="N° Factura"  colspan="2"   class="contenidoF">   {{ item?.Nfactura       }}</td>
+                              <td data-label="Fecha Factura " class="contenidoF ">   {{ item?.fechaFactura  | date : 'dd/MM/yyyy'  }} </td>
+                              <td data-label="Valor Factura"  class="contenidoF right exp2">        {{ item?.valorFacturaa | number : '1.2-2'   }}</td>
+                                    </tr>
+                              <tr  *ngFor="let item of espaciosBlancos" class="bodyTed"> 
+                                  <td class="espacioB bodyTed"  colspan="9"></td>
+                              </tr>
+
+                          </tbody>
+      
+                          <tfoot>
+                            <!-- Subtotal -->
+                            <tr >
+                                <th colspan="8" class="right"> Subtotal Lps.</th>
+                                <th class="right"> {{ subtotal | number}} </th>
+                                </tr>
+                            <!-- 5% -->
+                            <tr>
+                             <th colspan="8" class="right"> cobro 5% Lps.</th>
+                             <th class="right"> {{ (subtotal*0.05) | number}} </th>
+                            </tr>
+                            <!-- Total -->
+                          <tr>
+                            <th colspan="8" class="right"> Total Lps.</th>
+                            <th class="right"> {{ ((subtotal*0.05) + subtotal) | number}} </th>
+                          </tr>  
+
+                          </tfoot>  
+                      
+                        </table>
+                     </div>
+              </div>
+
+              <div class="row firmaCliente" style="margin-top: 5% !important">
+                <div class="col-md-6 container">
+                  ACEPTACION <br>
+                  
+                </div>
+                <div class="col-md-6 container">
+                 RANSA      <br>
+                </div>
+
+            </div>
+          
+                <div class="row firmaCliente" style="margin-top: 2% !important">
+                  <div class="col-md-6 container">
+                    Nombre _____________________________________________ <br>
+                    
+                  </div>
+                  <div class="col-md-6 container">
+                    Supervisor(A) _____________________________________________ <br>
+                  </div>
+  
+              </div>
+
+              <div class="row firmaCliente" style="margin-top: 1.5% !important">
+                <div class="col-md-6 container">
+                  Firma ______________________________________________ <br>
+                  
+                </div>
+                <div class="col-md-6 container">
+                  Firma ___________________________________________________ <br>
+                </div>
+   
+
+            </div>
+              
+
+            <div class="row firmaCliente" style="margin-top: 1.5% !important">
+                <div class="col-md-6 container">
+                  Identidad ____________________________________________ <br>
+                  
+                </div>
+                <div class="col-md-6 container">
+                  </div>
+            </div>
+    
+    </mat-card>
+  </div>
+
+
+  <button mat-raised-button class="buttonPrincipal btn-flotante" #tooltip="matTooltip" matTooltip="Generar PDF" *ngIf="dataRec.length > 0 && loading1" matTooltipPosition="left" 
+  (click)="GenerarPdf()">
+      <mat-icon> picture_as_pdf </mat-icon>
+  </button>
+  
