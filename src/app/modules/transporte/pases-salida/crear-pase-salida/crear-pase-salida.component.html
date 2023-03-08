@@ -61,7 +61,7 @@
     </div>
 
     <div  class="col-md-6 container" >
-        <!-- <mat-form-field  appearance="legacy">
+        <mat-form-field  appearance="legacy">
             <mat-label>Transporte </mat-label>
             <mat-select  formControlName="transporte"> 
                 <mat-option> - </mat-option> 
@@ -74,23 +74,22 @@
                 </ng-container>
                 
               </mat-select> 
-          </mat-form-field> -->
-          <mat-form-field appearance="legacy">
-            <mat-label  > Transporte </mat-label>
+          </mat-form-field>
+
+          <!-- <mat-form-field appearance="legacy">
+            <mat-label >Transportes</mat-label>
             <input type="text"
                    matInput
                    formControlName="transporte"
-                   [matAutocomplete]="auto" >
+                   [matAutocomplete]="auto" *ngIf="modalForm.value.tipo">
             <mat-autocomplete  #auto="matAutocomplete">
-                <div  *ngFor="let option2 of filteredOptions2 | async" >
-                    <div>
-                        <mat-option value=" {{option2 }}" (click)="setearValorT(option2)" (keyup.enter)="setearValorT(option2)">
-                        {{  option2?.nombreEmpresa }}        
+                <div  *ngFor="let option of filteredOptions2 | async" >
+                        <mat-option value=" {{option.motivo}}" (click)="setearValorD(option)" (keyup.enter)="setearValorD(option)">
+                        {{  option?.motivo | uppercase }}        
                         </mat-option>
-                    </div>
                 </div>            
             </mat-autocomplete>
-          </mat-form-field>
+          </mat-form-field> -->
 
     </div>
 

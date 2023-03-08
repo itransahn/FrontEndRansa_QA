@@ -81,6 +81,14 @@ export class CrearPaseSalidaComponent implements OnInit {
     this.cargarForm1();
     this.cargarForm2();
 
+    this.filteredOptions2 =  this.modalForm2.get('transporte').valueChanges.pipe(
+      startWith(''),
+      map(value => {
+      const  proveedor = typeof value === 'string' ? value : value?.motivo;
+      return  this.sharedS._filter(this.motivos, proveedor, 'motivo')
+      }),
+    );
+  
   }
 
   cargarForm1(){
@@ -106,6 +114,8 @@ setearValorT( data ?: any ){
       destino       : new FormControl({ value: '', disabled : this.enable }, [Validators.required] ),
       contenido     : new FormControl({ value: '', disabled : this.enable }, [Validators.required] ),
     })
+
+ 
 }
 
 cargarCatalogo( ){
@@ -126,13 +136,7 @@ cargarCatalogo( ){
           }),
         );
 
-        this.filteredOptions2 =  this.modalForm2.get('transporte').valueChanges.pipe(
-          startWith(''),
-          map(value => {
-          const  proveedor = typeof value === 'string' ? value : value?.nombreEmpresa;
-          return  this._filter2(this.catalogoF?.['Transportes'],proveedor, 'nombreEmpresa')
-          }),
-        );
+
     
     }
    
