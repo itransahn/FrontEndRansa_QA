@@ -287,14 +287,14 @@ servidaA : number;
 
 precargarAutoComplete(){
 if(this.catalogo?.['transportes'].length > 0 ){
-  this.filteredOptions =  this.formRecibo.get('cliente').valueChanges.pipe(
+this.filteredOptions =  this.formRecibo.get('cliente').valueChanges.pipe(
     startWith(''),
     map(value => {
     const  proveedor = typeof value === 'string' ? value : value?.cliente;
     return  this.sharedS._filter(this.catalogo?.['clientes'],proveedor, 'cliente')
     }),
   );
-  this.filteredOptions2 =  this.formRecibo.get('servidoA').valueChanges.pipe(
+this.filteredOptions2 =  this.formRecibo.get('servidoA').valueChanges.pipe(
     startWith(''),
     map(value => {
     const  proveedor = typeof value === 'string' ? value : value?.nombreEmpresa;
@@ -302,14 +302,14 @@ if(this.catalogo?.['transportes'].length > 0 ){
     }),
   );
 }else{
-  this.filteredOptions =  this.formRecibo.get('cliente').valueChanges.pipe(
+this.filteredOptions =  this.formRecibo.get('cliente').valueChanges.pipe(
     startWith(''),
     map(value => {
     const  proveedor = typeof value === 'string' ? value : value?.cliente;
     return  this.sharedS._filter(this.catalogo?.['clientes'],proveedor, 'cliente')
     }),
   );
-  this.filteredOptions2 =  this.formRecibo.get('servidoA').valueChanges.pipe(
+this.filteredOptions2 =  this.formRecibo.get('servidoA').valueChanges.pipe(
     startWith(''),
     map(value => {
     const  proveedor = typeof value === 'string' ? value : value?.nombreEmpresa;
@@ -317,9 +317,6 @@ if(this.catalogo?.['transportes'].length > 0 ){
     }),
   );
 }
-
-
-  
 }
 
   cargarFormFacturaR(){
