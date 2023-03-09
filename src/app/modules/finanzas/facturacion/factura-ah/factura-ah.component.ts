@@ -330,7 +330,7 @@ this.loading1 = true;
 
   retornarCorrelativo(){
     let correlativo : string = this.cabeceraF[0]['NDCCTC'];
-    return correlativo.substring(2,correlativo.length)
+    return correlativo.substring(2,(correlativo.length+1))
   }
   retornarCorrelativoPDF(){
     let correlativo : string = this.cabeceraF[0]['NDCCTC'];
