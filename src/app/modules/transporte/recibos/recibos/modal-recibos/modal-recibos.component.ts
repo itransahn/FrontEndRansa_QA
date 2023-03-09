@@ -105,7 +105,6 @@ servidaA : number;
     }
   }
 
-
   setearCliente(data ){
     this.idCliente = data?.idCliente;
   } 
