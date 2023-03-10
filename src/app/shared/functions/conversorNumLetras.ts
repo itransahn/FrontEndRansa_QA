@@ -309,7 +309,7 @@ export let numeroALetras = (function() {
                         //     return Millones(data.centavos) + ' ' + ;
                         // else
                         //     return Millones(data.centavos) + ' ' + ;
-                        return `${data.centavos}/100 M.N.` 
+                        return `0${data.centavos}/100 M.N.` 
                     })();
             };
     
