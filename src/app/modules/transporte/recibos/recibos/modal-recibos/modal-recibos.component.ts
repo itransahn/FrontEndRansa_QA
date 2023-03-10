@@ -50,7 +50,9 @@ export class ModalRecibosComponent implements OnInit {
   filteredOptions2: Observable<string[]>;
   public  botton     : boolean = false;
 
-  public  catalogo   : any;
+  public  catalogo      : any;
+  public  catalogoTgu   : any;
+  public  catalogoSps   : any;
   public  catalogoF  : any;
 
   public  titulo     : string;
@@ -92,7 +94,9 @@ servidaA : number;
 
   ngOnInit() {
     this.fecha = `${this.retornarValorMes(this.fechaG.getMonth()+1)}/01/${this.fechaG.getFullYear()}`;
-    this.cargarCatalogo()
+    this.cargarCatalogoTgu();
+    this.cargarCatalogoSps();
+    this.cargarCatalogo();
     this.catalogoF = this.auth.returnCatalogo();
     this.Validacion();
   }
@@ -140,14 +144,16 @@ servidaA : number;
       this.enable = false;
       this.enable3 = false;
       this.cargarFormTipo();
-      this.cargarCatalogo()
+      this.cargarCatalogoTgu();
+      this.cargarCatalogoSps();
     }
 /*
     BANDERA
     3 Actualizar
     */
     if ( this.data?.['bandera'] == 3 ){
-      this.cargarCatalogo()
+      this.cargarCatalogoTgu();
+      this.cargarCatalogoSps();
       this.enable = true;
       this.enable2 = false;
       this.enable3 = true;
@@ -160,16 +166,15 @@ servidaA : number;
 
       if ( this.data?.['data']['tipoRecibo'] == 1){
           this.cargarFormReciboInterno();
-          this.cargarFormFacturaMR()
+          this.cargarFormFacturaMR();
           this.setForm( this.data?.['data']['tipoRecibo'] )
       }else{
         this.cargarFormReciboExterno();
         this.cargarFormFacturaMR();
         this.setForm( this.data?.['data']['tipoRecibo'] )
       }
-
     }
-/*
+    /*
     BANDERA
     4 Cierre
     */
@@ -237,20 +242,31 @@ servidaA : number;
 
   cargarCatalogos(){
   if( this.formTipo.value.tipo == 1  ) {
-    this.cargarCatalogo();
+    this.cargarCatalogoTgu();
+    this.cargarCatalogoSps();
     this.cargarFormReciboInterno()
   }else{
-    this.cargarCatalogo();
+    this.cargarCatalogoTgu();
+    this.cargarCatalogoSps();
     this.cargarFormReciboExterno();
   }
   }
 
   retornarCCO( ){
-        for(let i = 0; this.catalogo?.['clientes'].length; i++){
-            if ( this.formRecibo.value.cliente === this.catalogo?.['clientes'][i]?.idCliente){
-                this.cco =   this.catalogo?.['clientes'][i]?.idCeco
-            }
+  if( this.auth.dataUsuario['sede'] === 1){
+    for(let i = 0; this.catalogoTgu?.['clientes'].length; i++){
+      if ( this.formRecibo.value.cliente === this.cargarCatalogoTgu?.['clientes'][i]?.idCliente){
+          this.cco =   this.catalogoTgu?.['clientes'][i]?.idCeco
+      }
+  }
+    }else{
+      for(let i = 0; this.cargarCatalogoSps?.['clientes'].length; i++){
+        if ( this.formRecibo.value.cliente === this.cargarCatalogoSps?.['clientes'][i]?.idCliente){
+            this.cco =   this.cargarCatalogoSps?.['clientes'][i]?.idCeco
         }
+    }
+    }
+       
     }
 
   cargarFormReciboInterno(){
@@ -267,7 +283,8 @@ servidaA : number;
     })
   }
 
-  cargarFormReciboExterno(){
+  
+cargarFormReciboExterno(){
     this.formRecibo = new FormGroup({
       cco           : new FormControl({ value:'', disabled: this.enable3}, [Validators.required]),
       reciboC       : new FormControl({ value:'', disabled: this.enable3}, [Validators.required]),
@@ -283,42 +300,41 @@ servidaA : number;
     this.precargarAutoComplete();
   }
 
-
 precargarAutoComplete(){
-if(this.catalogo?.['transportes'].length > 0 ){
-this.filteredOptions =  this.formRecibo.get('cliente').valueChanges.pipe(
+if( this.auth.dataUsuario['sede'] === 1 ){
+  this.filteredOptions =  this.formRecibo.get('cliente').valueChanges.pipe(
     startWith(''),
     map(value => {
     const  proveedor = typeof value === 'string' ? value : value?.cliente;
-    return  this.sharedS._filter(this.catalogo?.['clientes'],proveedor, 'cliente')
+    return  this.sharedS._filter(this.catalogoTgu?.['clientes'],proveedor, 'cliente')
     }),
   );
 this.filteredOptions2 =  this.formRecibo.get('servidoA').valueChanges.pipe(
     startWith(''),
     map(value => {
     const  proveedor = typeof value === 'string' ? value : value?.nombreEmpresa;
-    return  this.sharedS._filter(this.catalogo?.['transportes'],proveedor, 'nombreEmpresa')
+    return  this.sharedS._filter(this.catalogoTgu?.['transportes'],proveedor, 'nombreEmpresa')
     }),
   );
 }else{
-this.filteredOptions =  this.formRecibo.get('cliente').valueChanges.pipe(
+  this.filteredOptions =  this.formRecibo.get('cliente').valueChanges.pipe(
     startWith(''),
     map(value => {
     const  proveedor = typeof value === 'string' ? value : value?.cliente;
-    return  this.sharedS._filter(this.catalogo?.['clientes'],proveedor, 'cliente')
+    return  this.sharedS._filter(this.catalogoSps?.['clientes'],proveedor, 'cliente')
     }),
   );
 this.filteredOptions2 =  this.formRecibo.get('servidoA').valueChanges.pipe(
     startWith(''),
     map(value => {
     const  proveedor = typeof value === 'string' ? value : value?.nombreEmpresa;
-    return  this.sharedS._filter(this.catalogo?.['transportes'],proveedor, 'nombreEmpresa')
+    return  this.sharedS._filter(this.catalogoSps?.['transportes'],proveedor, 'nombreEmpresa')
     }),
   );
 }
 }
 
-  cargarFormFacturaR(){
+cargarFormFacturaR(){
     this.formFactura = new FormGroup({
       Nfactura : new FormControl({ value : '', disabled : this.enable4 }, [Validators.required]),
       fechaF   : new FormControl({ value:''  , disabled : this.enable4 }, [Validators.required]),
@@ -326,7 +342,7 @@ this.filteredOptions2 =  this.formRecibo.get('servidoA').valueChanges.pipe(
     })
   }
 
-  cargarFormFacturaMR(){
+cargarFormFacturaMR(){
     this.formFactura = new FormGroup({
       Nfactura : new FormControl({ value : '', disabled : false }, []),
       fechaF   : new FormControl({ value:''  , disabled : false }, []),
@@ -342,7 +358,34 @@ this.filteredOptions2 =  this.formRecibo.get('servidoA').valueChanges.pipe(
   this.transporteService.post(url, params).subscribe(
     res=>{
       if ( res ){
-        this.catalogo = res;
+        this.catalogo = res;  
+      }
+    }
+  )
+  }
+  cargarCatalogoTgu(){
+    let url = '/transporte/catalogoRec';
+    let params = {
+      sede : 1
+    }
+  this.transporteService.post(url, params).subscribe(
+    res=>{
+      if ( res ){
+        this.catalogoTgu = res;  
+      }
+    }
+  )
+  }
+
+  cargarCatalogoSps(){
+    let url = '/transporte/catalogoRec';
+    let params = {
+      sede : 2
+    }
+  this.transporteService.post(url, params).subscribe(
+    res=>{
+      if ( res ){
+        this.catalogoSps = res;  
       }
     }
   )

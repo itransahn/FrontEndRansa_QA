@@ -29,9 +29,9 @@ export class RetencionComponent implements OnInit {
   public retencionBD   : retenciones[] = [];
   public correlativoN  : string = '';
 
-  public DiaP        : number = 0;
-  public mesP        : number = 0;
-  public anioP       : number = 0;
+  public DiaP        : string = '0';
+  public mesP        : string = '0';
+  public anioP       : string = '0';
   public proveedorP  : number;
   public sedeP       : number;
   public tipoR       : string;
@@ -88,11 +88,14 @@ correlativo(){
 }
 
 cargarParametros(){
-  this.DiaP        = this.ruta.snapshot.params?.['dia'] ,
-  this.mesP        = this.ruta.snapshot.params?.['periodo'] ,
-  this.anioP       = this.ruta.snapshot.params?.['anio'] ,
-  this.proveedorP  = this.ruta.snapshot.params?.['proveedor'],
-  this.sedeP       = this.ruta.snapshot.params?.['empresa'],
+  this.DiaP        = this.ruta.snapshot.params?.['dia'] ;
+  if ( Number(this.DiaP) < 10 ){
+    this.DiaP =  `0${this.DiaP}`
+  }
+  this.mesP        = this.ruta.snapshot.params?.['periodo'] ;
+  this.anioP       = this.ruta.snapshot.params?.['anio'] ;
+  this.proveedorP  = this.ruta.snapshot.params?.['proveedor'];
+  this.sedeP       = this.ruta.snapshot.params?.['empresa'];
   this.correlativo();
   this.CargarRetencion();
 
@@ -233,7 +236,7 @@ retornarMes(periodo : number){
 
 
 guardarData(){
-  let fecha : string = String(this.DiaP) + '/'+ String(this.retornarMes(this.mesP)) + '/' + String(this.anioP);
+  let fecha : string = String(this.DiaP) + '/'+ String(this.retornarMes(Number(this.mesP))) + '/' + String(this.anioP);
   let proveedor : string = String(this.retencionBD[0]?.proveedor);
   let data = this.retencionBD;
   let correlativo = this.correlativoN;
