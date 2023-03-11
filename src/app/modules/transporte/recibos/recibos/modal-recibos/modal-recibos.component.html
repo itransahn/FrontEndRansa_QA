@@ -65,16 +65,7 @@
         </div>
 
 
-    <div  class="col-md-6" >
-        <!-- <mat-form-field  appearance="legacy">
-            <mat-label> Cliente </mat-label>
-            <mat-select  formControlName="cliente"> 
-                <mat-option *ngFor="let tu of catalogo?.['clientes']" [value]="tu?.idCliente">
-                    {{  tu?.cliente | uppercase }}
-                </mat-option> 
-              </mat-select> 
-          </mat-form-field> -->
-
+    <div  class="col-md-6" *ngIf="data?.['bandera'] == 2">
           <mat-form-field appearance="legacy">
             <mat-label>Cliente</mat-label>
             <input type="text"
@@ -92,10 +83,18 @@
                 </div>            
             </mat-autocomplete>
           </mat-form-field>
-
-
     </div>
 
+    <div class="col-md-6" *ngIf="data?.['bandera'] == 3 || data?.['bandera'] == 1 || data?.['bandera'] == 4 ">
+                <mat-form-field  appearance="legacy">
+            <mat-label> Cliente </mat-label>
+            <mat-select  formControlName="cliente"> 
+                <mat-option *ngFor="let tu of catalogo?.['clientes']" [value]="tu?.idCliente">
+                    {{  tu?.cliente | uppercase }}
+                </mat-option> 
+              </mat-select> 
+          </mat-form-field>
+    </div>
     <div  class="col-md-6" *ngIf="data?.['bandera'] != 2 " >
         <mat-form-field  appearance="legacy">
             <mat-label> Centro de Costo </mat-label>
@@ -116,7 +115,7 @@
             <mat-label> Centro de Costo </mat-label>
             <mat-select  formControlName="cco"> 
                 <ng-container *ngFor="let item of catalogo?.['ccoT']">
-                    <div *ngIf="item.idCliente === idCliente">
+                    <div *ngIf="item.idCliente === formRecibo.value.cliente">
                         <mat-option [value]="item?.idCeco">
                             {{  item?.cco | uppercase }}
                         </mat-option>
@@ -127,20 +126,7 @@
     </div>
 
 
-    <div  class="col-md-6" *ngIf="data?.['bandera'] !=2">
-        <!-- <mat-form-field  appearance="legacy">
-            <mat-label> Servido a </mat-label>
-            <mat-select  formControlName="servidoA"> 
-                <ng-container *ngFor="let item of catalogo?.['transportes']">
-                    <div *ngIf="item.idCliente === idCliente || item.idCliente === data?.['data']['idCliente']">
-                        <mat-option [value]="item?.idTransportista">
-                            {{  item?.nombreEmpresa | uppercase }}
-                        </mat-option>
-                    </div>
-                </ng-container>
-              </mat-select> 
-          </mat-form-field> -->
-
+    <!-- <div  class="col-md-6" *ngIf="data?.['bandera'] !=2">
           <mat-form-field appearance="legacy">
             <mat-label>Servido a</mat-label>
             <input type="text"
@@ -159,7 +145,7 @@
             </mat-autocomplete>
           </mat-form-field>
 
-    </div>
+    </div> -->
 
     <div  class="col-md-6" *ngIf="data?.['bandera'] == 2">
         <!-- <mat-form-field  appearance="legacy">
@@ -193,7 +179,20 @@
             </mat-autocomplete>
           </mat-form-field>
     </div>
-
+    <div class="col-md-6" *ngIf="data?.['bandera'] == 3 || data?.['bandera'] == 1 || data?.['bandera'] == 4 " >
+                <mat-form-field  appearance="legacy">
+            <mat-label> Servido a </mat-label>
+            <mat-select  formControlName="servidoA"> 
+                <ng-container *ngFor="let item of catalogo?.['transportes']">
+                    <div *ngIf="item.idCliente === idCliente ">
+                        <mat-option [value]="item?.idTransportista" (click)="setearservidaA(item)" (keyup.enter)="setearservidaA(item)">
+                            {{  item?.nombreEmpresa | uppercase }}
+                        </mat-option>
+                    </div>
+                </ng-container>
+              </mat-select> 
+          </mat-form-field>
+    </div>
 
     <div  class="col-md-6" >
         <mat-form-field  appearance="legacy">

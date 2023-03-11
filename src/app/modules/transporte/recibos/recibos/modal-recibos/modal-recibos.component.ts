@@ -27,7 +27,6 @@ export const MY_FORMATS = {
   },
 };
 
-
 @Component({
   selector: 'app-modal-recibos',
   templateUrl: './modal-recibos.component.html',
@@ -50,9 +49,9 @@ export class ModalRecibosComponent implements OnInit {
   filteredOptions2: Observable<string[]>;
   public  botton     : boolean = false;
 
-  public  catalogo      : any;
-  public  catalogoTgu   : any;
-  public  catalogoSps   : any;
+  public  catalogo      : any[]=[];
+  public  catalogoTgu   : any[]=[];
+  public  catalogoSps   : any[]=[];
   public  catalogoF  : any;
 
   public  titulo     : string;
@@ -99,6 +98,7 @@ servidaA : number;
     this.cargarCatalogo();
     this.catalogoF = this.auth.returnCatalogo();
     this.Validacion();
+    console.log(this.data)
   }
 
   retornarValorMes( mes : number ){
@@ -122,6 +122,9 @@ servidaA : number;
     if ( this.data?.['bandera'] == 1 ){
       this.enable  = true;
       this.enable2 = true;
+      this.enable3 = true;
+      this.idCliente = this.data?.['data']['idCliente']
+      this.servidaA = this.data?.['data']['servidoA']
       this.cargarFormTipo();
       this.formTipo.patchValue({
         tipo : this.data?.['data']['tipoRecibo']
@@ -184,6 +187,8 @@ servidaA : number;
       this.enable2 = true;
       this.enable3 = true;
       this.enable4 = false;
+      this.idCliente = this.data?.['data']['idCliente']
+      this.servidaA = this.data?.['data']['servidoA']
       this.fechaF = this.data?.['data']['fechaR'];
       this.cargarFormTipo();
       this.formTipo.patchValue({
@@ -203,32 +208,32 @@ servidaA : number;
   }
 
   setForm(tipo : number){
-
       if ( tipo == 1) {
         this.formRecibo.patchValue({
-          cco           : this.data?.['data']['idCco'],
-          reciboC       : this.data?.['data']['ReciboC'],
-          fechaR        : this.data?.['data']['fechaR'],
-          proveedorC    : this.data?.['data']['proveedorCombustible'],
-          tipoC         : this.data?.['data']['tipoCombustible'],
-          servidoA      : this.data?.['data']['servidoA'],
-          placa         : this.data?.['data']['placa'],
-          valorRecibo   : this.data?.['data']['valorRecibo'],
-          observaciones : this.data?.['data']['Observaciones']
+          cco           : this.data?.['data']?.['idCco'],
+          reciboC       : this.data?.['data']?.['ReciboC'],
+          fechaR        : this.data?.['data']?.['fechaR'],
+          proveedorC    : this.data?.['data']?.['proveedorCombustible'],
+          tipoC         : this.data?.['data']?.['tipoCombustible'],
+          servidoA      : this.data?.['data']?.['servidoA'],
+          placa         : this.data?.['data']?.['placa'],
+          valorRecibo   : this.data?.['data']?.['valorRecibo'],
+          observaciones : this.data?.['data']?.['Observaciones']
         })
       }
     if ( tipo == 2) {
+      this.precargarAutoComplete()
         this.formRecibo.patchValue({
-          cco           : this.data?.['data']['idCco'],
-          reciboC       : this.data?.['data']['ReciboC'],
-          fechaR        : this.data?.['data']['fechaR'],
-          proveedorC    : this.data?.['data']['proveedorCombustible'],
-          tipoC         : this.data?.['data']['tipoCombustible'],
-          servidoA      : this.data?.['data']['servidoAC'],
-          placa         : this.data?.['data']['placa'],
-          valorRecibo   : this.data?.['data']['valorRecibo'],
-          observaciones : this.data?.['data']['Observaciones'],
-          cliente       : this.data?.['data']['cliente']
+          cco           : this.data?.['data']?.['idCco'],
+          reciboC       : this.data?.['data']?.['ReciboC'],
+          fechaR        : this.data?.['data']?.['fechaR'],
+          proveedorC    : this.data?.['data']?.['proveedorCombustible'],
+          tipoC         : this.data?.['data']?.['tipoCombustible'],
+          servidoA      : this.data?.['data']?.['servidoA'],
+          placa         : this.data?.['data']?.['placa'],
+          valorRecibo   : this.data?.['data']?.['valorRecibo'],
+          observaciones : this.data?.['data']?.['Observaciones'],
+          cliente       : this.data?.['data']?.['idCliente']
         })
 
       }
@@ -301,6 +306,23 @@ cargarFormReciboExterno(){
   }
 
 precargarAutoComplete(){
+
+if ( this.catalogo.length > 0) {
+}else{
+  this.cargarCatalogo()
+}
+
+if ( this.catalogoTgu.length > 0) {
+}else{
+  this.cargarCatalogoTgu()
+}
+
+if ( this.catalogoSps.length > 0) {
+}else{
+  this.cargarCatalogoSps()
+}
+
+
 if( this.auth.dataUsuario['sede'] === 1 ){
   this.filteredOptions =  this.formRecibo.get('cliente').valueChanges.pipe(
     startWith(''),
@@ -359,7 +381,7 @@ cargarFormFacturaMR(){
     res=>{
       if ( res ){
         this.catalogo = res;  
-      }
+    }
     }
   )
   }
@@ -376,7 +398,6 @@ cargarFormFacturaMR(){
     }
   )
   }
-
   cargarCatalogoSps(){
     let url = '/transporte/catalogoRec';
     let params = {
@@ -456,7 +477,7 @@ cco             : this.data?.['data']['idCco'],
 fechaR          : this.formRecibo.value.fechaR,
 proveedorC      : this.formRecibo.value.proveedorC,
 tipoCombustible : this.formRecibo.value.tipoC,
-servidoA        : this.formRecibo.value.servidoA,
+servidoA        : servidoA,
 placa           : this.formRecibo.value.placa,
 valorR          : this.formRecibo.value.valorRecibo,
 obs             : this.formRecibo.value.observaciones,

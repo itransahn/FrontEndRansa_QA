@@ -47,11 +47,11 @@ placa" formControlName="filtrar">
             <tbody>
               <tr *ngFor="let tr of dataE | search: this.filtro.value.filtrar:parametrosBusqueda | slice: desde: hasta " class="trHover">
                 <td data-label="Fecha Recibo">{{    tr?.fechaR   | date : 'shortDate'          }}</td>
-                <td data-label="Recibo">{{    tr?.ORDEN             }}</td>
-                <td data-label="Recibo">{{    tr?.ReciboC             }}</td>
-                <td data-label="Servido A">{{    tr?.servidoAC             }}</td>
-                <td data-label="Placa">{{    tr?.placa             }}</td>
-                <td data-label="Valor Recibo">{{    tr?.valorRecibo             }}</td>
+                <td data-label="Recibo">{{          tr?.ORDEN             }}</td>
+                <td data-label="Recibo">{{          tr?.ReciboC             }}</td>
+                <td data-label="Servido A">{{       tr?.servidoAC             }}</td>
+                <td data-label="Placa">{{           tr?.placa             }}</td>
+                <td data-label="Valor Recibo" class="right">{{    tr?.valorRecibo | currency:'L. '             }}</td>
                 <td data-label="Acciones">
                 <div class="text-center">
 
@@ -85,7 +85,7 @@ placa" formControlName="filtrar">
                     <th ></th>
                     <th ></th>
                     <th ></th>
-                    <th > {{ total | currency : 'Lps '}} </th>
+                    <th class="right"> {{ total | currency : 'L. '}} </th>
                     <th ></th>
                     </tr>
                 <!-- ISV -->
