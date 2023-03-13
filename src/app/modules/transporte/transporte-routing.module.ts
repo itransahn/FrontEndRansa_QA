@@ -14,6 +14,7 @@ import { VistaPaseSalidaComponent } from './pases-salida/vista-pase-salida/vista
 import { HistorialPasesComponent } from './pasesf/historial-pases/historial-pases.component';
 import { ProveedoresTComponent } from './proveedores-t/proveedores-t.component';
 import { CancelarrecibosComponent } from './recibos/cancelarrecibos/cancelarrecibos.component';
+import { PlacasEmpComponent } from './recibos/placas-emp/placas-emp.component';
 import { RecibosComponent } from './recibos/recibos/recibos.component';
 import { RolClienteComponent } from './rol-cliente/rol-cliente.component';
 import { RolProveedorComponent } from './rol-proveedor/rol-proveedor.component';
@@ -99,6 +100,10 @@ const routes: Routes = [
 {
     path : 'Deducciones',
     component : DeducciontComponent
+},
+{
+    path : 'placasEmp',
+    component : PlacasEmpComponent
 }
   ];
   

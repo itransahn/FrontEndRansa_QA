@@ -114,6 +114,7 @@ servidaA : number;
   } 
 
   setearservidaA(data ){
+    console.log(data)
     this.servidaA = data?.idTransportista;
   } 
 
@@ -466,8 +467,8 @@ actualizarRecibo(){
     cliente = 0;
     servidoA = this.formRecibo.value.servidoA
   }else{
-    cliente  = this.idCliente | this.data?.['data']['idCliente'];
-    servidoA = this.servidaA  | this.data?.['data']['servidoA'];
+    cliente  = this.idCliente ;
+    servidoA = this.servidaA  ;
    }
   let url = '/transporte/Updrecibos';
   let params = {

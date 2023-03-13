@@ -141,8 +141,8 @@ retornarCorrelativo(){
     return correlativo.substring(0,correlativo.length)
   }
 
-retornarSubtotal(filtro:string){
-    return Acumulador(this.retencionBD,filtro)
+retornarSubtotal(){
+    return Acumulador(this.retencionBD,this.validarTipoRetencion())
   }
 
 convertirNumLetra( numero : any){
@@ -217,6 +217,7 @@ CargarRetencion(){
     this.facturacionS.post (url,params).subscribe(
       res=>{
         this.retencionBD = res?.data?.Table0;
+        console.log(this.retencionBD)
         if ( this.retencionBD.length < 20 ){
           for(let j = this.retencionBD.length; j<(40-this.retencionBD.length); j++){
             this.espaciosBlancos.push(j)
@@ -272,6 +273,26 @@ this.facturacionS.post(url,params).subscribe( )
 
 
 }
+
+validarTipoRetencion(){
+
+  if(this.ruta.snapshot.params?.['retencion'] == '112'){
+    return 'retencion112'
+  }
+
+  if(this.ruta.snapshot.params?.['retencion'] == '113'){
+    return 'retencion113'
+  }
+  if(this.ruta.snapshot.params?.['retencion'] == '135'){
+    return 'retencion135'
+  }
+  if(this.ruta.snapshot.params?.['retencion'] == '217'){
+    return 'retencion217'
+  }
+
+return ''
+}
+
 
 validarCorrelativo(){
 
