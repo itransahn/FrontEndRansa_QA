@@ -72,10 +72,10 @@
         </div>
         <div class="row">
             <div class="col-md-12 container">
-                <h4 class="subtitle" style="color: #006F1D !important">   RECIBO DEDUCCION DE COMBUSTIBLE </h4>
+                <h4 class="subtitle" style="color: #050404 !important">   RECIBO DEDUCCION DE COMBUSTIBLE </h4>
             </div>
             <div class="col-md-12 container">
-                <h4 class="subtitle" style="color: #006F1D !important">   {{ dataRec[0]?.Transporte }} </h4>
+                <h4 class="subtitle" style="color: #050404 !important">   {{ dataRec[0]?.Transporte }} </h4>
             </div>
         </div>
 
@@ -101,7 +101,7 @@
                               <td data-label="Placa"  class="contenidoF"  >                    {{ item?.placa  }} </td>
                               <td data-label="N° Recibo"      class="contenidoF"  >            {{ item?.ReciboC  }} </td>     
                               <td data-label="Fecha Recibo"   class="contenidoF"  >            {{ item?.fechaR | date : 'dd/MM/yyyy'    }} </td>      
-                              <td data-label="Valor Recibo"   class="contenidoF right" >             {{ item?.valorRecibo | number    }}</td>
+                              <td data-label="Valor Recibo"   class="contenidoF right" >             {{ item?.valorRecibo | number : '1.2-2'   }}</td>
                               <td data-label="N° Factura"  colspan="2"   class="contenidoF">   {{ item?.Nfactura       }}</td>
                               <td data-label="Fecha Factura " class="contenidoF ">   {{ item?.fechaFactura  | date : 'dd/MM/yyyy'  }} </td>
                               <td data-label="Valor Factura"  class="contenidoF right exp2">        {{ item?.valorFacturaa | number : '1.2-2'   }}</td>
@@ -116,17 +116,17 @@
                             <!-- Subtotal -->
                             <tr >
                                 <th colspan="8" class="right"> Subtotal Lps.</th>
-                                <th class="right"> {{ subtotal | number}} </th>
+                                <th class="right"> {{ subtotal | number : '1.2-2' }} </th>
                                 </tr>
                             <!-- 5% -->
                             <tr>
                              <th colspan="8" class="right"> cobro 5% Lps.</th>
-                             <th class="right"> {{ (subtotal*0.05) | number}} </th>
+                             <th class="right"> {{ (subtotal*0.05) | number : '1.2-2'}} </th>
                             </tr>
                             <!-- Total -->
                           <tr>
                             <th colspan="8" class="right"> Total Lps.</th>
-                            <th class="right"> {{ ((subtotal*0.05) + subtotal) | number}} </th>
+                            <th class="right"> {{ ((subtotal*0.05) + subtotal) | number : '1.2-2'}} </th>
                           </tr>  
 
                           </tfoot>  

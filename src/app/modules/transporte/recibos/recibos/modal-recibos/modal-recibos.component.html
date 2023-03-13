@@ -76,7 +76,7 @@
             <mat-autocomplete  #auto="matAutocomplete">
                 <div  *ngFor="let option of filteredOptions | async" >
                     <div  >
-                        <mat-option value=" {{option.cliente}}" (click)="setearCliente(option)" (keyup.enter)="setearProveedor(option)">
+                        <mat-option value=" {{option.cliente}}" (click)="setearCliente(option)" (keyup.enter)="setearCliente(option)">
                         {{  option?.cliente | uppercase }}        
                         </mat-option>
                     </div>
@@ -115,7 +115,7 @@
             <mat-label> Centro de Costo </mat-label>
             <mat-select  formControlName="cco"> 
                 <ng-container *ngFor="let item of catalogo?.['ccoT']">
-                    <div *ngIf="item.idCliente === formRecibo.value.cliente">
+                    <div *ngIf="item.idCliente === idCliente">
                         <mat-option [value]="item?.idCeco">
                             {{  item?.cco | uppercase }}
                         </mat-option>

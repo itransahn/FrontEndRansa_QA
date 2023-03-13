@@ -96,6 +96,17 @@ cargarData(){
   );
 }
 
+cambiarEstadoRecibo(){
+  let url    = '/transporte/estadoRecibo';
+for (let i = 0 ; i < this.dataRec.length; i++ ){
+    let params = {
+    idRecibo  : this.dataRec[i]?.idRecibo
+  } 
+this.transporteService.put(url,params).subscribe( ) 
+}
+// this.auth.redirecTo('/ransa/transporte/Deducciones');
+
+}
 
 cargarDeducciones(){
   this.espaciosBlancos = [];
@@ -125,8 +136,6 @@ this.transporteService.post(url,params).subscribe(
 )
 }
 
-
-
 GenerarPdf(){
   this.pdfRetencion('Deduccion',  `${this.dataRec[0]?.Transporte}_Recibo`,'Recibo Ransa', `Seguro de generar PDF de Recibo del Transportista
 ${this.dataRec[0]?.Transporte}`,{
@@ -134,6 +143,9 @@ ${this.dataRec[0]?.Transporte}`,{
   factura : 'Recibo Ransa',
   titulo : ''
 })
+
+
+
 }
 
 pdfRetencion( id?:string, NombreFinal ?: string, detalle?: string, titulo ?: string, data?:any) :boolean {
@@ -168,7 +180,8 @@ pdfRetencion( id?:string, NombreFinal ?: string, detalle?: string, titulo ?: str
       this.toast.mensajeSuccess("Documento generado correctamente","Generación de PDF");
       // this.guardarData();
       // this.cambiarEstadoRetencion();
-      // this.auth.redirecTo('/ransa/finanzas/retencion')
+this.cambiarEstadoRecibo();
+      this.cargarDeducciones();
       return true;
     });
                 return true

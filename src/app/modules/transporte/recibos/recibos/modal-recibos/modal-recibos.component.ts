@@ -98,7 +98,6 @@ servidaA : number;
     this.cargarCatalogo();
     this.catalogoF = this.auth.returnCatalogo();
     this.Validacion();
-    console.log(this.data)
   }
 
   retornarValorMes( mes : number ){
@@ -114,7 +113,6 @@ servidaA : number;
   } 
 
   setearservidaA(data ){
-    console.log(data)
     this.servidaA = data?.idTransportista;
   } 
 
@@ -146,6 +144,7 @@ servidaA : number;
     2 Insertar */
     if ( this.data?.['bandera'] == 2 ){
       this.enable = false;
+      this.enable2 = false;
       this.enable3 = false;
       this.cargarFormTipo();
       this.cargarCatalogoTgu();
@@ -160,7 +159,7 @@ servidaA : number;
       this.cargarCatalogoSps();
       this.enable = true;
       this.enable2 = false;
-      this.enable3 = true;
+      this.enable3 = false;
       this.idCliente = this.data?.['data']['idCliente']
       this.servidaA = this.data?.['data']['servidoA']
       this.cargarFormTipo();
