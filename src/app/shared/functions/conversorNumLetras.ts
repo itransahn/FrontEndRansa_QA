@@ -299,7 +299,7 @@ export let numeroALetras = (function() {
                 letrasMonedaCentavoSingular: currency.centSingular || 'Centavo'
             };
     
-            if (data.centavos >= 0) {
+            if (data.centavos > 0) {
                 data.letrasCentavos = 'CON ' + (function () {
                         // if (data.centavos == 1)
                         //     return Millones(data.centavos) + ' ' + data.letrasMonedaCentavoSingular;
@@ -311,6 +311,18 @@ export let numeroALetras = (function() {
                         //     return Millones(data.centavos) + ' ' + ;
                         return `${data.centavos}/100 M.N.` 
                     })();
+            }else{
+                data.letrasCentavos = 'CON ' + (function () {
+                    // if (data.centavos == 1)
+                    //     return Millones(data.centavos) + ' ' + data.letrasMonedaCentavoSingular;
+                    // else
+                    //     return Millones(data.centavos) + ' ' + data.letrasMonedaCentavoPlural;
+                    //       if (data.centavos == 1)
+                    //     return Millones(data.centavos) + ' ' + ;
+                    // else
+                    //     return Millones(data.centavos) + ' ' + ;
+                    return `0${data.centavos}/100 M.N.` 
+                })(); 
             };
     
             if(data.enteros == 0)
