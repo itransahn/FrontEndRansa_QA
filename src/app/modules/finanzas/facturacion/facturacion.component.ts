@@ -187,6 +187,7 @@ impuesto   : new FormControl('', [ Validators.required]),
   this.facturacionS.As400( params ).subscribe(
     (res:any)=>{
       this.cabeceraF = res;
+      console.log(this.cabeceraF)
       let fecha : string = String(this.cabeceraF[0]?.FDCCTC);
       this.dia  =  fecha.substring(6,8);
       this.mes  =  fecha.substring(4,6);

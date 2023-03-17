@@ -309,7 +309,15 @@ export let numeroALetras = (function() {
                         //     return Millones(data.centavos) + ' ' + ;
                         // else
                         //     return Millones(data.centavos) + ' ' + ;
+                    if ( data.centavos >= 10){
                         return `${data.centavos}/100 M.N.` 
+                    }else{
+                        return `0${data.centavos}/100 M.N.` 
+                    }
+
+
+
+
                     })();
             }else{
                 data.letrasCentavos = 'CON ' + (function () {
