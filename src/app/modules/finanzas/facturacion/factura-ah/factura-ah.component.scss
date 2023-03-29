@@ -1,5 +1,5 @@
 .cardPersonalizada{
-    width:  32cm;
+    width:  32cm !important;
     height: auto ;
     box-shadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2), 0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12);
 }
@@ -258,8 +258,8 @@ text-align: right !important;
   }
 
   .espacioB{
-	width: 100% !important;
-	height:  auto !important;
+	width: auto !important;
+	height:  20px !important;
 	// border-color: #050404 !important;
   }
 
@@ -418,9 +418,6 @@ table{
 		border-left:     0.1px solid #050404 !important;
 		padding: 0 !important;
 	}
-	margin: 0;
-	padding: 0;
-	width: 100% !important;
 	// border :  0.3px solid #050404 !important;
 	.bordeIz{
 		border-bottom-style: none !important;
@@ -433,7 +430,6 @@ table{
 
 	.filas{
 	border :  0.5px solid #050404 !important;
-
 	}
 	.bodyTed{
 		border-bottom:  none !important;
@@ -600,6 +596,16 @@ thead{
 .pertenece{
 	margin-top: 20px;
 }
+
+.container2{
+    // max-width: 1024px;
+    // width: 100%;
+    // height: 100%;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
 
 .container2{
     // max-width: 1024px;

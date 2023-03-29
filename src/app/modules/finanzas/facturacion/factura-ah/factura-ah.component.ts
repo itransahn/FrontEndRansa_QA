@@ -222,7 +222,8 @@ this.loading1 = true;
       }
   
       for( let i = 0; i < this.EstrObs2.length; i++ ){
-       this.Observaciones += this.EstrObs2[i]['TOBCTC']
+       this.Observaciones += this.EstrObs2[i]['TOBCTC'];
+       this.Observaciones += ' ';
     }
   
   }
