@@ -19,7 +19,7 @@
                 <span class="rigth factura">NOTA DE DEBITO </span> <br>
                 <span *ngIf="ruta.snapshot.params['empresa'] == 'RH'" class="rigth correlativo factura">
                         <!-- 000-001-01-{{retornarCorrelativo()}} -->
-                        000-002-07-{{retornarCorrelativo()}} <br>          
+                        000-002-07-0{{retornarCorrelativo()}} <br>          
                 </span> 
                 <span *ngIf="ruta.snapshot.params['empresa'] == 'AH'" class="rigth correlativo factura">
                     <!-- 000-001-01-{{retornarCorrelativo()}} -->

@@ -199,6 +199,7 @@ export class NdComponent implements OnInit {
     
       retornarCorrelativo( ){
         let correlativo : string = this.cabeceraN[0]['NDCCTC'];
+        console.log(correlativo)
         return correlativo.substring(1,correlativo.length)
       } 
       
