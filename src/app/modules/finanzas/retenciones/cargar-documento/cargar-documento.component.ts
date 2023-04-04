@@ -150,6 +150,7 @@ tipoRetencion : tipoRetP,
 cai           : caiP,
 sede          : sede
   };
+  console.log(params)
  this.servicio.put( url, params ).subscribe ( 
   res=>{
       if( res?.data?.Table0?.[0]['codigo'] != -1 ){

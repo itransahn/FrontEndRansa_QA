@@ -145,6 +145,10 @@ retornarSubtotal(){
     return Acumulador(this.retencionBD,this.validarTipoRetencion())
   }
 
+
+  retornarImpuesto(){
+    return Acumulador(this.retencionBD,'baseRetencion')
+  }
 convertirNumLetra( numero : any){
     return numeroALetras(numero,{})
 }
@@ -217,7 +221,6 @@ CargarRetencion(){
     this.facturacionS.post (url,params).subscribe(
       res=>{
         this.retencionBD = res?.data?.Table0;
-        console.log(this.retencionBD)
         if ( this.retencionBD.length < 20 ){
           for(let j = this.retencionBD.length; j<(40-this.retencionBD.length); j++){
             this.espaciosBlancos.push(j)
