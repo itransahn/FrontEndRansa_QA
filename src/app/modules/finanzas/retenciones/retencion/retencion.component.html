@@ -127,17 +127,14 @@ La cantidad de: <span style="text-decoration: underline;"> &nbsp;&nbsp;&nbsp;&nb
                                            <!-- <th class="center" style="font-size: 0.7em !important;"> {{ retornarSubtotal('baseR')  | number }} </th> -->
 
 
-                                           <th class="right legend" *ngIf=" retornarSubtotal('baseRetencion') <= 0"                                      > <span  class="letra0"> L.        </span>            {{         retornarImpuesto() | number : '1.2-2' }}  </th>
-                                           <th class="right legend" *ngIf=" retornarSubtotal('baseRetencion') >  0        && retornarSubtotal('baseRetencion') <= 99"      > <span  class="letra0"> L.        </span>  {{ retornarImpuesto() | number : '1.2-2' }}  </th>
-                                           <th class="right legend" *ngIf=" retornarSubtotal('baseRetencion') >= 100      && retornarSubtotal('baseRetencion') <= 999"     > <span  class="letra100"> L.      </span>  {{ retornarImpuesto() | number : '1.2-2' }}  </th>
-                                           <th class="right legend" *ngIf=" retornarSubtotal('baseRetencion') >= 1000     && retornarSubtotal('baseRetencion') <= 9999"    > <span  class="letra1000"> L.     </span>  {{ retornarImpuesto() | number : '1.2-2' }}  </th>
-                                           <th class="right legend" *ngIf=" retornarSubtotal('baseRetencion') >= 10000    && retornarSubtotal('baseRetencion') <= 99999"   > <span  class="letra10000"> L.    </span>  {{ retornarImpuesto() | number : '1.2-2' }}  </th>
-                                           <th class="right legend" *ngIf=" retornarSubtotal('baseRetencion') >= 100000   && retornarSubtotal('baseRetencion') <= 999999"  > <span  class="letra100000"> L.   </span>  {{ retornarImpuesto() | number : '1.2-2' }}  </th>
-                                           <th class="right legend" *ngIf=" retornarSubtotal('baseRetencion') >= 1000000  && retornarSubtotal('baseRetencion') <= 9999999" > <span  class="letra1000000"> L.  </span>  {{ retornarImpuesto() | number : '1.2-2' }}  </th>
-                                           <th class="right legend" *ngIf=" retornarSubtotal('baseRetencion') >= 10000000 "                              > <span  class="letra10000000"> L. </span>            {{         retornarImpuesto() | number : '1.2-2' }}  </th>
-
-
-
+                                           <th class="right legend" *ngIf=" retornarImpuesto() <= 0"                                      > <span  class="letra0"> L.        </span>            {{         retornarImpuesto() | number : '1.2-2' }}  </th>
+                                           <th class="right legend" *ngIf=" retornarImpuesto() >  0        && retornarImpuesto() <= 99"      > <span  class="letra0"> L.        </span>  {{ retornarImpuesto() | number : '1.2-2' }}  </th>
+                                           <th class="right legend" *ngIf=" retornarImpuesto() >= 100      && retornarImpuesto() <= 999"     > <span  class="letra100"> L.      </span>  {{ retornarImpuesto() | number : '1.2-2' }}  </th>
+                                           <th class="right legend" *ngIf=" retornarImpuesto() >= 1000     && retornarImpuesto() <= 9999"    > <span  class="letra1000"> L.     </span>  {{ retornarImpuesto() | number : '1.2-2' }}  </th>
+                                           <th class="right legend" *ngIf=" retornarImpuesto() >= 10000    && retornarImpuesto() <= 99999"   > <span  class="letra10000"> L.    </span>  {{ retornarImpuesto() | number : '1.2-2' }}  </th>
+                                           <th class="right legend" *ngIf=" retornarImpuesto() >= 100000   && retornarImpuesto() <= 999999"  > <span  class="letra100000"> L.   </span>  {{ retornarImpuesto() | number : '1.2-2' }}  </th>
+                                           <th class="right legend" *ngIf=" retornarImpuesto() >= 1000000  && retornarImpuesto() <= 9999999" > <span  class="letra1000000"> L.  </span>  {{ retornarImpuesto() | number : '1.2-2' }}  </th>
+                                           <th class="right legend" *ngIf=" retornarImpuesto() >= 10000000 "                              > <span  class="letra10000000"> L. </span>            {{         retornarImpuesto() | number : '1.2-2' }}  </th>
                                     <!-- vista de monto retenido -->
                                     <!-- <th class="center" style="font-size: 0.7em !important;"> {{ retornarSubtotal('montoR') | number }}</th> -->
 
@@ -316,14 +313,14 @@ La cantidad de: <span style="text-decoration: underline;"> &nbsp;&nbsp;&nbsp;&nb
                                        <!-- <th class="center" style="font-size: 0.7em !important;"> {{ retornarSubtotal('baseR')  | number }} </th> -->
 
 
-                                       <th class="right legend" *ngIf=" retornarSubtotal('baseRetencion') <= 0"                                      > <span  class="letra0"> L.        </span>            {{         retornarImpuesto() | number : '1.2-2' }}  </th>
-                                       <th class="right legend" *ngIf=" retornarSubtotal('baseRetencion') >  0        && retornarSubtotal('baseRetencion') <= 99"      > <span  class="letra0"> L.        </span>  {{ retornarImpuesto() | number : '1.2-2' }}  </th>
-                                       <th class="right legend" *ngIf=" retornarSubtotal('baseRetencion') >= 100      && retornarSubtotal('baseRetencion') <= 999"     > <span  class="letra100"> L.      </span>  {{ retornarImpuesto() | number : '1.2-2' }}  </th>
-                                       <th class="right legend" *ngIf=" retornarSubtotal('baseRetencion') >= 1000     && retornarSubtotal('baseRetencion') <= 9999"    > <span  class="letra1000"> L.     </span>  {{ retornarImpuesto() | number : '1.2-2' }}  </th>
-                                       <th class="right legend" *ngIf=" retornarSubtotal('baseRetencion') >= 10000    && retornarSubtotal('baseRetencion') <= 99999"   > <span  class="letra10000"> L.    </span>  {{ retornarImpuesto() | number : '1.2-2' }}  </th>
-                                       <th class="right legend" *ngIf=" retornarSubtotal('baseRetencion') >= 100000   && retornarSubtotal('baseRetencion') <= 999999"  > <span  class="letra100000"> L.   </span>  {{ retornarImpuesto() | number : '1.2-2' }}  </th>
-                                       <th class="right legend" *ngIf=" retornarSubtotal('baseRetencion') >= 1000000  && retornarSubtotal('baseRetencion') <= 9999999" > <span  class="letra1000000"> L.  </span>  {{ retornarImpuesto() | number : '1.2-2' }}  </th>
-                                       <th class="right legend" *ngIf=" retornarSubtotal('baseRetencion') >= 10000000 "                              > <span  class="letra10000000"> L. </span>            {{         retornarImpuesto() | number : '1.2-2' }}  </th>
+                                       <th class="right legend" *ngIf=" retornarImpuesto() <= 0"                                      > <span  class="letra0"> L.        </span>            {{         retornarImpuesto() | number : '1.2-2' }}  </th>
+                                       <th class="right legend" *ngIf=" retornarImpuesto() >  0        && retornarImpuesto() <= 99"      > <span  class="letra0"> L.        </span>  {{ retornarImpuesto() | number : '1.2-2' }}  </th>
+                                       <th class="right legend" *ngIf=" retornarImpuesto() >= 100      && retornarImpuesto() <= 999"     > <span  class="letra100"> L.      </span>  {{ retornarImpuesto() | number : '1.2-2' }}  </th>
+                                       <th class="right legend" *ngIf=" retornarImpuesto() >= 1000     && retornarImpuesto() <= 9999"    > <span  class="letra1000"> L.     </span>  {{ retornarImpuesto() | number : '1.2-2' }}  </th>
+                                       <th class="right legend" *ngIf=" retornarImpuesto() >= 10000    && retornarImpuesto() <= 99999"   > <span  class="letra10000"> L.    </span>  {{ retornarImpuesto() | number : '1.2-2' }}  </th>
+                                       <th class="right legend" *ngIf=" retornarImpuesto() >= 100000   && retornarImpuesto() <= 999999"  > <span  class="letra100000"> L.   </span>  {{ retornarImpuesto() | number : '1.2-2' }}  </th>
+                                       <th class="right legend" *ngIf=" retornarImpuesto() >= 1000000  && retornarImpuesto() <= 9999999" > <span  class="letra1000000"> L.  </span>  {{ retornarImpuesto() | number : '1.2-2' }}  </th>
+                                       <th class="right legend" *ngIf=" retornarImpuesto() >= 10000000 "                              > <span  class="letra10000000"> L. </span>            {{         retornarImpuesto() | number : '1.2-2' }}  </th>
 
                                 <!-- vista de monto retenido -->
                                 <!-- <th class="center" style="font-size: 0.7em !important;"> {{ retornarSubtotal('montoR') | number }}</th> -->
