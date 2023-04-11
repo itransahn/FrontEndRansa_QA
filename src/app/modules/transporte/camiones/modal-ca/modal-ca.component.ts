@@ -83,6 +83,7 @@ export class ModalCaComponent implements OnInit {
 
   validacion(){
     if ( this.data['bandera'] == 1 ){
+    this.idValor =  this.data?.idTransportista;
       this.enable     = true;
       this.visible    = true;
       this.botton     = false
@@ -101,6 +102,7 @@ export class ModalCaComponent implements OnInit {
     }
 
     if ( this.data['bandera'] == 3 ){
+      this.idValor =  this.data?.idTransportista;
       this.enable     = false;
       this.visible    = true;
       this.botton     = true
