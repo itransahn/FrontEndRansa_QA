@@ -28,6 +28,7 @@ export class RetencionComponent implements OnInit {
   public parametrosCai = [];
   public retencionBD   : retenciones[] = [];
   public correlativoN  : string = '';
+  public correlativoC  : string = '';
 
   public DiaP        : string = '0';
   public mesP        : string = '0';
@@ -78,6 +79,7 @@ correlativo(){
     ( res:DataApi)=>{
         if(res){
             this.correlativoN = res?.data?.Table0[0]?.['Correlativo'];  
+            this.correlativoC = res?.data?.Table0[0]?.['correlativoC'];
             if ( this.correlativoN === '-1'){
                  this.permitido = false;
             }

@@ -27,6 +27,8 @@ export class RetencionesGComponent implements OnInit {
   public parametrosCai = [];
   public retencionBD   : any[] = [];
   public correlativoN  : string = '';
+  public correlativoC  : string = '';
+
 
   public DiaP        : number = 0;
   public mesP        : number = 0;
@@ -123,6 +125,7 @@ this.desde         = res?.data?.Table0[0]?.desde,
 this.hasta         = res?.data?.Table0[0]?.hasta,
 this.fechaLimite   = res?.data?.Table0[0]?.fechaLimite,
 this.rtn           = res?.data?.Table0[0]?.rtn,
+this.correlativoC  = res?.data?.Table0[0]?.correlativoC,
 retencionT         = res?.data?.Table0[0]?.tipoR
 
 this.cargarParametrosF();
