@@ -608,3 +608,19 @@ border-color: red !important;
   .firmaLetra{
 	z-index: 100;
   }
+
+  .firmaIL{
+	width:  120px;
+	height: 120px;
+	z-index: 2;
+	position: relative;
+	left: 10px;
+}
+
+.firmaIR{
+	width:  150px;
+	height: 120px;
+	position: relative;
+	// top : 5px;
+	// z-index: 2;
+}
