@@ -191,7 +191,10 @@ export class NdComponent implements OnInit {
         (res:DataApi | any )=>{
             if( !res?.hasError ){
                 this.parametros    = res.data.Table0;
-                this.parametrosCai = res.data.Table1;          
+                this.parametrosCai = res.data.Table1;    
+                console.log(this.parametros)
+                console.log(this.parametrosCai)
+
             }
         }
       )
@@ -199,7 +202,6 @@ export class NdComponent implements OnInit {
     
       retornarCorrelativo( ){
         let correlativo : string = this.cabeceraN[0]['NDCCTC'];
-        console.log(correlativo)
         return correlativo.substring(1,correlativo.length)
       } 
       
