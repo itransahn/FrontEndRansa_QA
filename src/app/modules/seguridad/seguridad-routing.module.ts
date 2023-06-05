@@ -13,6 +13,7 @@ import { PermisosModuloComponent } from './modulos-admin/permisos-modulo/permiso
 import { RolesComponent } from './roles/roles.component';
 import { UsuarioFormComponent } from './usuarios/usuario-form/usuario-form.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
+import { InforComponent } from './infor/infor.component';
 
 const routes: Routes = [
   {
@@ -66,6 +67,10 @@ const routes: Routes = [
    {
     path : 'puestos',
     component : PuestosComponent
+   },
+   {
+    path : 'infor',
+    component : InforComponent
    },
 
 ];

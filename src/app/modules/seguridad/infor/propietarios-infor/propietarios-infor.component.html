@@ -1,0 +1,62 @@
+<form [formGroup]="form" #f="ngForm">
+    <div class="row" style="padding: 1% !important;">
+        <div class="col-md-6 container">
+            <img src="../../../../../assets/images/logoRansa.ico" alt="">
+        </div>
+        <div class="col-md-6 container">
+            <h3 class="h4"> Propietarios Infor </h3>
+        </div>
+
+        <div class="col-md-4">
+            <mat-form-field  appearance="legacy">
+                <mat-label> Id Propietario </mat-label>
+                <input matInput #idPropietario  placeholder="Nombre Propietario" formControlName ="idPropietario">
+            </mat-form-field>
+        </div>
+
+        <div class="col-md-4">
+            <mat-form-field  appearance="legacy">
+                <mat-label> Propietario </mat-label>
+                <input matInput #Propietario placeholder="Descripcion propietario"  formControlName ="Propietario">
+            </mat-form-field>
+        </div>
+
+        <div class="col-md-4">
+            <mat-form-field appearance="legacy">
+                <mat-label> Sede </mat-label>
+                <mat-select  formControlName="Sede" > 
+                    <mat-option> - </mat-option> 
+                    <mat-option #sede *ngFor="let tipo of catalogo['sedes']" [value]="tipo?.id_sedeRansa">
+                        {{  tipo?.sedeRansa | uppercase }}
+                    </mat-option> 
+                  </mat-select> 
+              </mat-form-field>
+        </div>
+
+        <div class=" col-md-12 container">
+            <button class="buttonPrincipal" mat-raised-button type="submit" [disabled]="f.invalid || (!auth.Insercion())" (click)="insertarPropietario()" >Guardar</button>
+        </div>
+    </div>
+</form>
+
+
+<div class="table-responsive !important" style="padding: 1% !important;">
+    <table  >
+        <!-- <caption>Statement Summary</caption> -->
+        <thead>
+          <tr> 
+            <th scope="col">Id Propietario </th>
+            <th scope="col">Propietario    </th>
+            <th scope="col">Sede           </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of propietarios" class="trHover">
+            <td data-label="Id Propietario">    {{  item?.idpropietario  }}</td>
+            <td data-label="Propietario">       {{  item?.Propietario   }}</td>
+            <td data-label="Sede"> {{  item?.Sede     }}</td>
+          </tr>
+        </tbody>
+      </table>
+      
+   </div>

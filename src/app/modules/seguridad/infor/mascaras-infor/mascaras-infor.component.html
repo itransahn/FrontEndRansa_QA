@@ -1,0 +1,72 @@
+<form [formGroup]="form" #f="ngForm">
+    <div class="row" style="padding: 1% !important;">
+        <div class="col-md-6 container">
+            <img src="../../../../../assets/images/logoRansa.ico" alt="">
+        </div>
+        <div class="col-md-6 container">
+            <h3 class="h4"> Mascaras Infor </h3>
+        </div>
+
+   
+        <div class="col-md-4">
+            <mat-form-field appearance="legacy">
+                <mat-label> Propietario </mat-label>
+                <mat-select  formControlName="idPropietario" > 
+                    <mat-option> - </mat-option> 
+                    <mat-option #sede *ngFor="let tipo of catalogo['PropietarioInfor']" [value]="tipo?.idpropietario">
+                        {{  tipo?.Propietario | uppercase }}
+                    </mat-option> 
+                  </mat-select> 
+              </mat-form-field>
+        </div>
+
+        <div class="col-md-4">
+            <mat-form-field  appearance="legacy">
+                <mat-label> Abreviatura Propietario </mat-label>
+                <input matInput #Propietario maxlength="2" placeholder="XX" class="uppercase" formControlName ="Propietario">
+            </mat-form-field>
+        </div>
+
+        <div class="col-md-4">
+            <mat-form-field appearance="legacy">
+                <mat-label> Tipo de Operación </mat-label>
+                <mat-select  formControlName="tipoOperacion" > 
+                    <mat-option> - </mat-option> 
+                    <mat-option #sede *ngFor="let tipo of TipoOperacion" [value]="tipo?.idTipoOperacion">
+                        {{  tipo?.TipoOperacion | uppercase }}
+                    </mat-option> 
+                  </mat-select>     
+              </mat-form-field>
+        </div>
+
+        <div class=" col-md-12 container">
+            <button class="buttonPrincipal" mat-raised-button type="submit" [disabled]="f.invalid || (!auth.Insercion())" (click)="insertarMascara()" >Guardar</button>
+        </div>
+    </div>
+</form>
+
+
+<div class="table-responsive !important" style="padding: 1% !important;">
+    <table  >
+        <!-- <caption>Statement Summary</caption> -->
+        <thead>
+          <tr> 
+            <th scope="col">Id Propietario </th>
+            <th scope="col">Tipo de Operación    </th>
+            <th scope="col">Rango Inicial   </th>
+            <th scope="col">Rango Final   </th>
+            <th scope="col">Sede           </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of Mascaras" class="trHover">
+            <td data-label="Id Propietario">    {{  item?.idPropietario  }}</td>
+            <td data-label="Tipo de Operación"> {{  item?.OperacionTipo  }}</td>
+            <td data-label="Rango Inicial">     {{  item?.RangoInicial   }}</td>
+            <td data-label="Rango Final">       {{  item?.RangoFinal     }}</td>
+            <td data-label="Sede">              {{  item?.SedeRansa     }}</td>
+          </tr>
+        </tbody>
+      </table>
+      
+   </div>

@@ -25,6 +25,11 @@ $negro-texto   :        #1E1E1E;
     // text-align: center;
   }
 
+.uppercase{
+  text-transform: uppercase; /* Texto en mayusculas */
+}
+
+
 .buttonView {
   background-color: #006F1D !important;
   color: #e8e8e8 !important;

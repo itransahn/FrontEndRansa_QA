@@ -5,6 +5,7 @@ import { catalogo, mensajes } from 'src/app/interfaces/generales';
 import { AuthService } from 'src/app/services/auth.service';
 import { ToastServiceLocal } from 'src/app/services/toast.service';
 import { OperatoriaService } from '../operatoria.service';
+import { ExcelenciaService } from '../../excelencia/excelencia.service';
 
 @Component({
   selector: 'app-fleje',
@@ -20,13 +21,25 @@ export class FlejeComponent implements OnInit {
     public  auth : AuthService,
     private operatorioS : OperatoriaService,
     private toast : ToastServiceLocal,
-    private ruta  : ActivatedRoute
+    private ruta  : ActivatedRoute,
+    private excelenciaS : ExcelenciaService
   ) { }
 
   ngOnInit() {
     this.catalogo();
     this.cargarForm();
-    this.auth.CargarMenuActual( this.ruta.snapshot.params['idMenu'] )
+    this.auth.CargarMenuActual( this.ruta.snapshot.params['idMenu'] );
+    this.pruebaAPI();
+  }
+
+  pruebaAPI(){
+    let params = {
+    nameReporte   : 'viaje',
+    codReporte    : '263',
+    diaReprocesar : '',  
+    idReprocesar  : '369709'
+    }
+  this.excelenciaS.Sincronizacion(params);
   }
 
 catalogo(){

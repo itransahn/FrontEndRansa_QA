@@ -34,7 +34,7 @@ export class EntradaLLantasComponent implements OnInit {
     // this.excelenciaS.postAs400({})
 
     // this.postAs400()
-    this.pruebaAs400()
+    // this.pruebaAs400()
   }
 
   catalogo(){
@@ -103,23 +103,22 @@ export class EntradaLLantasComponent implements OnInit {
   
   }
 
-pruebaAs400(){
-  let params = {
-    // query : "CALL DC@RNSLIB.SP_AWS_LISTA_FACTURA ('EZ', 51, 16168, 1390054395, 20220413, 20220413)",
-    // env   : "PRD"
+// pruebaAs400(){
+//   let params = {
+//     // query : "CALL DC@RNSLIB.SP_AWS_LISTA_FACTURA ('EZ', 51, 16168, 1390054395, 20220413, 20220413)",
+//     // env   : "PRD"
     
-      "query": "CALL DC@HONLIB.SP_AWS_LISTA_FACTURA ('RH', 1, 1965, 100031795, 20210101, 20221231)",
-      "env": "PRD"
+//       "query": "CALL DC@HONLIB.SP_AWS_LISTA_FACTURA ('RH', 1, 1965, 100031795, 20210101, 20221231)",
+//       "env": "PRD"
   
-  }
-this.excelenciaS.pruebahttp( params ).subscribe(
-  (res:any)=>{
-if (res){
-  // console.log(res)
-}
-  }
-)
-}
+//   }
+// this.excelenciaS.pruebahttp( params ).subscribe(
+//   (res:any)=>{
+// if (res){
+// }
+//   }
+// )
+// }
 
 
 async postAs400  (  params?:any ){
@@ -147,7 +146,7 @@ let contenedores = await axios(conf);
 
   contenedores = contenedores.data;
 
-  console.log(contenedores);
+
 }
 
 }

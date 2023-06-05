@@ -39,6 +39,9 @@ import { SharedModule } from '../shared/shared.module';
 import { CambioContraUComponent } from './cambio-contra-u/cambio-contra-u.component';
 import { MiPerfilComponent } from './mi-perfil/mi-perfil.component';
 import { PrimeraVezComponent } from './primera-vez/primera-vez.component';
+import { InforComponent } from './infor/infor.component';
+import { PropietariosInforComponent } from './infor/propietarios-infor/propietarios-infor.component';
+import { MascarasInforComponent } from './infor/mascaras-infor/mascaras-infor.component';
 
 @NgModule({
   declarations: [
@@ -77,6 +80,9 @@ import { PrimeraVezComponent } from './primera-vez/primera-vez.component';
     CambioContraUComponent,
     MiPerfilComponent,
     PrimeraVezComponent,
+    InforComponent,
+    PropietariosInforComponent,
+    MascarasInforComponent,
   ],
   imports: [
     CommonModule,
