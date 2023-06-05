@@ -95,9 +95,9 @@ cargarMascaras(){
               }else{
                 this.toast.mensajeSuccess(String(res?.data.Table0[0]['Mensaje']), mensajes.success)
                 this.form.setValue({  
-                     idPropietario : '',
-                     Propietario   : '',
-                     Sede     : '',
+                     Propietario     : '',
+                     idPropietario   : '',
+                     idtipoOperacion : '',
                 })
               }
           }else{
