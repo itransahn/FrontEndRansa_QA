@@ -127,7 +127,6 @@ this.fechaLimite   = res?.data?.Table0[0]?.fechaLimite,
 this.rtn           = res?.data?.Table0[0]?.rtn,
 this.correlativoC  = res?.data?.Table0[0]?.correlativoC,
 retencionT         = res?.data?.Table0[0]?.tipoR
-
 this.cargarParametrosF();
 if( retencionT == '135' ){
   this.tipoR  = 'retencion135'
