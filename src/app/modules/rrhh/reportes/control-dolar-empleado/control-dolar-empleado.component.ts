@@ -96,7 +96,6 @@ export class ControlDolarEmpleadoComponent implements OnInit {
             if( !res.hasError ){
               this.loading = true;
               this.dolares = res?.data?.Table0;
-              console.log( this.dolares )
               this.subTotal = Acumulador( this.dolares, 'Dolar')
               }
           }

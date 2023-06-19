@@ -64,8 +64,10 @@
                   <tr> 
                     <th scope="col"> Usuario     </th>
                     <th scope="col"> Colaborador </th>
-                    <th scope="col"> CCO         </th>
-                    <th scope="col"> Total   </th>
+                    <th scope="col"> CCO          </th>
+                    <th scope="col"> Sub Total    </th>
+                    <th scope="col"> Impuesto     </th>
+                    <th scope="col"> Total     </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -73,12 +75,16 @@
                     <td data-label="Usuario">     {{  credito?.EMPLEADO   }} </td>
                     <td data-label="Colaborador"> {{  credito?.Nombre     }} </td>
                     <td data-label="CCO">         {{  credito?.CCO        }} </td>
-                    <td data-label="Total">       {{  credito?.CantidadaPagar  | currency: 'Lps ' }} </td>
+                    <td data-label="Sub Total">   {{  credito?.CantidadaPagar  | currency: 'Lps ' }} </td>
+                    <td data-label="Impuesto">    {{  credito?.Impuesto  | currency: 'Lps ' }} </td>
+                    <td data-label="Total">       {{  credito?.Total     | currency: 'Lps ' }} </td>
                   </tr>
                 </tbody>
                 <tfoot *ngIf=" hastaF >= creditos.length && creditos.length >= 1">
                     <tr >
                         <!-- style="background-color: #ffffff !important;" -->
+                        <th ></th>
+                        <th ></th>
                         <th ></th>
                         <th ></th>
                         <th > TOTAL </th>

@@ -96,10 +96,11 @@ export class AcumuladoEmpComponent implements OnInit {
         this.rrhhS.post( url, params ).subscribe (
           ( res : DataApi | any)=>{
             if( !res.hasError ){
+              console.log(res)
               this.loading = true;
               this.creditos = res?.data?.Table0;
               // this.sacarTotal( this.creditos)
-              this.subTotal =  Acumulador( this.creditos, 'CantidadaPagar' )
+              this.subTotal =  Acumulador( this.creditos, 'Total' )
                     }
           }
         )
