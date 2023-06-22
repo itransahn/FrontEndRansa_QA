@@ -111,8 +111,4 @@ export class AcumuladoEmpComponent implements OnInit {
   //     this.subTotal += arreglo[i]['CantidadaPagar']
   //   }
   // }
-
-
-
-
 }
