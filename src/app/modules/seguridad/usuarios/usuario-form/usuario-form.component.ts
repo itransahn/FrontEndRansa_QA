@@ -166,6 +166,7 @@ validarRuta(){
 
   post(){
     let url = 'seguridad/crearUsuario';
+    let contra = GeneraRandomPassword;
     let params = {
       nombreCompleto     : this.usuarioForm.value?.nombre,
       telefono           : this.usuarioForm.value?.telefono,
@@ -179,7 +180,7 @@ validarRuta(){
       tipoSangre         : this.usuarioForm.value?.tipoSangre,
       usuarioRansa       : this.usuarioForm.value?.usuarioRansa,
       fechaIngreso       : this.usuarioForm.value?.fechaIngreso,
-      contrasena         : GeneraRandomPassword,
+      contrasena         : contra,
       DepartamentoFisico : this.usuarioForm.value?.deptoFisico,
       idPuesto           : this.usuarioForm.value?.idPuesto,
       url_imagen         : this.usuarioForm.value?.url_imagen,
@@ -187,6 +188,7 @@ validarRuta(){
       cco                : this.usuarioForm.value?.cco,
       id_rol             : this.usuarioForm.value?.rol,
       id_sede            : this.usuarioForm.value?.idSede,
+      contraUsuario      : contra
     }
   this.usuarioS.post(url,params).subscribe( res=>{
     if ( !res.hasError){

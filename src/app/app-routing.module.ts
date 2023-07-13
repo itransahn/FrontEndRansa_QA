@@ -56,7 +56,7 @@ const routes: Routes = [
       },
       {
         path : 'ssoma',
-        canActivate : [],
+        canActivate : [AccessGuard],
         loadChildren : () => import('./modules/SSOMA/ssoma-routing.module').then(m => m.ssomaRoutingModule)
       }
     ]

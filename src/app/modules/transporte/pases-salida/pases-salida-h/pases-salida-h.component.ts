@@ -99,8 +99,9 @@ next(event: PageEvent) {
     localStorage.removeItem('PaseSalida')
   }
 
-  ValidacionHora( hora:string ){
-    if ( Number(hora.substring(11,5)) >=0 && Number(hora.substring(11,5))<= 12 ){
+  ValidacionHora( hora ){
+    // console.log( hora.substring(12,13)  )
+    if ( Number(hora.substring(12,13)) >=0 && Number(hora.substring(12,13))<= 12 ){
         return 'AM'
     }else{
       return 'PM'

@@ -1,0 +1,106 @@
+
+
+<mat-card class="cardPersonalizada">
+ 
+    <mat-card-header class="header">    {{ titulo }} {{ subtitulo }}
+    <mat-icon style="float: right !important;" (click)="close()" > close </mat-icon>
+    </mat-card-header>
+
+
+    <mat-card-content>
+        <form [formGroup]="Form" #f="ngForm" style="margin-top: 2%;">
+            <div class="row">
+
+                <div  class="col-md-6 container" >
+                    <mat-form-field appearance="legacy">
+                        <mat-label>Tipo Agente</mat-label>
+                        <mat-select  formControlName="tipoAgente" > 
+                            <mat-option> - </mat-option> 
+                            <mat-option  *ngFor="let item of dataCatalogo?.['tipoAgente']" [value]="item?.id_tipoAgente">
+                                {{  item?.tipo_agente | uppercase }}
+                            </mat-option> 
+                          </mat-select> 
+                      </mat-form-field>
+                </div>
+
+                <div  class="col-md-6 container" >
+                    <mat-form-field  appearance="legacy">
+                        <mat-label>Tipo Extintor</mat-label>
+                        <mat-select  formControlName="tipoExtintor" > 
+                            <mat-option> - </mat-option> 
+                            <mat-option  *ngFor="let item of dataCatalogo?.['tipoExtintor']" [value]="item?.id_tipoExtintor">
+                                {{  item?.tipo_extintor | uppercase }}
+                            </mat-option> 
+                          </mat-select> 
+                      </mat-form-field>
+                </div>
+
+
+                <div class="col-md-6">
+                    <mat-form-field appearance="legacy">
+                        <mat-label>Vida Util</mat-label>
+                        <input matInput #texto [readonly]="enable" maxlength="3" mask="999" placeholder="Vida Util" formControlName ="vidaUtil">
+                    </mat-form-field>
+                </div>
+
+                <div  class="col-md-6 container" >
+                    <mat-form-field  appearance="legacy">
+                        <mat-label> Capacidad </mat-label>
+                        <mat-select  formControlName="Capacidad" > 
+                            <mat-option> - </mat-option> 
+                            <mat-option  *ngFor="let item of dataCatalogo?.['Capacidad']" [value]="item?.id">
+                                {{  item?.Capacidad | uppercase }}
+                            </mat-option> 
+                          </mat-select> 
+                      </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Fecha anterior Carga </mat-label>
+                        <input name="date" formControlName = "fechaAnteriorCarga" matInput [matDatepicker]="pickerN">
+                        <mat-datepicker-toggle matSuffix [for]="pickerN"></mat-datepicker-toggle>
+                        <mat-datepicker #pickerN></mat-datepicker>
+                      </mat-form-field>
+             </div>
+
+             <div class="col-md-6">
+                <mat-form-field appearance="fill">
+                    <mat-label>Fecha proxima Carga </mat-label>
+                    <input name="date2" formControlName = "fechaProximaCarga" matInput [matDatepicker]="pickerN2">
+                    <mat-datepicker-toggle matSuffix [for]="pickerN2"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerN2></mat-datepicker>
+                  </mat-form-field>
+         </div>
+
+         <div  class="col-md-6 container" >
+            <mat-form-field  appearance="legacy">
+                <mat-label> Ubicación </mat-label>
+                <mat-select  formControlName="ubicacion" > 
+                    <mat-option> - </mat-option> 
+                    <mat-option  *ngFor="let item of dataCatalogo?.['Ubicaciones']" [value]="item?.id_ubicacion">
+                        {{  item?.ubicacion | uppercase }}
+                    </mat-option> 
+                  </mat-select> 
+              </mat-form-field>
+        </div>
+
+        <div class="col-md-6">
+            <mat-form-field appearance="fill">
+                <mat-label>Fecha creación Extintor </mat-label>
+                <input name="date3" formControlName = "fechaCreacion" matInput [matDatepicker]="pickerN3">
+                <mat-datepicker-toggle matSuffix [for]="pickerN3"></mat-datepicker-toggle>
+                <mat-datepicker #pickerN3></mat-datepicker>
+              </mat-form-field>
+     </div>
+         
+
+                </div>
+            <div class="container">
+                <button class="buttonPrincipal" mat-raised-button type="submit" [disabled]="f.invalid" [hidden]="!botton" (click)="crearExtintor()"  >Guardar</button>
+            </div>
+        </form>
+    </mat-card-content>
+    
+</mat-card>  
+
