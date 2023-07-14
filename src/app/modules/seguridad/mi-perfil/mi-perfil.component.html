@@ -230,7 +230,7 @@
             </div>
 
             <div class="container">
-                <button class="buttonPrincipal" mat-raised-button type="submit" [disabled]="f.invalid">Guardar</button>
+                <button class="buttonPrincipal" mat-raised-button type="submit" [disabled]="f.invalid" (click)="put()">Guardar</button>
             </div>
         </form>
     </mat-card-content>

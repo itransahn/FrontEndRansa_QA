@@ -28,6 +28,11 @@ export class ExtintoresALComponent implements OnInit {
   ngOnInit(): void {
     // this.cargarCatalogo()
     this.cargarExtintores();
+    this.ssomas.refresh$.subscribe(
+      res=>{
+        this.cargarExtintores()
+      }
+    )
   }
 
   cargarExtintores(){
@@ -42,11 +47,12 @@ export class ExtintoresALComponent implements OnInit {
   }
 
   menu(template, data) {
-    this.extintor = data.extintor;
+    this.extintor = data.Nomenclatura;
+    // this.dataModulo = dataModulo;
     this.opcionesModules = [
       {
         icono     : 'edit',
-        titulo    : `Modificar Extintor ${data?.extintor}`,
+        titulo    : `Modificar Extintor ${this.extintor}`,
         subtitulo : 'Cambios a Extintor',
         url       : `ransa/administracion/usuarios`,
         accion    : 1

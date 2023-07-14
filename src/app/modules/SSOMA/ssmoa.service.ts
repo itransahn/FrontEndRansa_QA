@@ -20,7 +20,6 @@ export class SsmoaService {
 
   // Servicio de Visualización 
   get( url?:string, params?:any){
-    console.log(params)
     let request$ = this.http.get(environment.UrlApi + url, {params:params}).pipe(
       tap( ( result)=>{
         // this.refresh$.next();
