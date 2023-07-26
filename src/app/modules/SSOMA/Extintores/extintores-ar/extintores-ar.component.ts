@@ -56,14 +56,14 @@ export class ExtintoresARComponent implements OnInit {
         accion    : 1
       },
       {
-        icono   : 'remove_red_eye',
+        icono   : 'note_add',
         titulo  : 'Auditoria',
         subtitulo : 'Auditoria del extintor',
         url       :  `ransa/administracion/usuarios/${data?.id}`,
         accion    : 2
       },
       {
-        icono   : 'delete_sweep',
+        icono   : 'announcement',
         titulo  : 'Incidencia',
         subtitulo : 'Incidencia sobre Extintor',
         url       : `ransa/administracion/usuarios/${data?.id}`,

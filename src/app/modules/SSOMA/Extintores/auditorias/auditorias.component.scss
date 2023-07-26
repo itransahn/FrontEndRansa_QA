@@ -1,0 +1,134 @@
+@import "../../../../shared/variables.scss";
+
+img{
+width:  75px !important ;
+height: 75px !important;
+}
+.contenedor{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+mat-card{
+    color: $verde-primario;
+    margin-left: 1% !important;
+    margin-top: 1% !important;
+    float: left;
+    // margin-left:   5% !important; 
+    border-radius: 20px !important;
+}
+
+.ext:hover{
+    cursor: pointer;
+}
+/* ***************************************************************************************** */
+.example-action-buttons {
+    padding-bottom: 20px;
+    button{
+      border-style: groove;
+      border-color: #F4F4F4;
+      margin: 0.5%;
+    }
+  }
+
+ 
+    
+.mat-expansion-indicator::before {
+  display:  none !important;
+  }
+   
+.mat-expansion-indicator::after {
+  display:  none !important;
+  }
+  
+
+  .example-headers-align .mat-expansion-panel-header-description {
+    justify-content: space-between;
+    align-items: center;
+ 
+  }
+  
+  .example-headers-align .mat-form-field {
+    margin-left: 8px;
+    .mat-expansion-indicator::after {
+      display: none !important;
+  }
+
+  }
+
+
+  /* SCSS para Accordion */
+  
+  mat-expansion-panel-header, mat-panel-title{
+    color: #00A72C !important;
+  }
+
+  ::ng-deep .mat-expansion-indicator, .mat-expansion-indicator:after {
+    color: #00A72C !important;}
+
+    /* SCSS para Accordion */
+
+  /*SCSS Para la lista */
+  mat-list-item{
+    background-color: #F4F4F4 ;
+    div, mat-list-icon, mat-icon{
+      color:  #FE9600 !important;
+    }
+  }
+
+
+  mat-list-item:hover{
+    background-color: #ffffff ;
+    cursor: pointer;
+    div, mat-list-icon, mat-icon{
+      color:  #00A72C !important;
+    }
+  }
+
+.Sheep{
+  width: 80% !important;
+
+}
+
+h4{
+  border-style: solid;
+  background-color: #006F1D;
+  color: #ffffff !important;
+  border-radius: 50px;
+}
+
+a{
+  color: #006F1D !important;
+}
+mat-icon{
+  color: #006F1D !important;
+}
+
+
+/* Cambios al BottoPrincipal para que herede lo de style.scss*/
+
+.buttonPrincipal {
+  color: white !important;
+  background-color: #006F1D !important;
+    mat-icon{
+      color: #ffffff !important;
+      background-color: #006F1D !important;
+    }
+}
+
+.ContenedorModulos{
+  margin-top:  2%;
+}
+
+
+@media only screen and (max-width: 500px) {
+  .example-action-buttons{
+    display:  none !important;
+  }
+}
+
+/* Cambios al BottoPrincipal para que herede lo de style.scss*/
+mat-icon.disable {
+  filter:opacity(0.5);
+}

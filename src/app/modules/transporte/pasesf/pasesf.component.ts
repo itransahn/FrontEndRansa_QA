@@ -60,10 +60,11 @@ private sub : Subscription = new Subscription();
 
   cargarPases(){
     let url = 'transporte/paseSalidaF';
-    let params = {};
+    let params = {
+      sede : this.auth.dataUsuario['sede']
+    };
     this.transporteService.get(url,params).subscribe(
       (data : DataApi | any) =>{
-          console.log(data?.data?.Table0)
         if( !data.hasError ){
           this.pases = data?.data?.Table0;
         }    
@@ -123,6 +124,7 @@ eliminarPase( idPase : number, nombrePersona, tipo){
   }
   
   enviarLocalStorage( data){
+    console.log(data)
     localStorage.setItem('PaseSalida', JSON.stringify(data));
     this.auth.redirecTo('ransa/transporte/Pasesalidas')
   }

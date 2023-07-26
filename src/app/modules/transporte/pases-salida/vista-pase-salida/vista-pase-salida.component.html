@@ -14,11 +14,23 @@
         <div class="row" style="margin-top: 50px;">
             <h4 class="container" style="color: black; font-size: large; font-weight: bold;"> PASE DE SALIDA </h4>
         </div>
-  
-<div class="row texto1">
+ 
+<div class="row texto1" *ngIf=" data?.['tipo'] != 4">
+            <h4>
+                Anillo periférico, El SAUCE Francisco Morazán {{ data['Fecha'] }}
+           </h4>
+</div>        
+
+<div class="row texto1" *ngIf="data?.['sede'] == 1 && data?.['tipo'] == 4">
      <h4>
          Anillo periférico, El SAUCE Francisco Morazán {{ data['Fecha'] }}
     </h4>
+</div>
+
+<div class="row texto1" *ngIf="data?.['sede'] == 2 && data?.['tipo'] == 4">
+    <h4>
+       El polvorin, ALMAHSA Cortés {{ data['Fecha'] }}
+   </h4>
 </div>
 
 <div class="row texto2">

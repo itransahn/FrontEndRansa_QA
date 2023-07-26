@@ -16,6 +16,14 @@
     Capacidad : {
         id : number,
         Capacidad : string
+    }[],
+    unidadMedicion : {
+        id_unidadMedicion : number,
+        unidadMedicion    : string
+    }[],
+    Sedes    :  {
+        id_sedeRansa : number,
+        sedeRansa    : string 
     }
 
 }

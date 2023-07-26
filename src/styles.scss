@@ -24,6 +24,18 @@ $negro-texto   :        #1E1E1E;
     // width: 100%;
     // text-align: center;
   }
+/* RADIO BUTTON */
+:host ::ng-deep .mat-radio-checked .mat-radio-outer-circle{
+  background:#006F1D!important;
+}
+
+:host ::ng-deep .mat-radio-inner-circle{
+  border-radius:2px;
+  background-color: white !important;
+  border-radius: 10px;
+  color: #ffffff !important;
+} 
+/* RADIO BUTTON */
 
 .uppercase{
   text-transform: uppercase; /* Texto en mayusculas */

@@ -9,6 +9,17 @@ import { ExtintoresComponent } from './Extintores/extintores/extintores.componen
 import { ExtintoresALComponent } from './Extintores/extintores-al/extintores-al.component';
 import { ExtintoresARComponent } from './Extintores/extintores-ar/extintores-ar.component';
 import { CrearExtintorComponent } from './Extintores/crear-extintor/crear-extintor.component';
+import { AgenteComponent } from './Extintores/Mantenimientos/agente/agente.component';
+import { TipoextintorComponent } from './Extintores/Mantenimientos/tipoextintor/tipoextintor.component';
+import { UbicacionesComponent } from './Extintores/Mantenimientos/ubicaciones/ubicaciones.component';
+import { CapacidadesComponent } from './Extintores/Mantenimientos/capacidades/capacidades.component';
+import { ModalAgenteComponent } from './Extintores/Mantenimientos/agente/modal-agente/modal-agente.component';
+import { ModaltipoExtintorComponent } from './Extintores/Mantenimientos/tipoextintor/modaltipo-extintor/modaltipo-extintor.component';
+import { ModalCapacidadComponent } from './Extintores/Mantenimientos/capacidades/modal-capacidad/modal-capacidad.component';
+import { ModalUbicacionComponent } from './Extintores/Mantenimientos/ubicaciones/modal-ubicacion/modal-ubicacion.component';
+import { AuditoriaComponent } from './Extintores/auditoria/auditoria.component';
+import { AuditoriasComponent } from './Extintores/auditorias/auditorias.component';
+import { AuditoriasRealizadasComponent } from './Extintores/auditorias-realizadas/auditorias-realizadas.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +28,18 @@ import { CrearExtintorComponent } from './Extintores/crear-extintor/crear-extint
     ExtintoresComponent,
     ExtintoresALComponent,
     ExtintoresARComponent,
-    CrearExtintorComponent
+    CrearExtintorComponent,
+    AgenteComponent,
+    TipoextintorComponent,
+    UbicacionesComponent,
+    CapacidadesComponent,
+    ModalAgenteComponent,
+    ModaltipoExtintorComponent,
+    ModalCapacidadComponent,
+    ModalUbicacionComponent,
+    AuditoriaComponent,
+    AuditoriasComponent,
+    AuditoriasRealizadasComponent
   ],
   imports: [
     CommonModule,

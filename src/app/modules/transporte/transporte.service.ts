@@ -53,7 +53,7 @@ public dataCatalogo : any;
 
     // Servicio de Visualización 
     get( url?:string, params?:any){
-      let request$ = this.http.get<DataApi>(environment.UrlApi + url, params ).pipe(
+      let request$ = this.http.get<DataApi>(environment.UrlApi + url, {params : params} ).pipe(
         tap( ( result:DataApi | any )=>{
             return result
         } ),

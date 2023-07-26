@@ -1,0 +1,74 @@
+<mat-card class="mat-cardContainerCuerpo mt-4" >
+    <form [formGroup]="filtro" #f ="ngForm">
+       <div class="row">
+        <div class="col-md-6">
+            <mat-form-field appearance="legacy">
+                <mat-label>Sede </mat-label>
+                <mat-select  formControlName="filtrar" (selectionChange)="cargarData()" > 
+                    <mat-option #sede *ngFor="let item of sedes" [value]="item?.idSede">
+                        {{  item?.Sede | uppercase }}
+                    </mat-option> 
+                  </mat-select> 
+              </mat-form-field>
+        </div>
+
+        <div class="col-md-6" *ngIf="data.length >= 1">
+
+            <mat-form-field appearance="legacy">
+                <mat-label>
+                    <mat-icon> search </mat-icon>
+                    Buscar
+                </mat-label>
+                <input matInput placeholder="Nomenclatura" formControlName="buscar">
+            </mat-form-field>
+
+        </div>
+
+        <!-- <div class="col-md-4">
+          <div class="text-right">
+              <button mat-raised-button class="buttonPrincipal"  [disabled]="f.invalid" (click)="cargarStock()">
+                  <mat-icon>
+                      search
+                  </mat-icon>
+              </button>
+          </div>
+        </div> -->
+
+       </div>
+    </form>
+     
+   </mat-card>
+
+   <mat-card class="mat-cardContainerCuerpo mt-4">
+
+
+    <nav *ngIf="data?.length < 1 && bandera" aria-label="breadcrumb" class="mt-4">
+        <ol class="breadcrumb container">
+         <h4> Todos los extintores han sido Auditados </h4>
+        </ol>
+    </nav>
+
+    <div *ngIf="data?.length >= 1">
+        <div class="col-md-12 ">
+            <mat-card  class="card mat-elevation-z1 example-card ext" *ngFor="let mod of data  | search: this.filtro.value.buscar:parametrosBusqueda | slice: desde: hasta " (click)="Auditoria(mod)" >
+       <mat-card-header>
+           <mat-card-tittle style="text-align: center !important;">  {{ mod?.Nomenclatura }} </mat-card-tittle>
+    </mat-card-header>
+    
+    <div class="contenedor mt-4">
+    <img  mat-card-image src="../../../.././../assets/images/extintor.jpg">
+    </div>
+    
+    <mat-card-content >
+        <p style="font-size: x-small !important; text-align: center !important;"> {{ mod?.ubicacion }} </p>
+        <p style="font-size: x-small !important; text-align: center !important;"> {{ mod?.Fecha_Proxima_Carga }} </p>
+
+    </mat-card-content>
+            </mat-card>
+        </div>
+
+
+        <mat-paginator *ngIf="data.length >= 1" [length] ="data.length" [pageSize]="pageSize " (page)="next($event)">
+        </mat-paginator>
+      </div>
+   </mat-card>

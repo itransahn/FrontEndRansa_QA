@@ -61,7 +61,9 @@ private sub : Subscription = new Subscription();
 
   cargarPases(){
     let url = 'transporte/paseSalidafP';
-    let params = {};
+    let params = {
+      sede : this.auth.dataUsuario['sede']
+    };
     this.transporteService.get(url,params).subscribe(
       (data : DataApi | any) =>{
         if( !data.hasError ){

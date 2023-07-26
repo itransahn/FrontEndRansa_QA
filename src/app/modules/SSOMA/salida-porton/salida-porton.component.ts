@@ -61,7 +61,9 @@ export class SalidaPortonComponent implements OnInit {
 
   cargarPases(){
     let url = 'transporte/paseSalidaPorton';
-    let params = {};
+    let params = {
+      sede : this.auth.dataUsuario['sede']
+    };
     this.transporteService.get(url,params).subscribe(
       (data : DataApi | any) =>{
         if( !data.hasError ){

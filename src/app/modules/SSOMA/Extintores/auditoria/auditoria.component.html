@@ -1,0 +1,122 @@
+<!-- <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a [routerLink]="['/dashboard']">Inicio</a></li>
+        <li class="breadcrumb-item"><a [routerLink]="['/seguridad/menus']">Menus</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Nuevo Menu</li>
+    </ol>
+</nav> -->
+
+
+<mat-card class="cardPersonalizada">
+ 
+    <mat-card-header class="header"> Auditoria Extintor {{ extintor }}
+    <mat-icon style="float: right !important; color: white !important;" (click)="close()" > close </mat-icon>
+
+    </mat-card-header>
+
+
+    <mat-card-content>
+        <form [formGroup]="Form" #f="ngForm">
+            <div class="row" style="margin-top: 2%;">
+                    <div class="col-md-6">
+                        <label id="example-radio-group-label" class="label1"> Presión </label>
+                        <mat-radio-group formControlName="presion" ng-model="selvalue">
+                            <mat-radio-button color="warn" style="margin: 10px !important" value="1">Sí</mat-radio-button>
+                            <mat-radio-button color="warn" style="margin: 10px !important" value="0">No</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+    
+                    <div class="col-md-6">
+                        <label id="example-radio-group-label" class="label1"> Sello </label>
+                        <mat-radio-group  aria-labelledby="example-radio-group-label" formControlName="sello" >
+                            <mat-radio-button color="warn" style="margin: 10px !important" value="1">Sí</mat-radio-button>
+                            <mat-radio-button color="warn" style="margin: 10px !important" value="0">No</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+    
+                    <div class="col-md-6">
+                        <label id="example-radio-group-label" class="label1"> Manometro </label>
+                        <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" formControlName="manometro" >
+                            <mat-radio-button color="warn" style="margin: 10px !important" value="1">Sí</mat-radio-button>
+                            <mat-radio-button color="warn" style="margin: 10px !important" value="0">No</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label id="example-radio-group-label" class="label1"> Soporte </label>
+                        <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" formControlName="soporte" >
+                            <mat-radio-button color="warn" style="margin: 10px !important" value="1">Sí</mat-radio-button>
+                            <mat-radio-button color="warn" style="margin: 10px !important" value="0">No</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label id="example-radio-group-label" class="label1"> Manguera </label>
+                        <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" formControlName="manguera" >
+                            <mat-radio-button color="warn" style="margin: 10px !important" value="1">Sí</mat-radio-button>
+                            <mat-radio-button color="warn" style="margin: 10px !important" value="0">No</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label id="example-radio-group-label" class="label1"> Boquilla </label>
+                        <mat-radio-group aria-labelledby="example-radio-group-label"  class="example-radio-group" formControlName="boquilla" >
+                            <mat-radio-button color="warn" style="margin: 10px !important" value="1">Sí</mat-radio-button>
+                            <mat-radio-button color="warn" style="margin: 10px !important" value="0">No</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label id="example-radio-group-label" class="label1"> Pintura </label>
+                        <mat-radio-group aria-labelledby="example-radio-group-label"  class="example-radio-group" formControlName="pintura" >
+                            <mat-radio-button color="warn" style="margin: 10px !important" value="1">Sí</mat-radio-button>
+                            <mat-radio-button color="warn" style="margin: 10px !important" value="0">No</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label id="example-radio-group-label" class="label1"> Señalización </label>
+                        <mat-radio-group aria-labelledby="example-radio-group-label"  class="example-radio-group" formControlName="señalizacion" >
+                            <mat-radio-button color="warn" style="margin: 10px !important" value="1">Sí</mat-radio-button>
+                            <mat-radio-button color="warn" style="margin: 10px !important" value="0">No</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label id="example-radio-group-label" class="label1"> Altura </label>
+                        <mat-radio-group  aria-labelledby="example-radio-group-label"  class="example-radio-group" formControlName="altura" >
+                            <mat-radio-button color="warn" style="margin: 10px !important" value="1">Sí</mat-radio-button>
+                            <mat-radio-button color="warn" style="margin: 10px !important" value="0">No</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label id="example-radio-group-label" class="label1"> Acceso </label>
+                        <mat-radio-group aria-labelledby="example-radio-group-label"  class="example-radio-group" formControlName="acceso" >
+                            <mat-radio-button color="warn" style="margin: 10px !important" value="1">Sí</mat-radio-button>
+                            <mat-radio-button color="warn" style="margin: 10px !important" value="0">No</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+
+                    <div class="col-md-6" layout="row">
+                        <label id="example-radio-group-label"  class="label1"> Estado </label>
+               <mat-radio-group  ng-model="data.group1" aria-labelledby="favoriteFruit" layout="row" formControlName="estado" >
+                            <mat-radio-button color="warn" style="margin: 10px !important" value="1">Sí</mat-radio-button>
+                            <mat-radio-button color="warn" style="margin: 10px !important" value="0">No</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+
+            <div class="col-md-12">
+                    <!-- <label id="example-radio-group-label"> Observaciones </label> -->
+                    <mat-form-field class="example-full-width"> <textarea matInput placeholder="Observaciones"></textarea>  </mat-form-field>
+            </div>
+
+                </div>
+            <!-- *ngFor = "let Estado of EstadoCivilData" [value] = "Estado.idEstadoCivil"  -->
+            <div class="container">
+                <button class="buttonPrincipal" mat-raised-button type="submit" [disabled]="f.invalid" (click)="crearExtintor()">Guardar</button>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>  
+

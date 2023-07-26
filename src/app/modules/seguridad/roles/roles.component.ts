@@ -100,9 +100,8 @@ export class RolesComponent implements OnInit, OnDestroy {
     )
   }
 
-
-        //Paginación de la tabla
-        next(event: PageEvent) {
+  //Paginación de la tabla
+  next(event: PageEvent) {
 
           if (event.pageIndex === this.pageIndex + 1) {
             this.desde = this.desde + this.pageSize;
@@ -114,7 +113,6 @@ export class RolesComponent implements OnInit, OnDestroy {
           }
           this.pageIndex = event.pageIndex;
         }
-
 
 
       ModalRol ( accion : number, dataRol ?: any ){

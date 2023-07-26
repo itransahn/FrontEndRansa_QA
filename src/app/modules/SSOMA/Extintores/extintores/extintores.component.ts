@@ -7,6 +7,7 @@ import { CrearExtintorComponent } from '../crear-extintor/crear-extintor.compone
 import { MatDialog } from '@angular/material/dialog';
 import { extintor } from 'src/app/interfaces/ssmoa';
 import { DataApi } from 'src/app/interfaces/dataApi';
+import { AuditoriaComponent } from '../auditoria/auditoria.component';
 
 @Component({
   selector: 'app-extintores',
@@ -17,7 +18,7 @@ export class ExtintoresComponent implements OnInit {
   opcionesModules : any;
   extintor : any;
   extintores : extintor[] = []
-
+  dataExtintor : any;
   data = [
     {
       id: '1',
@@ -102,7 +103,6 @@ export class ExtintoresComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // this.cargarCatalogo()
     this.cargarExtintores();
     this.ssomas.refresh$.subscribe(
       res=>{
@@ -124,6 +124,7 @@ export class ExtintoresComponent implements OnInit {
 
   menu(template, data) {
     this.extintor = data.Nomenclatura;
+    this.dataExtintor = data;
     // this.dataModulo = dataModulo;
     this.opcionesModules = [
       {
@@ -134,18 +135,18 @@ export class ExtintoresComponent implements OnInit {
         accion    : 1
       },
       {
-        icono   : 'remove_red_eye',
+        icono   : 'note_add',
         titulo  : 'Auditoria',
         subtitulo : 'Auditoria del extintor',
         url       :  `ransa/administracion/usuarios/${data?.id}`,
         accion    : 2
       },
       {
-        icono   : 'delete_sweep',
+        icono   : 'announcement',
         titulo  : 'Incidencia',
         subtitulo : 'Incidencia sobre Extintor',
         url       : `ransa/administracion/usuarios/${data?.id}`,
-        accion    : 4
+        accion    : 3
 
       },
     ]
@@ -162,6 +163,39 @@ export class ExtintoresComponent implements OnInit {
         sede : sede,
         data : data  ,
         bandera : bandera 
+      },
+      disableClose : true
+    })
+  }
+
+
+  Accion( accion ?: number, data?:any ){
+    if ( accion == 1){
+      // this.CrearMenu()
+    }
+
+    if ( accion == 2 ){
+      this.Auditoria(this.dataExtintor)
+   }
+    if ( accion == 3){
+  //  this.EditarModulo()
+    }
+    
+
+      this._bottomSheet.dismiss();
+  }
+
+
+
+  
+Auditoria(  data ?: any ){
+    const dialogReg = this.dialog.open( AuditoriaComponent,{
+      width :   'auto',
+      height:   'auto',
+      maxWidth: '75%',
+      minWidth: '50%',
+      data: { 
+        data : data  
       },
       disableClose : true
     })
