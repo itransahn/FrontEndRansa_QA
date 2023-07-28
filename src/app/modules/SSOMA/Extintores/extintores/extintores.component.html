@@ -12,12 +12,17 @@
     <div class="col-md-12 ">
         <mat-card  class="card mat-elevation-z1 example-card" *ngFor="let mod of extintores" (click)="menu(modulos,mod)" >
    <mat-card-header>
-       <mat-card-tittle style="text-align: center !important;">  {{ mod?.Nomenclatura }} </mat-card-tittle>
+       <mat-card-tittle style="text-align: center !important;">  {{ mod?.Nomenclatura }} 
+        <span class="badge bg-danger  mb-1"  *ngIf="mod?.Bandera == 0" >{{mod?.dias}}</span>
+        <span class="badge bg-warning mb-1" *ngIf="mod?.Bandera == 5">  {{mod?.dias}} </span>
+        <span class="badge bg-info mb-1" *ngIf="mod?.Bandera == 10"> {{mod?.dias}} </span>
+    </mat-card-tittle>
+  
 </mat-card-header>
 <img style="justify-content: center !important;" mat-card-image src="../../../.././../assets/images/extintor.jpg" alt="Extintor">
 
 <mat-card-content >
-    <p style="font-size: x-small !important;"> {{ mod?.ubicacion }} </p>
+    <h3 style="font-size: x-small !important; text-align: center !important;"> {{ mod?.ubicacion }} </h3>
 </mat-card-content>
         </mat-card>
     </div>

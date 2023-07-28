@@ -6,6 +6,9 @@ import { SsmoaService } from '../../ssmoa.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DataApi } from 'src/app/interfaces/dataApi';
 import { CrearExtintorComponent } from '../crear-extintor/crear-extintor.component';
+import { AuditoriaComponent } from '../auditoria/auditoria.component';
+import { mensajes } from 'src/app/interfaces/generales';
+import { ToastServiceLocal } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-extintores-ar',
@@ -16,12 +19,16 @@ export class ExtintoresARComponent implements OnInit {
 
   opcionesModules : any;
   extintor : any;
-  extintores : extintor[] = []
+  extintores : extintor[] = [];
+  idExtintor : any;
+  dataExtintor : any;
+
   constructor(
     private _bottomSheet : MatBottomSheet,
     public auth : AuthService,
     public ssomas : SsmoaService,
-    public dialog  : MatDialog
+    public dialog  : MatDialog,
+    public toast  : ToastServiceLocal
   ) { }
 
   ngOnInit(): void {
@@ -46,6 +53,8 @@ export class ExtintoresARComponent implements OnInit {
 
   menu(template, data) {
     this.extintor = data.Nomenclatura;
+    this.idExtintor = data?.id_Extintor;
+    this.dataExtintor = data;
     // this.dataModulo = dataModulo;
     this.opcionesModules = [
       {
@@ -67,13 +76,45 @@ export class ExtintoresARComponent implements OnInit {
         titulo  : 'Incidencia',
         subtitulo : 'Incidencia sobre Extintor',
         url       : `ransa/administracion/usuarios/${data?.id}`,
-        accion    : 4
+        accion    : 3
 
       },
     ]
     this._bottomSheet.open(template);
   }
 
+  Accion( accion ?: number, data?:any ){
+    if ( accion == 1){
+      // this.CrearMenu()
+    }
+
+    if ( accion == 2 ){
+      this.ssomas.validarExtintor(this.idExtintor).subscribe(
+        (res:any)=>{
+    if ( res?.data.Table0[0]['codigo'] == -1 ){ this.toast.mensajeWarning(String(res?.data.Table0[0]['Mensaje']), mensajes.warning)
+  }else{ this.Auditoria(this.dataExtintor,1)}
+  } )
+   }
+    if ( accion == 3){
+      this.Auditoria(this.dataExtintor,2)
+    }
+      this._bottomSheet.dismiss();
+  }
+
+  Auditoria(  data ?: any, bandera ?:any ){
+    const dialogReg = this.dialog.open( AuditoriaComponent,{
+      width :   'auto',
+      height:   'auto',
+      maxWidth: '75%',
+      minWidth: '50%',
+      data: { 
+        data : data ,
+        bandera : bandera
+      },
+      disableClose : true
+    })
+  }
+  
   Modal ( sede : number, data ?: any, bandera ?: any){
     const dialogReg = this.dialog.open( CrearExtintorComponent,{
       width :   'auto',
@@ -82,7 +123,7 @@ export class ExtintoresARComponent implements OnInit {
       data: { 
         sede : sede,
         data : data  ,
-        bandera : bandera 
+        bandera : bandera
       },
       disableClose : true
     })

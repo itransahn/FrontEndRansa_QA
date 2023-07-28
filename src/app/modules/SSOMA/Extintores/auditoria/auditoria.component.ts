@@ -15,9 +15,11 @@ import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 })
 export class AuditoriaComponent implements OnInit {
   public Form : FormGroup;
-  public catalogo    : any;
-  public lectura     : boolean;
-  public extintor    : string;
+  public catalogo : any;
+  public lectura  : boolean;
+  public extintor : string;
+  public titulo   : string;
+
   
   constructor(
     private _bottomSheet : MatBottomSheet,
@@ -32,7 +34,12 @@ export class AuditoriaComponent implements OnInit {
 
   ngOnInit(){
     this.formPermiso();
-    this.extintor = this.data?.data?.['Nomenclatura']
+    this.extintor = this.data?.data?.['Nomenclatura'];
+    if( this.data?.bandera == 1 ){
+      this.titulo = 'Auditoria'
+    }else{
+      this.titulo = 'Incidencia'   
+    }
   }
 
   formPermiso(){
@@ -58,7 +65,15 @@ export class AuditoriaComponent implements OnInit {
     this.dialogRef.close()
   }
 
-  crearExtintor(){
+  submit(){
+    if(this.data?.bandera == 1){
+      this.Auditoria()
+    }else{
+      this.Incidencia()
+    }
+  }
+
+  Auditoria(){
 this.sweel.mensajeConConfirmacion("Auditoria Extintor","¿Seguro de generar auditoria?","question").then(
   res=>{
       if ( res ){
@@ -99,6 +114,43 @@ this.sweel.mensajeConConfirmacion("Auditoria Extintor","¿Seguro de generar audi
 
   
   }
-  
+
+  Incidencia(){
+    this.sweel.mensajeConConfirmacion("Incidencia Extintor","¿Seguro de generar Incidencia?","question").then(
+      res=>{
+          if ( res ){
+            let formValues = this.Form.value;
+            let params = {
+              Presion       : formValues.presion,
+              Sello         : formValues.sello,
+              Manometro     : formValues.manometro,
+              Soporte       : formValues.soporte ,
+              Manguera      : formValues.manguera  ,
+              Boquilla      : formValues.boquilla,
+              Pintura       : formValues.pintura,
+              Señalizacion  : formValues.señalizacion,
+              Altura        : formValues.altura,
+              Acceso        : formValues.acceso,
+              Estado        : formValues.estado,
+              Usuario       : this.auth.dataUsuario['id_usuario'],
+              observaciones : formValues.observaciones,
+              idExtintor    : this.data?.data?.['id_Extintor']  
+            }
+          this.ssoma.put('/ssmoa/Incidencia', params).subscribe(
+            res=>{
+              if( !res.hasError){
+                if ( res?.data.Table0[0]['codigo'] == -1 ){
+                  this.toast.mensajeWarning(String(res?.data.Table0[0]['Mensaje']), mensajes.warning)
+              }else{
+                  this.toast.mensajeSuccess(String(res?.data.Table0[0]['Mensaje']), mensajes.success);
+                  this.close()
+              }
+              }
+            }
+          )
+          }
+      }
+    )
+  }
 
 }

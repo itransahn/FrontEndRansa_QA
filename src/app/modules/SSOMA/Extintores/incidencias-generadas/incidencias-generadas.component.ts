@@ -1,22 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { SsmoaService } from '../../ssmoa.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
+import { SsmoaService } from '../../ssmoa.service';
 import { MatDialog } from '@angular/material/dialog';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import { ToastServiceLocal } from 'src/app/services/toast.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ActivatedRoute } from '@angular/router';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DataApi } from 'src/app/interfaces/dataApi';
-import { mesesd } from 'src/app/data/data';
-import { meses } from 'src/app/interfaces/generales';
 
 @Component({
-  selector: 'app-auditorias-realizadas',
-  templateUrl: './auditorias-realizadas.component.html',
-  styleUrls: ['./auditorias-realizadas.component.scss']
+  selector: 'app-incidencias-generadas',
+  templateUrl: './incidencias-generadas.component.html',
+  styleUrls: ['./incidencias-generadas.component.scss']
 })
-export class AuditoriasRealizadasComponent implements OnInit {
+export class IncidenciasGeneradasComponent implements OnInit {
   public data1 : any[]=[];
   public data2 : any[]=[];
   public data3 : any[]=[];
@@ -70,7 +68,7 @@ export class AuditoriasRealizadasComponent implements OnInit {
   }
 
   cargarData( ){
-    let url = 'ssmoa/auditoriasGeneradas';
+    let url = 'ssmoa/IncidenciaG';
     let params = {
       Mes  : this.filtro.value.mes,
       anio : this.filtro.value.anio
@@ -86,7 +84,4 @@ export class AuditoriasRealizadasComponent implements OnInit {
       }
     )
   }
-
-
-
 }

@@ -1,7 +1,7 @@
 <mat-card class="mat-cardContainerCuerpo mt-4">
     <form [formGroup]="filtro" #f ="ngForm">
         <div class="row">
-            <h4 class="titulo2"> AUDITORIAS </h4>
+         <h4 class="titulo2"> INCIDENCIAS </h4>
          <div class="col-md-4">
              <mat-form-field appearance="legacy">
                  <mat-label> Mes </mat-label>
@@ -34,15 +34,15 @@
 
 <mat-card class="mat-cardContainerCuerpo mt-4" *ngIf="data1.length >= 1">
     <h4 class="titulo">SAUCE</h4>
-    <app-audoritas-detalle [data]="data1" [dataS]="data1" [dataA]="data2" [dataAR]="data3" [Tipo]="'Auditoria'" ></app-audoritas-detalle>
+    <app-audoritas-detalle [data]="data1" [dataS]="data1" [dataA]="data2" [dataAR]="data3" [Tipo]="'Incidencia'" ></app-audoritas-detalle>
 </mat-card>
 
  <mat-card class="mat-cardContainerCuerpo mt-4"  *ngIf="data2.length >= 1">
     <h4 class="titulo">ALMAHSA</h4>
-    <app-audoritas-detalle [data]="data2"  [dataS]="data1"  [dataA]="data2" [dataAR]="data3" [Tipo]="'Auditoria'" ></app-audoritas-detalle>
+    <app-audoritas-detalle [data]="data2" [dataS]="data1" [dataA]="data2" [dataAR]="data3" [Tipo]="'Incidencia'" ></app-audoritas-detalle>
 </mat-card>
 
 <mat-card class="mat-cardContainerCuerpo mt-4"  *ngIf="data3.length >= 1">
     <h4 class="titulo">ARCHIVO</h4>
-    <app-audoritas-detalle [data]="data3"  [dataS]="data1"  [dataA]="data2" [dataAR]="data3" [Tipo]="'Auditoria'"  ></app-audoritas-detalle>
+    <app-audoritas-detalle [data]="data3" [dataS]="data1" [dataA]="data2" [dataAR]="data3" [Tipo]="'Incidencia'" ></app-audoritas-detalle>
 </mat-card> 

@@ -12,12 +12,16 @@
     <div class="col-md-12 ">
         <mat-card  class="card mat-elevation-z1 example-card" *ngFor="let mod of extintores" (click)="menu(modulos,mod)" >
    <mat-card-header>
-       <mat-card-tittle style="text-align: center !important;">  {{ mod?.Nomenclatura }} </mat-card-tittle>
+       <mat-card-tittle style="text-align: center !important;">  {{ mod?.Nomenclatura }} 
+        <span class="badge bg-danger  mb-1"  *ngIf="mod?.Bandera == 0" >{{mod?.dias}}</span>
+        <span class="badge bg-warning mb-1" *ngIf="mod?.Bandera == 5">  {{mod?.dias}} </span>
+        <span class="badge bg-info mb-1" *ngIf="mod?.Bandera == 10"> {{mod?.dias}} </span>
+    </mat-card-tittle>
 </mat-card-header>
 <img style="justify-content: center !important;" mat-card-image src="../../../.././../assets/images/extintor.jpg" alt="Extintor">
 
 <mat-card-content >
-    <p style="font-size: x-small !important;"> {{ mod?.ubicacion }} </p>
+    <p style="font-size: x-small !important; text-align: center !important;"> {{ mod?.ubicacion }} </p>
 </mat-card-content>
         </mat-card>
     </div>
@@ -28,7 +32,7 @@
 <ng-template  #modulos>
     <h4 class="container"> Extintor {{ extintor }} </h4>
   <mat-nav-list >
-    <a  mat-list-item *ngFor="let bottom of opcionesModules" >
+    <a  mat-list-item *ngFor="let bottom of opcionesModules" (click)="Accion(bottom?.accion)" >
         <mat-icon>{{bottom.icono}}</mat-icon>
         <span mat-line><b>{{bottom.titulo}}</b></span>
         <span mat-line>{{bottom.subtitulo}}</span>

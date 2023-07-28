@@ -39,10 +39,8 @@ export class SsmoaService {
     return request$
   }
 
-
   // Servicio de Inserción 
   post( url?:string, params?:any){
-  
     let request$ = this.http.post<DataApi>(environment.UrlApi + url, params).pipe(
       tap( ( result:DataApi | any )=>{
         this.refresh$.next();
@@ -63,7 +61,6 @@ export class SsmoaService {
   }
   // Servicio de Actualización
   put( url?:string, params?:any){
-  
     let request$ = this.http.put<DataApi>(environment.UrlApi + url,params).pipe(
       tap( ( result:DataApi | any )=>{
         this.refresh$.next();
@@ -84,7 +81,6 @@ export class SsmoaService {
   }
   // Servicio de Eliminación
   delete( url?:string, params?:any){
-  
     let request$ = this.http.delete<DataApi>(environment.UrlApi + url, { body: params }).pipe(
       tap( ( result:DataApi | any )=>{
         this.refresh$.next();
@@ -103,4 +99,25 @@ export class SsmoaService {
     );
     return request$
   }
+
+  validarExtintor(idExtintor : number ){
+    let params = { idExtintor : idExtintor}
+    let request$ = this.http.get(environment.UrlApi + '/ssmoa/Auditoria', {params:params}).pipe(
+      tap( ( result: any)=>{
+          return result
+      } ),
+      catchError( ( error: HttpErrorResponse) =>{
+        this._mensajesHttp.mostrarErrorHttp(error, String(error.error?.errors[0]['descripcion']), '');
+          return [
+            {
+              data     : error,
+              errors   : error,
+              hasError :  true 
+            }
+          ]
+      })
+    );
+    return request$
+  }
+
 }

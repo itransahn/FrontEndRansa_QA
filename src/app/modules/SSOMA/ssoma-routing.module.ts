@@ -7,6 +7,8 @@ import { TipoextintorComponent } from './Extintores/Mantenimientos/tipoextintor/
 import { CapacidadesComponent } from './Extintores/Mantenimientos/capacidades/capacidades.component';
 import { UbicacionesComponent } from './Extintores/Mantenimientos/ubicaciones/ubicaciones.component';
 import { AuditoriasComponent } from './Extintores/auditorias/auditorias.component';
+import { AuditoriasRealizadasComponent } from './Extintores/auditorias-realizadas/auditorias-realizadas.component';
+import { IncidenciasGeneradasComponent } from './Extintores/incidencias-generadas/incidencias-generadas.component';
 
 
 const routes: Routes = [
@@ -37,6 +39,14 @@ const routes: Routes = [
    {
     path         : 'auditorias',
     component    : AuditoriasComponent
+   },
+   {
+    path         : 'auditoriasG',
+    component    : AuditoriasRealizadasComponent
+   },
+   {
+    path         : 'incidenciasG',
+    component    : IncidenciasGeneradasComponent
    }
   ];
   

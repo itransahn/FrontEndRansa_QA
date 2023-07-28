@@ -1,0 +1,139 @@
+<div class="table-responsive !important">
+    <table>
+        <thead>
+          <tr>
+            <th scope="col">Ubicación</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Presión</th>
+            <th scope="col">Sello</th>
+            <th scope="col">Manometro</th>
+            <th scope="col">Soporte</th>
+            <th scope="col">Manguera</th>
+            <th scope="col">Boquilla</th>
+            <th scope="col">Pintura</th>
+            <th scope="col">Señalización</th>
+            <th scope="col">Altura</th>
+            <th scope="col">Acceso</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of data   | slice: desde: hasta  " class="trHover">
+            <td data-label="Ubicación">{{    item?.ubicacion }}</td>
+
+            <td data-label="Estado">
+                <span *ngIf="item?.Estado == 1">
+                    <mat-icon class="success">check_box</mat-icon>
+                </span>
+                <span *ngIf="item?.Estado != 1">
+                    <mat-icon class="error">indeterminate_check_box</mat-icon>
+                </span>    
+            </td>
+
+            <td data-label="Presión">
+                <span *ngIf="item?.Presion == 1">
+                    <mat-icon class="success">check_box</mat-icon>
+                </span>
+                <span *ngIf="item?.Presion != 1">
+                    <mat-icon class="error">indeterminate_check_box</mat-icon>
+                </span>    
+            </td>
+
+            <td data-label="Sello">
+                <span *ngIf="item?.Sello == 1">
+                    <mat-icon class="success">check_box</mat-icon>
+                </span>
+                <span *ngIf="item?.Sello != 1">
+                    <mat-icon class="error">indeterminate_check_box</mat-icon>
+                </span>    
+            </td>
+
+            <td data-label="Manometro">
+                <span *ngIf="item?.Manometro == 1">
+                    <mat-icon class="success">check_box</mat-icon>
+                </span>
+                <span *ngIf="item?.Manometro != 1">
+                    <mat-icon class="error">indeterminate_check_box</mat-icon>
+                </span>    
+            </td>
+
+            <td data-label="Soporte">
+                <span *ngIf="item?.Soporte == 1">
+                    <mat-icon class="success">check_box</mat-icon>
+                </span>
+                <span *ngIf="item?.Soporte != 1">
+                    <mat-icon class="error">indeterminate_check_box</mat-icon>
+                </span>    
+            </td>
+
+            <td data-label="Manguera">
+                <span *ngIf="item?.Manguera == 1">
+                    <mat-icon class="success">check_box</mat-icon>
+                </span>
+                <span *ngIf="item?.Manguera != 1">
+                    <mat-icon class="error">indeterminate_check_box</mat-icon>
+                </span>    
+            </td>
+
+            <td data-label="Boquilla">
+                <span *ngIf="item?.Boquilla == 1">
+                    <mat-icon class="success">check_box</mat-icon>
+                </span>
+                <span *ngIf="item?.Boquilla != 1">
+                    <mat-icon class="error">indeterminate_check_box</mat-icon>
+                </span>    
+            </td>
+
+            <td data-label="Pintura">
+                <span *ngIf="item?.Pintura == 1">
+                    <mat-icon class="success">check_box</mat-icon>
+                </span>
+                <span *ngIf="item?.Pintura != 1">
+                    <mat-icon class="error">indeterminate_check_box</mat-icon>
+                </span>    
+            </td>
+
+            <td data-label="Señalización">
+                <span *ngIf="item?.Senalizacion == 1">
+                    <mat-icon class="success">check_box</mat-icon>
+                </span>
+                <span *ngIf="item?.Senalizacion != 1">
+                    <mat-icon class="error">indeterminate_check_box</mat-icon>
+                </span>    
+            </td>
+        
+            <td data-label="Altura">
+                <span *ngIf="item?.Altura == 1">
+                    <mat-icon class="success">check_box</mat-icon>
+                </span>
+                <span *ngIf="item?.Altura != 1">
+                    <mat-icon class="error">indeterminate_check_box</mat-icon>
+                </span>    
+            </td>
+
+            <td data-label="Acceso">
+                <span *ngIf="item?.Acceso == 1">
+                    <mat-icon class="success">check_box</mat-icon>
+                </span>
+                <span *ngIf="item?.Acceso != 1">
+                    <mat-icon class="error">indeterminate_check_box</mat-icon>
+                </span>    
+            </td>
+         
+         
+    
+          </tr>
+        </tbody>
+      </table>
+      
+   </div>
+      <mat-paginator [length]="data.length" [pageSize]="pageSize " (page)="next($event)">
+    </mat-paginator>
+
+
+    <div class="container">
+        <!-- <h3 >EXPORT as XLSX</h3> -->
+            <button mat-raised-button class="buttonPrincipal"  (click)="exportAsXLSX()">  Exportar
+                <mat-icon>trending_down</mat-icon>
+            </button>
+    </div>

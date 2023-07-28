@@ -49,8 +49,7 @@ import { SharedModule } from './modules/shared/shared.module';
     HttpClientModule,
     LayoutsModule,
     ToastrModule.forRoot(),
-    SharedModule,
-    
+    SharedModule
   ],
   exports :[
     FormsModule,

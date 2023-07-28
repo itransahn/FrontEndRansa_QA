@@ -112,7 +112,8 @@ export class AuditoriasComponent implements OnInit {
       maxWidth: '75%',
       minWidth: '50%',
       data: { 
-        data : data  
+        data : data,
+        bandera : 1
       },
       disableClose : true
     })

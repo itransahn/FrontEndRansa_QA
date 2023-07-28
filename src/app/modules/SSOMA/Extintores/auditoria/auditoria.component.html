@@ -9,9 +9,8 @@
 
 <mat-card class="cardPersonalizada">
  
-    <mat-card-header class="header"> Auditoria Extintor {{ extintor }}
+    <mat-card-header class="header"> {{titulo}} Extintor {{ extintor }}
     <mat-icon style="float: right !important; color: white !important;" (click)="close()" > close </mat-icon>
-
     </mat-card-header>
 
 
@@ -114,7 +113,7 @@
                 </div>
             <!-- *ngFor = "let Estado of EstadoCivilData" [value] = "Estado.idEstadoCivil"  -->
             <div class="container">
-                <button class="buttonPrincipal" mat-raised-button type="submit" [disabled]="f.invalid" (click)="crearExtintor()">Guardar</button>
+                <button class="buttonPrincipal" mat-raised-button type="submit" [disabled]="f.invalid" (click)=" submit()">Guardar</button>
             </div>
         </form>
     </mat-card-content>

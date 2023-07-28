@@ -13,6 +13,7 @@ import { ToastServiceLocal } from 'src/app/services/toast.service';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { mensajes } from 'src/app/interfaces/generales';
+import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 const moment = _rollupMoment || _moment;
 
 
@@ -47,26 +48,27 @@ export class CrearExtintorComponent implements OnInit {
   public  titulo    : string;
   public  subtitulo : string;
 
-  constructor(
+constructor(
     public ssoma : SsmoaService,
     private dialogRef:MatDialogRef<CrearExtintorComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private toast       : ToastServiceLocal, 
-    public auth: AuthService
+    public auth: AuthService,
+    public sweel : SweetAlertService
   ) { }
 
-  ngOnInit(){
-    this.cargarCatalogo( this.data?.sede)
+ngOnInit(){
+    this.cargarCatalogo( this.data?.sede);
     this.validacion();
   }
   
-  validacion(){
+validacion(){
     if ( this.data['bandera'] == 1 ){
       this.enable     = true;
       this.visible    = true;
       this.botton     = false
-      this.titulo     = `Rol` 
-      this.subtitulo  = String(this.data['rol']); 
+      this.titulo     = `Creación de Extintor` 
+      this.subtitulo  = String(this.data?.['Nomenclatura']); 
       this.cargarFormGet(),
       this.SetForm()
     }
@@ -83,8 +85,8 @@ export class CrearExtintorComponent implements OnInit {
       this.enable     = false;
       this.visible    = true;
       this.botton     = true
-      this.titulo     = `Actualizacion del Rol` 
-      this.subtitulo  = String(this.data['rol']); 
+      this.titulo     = `Actualizacion del Extintor` 
+      this.subtitulo  = String(this.data?.data?.['Nomenclatura']); 
       this.cargarFormPut()
       this.SetForm()
     }
@@ -93,11 +95,11 @@ export class CrearExtintorComponent implements OnInit {
 
   }
 
-  close(){
+close(){
     this.dialogRef.close()
   }
 
-  cargarCatalogo( Sede ){
+cargarCatalogo( Sede ){
     let params = {
       Sede  : Sede
     }
@@ -109,7 +111,7 @@ export class CrearExtintorComponent implements OnInit {
   }
 
 
-  cargarFormGet(){
+cargarFormGet(){
     this.Form = new FormGroup({
       tipoAgente   : new FormControl({ value: '', disabled : this.enable }, [] ),
       tipoExtintor : new FormControl({ value: '', disabled : this.enable }, [] ),
@@ -129,10 +131,10 @@ cargarFormPost(){
       tipoExtintor : new FormControl({ value: '', disabled : this.enable }, [] ),
       vidaUtil     : new FormControl({ value: '', disabled : this.enable }, [] ),
       Capacidad    : new FormControl({ value: '', disabled : this.enable }, [] ),
-      fechaAnteriorCarga   : new FormControl({ value: '', disabled : this.enable }, [] ),
-      fechaProximaCarga   : new FormControl({ value: '',  disabled : this.enable }, [] ),
-      ubicacion    : new FormControl({ value: '',   disabled : this.enable }, [] ),
-      fechaCreacion  : new FormControl({ value: '', disabled : this.enable }, [] )
+      fechaAnteriorCarga : new FormControl({ value: '', disabled : this.enable }, [] ),
+      fechaProximaCarga  : new FormControl({ value: '', disabled : this.enable }, [] ),
+      ubicacion     : new FormControl({ value: '', disabled : this.enable }, [] ),
+      fechaCreacion : new FormControl({ value: '', disabled : this.enable }, [] )
   })
 }
 
@@ -145,38 +147,83 @@ this.Form = new FormGroup({
   fechaAnteriorCarga   : new FormControl({ value: '', disabled : this.enable }, [] ),
   fechaProximaCarga    : new FormControl({ value: '', disabled : this.enable }, [] ),
   ubicacion    : new FormControl({ value: '', disabled : this.enable }, [] ),
-  fechaCreacion  : new FormControl({ value: '', disabled : true }, [] )
+  fechaCreacion  : new FormControl({ value: '', disabled : false }, [] )
 })
 }
 
 SetForm(){
 this.Form.setValue({
-  tipoAgente        : this.data['idAgente'],
-  tipoExtintor      : this.data['idtipoExtintor'],
-  vidaUtil          : this.data['vida_util'],
-  Capacidad         : this.data['capacidad'],
-  fechaAnteriorCarga : this.data['Fecha_Anterior_Carga'],
-  fechaProximaCarga  : this.data['Fecha_Proxima_Carga'],
-  ubicacion      :    this.data['idUbicacion'],
-  fechaCreacion  :    this.data['fechaCreacion']
+  tipoAgente        :  this.data?.data?.['idAgente'],
+  tipoExtintor      :  this.data?.data?.['idTipoExtintor'],
+  vidaUtil          :  this.data?.data?.['vida_util'],
+  Capacidad         :  this.data?.data?.['capacidad'],
+  fechaAnteriorCarga : this.data?.data?.['Fecha_Anterior_Carga'],
+  fechaProximaCarga  : this.data?.data?.['Fecha_Proxima_Carga'],
+  ubicacion      :     this.data?.data?.['idUbicacion'],
+  fechaCreacion  :     this.data?.data?.['fechaCreacion']
 })
 }
 
+submit(){
+  if( this.data?.bandera == 2){
+    this.crearExtintor()
+  }else{
+    this.actualizarExtintor()
+  }
+}
+
 crearExtintor(){
-  let formValues = this.Form.value;
+  this.sweel.mensajeConConfirmacion("Creación de Extintor","¿Seguro de guardar Cambios?","warning").then(
+    res=>{
+      if(res){
+        let formValues = this.Form.value;
+        let params = {
+          sede         : this.data?.sede,
+          tipoAgente   : formValues.tipoAgente,
+          tipoExtintor : formValues.tipoExtintor,
+          vidaUtil     : formValues.vidaUtil,
+          capacidad    : formValues.Capacidad,
+          Fecha_Anterior_Carga : formValues.fechaAnteriorCarga,
+          Fecha_Proxima_Carga : formValues.fechaProximaCarga,
+          usuario_creador     : this.auth.dataUsuario['id_usuario'],
+          ubicacion           : formValues.ubicacion,
+          fechaCreacion       : formValues.fechaCreacion
+        }
+      this.ssoma.post('ssmoa/extintor', params).subscribe(
+        res=>{
+          if( !res.hasError){
+            if ( res?.data.Table0[0]['codigo'] == -1 ){
+              this.toast.mensajeWarning(String(res?.data.Table0[0]['Mensaje']), mensajes.warning)
+          }else{
+              this.toast.mensajeSuccess(String(res?.data.Table0[0]['Mensaje']), mensajes.success);
+              this.close()
+          }
+          }
+        }
+      )
+      }
+    }
+  )}
+
+actualizarExtintor(){
+this.sweel.mensajeConConfirmacion("Actualización de Extintor","¿Seguro de guardar Cambios?","warning").then(
+  res=>{
+    if (res){
+      let formValues = this.Form.value;
   let params = {
+    idExtintor   : this.data?.data?.['id_Extintor'],
     sede         : this.data?.sede,
     tipoAgente   : formValues.tipoAgente,
     tipoExtintor : formValues.tipoExtintor,
     vidaUtil     : formValues.vidaUtil,
     capacidad    : formValues.Capacidad,
     Fecha_Anterior_Carga : formValues.fechaAnteriorCarga,
-    Fecha_Proxima_Carga : formValues.fechaProximaCarga,
-    usuario_creador     : this.auth.dataUsuario['id_usuario'],
-    ubicacion           : formValues.ubicacion,
-    fechaCreacion       : formValues.fechaCreacion
+    Fecha_Proxima_Carga  : formValues.fechaProximaCarga,
+    usuario              : this.auth.dataUsuario['id_usuario'],
+    ubicacion            : formValues.ubicacion,
+    fechaCreacion        : formValues.fechaCreacion
   }
-this.ssoma.post('ssmoa/extintor', params).subscribe(
+this.ssoma.put('ssmoa/extintor', params).subscribe(
   res=>{
     if( !res.hasError){
       if ( res?.data.Table0[0]['codigo'] == -1 ){
@@ -188,6 +235,10 @@ this.ssoma.post('ssmoa/extintor', params).subscribe(
     }
   }
 )
+    }
+  }
+)
+  
 
 }
 }

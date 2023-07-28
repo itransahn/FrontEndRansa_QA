@@ -20,7 +20,9 @@ import { ModalUbicacionComponent } from './Extintores/Mantenimientos/ubicaciones
 import { AuditoriaComponent } from './Extintores/auditoria/auditoria.component';
 import { AuditoriasComponent } from './Extintores/auditorias/auditorias.component';
 import { AuditoriasRealizadasComponent } from './Extintores/auditorias-realizadas/auditorias-realizadas.component';
-
+import { AngularMaterialModule } from '../angular-material/angular-material.module';
+import { AudoritasDetalleComponent } from './Extintores/Auditorias_realizadas/audoritas-detalle/audoritas-detalle.component';
+import { IncidenciasGeneradasComponent } from './Extintores/incidencias-generadas/incidencias-generadas.component';
 @NgModule({
   declarations: [
     SalidaPortonComponent,
@@ -39,14 +41,17 @@ import { AuditoriasRealizadasComponent } from './Extintores/auditorias-realizada
     ModalUbicacionComponent,
     AuditoriaComponent,
     AuditoriasComponent,
-    AuditoriasRealizadasComponent
+    AuditoriasRealizadasComponent,
+    AudoritasDetalleComponent,
+    IncidenciasGeneradasComponent
   ],
   imports: [
     CommonModule,
     ssomaRoutingModule,
     SharedModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    AngularMaterialModule
 
   ]
 })

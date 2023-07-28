@@ -8,6 +8,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { extintor } from 'src/app/interfaces/ssmoa';
 import { DataApi } from 'src/app/interfaces/dataApi';
 import { AuditoriaComponent } from '../auditoria/auditoria.component';
+import { ToastServiceLocal } from 'src/app/services/toast.service';
+import { mensajes } from 'src/app/interfaces/generales';
 
 @Component({
   selector: 'app-extintores',
@@ -17,6 +19,7 @@ import { AuditoriaComponent } from '../auditoria/auditoria.component';
 export class ExtintoresComponent implements OnInit {
   opcionesModules : any;
   extintor : any;
+  idExtintor : any;
   extintores : extintor[] = []
   dataExtintor : any;
   data = [
@@ -99,7 +102,8 @@ export class ExtintoresComponent implements OnInit {
     private _bottomSheet : MatBottomSheet,
     public auth : AuthService,
     public ssomas : SsmoaService,
-    public dialog  : MatDialog
+    public dialog  : MatDialog,
+    public toast   : ToastServiceLocal
   ) { }
 
   ngOnInit(): void {
@@ -124,6 +128,7 @@ export class ExtintoresComponent implements OnInit {
 
   menu(template, data) {
     this.extintor = data.Nomenclatura;
+    this.idExtintor = data?.id_Extintor;
     this.dataExtintor = data;
     // this.dataModulo = dataModulo;
     this.opcionesModules = [
@@ -171,14 +176,19 @@ export class ExtintoresComponent implements OnInit {
 
   Accion( accion ?: number, data?:any ){
     if ( accion == 1){
-      // this.CrearMenu()
+      this.Modal(1,this.dataExtintor,3)
     }
 
     if ( accion == 2 ){
-      this.Auditoria(this.dataExtintor)
+      this.ssomas.validarExtintor(this.idExtintor).subscribe(
+        (res:any)=>{
+    if ( res?.data.Table0[0]['codigo'] == -1 ){ this.toast.mensajeWarning(String(res?.data.Table0[0]['Mensaje']), mensajes.warning)
+  }else{ this.Auditoria(this.dataExtintor,1)}
+  } )
+      
    }
     if ( accion == 3){
-  //  this.EditarModulo()
+      this.Auditoria(this.dataExtintor,2)
     }
     
 
@@ -188,14 +198,15 @@ export class ExtintoresComponent implements OnInit {
 
 
   
-Auditoria(  data ?: any ){
+Auditoria(  data ?: any, bandera ?:any ){
     const dialogReg = this.dialog.open( AuditoriaComponent,{
       width :   'auto',
       height:   'auto',
       maxWidth: '75%',
       minWidth: '50%',
       data: { 
-        data : data  
+        data : data ,
+        bandera : bandera
       },
       disableClose : true
     })
