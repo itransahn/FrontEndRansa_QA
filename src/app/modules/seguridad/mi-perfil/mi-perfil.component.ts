@@ -112,7 +112,6 @@ export class MiPerfilComponent implements OnInit {
     this.usuarioS.post(url,params).subscribe(
       res=>{
           this.dataUsuario = res?.data.Table0[0];
-          console.log(this.dataUsuario)
           this.cargarFormulario()
       }
     )
@@ -167,7 +166,6 @@ export class MiPerfilComponent implements OnInit {
     }
 
   this.usuarioS.put(url,params).subscribe( res=>{
-    console.log(res)
     if ( !res.hasError){
       if ( res?.data.Table0[0]['codigo'] == -1 ){
         this.toast.mensajeWarning(String(res?.data.Table0[0]['Mensaje']), mensajes.warning)

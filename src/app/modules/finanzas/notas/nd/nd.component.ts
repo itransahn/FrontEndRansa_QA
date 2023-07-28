@@ -192,8 +192,6 @@ export class NdComponent implements OnInit {
             if( !res?.hasError ){
                 this.parametros    = res.data.Table0;
                 this.parametrosCai = res.data.Table1;    
-                console.log(this.parametros)
-                console.log(this.parametrosCai)
 
             }
         }

@@ -79,7 +79,6 @@ export class CancelarrecibosComponent implements OnInit {
       res=>{
         if ( res) {
           for( let i = 0; i < this.cancelaciosData.length; i++){
-            console.log(this.cancelaciosData[i]?.idRecibo, this.cancelaciosData[i]?.cancelada )
             let cancelado : number ;
 
             if ( this.cancelaciosData[i]?.cancelada ){
@@ -116,7 +115,6 @@ export class CancelarrecibosComponent implements OnInit {
     }
 
     checkOnClick( recibo : number ,tipo : boolean )  {
-      console.log(tipo)
       let validacion : number;
         if ( tipo  ){
           this.loadingB  = true;

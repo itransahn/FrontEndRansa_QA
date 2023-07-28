@@ -65,7 +65,6 @@ export class TransProveedorComponent implements OnInit {
       (data : DataApi | any) =>{
         if( !data.hasError ){
           this.proveedores = data?.data?.Table0;
-          console.log(this.proveedores)
         }    
       }
     )

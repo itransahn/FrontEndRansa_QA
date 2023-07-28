@@ -145,7 +145,6 @@ cargarData(){
   this.filteredOptions2 =  this.modalForm2.get('transporte').valueChanges.pipe(
     startWith(''),
     map(value => {
-      console.log(value)
     const  proveedor = typeof value === 'string' ? value : value;
     return  this._filter2(this.catalogoF?.['Transportes'],proveedor, 'nombreEmpresa')
     }),

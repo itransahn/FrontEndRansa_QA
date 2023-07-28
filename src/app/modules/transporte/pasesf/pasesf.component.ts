@@ -124,7 +124,6 @@ eliminarPase( idPase : number, nombrePersona, tipo){
   }
   
   enviarLocalStorage( data){
-    console.log(data)
     localStorage.setItem('PaseSalida', JSON.stringify(data));
     this.auth.redirecTo('ransa/transporte/Pasesalidas')
   }

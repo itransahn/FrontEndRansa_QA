@@ -104,7 +104,6 @@ EnvioCorreoContra( IdUsuario ?: number, nombreUsuario ?: string){
           contra :      GeneraRandomPassword
         };
         this.usuarioS.put(url, params).subscribe( data =>{
-          console.log(data)
           if( !data.hasError ){
             if ( data?.data.Table0[0]['codigo'] == -1 ){
               this.toast.mensajeWarning(String(data?.data.Table0[0]['Mensaje']), mensajes.warning)

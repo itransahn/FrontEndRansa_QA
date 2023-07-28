@@ -119,7 +119,6 @@ placa    : this.data?.['data']['placa']
 }
 
 setearID( option ?: any   ){
-  console.log(option);
   this.idUsuario = option?.ID
   }
 

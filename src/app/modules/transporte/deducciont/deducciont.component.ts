@@ -86,7 +86,6 @@ fecha      : new FormControl('', [ Validators.required]) })
 
 cargarData(){
   this.catalogoF = this.transporteService.returnCatalogo();
-  console.log(this.catalogoF)
   this.filteredOptions =  this.form.get('transporte').valueChanges.pipe(
     startWith(''),
     map(value => {
@@ -121,7 +120,6 @@ this.transporteService.post(url,params).subscribe(
   res=>{
     if(res){
       this.dataRec = res?.data?.Table0;
-      console.log(this.dataRec);
       this.subtotal = Acumulador(this.dataRec,'valorFacturaa')
       this.loading1 = true;
       if ( this.dataRec.length < 20 ){

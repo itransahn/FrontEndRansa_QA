@@ -242,7 +242,6 @@ detalleAntecedentes : this.FormAntecedentes.value.detalleAntecedente,
 tipoD               : this.FormPrimario.value.tipo,
   }
 
-console.log( params )
 
 this.transporteService.put(url,params).subscribe(
     res=>{
