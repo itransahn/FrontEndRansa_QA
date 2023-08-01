@@ -9,6 +9,7 @@ import { UbicacionesComponent } from './Extintores/Mantenimientos/ubicaciones/ub
 import { AuditoriasComponent } from './Extintores/auditorias/auditorias.component';
 import { AuditoriasRealizadasComponent } from './Extintores/auditorias-realizadas/auditorias-realizadas.component';
 import { IncidenciasGeneradasComponent } from './Extintores/incidencias-generadas/incidencias-generadas.component';
+import { CorrecionesGeneradasComponent } from './Extintores/correciones-generadas/correciones-generadas.component';
 
 
 const routes: Routes = [
@@ -47,6 +48,10 @@ const routes: Routes = [
    {
     path         : 'incidenciasG',
     component    : IncidenciasGeneradasComponent
+   },
+   {
+    path         : 'correcionesG',
+    component    : CorrecionesGeneradasComponent
    }
   ];
   
