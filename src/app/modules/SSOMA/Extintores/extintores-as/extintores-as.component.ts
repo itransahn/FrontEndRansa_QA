@@ -99,7 +99,7 @@ Modal ( sede : number, data ?: any, bandera ?: any){
 
 Accion( accion ?: number, data?:any ){
     if ( accion == 1){
-      this.Modal(15,this.dataExtintor,3)
+      this.Modal(14,this.dataExtintor,3)
     }
 
     if ( accion == 2 ){
