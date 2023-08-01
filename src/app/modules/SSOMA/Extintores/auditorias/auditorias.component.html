@@ -50,9 +50,7 @@
     <div *ngIf="data?.length >= 1">
         <div class="col-md-12 ">
             <mat-card  class="card mat-elevation-z1 example-card ext" *ngFor="let mod of data  | search: this.filtro.value.buscar:parametrosBusqueda | slice: desde: hasta " (click)="Auditoria(mod)" >
-       <mat-card-header>
-           <mat-card-tittle style="text-align: center !important;">  {{ mod?.Nomenclatura }} </mat-card-tittle>
-    </mat-card-header>
+                <h3 style="text-align: center !important;" >{{ mod?.Nomenclatura }} </h3>
     
     <div class="contenedor mt-4">
     <img  mat-card-image src="../../../.././../assets/images/extintor.jpg">

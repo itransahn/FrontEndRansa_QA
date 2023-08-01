@@ -1,15 +1,9 @@
 @import "../../../../shared/variables.scss";
 
 img{
-width:  75px !important ;
-height: 75px !important;
+  width:  100px !important ;
+  height: 100px !important;
 }
-.contenedor{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 mat-card{
     color: $verde-primario;
     margin-left: 1% !important;
@@ -18,6 +12,12 @@ mat-card{
     // margin-left:   5% !important; 
     border-radius: 20px !important;
 }
+.contenedor{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 
 .ext:hover{
     cursor: pointer;
@@ -32,7 +32,16 @@ mat-card{
     }
   }
 
- 
+  .card{
+    color: $verde-primario;
+    margin-left: 1% !important;
+    margin-top:  1% !important;
+    float: left;
+    // margin-left:   5% !important; 
+    border-radius: 20px !important;
+    width : 140px !important;
+    height: 270px !important;
+  }
     
 .mat-expansion-indicator::before {
   display:  none !important;

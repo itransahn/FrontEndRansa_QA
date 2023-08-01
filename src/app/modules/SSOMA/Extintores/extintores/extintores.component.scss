@@ -16,12 +16,13 @@ mat-card{
     border-radius: 20px !important;
     width : 140px !important;
     height: 270px !important;
-
 }
 mat-card:hover{
     cursor: pointer !important;
     transform: scale(0.9);
 }
+
+
 
 // mat-card:first-child{
 //     margin-left:  0 !important;
