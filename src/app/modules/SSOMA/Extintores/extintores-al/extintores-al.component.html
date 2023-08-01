@@ -11,20 +11,20 @@
     </div>
     <div class="col-md-12 ">
         <mat-card  class="card mat-elevation-z1 example-card" *ngFor="let mod of extintores" (click)="menu(modulos,mod)" >
-   <mat-card-header>
-       <mat-card-tittle style="text-align: center !important;">  {{ mod?.Nomenclatura }}
-        <span class="badge bg-danger  mb-1"  *ngIf="mod?.Bandera == 0" >{{mod?.dias}}</span>
-        <span class="badge bg-warning mb-1" *ngIf="mod?.Bandera == 5">  {{mod?.dias}} </span>
-        <span class="badge bg-info mb-1" *ngIf="mod?.Bandera == 10"> {{mod?.dias}} </span>
-     </mat-card-tittle>
-</mat-card-header>
-<img style="justify-content: center !important;" mat-card-image src="../../../.././../assets/images/extintor.jpg" alt="Extintor">
-
-<mat-card-content >
-    <p style="font-size: x-small !important; text-align: center !important;"> {{ mod?.ubicacion }} </p>
-</mat-card-content>
-
-        </mat-card>
+            <h3 style="text-align: center !important;" >{{ mod?.Nomenclatura }} </h3>
+                    <div class="container">
+                        <span style="text-align: center !important;" class="badge bg-danger  mb-1"  *ngIf="mod?.Bandera == 0" >{{mod?.dias}}</span>
+                        <span style="text-align: center !important;" class="badge bg-warning mb-1" *ngIf="mod?.Bandera == 5">  {{mod?.dias}} </span>
+                        <span style="text-align: center !important;" class="badge bg-info mb-1" *ngIf="mod?.Bandera == 10"> {{mod?.dias}} </span>
+                    </div>
+    <div class="container mt-4">
+        <img mat-card-image src="../../../.././../assets/images/extintor.PNG" alt="Extintor">
+    </div>
+    
+    <mat-card-content>
+        <h3 [ngStyle]="{'color': mod?.estado==0?'red':'green'}" style="font-size: x-small !important; text-align: center !important;"> {{ mod?.ubicacion }} </h3>
+    </mat-card-content>
+            </mat-card>
     </div>
 </div>
 

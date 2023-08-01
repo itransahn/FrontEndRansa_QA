@@ -34,15 +34,25 @@
 
 <mat-card class="mat-cardContainerCuerpo mt-4" *ngIf="data1.length >= 1">
     <h4 class="titulo">SAUCE</h4>
-    <app-audoritas-detalle [data]="data1" [dataS]="data1" [dataA]="data2" [dataAR]="data3" [Tipo]="'Auditoria'" ></app-audoritas-detalle>
+    <app-audoritas-detalle [data]="data1" [dataS]="data1" [dataA]="data2" [dataAR]="data3" [dataAS]="data4" [dataFR]="data5" [Tipo]="'Auditoria'" ></app-audoritas-detalle>
 </mat-card>
 
  <mat-card class="mat-cardContainerCuerpo mt-4"  *ngIf="data2.length >= 1">
     <h4 class="titulo">ALMAHSA</h4>
-    <app-audoritas-detalle [data]="data2"  [dataS]="data1"  [dataA]="data2" [dataAR]="data3" [Tipo]="'Auditoria'" ></app-audoritas-detalle>
+    <app-audoritas-detalle [data]="data2"  [dataS]="data1"  [dataA]="data2" [dataAR]="data3" [dataAS]="data4" [dataFR]="data5" [Tipo]="'Auditoria'" ></app-audoritas-detalle>
 </mat-card>
 
 <mat-card class="mat-cardContainerCuerpo mt-4"  *ngIf="data3.length >= 1">
     <h4 class="titulo">ARCHIVO</h4>
-    <app-audoritas-detalle [data]="data3"  [dataS]="data1"  [dataA]="data2" [dataAR]="data3" [Tipo]="'Auditoria'"  ></app-audoritas-detalle>
+    <app-audoritas-detalle [data]="data3"  [dataS]="data1"  [dataA]="data2" [dataAR]="data3" [dataAS]="data4" [dataFR]="data5" [Tipo]="'Auditoria'"  ></app-audoritas-detalle>
+</mat-card> 
+
+<mat-card class="mat-cardContainerCuerpo mt-4"  *ngIf="data4.length >= 1">
+    <h4 class="titulo">ARCHIVO SPS</h4>
+    <app-audoritas-detalle [data]="data4"  [dataS]="data1"  [dataA]="data2" [dataAR]="data3" [dataAS]="data4" [dataFR]="data5" [Tipo]="'Auditoria'"  ></app-audoritas-detalle>
+</mat-card> 
+
+<mat-card class="mat-cardContainerCuerpo mt-4"  *ngIf="data5.length >= 1">
+    <h4 class="titulo">FRIO</h4>
+    <app-audoritas-detalle [data]="data5"  [dataS]="data1"  [dataA]="data2" [dataAR]="data3" [dataAS]="data4" [dataFR]="data5" [Tipo]="'Auditoria'"  ></app-audoritas-detalle>
 </mat-card> 

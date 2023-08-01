@@ -19,7 +19,7 @@
             <div class="row" style="margin-top: 2%;">
                     <div class="col-md-6">
                         <label id="example-radio-group-label" class="label1"> Presión </label>
-                        <mat-radio-group formControlName="presion" ng-model="selvalue">
+                        <mat-radio-group formControlName="presion">
                             <mat-radio-button color="warn" style="margin: 10px !important" value="1">Sí</mat-radio-button>
                             <mat-radio-button color="warn" style="margin: 10px !important" value="0">No</mat-radio-button>
                         </mat-radio-group>
@@ -97,17 +97,10 @@
                         </mat-radio-group>
                     </div>
 
-                    <div class="col-md-6" layout="row">
-                        <label id="example-radio-group-label"  class="label1"> Estado </label>
-               <mat-radio-group  ng-model="data.group1" aria-labelledby="favoriteFruit" layout="row" formControlName="estado" >
-                            <mat-radio-button color="warn" style="margin: 10px !important" value="1">Sí</mat-radio-button>
-                            <mat-radio-button color="warn" style="margin: 10px !important" value="0">No</mat-radio-button>
-                        </mat-radio-group>
-                    </div>
 
             <div class="col-md-12">
                     <!-- <label id="example-radio-group-label"> Observaciones </label> -->
-                    <mat-form-field class="example-full-width"> <textarea matInput placeholder="Observaciones"></textarea>  </mat-form-field>
+                    <mat-form-field class="example-full-width" placeholder="asdasdas"> <textarea formControlName="observaciones"  matInput placeholder="Observaciones"></textarea>  </mat-form-field>
             </div>
 
                 </div>

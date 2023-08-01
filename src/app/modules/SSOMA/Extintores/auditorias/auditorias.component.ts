@@ -32,7 +32,14 @@ export class AuditoriasComponent implements OnInit {
     },
     { idSede : 3, 
       Sede   : "ARCHIVO"
+    },
+    { idSede : 14, 
+      Sede   : "ARCHIVO SPS"
+    },
+    { idSede : 15, 
+      Sede   : "FRIO"
     }
+
   ]
 
       Paginacion

@@ -100,13 +100,11 @@ export class RecibosComponent implements OnInit {
           this.data = res?.data?.Table0;
           this.recibos  =  Acumulador( this.data, 'valorRecibo');
           this.facturas =  Acumulador( this.data, 'valorFacturaa');
-          console.log(this.data)
                 }
       }
     )
   }
 
   checkOnClick( tipo : boolean )  {
-    console.log(tipo)
   }
 }

@@ -27,11 +27,15 @@ export class AudoritasDetalleComponent implements OnInit {
   @Input()dataS ?: any[];
   @Input()dataA ?: any[];
   @Input()dataAR ?: any[];
+  @Input()dataAS ?: any[];
+  @Input()dataFR ?: any[];
   @Input()Tipo   ?: string;
 
-  public dataMapedaS : dataMapeadaExcel[]=[];
-  public dataMapedaA : dataMapeadaExcel[]=[];
+  public dataMapedaS  : dataMapeadaExcel[] =[];
+  public dataMapedaA  : dataMapeadaExcel[] =[];
   public dataMapedaAR : dataMapeadaExcel[]=[];
+  public dataMapedaAS : dataMapeadaExcel[]=[];
+  public dataMapedaFR : dataMapeadaExcel[]=[];
 
 
   constructor(
@@ -76,7 +80,7 @@ export class AudoritasDetalleComponent implements OnInit {
   cargarDataMapeada() {
 
     /* MAPEAR SAUCE */
-    for(let i = 0; i < this.dataS.length; i++){
+    for(let i = 0; i < this.dataS?.length; i++){
       this.dataMapedaS.push({
         'Tipo Extintor'  : this.dataS[i]?.['tipo_extintor'],
         'Clase Agente'   : this.dataS[i]?.['tipo_agente'],
@@ -99,13 +103,13 @@ export class AudoritasDetalleComponent implements OnInit {
       })
     }
     /* MAPEAR ALMAHSA */
-    for(let i = 0; i < this.dataA.length; i++){
+    for(let i = 0; i < this.dataA?.length; i++){
       this.dataMapedaA.push({
         'Tipo Extintor'  : this.dataA[i]?.['tipo_extintor'],
         'Clase Agente'   : this.dataA[i]?.['tipo_agente'],
         Capacidad        : this.dataA[i]?.['Capacidad'],
-        'Fecha Anterior' : new Date(this.dataS[i]?.['Fecha_Anterior_Carga']),
-        'Fecha Proxima'  : new Date(this.dataS[i]?.['Fecha_Proxima_Carga']),
+        'Fecha Anterior' : new Date(this.dataA[i]?.['Fecha_Anterior_Carga']),
+        'Fecha Proxima'  : new Date(this.dataA[i]?.['Fecha_Proxima_Carga']),
         Ubicacion    : this.dataA[i]?.['ubicacion'],
         Estado       : this.cargarValor(this.dataA[i]?.['Estado']),
         Presion      : this.cargarValor(this.dataA[i]?.['Presion']),
@@ -123,13 +127,13 @@ export class AudoritasDetalleComponent implements OnInit {
       })
     }
      /* MAPEAR ARCHIVO */
-    for(let i = 0; i < this.dataAR.length; i++){
+    for(let i = 0; i < this.dataAR?.length; i++){
       this.dataMapedaAR.push({
         'Tipo Extintor'  : this.dataAR[i]?.['tipo_extintor'],
         'Clase Agente'   : this.dataAR[i]?.['tipo_agente'],
         Capacidad        : this.dataAR[i]?.['Capacidad'],
-        'Fecha Anterior' : new Date(this.dataS[i]?.['Fecha_Anterior_Carga']),
-        'Fecha Proxima'  : new Date(this.dataS[i]?.['Fecha_Proxima_Carga']),
+        'Fecha Anterior' : new Date(this.dataAR[i]?.['Fecha_Anterior_Carga']),
+        'Fecha Proxima'  : new Date(this.dataAR[i]?.['Fecha_Proxima_Carga']),
         Ubicacion    : this.dataAR[i]?.['ubicacion'],
         Estado       : this.cargarValor(this.dataAR[i]?.['Estado']),
         Presion      : this.cargarValor(this.dataAR[i]?.['Presion']),
@@ -146,8 +150,56 @@ export class AudoritasDetalleComponent implements OnInit {
      
       })
     }
-    // console.log(this.dataMapedaS, this.dataMapedaA, this.dataMapedaAR)
-    this.excelService.exportToExcel(this.dataMapedaS, this.dataMapedaA ,this.dataMapedaAR ,  this.Tipo);
+      /* MAPEAR ARCHIVO SPS*/
+    for(let i = 0; i < this.dataAS?.length; i++){
+          this.dataMapedaAS.push({
+            'Tipo Extintor'  : this.dataAS[i]?.['tipo_extintor'],
+            'Clase Agente'   : this.dataAS[i]?.['tipo_agente'],
+            Capacidad        : this.dataAS[i]?.['Capacidad'],
+            'Fecha Anterior' : new Date(this.dataS[i]?.['Fecha_Anterior_Carga']),
+            'Fecha Proxima'  : new Date(this.dataS[i]?.['Fecha_Proxima_Carga']),
+            Ubicacion    : this.dataAS[i]?.['ubicacion'],
+            Estado       : this.cargarValor(this.dataAS[i]?.['Estado']),
+            Presion      : this.cargarValor(this.dataAS[i]?.['Presion']),
+            Sello        : this.cargarValor(this.dataAS[i]?.['Sello']),
+            Manometro    : this.cargarValor(this.dataAS[i]?.['Manometro']),
+            Soporte      : this.cargarValor(this.dataAS[i]?.['Soporte']),
+            Manguera     : this.cargarValor(this.dataAS[i]?.['Manguera']),
+            Pintura      : this.cargarValor(this.dataAS[i]?.['Pintura']),
+            Señalizacion : this.cargarValor(this.dataAS[i]?.['Senalizacion']),
+            Altura       : this.cargarValor(this.dataAS[i]?.['Altura']),
+            Acceso       : this.cargarValor(this.dataAS[i]?.['Acceso']),
+            Usuario      : this.dataAS[i]?.['usuario'],
+            Fecha        : new Date(this.dataAS[i]?.['Fecha'])
+         
+          })
+        }
+     /* MAPEAR ARCHIVO SPS*/
+    for(let i = 0; i < this.dataFR?.length; i++){
+        this.dataMapedaFR.push({
+          'Tipo Extintor'  : this.dataFR[i]?.['tipo_extintor'],
+          'Clase Agente'   : this.dataFR[i]?.['tipo_agente'],
+          Capacidad        : this.dataFR[i]?.['Capacidad'],
+          'Fecha Anterior' : new Date(this.dataFR[i]?.['Fecha_Anterior_Carga']),
+          'Fecha Proxima'  : new Date(this.dataFR[i]?.['Fecha_Proxima_Carga']),
+          Ubicacion    : this.dataFR[i]?.['ubicacion'],
+          Estado       : this.cargarValor(this.dataFR[i]?.['Estado']),
+          Presion      : this.cargarValor(this.dataFR[i]?.['Presion']),
+          Sello        : this.cargarValor(this.dataFR[i]?.['Sello']),
+          Manometro    : this.cargarValor(this.dataFR[i]?.['Manometro']),
+          Soporte      : this.cargarValor(this.dataFR[i]?.['Soporte']),
+          Manguera     : this.cargarValor(this.dataFR[i]?.['Manguera']),
+          Pintura      : this.cargarValor(this.dataFR[i]?.['Pintura']),
+          Señalizacion : this.cargarValor(this.dataFR[i]?.['Senalizacion']),
+          Altura       : this.cargarValor(this.dataFR[i]?.['Altura']),
+          Acceso       : this.cargarValor(this.dataFR[i]?.['Acceso']),
+          Usuario      : this.dataFR[i]?.['usuario'],
+          Fecha        : new Date(this.dataFR[i]?.['Fecha'])
+       
+        })
+      }
+    //console.log(this.dataMapedaAS , this.dataMapedaFR)
+    this.excelService.exportToExcel(this.dataMapedaS, this.dataMapedaA ,this.dataMapedaAR , this.dataMapedaAS , this.dataMapedaFR , this.Tipo);
   }
 
 

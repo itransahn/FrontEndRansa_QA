@@ -20,6 +20,7 @@ export class ExtintoresComponent implements OnInit {
   opcionesModules : any;
   extintor : any;
   idExtintor : any;
+  estado : any;
   extintores : extintor[] = []
   dataExtintor : any;
   data = [
@@ -130,6 +131,7 @@ export class ExtintoresComponent implements OnInit {
     this.extintor = data.Nomenclatura;
     this.idExtintor = data?.id_Extintor;
     this.dataExtintor = data;
+    this.estado       = data?.estado;
     // this.dataModulo = dataModulo;
     this.opcionesModules = [
       {
@@ -137,22 +139,33 @@ export class ExtintoresComponent implements OnInit {
         titulo    : `Modificar Extintor ${this.extintor}`,
         subtitulo : 'Cambios a Extintor',
         url       : `ransa/administracion/usuarios`,
-        accion    : 1
+        accion    : 1,
+        estado    : data?.estado
       },
       {
         icono   : 'note_add',
         titulo  : 'Auditoria',
         subtitulo : 'Auditoria del extintor',
         url       :  `ransa/administracion/usuarios/${data?.id}`,
-        accion    : 2
+        accion    : 2,
+        estado    : data?.estado
       },
       {
         icono   : 'announcement',
         titulo  : 'Incidencia',
         subtitulo : 'Incidencia sobre Extintor',
         url       : `ransa/administracion/usuarios/${data?.id}`,
-        accion    : 3
+        accion    : 3,
+        estado    : data?.estado
 
+      },
+      {
+        icono   : 'announcement',
+        titulo  : 'Corregir Auditoria',
+        subtitulo : 'Correción de incidencias',
+        url       :'',
+        accion    : 4,
+        estado    : data?.estado
       },
     ]
     this._bottomSheet.open(template);
@@ -178,20 +191,25 @@ export class ExtintoresComponent implements OnInit {
     if ( accion == 1){
       this.Modal(1,this.dataExtintor,3)
     }
-
     if ( accion == 2 ){
       this.ssomas.validarExtintor(this.idExtintor).subscribe(
         (res:any)=>{
     if ( res?.data.Table0[0]['codigo'] == -1 ){ this.toast.mensajeWarning(String(res?.data.Table0[0]['Mensaje']), mensajes.warning)
   }else{ this.Auditoria(this.dataExtintor,1)}
-  } )
-      
+  } ) 
    }
     if ( accion == 3){
       this.Auditoria(this.dataExtintor,2)
     }
-    
+    if ( accion == 4){
 
+        if(this.estado == 0){
+          this.Auditoria(this.dataExtintor,4)
+        }else{
+this.toast.mensajeInfo("Actualmente no tiene auditorias a corregir","Corrección de auditoria")
+        }
+      
+    }
       this._bottomSheet.dismiss();
   }
 

@@ -279,6 +279,10 @@ interface catalogo{
             ID      ?: number,
             usuario ?: string,
             area    ?: number
+        }[],
+        SedesExtintor : {
+            id_sedeRansa ?: number,
+            sedeRansa    ?: string
         }[]
 
 }

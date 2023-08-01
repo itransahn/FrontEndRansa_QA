@@ -18,6 +18,8 @@ export class IncidenciasGeneradasComponent implements OnInit {
   public data1 : any[]=[];
   public data2 : any[]=[];
   public data3 : any[]=[];
+  public data4 : any[]=[];
+  public data5 : any[]=[];
   public flat  : boolean = false;
   public filtro: FormGroup;
   public parametrosBusqueda = ['Nomenclatura'];
@@ -79,7 +81,9 @@ export class IncidenciasGeneradasComponent implements OnInit {
           this.data1 = data?.data?.Table0;
           this.data2 = data?.data?.Table1;
           this.data3 = data?.data?.Table2;
-          this.bandera = true
+          this.data4 = data?.data?.Table3;
+          this.data5 = data?.data?.Table4;
+          this.bandera = true;
         }
       }
     )

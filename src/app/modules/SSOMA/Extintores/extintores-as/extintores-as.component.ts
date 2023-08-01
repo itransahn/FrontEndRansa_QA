@@ -1,28 +1,27 @@
 import { Component, OnInit } from '@angular/core';
-import { MatBottomSheet } from '@angular/material/bottom-sheet';
-import { extintor } from 'src/app/interfaces/ssmoa';
-import { AuthService } from 'src/app/services/auth.service';
-import { SsmoaService } from '../../ssmoa.service';
-import { MatDialog } from '@angular/material/dialog';
-import { DataApi } from 'src/app/interfaces/dataApi';
-import { CrearExtintorComponent } from '../crear-extintor/crear-extintor.component';
-import { ToastServiceLocal } from 'src/app/services/toast.service';
 import { AuditoriaComponent } from '../auditoria/auditoria.component';
 import { mensajes } from 'src/app/interfaces/generales';
+import { CrearExtintorComponent } from '../crear-extintor/crear-extintor.component';
+import { DataApi } from 'src/app/interfaces/dataApi';
+import { ToastServiceLocal } from 'src/app/services/toast.service';
+import { MatDialog } from '@angular/material/dialog';
+import { SsmoaService } from '../../ssmoa.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { extintor } from 'src/app/interfaces/ssmoa';
 
 @Component({
-  selector: 'app-extintores-al',
-  templateUrl: './extintores-al.component.html',
-  styleUrls: ['./extintores-al.component.scss']
+  selector: 'app-extintores-as',
+  templateUrl: './extintores-as.component.html',
+  styleUrls: ['./extintores-as.component.scss']
 })
-export class ExtintoresALComponent implements OnInit {
-
+export class ExtintoresAsComponent implements OnInit {
   opcionesModules : any;
   extintor : any;
-  extintores : extintor[] = []
   idExtintor : any;
+  extintores : extintor[] = []
   dataExtintor : any;
-  
+
   constructor(
     private _bottomSheet : MatBottomSheet,
     public auth : AuthService,
@@ -42,7 +41,7 @@ export class ExtintoresALComponent implements OnInit {
 
   cargarExtintores(){
     let params = {
-      sede : 2
+      sede : 14
     }
     this.ssomas.get('/ssmoa/extintor', params).subscribe(
       (res:DataApi)=>{
@@ -50,6 +49,7 @@ export class ExtintoresALComponent implements OnInit {
       }
     )
   }
+
   menu(template, data) {
     this.extintor = data.Nomenclatura;
     this.idExtintor = data?.id_Extintor;
@@ -81,9 +81,25 @@ export class ExtintoresALComponent implements OnInit {
     ]
     this._bottomSheet.open(template);
   }
-  Accion( accion ?: number, data?:any ){
+
+
+Modal ( sede : number, data ?: any, bandera ?: any){
+    const dialogReg = this.dialog.open( CrearExtintorComponent,{
+      width :   'auto',
+      height:   'auto',
+      maxWidth: '75%',
+      data: { 
+        sede : sede,
+        data : data  ,
+        bandera : bandera 
+      },
+      disableClose : true
+    })
+  }
+
+Accion( accion ?: number, data?:any ){
     if ( accion == 1){
-      // this.CrearMenu()
+      this.Modal(15,this.dataExtintor,3)
     }
 
     if ( accion == 2 ){
@@ -101,7 +117,8 @@ export class ExtintoresALComponent implements OnInit {
 
       this._bottomSheet.dismiss();
   }
-  Auditoria(  data ?: any, bandera ?:any ){
+
+Auditoria(  data ?: any, bandera ?:any ){
     const dialogReg = this.dialog.open( AuditoriaComponent,{
       width :   'auto',
       height:   'auto',
@@ -114,18 +131,6 @@ export class ExtintoresALComponent implements OnInit {
       disableClose : true
     })
   }
-  Modal ( sede : number, data ?: any, bandera ?: any){
-    const dialogReg = this.dialog.open( CrearExtintorComponent,{
-      width :   'auto',
-      height:   'auto',
-      maxWidth: '75%',
-      data: { 
-        sede : sede,
-        data : data  ,
-        bandera : bandera 
-      },
-      disableClose : true
-    })
-  }
+
 
 }

@@ -23,6 +23,8 @@ import { AuditoriasRealizadasComponent } from './Extintores/auditorias-realizada
 import { AngularMaterialModule } from '../angular-material/angular-material.module';
 import { AudoritasDetalleComponent } from './Extintores/Auditorias_realizadas/audoritas-detalle/audoritas-detalle.component';
 import { IncidenciasGeneradasComponent } from './Extintores/incidencias-generadas/incidencias-generadas.component';
+import { ExtintoresFrComponent } from './Extintores/extintores-fr/extintores-fr.component';
+import { ExtintoresAsComponent } from './Extintores/extintores-as/extintores-as.component';
 @NgModule({
   declarations: [
     SalidaPortonComponent,
@@ -43,7 +45,9 @@ import { IncidenciasGeneradasComponent } from './Extintores/incidencias-generada
     AuditoriasComponent,
     AuditoriasRealizadasComponent,
     AudoritasDetalleComponent,
-    IncidenciasGeneradasComponent
+    IncidenciasGeneradasComponent,
+    ExtintoresFrComponent,
+    ExtintoresAsComponent
   ],
   imports: [
     CommonModule,

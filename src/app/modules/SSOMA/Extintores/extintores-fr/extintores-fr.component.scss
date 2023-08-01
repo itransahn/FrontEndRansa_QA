@@ -1,23 +1,23 @@
 @import "../../../../shared/variables.scss";
 
 img{
-width:  100px !important ;
-height: 100px !important;
-justify-content: center !important;
-align-items: center !important;
-}
-
-mat-card{
-    color: $verde-primario;
-    margin-left: 1% !important;
-    margin-top:  1% !important;
-    float: left;
-    // margin-left:   5% !important; 
-    border-radius: 20px !important;
-    width : 140px !important;
-    height: 270px !important;
-
-}
+  width:  100px !important ;
+  height: 100px !important;
+  justify-content: center !important;
+  align-items: center !important;
+  }
+  
+  mat-card{
+      color: $verde-primario;
+      margin-left: 1% !important;
+      margin-top:  1% !important;
+      float: left;
+      // margin-left:   5% !important; 
+      border-radius: 20px !important;
+      width : 140px !important;
+      height: 270px !important;
+  
+  }
 mat-card:hover{
     cursor: pointer !important;
     transform: scale(0.9);
@@ -28,10 +28,7 @@ mat-card:hover{
 // }
 
 
-p{
-  width: 100% !important;
-  float: left;
-}
+
 /* ***************************************************************************************** */
 .example-action-buttons {
     padding-bottom: 20px;
@@ -140,15 +137,6 @@ mat-icon{
   }
 }
 
-// .buttonPrincipal:hover {
-//   background-color: #ffffff !important;
-//   color: #006F1D !important;
-//   box-shadow: 5px 10px #888888;
-//   mat-icon{
-//     color: #006F1D !important;
-//     background-color: #ffffff !important;
-//   }
-// }
 /* Cambios al BottoPrincipal para que herede lo de style.scss*/
 
 mat-icon.disable {
