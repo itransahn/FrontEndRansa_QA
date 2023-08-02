@@ -127,6 +127,23 @@ export class ExtintoresComponent implements OnInit {
     )
   }
 
+
+
+
+  Modal ( sede : number, data ?: any, bandera ?: any){
+    const dialogReg = this.dialog.open( CrearExtintorComponent,{
+      width :   'auto',
+      height:   'auto',
+      maxWidth: '75%',
+      data: { 
+        sede : sede,
+        data : data  ,
+        bandera : bandera 
+      },
+      disableClose : true
+    })
+  }
+
   menu(template, data) {
     this.extintor = data.Nomenclatura;
     this.idExtintor = data?.id_Extintor;
@@ -160,9 +177,9 @@ export class ExtintoresComponent implements OnInit {
 
       },
       {
-        icono   : 'announcement',
-        titulo  : 'Corregir Auditoria',
-        subtitulo : 'Correción de incidencias',
+        icono   : 'autorenew',
+        titulo  : 'Corrección',
+        subtitulo : 'Correción de hallazgos',
         url       :'',
         accion    : 4,
         estado    : data?.estado
@@ -170,23 +187,6 @@ export class ExtintoresComponent implements OnInit {
     ]
     this._bottomSheet.open(template);
   }
-
-
-  Modal ( sede : number, data ?: any, bandera ?: any){
-    const dialogReg = this.dialog.open( CrearExtintorComponent,{
-      width :   'auto',
-      height:   'auto',
-      maxWidth: '75%',
-      data: { 
-        sede : sede,
-        data : data  ,
-        bandera : bandera 
-      },
-      disableClose : true
-    })
-  }
-
-
   Accion( accion ?: number, data?:any ){
     if ( accion == 1){
       this.Modal(1,this.dataExtintor,3)
@@ -206,16 +206,13 @@ export class ExtintoresComponent implements OnInit {
         if(this.estado == 0){
           this.Auditoria(this.dataExtintor,4)
         }else{
-this.toast.mensajeInfo("Actualmente no tiene auditorias a corregir","Corrección de auditoria")
+this.toast.mensajeInfo("Actualmente no tiene items a corregir","Corrección a Extintor")
         }
       
     }
       this._bottomSheet.dismiss();
   }
-
-
-
-  
+ 
 Auditoria(  data ?: any, bandera ?:any ){
     const dialogReg = this.dialog.open( AuditoriaComponent,{
       width :   'auto',
