@@ -99,7 +99,8 @@ export class AudoritasDetalleComponent implements OnInit {
         Altura       : this.cargarValor(this.dataS[i]?.['Altura']),
         Acceso       : this.cargarValor(this.dataS[i]?.['Acceso']),
         Usuario      : this.dataS[i]?.['usuario'],
-        Fecha        : new Date(this.dataS[i]?.['Fecha'])
+        Fecha        : new Date(this.dataS[i]?.['Fecha']),
+        observaciones : this.dataS[i]?.['observaciones']
       })
     }
     /* MAPEAR ALMAHSA */
@@ -122,7 +123,8 @@ export class AudoritasDetalleComponent implements OnInit {
         Altura       : this.cargarValor(this.dataA[i]?.['Altura']),
         Acceso       : this.cargarValor(this.dataA[i]?.['Acceso']),
         Usuario      : this.dataA[i]?.['usuario'],
-        Fecha        : new Date(this.dataA[i]?.['Fecha'])
+        Fecha        : new Date(this.dataA[i]?.['Fecha']),
+        observaciones : this.dataS[i]?.['observaciones']
      
       })
     }
@@ -146,8 +148,8 @@ export class AudoritasDetalleComponent implements OnInit {
         Altura       : this.cargarValor(this.dataAR[i]?.['Altura']),
         Acceso       : this.cargarValor(this.dataAR[i]?.['Acceso']),
         Usuario      : this.dataAR[i]?.['usuario'],
-        Fecha        : new Date(this.dataAR[i]?.['Fecha'])
-     
+        Fecha        : new Date(this.dataAR[i]?.['Fecha']),
+        observaciones : this.dataS[i]?.['observaciones']     
       })
     }
       /* MAPEAR ARCHIVO SPS*/
@@ -170,7 +172,8 @@ export class AudoritasDetalleComponent implements OnInit {
             Altura       : this.cargarValor(this.dataAS[i]?.['Altura']),
             Acceso       : this.cargarValor(this.dataAS[i]?.['Acceso']),
             Usuario      : this.dataAS[i]?.['usuario'],
-            Fecha        : new Date(this.dataAS[i]?.['Fecha'])
+            Fecha        : new Date(this.dataAS[i]?.['Fecha']),
+            observaciones : this.dataS[i]?.['observaciones']
          
           })
         }
@@ -194,8 +197,8 @@ export class AudoritasDetalleComponent implements OnInit {
           Altura       : this.cargarValor(this.dataFR[i]?.['Altura']),
           Acceso       : this.cargarValor(this.dataFR[i]?.['Acceso']),
           Usuario      : this.dataFR[i]?.['usuario'],
-          Fecha        : new Date(this.dataFR[i]?.['Fecha'])
-       
+          Fecha        : new Date(this.dataFR[i]?.['Fecha']),
+          observaciones : this.dataS[i]?.['observaciones']       
         })
       }
     //console.log(this.dataMapedaAS , this.dataMapedaFR)
@@ -230,5 +233,5 @@ interface dataMapeadaExcel{
   Acceso       : string,
   Usuario      : string,
   Fecha        : Date
-
+  observaciones : string
  }[]
