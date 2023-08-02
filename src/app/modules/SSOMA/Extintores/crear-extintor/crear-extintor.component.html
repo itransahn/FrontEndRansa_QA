@@ -57,16 +57,17 @@
                 <div class="col-md-6">
                     <mat-form-field appearance="fill">
                         <mat-label>Fecha anterior Carga </mat-label>
-                        <input name="date" formControlName = "fechaAnteriorCarga" matInput [matDatepicker]="pickerN">
+                        <input name="date"  formControlName = "fechaAnteriorCarga" matInput [matDatepicker]="pickerN" [max]="maxDate" (dateChange)="agregar_dias()"  >
                         <mat-datepicker-toggle matSuffix [for]="pickerN"></mat-datepicker-toggle>
                         <mat-datepicker #pickerN></mat-datepicker>
                       </mat-form-field>
+
              </div>
 
              <div class="col-md-6">
                 <mat-form-field appearance="fill">
                     <mat-label>Fecha proxima Carga </mat-label>
-                    <input name="date2" formControlName = "fechaProximaCarga" matInput [matDatepicker]="pickerN2">
+                    <input name="date2" formControlName = "fechaProximaCarga" matInput [matDatepicker]="pickerN2" [min]="maxDate">
                     <mat-datepicker-toggle matSuffix [for]="pickerN2"></mat-datepicker-toggle>
                     <mat-datepicker #pickerN2></mat-datepicker>
                   </mat-form-field>

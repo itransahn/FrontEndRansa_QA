@@ -77,8 +77,8 @@ observaciones : ''
   formPermiso(){
     this.Form = new FormGroup({
       // idRol      : new FormControl( { value : '' ,disabled : this.lectura} ,[Validators.required,]),
-      presion   : new FormControl( '',      [Validators.required]),
-      sello     : new FormControl( '',      [Validators.required]),
+      presion   : new FormControl( '',    [Validators.required]),
+      sello     : new FormControl( '',    [Validators.required]),
       manometro : new FormControl( '',    [Validators.required]),
       soporte   : new FormControl( '',    [Validators.required]),
       manguera  : new FormControl( '',    [Validators.required]),
@@ -90,6 +90,8 @@ observaciones : ''
       observaciones : new FormControl( '',[])
     })
   }
+
+
 
   close(){
     this.dialogRef.close()

@@ -14,6 +14,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { mensajes } from 'src/app/interfaces/generales';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
+
 const moment = _rollupMoment || _moment;
 
 
@@ -47,6 +48,8 @@ export class CrearExtintorComponent implements OnInit {
   public  botton    : boolean = false;
   public  titulo    : string;
   public  subtitulo : string;
+  maxDate = new Date();
+  public fecha : string ;
 
 constructor(
     public ssoma : SsmoaService,
@@ -94,6 +97,12 @@ validacion(){
 
 
   }
+
+agregar_dias(){
+  this.Form.patchValue({
+    fechaProximaCarga :  moment(this?.Form.value?.fechaAnteriorCarga).add(1,'years')
+  })
+}
 
 close(){
     this.dialogRef.close()
