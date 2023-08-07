@@ -1,20 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 import { DataApi } from 'src/app/interfaces/dataApi';
 import { mensajes } from 'src/app/interfaces/generales';
 import { AuthService } from 'src/app/services/auth.service';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import { ToastServiceLocal } from 'src/app/services/toast.service';
 import { RrhhService } from '../rrhh.service';
+import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 
 @Component({
-  selector: 'app-registro-dolar',
-  templateUrl: './registro-dolar.component.html',
-  styleUrls: ['./registro-dolar.component.scss']
+  selector: 'app-registro-dolar-sps',
+  templateUrl: './registro-dolar-sps.component.html',
+  styleUrls: ['./registro-dolar-sps.component.scss']
 })
-export class RegistroDolarComponent implements OnInit {
+export class RegistroDolarSpsComponent implements OnInit {
+
   public dolarForm : FormGroup;
   public flat  : boolean = false;
   public filtro: FormGroup;
@@ -107,7 +108,7 @@ export class RegistroDolarComponent implements OnInit {
   }
 
   cargarCanjeos(){
-    let url = 'rrhh/canjeoDolar';
+    let url = 'rrhh/canjeoDolarSps';
     let params = { }
     this.rrhhS.get( url, params ).subscribe(
       (data : DataApi | any) =>{
@@ -148,4 +149,5 @@ export class RegistroDolarComponent implements OnInit {
         } 
       })
   }
+
 }

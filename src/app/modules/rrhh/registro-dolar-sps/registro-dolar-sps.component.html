@@ -1,0 +1,75 @@
+<mat-card class="mat-cardContainerCuerpo">
+    <div class="row">
+      
+         <form [formGroup]="dolarForm" #f="ngForm" style="margin-top: 2%;">
+          
+          <div class="row">
+            <div class="container">
+                <h3> Registro de Dolar </h3>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field  appearance="legacy">
+                    <mat-label>Cod. Empleado</mat-label>
+                    <input matInput #texto maxlength="100" placeholder="Cod. Empleado" (window:keypress) ="onKeypressEvent($event)" formControlName ="codigoEmpleado">
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-6" *ngIf="dolarForm.value.codigoEmpleado.length > 8">
+                <mat-form-field appearance="legacy">
+                    <mat-label>Nombre Empleado</mat-label>
+                    <input readonly="true" matInput #texto maxlength="100" placeholder="Nombre Empleado" formControlName ="nombreEmpleado">
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-12 container" *ngIf="dolarForm.valid">
+                <button mat-raised-button class="fs" type="submit" [disabled]="!auth.Insercion()"  (click)="ingresarDolar()">
+                    <i class="fas fa-comment-dollar icon"></i>
+                    <!-- <span style="margin-left: 10px;">Insertar Nivel</span> --> Canjear Dolar
+                </button>
+            </div>
+          </div>
+  
+     </form>
+ 
+    </div>
+</mat-card>
+
+<mat-card class="mat-cardContainerCuerpo mt-4">
+    <div class="container">
+        <h3> Dolares Canjeados {{ fecha | date:'shortDate' }} </h3>
+    </div>
+ <form [formGroup]="filtro">
+    <mat-form-field appearance="legacy">
+        <mat-label>
+            <mat-icon> search </mat-icon>
+            Buscar
+        </mat-label>
+        <input matInput placeholder="Cod. Empleado, Nombre, Departamento....." formControlName="filtrar">
+    </mat-form-field> 
+ </form>
+ <div class="table-responsive !important">
+    <table  >
+        <!-- <caption>Statement Summary</caption> -->
+        <thead>
+          <tr> 
+            <th scope="col">HORA         </th>
+            <th scope="col">Cod. Empleado      </th>
+            <th scope="col">Colaborador  </th>
+            <th scope="col">Departamento </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let canjeo of canjeos  | search: this.filtro.value.filtrar:parametrosBusqueda | slice: desde: hasta " class="trHover">
+            <td data-label="HORA">       {{   canjeo?.HORA          }}</td>
+            <td data-label="Cod. Empleado">    {{   canjeo?.USUARIO       }}</td>
+            <td data-label="Colaborador">{{   canjeo?.Nombre        }}</td>
+            <td data-label="Departamento">{{  canjeo?.Departamento  }}</td>
+
+          </tr>
+        </tbody>
+      </table>
+      
+   </div>
+      <mat-paginator [length]="canjeos.length" [pageSize]="pageSize " (page)="next($event)">
+    </mat-paginator>
+</mat-card>

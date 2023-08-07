@@ -120,6 +120,7 @@ export class PermisosDolarComponent implements OnInit {
         usuarioRansa : dataRol?.USUARIO,
         colaborador  : dataRol?.NOMBRE,
         cco          : dataRol?.id_cco,
+        sede         : dataRol?.sede
       },
       disableClose : true
     })

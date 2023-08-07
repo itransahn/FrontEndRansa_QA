@@ -27,6 +27,7 @@ import { FinanzasModule } from './modules/finanzas/finanzas.module';
 import { TransporteModule } from './modules/transporte/transporte.module';
 import { ssomaModule } from './modules/SSOMA/ssoma.module';
 import { SharedModule } from './modules/shared/shared.module';
+import { RegistroDolarSpsComponent } from './modules/rrhh/registro-dolar-sps/registro-dolar-sps.component';
 // import { Loading2Component } from './shared/loading2/loading2.component';
 
 @NgModule({
@@ -37,6 +38,7 @@ import { SharedModule } from './modules/shared/shared.module';
     NoPageFoundComponent,
     FullComponentComponent,
     CambioContraComponent,
+    RegistroDolarSpsComponent,
 
   ],
   imports: [

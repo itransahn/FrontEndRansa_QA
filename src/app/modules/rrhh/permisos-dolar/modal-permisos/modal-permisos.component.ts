@@ -31,7 +31,9 @@ export class ModalPermisosComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.catalogo = this.auth.returnCatalogo()
+    this.catalogo = this.auth.returnCatalogo();
+    console.log(this.catalogo)
+    console.log(this.data)
     this.validacion();
   }
 
@@ -73,7 +75,8 @@ export class ModalPermisosComponent implements OnInit {
       this.permisosForm = new FormGroup({
         usuarioRansa    : new FormControl({ value: '', disabled : this.enable }, [Validators.required, Validators.pattern( this.pattern )] ),
         Colaborador     : new FormControl({ value: '', disabled : this.enable }, [Validators.required] ),
-        Cco             : new FormControl({ value: '', disabled : this.enable }, [Validators.required] )
+        Cco             : new FormControl({ value: '', disabled : this.enable }, [Validators.required] ),
+        sede             : new FormControl({ value: '', disabled : this.enable }, [Validators.required] )
       })
 
   }
@@ -82,7 +85,9 @@ export class ModalPermisosComponent implements OnInit {
     this.permisosForm = new FormGroup({
       usuarioRansa    : new FormControl({ value: '', disabled : this.enable }, [Validators.required] ),
       Colaborador     : new FormControl({ value: '', disabled : this.enable }, [] ),
-      Cco             : new FormControl({ value: '', disabled : this.enable }, [] )
+      Cco             : new FormControl({ value: '', disabled : this.enable }, [] ),
+      sede             : new FormControl({ value: '', disabled : this.enable }, [] )
+
     })
 }
 
@@ -90,7 +95,9 @@ cargarFormPut(){
   this.permisosForm = new FormGroup({
     usuarioRansa    : new FormControl( { value: '', disabled : this.enable }, [Validators.required] ),
     Colaborador     : new FormControl( { value: '', disabled : this.enable }, [Validators.required] ),
-    Cco             : new FormControl( { value: '', disabled : this.enable }, [Validators.required] )
+    Cco             : new FormControl( { value: '', disabled : this.enable }, [Validators.required] ),
+    sede             : new FormControl( { value: '', disabled : this.enable }, [Validators.required] ),
+
   })
 }
 
@@ -99,6 +106,7 @@ SetForm(){
     usuarioRansa     : this.data['usuarioRansa'],
     Colaborador      : this.data['colaborador'],
     Cco              : this.data['cco'],
+    sede              : this.data['sede'],
   })
 }
 
@@ -109,6 +117,8 @@ SetForm(){
       usuario  : this.permisosForm.value.usuarioRansa,
       nombre   : this.permisosForm.value.Colaborador,
       cco      : this.permisosForm.value.Cco,
+      sede      : this.permisosForm.value.sede,
+
     } 
     this.rrhhS.post(url,params).subscribe(
       res=>{
@@ -133,6 +143,7 @@ actualizarPermiso(){
     usuario   : this.permisosForm.value.usuarioRansa,
     nombre    : this.permisosForm.value.Colaborador,
     cco       : this.permisosForm.value.Cco,
+    sede      : this.permisosForm.value.sede,
   } 
   this.rrhhS.post( url,params ).subscribe(
     res=>{

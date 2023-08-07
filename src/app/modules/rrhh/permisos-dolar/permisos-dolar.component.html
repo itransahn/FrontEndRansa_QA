@@ -33,6 +33,7 @@
             <th scope="col">Cod. Empleado  </th>
             <th scope="col">Colaborador    </th>
             <th scope="col">CCO            </th>
+            <th scope="col">Sede            </th>
             <th scope="col">Estado         </th>
             <th scope="col">Acciones       </th>
           </tr>
@@ -42,6 +43,7 @@
             <td data-label="Cod. Empleado"> {{  permiso?.USUARIO      }}</td>
             <td data-label="Colaborador">   {{  permiso?.NOMBRE       }}</td>
             <td data-label="CCO">           {{  permiso?.Departamento }}</td>
+            <td data-label="Sede">          {{  permiso?.SedeRansa }}</td>
             <td data-label="Estado">
                 <span *ngIf="permiso?.idEstado == 1">
                     <mat-icon class="success">check_box</mat-icon>

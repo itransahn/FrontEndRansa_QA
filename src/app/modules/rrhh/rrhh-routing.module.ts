@@ -13,6 +13,8 @@ import { ControlDolarCCOComponent } from './reportes/control-dolar-cco/control-d
 import { ControlDolarDetalladoComponent } from './reportes/control-dolar-detallado/control-dolar-detallado.component';
 import { ControlDolarEmpleadoComponent } from './reportes/control-dolar-empleado/control-dolar-empleado.component';
 import { EmpleadoAcumuladoComponent } from './reportes/empleado-acumulado/empleado-acumulado.component';
+import { RegistroDolarSpsComponent } from './registro-dolar-sps/registro-dolar-sps.component';
+import { CreditoSpsComponent } from './credito-sps/credito-sps.component';
 
 
 const routes: Routes = [
@@ -20,6 +22,10 @@ const routes: Routes = [
         path      : 'dolar',
         component : RegistroDolarComponent
     },
+    {
+      path      : 'dolarSps',
+      component : RegistroDolarSpsComponent
+   },
     {
       path        : 'permisos',
       component   : PermisosDolarComponent
@@ -53,6 +59,10 @@ const routes: Routes = [
     {
       path        : 'credito',
       component   : CreditoComponent
+    },
+    {
+      path        : 'creditoSps',
+      component   : CreditoSpsComponent
     },
     {
       path        : 'creditos',

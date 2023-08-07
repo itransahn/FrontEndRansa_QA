@@ -24,6 +24,7 @@ import { AcumuladoEmpComponent } from './credito/Reportes/acumulado-emp/acumulad
 import { AcumuladoEmpEspComponent } from './credito/Reportes/acumulado-emp-esp/acumulado-emp-esp.component';
 
 import { EmpleadoAcumuladoComponent } from './reportes/empleado-acumulado/empleado-acumulado.component';
+import { CreditoSpsComponent } from './credito-sps/credito-sps.component';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -46,7 +47,8 @@ const maskConfig: Partial<IConfig> = {
     AcumuladoComponent,
     AcumuladoEmpComponent,
     AcumuladoEmpEspComponent,
-    EmpleadoAcumuladoComponent
+    EmpleadoAcumuladoComponent,
+    CreditoSpsComponent
   ],
   imports: [
     CommonModule,
