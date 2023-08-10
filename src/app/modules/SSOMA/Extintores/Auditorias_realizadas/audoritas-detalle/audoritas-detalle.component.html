@@ -14,6 +14,7 @@
             <th scope="col">Señalización</th>
             <th scope="col">Altura</th>
             <th scope="col">Acceso</th>
+            <th scope="col" *ngIf="Tipo == 'Incidencia' || Tipo == 'Auditoria' ">Accción</th>
 
           </tr>
         </thead>
@@ -119,7 +120,17 @@
                     <mat-icon class="error">indeterminate_check_box</mat-icon>
                 </span>    
             </td>
-         
+            <td data-label="Acciones" *ngIf="Tipo == 'Incidencia' || Tipo == 'Auditoria'">
+                <div class="text-center">
+
+               <!-- Ver -->
+               <button mat-mini-fab class="buttonSecundary"   #tooltip="matTooltip" matTooltip="Cargar Imagenes" (click)="CargarArchivo(item)" matTooltipPosition="left">
+                   <mat-icon>image</mat-icon>
+               </button>
+                      
+                </div>
+
+                </td>
          
     
           </tr>

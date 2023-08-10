@@ -1,0 +1,80 @@
+<mat-card class="mat-cardContainerCuerpo mt-4">
+    <form [formGroup]="filtro" #f="ngForm">
+        <div class="row">
+            <div class="col-md-4">
+                <mat-form-field appearance="legacy">
+                    <mat-label> Tipo </mat-label>
+                    <mat-select  formControlName="Tipo"  > 
+                        <mat-option #Tipo *ngFor="let item of Tipos" [value]="item?.idTipo">
+                            {{  item?.Tipo | uppercase }}
+                        </mat-option> 
+                      </mat-select> 
+                  </mat-form-field>
+            </div>
+
+            <div class="col-md-4">
+                <mat-form-field appearance="legacy">
+                    <mat-label> Mes </mat-label>
+                    <mat-select  formControlName="Mes"  > 
+                        <mat-option #Mes *ngFor="let item of meses" [value]="item?.idMes">
+                            {{  item?.mes | uppercase }}
+                        </mat-option> 
+                      </mat-select> 
+                  </mat-form-field>
+            </div>
+
+            <div class="col-md-4">
+                <mat-form-field appearance="legacy">
+                    <mat-label> Año </mat-label>
+                    <input matInput mask="9999" placeholder="Año" formControlName="Anio">
+                </mat-form-field>
+            </div>
+
+          <div class="col-md-4">
+                <mat-form-field appearance="legacy">
+                    <mat-label> Sede </mat-label>
+                    <mat-select  formControlName="Sede"  > 
+                        <mat-option #Sede *ngFor="let item of Sedes" [value]="item?.idSede">
+                            {{  item?.Sede | uppercase }}
+                        </mat-option> 
+                      </mat-select> 
+                  </mat-form-field>
+            </div>
+            <div class="col-md-8">
+                <div class="text-right">
+                    <button style="margin-top: 12px !important;" mat-raised-button class="buttonPrincipal" (click)="CargarImages()"  [disabled]="f.invalid" >
+                        <mat-icon>     search  </mat-icon>
+                    </button>
+                </div>
+              </div> 
+        
+        </div>
+    </form>
+
+          <!-- <mat-paginator [length]="roles.length" [pageSize]="pageSize " (page)="next($event)">
+        </mat-paginator> -->
+        
+
+ 
+</mat-card>
+
+<!-- <div class="images-container">
+    <div class="container-enlarge" *ngFor="let item of images">
+        <img [src] ="returnLocal(item?.archivo) || returnServer(item?.archivo)" alt="">
+        <span><img [src] ="returnLocal(item?.archivo) || returnServer(item?.archivo)"></span>
+    </div>
+</div> -->
+
+
+<mat-card class="mat-cardContainerCuerpo mt-4 container-enlarge" *ngIf="images.length > 0 " >
+  <mat-card class="mat-cardContainerCuerpo mt-4 card"  *ngFor="let item of images">
+        <h3>{{ item?.Nomenclatura }} </h3>
+    <mat-card-content>
+        <img [src] ="returnLocal(item?.archivo) || returnServer(item?.archivo)" alt="">
+        <!-- <span><img [src] ="returnLocal(item?.archivo) || returnServer(item?.archivo)"></span> -->
+        <h3> {{ item?.ubicacion }}</h3>
+    </mat-card-content>
+    <mat-card-actions>
+      </mat-card-actions>
+  </mat-card>
+</mat-card>

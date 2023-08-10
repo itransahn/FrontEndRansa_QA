@@ -132,14 +132,14 @@ cargarProveedores(){
     res => {
       if(res){
           this.proveedores = res?.data?.Table0;
-          // console.log( this.proveedores )
+          // 
       }
     }
   )
 }
 
   redireccionar(){
-    // console.log(this.idProveedor)
+    // 
     this.auth.redirecTo(`/ransa/finanzas/retencion/${this.menuForm.value.fecha?._i?.month + 1}/${this.menuForm.value.fecha?._i?.date}/${this.menuForm.value.fecha?._i?.year}/${this.idProveedor}/${this.menuForm.value.sede}/${this.menuForm.value.tipoR}`);
     // this.auth.redirecTo(`/ransa/finanzas/retencion/${this.menuForm.value.periodo}/${this.menuForm.value.dia}/${this.menuForm.value.anio}/${this.idProveedor}/${this.menuForm.value.sede}/${this.menuForm.value.tipoR}`);
     this.dialogRef.close()

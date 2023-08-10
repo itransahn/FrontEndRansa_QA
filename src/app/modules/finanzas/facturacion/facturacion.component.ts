@@ -187,7 +187,7 @@ impuesto   : new FormControl('', [ Validators.required]),
   this.facturacionS.As400( params ).subscribe(
     (res:any)=>{
       this.cabeceraF = res;
-      console.log(this.cabeceraF)
+      
       let fecha : string = String(this.cabeceraF[0]?.FDCCTC);
       this.dia  =  fecha.substring(6,8);
       this.mes  =  fecha.substring(4,6);
@@ -212,7 +212,7 @@ impuesto   : new FormControl('', [ Validators.required]),
       if( res.length > 0 ){
              // this.DcabeceraF = res;
       for(let i=0; i< res.length; i++){
-        // console.log( res[i]['TCMTRF'] )
+        // 
    
   if( res[i]['TCMTRF'] == 'IVA' || res[i]['TCMTRF'] == 'IMPUESTO AL VALOR AGREGADO'){
         }else{
@@ -284,8 +284,8 @@ EstructurarObservaciones( array : any[]){
     for( let i = 0; i < this.EstrObs2.length; i++ ){
      this.Observaciones += '    ' + '    ' + this.EstrObs2[i]?.['TOBCTC']
   }
-    // console.log( this.EstrObs2)
-    // console.log( this.Observaciones)
+    // 
+    // 
 }
 
   retornarArraryAcum( objeto : any[]){
@@ -338,7 +338,7 @@ EstructurarObservaciones( array : any[]){
 
   descomponerArray( array : detalleCabecera[] ){
       let arrayC : detalleCabecera[];
-      // console.log(array[0])
+      // 
       // arrayC.push(array[0]);
       arrayC = [{
 CCNCSD:array[0]?.['CCNCSD'],
@@ -355,9 +355,9 @@ TCMTRF:array[0]?.['TCMTRF']
       }]
       
       for( let i = 0; i < array.length; i++ ){
-      // console.log(array[i]['TCMTRF'],array[i]['IVLDCS'])
-      // console.log(array[i])
-      // console.log(arrayC.length)
+      // 
+      // 
+      // 
 
       /* FALLA PORQUE NO CONTROLA LA IGUALACION DENTRO DEL CICLO  
       ¿Variable temporal?

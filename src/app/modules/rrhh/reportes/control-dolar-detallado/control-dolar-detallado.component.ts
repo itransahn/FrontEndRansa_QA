@@ -110,7 +110,7 @@ public hastaF= 50;
   //   this.subTotal = 0;
   //   for( let i = 0; i < arreglo.length; i++){
   //     this.subTotal += arreglo[i]['Dolar']
-  //   // console.log(arreglo[i]['TOTAL'])
+  //   // 
 
   //   }
   // }

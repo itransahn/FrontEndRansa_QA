@@ -1,0 +1,30 @@
+img{
+    width: 150px;
+    height: 150px;
+    float: left;
+    margin-left : 1%;
+    border: solid 1px black;
+}
+
+.card{
+    width:  200px;
+    height: auto;
+    float : left;
+    margin-left: 2%;
+}
+
+h3{
+    text-align: center !important;
+}
+
+.card:active{
+        box-shadow: 2px 2px 5px #fc894d;
+    // transform: scale(15);
+    -webkit-transform:scale(1.3);transform:scale(1.3);
+}
+img:active {
+    box-shadow: 2px 2px 5px #fc894d;
+    // transform: scale(15);
+    -webkit-transform:scale(1.0);transform:scale(1.0);
+}
+

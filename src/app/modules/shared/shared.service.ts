@@ -233,7 +233,7 @@ html2canvas(DATA, options).then((canvas) => {
           // let printContents, popupWin;
           // printContents = document.getElementById(idName).innerHTML;
           // // printContents = (<string>printContents + "").replace("col-sm", "col-xs");
-          // // console.log(printContents);
+          // // 
           // popupWin = window.open("", "", "top=0,left=0,height=100%,width=auto");
           // popupWin.document.open();
           // popupWin.document.write(document.body.innerHTML.toString())
@@ -298,7 +298,7 @@ html2canvas(DATA, options).then((canvas) => {
       //guardar datos
       data = XLSX.utils.sheet_to_json(ws);
 
-      // console.log(data)
+      // 
 
     };
 

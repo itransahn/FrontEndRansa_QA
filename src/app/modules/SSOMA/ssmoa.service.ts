@@ -120,4 +120,17 @@ export class SsmoaService {
     return request$
   }
 
+  CargarArchivos( url: string, photo: File ){
+   
+    const fd = new FormData();
+    fd.append('file', photo);
+    return this.http.post<DataApi>( environment.UrlApi + url, fd );
+
+   
+  }
+
+
+  Reproceso( params ){
+    return this.http.post( 'https://api-tms-r360.ransaaplicaciones.com/liquidacionCAM', params )
+  }
 }

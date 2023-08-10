@@ -1,3 +1,52 @@
+<div style="position: relative; margin-bottom: 5px;" class="container" >
+    <mat-card class="cardPersonalizada" *ngIf="tipo == 1">
+        <form [formGroup]="form" #f="ngForm">
+            <div class="row">
+                <div class="col-md-4">
+                    <mat-form-field appearance="legacy">
+                        <mat-label> Cantidad </mat-label>
+                        <input matInput maxlength="5" placeholder=" Cantidad " formControlName ="cantidad">
+                    </mat-form-field>
+                </div>
+
+           
+                <div class="col-md-4">
+                    <mat-form-field appearance="legacy">
+                        <mat-label> Precio Unitario </mat-label>
+                        <input matInput mask="separator.2" thousandSeparator="," placeholder=" Precio Unitario " formControlName ="punitario">
+                    </mat-form-field>
+                </div>
+
+                <!-- <div class="col-md-4">
+                    <mat-form-field appearance="legacy">
+                        <mat-label> Descuento y Reb Otorgada </mat-label>
+                        <input matInput maxlength="50" placeholder=" Descuento y Reb Otorgada " formControlName ="anio">
+                    </mat-form-field>
+                </div> -->
+                
+                <div class="col-md-4">
+                    <mat-form-field appearance="legacy">
+                        <mat-label> Impuesto </mat-label>
+                        <input matInput   style="text-transform:uppercase;" placeholder=" Impuesto " formControlName ="impuesto">
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-12">
+                    <mat-form-field appearance="legacy">
+                        <mat-label> Descripción </mat-label>
+                        <textarea matInput maxlength="250" placeholder=" Descripción " formControlName ="detalle"></textarea>
+                    </mat-form-field>
+                </div>
+
+                <div class="container">
+                    <button class="buttonPrincipal" mat-raised-button type="submit" [disabled]="f.invalid" (click)="llenarDataManual()" > Agregar </button>
+                </div>
+
+            </div>
+        </form>
+    </mat-card>
+</div>
+
 <div class="container " id="originalN" *ngIf="loading && loading1">
     <mat-card class="cardPersonalizada">
         <div class="row">
@@ -75,7 +124,7 @@
                             <th class="contenidoF detalletfootR" scope="col">Monto Total</th>
                           </tr>
                         </thead>
-                        <tbody class="bordes2">
+                        <tbody class="bordes2" *ngIf="tipo == 0">
                           <tr *ngFor="let item of DcabeceraN; let i = index"  class="bodyTed">
                             <td data-label="No." class="contenidoF"> {{ i + 1  }} </td>
                             <td data-label="Descripcion" colspan="2" class="contenidoF left"> {{ item?.TCMTRF }} </td>
@@ -113,6 +162,41 @@
 
 
                         </tbody>
+
+                        <tbody class="bordes2" *ngIf="tipo == 1">
+                            <tr *ngFor="let item of detalleServicios; let i = index" class="bodyTed"> 
+                              <td data-label="No." class="contenidoF"> {{ i + 1  }} </td>
+                              <td data-label="Descripcion" colspan="2" class="contenidoF left"> {{item?.descripcion  | uppercase }} </td>
+                              <td data-label="Sub Total" class="contenidoF">{{ item?.Punitario | number : '1.2-2' }}</td>
+                              <td data-label="Impuesto" class="contenidoF"> {{ item?.impuesto  }} </td>
+                              <td data-label="Monto Total" class="contenidoF">{{ item?.total    | number : '1.2-2' }}</td>
+                            </tr>
+                     
+      
+                            <!-- <tr>
+                              <td data-label="CANTIDAD"> 01</td>
+                              <td data-label="DESCRIPCION">FLETE</td>
+                              <td data-label="PRECIO UNITARIO">{{ 4047 | currency : 'Lps' }}</td>
+                              <td data-label="DESC. Y REB OTORGADA">{{ 0    | currency : 'Lps' }}</td>
+                              <td data-label="IMPUESTO"> G </td>
+                              <td data-label="TOTAL">{{ 4047    | currency  : 'Lps'}}</td>
+                            </tr> -->
+      
+                            <tr  *ngFor="let item of espaciosBlancos"  class="expTable"> 
+                                <td class="espacioB"  colspan="6"></td>
+                            </tr>
+                            <tr> 
+                                <td style="text-align:left !important; " class="espacioB bodyTed2" colspan="6" >
+                                    <span *ngFor="let item of EstrObs2" >
+                                        {{ item?.TOBCTC}}
+                                    </span>
+                                </td>
+                                <!-- <td class="espacioB bodyTed2" colspan="3"> </td> -->
+                            </tr>
+                          
+                            
+                            
+                          </tbody>
                         <tfoot>
                             <tr >
                                     <!-- Número a letras -->
@@ -294,7 +378,7 @@
                         <th class="contenidoF detalletfootR" scope="col">Monto Total</th>
                       </tr>
                     </thead>
-                    <tbody class="bordes2">
+                    <tbody class="bordes2" *ngIf="tipo == 0">
                       <tr *ngFor="let item of DcabeceraN; let i = index"  class="bodyTed">
                         <td data-label="No." class="contenidoF"> {{ i + 1  }} </td>
                         <td data-label="Descripcion" colspan="2" class="contenidoF left"> {{ item?.TCMTRF }} </td>
@@ -332,6 +416,42 @@
 
 
                     </tbody>
+
+                    <tbody class="bordes2" *ngIf="tipo == 1">
+                        <tr *ngFor="let item of detalleServicios; let i = index" class="bodyTed"> 
+                          <td data-label="No." class="contenidoF"> {{ i + 1  }} </td>
+                          <td data-label="Descripcion" colspan="2" class="contenidoF left"> {{item?.descripcion  | uppercase }} </td>
+                          <td data-label="Sub Total" class="contenidoF">{{ item?.Punitario | number : '1.2-2' }}</td>
+                          <td data-label="Impuesto" class="contenidoF"> {{ item?.impuesto  }} </td>
+                          <td data-label="Monto Total" class="contenidoF">{{ item?.total    | number : '1.2-2' }}</td>
+                        </tr>
+                 
+  
+                        <!-- <tr>
+                          <td data-label="CANTIDAD"> 01</td>
+                          <td data-label="DESCRIPCION">FLETE</td>
+                          <td data-label="PRECIO UNITARIO">{{ 4047 | currency : 'Lps' }}</td>
+                          <td data-label="DESC. Y REB OTORGADA">{{ 0    | currency : 'Lps' }}</td>
+                          <td data-label="IMPUESTO"> G </td>
+                          <td data-label="TOTAL">{{ 4047    | currency  : 'Lps'}}</td>
+                        </tr> -->
+  
+                        <tr  *ngFor="let item of espaciosBlancos"  class="expTable"> 
+                            <td class="espacioB"  colspan="6"></td>
+                        </tr>
+                        <tr> 
+                            <td style="text-align:left !important; " class="espacioB bodyTed2" colspan="6" >
+                                <span *ngFor="let item of EstrObs2" >
+                                    {{ item?.TOBCTC}}
+                                </span>
+                            </td>
+                            <!-- <td class="espacioB bodyTed2" colspan="3"> </td> -->
+                        </tr>
+                      
+                        
+                        
+                      </tbody>
+
                     <tfoot>
                         <tr >
                                 <!-- Número a letras -->
@@ -517,7 +637,7 @@
                         <th class="contenidoF detalletfootR" scope="col">Monto Total</th>
                       </tr>
                     </thead>
-                    <tbody class="bordes2">
+                    <tbody class="bordes2" *ngIf="tipo == 0">
                       <tr *ngFor="let item of DcabeceraN; let i = index"  class="bodyTed">
                         <td data-label="No." class="contenidoF"> {{ i + 1  }} </td>
                         <td data-label="Descripcion" colspan="2" class="contenidoF left"> {{ item?.TCMTRF }} </td>
@@ -555,6 +675,40 @@
 
 
                     </tbody>
+                    <tbody class="bordes2" *ngIf="tipo == 1">
+                        <tr *ngFor="let item of detalleServicios; let i = index" class="bodyTed"> 
+                          <td data-label="No." class="contenidoF"> {{ i + 1  }} </td>
+                          <td data-label="Descripcion" colspan="2" class="contenidoF left"> {{item?.descripcion  | uppercase }} </td>
+                          <td data-label="Sub Total" class="contenidoF">{{ item?.Punitario | number : '1.2-2' }}</td>
+                          <td data-label="Impuesto" class="contenidoF"> {{ item?.impuesto  }} </td>
+                          <td data-label="Monto Total" class="contenidoF">{{ item?.total    | number : '1.2-2' }}</td>
+                        </tr>
+                 
+  
+                        <!-- <tr>
+                          <td data-label="CANTIDAD"> 01</td>
+                          <td data-label="DESCRIPCION">FLETE</td>
+                          <td data-label="PRECIO UNITARIO">{{ 4047 | currency : 'Lps' }}</td>
+                          <td data-label="DESC. Y REB OTORGADA">{{ 0    | currency : 'Lps' }}</td>
+                          <td data-label="IMPUESTO"> G </td>
+                          <td data-label="TOTAL">{{ 4047    | currency  : 'Lps'}}</td>
+                        </tr> -->
+  
+                        <tr  *ngFor="let item of espaciosBlancos"  class="expTable"> 
+                            <td class="espacioB"  colspan="6"></td>
+                        </tr>
+                        <tr> 
+                            <td style="text-align:left !important; " class="espacioB bodyTed2" colspan="6" >
+                                <span *ngFor="let item of EstrObs2" >
+                                    {{ item?.TOBCTC}}
+                                </span>
+                            </td>
+                            <!-- <td class="espacioB bodyTed2" colspan="3"> </td> -->
+                        </tr>
+                      
+                        
+                        
+                      </tbody>
                     <tfoot>
                         <tr >
                                 <!-- Número a letras -->

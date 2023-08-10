@@ -7,6 +7,7 @@ import { SharedService } from 'src/app/modules/shared/shared.service';
 import { ToastServiceLocal } from 'src/app/services/toast.service';
 import { numeroALetras } from 'src/app/shared/functions/conversorNumLetras';
 import { FacturacionService } from '../../facturacion.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-nc',
@@ -14,6 +15,10 @@ import { FacturacionService } from '../../facturacion.service';
   styleUrls: ['./nc.component.scss']
 })
 export class NcComponent implements OnInit {
+  public form : FormGroup;
+  public espaciosBlancos2 = [];
+  public detalleServicios : dataManual[] = [];
+  public tipo: any;
   public anioActual = new Date().getFullYear();
   public sede : number ;
   public Emp        :  number;
@@ -55,12 +60,42 @@ export class NcComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.tipo = this.ruta.snapshot.params?.['tipo'];
+    this.cargarForm();
     this.PreCargaData();
     this.validarCorrelativo()
     this.cargarCabeceraN();
     this.DetallecabeceraN();
     this.cargarParametrosF();
   }
+
+cargarForm(){
+this.form = new FormGroup({
+cantidad   : new FormControl('', [ Validators.required]),
+punitario  : new FormControl('', [ Validators.required]),
+detalle    : new FormControl('', [ Validators.required]),
+impuesto   : new FormControl('', [ Validators.required]),
+    })
+  }
+
+
+  llenarDataManual(){
+    this.espaciosBlancos2 = []
+    this.detalleServicios.push({
+     cantidad    : this.form.value.cantidad,
+     descripcion : this.form.value.detalle,
+     Punitario   : this.form.value.punitario,
+     descuento   : 0,
+     impuesto    : this.form.value.impuesto,
+     total       : (Number(this.form.value.punitario)  + Number(this.form.value.impuesto) ),
+    })
+  
+    for(let j=0; j<(10-this.detalleServicios.length); j++){
+      this.espaciosBlancos2.push(j)
+  }
+    this.form.reset()
+  }
+
 
   PreCargaData(){
     if( this.ruta.snapshot.params['empresa'] == 'AH' ){
@@ -96,7 +131,6 @@ cargarCabeceraN(){
   this.facturacionS.As400( params ).subscribe(
     (res:any)=>{
       this.cabeceraN = res;
-      console.log(this.cabeceraN)
       if ( this.cabeceraN.length > 0) {
         this.loading = true;
       }
@@ -123,10 +157,9 @@ cargarCabeceraN(){
      }
   this.facturacionS.As400( params ).subscribe(
     (res:any[])=>{
-      console.log(res)
       if( res.length > 0 ){
         // this.DcabeceraN = res 
-        // console.log( this.DcabeceraN )
+        // 
         for(let i=0; i< res.length; i++){
     if( res[i]?.['TCMTRF'] == 'IVA' || res[i]?.['TCMTRF'] == 'IMPUESTO AL VALOR AGREGADO'){
           }else{
@@ -243,7 +276,6 @@ cargarCabeceraN(){
     }
     this.facturacionS.post( url, params ).subscribe(
       (res:DataApi)=>{
-        console.log(params,res)
         if(!res.hasError){
           if ( res?.data.Table0[0]['codigo'] != -1 && res?.data.Table0[0]['codigo'] != 1 ){
               this.toast.mensajeWarning(String(res?.data.Table0[0]['Mensaje']), mensajes.warning);
@@ -278,4 +310,14 @@ cargarCabeceraN(){
       tipo   : 'NC'
     })
   }
+}
+
+
+interface dataManual {
+  cantidad    : number,
+  descripcion : string,
+  Punitario   : string,
+  descuento   : number,
+  impuesto    : string,
+  total       : number
 }

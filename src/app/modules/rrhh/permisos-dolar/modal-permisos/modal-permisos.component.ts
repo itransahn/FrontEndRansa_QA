@@ -32,8 +32,8 @@ export class ModalPermisosComponent implements OnInit {
 
   ngOnInit() {
     this.catalogo = this.auth.returnCatalogo();
-    console.log(this.catalogo)
-    console.log(this.data)
+    
+    
     this.validacion();
   }
 

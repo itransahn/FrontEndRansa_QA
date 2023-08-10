@@ -21,7 +21,7 @@ export class StockComponent implements OnInit {
   ngOnInit(){
     this.menus = JSON.parse(localStorage.getItem("menus"))
     this.auth.CargarMenuActual( this.ruta.snapshot.params['idMenu'] );
-    // console.log( this.menus )
+    // 
     this.descomponerHijos()
     // this.validarAcceso()
   //  this.auth.validarMenu2( this.auth.dataUsuario['id_rol'], Number(localStorage.getItem('MenuHijo') )) 
@@ -30,7 +30,7 @@ export class StockComponent implements OnInit {
   validarAcceso(){
     this.auth.validarMenu( this.auth.dataUsuario['id_rol'], Number(localStorage.getItem('MenuHijo'))).subscribe(
       res=>{
-        // console.log( res )
+        // 
       }
     )
   }

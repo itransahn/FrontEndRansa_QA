@@ -19,7 +19,7 @@ export class AccessGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       this.dataHijo = JSON.parse(localStorage.getItem("dataHijo"));
-      // console.log( this.dataHijo)
+      // 
       let idMenu = Number(this.dataHijo['idMenuHijo']);
       this.descomponerHijos();
       if( idMenu &&  this.access){

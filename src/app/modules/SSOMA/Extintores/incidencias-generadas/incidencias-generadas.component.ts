@@ -8,6 +8,7 @@ import { ToastServiceLocal } from 'src/app/services/toast.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { DataApi } from 'src/app/interfaces/dataApi';
+import { CargarimagenComponent } from '../cargarimagen/cargarimagen.component';
 
 @Component({
   selector: 'app-incidencias-generadas',
@@ -88,4 +89,6 @@ export class IncidenciasGeneradasComponent implements OnInit {
       }
     )
   }
+
+
 }

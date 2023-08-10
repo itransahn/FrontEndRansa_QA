@@ -111,7 +111,7 @@ export class ControlDolarAgrupadoComponent implements OnInit {
   //   this.subTotal = 0;
   //   for( let i = 0; i < arreglo.length; i++){
   //     this.subTotal += arreglo[i]['TOTAL']
-  //   // console.log(arreglo[i]['TOTAL'])
+  //   // 
   //   }
   // }
 

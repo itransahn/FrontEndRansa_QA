@@ -7,6 +7,7 @@ import { ToastServiceLocal } from 'src/app/services/toast.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { ExportarService } from 'src/app/modules/shared/exportar.service';
+import { CargarimagenComponent } from '../../cargarimagen/cargarimagen.component';
 
 @Component({
   selector: 'app-audoritas-detalle',
@@ -201,7 +202,7 @@ export class AudoritasDetalleComponent implements OnInit {
           observaciones : this.dataS[i]?.['observaciones']       
         })
       }
-    //console.log(this.dataMapedaAS , this.dataMapedaFR)
+    //
     this.excelService.exportToExcel(this.dataMapedaS, this.dataMapedaA ,this.dataMapedaAR , this.dataMapedaAS , this.dataMapedaFR , this.Tipo);
   }
 
@@ -211,7 +212,41 @@ export class AudoritasDetalleComponent implements OnInit {
           return 'X'
       }else{ return ''}
   }
+
+  CargarArchivo ( data ){
+    let tipo   : number;
+    let itemD : number;
+
+    if (this.Tipo == 'Incidencia'){
+      tipo = 1;
+      itemD = data?.idIncidencia
+    }
+
+    if (this.Tipo == 'Auditoria'){
+      tipo = 2;
+      itemD = data?.idAuditoria
+    }
+
+    if (this.Tipo == 'Correccion'){
+      tipo = 3;
+      itemD = data?.idCorrecion
+
+    }
+
+    const dialogReg = this.dialog.open( CargarimagenComponent,{
+      width :   '1000px',
+      height:   'auto',
+      maxWidth: 'auto',
+      data: { 
+          item : itemD,
+          tipo : tipo
+      },
+      disableClose : true
+    })
+  }
+
 }
+
 
 
 interface dataMapeadaExcel{

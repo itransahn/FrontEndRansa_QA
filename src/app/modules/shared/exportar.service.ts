@@ -14,7 +14,7 @@ export class ExportarService {
   constructor() { }
 
   exportToExcel(json?:any[] , json2?:any[], json3?:any[], json4?:any[], json5?:any[],  excelFileName?:string) :void{
-    // console.log(json4, json5)
+    // 
     const worksheet  : XLSX.WorkSheet = XLSX.utils.json_to_sheet(json);
     const worksheet2 : XLSX.WorkSheet = XLSX.utils.json_to_sheet(json2);
     const worksheet3 : XLSX.WorkSheet = XLSX.utils.json_to_sheet(json3);

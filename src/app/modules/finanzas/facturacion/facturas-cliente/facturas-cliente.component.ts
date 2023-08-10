@@ -161,7 +161,7 @@ if ( this.menuForm.value.documento == 2) {
   this.sweet.mensajeConConfirmacion('Visualización de Nota de Débito',`Seguro de visualizar la Nota ${documento} del cliente ${cliente}`,"question").then(
     res=>{
       if ( res ){
-        this.auth.redirecTo(`/ransa/finanzas/notaDebito/${this.empresa}/${this.menuForm.value.cliente}/${documento}`)
+        this.auth.redirecTo(`/ransa/finanzas/notaDebito/${this.empresa}/${this.menuForm.value.cliente}/${documento}/0`)
       }
     }
   ) 
@@ -172,7 +172,7 @@ if( this.menuForm.value.documento == 3){
   this.sweet.mensajeConConfirmacion('Visualización de Nota de Crédito',`Seguro de visualizar la Nota ${documento} del cliente ${cliente}`,"question").then(
     res=>{
       if ( res ){
-        this.auth.redirecTo(`/ransa/finanzas/notaCredito/${this.empresa}/${this.menuForm.value.cliente}/${documento}`)
+        this.auth.redirecTo(`/ransa/finanzas/notaCredito/${this.empresa}/${this.menuForm.value.cliente}/${documento}/0`)
       }
     }
   ) 

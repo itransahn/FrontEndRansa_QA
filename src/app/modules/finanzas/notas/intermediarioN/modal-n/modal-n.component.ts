@@ -13,6 +13,16 @@ import { ToastServiceLocal } from 'src/app/services/toast.service';
 export class ModalNComponent implements OnInit {
   public menuForm : FormGroup;
   public tipo : string = '';
+  public cambios = [
+    {
+      id : 0,
+      valor : 'No'
+    },
+    {
+      id : 1,
+      valor : 'Si'
+    }
+  ]
   public sedes = [
     {
       id    : 'AH',
@@ -50,7 +60,9 @@ export class ModalNComponent implements OnInit {
     this.menuForm = new FormGroup({
       cliente     : new FormControl ('' , [ Validators.required,]),
       documento   : new FormControl ('' , [ Validators.required, Validators.maxLength(5)]),
-      empresa     : new FormControl ('' , [ Validators.required ])
+      empresa     : new FormControl ('' , [ Validators.required ]),
+      cambios     : new FormControl ('' , [ Validators.required,])
+
     })
 }
 
@@ -58,13 +70,25 @@ redireccionar(){
   
   if ( this.menuForm.value.empresa == 'AH' || this.menuForm.value.empresa == 'RH'   ){
     if ( this.data['tipo'] == 1){
-      this.auth.redirecTo(`/ransa/finanzas/notaDebito/${this.menuForm.value.empresa}/${this.menuForm.value.cliente}/${this.menuForm.value.documento}`)
-      this.dialogRef.close()
+      if ( this.menuForm.value.cambios === 0){
+        this.auth.redirecTo(`/ransa/finanzas/notaDebito/${this.menuForm.value.empresa}/${this.menuForm.value.cliente}/${this.menuForm.value.documento}/0`)
+        this.dialogRef.close()
+      }else{
+        this.auth.redirecTo(`/ransa/finanzas/notaDebito/${this.menuForm.value.empresa}/${this.menuForm.value.cliente}/${this.menuForm.value.documento}/1`)
+        this.dialogRef.close()
+      }
+   
     }
   
     if ( this.data['tipo'] == 2) {
-      this.auth.redirecTo(`/ransa/finanzas/notaCredito/${this.menuForm.value.empresa}/${this.menuForm.value.cliente}/${this.menuForm.value.documento}`)
-      this.dialogRef.close()
+      if ( this.menuForm.value.cambios === 0){
+        this.auth.redirecTo(`/ransa/finanzas/notaCredito/${this.menuForm.value.empresa}/${this.menuForm.value.cliente}/${this.menuForm.value.documento}/0`)
+        this.dialogRef.close()
+      }else{
+        this.auth.redirecTo(`/ransa/finanzas/notaCredito/${this.menuForm.value.empresa}/${this.menuForm.value.cliente}/${this.menuForm.value.documento}/1`)
+        this.dialogRef.close()
+      }
+    
     }
   }
 }

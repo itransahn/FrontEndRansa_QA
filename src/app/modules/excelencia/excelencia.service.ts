@@ -48,14 +48,11 @@ export class ExcelenciaService {
 
   // Sincronización
   Sincronizacion(  params?:any){
-    console.log(params)
     let url = 'https://us-central1-pe-gromero-ransa-datalake.cloudfunctions.net/api-reproceso-vgp-unigis'
     this.http.get<any>( url, { params } ).subscribe(
       (res:any[])=>{
-        console.log(res)
       }
     )
-    // console.log(request$)
     // return request$
   }
   
@@ -148,7 +145,7 @@ let contenedores = await axios(conf);
 
     contenedores = contenedores.data;
 
-    console.log(contenedores)
+    
   }
 
   pruebahttp( params ){

@@ -10,6 +10,7 @@ import { AuditoriasComponent } from './Extintores/auditorias/auditorias.componen
 import { AuditoriasRealizadasComponent } from './Extintores/auditorias-realizadas/auditorias-realizadas.component';
 import { IncidenciasGeneradasComponent } from './Extintores/incidencias-generadas/incidencias-generadas.component';
 import { CorrecionesGeneradasComponent } from './Extintores/correciones-generadas/correciones-generadas.component';
+import { VerImagenesCargadasComponent } from './Extintores/ver-imagenes-cargadas/ver-imagenes-cargadas.component';
 
 
 const routes: Routes = [
@@ -52,6 +53,10 @@ const routes: Routes = [
    {
     path         : 'correcionesG',
     component    : CorrecionesGeneradasComponent
+   },
+   {
+    path         : 'imagenesCargadas',
+    component    : VerImagenesCargadasComponent
    }
   ];
   

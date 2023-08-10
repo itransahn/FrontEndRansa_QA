@@ -67,10 +67,10 @@ cargarPases(){
   let params = {};
   this.transporteService.get(url,params).subscribe(
     (data : DataApi | any) =>{
-      // console.log(data)
+      // 
       if( !data.hasError ){
         this.pases = data?.data?.Table0;
-        // console.log(this.pases)
+        // 
       }    
     }
 
@@ -100,7 +100,7 @@ next(event: PageEvent) {
   }
 
   ValidacionHora( hora ){
-    // console.log( hora.substring(12,13)  )
+    // 
     if ( Number(hora.substring(12,13)) >=0 && Number(hora.substring(12,13))<= 12 ){
         return 'AM'
     }else{

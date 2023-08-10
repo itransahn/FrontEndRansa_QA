@@ -56,11 +56,11 @@ const routes: Routes = [
   component : IntermediarioNComponent
  },
  {
-  path      : 'notaDebito/:empresa/:cliente/:documento',
+  path      : 'notaDebito/:empresa/:cliente/:documento/:tipo',
   component : NdComponent
  },
  {
-  path      : 'notaCredito/:empresa/:cliente/:documento',
+  path      : 'notaCredito/:empresa/:cliente/:documento/:tipo',
   component : NcComponent
  },
 

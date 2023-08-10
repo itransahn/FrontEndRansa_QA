@@ -26,6 +26,8 @@ import { IncidenciasGeneradasComponent } from './Extintores/incidencias-generada
 import { ExtintoresFrComponent } from './Extintores/extintores-fr/extintores-fr.component';
 import { ExtintoresAsComponent } from './Extintores/extintores-as/extintores-as.component';
 import { CorrecionesGeneradasComponent } from './Extintores/correciones-generadas/correciones-generadas.component';
+import { CargarimagenComponent } from './Extintores/cargarimagen/cargarimagen.component';
+import { VerImagenesCargadasComponent } from './Extintores/ver-imagenes-cargadas/ver-imagenes-cargadas.component';
 @NgModule({
   declarations: [
     SalidaPortonComponent,
@@ -49,7 +51,9 @@ import { CorrecionesGeneradasComponent } from './Extintores/correciones-generada
     IncidenciasGeneradasComponent,
     ExtintoresFrComponent,
     ExtintoresAsComponent,
-    CorrecionesGeneradasComponent
+    CorrecionesGeneradasComponent,
+    CargarimagenComponent,
+    VerImagenesCargadasComponent
   ],
   imports: [
     CommonModule,

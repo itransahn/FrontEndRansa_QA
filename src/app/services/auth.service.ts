@@ -152,7 +152,7 @@ validarMenu( rol : number, menu : number){
     }
   this.http.post(environment.UrlApi + url , params ).subscribe(
   (res : any) => {
-        // console.log(res?.access);
+        // 
         localStorage.setItem("Access", res?.access)
     }
   )

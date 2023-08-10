@@ -244,7 +244,7 @@ this.loading1 = true;
       if( res.length > 0 ){
              // this.DcabeceraF = res;
       for(let i=0; i< res.length; i++){
-        // console.log( res[i]['TCMTRF'] )
+        // 
    
   if( res[i]['TCMTRF'] == 'IVA' || res[i]['TCMTRF'] == 'IMPUESTO AL VALOR AGREGADO'){
         }else{
@@ -278,10 +278,10 @@ this.loading1 = true;
 
     /* SABER SI EXISTE EXENTO */ 
 
-    // console.log(this.espaciosBlancos)
+    // 
     this.DcabeceraF =  this.descomponerArray(this.DcabeceraF);
     this.loading2 = true;
-    // console.log(this.DcabeceraF)
+    // 
 
       }
     }
@@ -355,7 +355,7 @@ this.loading1 = true;
 
     descomponerArray( array : detalleCabecera[] ){
       let arrayC : detalleCabecera[];
-      // console.log(array[0])
+      // 
       // arrayC.push(array[0]);
       arrayC = [{
 CCNCSD:array[0]['CCNCSD'],
@@ -372,9 +372,9 @@ TCMTRF:array[0]['TCMTRF']
       }]
       
       for( let i = 0; i < array.length; i++ ){
-      // console.log(array[i]['TCMTRF'],array[i]['IVLDCS'])
-      // console.log(array[i])
-      // console.log(arrayC.length)
+      // 
+      // 
+      // 
 
       /* FALLA PORQUE NO CONTROLA LA IGUALACION DENTRO DEL CICLO  
       ¿Variable temporal?

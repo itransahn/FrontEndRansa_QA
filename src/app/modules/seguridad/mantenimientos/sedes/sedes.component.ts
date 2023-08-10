@@ -10,6 +10,7 @@ import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import { ToastServiceLocal } from 'src/app/services/toast.service';
 import { ModalSedesComponent } from './modal-sedes/modal-sedes.component';
 import { SedeService } from './sede.service';
+import { CargarimagenComponent } from 'src/app/modules/SSOMA/Extintores/cargarimagen/cargarimagen.component';
 
 @Component({
   selector: 'app-sedes',
@@ -95,6 +96,7 @@ export class SedesComponent implements OnInit {
         disableClose : true
       })
     }
+
 
 
     eliminarSede(  idSede : number, sede ?: string ){

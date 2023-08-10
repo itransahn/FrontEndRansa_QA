@@ -7,6 +7,7 @@ import { SharedService } from 'src/app/modules/shared/shared.service';
 import { ToastServiceLocal } from 'src/app/services/toast.service';
 import { numeroALetras } from 'src/app/shared/functions/conversorNumLetras';
 import { FacturacionService } from '../../facturacion.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-nd',
@@ -14,6 +15,12 @@ import { FacturacionService } from '../../facturacion.service';
   styleUrls: ['./nd.component.scss']
 })
 export class NdComponent implements OnInit {
+
+  public form : FormGroup;
+  public espaciosBlancos2 = [];
+  public detalleServicios : dataManual[] = [];
+  public tipo: any;
+  
   public anioActual = new Date().getFullYear();
   public sede : number ;
   public Emp        :  number;
@@ -50,6 +57,8 @@ export class NdComponent implements OnInit {
   public sharedS      : SharedService
       ) { }
       ngOnInit() {
+        this.tipo = this.ruta.snapshot.params?.['tipo'];
+        this.cargarForm();
         this.PreCargaData();
         this.validarCorrelativo()
         this.cargarCabeceraN();
@@ -57,6 +66,34 @@ export class NdComponent implements OnInit {
         this.cargarParametrosF();
       }
     
+
+      cargarForm(){
+        this.form = new FormGroup({
+        cantidad   : new FormControl('', [ Validators.required]),
+        punitario  : new FormControl('', [ Validators.required]),
+        detalle    : new FormControl('', [ Validators.required]),
+        impuesto   : new FormControl('', [ Validators.required]),
+            })
+          }
+        
+        
+          llenarDataManual(){
+            this.espaciosBlancos2 = []
+            this.detalleServicios.push({
+             cantidad    : this.form.value.cantidad,
+             descripcion : this.form.value.detalle,
+             Punitario   : this.form.value.punitario,
+             descuento   : 0,
+             impuesto    : this.form.value.impuesto,
+             total       : (Number(this.form.value.punitario)  + Number(this.form.value.impuesto) ),
+            })
+          
+            for(let j=0; j<(10-this.detalleServicios.length); j++){
+              this.espaciosBlancos2.push(j)
+          }
+            this.form.reset()
+          }
+          
       PreCargaData(){
         if( this.ruta.snapshot.params['empresa'] == 'AH' ){
           this.sede = 2;
@@ -75,7 +112,7 @@ export class NdComponent implements OnInit {
       }
     
       convertirNumLetra( numero : any){
-        return numeroALetras((Number(this.cabeceraN[0]['ITTFCS']) * -1),{})
+        return numeroALetras((Number(this.cabeceraN[0]?.['ITTFCS']) * -1),{})
     }
     
     cargarCabeceraN(){
@@ -91,7 +128,6 @@ export class NdComponent implements OnInit {
       this.facturacionS.As400( params ).subscribe(
         (res:any)=>{
           this.cabeceraN = res;
-          // console.log( this.cabeceraN )
           if ( this.cabeceraN.length > 0) {
             this.loading = true;
           }
@@ -100,8 +136,7 @@ export class NdComponent implements OnInit {
           this.mes  =  fecha.substring(4,6);
           this.mesN =  fecha.substring(4,6);
           this.mes  =  retornarMes(this.mes);
-          // console.log('Cantidad', this.cabeceraN[0]['ITTFCS'])
-          this.letras = numeroALetras( Number(this.cabeceraN[0]['ITTFCS']),{})
+          this.letras = numeroALetras( Number(this.cabeceraN[0]?.['ITTFCS']),{})
           this.anio =  fecha.substring(0,4);
         }
       )
@@ -121,7 +156,7 @@ export class NdComponent implements OnInit {
         (res:any[])=>{
           if( res.length > 0 ){
             // this.DcabeceraN = res 
-            // console.log( this.DcabeceraN )
+            // 
             for(let i=0; i< res.length; i++){
         if( res[i]['TCMTRF'] == 'IVA' || res[i]['TCMTRF'] == 'IMPUESTO AL VALOR AGREGADO'){
               }else{
@@ -175,7 +210,7 @@ export class NdComponent implements OnInit {
           for( let i = 0; i < this.EstrObs2.length; i++ ){
            this.Observaciones += this.EstrObs2[i]['TOBCTC']
         }
-          // console.log( this.EstrObs2)
+          // 
       }
            
 
@@ -214,7 +249,7 @@ export class NdComponent implements OnInit {
           sede        : this.sede,
           tipo        : 2
         }
-        // console.log( params )
+        // 
         this.facturacionS.post( url, params ).subscribe(
           (res:DataApi)=>{
             if(!res.hasError){
@@ -246,4 +281,14 @@ export class NdComponent implements OnInit {
           tipo   : 'ND'
         })
       }
+}
+
+
+interface dataManual {
+  cantidad    : number,
+  descripcion : string,
+  Punitario   : string,
+  descuento   : number,
+  impuesto    : string,
+  total       : number
 }

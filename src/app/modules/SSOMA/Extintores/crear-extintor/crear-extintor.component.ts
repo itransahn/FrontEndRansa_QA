@@ -247,7 +247,19 @@ this.ssoma.put('ssmoa/extintor', params).subscribe(
     }
   }
 )
-  
+}
+
+Reprocesar(){
+  let liquidacion = 3496;
+  let params = { "IdLiquidacion": `${liquidacion}`}
+  this.ssoma.Reproceso(params).subscribe(
+    res=>{
+      
+      if( res ){
+      }
+    }
+  )
 
 }
+
 }
