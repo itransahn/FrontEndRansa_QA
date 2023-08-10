@@ -45,3 +45,6 @@ Thumbs.db
 enviroment.prod.ts
 angular.json
 environment.ts
+
+#componentes
+ver-imagenes-cargadas-component.html
