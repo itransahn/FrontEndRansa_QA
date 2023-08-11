@@ -155,8 +155,7 @@ export class NdComponent implements OnInit {
       this.facturacionS.As400( params ).subscribe(
         (res:any[])=>{
           if( res.length > 0 ){
-            // this.DcabeceraN = res 
-            // 
+            console.log(res)
             for(let i=0; i< res.length; i++){
         if( res[i]['TCMTRF'] == 'IVA' || res[i]['TCMTRF'] == 'IMPUESTO AL VALOR AGREGADO'){
               }else{
