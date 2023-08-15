@@ -27,14 +27,14 @@
                 <div class="col-md-4">
                     <mat-form-field appearance="legacy">
                         <mat-label> Impuesto </mat-label>
-                        <input matInput   style="text-transform:uppercase;" placeholder=" Impuesto " formControlName ="impuesto">
+                        <input matInput mask="separator.2" thousandSeparator=","   placeholder=" Impuesto " formControlName ="impuesto">
                     </mat-form-field>
                 </div>
 
                 <div class="col-md-12">
                     <mat-form-field appearance="legacy">
                         <mat-label> Descripción </mat-label>
-                        <textarea matInput maxlength="250" placeholder=" Descripción " formControlName ="detalle"></textarea>
+                        <textarea matInput maxlength="250" placeholder=" Descripción " style="text-transform:uppercase;"  formControlName ="detalle"></textarea>
                     </mat-form-field>
                 </div>
 
@@ -132,8 +132,8 @@
                             <td data-label="No." class="contenidoF"> {{ i + 1  }} </td>
                             <td data-label="Descripcion" colspan="2" class="contenidoF left"> {{ item?.TCMTRF }} </td>
                             <td data-label="Sub Total" class="contenidoF center"> {{ (item?.IVLDCS * -1 ) | number : '1.2-2' }}</td>
-                            <td data-label="Impuesto"  class="contenidoF center">  {{  calcularImpuesto(item?.IVLDCS)  | number : '1.2-2' }}</td>
-                            <td data-label="Monto Total" class="contenidoF center"> {{ total(item?.IVLDCS)  | number : '1.2-2' }} </td>
+                            <td data-label="Impuesto"  class="contenidoF center">  {{  retornarImpuesto(item?.TCMTRF, item?.IVLDCS)  | number : '1.2-2' }}</td>
+                            <td data-label="Monto Total" class="contenidoF center"> {{ total(item?.TCMTRF, item?.IVLDCS)  | number : '1.2-2' }} </td>
                           </tr>
                           
                             <tr  *ngFor="let item of espaciosBlancos"  class="expTable"> 
@@ -161,13 +161,13 @@
                                     TOTALES
                                 </td>
                                 <td style="font-size: 0.9em !important; " class="espacioB center">
-                                        {{ (DcabeceraN[0]['IVLDCS'] * -1) | number :'1.2-2' }}
+                                        {{ (DcabeceraN[0]['IVLDCS'] * ) | number :'1.2-2' }}
                                 </td>
                                 <td style="font-size: 0.9em !important; " class="espacioB center">
-                                        {{ ( cabeceraN[0]['IVLIGS'] * -1)  | number :'1.2-2' }}
+                                        {{ ( cabeceraN[0]['IVLIGS'] * )  | number :'1.2-2' }}
                                 </td>
                                 <td style="font-size: 0.9em !important; " class="espacioB center">
-                                    {{ (cabeceraN[0]['ITTFCS'] * -1) | number :'1.2-2' }}
+                                    {{ (cabeceraN[0]['ITTFCS'] * ) | number :'1.2-2' }}
                             </td>
                             </tr> -->
                         </tbody>
@@ -177,8 +177,8 @@
                               <td data-label="No." class="contenidoF"> {{ i + 1  }} </td>
                               <td data-label="Descripcion" colspan="2" class="contenidoF left"> {{item?.descripcion  | uppercase }} </td>
                               <td data-label="Sub Total" class="contenidoF">{{ item?.Punitario | number : '1.2-2' }}</td>
-                              <td data-label="Impuesto" class="contenidoF"> {{ item?.impuesto  }} </td>
-                              <td data-label="Monto Total" class="contenidoF">{{ item?.total    | number : '1.2-2' }}</td>
+                              <td data-label="Impuesto"  class="contenidoF center">  {{  retornarImpuesto(item?.descripcion, item?.Punitario )  | number : '1.2-2' }}</td>
+                              <td data-label="Monto Total" class="contenidoF center"> {{ total(  item?.descripcion, item?.Punitario )  | number : '1.2-2' }} </td>
                             </tr>
                      
       
@@ -389,8 +389,8 @@
                         <td data-label="No." class="contenidoF"> {{ i + 1  }} </td>
                         <td data-label="Descripcion" colspan="2" class="contenidoF left"> {{ item?.TCMTRF }} </td>
                         <td data-label="Sub Total" class="contenidoF center"> {{ (item?.IVLDCS * -1 ) | number : '1.2-2' }}</td>
-                        <td data-label="Impuesto"  class="contenidoF center">  {{  calcularImpuesto(item?.IVLDCS)  | number : '1.2-2' }}</td>
-                        <td data-label="Monto Total" class="contenidoF center"> {{ total(item?.IVLDCS)  | number : '1.2-2' }} </td>
+                        <td data-label="Impuesto"  class="contenidoF center">  {{  retornarImpuesto(item?.TCMTRF, item?.IVLDCS)  | number : '1.2-2' }}</td>
+                        <td data-label="Monto Total" class="contenidoF center"> {{ total(item?.TCMTRF, item?.IVLDCS)  | number : '1.2-2' }} </td>
                       </tr>
                       
                         <tr  *ngFor="let item of espaciosBlancos"  class="expTable"> 
@@ -436,8 +436,8 @@
                           <td data-label="No." class="contenidoF"> {{ i + 1  }} </td>
                           <td data-label="Descripcion" colspan="2" class="contenidoF left"> {{item?.descripcion  | uppercase }} </td>
                           <td data-label="Sub Total" class="contenidoF">{{ item?.Punitario | number : '1.2-2' }}</td>
-                          <td data-label="Impuesto" class="contenidoF"> {{ item?.impuesto  }} </td>
-                          <td data-label="Monto Total" class="contenidoF">{{ item?.total    | number : '1.2-2' }}</td>
+                          <td data-label="Impuesto"  class="contenidoF center">  {{  retornarImpuesto(item?.descripcion, item?.Punitario )  | number : '1.2-2' }}</td>
+                          <td data-label="Monto Total" class="contenidoF center"> {{ total(  item?.descripcion, item?.Punitario )  | number : '1.2-2' }} </td>
                         </tr>
                  
   
@@ -641,13 +641,14 @@
                         <th class="contenidoF detalletfootR" scope="col">Monto Total</th>
                       </tr>
                     </thead>
+
                     <tbody class="bordes2" *ngIf="tipo == 0">
                       <tr *ngFor="let item of DcabeceraN; let i = index" class="bodyTed">
                         <td data-label="No." class="contenidoF"> {{ i + 1  }} </td>
                         <td data-label="Descripcion" colspan="2" class="contenidoF left"> {{ item?.TCMTRF }} </td>
                         <td data-label="Sub Total" class="contenidoF center"> {{ (item?.IVLDCS * -1 ) | number : '1.2-2' }}</td>
-                        <td data-label="Impuesto"  class="contenidoF center">  {{  calcularImpuesto(item?.IVLDCS)  | number : '1.2-2' }}</td>
-                        <td data-label="Monto Total" class="contenidoF center"> {{ total(item?.IVLDCS)  | number : '1.2-2' }} </td>
+                        <td data-label="Impuesto"  class="contenidoF center">  {{  retornarImpuesto(item?.TCMTRF, item?.IVLDCS)  | number : '1.2-2' }}</td>
+                        <td data-label="Monto Total" class="contenidoF center"> {{ total(item?.TCMTRF, item?.IVLDCS)  | number : '1.2-2' }} </td>
                       </tr>
                       
                         <tr  *ngFor="let item of espaciosBlancos"  class="expTable"> 
@@ -693,8 +694,8 @@
                           <td data-label="No." class="contenidoF"> {{ i + 1  }} </td>
                           <td data-label="Descripcion" colspan="2" class="contenidoF left"> {{item?.descripcion  | uppercase }} </td>
                           <td data-label="Sub Total" class="contenidoF">{{ item?.Punitario | number : '1.2-2' }}</td>
-                          <td data-label="Impuesto" class="contenidoF"> {{ item?.impuesto  }} </td>
-                          <td data-label="Monto Total" class="contenidoF">{{ item?.total    | number : '1.2-2' }}</td>
+                   <td data-label="Impuesto"  class="contenidoF center">  {{  retornarImpuesto(item?.descripcion, item?.Punitario )  | number : '1.2-2' }}</td>
+                              <td data-label="Monto Total" class="contenidoF center"> {{ total(  item?.descripcion, item?.Punitario )  | number : '1.2-2' }} </td>
                         </tr>
                  
   

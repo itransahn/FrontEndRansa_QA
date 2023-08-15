@@ -159,7 +159,6 @@ cargarCabeceraN(){
     (res:any[])=>{
       if( res.length > 0 ){
         // this.DcabeceraN = res 
-        // 
         for(let i=0; i< res.length; i++){
     if( res[i]?.['TCMTRF'] == 'IVA' || res[i]?.['TCMTRF'] == 'IMPUESTO AL VALOR AGREGADO'){
           }else{
@@ -197,6 +196,29 @@ cargarCabeceraN(){
       }
     )
   }
+
+
+  retornarImpuesto( descripcion : string, cantidad : number){
+    let monto  : number = 0;
+    if( this.tipo == 0 ){
+      if(descripcion.includes('EX') || descripcion.includes(" ex") ){
+        monto =  0;
+      }else{
+        monto = (cantidad * 0.15) * -1;
+      }
+    }
+
+    if( this.tipo == 1 ){
+      if(descripcion.includes('EX') || descripcion.includes(" ex") ){
+        monto = 0;
+      }else{
+        monto = (cantidad * 0.15) ;
+      }
+    }
+
+return monto
+   
+  }
   
 
   retornarTotal(){
@@ -205,26 +227,64 @@ cargarCabeceraN(){
   }
 
   retornarTotalIsv(){
-  let total: number;
-  total = this.retornarTotal() * 0.15;
-  return total;
+    let total: number = 0;
+    let isv  : number = 0;
+    for(let i=0; i< this.DcabeceraN.length; i++){
+      if( this.DcabeceraN[i]?.TCMTRF.includes('EX') || this.DcabeceraN[i]?.TCMTRF.includes('ex') ){
+        total += 0;
+      }else{
+        isv = this.DcabeceraN[i]?.IVLDCS* 0.15;
+        total += ( isv );
+      }
+  }
+    
+    return total;
+
   }
   
 
+
   retornarTotalN(){
-    let total: number;
-    total = this.retornarTotal() + this.retornarTotalIsv();
-    return total;
+    let total: number = 0;
+    let isv  : number = 0;
+    for(let i=0; i< this.DcabeceraN.length; i++){
+      if( this.DcabeceraN[i]?.TCMTRF.includes('EX') || this.DcabeceraN[i]?.TCMTRF.includes('ex') ){
+        total += ( (this.DcabeceraN[i]?.IVLDCS)* -1);
+      }else{
+        isv = this.DcabeceraN[i]?.IVLDCS * 0.15;
+        total += ( this.DcabeceraN[i]?.IVLDCS + isv );
+      }
+  } 
+    return (total * -1);
     }
 
   calcularImpuesto( monto ){
     return (monto * 0.15) * -1
   }
 
-  total(monto){ 
-    let isv : number;
-    isv = (monto * 0.15) * -1;
-    return ( monto * -1 ) + isv
+  total( descripcion : string, monto : number){ 
+    let isv   : number;
+    let total : number;
+    
+    if ( this.tipo == 0){
+      if(descripcion.includes('EX') || descripcion.includes("ex") ){
+        total = (monto)*-1;
+      }else{
+          isv = (monto * 0.15) ;
+        total =  (monto  + isv ) * -1;
+      }
+    }
+
+    if ( this.tipo == 1){
+      if(descripcion.includes('EX') || descripcion.includes("ex") ){
+        total = (monto) ;
+      }else{
+          isv = (monto * 0.15) ;
+        total =  (monto  + isv ) ;
+      }
+    }
+
+    return total;
   }
   
   EstructurarObservaciones( array : any[]){
@@ -316,7 +376,7 @@ cargarCabeceraN(){
 interface dataManual {
   cantidad    : number,
   descripcion : string,
-  Punitario   : string,
+  Punitario   : number,
   descuento   : number,
   impuesto    : string,
   total       : number

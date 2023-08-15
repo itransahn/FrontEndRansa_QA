@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DataApi } from 'src/app/interfaces/dataApi';
 import { cabeceraFactura, detalleCabecera, retornarMes } from 'src/app/interfaces/Factura';
-import { mensajes } from 'src/app/interfaces/generales';
+import { Acumulador, mensajes } from 'src/app/interfaces/generales';
 import { SharedService } from 'src/app/modules/shared/shared.service';
 import { ToastServiceLocal } from 'src/app/services/toast.service';
 import { numeroALetras } from 'src/app/shared/functions/conversorNumLetras';
@@ -76,7 +76,30 @@ export class NdComponent implements OnInit {
             })
           }
         
+          total( descripcion : string, monto : number){ 
+            let isv   : number;
+            let total : number;
+            
+            if ( this.tipo == 0){
+              if(descripcion.includes('EX') || descripcion.includes("ex") ){
+                total = (monto);
+              }else{
+                  isv = (monto * 0.15) ;
+                total =  (monto  + isv );
+              }
+            }
         
+            if ( this.tipo == 1){
+              if(descripcion.includes('EX') || descripcion.includes("ex") ){
+                total = (monto) ;
+              }else{
+                  isv = (monto * 0.15) ;
+                total =  (monto  + isv ) ;
+              }
+            }
+        
+            return total;
+          }       
           llenarDataManual(){
             this.espaciosBlancos2 = []
             this.detalleServicios.push({
@@ -155,7 +178,7 @@ export class NdComponent implements OnInit {
       this.facturacionS.As400( params ).subscribe(
         (res:any[])=>{
           if( res.length > 0 ){
-            console.log(res)
+            
             for(let i=0; i< res.length; i++){
         if( res[i]['TCMTRF'] == 'IVA' || res[i]['TCMTRF'] == 'IMPUESTO AL VALOR AGREGADO'){
               }else{
@@ -174,6 +197,11 @@ export class NdComponent implements OnInit {
       )
       }
 
+      retornarTotal(){
+        let total : number = Acumulador(this.DcabeceraN, 'IVLDCS')
+        return total;
+      }
+      
       cargarObservacionesFac(){
         // Observaciones
         let paramsE = {
@@ -195,6 +223,37 @@ export class NdComponent implements OnInit {
         )
       }
       
+      retornarTotalIsv(){
+        let total: number = 0;
+        let isv  : number = 0;
+        for(let i=0; i< this.DcabeceraN.length; i++){
+          if( this.DcabeceraN[i]?.TCMTRF.includes('EX') || this.DcabeceraN[i]?.TCMTRF.includes('ex') ){
+            total += 0;
+          }else{
+            isv = this.DcabeceraN[i]?.IVLDCS* 0.15;
+            total += ( isv );
+          }
+      }
+        
+        return total;
+    
+      }
+      
+    
+    
+      retornarTotalN(){
+        let total: number = 0;
+        let isv  : number = 0;
+        for(let i=0; i< this.DcabeceraN.length; i++){
+          if( this.DcabeceraN[i]?.TCMTRF.includes('EX') || this.DcabeceraN[i]?.TCMTRF.includes('ex') ){
+            total += ( (this.DcabeceraN[i]?.IVLDCS));
+          }else{
+            isv = this.DcabeceraN[i]?.IVLDCS * 0.15;
+            total += ( this.DcabeceraN[i]?.IVLDCS + isv );
+          }
+      } 
+        return (total);
+        }
       
       EstructurarObservaciones( array : any[]){
           for( let i = 0; i < array.length; i++ ){
@@ -212,7 +271,28 @@ export class NdComponent implements OnInit {
           // 
       }
            
-
+    retornarImpuesto( descripcion : string, cantidad : number){
+        let monto  : number = 0;
+        if( this.tipo == 0 ){
+          if(descripcion.includes('EX') || descripcion.includes(" ex") ){
+            monto =  0;
+          }else{
+            monto = (cantidad * 0.15) ;
+          }
+        }
+    
+        if( this.tipo == 1 ){
+          if(descripcion.includes('EX') || descripcion.includes(" ex") ){
+            monto = 0;
+          }else{
+            monto = (cantidad * 0.15) ;
+          }
+        }
+    
+    return monto
+       
+      }
+      
 
     
       cargarParametrosF(){
@@ -280,6 +360,9 @@ export class NdComponent implements OnInit {
           tipo   : 'ND'
         })
       }
+
+
+      
 }
 
 
