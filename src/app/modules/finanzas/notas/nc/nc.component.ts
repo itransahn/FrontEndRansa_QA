@@ -256,7 +256,9 @@ return monto
         isv    = Number(this.DcabeceraN[i]?.IVLDCS) * 0.15;
         total += (Number(this.DcabeceraN[i]?.IVLDCS) + isv );
       }
-  } }
+  } 
+return total;
+}
 
   calcularImpuesto( monto ){
     return (monto * 0.15) * -1
@@ -268,19 +270,19 @@ return monto
     
     if ( this.tipo == 0){
       if(descripcion.includes('EX') || descripcion.includes("ex") ){
-        total = (monto)*-1;
+        total = (Number(monto))*-1;
       }else{
-          isv = (monto * 0.15) ;
-        total =  (monto  + isv ) * -1;
+          isv = (Number(monto) * 0.15) ;
+        total =  (Number(monto)  + isv ) * -1;
       }
     }
 
     if ( this.tipo == 1){
       if(descripcion.includes('EX') || descripcion.includes("ex") ){
-        total = (monto) ;
+        total = (Number(monto)) ;
       }else{
-          isv = (monto * 0.15) ;
-        total =  (monto  + isv ) ;
+          isv = (Number(monto) * 0.15) ;
+        total =  (Number(monto)  + isv ) ;
       }
     }
 
