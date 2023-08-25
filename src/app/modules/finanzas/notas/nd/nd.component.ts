@@ -97,7 +97,7 @@ export class NdComponent implements OnInit {
                 total =  (monto  + isv ) ;
               }
             }
-        
+        // console.log(total)
             return total;
           }       
           llenarDataManual(){
@@ -234,7 +234,6 @@ export class NdComponent implements OnInit {
             total += ( isv );
           }
       }
-        
         return total;
     
       }
@@ -246,10 +245,11 @@ export class NdComponent implements OnInit {
         let isv  : number = 0;
         for(let i=0; i< this.DcabeceraN.length; i++){
           if( this.DcabeceraN[i]?.TCMTRF.includes('EX') || this.DcabeceraN[i]?.TCMTRF.includes('ex') ){
-            total += ( (this.DcabeceraN[i]?.IVLDCS));
+            total += ( Number(this.DcabeceraN[i]?.IVLDCS));
           }else{
-            isv = this.DcabeceraN[i]?.IVLDCS * 0.15;
-            total += ( this.DcabeceraN[i]?.IVLDCS + isv );
+            isv = 0;
+            isv    = Number(this.DcabeceraN[i]?.IVLDCS) * 0.15;
+            total += (Number(this.DcabeceraN[i]?.IVLDCS) + isv );
           }
       } 
         return (total);
