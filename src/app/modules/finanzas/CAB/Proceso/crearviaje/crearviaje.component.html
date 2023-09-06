@@ -1,0 +1,201 @@
+<mat-card class="mat-cardContainerCuerpo">
+    <form [formGroup]="Form" #f="ngForm">
+        <div class="row">
+            <div class="col-md-6 container">
+                <img src="../../../../../assets/images/logoRansa.ico" alt="">
+            </div>
+            <div class="col-md-6 container">
+                <h3 class="h4"> Vales para Transporte </h3>
+            </div>
+
+            <div class="col-md-4">
+                <mat-form-field appearance="legacy">
+                    <mat-label>Tipo de Viaje</mat-label>
+                    <mat-select  formControlName="tipoViaje"  > 
+                        <mat-option> - </mat-option> 
+                        <mat-option #tipoViaje *ngFor="let item of tipoViaje" [value]="item?.id">
+                            {{  item?.tipo | uppercase }}
+                        </mat-option> 
+                      </mat-select> 
+                  </mat-form-field>
+            </div>
+    
+
+            <div class="col-md-4">
+                <mat-form-field  appearance="legacy">
+                    <mat-label> Número de contacto </mat-label>
+                    <input matInput #numero [mask]="mask.numberPhone"  placeholder="Contacto"  formControlName ="numero">
+                </mat-form-field>
+            </div>
+            <div class="col-md-4">
+                <mat-form-field appearance="legacy">
+                    <mat-label>Cantidad de Personas</mat-label>
+                    <mat-select  formControlName="cantidadPersonas"  > 
+                        <mat-option #cantPersonas *ngFor="let item of personas" [value]="item?.id">
+                            {{  item?.value }}
+                        </mat-option> 
+                      </mat-select> 
+                  </mat-form-field>
+            </div>
+
+            <div  class="col-md-6 container" *ngIf="Form.value.tipoViaje != 3" >
+                <mat-form-field  appearance="legacy">
+                    <mat-label> Origen </mat-label>
+                    <mat-select  formControlName="origen" > 
+                        <ng-container *ngFor="let tu of tarifas">
+                            <div >
+                                <mat-option [value]="tu?.Origen">
+                                    {{  tu?.Origen | uppercase }}
+                                </mat-option>
+                            </div>
+                        </ng-container>
+                      </mat-select> 
+                  </mat-form-field>
+            </div>
+
+            <div  class="col-md-6 container"  *ngIf="Form.value.tipoViaje != 3">
+                <mat-form-field  appearance="legacy">
+                    <mat-label> Destino </mat-label>
+                    <mat-select  formControlName="destino" > 
+                        <ng-container *ngFor="let tu of tarifas">
+                            <div *ngIf="tu.Origen === Form.value.origen">
+                                <mat-option [value]="tu?.Destino">
+                                    {{  tu?.Destino | uppercase }}
+                                </mat-option>
+                            </div>
+                        </ng-container>
+                      </mat-select> 
+                  </mat-form-field>
+            </div>
+
+<div *ngIf="Form.value.tipoViaje == 3">
+<div class="row">
+    <div class="col-md-4">
+        <mat-form-field  appearance="legacy">
+            <mat-label> Origen </mat-label>
+            <input id="origen" matInput #origen  placeholder="Origen" formControlName="origen" >
+        </mat-form-field>
+    </div>
+    <div class="col-md-4">
+        <mat-form-field  appearance="legacy">
+            <mat-label> Destino </mat-label>
+            <input id="destino" matInput #destino placeholder="Destino" formControlName="destino" >
+        </mat-form-field>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="text-center">
+            <button mat-raised-button class="buttonPrincipal" [disabled]="!Form.value.origen || !Form.value.destino" (click)=" Paradas(  )">
+                <mat-icon>
+                    add
+                </mat-icon>
+                Agregar Parada
+            </button>
+        </div>
+    </div>
+</div>
+
+</div>
+
+            <div class="col-md-4">
+                <mat-form-field appearance="legacy">
+                    <mat-label> Medio de Pago </mat-label>
+                    <mat-select  formControlName="metodoPago" > 
+                        <mat-option> - </mat-option> 
+                        <mat-option #tipoPago *ngFor="let item of tipoPago" [value]="item?.id">
+                            {{  item?.tipo | uppercase }}
+                        </mat-option> 
+                      </mat-select> 
+                  </mat-form-field>
+            </div>
+            <div class="col-md-4 container">
+                <mat-form-field appearance="legacy" >
+                    <mat-label>Fecha de Salida </mat-label>
+                    <input name="date" formControlName = "fecha" matInput [matDatepicker]="pickerN" [min]="maxDate">
+                    <mat-datepicker-toggle matSuffix [for]="pickerN"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerN></mat-datepicker>
+                  </mat-form-field>
+            </div>
+           
+            <div class="col-md-4 container">
+                <mat-form-field appearance="legacy">
+                    <mat-label> Hora Salida </mat-label>
+                    <input matInput type="time" placeholder="Hora de Salida" formControlName ="hora" min="16:00">
+                </mat-form-field>
+            </div>
+    
+            <div class="col-md-12 container">
+                <mat-form-field appearance="legacy">
+                    <mat-label> Motivo </mat-label>
+                    <textarea matInput  placeholder="Motivo de viaje" formControlName ="motivo"></textarea>
+                </mat-form-field>
+            </div>
+            <div class=" col-md-12 container">
+                <button class="buttonPrincipal" mat-raised-button type="submit" [disabled]="f.invalid || (!auth.Insercion()) || (multipleDestino.length == 0  && Form.value.tipoViaje == 3)" (click)="cargarViaje()"  >Guardar</button>
+            </div>
+        </div>
+        <div class="table-responsive !important mt-4 mb-4" *ngIf="multipleDestino.length > 0">
+            <h4 style="text-align: center;"> Paradas del Viaje </h4>
+            <table  >
+                <!-- <caption>Statement Summary</caption> -->
+                <thead>
+                  <tr>
+                    <th scope="col">Origen</th>
+                    <th scope="col">Destino</th>
+                    <th scope="col">Accion</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of multipleDestino; let i = index" class="trHover">
+                    <td data-label="Origen">{{   item?.Origen  }}</td>
+                    <td data-label="Destino">{{  item?.Destino  }}</td>
+                    <td data-label="Acciones">
+                    <div class="text-center">
+                   <!-- Eliminar -->
+                   <button mat-mini-fab class="btnDelete" (click)="quitarViaje(i)"  #tooltip="matTooltip" matTooltip="Eliminar Viaje"  matTooltipPosition="right"  >
+                                <mat-icon>delete_forever</mat-icon>
+                   </button>
+                          
+                    </div>
+    
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              
+           </div>
+    </form>
+</mat-card>
+
+
+<mat-card class="mat-cardContainerCuerpo">
+    <div class="table-responsive !important" *ngIf="viajes.length > 0">
+        <table  >
+            <!-- <caption>Statement Summary</caption> -->
+            <thead>
+              <tr>
+                <th scope="col">Origen</th>
+                <th scope="col">Destino</th>
+                <th scope="col">Fecha / Hora </th>
+                <th scope="col">Personas </th>
+                <th scope="col">Estado </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of viajes; let i = index" class="trHover">
+                <td data-label="Origen">{{   item?.Origen  }}</td>
+                <td data-label="Destino">{{  item?.Destino  }}</td>
+                <td data-label="Fecha / Hora">{{  item?.fechaviaje | date :'YYYY/MM/dd'  }} {{ item?.Hora}}</td>
+                <td data-label="Personas">{{  item?.cantidadPersonas  }}</td>
+                <td data-label="Estado">
+                    <span *ngIf="item?.estado ===  0" class="badge badge-pill badge-warning">  Pendiente  </span>
+                    <span *ngIf="item?.estado ===  1" class="badge badge-pill badge-success">  Aprobado   </span>
+                    <span *ngIf="item?.estado === -1" class="badge badge-pill badge-danger">   Denegado   </span>
+                    <span *ngIf="item?.estado ===  3" class="badge badge-pill badge-info">     Cancelado  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          
+       </div>
+</mat-card>

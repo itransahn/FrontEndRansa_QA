@@ -1,0 +1,135 @@
+<div class="container" id="vale">
+    <mat-card class="cardPersonalizada">
+        <div class="row">
+            <div class="col-md-2">
+                <img style="width: 150px;" src="../../../../assets/images/logoRansa.ico" alt="">
+            </div>
+            <div class="col-md-10">
+                <div class="linea">  </div>
+                <div class="linea2">  </div>
+            </div>
+        </div>
+
+
+        <div class="row" style="margin-top: 15px;">
+            <h4 class="container" style="color: black; font-size: large; font-weight: bold;"> Vale de Transporte </h4>
+
+            <h4 style="text-align: right !important; color: red !important;"> N° {{ viaje[0]?.['recibo']}} </h4>
+        </div>
+ 
+<div class="row mt-4 mb-4">
+    <div class="col-md-4">
+      <mat-label> Método de pago </mat-label>
+        <mat-form-field  appearance="outline">
+                   <input matInput #metPago  placeholder="Método de pago" [value]="viaje[0]?.['metodoPago']"  readonly="true">
+        </mat-form-field>
+   </div>
+
+   <div class="col-md-4">
+     <mat-label> Fecha/Hora de Servicio </mat-label>
+    <mat-form-field  appearance="outline">
+               <input matInput #FechaServicio  placeholder="Fecha Servicio" [value]="viaje[0]?.['FechaViaje'] + ' '+viaje[0]?.['Hora']" readonly="true" >
+    </mat-form-field>
+</div>
+
+    <div class="col-md-4">
+      <mat-label > Solicitante </mat-label>
+         <mat-form-field  appearance="outline">
+                    <input matInput #Solicitante placeholder="Solicitante" [value]="viaje[0]?.['Solicitante']" readonly="true" >
+         </mat-form-field>
+    </div>
+
+    
+    <div class="col-md-4">
+      <mat-label> Monto  </mat-label>
+        <mat-form-field  appearance="outline">
+                   <input  matInput #HoraServicio placeholder="Monto " [value]="viaje[0]?.['monto'] | currency : ' Lps '" readonly="true" >
+        </mat-form-field>
+   </div>
+    <div class="col-md-8">
+      <mat-label> Motivo </mat-label>
+        <mat-form-field  appearance="outline">
+                   <input   matInput #Motivo placeholder="Motivo" [value]="viaje[0]?.['MOTIVO']" readonly="true" >
+                   <!-- <textarea matInput #Motivo placeholder="Motivo" [value]="viaje[0]?.['MOTIVO']" readonly="true"></textarea> -->
+        </mat-form-field>
+   </div>
+
+ 
+</div>
+
+<div class="table-responsive mt-4 mb-4 tableCC" *ngIf="viaje[0]?.idtipoViaje == 3" appearance="outline">
+    <h4 style="text-align: center;"> Destinos</h4>
+    <table  style="background-color: transparent !important; color: green !important" >
+        <!-- <caption>Statement Summary</caption> -->
+        <thead style="background-color: transparent !important; color: green !important">
+          <tr style="background-color: transparent !important; color: green !important">
+            <th style="background-color: transparent !important; color: green !important" scope="col">#</th>
+            <th style="background-color: transparent !important; color: green !important" scope="col">Origen</th>
+            <th style="background-color: transparent !important; color: green !important" scope="col">Destino</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of multiparadas; let i = index" class="trHover">
+            <td data-label="#">{{  i +1  }}</td>
+            <td data-label="Origen">{{   item?.Origen  }}</td>
+            <td data-label="Destino">{{  item?.Destino  }}</td>
+          </tr>
+        </tbody>
+      </table>
+   </div>
+
+  <div class="table-responsive mt-4 mb-4 tableCC" *ngIf="viaje[0]?.idtipoViaje != 3" appearance="outline">
+    <h4 style="text-align: center;"> Destinos</h4>
+    <table style="background-color: transparent !important; color: green !important">
+        <!-- <caption>Statement Summary</caption> -->
+        <thead style="background-color: transparent !important; color: green !important">
+          <tr>
+            <th style="background-color: transparent !important; color: green !important" scope="col">#</th>
+            <th style="background-color: transparent !important; color: green !important" scope="col">Origen</th>
+            <th style="background-color: transparent !important; color: green !important" scope="col">Destino</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr  class="trHover">
+            <td data-label="Origen">{{   1  }}</td>
+            <td data-label="Origen">{{   viaje[0]?.origen  }}</td>
+            <td data-label="Destino">{{  viaje[0]?.destino  }}</td>
+          </tr>
+        </tbody>
+      </table>
+   </div>
+
+
+
+<div class="row container mt-4" >
+    <div class="col-md-12 container" >
+        <h4 style="color:red; font-weight: bold; font-size: medium ;">
+           {{viaje[0]?.['Aprobador'] | uppercase }}
+        </h4>
+        
+    </div>
+    <div class="col-md-12 container" >
+        <h4 style="color:red; font-weight: bold; font-size: medium ;">
+           <!-- NOMBRE DE LA PERSONA QUE AUTORIZA -->
+           AUTORIZA
+        </h4>
+    </div>
+    </div>
+
+<div>
+    <!-- <div class="marca-de-agua container">
+        <img alt="" src="../../../../assets/images/logoRansa.ico" />
+    </div> -->
+
+</div>
+       
+
+    </mat-card>
+</div>
+
+
+
+<button mat-raised-button class="buttonPrincipal btn-flotante" #tooltip="matTooltip" matTooltip="Generar PDF"  matTooltipPosition="left" 
+(click)="GenerarPdf()">
+    <mat-icon> picture_as_pdf </mat-icon>
+</button>

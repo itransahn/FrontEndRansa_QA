@@ -57,11 +57,10 @@
         Contenido de Camión:   <span class="subrayado"> {{ data?.['contenido'] }} </span>
     </h4>
     <h4 *ngIf="data['tipo']===3">
-        <!-- Tipo camión con mercadería de Persona Natural: <span class="subrayado">{{ data?.['Hacia'] }}</span> <br> -->
+        <span *ngIf="data?.proveedor">Proveedor: </span> <span *ngIf="data?.proveedor" class="subrayado">{{ data?.['proveedor'] }}</span> <br>
         Contenido de Camión:   <span class="subrayado"> {{ data?.['contenido'] }} </span>
     </h4>
     <h4 *ngIf="data['tipo']=== 4">
-        <!-- Tipo camión con mercadería de Persona Natural: <span class="subrayado">{{ data?.['Hacia'] }}</span> <br> -->
         Contenido:   <span class="subrayado"> {{ data?.['contenido'] }} </span>
     </h4>
 </div>

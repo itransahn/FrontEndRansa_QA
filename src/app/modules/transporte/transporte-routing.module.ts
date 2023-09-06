@@ -104,7 +104,8 @@ const routes: Routes = [
 {
     path : 'placasEmp',
     component : PlacasEmpComponent
-}
+},
+
   ];
   
   @NgModule({

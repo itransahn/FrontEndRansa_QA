@@ -50,6 +50,13 @@ export class CrearpaseEstandarComponent implements OnInit {
   public  subtitulo  : string;
   public readonly    : boolean = true;
   public mask = mask;
+  public departamento : number;
+  public requerid : boolean = false;
+  /*
+8	Recepción	1
+9	Operacion	1
+10	Inventario	1
+  */
   public transporte = [
     {
       id  : 1, 
@@ -71,8 +78,9 @@ export class CrearpaseEstandarComponent implements OnInit {
   ) { }
 
   ngOnInit(){
-  this.cargarForm()
-  }
+  this.cargarForm();
+  this.departamento = this.auth.dataUsuario['id_departamentoFisico'];
+}
 
   cargarForm(){
     this.modalForm = new FormGroup({
@@ -83,6 +91,7 @@ export class CrearpaseEstandarComponent implements OnInit {
       transporte    : new FormControl({ value: '', disabled : this.enable }, [Validators.required] ),
       placa         : new FormControl({ value: '', disabled : this.enable }, [Validators.required] ),
       contenido     : new FormControl({ value: '', disabled : this.enable }, [Validators.required] ),
+      proveedor     : new FormControl({ value: '', disabled : this.enable }, [ ] ),
     })
 }
 
@@ -110,6 +119,12 @@ placaChange(){
 
 
 submit(){
+let proveedor : string; 
+if ( this.departamento == 8){
+  proveedor = this.modalForm.value.proveedor
+}else{
+  proveedor = ''
+}
   this.sweel.mensajeConConfirmacion('¿Seguro de crear pase de salida?','Pase de Salida Ransa','question').then(
     res=>{
       if ( res ){
@@ -122,6 +137,7 @@ submit(){
           contenido       : this.modalForm.value.contenido,
           identidad       : this.modalForm.value.identidad,
           placa           : this.modalForm.value.placa,
+          proveedor       : proveedor
         } 
         this.transporteService.put(url,params).subscribe(
           res=>{

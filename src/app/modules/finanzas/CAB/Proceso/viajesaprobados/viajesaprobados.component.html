@@ -1,0 +1,86 @@
+<mat-card class="cardPersonalizada"> 
+    <form [formGroup]="filtro">
+        <div class="row">
+            <div class="col-md-12">
+    
+                <mat-form-field appearance="legacy">
+                    <mat-label>
+                        <mat-icon> search </mat-icon>
+                        Buscar
+                    </mat-label>
+                    <input matInput placeholder="Solicitante, Tipo de Viaje, Estado" formControlName="filtrar">
+                </mat-form-field>
+            </div>
+     
+
+        </div>
+    </form>
+
+    <div class="table-responsive !important mt-4 mb-4">
+        <h4 style="text-align: center;"> Viajes </h4>
+        <table  >
+            <!-- <caption>Statement Summary</caption> -->
+            <thead>
+              <tr>
+                <th scope="col">Recibo</th>
+                <th scope="col">Método de Pago</th>
+                <th scope="col">Origen</th>
+                <th scope="col">Destino</th>
+                <th scope="col">Solicitante</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Acciones</th>
+                <th scope="col">Valor Original</th>
+                <th scope="col">Valor a Cancelar</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of viajes | search: this.filtro.value.filtrar:parametrosBusqueda | slice: desde: hasta; let i = index" class="trHover">
+                <td data-label="Solicitante">   {{   item?.recibo      }}</td>
+                <td data-label="Método de Pago">{{   item?.metodoPago  }}</td>
+                <td data-label="Origen">{{  item?.origen  }}</td>
+                <td data-label="Destino">{{  item?.destino  }}</td>
+                <td data-label="Solicitante">{{  item?.Solicitante  }}</td>
+                <td data-label="Estado">
+                    <span *ngIf="item?.estado ===  0" class="badge badge-pill badge-warning"> Pendiente </span>
+                    <span *ngIf="item?.estado ===  1" class="badge badge-pill badge-success"> Aprobado  </span>
+                    <span *ngIf="item?.estado === -1" class="badge badge-pill badge-danger">  Denegado  </span>
+                    <span *ngIf="item?.estado ===  3" class="badge badge-pill badge-info">  Cancelado </span>
+                </td>
+             
+                <td data-label="Acciones">
+                  <div class="text-center">
+          
+                            <!-- Ver -->
+                     <button mat-mini-fab class="buttonSecundary" [disabled]="item?.estado !=  3" (click)=" VerViaje( item?.idviaje )" title="Aprobar">
+                      <mat-icon>remove_red_eye</mat-icon>
+                      </button>
+                  </div>
+      
+                  </td>
+                <td data-label="Valor Original">{{  item?.Valororiginal  | currency :'Lps '  }}</td>
+                <td data-label="Valor a Cancelar">{{  item?.monto        | currency :'Lps ' }}</td>
+           
+              </tr>
+            </tbody>
+            <tfoot *ngIf=" hasta >= viajes.length && viajes.length >= 1">
+              <tr >
+                  <!-- style="background-color: #ffffff !important;" -->
+                  <th ></th>
+                  <th ></th>
+                  <th ></th>
+                  <th ></th>
+                  <th ></th>
+                  <th ></th>
+                  <th ></th>
+                  <th > TOTAL </th>
+                  <th > {{ total | currency : 'Lps '}} </th>
+              </tr>
+            </tfoot> 
+          </table>
+          
+       </div>
+       <mat-paginator [length]="viajes.length" [pageSize]="pageSize " (page)="next($event)">
+      </mat-paginator>
+</mat-card>
+
+

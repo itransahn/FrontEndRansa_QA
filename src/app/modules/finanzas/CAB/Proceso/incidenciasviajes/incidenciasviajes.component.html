@@ -1,0 +1,35 @@
+
+
+<mat-card class="cardPersonalizada">
+ 
+    <mat-card-header class="header">    Incidencias sobre Viaje
+    <mat-icon style="float: right !important;" (click)="close()" > close </mat-icon>
+    </mat-card-header>
+
+
+    <mat-card-content>
+        <form [formGroup]="FormModule" #f="ngForm" style="margin-top: 2%;">
+            <div class="row">
+                <div class="col-md-12">
+                    <mat-form-field  appearance="legacy">
+                        <mat-label>Incidencia</mat-label>
+                        <textarea matInput #incidencia minlength="1"   placeholder="Incidencias" formControlName ="Incidencia"></textarea>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-12">
+                    <mat-form-field  appearance="legacy">
+                        <mat-label>Monto de Incidencia</mat-label>
+                        <input matInput #monto mask="separator.2" thousandSeparator="," placeholder="Monto de Incidencia" formControlName ="monto">
+                    </mat-form-field>
+                </div>
+
+                </div>
+            <div class="container">
+                <button class="buttonPrincipal" mat-raised-button type="submit" [disabled]="f.invalid" (click)="submit()"  >Guardar</button>
+            </div>
+        </form>
+    </mat-card-content>
+    
+</mat-card>  
+

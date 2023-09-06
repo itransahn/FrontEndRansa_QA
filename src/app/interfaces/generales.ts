@@ -283,6 +283,11 @@ interface catalogo{
         SedesExtintor : {
             id_sedeRansa ?: number,
             sedeRansa    ?: string
+        }[],
+        usuariosCAB : {
+            USUARIO  ?: string,
+            idUsuario  ?: string,
+            Cod_Empleado  ?: string
         }[]
 
 }

@@ -249,7 +249,7 @@ return monto
     let isv  : number = 0;
     for(let i=0; i< this.DcabeceraN.length; i++){
       if( this.DcabeceraN[i]?.TCMTRF.includes('EX') || this.DcabeceraN[i]?.TCMTRF.includes('ex') ){
-        // console.log( Number(this.DcabeceraN[i]?.IVLDCS))
+        // 
         total += ( Number(this.DcabeceraN[i]?.IVLDCS));
       }else{
         isv = 0;

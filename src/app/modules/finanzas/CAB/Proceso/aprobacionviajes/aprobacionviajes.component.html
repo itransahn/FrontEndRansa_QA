@@ -1,0 +1,49 @@
+<div class="table-responsive !important mt-4 mb-4">
+    <h4 style="text-align: center;"> Viajes </h4>
+    <table  >
+        <!-- <caption>Statement Summary</caption> -->
+        <thead>
+          <tr>
+            <th scope="col">Solicitante</th>
+            <th scope="col">Origen</th>
+            <th scope="col">Destino</th>
+            <th scope="col">Personas</th>
+            <th scope="col">Valor Original</th>
+            <th scope="col">Valor a Pagar</th>
+            <th scope="col">Accion</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of viajes; let i = index" class="trHover">
+            <td data-label="Solicitante">{{   item?.nombre  }}</td>
+            <td data-label="Origen">{{   item?.Origen  }}</td>
+            <td data-label="Destino">{{  item?.Destino  }}</td>
+            <td data-label="Personas">{{  item?.cantidadPersonas  }}</td>
+            <td data-label="Personas">{{  item?.Valororiginal | number | currency :'Lps '  }}</td>
+            <td data-label="Personas">{{  item?.monto         | number | currency :'Lps ' }}</td>
+            <td data-label="Acciones">
+            <div class="text-center">
+    
+                      <!-- Aprobar -->
+               <button mat-mini-fab class="buttonSecundary" [disabled]="(!auth.Actualizacion())" (click)="aprobacion( item?.idviaje , 1 )" title="Aprobar">
+                <mat-icon>check_circle</mat-icon>
+                </button>
+
+                      <!-- denegar -->
+               <button mat-mini-fab class="btnDelete" [disabled]="(!auth.Actualizacion())" (click)="aprobacion( item?.idviaje , 0 )" title="Denegar">
+                <mat-icon>clear</mat-icon>
+                </button>
+
+                            <!-- denegar -->
+               <!-- <button mat-mini-fab class="btnDelete" [disabled]="(!auth.Actualizacion())" (click)="aprobacion( )" title="Incidencia">
+                <mat-icon>create</mat-icon>
+                </button> -->
+                  
+            </div>
+
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      
+   </div>

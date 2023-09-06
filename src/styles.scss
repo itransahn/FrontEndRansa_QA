@@ -25,6 +25,14 @@ $negro-texto   :        #1E1E1E;
     // text-align: center;
   }
 /* RADIO BUTTON */
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+  background-color: $verde-primario!important;
+}
+::ng-deep .mat-checkbox-ripple .mat-ripple-element {
+  background-color: $blanco-primario !important;
+}
+
 :host ::ng-deep .mat-radio-checked .mat-radio-outer-circle{
   background:#006F1D!important;
 }
@@ -730,11 +738,11 @@ table th {
 }
 .mat-datepicker-content.mat-accent .mat-calendar-body-comparison-bridge-start::before,
 .mat-datepicker-content.mat-accent [dir=rtl] .mat-calendar-body-comparison-bridge-end::before {
-  background: linear-gradient(to right, rgba(255, 64, 129, 0.2) 50%, rgba(249, 171, 0, 0.2) 50%);
+  background: linear-gradient(to right, rgba(255, 64, 129, 0.2) 50%, rgba(249, 171, 0, 0.2) 70%);
 }
 .mat-datepicker-content.mat-accent .mat-calendar-body-comparison-bridge-end::before,
 .mat-datepicker-content.mat-accent [dir=rtl] .mat-calendar-body-comparison-bridge-start::before {
-  background: linear-gradient(to left, rgba(255, 64, 129, 0.2) 50%, rgba(249, 171, 0, 0.2) 50%);
+  background: linear-gradient(to left, rgba(255, 64, 129, 0.2) 50%, rgba(249, 171, 0, 0.2) 70%);
 }
 .mat-datepicker-content.mat-accent .mat-calendar-body-in-range > .mat-calendar-body-comparison-identical,
 .mat-datepicker-content.mat-accent .mat-calendar-body-in-comparison-range.mat-calendar-body-in-range::after {
@@ -763,11 +771,11 @@ table th {
 }
 .mat-datepicker-content.mat-warn .mat-calendar-body-comparison-bridge-start::before,
 .mat-datepicker-content.mat-warn [dir=rtl] .mat-calendar-body-comparison-bridge-end::before {
-  background: linear-gradient(to right, rgba(244, 67, 54, 0.2) 50%, rgba(249, 171, 0, 0.2) 50%);
+  background: linear-gradient(to right, rgba(244, 67, 54, 0.2) 50%, rgba(249, 171, 0, 0.2) 70%);
 }
 .mat-datepicker-content.mat-warn .mat-calendar-body-comparison-bridge-end::before,
 .mat-datepicker-content.mat-warn [dir=rtl] .mat-calendar-body-comparison-bridge-start::before {
-  background: linear-gradient(to left, rgba(244, 67, 54, 0.2) 50%, rgba(249, 171, 0, 0.2) 50%);
+  background: linear-gradient(to left, rgba(244, 67, 54, 0.2) 50%, rgba(249, 171, 0, 0.2) 70%);
 }
 .mat-datepicker-content.mat-warn .mat-calendar-body-in-range > .mat-calendar-body-comparison-identical,
 .mat-datepicker-content.mat-warn .mat-calendar-body-in-comparison-range.mat-calendar-body-in-range::after {

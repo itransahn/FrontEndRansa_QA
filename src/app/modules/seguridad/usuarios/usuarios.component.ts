@@ -94,6 +94,7 @@ export class UsuariosComponent implements OnInit {
   })
 }
 
+
 EnvioCorreoContra( IdUsuario ?: number, nombreUsuario ?: string){
   this.sweel.mensajeConConfirmacion("Reenvío de contraseña", `¿Seguro de envíar contraseña generica a ${nombreUsuario}?`, "question").then(
     res=>{

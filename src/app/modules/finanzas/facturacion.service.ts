@@ -28,7 +28,7 @@ export class FacturacionService {
 
   // Servicio de Visualización 
   get( url?:string, params?:any){
-    let request$ = this.http.get<DataApi>(environment.UrlApi + url, params ).pipe(
+    let request$ = this.http.get<DataApi>(environment.UrlApi + url, {params:params} ).pipe(
       tap( ( result:DataApi | any )=>{
           return result
       } ),
@@ -73,7 +73,7 @@ export class FacturacionService {
   post( url?:string, params?:any){
     let request$ = this.http.post<DataApi>(environment.UrlApi + url,params).pipe(
       tap( ( result:DataApi | any )=>{
-        // this.refresh$.next();
+        this.refresh$.next();
           return result
       } ),
       catchError( ( error: HttpErrorResponse) =>{

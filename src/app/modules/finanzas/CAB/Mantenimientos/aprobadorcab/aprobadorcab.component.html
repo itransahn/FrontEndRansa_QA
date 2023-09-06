@@ -1,0 +1,77 @@
+<mat-card class="mat-cardContainerCuerpo mat-elevation-z0">
+    <form [formGroup]="filtro">
+        <div class="row">
+            <div class="col-md-6">
+    
+                <mat-form-field appearance="legacy">
+                    <mat-label>
+                        <mat-icon> search </mat-icon>
+                        Buscar
+                    </mat-label>
+                    <input matInput placeholder="cod_empleado,Nombre,Area,Sede" formControlName="filtrar">
+                </mat-form-field>
+    
+            </div>
+     
+            <div class="col-md-6">
+                <div class="text-right">
+                    <button mat-raised-button class="buttonPrincipal" [disabled]="!auth.Insercion()"  (click)="Modal ('Aprobador CAB' , [], 2, 'Aprobador CAB')"  >
+                        <mat-icon>
+                            add
+                        </mat-icon>
+                        Agregar Aprobador
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+       <div class="table-responsive !important">
+        <table  >
+            <!-- <caption>Statement Summary</caption> -->
+            <thead>
+              <tr>
+                <th scope="col"> Código de Empleado </th>
+                <th scope="col"> Nombre de Empleado </th>
+                <th scope="col"> Area   </th>
+                <th scope="col"> Tipo Permiso </th>
+                <th scope="col"> Sede   </th>
+                <th scope="col"> Acciones </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of data  | search: this.filtro.value.filtrar:parametrosBusqueda | slice: desde: hasta " class="trHover">
+                <td data-label="Código de Empleado">{{    item?.cod_empleado }}</td>
+                <td data-label="Nombre de Empleado">{{    item?.Nombre }}</td>
+                <td data-label="Area">{{    item?.area }}</td>
+                <td data-label="Tipo Permiso">{{    item?.TipoAprobacion }}</td>
+                <td data-label="Sede">{{    item?.Sede }}</td>
+                <td data-label="Acciones">
+                <div class="text-center">
+
+               <!-- Ver -->
+               <!-- <button mat-mini-fab class="buttonSecundary"   #tooltip="matTooltip" matTooltip="Ver Rol" (click)="Modal ( 1 , item )"  matTooltipPosition="left">
+                   <mat-icon>visibility</mat-icon>
+               </button> -->
+                 <!-- Editar -->
+                 <button mat-mini-fab class="buttonSecundary" [disabled]="!auth.Actualizacion()" #tooltip="matTooltip" matTooltip="Editar" matTooltipPosition="right"  (click)="Modal ('Aprobador CAB' , item, 3, 'Aprobador CAB')">
+                   <mat-icon>create</mat-icon>
+               </button>
+               <!-- Eliminar -->
+               <button mat-mini-fab class="btnDelete"  [disabled]="!auth.Eliminacion()" (click)="DCapacidad(item?.id_tipoCapacidad)" #tooltip="matTooltip" matTooltip="Eliminar"  matTooltipPosition="right">
+                            <mat-icon>delete_forever</mat-icon>
+               </button>
+                      
+                </div>
+
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          
+       </div>
+          <mat-paginator [length]="data.length" [pageSize]="pageSize " (page)="next($event)">
+        </mat-paginator>
+        
+
+ 
+</mat-card>

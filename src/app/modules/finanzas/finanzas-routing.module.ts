@@ -20,6 +20,13 @@ import { IntermedioRetComponent } from './retenciones/intermedio-ret/intermedio-
 import { ProveedoresFComponent } from './retenciones/proveedores-f/proveedores-f.component';
 import { RetencionComponent } from './retenciones/retencion/retencion.component';
 import { RetencionesHComponent } from './retenciones/retenciones-h/retenciones-h.component';
+import { EmpleadocabComponent } from './CAB/Mantenimientos/empleadocab/empleadocab.component';
+import { AprobadorcabComponent } from './CAB/Mantenimientos/aprobadorcab/aprobadorcab.component';
+import { CrearviajeComponent } from './CAB/Proceso/crearviaje/crearviaje.component';
+import { ViajesaprobadosComponent } from './CAB/Proceso/viajesaprobados/viajesaprobados.component';
+import { AprobacionviajesComponent } from './CAB/Proceso/aprobacionviajes/aprobacionviajes.component';
+import { CancelarviajesComponent } from './CAB/Proceso/cancelarviajes/cancelarviajes.component';
+import { ValeComponent } from './CAB/Proceso/vale/vale.component';
 
 
 const routes: Routes = [
@@ -106,8 +113,36 @@ const routes: Routes = [
  {
   path      : 'AprobapaseF',
   component : AprobacionPaseComponent
- }
-
+ },
+ /* CAB */
+ {
+  path      : 'empleadoCAB',
+  component : EmpleadocabComponent
+ },
+ {
+  path      : 'aprobadorCAB',
+  component : AprobadorcabComponent
+ },
+ {
+  path      : 'viajeCAB',
+  component : CrearviajeComponent
+ },
+ {
+  path      : 'viajesAprobados',
+  component : ViajesaprobadosComponent
+ },
+ {
+  path      : 'aprobarViaje',
+  component : AprobacionviajesComponent
+ },
+ {
+  path      : 'cancelarViaje',
+  component : CancelarviajesComponent
+ },
+ {
+  path : 'vale/:idViaje',
+  component : ValeComponent
+}
 
 ];
 

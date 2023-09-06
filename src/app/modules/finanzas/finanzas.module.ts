@@ -26,6 +26,16 @@ import { IntermediorgComponent } from './retenciones-g/intermediorg/intermediorg
 import { ModalrgComponent } from './retenciones-g/modalrg/modalrg.component';
 import { RetencionesHComponent } from './retenciones/retenciones-h/retenciones-h.component';
 import { RecibosComponent } from './recibos/recibos.component';
+import { EmpleadocabComponent } from './CAB/Mantenimientos/empleadocab/empleadocab.component';
+import { CrearviajeComponent } from './CAB/Proceso/crearviaje/crearviaje.component';
+import { AprobacionviajesComponent } from './CAB/Proceso/aprobacionviajes/aprobacionviajes.component';
+import { ViajesaprobadosComponent } from './CAB/Proceso/viajesaprobados/viajesaprobados.component';
+import { AprobadorcabComponent } from './CAB/Mantenimientos/aprobadorcab/aprobadorcab.component';
+import { ModalempleadocabComponent } from './CAB/Mantenimientos/empleadocab/modalempleadocab/modalempleadocab.component';
+import { ModalaprobadorcabComponent } from './CAB/Mantenimientos/aprobadorcab/modalaprobadorcab/modalaprobadorcab.component';
+import { CancelarviajesComponent } from './CAB/Proceso/cancelarviajes/cancelarviajes.component';
+import { IncidenciasviajesComponent } from './CAB/Proceso/incidenciasviajes/incidenciasviajes.component';
+import { ValeComponent } from './CAB/Proceso/vale/vale.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +61,17 @@ import { RecibosComponent } from './recibos/recibos.component';
     IntermediorgComponent,
     ModalrgComponent,
     RetencionesHComponent,
-    RecibosComponent
+    RecibosComponent,
+    EmpleadocabComponent,
+    CrearviajeComponent,
+    AprobacionviajesComponent,
+    ViajesaprobadosComponent,
+    AprobadorcabComponent,
+    ModalempleadocabComponent,
+    ModalaprobadorcabComponent,
+    CancelarviajesComponent,
+    IncidenciasviajesComponent,
+    ValeComponent
   ],
   imports: [
     CommonModule,

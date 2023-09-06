@@ -68,6 +68,7 @@ export class SalidaPortonComponent implements OnInit {
       (data : DataApi | any) =>{
         if( !data.hasError ){
           this.pases = data?.data?.Table0;
+          
         }    
       }
   

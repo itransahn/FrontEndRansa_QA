@@ -226,7 +226,7 @@ validarRuta(){
       idPersona         : this.dataUsuario['id_persona'],
       idUsuario          : this.dataUsuario['ID'],
     }
-
+// 
   this.usuarioS.put(url,params).subscribe( res=>{
     if ( !res.hasError){
       if ( res?.data.Table0[0]['codigo'] == -1 ){

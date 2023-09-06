@@ -97,7 +97,7 @@ export class NdComponent implements OnInit {
                 total =  (monto  + isv ) ;
               }
             }
-        // console.log(total)
+        // 
             return total;
           }       
           llenarDataManual(){

@@ -26,9 +26,9 @@ export class RolesComponent implements OnInit, OnDestroy {
   nextPageLabel     = 'Página Siguiente';
   previousPageLabel = 'Página Anterior';
   public pageSize = 10;
+  public parametrosBusqueda = ['rol', 'Estado'];
   public filter :string  = '';
   public filtro: FormGroup;
-  public parametrosBusqueda = ['rol', 'Estado'];
   public roles : roles[] = [];
   private sub : Subscription = new Subscription();
   constructor( 

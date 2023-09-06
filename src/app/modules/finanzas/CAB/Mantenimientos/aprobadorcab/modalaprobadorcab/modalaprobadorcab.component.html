@@ -1,0 +1,71 @@
+
+
+<mat-card class="cardPersonalizada">
+ 
+    <mat-card-header class="header">    {{ titulo }} {{ subtitulo }}
+    <mat-icon style="float: right !important;" (click)="close()" > close </mat-icon>
+    </mat-card-header>
+
+
+    <mat-card-content>
+        <form [formGroup]="FormModule" #f="ngForm" style="margin-top: 2%;">
+            <div class="row">
+            
+                <div  class="col-md-12 container" >
+                    <mat-form-field *ngIf="visible" appearance="legacy">
+                        <mat-label>Usuario</mat-label>
+                        <mat-select  formControlName="idUsuario" > 
+                            <mat-option> - </mat-option> 
+                            <mat-option  *ngFor="let item of catalogo['usuariosCAB']" [value]="item?.idUsuario">
+                                {{  item?.USUARIO | uppercase }}
+                            </mat-option> 
+                          </mat-select> 
+                      </mat-form-field>
+                </div>
+
+                <div  class="col-md-12 container" >
+                    <mat-form-field *ngIf="visible" appearance="legacy">
+                        <mat-label>Sedes</mat-label>
+                        <mat-select  formControlName="idSede" > 
+                            <mat-option> - </mat-option> 
+                            <mat-option  *ngFor="let item of catalogo['SedesExtintor']" [value]="item?.id_sedeRansa">
+                                {{  item?.sedeRansa | uppercase }}
+                            </mat-option> 
+                          </mat-select> 
+                      </mat-form-field>
+                </div>
+
+
+                <div  class="col-md-12 container" >
+                    <mat-form-field *ngIf="visible" appearance="legacy">
+                        <mat-label>Area</mat-label>
+                        <mat-select  formControlName="idArea" > 
+                            <mat-option> - </mat-option> 
+                            <mat-option  *ngFor="let item of catalogo['areasRansa']" [value]="item?.id_areaDeOperacion">
+                                {{  item?.area | uppercase }}
+                            </mat-option> 
+                          </mat-select> 
+                      </mat-form-field>
+                </div>
+
+                <div  class="col-md-12 container" >
+                    <mat-form-field *ngIf="visible" appearance="legacy">
+                        <mat-label>Tipo</mat-label>
+                        <mat-select  formControlName="tipoAprobacion" > 
+                            <mat-option> - </mat-option> 
+                            <mat-option  *ngFor="let item of tipo" [value]="item?.idTipo">
+                                {{  item?.tipo | uppercase }}
+                            </mat-option> 
+                          </mat-select> 
+                      </mat-form-field>
+                </div>
+
+                </div>
+            <div class="container">
+                <button class="buttonPrincipal" mat-raised-button type="submit" [disabled]="f.invalid" [hidden]="!botton" (click)="submit()"  >Guardar</button>
+            </div>
+        </form>
+    </mat-card-content>
+    
+</mat-card>  
+
