@@ -21,6 +21,7 @@ import { RolProveedorComponent } from './rol-proveedor/rol-proveedor.component';
 import { TransClienteComponent } from './trans-cliente/trans-cliente.component';
 import { TransProveedorComponent } from './trans-proveedor/trans-proveedor.component';
 import { TransportesComponent } from './transportes/transportes.component';
+import { PasesehistoricosComponent } from './pases-estandar/pasesehistoricos/pasesehistoricos.component';
 
 
 
@@ -105,7 +106,10 @@ const routes: Routes = [
     path : 'placasEmp',
     component : PlacasEmpComponent
 },
-
+{
+    path : 'PasesalidasEH',
+    component : PasesehistoricosComponent
+},
   ];
   
   @NgModule({

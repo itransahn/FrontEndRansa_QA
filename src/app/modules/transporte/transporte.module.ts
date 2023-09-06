@@ -41,6 +41,7 @@ import { HistorialPasesComponent } from './pasesf/historial-pases/historial-pase
 import { DeducciontComponent } from './deducciont/deducciont.component';
 import { PlacasEmpComponent } from './recibos/placas-emp/placas-emp.component';
 import { ModalplacaComponent } from './recibos/placas-emp/modalplaca/modalplaca.component';
+import { PasesehistoricosComponent } from './pases-estandar/pasesehistoricos/pasesehistoricos.component';
 
 
 @NgModule({
@@ -82,7 +83,8 @@ AprobacionPaseComponent,
 HistorialPasesComponent,
 DeducciontComponent,
 PlacasEmpComponent,
-ModalplacaComponent
+ModalplacaComponent,
+PasesehistoricosComponent
   ],
   imports: [
     CommonModule,
