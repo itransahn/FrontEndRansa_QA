@@ -25,12 +25,12 @@
             <div class="text-center">
     
                       <!-- Aprobar -->
-               <button mat-mini-fab class="buttonSecundary" [disabled]="(!auth.Actualizacion())" (click)="aprobacion( item?.idviaje , 1 )" title="Aprobar">
+               <button mat-mini-fab class="buttonSecundary" [disabled]="(!auth.Actualizacion())" (click)="aprobacion( item?.idviaje , 1, item )" title="Aprobar">
                 <mat-icon>check_circle</mat-icon>
                 </button>
 
                       <!-- denegar -->
-               <button mat-mini-fab class="btnDelete" [disabled]="(!auth.Actualizacion())" (click)="aprobacion( item?.idviaje , 0 )" title="Denegar">
+               <button mat-mini-fab class="btnDelete" [disabled]="(!auth.Actualizacion())" (click)="aprobacion( item?.idviaje , 0, item )" title="Denegar">
                 <mat-icon>clear</mat-icon>
                 </button>
 

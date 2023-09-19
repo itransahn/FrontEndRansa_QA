@@ -14,6 +14,10 @@ import { ToastServiceLocal } from 'src/app/services/toast.service';
 export class IncidenciasviajesComponent implements OnInit {
   public  FormModule   : FormGroup;
 
+  customPatterns = {
+    'V': {pattern: new RegExp('-?')},
+    '0': {pattern: new RegExp('[0-9]')}
+  }
   constructor(
     private dialogRef:MatDialogRef<IncidenciasviajesComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any, 

@@ -27,6 +27,7 @@ export class AprobacionviajesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    
     this.cargarViajes();
     this.service.refresh$.subscribe(
       res=>{
@@ -45,12 +46,13 @@ export class AprobacionviajesComponent implements OnInit {
     res=>{
       if(res){
         this.viajes = res?.data?.Table0;
+        
         }
     }
   )
   }
 
-  aprobacion( viaje:number ,aprobacion : number ){
+  aprobacion( viaje:number ,aprobacion : number, data?:any ){
 let aprobacion1 : string
 let tipo        : string
 
@@ -77,7 +79,8 @@ this.service.post( url, params ).subscribe(
       if ( res?.data.Table0[0]['codigo'] == -1 ){
           this.toast.mensajeWarning(String(res?.data.Table0[0]['Mensaje']), mensajes.warning)
       }else{
-        this.toast.mensajeSuccess(String(res?.data.Table0[0]['Mensaje']), mensajes.success)
+        this.toast.mensajeSuccess(String(res?.data.Table0[0]['Mensaje']), mensajes.success);
+        this.correoAprobacion( data );
         this.cargarViajes()
       }
   }else{
@@ -87,8 +90,27 @@ this.service.post( url, params ).subscribe(
 )
     }
   }
-)
+) }
 
-
+correoAprobacion( data ){
+  let url = '/auth/ViajeAprobado';
+  let params = {
+    solicitado      : data?.['nombre'],
+    tipoViaje       : data?.['tipoViaje'],
+    FechaHora       : data?.['Fecha'] + data?.['Hora'],
+    numero          : data?.['numero'],
+    origen          : data?.['Origen'],
+    destino         : data?.['Destino'],
+    multipleDestino : data?.['multipleDestinto'],
+    correo          : this.auth.dataUsuario['correo'],
+    recibo          : data?.['recibo'],
+    valor           : data?.['monto'],
   }
+this.service.get(url,params).subscribe(
+  res =>{
+    
+  }
+);
+
+}
 }
