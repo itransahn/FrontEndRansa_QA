@@ -49,8 +49,8 @@
                 <td data-label="Contenido">{{    tr?.contenido  }}</td>
                 <td data-label="Autoriza ">{{    tr?.NombreUsuario  }}</td>
                 <td role="cell" data-label="Estado" class="text-center">
-                    <span *ngIf="tr.estado === 2" class="badge badge-pill badge-warning">   Pendiente    </span>
-                    <span *ngIf="tr.estado ===  0" class="badge badge-pill badge-success">  Confirmado </span>
+                    <span *ngIf="tr.estado ===  3" class="badge badge-pill badge-warning">   Pendiente    </span>
+                    <span *ngIf="tr.estado ===  2" class="badge badge-pill badge-success">  Confirmado </span>
                     <span *ngIf="tr.estado === -1" class="badge badge-pill badge-danger">   Denegado   </span>
                 </td>
                 <td data-label="Acciones">
