@@ -14,6 +14,9 @@ import { RolesComponent } from './roles/roles.component';
 import { UsuarioFormComponent } from './usuarios/usuario-form/usuario-form.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { InforComponent } from './infor/infor.component';
+import { IntegracionesComponent } from './Integraciones/integraciones/integraciones.component';
+import { PedidosComponent } from './Integraciones/pedidos/pedidos.component';
+import { OrdenesComponent } from './Integraciones/ordenes/ordenes.component';
 
 const routes: Routes = [
   {
@@ -72,7 +75,18 @@ const routes: Routes = [
     path : 'infor',
     component : InforComponent
    },
-
+   {
+    path : 'pedidos',
+    component : IntegracionesComponent
+   },
+   {
+    path : 'pedidosInfor',
+    component : PedidosComponent
+   },
+   {
+    path : 'ordenesInfor',
+    component : OrdenesComponent
+   },
 ];
 
 @NgModule({

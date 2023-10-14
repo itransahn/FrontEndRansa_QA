@@ -42,6 +42,9 @@ import { PrimeraVezComponent } from './primera-vez/primera-vez.component';
 import { InforComponent } from './infor/infor.component';
 import { PropietariosInforComponent } from './infor/propietarios-infor/propietarios-infor.component';
 import { MascarasInforComponent } from './infor/mascaras-infor/mascaras-infor.component';
+import { IntegracionesComponent } from './Integraciones/integraciones/integraciones.component';
+import { PedidosComponent } from './Integraciones/pedidos/pedidos.component';
+import { OrdenesComponent } from './Integraciones/ordenes/ordenes.component';
 
 @NgModule({
   declarations: [
@@ -83,6 +86,9 @@ import { MascarasInforComponent } from './infor/mascaras-infor/mascaras-infor.co
     InforComponent,
     PropietariosInforComponent,
     MascarasInforComponent,
+    IntegracionesComponent,
+    PedidosComponent,
+    OrdenesComponent,
   ],
   imports: [
     CommonModule,
