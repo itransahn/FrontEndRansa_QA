@@ -325,11 +325,12 @@ cargarPropietarios(){
 
     this.servicio.post(url,params).subscribe(
       res=>{
-        if( res ){
+        if( !res?.errors ){
           this.toast.mensajeSuccess("Pedidos Enviados","Envío de pedidos")
             console.log( res );
         }else{
-          this.toast.mensajeError('Error en la carga de pedidos',"Error")
+          console.log( res );
+          this.toast.mensajeError(String(res?.errors[0]?.message),"Error")
         }
       }
     )
