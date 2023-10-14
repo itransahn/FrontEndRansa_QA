@@ -299,15 +299,17 @@ storerkey            : this.propietario,
 
     this.servicio.post(url,params).subscribe(
       res=>{
-        if( res ){
+        if( !res?.errors ){
+          this.toast.mensajeSuccess("ASN'S Enviadas","Envío de ASN")
             console.log( res );
         }else{
-          this.toast.mensajeError('Error en la carga de Orden',"Error")
+          console.log( res );
+          this.toast.mensajeError(String(res?.errors[0]?.message),"Error")
         }
       }
     )
      }else{
-      this.toast.mensajeWarning("Favor Cargar los Orden ","Cargar Ordenes")
+      this.toast.mensajeWarning("Favor Cargar las ASN ","Cargar ASN'S")
      }
     }
 
