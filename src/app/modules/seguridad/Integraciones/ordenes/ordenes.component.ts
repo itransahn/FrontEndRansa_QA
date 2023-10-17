@@ -203,6 +203,7 @@ storerkey            : this.propietario,
                               uom            : 'CJ',
                               externlineno   : String(body[k].details.length + 1),
                               externpokey    : String(array[p]?.[this.PLANILLA]),
+                              pokey          : String(array[p]?.[this.PLANILLA]),
                               // externpolineno : String(body[k].details.length + 1),
                               LOTTABLE06     : String(array[p]?.[this.Lote])
                           })
@@ -215,6 +216,7 @@ storerkey            : this.propietario,
                           uom            : 'CJ',
                           externlineno   : String(body[k].details.length + 1),
                           externpokey    : String(array[p]?.[this.PLANILLA]),
+                          pokey          : String(array[p]?.[this.PLANILLA]),
                           // externpolineno : String(body[k].details.length + 1),
                           LOTTABLE06     : String(array[p]?.[this.Lote])
                       })
@@ -299,7 +301,8 @@ storerkey            : this.propietario,
 
     this.servicio.post(url,params).subscribe(
       res=>{
-        if( !res?.errors ){
+        console.log( res );
+        if( !res?.errors[0] ){
           this.toast.mensajeSuccess("ASN'S Enviadas","Envío de ASN")
             console.log( res );
         }else{
@@ -345,6 +348,7 @@ storerkey            : this.propietario,
         uom          : string,
         externlineno : string,
         externpokey  : string,
+        pokey        : string,
         // externpolineno : string,
         LOTTABLE06   : string
       }[],
@@ -365,6 +369,7 @@ storerkey            : this.propietario,
       uom          : string,
       externlineno : string,
       externpokey  : string,
+      pokey        : string,
       // externpolineno : string,
       LOTTABLE06   : string
     }[],
