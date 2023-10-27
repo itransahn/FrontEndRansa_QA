@@ -338,7 +338,7 @@ storerkey            : this.propietario,
     this.servicio.get(url, params).subscribe(
       res =>{
         if( res ){
-          this.username = res?.data?.Table0[0]?.usuarioAuth0;
+          this.username = res?.data?.Table0[0]?.usuarioAuth0QA;
           this.ObtenerToken( this.username );
         }
       }

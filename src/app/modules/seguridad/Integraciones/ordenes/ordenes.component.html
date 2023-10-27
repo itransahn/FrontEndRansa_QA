@@ -6,8 +6,8 @@
                    <mat-label> Propietario </mat-label>
                    <mat-select  formControlName="propietario" (selectionChange)="SetearData($event)" > 
                        <mat-option> - </mat-option> 
-                       <mat-option #tipoLla *ngFor="let tipo of propietarios" [value]="tipo?.propietario">
-                           {{  tipo?.propietario | uppercase }}
+                       <mat-option #tipoLla *ngFor="let tipo of propietarios" [value]="tipo?.propietarioQA">
+                           {{  tipo?.propietarioQA | uppercase }}
                        </mat-option> 
                      </mat-select> 
                  </mat-form-field>
