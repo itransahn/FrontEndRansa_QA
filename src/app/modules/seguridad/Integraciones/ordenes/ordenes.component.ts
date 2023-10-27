@@ -24,7 +24,7 @@ export class OrdenesComponent implements OnInit {
   public contrasena  : string = 'Ransa-360';
   public token       : string = '';
   public propietario : string = '';
-
+  public UrlEnvio    : string = '';
     //Parametrizar Columnas 
     public PLANILLA : string = 'FACTURA';
     public CODIGOS  : string = 'CODIGOS';
@@ -202,8 +202,8 @@ storerkey            : this.propietario,
                               sku            : String(array[p]?.[this.CODIGOS]),
                               uom            : 'CJ',
                               externlineno   : String(body[k].details.length + 1),
-                              externpokey    : String(array[p]?.[this.PLANILLA]),
-                              pokey          : String(array[p]?.[this.PLANILLA]),
+                              // externpokey    : String(array[p]?.[this.PLANILLA]),
+                              // pokey          : String(array[p]?.[this.PLANILLA]),
                               // externpolineno : String(body[k].details.length + 1),
                               LOTTABLE06     : String(array[p]?.[this.Lote])
                           })
@@ -215,8 +215,9 @@ storerkey            : this.propietario,
                           sku            : String(array[p]?.[this.CODIGOS]),
                           uom            : 'CJ',
                           externlineno   : String(body[k].details.length + 1),
-                          externpokey    : String(array[p]?.[this.PLANILLA]),
-                          pokey          : String(array[p]?.[this.PLANILLA]),
+                          // externpokey    : String(array[p]?.[this.PLANILLA]),
+                          // pokey          : String(array[p]?.[this.PLANILLA]),
+                          //  pokey          : '',
                           // externpolineno : String(body[k].details.length + 1),
                           LOTTABLE06     : String(array[p]?.[this.Lote])
                       })
@@ -237,7 +238,7 @@ storerkey            : this.propietario,
       }
 
   enviarData(){
-        this.sweel.mensajeConConfirmacion('¿Seguro de enviar Pedidos?', 'Carga de Pedidos','warning').then(
+        this.sweel.mensajeConConfirmacion('¿Seguro de enviar ASN?', 'Carga de ASN','warning').then(
           res =>{
                 if ( res ){
                 if(this.dataMapeada.length > 0){
@@ -251,15 +252,27 @@ storerkey            : this.propietario,
             )
       }
 
-  Limpieza(){
-        this.sweel.mensajeConConfirmacion("¿Seguro de Limpiar data?","Limpieza","question").then(
-          res=>{
-            if ( res ){
-              // this.proveedoresF = []
-              this.sharedS.CleanDataExcel()
-            }
+  Limpieza( Bandera ?: number){
+
+    if ( Bandera == 1){
+      this.sweel.mensajeConConfirmacion("¿Seguro de Limpiar data?","Limpieza","question").then(
+        res=>{
+          if ( res ){
+            this.sharedS.CleanDataExcel();
+            this.dataMapeada = [];
+            this.dataapi = [];
           }
-        )
+        }
+      )
+    }else{
+      this.sharedS.CleanDataExcel();
+      this.dataMapeada = [];
+      this.dataapi = [];
+    }
+
+    
+
+
       
       }
 
@@ -302,11 +315,12 @@ storerkey            : this.propietario,
     this.servicio.post(url,params).subscribe(
       res=>{
         console.log( res );
-        if( !res?.errors[0] ){
+        if( !res?.hasError ){
           this.toast.mensajeSuccess("ASN'S Enviadas","Envío de ASN")
-            console.log( res );
+            // console.log( res );
+            this.Limpieza(2);
         }else{
-          console.log( res );
+          // console.log( res );
           this.toast.mensajeError(String(res?.errors[0]?.message),"Error")
         }
       }
@@ -347,8 +361,7 @@ storerkey            : this.propietario,
         sku          : string,
         uom          : string,
         externlineno : string,
-        externpokey  : string,
-        pokey        : string,
+        // pokey : string,
         // externpolineno : string,
         LOTTABLE06   : string
       }[],
@@ -368,8 +381,6 @@ storerkey            : this.propietario,
       sku          : string,
       uom          : string,
       externlineno : string,
-      externpokey  : string,
-      pokey        : string,
       // externpolineno : string,
       LOTTABLE06   : string
     }[],
