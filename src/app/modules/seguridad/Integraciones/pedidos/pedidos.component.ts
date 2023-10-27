@@ -361,7 +361,6 @@ cargarPropietarios(){
       res=>{
         if( res?.data ){
           this.token = res?.data?.access_token
-          console.log( this.token );
         }else{
           this.toast.mensajeError('Nombre y/o contraseña invalido',"Error")
         }
