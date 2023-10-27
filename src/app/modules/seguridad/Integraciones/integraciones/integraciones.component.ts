@@ -26,6 +26,7 @@ export class IntegracionesComponent implements OnInit {
   public valor    : string = ' Valor Facturado ';
   public sku      : string = 'Codigo/Productos';
   public cantidad : string = 'Unidades';
+  public Metodo   : string = 'Metodo';
 
 
    //Paginacion
@@ -174,7 +175,8 @@ let comprobar2 : boolean = false;
         fechaServicio        :this.retornarFormatoFecha(1),
         comentario           :'',
         ValorDeclarado       :array[i]?.[this.valor],
-        metodoPago           : 'Contado',
+        MetodoDePago           : 'Efectivo',
+        // MetodoDePago           : array[i]?.[this.Metodo],
         listaLineasPedido    : [],
             })
     }
@@ -195,8 +197,8 @@ horaGeneracion       :( this.retonar0Fecha(new Date().getHours().toString()) + n
 fechaServicio        :this.retornarFormatoFecha(1),
 comentario           :'',
 ValorDeclarado       : array[i]?.[this.valor],
-metodoPago           : 'Contado',
-
+MetodoDePago           : 'Efectivo',
+// MetodoDePago           : array[i]?.[this.Metodo],
 listaLineasPedido    : [],
     })
   }
@@ -254,7 +256,7 @@ listaLineasPedido    : [],
  //Cargar data mapeada para mostrar 
 this.dataMapeada = body;
   console.log(JSON.stringify(this.dataMapeada))
-  console.log(JSON.stringify(body))
+  // console.log(JSON.stringify(body))
 
 }
 
@@ -326,7 +328,7 @@ horaGeneracion  : string,
 fechaServicio   : string,
 comentario      : string,
 ValorDeclarado  : number,
-metodoPago      : string,
+MetodoDePago      : string,
 listaLineasPedido : {
   numeroLinea         : string,
   codigoArticuloBulto : string,
