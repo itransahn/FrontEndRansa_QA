@@ -58,10 +58,12 @@
                 </div>            
             </mat-autocomplete>
           </mat-form-field>
+
+
     </div>
 
     <div  class="col-md-6 container" >
-        <mat-form-field  appearance="legacy">
+        <!-- <mat-form-field  appearance="legacy">
             <mat-label>Transporte </mat-label>
             <mat-select  formControlName="transporte"> 
                 <mat-option> - </mat-option> 
@@ -74,6 +76,23 @@
                 </ng-container>
                 
               </mat-select> 
+          </mat-form-field> -->
+
+
+          <mat-form-field appearance="legacy">
+            <input type="text"
+                   matInput
+                   formControlName="transporte"
+                   [matAutocomplete]="auto" >
+            <mat-autocomplete  #auto="matAutocomplete">
+                <div  *ngFor="let option of filteredOptions2 | async" >
+                    <div  *ngIf="option.IdDestino === destino">
+                        <mat-option value=" {{option.idTransportista}}" (click)="setearValorD(option)" (keyup.enter)="setearValorD(option)">
+                        {{  option?.nombreEmpresa | uppercase }}        
+                        </mat-option>
+                    </div>
+                </div>            
+            </mat-autocomplete>
           </mat-form-field>
 
           <!-- <mat-form-field appearance="legacy">

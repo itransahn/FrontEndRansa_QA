@@ -59,7 +59,8 @@ export class PedidosComponent implements OnInit {
     public CODIGOS  : string = 'CODIGOS';
     public CAJAS    : string = 'CAJAS';
     public DESTINO  : string = 'DESTINO/PROVEEDOR';
-    public Lote     : string = 'Lote';
+    public Lote     : string = 'LOTE';
+    public UOM      : string = 'UDM';
 
 
        //Paginacion
@@ -259,7 +260,8 @@ cargarPropietarios(){
                               sku               : String(array[p]?.[this.CODIGOS]),
                               openqty     : Number(array[p]?.[this.CAJAS]),
                               fulfillqty  : Number(array[p]?.[this.CAJAS]),
-                              uom         : 'CJ',
+                              // uom         : 'CJ',
+                              uom         :   String(array[p]?.[this.UOM]),
                               externlineno  : String(body[k].details.length + 1),
                               whseid      : this.obtenerWh(this.propietario),
                               LOTTABLE06  : String(array[p]?.[this.Lote])
@@ -272,7 +274,8 @@ cargarPropietarios(){
                           sku         : String(array[p]?.[this.CODIGOS]),
                           openqty     : Number(array[p]?.[this.CAJAS]),
                           fulfillqty  : Number(array[p]?.[this.CAJAS]),
-                          uom  : 'CJ',
+                          // uom         : 'CJ',
+                          uom         :   String(array[p]?.[this.UOM]),
                           externlineno  : String(body[k].details.length + 1),
                           whseid  : this.obtenerWh(this.propietario),
                           LOTTABLE06  : String(array[p]?.[this.Lote])

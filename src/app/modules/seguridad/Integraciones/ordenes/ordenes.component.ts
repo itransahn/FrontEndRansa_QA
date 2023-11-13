@@ -30,7 +30,8 @@ export class OrdenesComponent implements OnInit {
     public CODIGOS  : string = 'CODIGOS';
     public CAJAS    : string = 'CAJAS';
     public DESTINO  : string = 'PROVEEDOR';
-    public Lote     : string = 'Lote';
+    public Lote     : string = 'LOTE';
+    public UOM      : string = 'UDM';
 
 
        //Paginacion
@@ -200,7 +201,8 @@ storerkey            : this.propietario,
                             body[k].details.push({
                               qtyexpected    : Number(array[p]?.[this.CAJAS]),
                               sku            : String(array[p]?.[this.CODIGOS]),
-                              uom            : 'CJ',
+                              // uom         : 'CJ',
+                              uom         :   String(array[p]?.[this.UOM]),
                               externlineno   : String(body[k].details.length + 1),
                               // externpokey    : String(array[p]?.[this.PLANILLA]),
                               // pokey          : String(array[p]?.[this.PLANILLA]),
@@ -213,7 +215,8 @@ storerkey            : this.propietario,
                         body[k].details.push({
                           qtyexpected    : Number(array[p]?.[this.CAJAS]),
                           sku            : String(array[p]?.[this.CODIGOS]),
-                          uom            : 'CJ',
+                          // uom         : 'CJ',
+                          uom         :   String(array[p]?.[this.UOM]),
                           externlineno   : String(body[k].details.length + 1),
                           // externpokey    : String(array[p]?.[this.PLANILLA]),
                           // pokey          : String(array[p]?.[this.PLANILLA]),

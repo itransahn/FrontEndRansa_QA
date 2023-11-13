@@ -88,7 +88,13 @@ export class CrearPaseSalidaComponent implements OnInit {
       return  this.sharedS._filter(this.motivos, proveedor, 'motivo')
       }),
     );
-  
+
+    this.filteredOptions2.subscribe(
+      res=>{
+        console.log(res)
+      }
+    )
+
   }
 
   cargarForm1(){
@@ -136,9 +142,7 @@ cargarCatalogo( ){
           }),
         );
     }
-   
   )
- 
 }
 
 cargarData(){
