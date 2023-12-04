@@ -91,7 +91,7 @@ submit(){
       }
     ) 
    }
-    this.toast.mensajeSuccess(String('Permisos Agregados Correctamente'), mensajes.success);
+    // this.toast.mensajeSuccess(String('Permisos Agregados Correctamente'), mensajes.success);
     this.dialogRef.close();
 }
 

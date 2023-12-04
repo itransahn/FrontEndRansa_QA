@@ -11,7 +11,9 @@ interface dataUsuario {
     id_area : number,
     id_rol : number,
     imgPerfil : string,
-    sede      : number
+    sede      : number,
+    rol       : string,
+    usuario   : string,
 }
 
 

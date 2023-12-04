@@ -26,8 +26,10 @@ import { OperatoriaModule } from './modules/operatoria/operatoria.module';
 import { FinanzasModule } from './modules/finanzas/finanzas.module';
 import { TransporteModule } from './modules/transporte/transporte.module';
 import { ssomaModule } from './modules/SSOMA/ssoma.module';
+import { ClienteModule } from './modules/cliente/cliente.module';
 import { SharedModule } from './modules/shared/shared.module';
 import { RegistroDolarSpsComponent } from './modules/rrhh/registro-dolar-sps/registro-dolar-sps.component';
+import { AccessGuard } from './Guard/access.guard';
 // import { Loading2Component } from './shared/loading2/loading2.component';
 
 @NgModule({
@@ -38,8 +40,7 @@ import { RegistroDolarSpsComponent } from './modules/rrhh/registro-dolar-sps/reg
     NoPageFoundComponent,
     FullComponentComponent,
     CambioContraComponent,
-    RegistroDolarSpsComponent,
-
+    RegistroDolarSpsComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +59,7 @@ import { RegistroDolarSpsComponent } from './modules/rrhh/registro-dolar-sps/reg
     ReactiveFormsModule,
     NoPageFoundComponent,
   ],
-  providers: [ ],
+  providers: [AccessGuard ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

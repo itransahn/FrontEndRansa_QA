@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { order, orders } from '../../seguridad/Integraciones/pedidos/pedidos.component';
 import { PageEvent } from '@angular/material/paginator';
-import { Acumulador } from 'src/app/interfaces/generales';
-import { SharedService } from 'src/app/modules/shared/shared.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { SharedService } from '../../shared/shared.service';
 import { AdministracionService } from 'src/app/services/administracion.service';
-import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import { ToastServiceLocal } from 'src/app/services/toast.service';
+import { SweetAlertService } from 'src/app/services/sweet-alert.service';
+import { Acumulador } from 'src/app/interfaces/generales';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-pedidos',
@@ -14,13 +16,13 @@ import { ToastServiceLocal } from 'src/app/services/toast.service';
 })
 export class PedidosComponent implements OnInit {
 
+
   public urlQA  : string = 'https://api-wms.qas.ransaaplicaciones.com/order'
   
   public dataExcel   : any[]=[];
   public dataMapeada : any[]= [];
   public dataapi     : order[]= [];
   public username    : string = '';
-  public contrasena  : string = 'Ransa-360';
   public token       : string = '';
   public propietario : string = '';
   public propietarioQA : string = '';
@@ -29,6 +31,11 @@ export class PedidosComponent implements OnInit {
   public UrlEnvio : string = '';
   public PwdPrd : string = '';
   public PwdQa  : string = '';
+  public pedidos : any[] =[];
+
+  public correosTGU : string = 'Mvelasquezb@ransa.net,jaguilarcor@ransa.net,Naguilarp@ransa.net,dandinoc@ransa.net'
+  public correosSPS : string = 'Mvelasquezb@ransa.net,jaguilarcor@ransa.net,Naguilarp@ransa.net,dandinoc@ransa.net,bbatizl@ransa.net'
+
   public ambienteL = [
     { id: 1, ambiente : 'QA'},
     { id: 2, ambiente : 'PRD'},
@@ -40,17 +47,15 @@ export class PedidosComponent implements OnInit {
 
 
   public propietarioaCargar(){
-    if ( this.Cargar.value.ambiente == 2 ){
-        this.PropietarioCargar = 'propietario';
-        this.usuarioAuth0Cargar = 'usuarioAuth0';
-        this.pwdCargar = 'pwdPRD';
-    }
-
-    if ( this.Cargar.value.ambiente == 1 ){
-      this.PropietarioCargar = 'propietarioQA';
-      this.usuarioAuth0Cargar = 'usuarioAuth0QA';
-      this.pwdCargar = 'pwdQA';
-  }
+    // if ( this.Cargar.value.ambiente == 2 ){
+    //     this.PropietarioCargar = 'propietario';
+    //     this.usuarioAuth0Cargar = 'usuarioAuth0';
+    //     this.pwdCargar = 'pwdPRD';
+    // }
+    // if ( this.Cargar.value.ambiente == 1 ){}
+    this.PropietarioCargar = 'propietarioQA';
+    this.usuarioAuth0Cargar = 'usuarioAuth0QA';
+    this.pwdCargar = 'pwdQA';
   }
  
 
@@ -96,36 +101,37 @@ export class PedidosComponent implements OnInit {
     public sharedS  : SharedService,
     public servicio : AdministracionService,
     public toast    : ToastServiceLocal,
-    public sweel    : SweetAlertService
+    public sweel    : SweetAlertService,
+    public auth     : AuthService
   ) { }
 
   ngOnInit() {
-    this.PropietarioCargar ='propietarioQA';
+    // this.PropietarioCargar ='propietarioQA';
+    this.propietario = this.auth.dataUsuario?.['usuario'];
+    // this.obtenerUsuario(this.propietario);
+    this.obtenerUsuario(this.propietario)
     this.sharedS.CleanDataExcel()
-    this.Cargar = new FormGroup({
-      ambiente : new FormControl({ value : '', disabled : false }, [Validators.required]),
-      propietario : new FormControl({ value : '', disabled : false }, [Validators.required]),
-    });
+
     this.filtro = new FormGroup({
       filtrar: new FormControl({ value:'',disabled: false}),
       // propietario : new FormControl({ value : '', disabled : false }, [Validators.required])
     });
-    this.cargarPropietarios();
+    // this.cargarPropietarios();
   }
 
-cargarPropietarios(){
-    this.servicio.get('administracion/propietariosInt', []).subscribe(
-      res=>{
-        console.log(res)
-        this.propietarios = res?.data.Table0;
-      }
-    )
-}
+// cargarPropietarios(){
+//     this.servicio.get('administracion/propietariosInt', []).subscribe(
+//       res=>{
+//         console.log(res)
+//         this.propietarios = res?.data.Table0;
+//       }
+//     )
+// }
 
-  SetearData(evt){
-  this.propietario = evt?.value;
-  this.obtenerUsuario(evt?.value);
-}
+//   SetearData(evt){
+//   this.propietario = evt?.value;
+//  
+// }
 
   cargarData(evt){
     this.loading1 = true; 
@@ -146,7 +152,7 @@ cargarPropietarios(){
     }
 
     obtenerWh( propietario : string){
-      if( propietario.toUpperCase().includes('SPS')){
+      if( propietario.toUpperCase()?.includes('SPS')){
         return 'WHSE52'
       }else{
         return 'WHSE51'
@@ -197,7 +203,7 @@ cargarPropietarios(){
           if ( !comprobar ){
             body.push({
               externorderkey : String(array[i]?.[this.PLANILLA]),
-              whseid         : this.obtenerWh(this.propietario),
+              whseid         : this.obtenerWh(this.propietarioQA),
               orderdate      : new Date(),
               type           :'0',
               consigneekey   : String(array[i]?.[this.DESTINO]),
@@ -209,14 +215,14 @@ cargarPropietarios(){
               shiptogether   : 'N',
               priority       : '3',
               splitshipmentindicator : '0',
-              storekey       : this.propietario,
+              storekey       : this.propietarioQA,
               details    : [],
                   })
           }
         }else{
           body.push({
             externorderkey : String(array[i]?.[this.PLANILLA]),
-              whseid         : this.obtenerWh(this.propietario),
+              whseid         : this.obtenerWh(this.propietarioQA),
               orderdate      : new Date(),
               type           :'0',
               consigneekey   : String(array[i]?.[this.DESTINO]),
@@ -228,7 +234,7 @@ cargarPropietarios(){
               shiptogether   : 'N',
               priority       : '3',
               splitshipmentindicator : '0',
-              storekey       : this.propietario,
+              storekey       : this.propietarioQA,
             details    : [],
           })
         }
@@ -295,8 +301,24 @@ cargarPropietarios(){
        orders : body
         })
        //Cargar data mapeada para mostrar 
-      this.dataMapeada = body;
+       this.dataMapeada = body;
+
+      this.buscarPedidos('externorderkey')
+
       }
+
+buscarPedidos(buscar: string){
+
+  if( this.dataMapeada.length > 0){
+    for( let i=0; i< this.dataMapeada.length; i++){
+        this.pedidos.push( this.dataMapeada[i][buscar])
+    } 
+  }
+
+  // console.log(this.pedidos)
+  
+}
+
 
    enviarPedidos(){
         this.sweel.mensajeConConfirmacion('¿Seguro de enviar Pedidos?', 'Carga de Pedidos','warning').then(
@@ -308,7 +330,7 @@ cargarPropietarios(){
                   //     this.toast.mensajeInfo(String(res?.Transmision),"Respuesta");
                   //   }
                   // )
-                  console.log(JSON.stringify(this.dataapi[0]))
+                  // console.log(JSON.stringify(this.dataapi[0]))
                   this.cargarPedidos( JSON.stringify(this.dataapi[0])  )
                 }  
                 // this.toast.mensajeSuccess("Data Cargada con éxito","Carga de datos");
@@ -364,6 +386,7 @@ cargarPropietarios(){
       res=>{
         if( res?.data ){
           this.token = res?.data?.access_token
+          // console.log(this.token)
         }else{
           this.toast.mensajeError('Nombre y/o contraseña invalido',"Error")
         }
@@ -383,12 +406,12 @@ cargarPropietarios(){
 
     this.servicio.post(url,params).subscribe(
       res=>{
-        console.log( res );
+        // console.log( res );
         if( !res?.hasError ){
           this.toast.mensajeSuccess("Pedidos Enviados","Envío de pedidos")
+          this.correoTransaccion()
             this.Limpieza(2)
         }else{
-          console.log( res );
           this.toast.mensajeError(String(res?.errors[0]?.message),"Error")
         }
       }
@@ -418,74 +441,39 @@ cargarPropietarios(){
     )
     }
 
+    correoTransaccion( ){
+      let correo : string;
+      if(this.obtenerWh( this.propietario) == 'WHSE51'){
+         correo = this.correosTGU
+      }else{
+        correo = this.correosSPS
+      }
+
+
+      let url = '/administracion/correoTransaccion';
+      let params = {
+        cliente     : this.propietario,
+        wh          : this.obtenerWh(this.propietario),
+        transaccion : 'PEDIDOS',
+        detalle     : this.pedidos.toString(),
+        fecha       : new Date(),
+        bultaje     : this.totalbultos,
+        correo      : correo,
+      }
+    this.servicio.post(url, params).subscribe(
+      res =>{
+        if( !res.hasError ){
+          this.toast.mensajeSuccess(res?.data[0]?.['mensaje'],"Exito")
+        }else{
+          this.toast.mensajeError('Favor notificar a IT RANSA envío de transacciones y correo fallido',"Error")
+
+        }
+      }
+    )
+    }
+
     checkOnClick(tipo : any){
 
     }
-    }
-
-export interface order {
-date       : Date,
-society    : string,
-clientcode : string,
-  orders : {
-   externorderkey  : string,
-   whseid          : string,
-   orderdate       : Date,
-   type            : string,
-   scheduleddelvdate : Date,
-   actualdelvdate    : Date,
-   consigneekey    : string,
-   deliverydate    : Date,
-   plannedshipdate : Date,
-   planneddelvdate : Date,
-   shiptogether    : string,
-   priority        : string,
-   splitshipmentindicator   : string,
-   storekey : string,
-   details : {
-    externlinenumber  :  string,
-    sku :         string,
-    openqty :     number ,
-    fulfillqty :  number ,
-    uom :         string ,
-    externlineno: string,
-    whseid :      string,
-    LOTTABLE06 : string
-  }[]
-}[]
+   
 }
-
-export interface orders{
-  externorderkey  : string,
-  whseid          : string,
-  orderdate       : Date,
-  type            : string,
-  scheduleddelvdate : Date,
-  actualdelvdate    : Date,
-  consigneekey    : string,
-  deliverydate    : Date,
-  plannedshipdate : Date,
-  planneddelvdate : Date,
-  shiptogether    : string,
-  priority        : string,
-  splitshipmentindicator   : string,
-  storekey : string,
-  details : {
-    externlinenumber  :  string,
-    sku :         string,
-    openqty :     number ,
-    fulfillqty :  number ,
-    uom :         string ,
-    externlineno: string,
-    whseid :      string,
-    LOTTABLE06 : string
-  }[]
-  }
-
-
-  
-  
-  
-  
-  
-  

@@ -1,0 +1,121 @@
+<div class="row mt-2">
+
+  <div class="col-md-12" *ngIf="token">
+    <div class="uploadfilecontainer" (click)="fileInput.click()" style="display: flex; justify-content: center; align-items: center;">
+        <h3 class="text-center"> {{sharedS.ExcelName || 'Seleccionar archivo'}} 
+        </h3>
+        <input type="file" #fileInput hidden (change)="cargarData($event)" [disabled]="sharedS.ExcelName" required>
+        <mat-icon class="iconM" *ngIf="!sharedS.ExcelName">  attach_file </mat-icon>
+        <mat-icon class="iconM" *ngIf="sharedS.ExcelName" >  bar_chart   </mat-icon>
+
+    </div>
+</div>
+
+
+    <div class="col-md-6 container">
+      <div >
+        <button mat-raised-button class="buttonPrincipal" [hidden]="dataMapeada.length <= 0 || !token" (click)="enviarPedidos ()">
+            <mat-icon>
+              cloud_upload
+            </mat-icon>
+            Cargar
+        </button>
+    </div>
+    </div>
+    <div class="col-md-6 container">
+      <div >
+        <button mat-raised-button class="buttonPrincipal" [hidden]="dataMapeada.length <= 0 || !token" (click)="Limpieza(1)">
+            <mat-icon>
+              clear
+            </mat-icon>
+            Limpiar
+        </button>
+    </div>
+    </div>
+  </div>
+
+
+  
+<mat-card class="cardPersonalizada mt-4"  *ngIf="dataMapeada.length > 0 && !loading3 ">
+  <form [formGroup]="filtro">
+      <div class="row">
+          <div class="col-md-12">
+              <mat-form-field appearance="legacy">
+                  <mat-label>
+                      <mat-icon> search </mat-icon>
+                      Buscar
+                  </mat-label>
+                  <input matInput placeholder="" formControlName="filtrar">
+              </mat-form-field>
+  
+          </div>
+          <div class="col-md-4">
+              <mat-card class="cardPersonalizada">
+                <h4 class="centrar">Pedidos</h4>
+                <h4 class="centrar">{{ totalPedidos }}</h4>
+              </mat-card>
+          </div>
+          <div class="col-md-4">
+              <mat-card class="cardPersonalizada">
+                <h4 class="centrar"> Cajas </h4>
+                <h4 class="centrar"> {{totalbultos }}</h4>
+              </mat-card>
+          </div>
+          <div class="col-md-4">
+              <mat-card class="cardPersonalizada">
+                <h4 class="centrar">Tiendas</h4>
+                <h4 class="centrar"> {{ totalDestinos }}</h4>
+              </mat-card>
+          </div>
+      </div>
+  </form>
+
+
+
+
+
+
+     <div class="table-responsive !important">
+      <table  >
+          <!-- <caption>Statement Summary</caption> -->
+          <thead>
+            <tr>
+              <th scope="col">Pedido</th>
+              <th scope="col">Tienda</th>
+              <th scope="col">Articulos</th>
+              <!-- <th scope="col">Valor Factura</th> -->
+              
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let act of dataMapeada  | search: this.filtro.value.filtrar:parametrosBusqueda | slice: desde: hasta " class="trHover">
+              <td data-label="Pedido">{{    act?.['externorderkey']  }}</td>
+              <td data-label="Tienda">{{    act?.['consigneekey']  }}</td>
+              <td data-label="Articulos">{{ act?.['details'].length      }}</td>
+              <!-- <td data-label="Unidades">{{        act?.['Unidades']  | number : '1.2-2'   }}</td>
+              <td data-label="Cajas">{{        act?.['Cajas']  | number : '1.2-2'   }}</td> -->
+              <!-- <td data-label="Valor Factura">{{        act?.['ValorDeclarado']     }}</td> -->
+           </tr>
+          </tbody>
+        </table>
+        
+     </div>
+        <mat-paginator [length]="dataMapeada.length" [pageSize]="pageSize " (page)="next($event)">
+      </mat-paginator>
+      
+
+
+</mat-card>
+
+
+
+
+
+
+<!-- <app-loading *ngIf="loading1"></app-loading> -->
+
+<app-loading2 *ngIf="loading1"></app-loading2>
+
+<app-loading2 *ngIf="loading2"></app-loading2>
+

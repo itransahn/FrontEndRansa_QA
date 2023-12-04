@@ -18,7 +18,7 @@ const routes: Routes = [
   {
     path : 'ransa',
     component: FullComponentComponent,
-    canActivate : [AuthGuard],
+    canActivate : [],
     children : [
       {
         path: '',
@@ -58,10 +58,16 @@ const routes: Routes = [
         path : 'ssoma',
         canActivate : [AccessGuard],
         loadChildren : () => import('./modules/SSOMA/ssoma-routing.module').then(m => m.ssomaRoutingModule)
+      },
+      {
+        path : 'tracking',
+        canActivate : [],
+        loadChildren : () => import('./modules/cliente/cliente-routing.module').then(m => m.clienteRoutingModule)
       }
+      
     ]
-
   },
+
   {
     path:           '', 
     component:       LoginComponent,

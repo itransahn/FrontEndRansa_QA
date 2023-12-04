@@ -321,8 +321,9 @@ html2canvas(DATA, options).then((canvas) => {
 
 CleanDataExcel(){
   this.Excel$.next([]);
-  this.ExcelName = '';
-  this.isExcelFile = '';
+  this.ExcelName = null;
+  this.isExcelFile = null;
+  (<HTMLInputElement>document.getElementById("fileInput")).value = ''
 }
 
 public _filter(array:any[],value: string, valorBuscar : string): string[]{

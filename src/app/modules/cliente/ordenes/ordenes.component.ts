@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ASN, ASNS } from '../../seguridad/Integraciones/ordenes/ordenes.component';
 import { PageEvent } from '@angular/material/paginator';
-import { Acumulador } from 'src/app/interfaces/generales';
-import { SharedService } from 'src/app/modules/shared/shared.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { SharedService } from '../../shared/shared.service';
 import { AdministracionService } from 'src/app/services/administracion.service';
-import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import { ToastServiceLocal } from 'src/app/services/toast.service';
+import { SweetAlertService } from 'src/app/services/sweet-alert.service';
+import { Acumulador } from 'src/app/interfaces/generales';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-ordenes',
@@ -15,16 +17,40 @@ import { ToastServiceLocal } from 'src/app/services/toast.service';
 export class OrdenesComponent implements OnInit {
 
 
+
+
   public urlQA  : string = 'https://api-wms.qas.ransaaplicaciones.com/asn'
   // public urlPRD : string = 'https://monitortmswms.ransa.net/importar/archivo_ws_json.php'
   public dataExcel   : any[]=[];
   public dataMapeada : any[]= [];
   public dataapi     : ASN[]= [];
   public username    : string = '';
-  public contrasena  : string = 'Ransa-360';
   public token       : string = '';
   public propietario : string = '';
+  public propietarioQA : string = '';
+  public usuarioAuth0 : string = '';
+  public usuarioAuthQA : string = '';
   public UrlEnvio    : string = '';
+
+  public PwdPrd : string = '';
+  public PwdQa  : string = '';
+
+  public ordenes : any[] =[];
+  
+  public correosTGU : string = 'Mvelasquezb@ransa.net,jaguilarcor@ransa.net,Naguilarp@ransa.net,dandinoc@ransa.net'
+  public correosSPS : string = 'Mvelasquezb@ransa.net,jaguilarcor@ransa.net,Naguilarp@ransa.net,dandinoc@ransa.net,bbatizl@ransa.net'
+
+  public PropietarioCargar : string;
+  public usuarioAuth0Cargar : string;
+  public pwdCargar : string;
+
+
+  public propietarioaCargar(){
+    this.PropietarioCargar = 'propietarioQA';
+    this.usuarioAuth0Cargar = 'usuarioAuth0QA';
+    this.pwdCargar = 'pwdQA';
+  }
+ 
     //Parametrizar Columnas 
     public PLANILLA : string = 'FACTURA';
     public CODIGOS  : string = 'CODIGOS';
@@ -44,7 +70,7 @@ export class OrdenesComponent implements OnInit {
    previousPageLabel = 'Página Anterior';
    public pageSize = 100;
    public filter :string  = '';
-   public filtro: FormGroup;
+   public filtro : FormGroup;
    public Cargar : FormGroup;
    Group;
    public parametrosBusqueda = ['FACTURA','CODIGOS'];
@@ -67,35 +93,25 @@ export class OrdenesComponent implements OnInit {
     public sharedS  : SharedService,
     public servicio : AdministracionService,
     public toast    : ToastServiceLocal,
-    public sweel    : SweetAlertService
+    public sweel    : SweetAlertService,
+    public auth     : AuthService
+
   ) { }
 
 ngOnInit() {
-    this.sharedS.CleanDataExcel()
-    this.Cargar = new FormGroup({
-      propietario : new FormControl({ value : '', disabled : false }, [Validators.required])
-    });
+  this.propietario = this.auth.dataUsuario?.['usuario'];
+  this.obtenerUsuario(this.propietario)
+  // this.sharedS.CleanDataExcel()
+   
     this.filtro = new FormGroup({
       filtrar: new FormControl({ value:'',disabled: false}),
       // propietario : new FormControl({ value : '', disabled : false }, [Validators.required])
     });
-    this.cargarPropietarios();
+    // this.cargarPropietarios();
   }
-
-cargarPropietarios(){
-    this.servicio.get('administracion/propietariosInt', []).subscribe(
-      res=>{
-        this.propietarios = res?.data.Table0
-      }
-    )
-}
-
-SetearData(evt){
-  this.propietario = evt?.value;
-  this.obtenerUsuario(evt?.value);
-}
-
+  
 cargarData(evt){
+  console.log(evt)
     this.loading1 = true; 
      this.sharedS.onChange(evt);
      this.sharedS.dataExcelo$.subscribe(
@@ -112,6 +128,14 @@ cargarData(evt){
      )
     }
 
+obtenerWh( propietario : string){
+      if( propietario.toUpperCase().includes('SPS')){
+        return 'WHSE52'
+      }else{
+        return 'WHSE51'
+
+      }
+    }
 // Buscar Totales
  BuscarTotales(array : any[], buscar : string){
       var cont : Number = 0;
@@ -160,8 +184,8 @@ suppliercode         : String(array[i]?.[this.DESTINO]),
 type                 : '1',
 scheduledshipdate    : new Date(),
 details    : [],
-whseid               : this.obtenerWh(this.propietario),
-storerkey            : this.propietario,
+whseid               : this.obtenerWh(this.propietarioQA),
+storerkey            : this.propietarioQA,
                   })
           }
         }else{
@@ -172,8 +196,8 @@ storerkey            : this.propietario,
             type                 : '1',
             scheduledshipdate    : new Date(),
             details    : [],
-            whseid               : this.obtenerWh(this.propietario),
-            storerkey            : this.propietario,
+            whseid               : this.obtenerWh(this.propietarioQA),
+            storerkey            : this.propietarioQA,
           })
         }
           }
@@ -187,7 +211,7 @@ storerkey            : this.propietario,
                         let posicion : number;
                         let cantidad : number;
                         comprobar2 = false;  
-          //Recorro El arreglo interno de articulos por pedido, para agrupar o consolidar articulos              
+          //Recorro El arreglo interno de articulos por ASN, para agrupar o consolidar articulos              
           for (let m = 0; m < body[k].details.length; m++) {
                           if ( body[k].details[m]['sku'] == array[p]?.[this.CODIGOS]  ){
                             comprobar2 = true;
@@ -238,6 +262,18 @@ storerkey            : this.propietario,
         })
        //Cargar data mapeada para mostrar 
       this.dataMapeada = body;
+
+      this.buscarOrdenes('externreceiptkey')
+
+      }
+
+
+      buscarOrdenes(buscar: string){
+        if( this.dataMapeada.length > 0){
+          for( let i=0; i< this.dataMapeada.length; i++){
+              this.ordenes.push( this.dataMapeada[i][buscar])
+          } 
+        } 
       }
 
   enviarData(){
@@ -245,8 +281,6 @@ storerkey            : this.propietario,
           res =>{
                 if ( res ){
                 if(this.dataMapeada.length > 0){
-           
-                  console.log(JSON.stringify(this.dataapi[0]))
                   this.cargarASN( JSON.stringify(this.dataapi[0])  )
                 }  
                 this.loading2 = false;
@@ -256,11 +290,12 @@ storerkey            : this.propietario,
       }
 
   Limpieza( Bandera ?: number){
-
+    // let inputValue = (<HTMLInputElement>document.getElementById("fileInput")).value;
     if ( Bandera == 1){
       this.sweel.mensajeConConfirmacion("¿Seguro de Limpiar data?","Limpieza","question").then(
         res=>{
           if ( res ){
+            (<HTMLInputElement>document.getElementById("fileInput")).value = ''
             this.sharedS.CleanDataExcel();
             this.dataMapeada = [];
             this.dataapi = [];
@@ -268,44 +303,56 @@ storerkey            : this.propietario,
         }
       )
     }else{
+      (<HTMLInputElement>document.getElementById("fileInput")).value = ''
       this.sharedS.CleanDataExcel();
       this.dataMapeada = [];
       this.dataapi = [];
     }
+ }
 
-    
+ Limpiar(){
+  this.sharedS.CleanDataExcel();
+  this.dataMapeada = [];
+  this.dataapi = [];
+  (<HTMLInputElement>document.getElementById("fileInput")).value = ''
 
-
-      
-      }
+ }
 
   ObtenerToken( propietario ){
-      let url = '/administracion/auth0';
-      let params = {
-        usuario : propietario, 
-        contra  : this.contrasena
-      }
 
-    this.servicio.post(url,params).subscribe(
-      res=>{
-        if( res?.data ){
-          this.token = res?.data?.access_token
-            //console.log( this.token );
-        }else{
-          this.toast.mensajeError('Nombre y/o contraseña invalido',"Error")
-        }
-      }
-    )
+    let contra  : string;
+    let usuario : string;
+    let urlApi     : string;
+
+    if ( true ){
+        contra  = this.PwdQa
+        usuario = this.usuarioAuthQA
+        urlApi  = 'https://api-wms.qas.ransaaplicaciones.com/auth/token';
+        this.UrlEnvio = 'https://api-wms.qas.ransaaplicaciones.com/order'
+    }else{ 
+      contra  = this.PwdPrd;
+      usuario = this.usuarioAuth0;
+      urlApi  =  'https://api-wms.ransaaplicaciones.com/auth/token';
+      this.UrlEnvio = 'https://api-wms.ransaaplicaciones.com/order'
+    }
+    let url = '/administracion/auth0';
+    let params = {
+      usuario : usuario, 
+      contra  : contra,
+      url     : urlApi
     }
 
-  obtenerWh( propietario : string){
-      if( propietario.toUpperCase().includes('SPS')){
-        return 'WHSE52'
+  this.servicio.post(url,params).subscribe(
+    res=>{
+      if( res?.data ){
+        this.token = res?.data?.access_token
       }else{
-        return 'WHSE51'
-
+        this.toast.mensajeError('Nombre y/o contraseña invalido',"Error")
       }
     }
+  )
+ }
+
 
   cargarASN( data  ){
      if(this.dataExcel.length > 0){
@@ -317,13 +364,10 @@ storerkey            : this.propietario,
 
     this.servicio.post(url,params).subscribe(
       res=>{
-        console.log( res );
         if( !res?.hasError ){
           this.toast.mensajeSuccess("ASN'S Enviadas","Envío de ASN")
-            // console.log( res );
             this.Limpieza(2);
         }else{
-          // console.log( res );
           this.toast.mensajeError(String(res?.errors[0]?.message),"Error")
         }
       }
@@ -341,52 +385,17 @@ storerkey            : this.propietario,
     this.servicio.get(url, params).subscribe(
       res =>{
         if( res ){
-          this.username = res?.data?.Table0[0]?.usuarioAuth0QA;
+          this.username = res?.data?.Table0[0]?.usuarioAuth0;
+          this.propietarioQA = res?.data?.Table0[0]?.propietarioQA;
+          this.usuarioAuth0  = res?.data?.Table0[0]?.usuarioAuth0;
+          this.usuarioAuthQA = res?.data?.Table0[0]?.usuarioAuth0QA;
+          this.PwdPrd        = res?.data?.Table0[0]?.pwdPRD;
+          this.PwdQa         = res?.data?.Table0[0]?.pwdQA;
           this.ObtenerToken( this.username );
         }
       }
     )
     }
-}
 
-export interface ASN {
-  date       : Date,
-  society    : string,
-  clientcode : number,
-   asn : {
-      expectedreceiptdate : Date,
-      externreceiptkey    : string,
-      suppliercode        : string,
-      type       : string,
-    scheduledshipdate : Date,
-      details : {
-        qtyexpected  : Number,
-        sku          : string,
-        uom          : string,
-        externlineno : string,
-        // pokey : string,
-        // externpolineno : string,
-        LOTTABLE06   : string
-      }[],
-      whseid     : string,
-      storerkey  : string,
-  }[]
-  }
-  
-export interface ASNS{
-    expectedreceiptdate : Date,
-    externreceiptkey    : string,
-    suppliercode        : string,
-    type       : string,
-    scheduledshipdate : Date,
-    details : {
-      qtyexpected  : number,
-      sku          : string,
-      uom          : string,
-      externlineno : string,
-      // externpolineno : string,
-      LOTTABLE06   : string
-    }[],
-    whseid     : string,
-    storerkey  : string
-    }
+
+}
