@@ -71,7 +71,7 @@ export class OrdenesComponent implements OnInit {
   ) { }
 
 ngOnInit() {
-    this.sharedS.CleanDataExcel()
+    // this.sharedS.CleanDataExcel()
     this.Cargar = new FormGroup({
       propietario : new FormControl({ value : '', disabled : false }, [Validators.required])
     });
@@ -264,6 +264,7 @@ storerkey            : this.propietario,
             this.sharedS.CleanDataExcel();
             this.dataMapeada = [];
             this.dataapi = [];
+      (<HTMLInputElement>document.getElementById("fileInput")).value = ''
           }
         }
       )
@@ -271,8 +272,8 @@ storerkey            : this.propietario,
       this.sharedS.CleanDataExcel();
       this.dataMapeada = [];
       this.dataapi = [];
-    }
-
+      (<HTMLInputElement>document.getElementById("fileInput")).value = ''
+    } 
     
 
 

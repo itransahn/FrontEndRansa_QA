@@ -323,7 +323,7 @@ CleanDataExcel(){
   this.Excel$.next([]);
   this.ExcelName = null;
   this.isExcelFile = null;
-  (<HTMLInputElement>document.getElementById("fileInput")).value = ''
+  // (<HTMLInputElement>document.getElementById("fileInput")).value = ''
 }
 
 public _filter(array:any[],value: string, valorBuscar : string): string[]{

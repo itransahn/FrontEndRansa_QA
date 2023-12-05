@@ -40,13 +40,13 @@ export class PedidosComponent implements OnInit {
 
 
   public propietarioaCargar(){
-    if ( this.Cargar.value.ambiente == 2 ){
-        this.PropietarioCargar = 'propietario';
-        this.usuarioAuth0Cargar = 'usuarioAuth0';
-        this.pwdCargar = 'pwdPRD';
-    }
+    // if ( this.Cargar.value.ambiente == 2 ){
+    //     this.PropietarioCargar = 'propietario';
+    //     this.usuarioAuth0Cargar = 'usuarioAuth0';
+    //     this.pwdCargar = 'pwdPRD';
+    // }
 
-    if ( this.Cargar.value.ambiente == 1 ){
+    if ( true ){
       this.PropietarioCargar = 'propietarioQA';
       this.usuarioAuth0Cargar = 'usuarioAuth0QA';
       this.pwdCargar = 'pwdQA';
@@ -101,7 +101,8 @@ export class PedidosComponent implements OnInit {
 
   ngOnInit() {
     this.PropietarioCargar ='propietarioQA';
-    this.sharedS.CleanDataExcel()
+    this.cargarPropietarios();
+    // this.sharedS.CleanDataExcel()
     this.Cargar = new FormGroup({
       ambiente : new FormControl({ value : '', disabled : false }, [Validators.required]),
       propietario : new FormControl({ value : '', disabled : false }, [Validators.required]),
@@ -110,7 +111,6 @@ export class PedidosComponent implements OnInit {
       filtrar: new FormControl({ value:'',disabled: false}),
       // propietario : new FormControl({ value : '', disabled : false }, [Validators.required])
     });
-    this.cargarPropietarios();
   }
 
 cargarPropietarios(){
@@ -319,7 +319,6 @@ cargarPropietarios(){
       }
 
    Limpieza( Bandera ?: number){
-
         if ( Bandera == 1){
           this.sweel.mensajeConConfirmacion("¿Seguro de Limpiar data?","Limpieza","question").then(
             res=>{
@@ -327,6 +326,7 @@ cargarPropietarios(){
                 this.sharedS.CleanDataExcel();
                 this.dataMapeada = [];
                 this.dataapi = [];
+          (<HTMLInputElement>document.getElementById("fileInput")).value = ''
               }
             }
           )
@@ -334,6 +334,7 @@ cargarPropietarios(){
           this.sharedS.CleanDataExcel();
           this.dataMapeada = [];
           this.dataapi = [];
+          (<HTMLInputElement>document.getElementById("fileInput")).value = ''
         } 
           }
 
@@ -383,12 +384,10 @@ cargarPropietarios(){
 
     this.servicio.post(url,params).subscribe(
       res=>{
-        console.log( res );
         if( !res?.hasError ){
           this.toast.mensajeSuccess("Pedidos Enviados","Envío de pedidos")
             this.Limpieza(2)
         }else{
-          console.log( res );
           this.toast.mensajeError(String(res?.errors[0]?.message),"Error")
         }
       }

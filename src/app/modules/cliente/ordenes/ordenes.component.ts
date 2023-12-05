@@ -111,7 +111,6 @@ ngOnInit() {
   }
   
 cargarData(evt){
-  console.log(evt)
     this.loading1 = true; 
      this.sharedS.onChange(evt);
      this.sharedS.dataExcelo$.subscribe(

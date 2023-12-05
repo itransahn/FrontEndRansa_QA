@@ -349,6 +349,7 @@ buscarPedidos(buscar: string){
                 this.sharedS.CleanDataExcel();
                 this.dataMapeada = [];
                 this.dataapi = [];
+      (<HTMLInputElement>document.getElementById("fileInput")).value = ''
               }
             }
           )
@@ -356,6 +357,7 @@ buscarPedidos(buscar: string){
           this.sharedS.CleanDataExcel();
           this.dataMapeada = [];
           this.dataapi = [];
+      (<HTMLInputElement>document.getElementById("fileInput")).value = ''
         } 
           }
 
