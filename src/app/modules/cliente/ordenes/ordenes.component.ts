@@ -212,7 +212,7 @@ storerkey            : this.propietarioQA,
                         comprobar2 = false;  
           //Recorro El arreglo interno de articulos por ASN, para agrupar o consolidar articulos              
           for (let m = 0; m < body[k].details.length; m++) {
-                          if ( body[k].details[m]['sku'] == array[p]?.[this.CODIGOS]  ){
+                          if ( body[k].details[m]['sku'] == array[p]?.[this.CODIGOS]  && body[k].details[m]['LOTTABLE06'] == array[p]?.[this.Lote]  ){
                             comprobar2 = true;
                             posicion  = m
                             cantidad  = array[p]?.[this.CAJAS] 
