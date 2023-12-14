@@ -273,7 +273,7 @@ export class PedidosComponent implements OnInit {
                         comprobar2 = false;  
           //Recorro El arreglo interno de articulos por pedido, para agrupar o consolidar articulos              
           for (let m = 0; m < body[k].details.length; m++) {
-                          if ( body[k].details[m]['sku'] == array[p]?.[this.CODIGOS] && body[k].details[m]['LOTTABLE06'] == array[p]?.[this.Lote]  ){
+                          if ( body[k].details[m]['sku'] == array[p]?.[this.CODIGOS] && body[k].details[m]['lottable06'] == array[p]?.[this.Lote]  ){
                             comprobar2 = true;
                             posicion  = m
                             cantidad  = Number(array[p]?.[this.CAJAS] )
@@ -292,7 +292,7 @@ export class PedidosComponent implements OnInit {
                               uom         :   String(array[p]?.[this.UOM]),
                               externlineno  : String(body[k].details.length + 1),
                               whseid      : this.obtenerWh(this.propietario),
-                              LOTTABLE06  : String(array[p]?.[this.Lote])
+                              lottable06  : String(array[p]?.[this.Lote])
                           })
                           }
       
@@ -306,7 +306,7 @@ export class PedidosComponent implements OnInit {
                           uom         :   String(array[p]?.[this.UOM]),
                           externlineno  : String(body[k].details.length + 1),
                           whseid  : this.obtenerWh(this.propietario),
-                          LOTTABLE06  : String(array[p]?.[this.Lote])
+                          lottable06  : String(array[p]?.[this.Lote])
                       })
                       }
                 }

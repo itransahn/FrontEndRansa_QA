@@ -125,6 +125,7 @@ export class PedidosComponent implements OnInit {
        // input.value = '';
     this.archivoSeleccionado = null;
   }
+
   Limpieza( Bandera ?: number){
 
     if ( Bandera == 1){
@@ -279,7 +280,7 @@ cargarPropietarios(){
                         comprobar2 = false;  
           //Recorro El arreglo interno de articulos por pedido, para agrupar o consolidar articulos              
           for (let m = 0; m < body[k].details.length; m++) {
-                          if ( body[k].details[m]['sku'] == array[p]?.[this.CODIGOS] && body[k].details[m]['LOTTABLE06'] == array[p]?.[this.Lote]  ){
+                          if ( body[k].details[m]['sku'] == array[p]?.[this.CODIGOS] && body[k].details[m]['lottable06'] == array[p]?.[this.Lote]  ){
                             comprobar2 = true;
                             posicion  = m
                             cantidad  = Number(array[p]?.[this.CAJAS] )
@@ -298,7 +299,7 @@ cargarPropietarios(){
                               uom         :   String(array[p]?.[this.UOM]),
                               externlineno  : String(body[k].details.length + 1),
                               whseid      : this.obtenerWh(this.propietario),
-                              LOTTABLE06  : String(array[p]?.[this.Lote])
+                              lottable06  : String(array[p]?.[this.Lote])
                           })
                           }
       
@@ -312,7 +313,7 @@ cargarPropietarios(){
                           uom         :   String(array[p]?.[this.UOM]),
                           externlineno  : String(body[k].details.length + 1),
                           whseid  : this.obtenerWh(this.propietario),
-                          LOTTABLE06  : String(array[p]?.[this.Lote])
+                          lottable06  : String(array[p]?.[this.Lote])
                       })
                       }
                 }
@@ -342,8 +343,7 @@ cargarPropietarios(){
                   //     this.toast.mensajeInfo(String(res?.Transmision),"Respuesta");
                   //   }
                   // )
-                  console.log( JSON.stringify(this.dataapi[0]))
-                  // this.cargarPedidos( JSON.stringify(this.dataapi[0])  )
+                  this.cargarPedidos( JSON.stringify(this.dataapi[0])  )
                 }  
                 // this.toast.mensajeSuccess("Data Cargada con éxito","Carga de datos");
                 this.loading2 = false;
@@ -351,8 +351,6 @@ cargarPropietarios(){
             }
             )
       }
-
-
 
     ObtenerToken( propietario : string ){
       let contra  : string;
@@ -465,7 +463,7 @@ clientcode : string,
     uom :         string ,
     externlineno: string,
     whseid :      string,
-    LOTTABLE06 : string
+    lottable06 : string
   }[]
 }[]
 }
@@ -493,7 +491,7 @@ export interface orders{
     uom :         string ,
     externlineno: string,
     whseid :      string,
-    LOTTABLE06 : string
+    lottable06 : string
   }[]
   }
 

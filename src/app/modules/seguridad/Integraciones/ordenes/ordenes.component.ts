@@ -228,7 +228,7 @@ storerkey            : this.propietario,
                         comprobar2 = false;  
           //Recorro El arreglo interno de articulos por pedido, para agrupar o consolidar articulos              
           for (let m = 0; m < body[k].details.length; m++) {
-                          if ( body[k].details[m]['sku'] == array[p]?.[this.CODIGOS] && body[k].details[m]['LOTTABLE06'] == array[p]?.[this.Lote] ){
+                          if ( body[k].details[m]['sku'] == array[p]?.[this.CODIGOS] && body[k].details[m]['lottable06'] == array[p]?.[this.Lote] ){
                             comprobar2 = true;
                             posicion  = m
                             cantidad  = array[p]?.[this.CAJAS] 
@@ -246,7 +246,8 @@ storerkey            : this.propietario,
                               // externpokey    : String(array[p]?.[this.PLANILLA]),
                               // pokey          : String(array[p]?.[this.PLANILLA]),
                               // externpolineno : String(body[k].details.length + 1),
-                              LOTTABLE06     : String(array[p]?.[this.Lote])
+                              lottable06     : String(array[p]?.[this.Lote]),
+                              lottable09     : array[p]?.[this.PLANILLA]
                           })
                           }
       
@@ -261,7 +262,8 @@ storerkey            : this.propietario,
                           // pokey          : String(array[p]?.[this.PLANILLA]),
                           //  pokey          : '',
                           // externpolineno : String(body[k].details.length + 1),
-                          LOTTABLE06     : String(array[p]?.[this.Lote])
+                          lottable06     : String(array[p]?.[this.Lote]),
+                          lottable09     : array[p]?.[this.PLANILLA]
                       })
                       }
                 }
@@ -329,18 +331,18 @@ storerkey            : this.propietario,
       }
 
       console.log(data)
-    // this.servicio.post(url,params).subscribe(
-    //   res=>{
-    //     if( !res?.hasError ){
-    //       this.toast.mensajeSuccess("ASN'S Enviadas","Envío de ASN")
-    //         // console.log( res );
-    //         this.Limpieza(2);
-    //     }else{
-    //       // console.log( res );
-    //       this.toast.mensajeError(String(res?.errors[0]?.message),"Error")
-    //     }
-    //   }
-    // )
+    this.servicio.post(url,params).subscribe(
+      res=>{
+        if( !res?.hasError ){
+          this.toast.mensajeSuccess("ASN'S Enviadas","Envío de ASN")
+            // console.log( res );
+            this.Limpieza(2);
+        }else{
+          // console.log( res );
+          this.toast.mensajeError(String(res?.errors[0]?.message),"Error")
+        }
+      }
+    )
      }else{
       this.toast.mensajeWarning("Favor Cargar las ASN ","Cargar ASN'S")
      }
@@ -379,7 +381,8 @@ export interface ASN {
         externlineno : string,
         // pokey : string,
         // externpolineno : string,
-        LOTTABLE06   : string
+        lottable06   : string,
+        lottable09   ?: string
       }[],
       whseid     : string,
       storerkey  : string,
@@ -398,7 +401,8 @@ export interface ASNS{
       uom          : string,
       externlineno : string,
       // externpolineno : string,
-      LOTTABLE06   : string
+      lottable06   : string,
+      lottable09   ?: string
     }[],
     whseid     : string,
     storerkey  : string
