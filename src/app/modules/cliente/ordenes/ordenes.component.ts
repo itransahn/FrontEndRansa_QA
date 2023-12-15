@@ -8,6 +8,7 @@ import { ToastServiceLocal } from 'src/app/services/toast.service';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import { Acumulador } from 'src/app/interfaces/generales';
 import { AuthService } from 'src/app/services/auth.service';
+import { validarVacio } from 'src/app/data/data';
 
 @Component({
   selector: 'app-ordenes',
@@ -230,7 +231,7 @@ storerkey            : this.propietarioQA,
                               // externpokey    : String(array[p]?.[this.PLANILLA]),
                               // pokey          : String(array[p]?.[this.PLANILLA]),
                               // externpolineno : String(body[k].details.length + 1),
-                              lottable06     : String(array[p]?.[this.Lote])
+                              lottable06     : validarVacio(String(array[p]?.[this.Lote]))
                           })
                           }
       
@@ -245,7 +246,7 @@ storerkey            : this.propietarioQA,
                           // pokey          : String(array[p]?.[this.PLANILLA]),
                           //  pokey          : '',
                           // externpolineno : String(body[k].details.length + 1),
-                          lottable06     : String(array[p]?.[this.Lote])
+                          lottable06     : validarVacio(String(array[p]?.[this.Lote]))
                       })
                       }
                 }
