@@ -17,6 +17,9 @@ export class IntegracionesComponent implements OnInit {
 
   public urlQA  : string = 'https://monitortmswms-qa.ransa.net/importar/archivo_ws_json.php'
   public urlPRD : string = 'https://monitortmswms.ransa.net/importar/archivo_ws_json.php'
+  /*
+  HOLA MUNDO
+  */
   public dataExcel   : any[]=[];
   public dataMapeada : pedidos[]= [];
 
