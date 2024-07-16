@@ -33,6 +33,7 @@ export class OrdenesComponent implements OnInit {
     public DESTINO  : string = 'PROVEEDOR';
     public Lote     : string = 'LOTE';
     public UOM      : string = 'UDM';
+    public CONTENEDOR: String = 'CONTENEDOR';
 
 
        //Paginacion
@@ -194,14 +195,14 @@ cargarData(evt){
           }
           if ( !comprobar ){
             body.push({
-expectedreceiptdate  : new Date(),
-externreceiptkey     : String(array[i]?.[this.PLANILLA]),
-suppliercode         : String(array[i]?.[this.DESTINO]),
-type                 : '1',
-scheduledshipdate    : new Date(),
-details    : [],
-whseid               : this.obtenerWh(this.propietario),
-storerkey            : this.propietario,
+            expectedreceiptdate  : new Date(),
+            externreceiptkey     : String(array[i]?.[this.PLANILLA]),
+            suppliercode         : String(array[i]?.[this.DESTINO]),
+            type                 : '1',
+            scheduledshipdate    : new Date(),
+            details    : [],
+            whseid               : this.obtenerWh(this.propietario),
+            storerkey            : this.propietario,
                   })
           }
         }else{
@@ -222,53 +223,56 @@ storerkey            : this.propietario,
               this.loading1 = true
             //Recorrer nuevamente la data del cliente para llenado de detalle de pedidos (SKU)
           for(let p = 0; p < array.length; p++){
-                   if(array[p]?.[this.PLANILLA] == body[k]?.externreceiptkey ){
-                      if( body[k].details.length > 0){
-                        let posicion : number;
-                        let cantidad : number;
-                        comprobar2 = false;  
+            if(array[p]?.[this.PLANILLA] == body[k]?.externreceiptkey ){
+            //inicio armadado
+              if( body[k].details.length > 0){
+                let posicion : number;
+                let cantidad : number;
+                comprobar2 = false;  
           //Recorro El arreglo interno de articulos por pedido, para agrupar o consolidar articulos              
-          for (let m = 0; m < body[k].details.length; m++) {
-                          if ( body[k].details[m]['sku'] == array[p]?.[this.CODIGOS] && body[k].details[m]['lottable06'] == array[p]?.[this.Lote] ){
-                            comprobar2 = true;
-                            posicion  = m
-                            cantidad  = array[p]?.[this.CAJAS] 
-                            // break
-                          } }
-                          if(comprobar2){
-                            body[k].details[posicion]['qtyexpected'] +=  cantidad
-                          }else{
-                            body[k].details.push({
-                              qtyexpected    : Number(array[p]?.[this.CAJAS]),
-                              sku            : String(array[p]?.[this.CODIGOS]),
-                              // uom         : 'CJ',
-                              uom         :   String(array[p]?.[this.UOM]),
-                              externlineno   : String(body[k].details.length + 1),
-                              // externpokey    : String(array[p]?.[this.PLANILLA]),
-                              // pokey          : String(array[p]?.[this.PLANILLA]),
-                              // externpolineno : String(body[k].details.length + 1),
-                              lottable06     : validarVacio(String(array[p]?.[this.Lote])),
-                              lottable09     : array[p]?.[this.PLANILLA]
-                          })
-                          }
-      
-                      }else{
-                        body[k].details.push({
-                          qtyexpected    : Number(array[p]?.[this.CAJAS]),
-                          sku            : String(array[p]?.[this.CODIGOS]),
-                          // uom         : 'CJ',
-                          uom         :   String(array[p]?.[this.UOM]),
-                          externlineno   : String(body[k].details.length + 1),
-                          // externpokey    : String(array[p]?.[this.PLANILLA]),
-                          // pokey          : String(array[p]?.[this.PLANILLA]),
-                          //  pokey          : '',
-                          // externpolineno : String(body[k].details.length + 1),
-                          lottable06     : validarVacio(String(array[p]?.[this.Lote])),
-                          lottable09     : array[p]?.[this.PLANILLA]
-                      })
-                      }
+                for (let m = 0; m < body[k].details.length; m++) {
+                  if ( body[k].details[m]['sku'] == array[p]?.[this.CODIGOS] && body[k].details[m]['lottable06'] == array[p]?.[this.Lote] ){
+                    comprobar2 = true;
+                    posicion  = m
+                    cantidad  = array[p]?.[this.CAJAS] 
+                    // break
+                  } 
                 }
+                if(comprobar2 ){
+                  body[k].details[posicion]['qtyexpected'] +=  cantidad
+                }else{
+                  body[k].details.push({
+                  qtyexpected    : Number(array[p]?.[this.CAJAS]),
+                  sku            : String(array[p]?.[this.CODIGOS]),
+                  // uom         : 'CJ',
+                  uom         :   String(array[p]?.[this.UOM]),
+                  externlineno   : String(body[k].details.length + 1),
+                  // externpokey    : String(array[p]?.[this.PLANILLA]),
+                  // pokey          : String(array[p]?.[this.PLANILLA]),
+                  // externpolineno : String(body[k].details.length + 1),
+                  lottable06     : validarVacio(String(array[p]?.[this.Lote])),
+                  lottable09     : validarVacio(String(array[p]?.['CONTENEDOR']))
+                  })
+                }
+
+                  }else{
+                  body[k].details.push({
+                  qtyexpected    : Number(array[p]?.[this.CAJAS]),
+                  sku            : String(array[p]?.[this.CODIGOS]),
+                  // uom         : 'CJ',
+                  uom         :   String(array[p]?.[this.UOM]),
+                  externlineno   : String(body[k].details.length + 1),
+                  // externpokey    : String(array[p]?.[this.PLANILLA]),
+                  // pokey          : String(array[p]?.[this.PLANILLA]),
+                  //  pokey          : '',
+                  // externpolineno : String(body[k].details.length + 1),
+                  lottable06     : validarVacio(String(array[p]?.[this.Lote])),
+                  lottable09     : validarVacio(String(array[p]?.['CONTENEDOR']))
+                  })
             }
+            //fin armado
+            }
+          }
         }
         // Mostrar Pantalla de carga
         this.loading1 = false;

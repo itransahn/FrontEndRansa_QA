@@ -67,6 +67,7 @@ export class PedidosComponent implements OnInit {
     public DESTINO  : string = 'DESTINO';
     public Lote     : string = 'LOTE';
     public UOM      : string = 'UDM';
+    public LPNS     : string = 'ETIQUETA';
 
 
        //Paginacion
@@ -274,7 +275,7 @@ export class PedidosComponent implements OnInit {
                         comprobar2 = false;  
           //Recorro El arreglo interno de articulos por pedido, para agrupar o consolidar articulos              
           for (let m = 0; m < body[k].details.length; m++) {
-                          if ( body[k].details[m]['sku'] == array[p]?.[this.CODIGOS] && body[k].details[m]['lottable06'] == array[p]?.[this.Lote]  ){
+            if ( body[k].details[m]['sku'] == array[p]?.[this.CODIGOS] && body[k].details[m]['lottable06'] == array[p]?.[this.Lote] && body[k].details[m]['idrequired'] == array[p]?.['ETIQUETA']  ){
                             comprobar2 = true;
                             posicion  = m
                             cantidad  = Number(array[p]?.[this.CAJAS] )
@@ -293,7 +294,8 @@ export class PedidosComponent implements OnInit {
                               uom         :   String(array[p]?.[this.UOM]),
                               externlineno  : String(body[k].details.length + 1),
                               whseid      : this.obtenerWh(this.propietario),
-                              lottable06  : validarVacio(String(array[p]?.[this.Lote]))
+                              lottable06  : validarVacio(String(array[p]?.[this.Lote])),
+                              idrequired  : validarVacio(String(array[p]?.[this.LPNS]))
                           })
                           }
       
@@ -307,7 +309,8 @@ export class PedidosComponent implements OnInit {
                           uom         :   String(array[p]?.[this.UOM]),
                           externlineno  : String(body[k].details.length + 1),
                           whseid  : this.obtenerWh(this.propietario),
-                          lottable06  : validarVacio(String(array[p]?.[this.Lote]))
+                          lottable06  : validarVacio(String(array[p]?.[this.Lote])),
+                          idrequired  : validarVacio(String(array[p]?.[this.LPNS]))
                       })
                       }
                 }
