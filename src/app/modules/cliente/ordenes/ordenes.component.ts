@@ -44,12 +44,13 @@ export class OrdenesComponent implements OnInit {
   public PropietarioCargar : string;
   public usuarioAuth0Cargar : string;
   public pwdCargar : string;
-
+  public almacen : string;
 
   public propietarioaCargar(){
     this.PropietarioCargar = 'propietarioQA';
     this.usuarioAuth0Cargar = 'usuarioAuth0QA';
     this.pwdCargar = 'pwdQA';
+    this.almacen = 'WHSEINFOR';
   }
  
     //Parametrizar Columnas 
@@ -129,12 +130,13 @@ cargarData(evt){
     }
 
 obtenerWh( propietario : string){
-      if( propietario.toUpperCase().includes('SPS')){
-        return 'WHSE52'
-      }else{
-        return 'WHSE51'
+    return this.almacen
+  // if( propietario.toUpperCase().includes('SPS')){
+  //       return 'WHSE52'
+  //     }else{
+  //       return 'WHSE51'
 
-      }
+  //     }
     }
 // Buscar Totales
  BuscarTotales(array : any[], buscar : string){

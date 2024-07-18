@@ -104,6 +104,8 @@ cargarData(){
         usuarioAuth0QA : data?.usuarioAuth0QA,
         pwdQA : data?.pwdQA,
         pwPRD : data?.pwdPRD,
+        sede : data?.sede,
+        sedeqa : data?.sedeqa,
       },
       disableClose : true
     })

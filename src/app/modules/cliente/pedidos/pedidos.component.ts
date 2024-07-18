@@ -67,6 +67,7 @@ export class PedidosComponent implements OnInit {
     public DESTINO  : string = 'DESTINO';
     public Lote     : string = 'LOTE';
     public UOM      : string = 'UDM';
+    public LPNS     : string = 'ETIQUETA';
 
 
        //Paginacion
@@ -267,14 +268,14 @@ export class PedidosComponent implements OnInit {
               this.loading1 = true
             //Recorrer nuevamente la data del cliente para llenado de detalle de pedidos (SKU)
           for(let p = 0; p < array.length; p++){
-                   if(array[p]?.[this.PLANILLA] == body[k]?.externorderkey ){
+                   if(array[p]?.[this.PLANILLA] == body[k]?.externorderkey && array[p]?.[this.CAJAS]>0){
                       if( body[k].details.length > 0){
                         let posicion : number;
                         let cantidad : number;
                         comprobar2 = false;  
           //Recorro El arreglo interno de articulos por pedido, para agrupar o consolidar articulos              
           for (let m = 0; m < body[k].details.length; m++) {
-                          if ( body[k].details[m]['sku'] == array[p]?.[this.CODIGOS] && body[k].details[m]['lottable06'] == array[p]?.[this.Lote]  ){
+            if ( body[k].details[m]['sku'] == array[p]?.[this.CODIGOS] && body[k].details[m]['lottable06'] == array[p]?.[this.Lote] && body[k].details[m]['idrequired'] == array[p]?.['ETIQUETA']  && body[k].details[m]['lottable09'] == array[p]?.['CONTENEDOR']){
                             comprobar2 = true;
                             posicion  = m
                             cantidad  = Number(array[p]?.[this.CAJAS] )
@@ -293,7 +294,9 @@ export class PedidosComponent implements OnInit {
                               uom         :   String(array[p]?.[this.UOM]),
                               externlineno  : String(body[k].details.length + 1),
                               whseid      : this.obtenerWh(this.propietario),
-                              lottable06  : validarVacio(String(array[p]?.[this.Lote]))
+                              lottable06  : validarVacio(String(array[p]?.[this.Lote])),
+                              lottable09  : validarVacio(String(array[p]?.['CONTENEDOR'])),
+                              idrequired  : validarVacio(String(array[p]?.[this.LPNS]))
                           })
                           }
       
@@ -307,7 +310,9 @@ export class PedidosComponent implements OnInit {
                           uom         :   String(array[p]?.[this.UOM]),
                           externlineno  : String(body[k].details.length + 1),
                           whseid  : this.obtenerWh(this.propietario),
-                          lottable06  : validarVacio(String(array[p]?.[this.Lote]))
+                          lottable06  : validarVacio(String(array[p]?.[this.Lote])),
+                          lottable09  : validarVacio(String(array[p]?.['CONTENEDOR'])),
+                          idrequired  : validarVacio(String(array[p]?.[this.LPNS]))
                       })
                       }
                 }

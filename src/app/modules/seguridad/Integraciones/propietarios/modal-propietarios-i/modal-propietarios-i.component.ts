@@ -74,6 +74,8 @@ export class ModalPropietariosIComponent implements OnInit {
       usuarioAuth0QA : new FormControl({ value: '', disabled : this.enable }, [] ),
       pwdQA : new FormControl({ value: '', disabled : this.enable }, [] ),
       pwPRD : new FormControl({ value: '', disabled : this.enable }, [] ),
+      sede : new FormControl({ value: '', disabled : this.enable }, [] ),
+      sedeqa : new FormControl({ value: '', disabled : this.enable }, [] ),
 
     })
 
@@ -87,6 +89,8 @@ cargarFormPost(){
     usuarioAuth0QA : new FormControl({ value: '', disabled : this.enable }, [] ),
     pwdQA : new FormControl({ value: '', disabled : this.enable }, [] ),
     pwPRD : new FormControl({ value: '', disabled : this.enable }, [] ),
+    sede : new FormControl({ value: '', disabled : this.enable }, [] ),
+    sedeqa : new FormControl({ value: '', disabled : this.enable }, [] ),
   })
 }
 
@@ -98,6 +102,8 @@ this.dataForm = new FormGroup({
   usuarioAuth0QA : new FormControl({ value: '', disabled : this.enable }, [] ),
   pwdQA : new FormControl({ value: '', disabled : this.enable }, [] ),
   pwPRD : new FormControl({ value: '', disabled : this.enable }, [] ),
+  sede : new FormControl({ value: '', disabled : this.enable }, [] ),
+  sedeqa : new FormControl({ value: '', disabled : this.enable }, [] ),
 })
 }
 
@@ -109,6 +115,8 @@ this.dataForm.setValue({
   usuarioAuth0QA : this.data['usuarioAuth0QA'],
   pwdQA : this.data['pwdQA'],
   pwPRD : this.data['pwPRD'],
+  sede : this.data['sede'],
+  sedeqa : this.data['sedeqa'],
 })
 }
 
@@ -122,10 +130,14 @@ insertarMenu(){
     propietarioQA  : this.dataForm.value.propietarioQA,
     usuarioAuth0QA : this.dataForm.value.usuarioAuth0QA,
     pwdPRD         : this.dataForm.value.pwdQA,
-    pwdQA          : this.dataForm.value.pwPRD, 
+    pwdQA          : this.dataForm.value.pwPRD,
+    sede           : this.dataForm.value.sede,
+    sedeqa         : this.dataForm.value.sedeqa, 
   } 
+  //console.log(params)
   this.Service.post(url,params).subscribe(
     res=>{
+      console.log(res?.data.Table0[0])
       if(!res.hasError){
           if ( res?.data.Table0[0]['codigo'] == -1 ){
               this.toast.mensajeWarning(String(res?.data.Table0[0]['Mensaje']), mensajes.warning)
@@ -151,6 +163,8 @@ let params = {
   usuarioAuth0QA : this.dataForm.value.usuarioAuth0QA,
   pwdPRD         : this.dataForm.value.pwdQA,
   pwdQA          : this.dataForm.value.pwPRD, 
+  sede           : this.dataForm.value.sede,
+  sedeqa         : this.dataForm.value.sedeqa, 
 } 
 this.Service.post( url,params ).subscribe(
   res=>{
