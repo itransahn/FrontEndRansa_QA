@@ -79,6 +79,7 @@ export class PedidosComponent implements OnInit {
     public Lote     : string = 'LOTE';
     public UOM      : string = 'UDM';
     public LPNS    : String = 'ETIQUETA';
+    public CONTENEDOR    : String = 'CONTENEDOR';
 
 
        //Paginacion
@@ -301,7 +302,7 @@ cargarPropietarios(){
               comprobar2 = false;  
               //Recorro El arreglo interno de articulos por pedido, para agrupar o consolidar articulos              
               for (let m = 0; m < body[k].details.length; m++) {
-                  if ( body[k].details[m]['sku'] == array[p]?.[this.CODIGOS] && body[k].details[m]['lottable06'] == array[p]?.[this.Lote] && body[k].details[m]['idrequired'] == array[p]?.['ETIQUETA']){
+                  if ( body[k].details[m]['sku'] == array[p]?.[this.CODIGOS] && body[k].details[m]['lottable06'] == array[p]?.[this.Lote] && body[k].details[m]['idrequired'] == array[p]?.['ETIQUETA'] && body[k].details[m]['lottable09'] == array[p]?.['CONTENEDOR']){
                     comprobar2 = true;
                     posicion  = m
                     cantidad  = Number(array[p]?.[this.CAJAS] )
@@ -322,6 +323,7 @@ cargarPropietarios(){
                   externlineno  : String(body[k].details.length + 1),
                   whseid      : this.almacen,//this.obtenerWh(this.propietario),
                   idrequired  : validarVacio(String(array[p]?.['ETIQUETA'])),
+                  lottable09  : validarVacio(String(array[p]?.['CONTENEDOR'])),
                   lottable06  : validarVacio(String(array[p]?.[this.Lote]))
                 })
               }
@@ -336,6 +338,7 @@ cargarPropietarios(){
               externlineno  : String(body[k].details.length + 1),
               whseid  : this.almacen,//this.obtenerWh(this.propietario),
               idrequired  : validarVacio(String(array[p]?.['ETIQUETA'])),
+              lottable09  : validarVacio(String(array[p]?.['CONTENEDOR'])),
               lottable06  : validarVacio(String(array[p]?.[this.Lote]))
               })
             }
@@ -488,6 +491,7 @@ clientcode : string,
     externlineno: string,
     whseid :      string,
     idrequired : string,
+    lottable09 : string,
     lottable06 : string
   }[]
 }[]
@@ -517,6 +521,7 @@ export interface orders{
     externlineno: string,
     whseid :      string,
     idrequired : string,
+    lottable09 : string,
     lottable06 : string
   }[]
   }
